@@ -2650,6 +2650,15 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     .hero-content {
         padding: 0 24px;
     }
+    /* En móvil el vídeo ocupa todo el ancho detrás del texto (no solo un lateral
+       como en escritorio), así que necesita más oscurecido para mantener legible
+       el subtítulo gris sobre el brillo metálico */
+    .hero-video-bg {
+        opacity: 0.32;
+    }
+    .hero-content > * {
+        text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+    }
     .section {
         padding: 80px 0;
     }
