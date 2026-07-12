@@ -2237,6 +2237,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .form-group label {
     position: absolute;
     left: 18px;
+    right: 18px;
     top: 17px;
     font-size: 0.9rem;
     color: var(--text-secondary);
@@ -2245,6 +2246,9 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     margin-bottom: 0;
     font-weight: 400;
     z-index: 2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* En el área de texto la etiqueta se alinea más arriba */
@@ -2723,6 +2727,40 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     .footer-links-grid {
         grid-template-columns: 1fr;
         gap: 24px;
+    }
+    /* Pantallas pequeñas reales (iPhone SE/mini, ~375-390px): el brillo
+       real de la pantalla lava el gris del subtítulo sobre el vídeo del
+       hero más de lo que se ve en DevTools/simuladores de escritorio */
+    .hero-video-bg {
+        opacity: 0.22;
+    }
+    .hero-subtitle {
+        color: rgba(246, 245, 242, 0.82); /* --text-primary atenuado: legible sin ser blanco puro */
+        font-size: 0.95rem;
+    }
+    .hero-content > * {
+        text-shadow: 0 2px 16px rgba(0, 0, 0, 0.85);
+    }
+    .hero-badge {
+        color: rgba(246, 245, 242, 0.7);
+        border-color: rgba(255, 255, 255, 0.25);
+        background-color: rgba(0, 0, 0, 0.35);
+    }
+    .glass-form {
+        padding: 24px 16px;
+    }
+    .form-group input,
+    .form-group textarea,
+    .glass-select {
+        padding: 22px 14px 8px 14px;
+        font-size: 1rem; /* evita el zoom automático de iOS en inputs <16px */
+    }
+    .form-group label {
+        left: 14px;
+    }
+    .glass-select {
+        padding-right: 40px;
+        background-position: right 14px center;
     }
 }
 

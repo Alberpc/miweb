@@ -11,7 +11,9 @@
     <meta name="robots" content="index, follow">
     <meta name="author" content="Alberto Pérez Cabrera">
     <meta name="theme-color" content="#070708">
-    <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon-32.png">
+    <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico">
+    <link rel="apple-touch-icon" href="../assets/img/favicon-512.png">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
@@ -20,13 +22,13 @@
     <meta property="og:site_name" content="Alberto Pérez Cabrera">
     <meta property="og:title" content="Blog | Negocios que crecen sin depender de ti">
     <meta property="og:description" content="Artículos sobre procesos, automatización con IA y cómo dejar de ser el cuello de botella de tu propio negocio.">
-    <meta property="og:image" content="https://albercabrera.com/assets/img/hero-fondo.jpg">
+    <meta property="og:image" content="https://albercabrera.com/assets/img/og-image.jpg">
 
     <!-- Twitter/X Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Blog | Negocios que crecen sin depender de ti">
     <meta name="twitter:description" content="Procesos, automatización con IA y crecimiento para negocios de servicios.">
-    <meta name="twitter:image" content="https://albercabrera.com/assets/img/hero-fondo.jpg">
+    <meta name="twitter:image" content="https://albercabrera.com/assets/img/og-image.jpg">
 
     <!-- Schema: Blog + Breadcrumb -->
     <script type="application/ld+json">
@@ -218,6 +220,10 @@
 
         @media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr; gap: 40px; } }
         @media (max-width: 560px) { .subnav { padding: 0 12px 0 20px; } .footer-links-grid { grid-template-columns: 1fr 1fr; gap: 24px; } }
+        @media (max-width: 480px) {
+            .footer-links-grid { grid-template-columns: 1fr; gap: 24px; }
+            .footer-bottom-bar { flex-direction: column; align-items: flex-start; gap: 16px; }
+        }
     </style>
 </head>
 <body>

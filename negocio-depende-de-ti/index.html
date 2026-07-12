@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Si tu negocio depende de ti y no crece, el problema no es delegar ni comprar más herramientas: es que no tienes procesos. Te explico por qué pasa y cómo salir de la trampa, área por área.">
+    <meta name="description" content="Si tu negocio depende de ti y no crece, el problema no es delegar ni comprar herramientas: es que no tienes procesos. Cómo salir de la trampa.">
     <title>Por qué tu negocio depende de ti y no crece | Alber Cabrera</title>
 
     <!-- SEO técnico -->
@@ -11,7 +11,9 @@
     <meta name="robots" content="index, follow">
     <meta name="author" content="Alberto Pérez Cabrera">
     <meta name="theme-color" content="#070708">
-    <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon-32.png">
+    <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico">
+    <link rel="apple-touch-icon" href="../assets/img/favicon-512.png">
 
     <!-- Open Graph -->
     <meta property="og:type" content="article">
@@ -376,6 +378,10 @@
             .prose .lead-answer { font-size: 1.06rem; padding: 22px 22px; }
             .cta-card { padding: 44px 24px; }
             .footer-links-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+        }
+        @media (max-width: 480px) {
+            .footer-links-grid { grid-template-columns: 1fr; gap: 24px; }
+            .footer-bottom-bar { flex-direction: column; align-items: flex-start; gap: 16px; }
         }
     </style>
 </head>
