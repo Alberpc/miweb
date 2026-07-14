@@ -18,6 +18,13 @@ RewriteRule ^(.*)$ https://albercabrera.com/$1 [L,R=301]
 RewriteCond %{THE_REQUEST} \s/+(.*/)?index\.html[\s?] [NC]
 RewriteRule ^(.*)index\.html$ /$1 [R=301,L]
 
+# --- URLs limpias para las paginas legales (sin .html) ---
+# 1) Redirige la version .html a la limpia (coherencia + SEO)
+RewriteCond %{THE_REQUEST} \s/+(aviso-legal|cookies|politica-de-privacidad)\.html[\s?] [NC]
+RewriteRule ^(aviso-legal|cookies|politica-de-privacidad)\.html$ /$1 [R=301,L]
+# 2) Sirve el archivo .html cuando se pide la URL limpia (sin redirigir)
+RewriteRule ^(aviso-legal|cookies|politica-de-privacidad)$ $1.html [L]
+
 # --- Pagina 404 personalizada (opcional, si existe) ---
 # ErrorDocument 404 /404.html
 
