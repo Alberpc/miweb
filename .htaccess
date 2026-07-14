@@ -12,6 +12,12 @@ RewriteRule ^(.*)$ https://albercabrera.com/$1 [L,R=301]
 RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://albercabrera.com/$1 [L,R=301]
 
+# --- URLs limpias: quitar "index.html" de la barra (/index.html -> /) ---
+# Solo actua cuando se pide index.html directamente en la barra, no en la
+# resolucion interna (asi la carpeta sigue sirviendo su index.html por defecto).
+RewriteCond %{THE_REQUEST} \s/+(.*/)?index\.html[\s?] [NC]
+RewriteRule ^(.*)index\.html$ /$1 [R=301,L]
+
 # --- Pagina 404 personalizada (opcional, si existe) ---
 # ErrorDocument 404 /404.html
 
