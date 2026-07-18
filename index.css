@@ -132,14 +132,15 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     border: 1px solid var(--glass-border);
     border-radius: 100px;
     z-index: 1000;
-    opacity: 0;
-    animation: fadeInFloatingNav 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.7s;
+    /* Aparicion suave desde el primer frame: sin el delay 0.7s que antes
+       esperaba a que se fuera el loader (ya eliminado). */
+    animation: fadeInFloatingNav 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes fadeInFloatingNav {
     0% {
-        opacity: 0;
-        transform: translateX(-50%) translateY(-35px);
+        opacity: 0.4;
+        transform: translateX(-50%) translateY(-20px);
     }
     100% {
         opacity: 1;
