@@ -404,9 +404,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     margin: 0 auto;
     text-align: left;
     padding: 0 24px; /* Alineado con .container y .navbar */
-    opacity: 0;
-    transform: scale(0.97);
-    animation: zoom3dIn 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.5s;
+    /* El hero arranca VISIBLE (opacity:1) para que el h1 sea LCP inmediato.
+       La entrada es solo un matiz de escala, sin fundido desde invisible ni
+       delay: si el texto naciera en opacity:0, Lighthouse no detecta LCP. */
+    animation: zoom3dIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* El texto del hero no ocupa toda la caja: deja respirar la esfera a la derecha */
@@ -2503,11 +2504,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 
 @keyframes zoom3dIn {
     0% {
-        opacity: 0;
-        transform: scale(0.96) translateY(10px);
+        /* sin opacity:0 — el texto es visible desde el primer frame (LCP) */
+        transform: scale(0.98) translateY(8px);
     }
     100% {
-        opacity: 1;
         transform: scale(1) translateY(0);
     }
 }
