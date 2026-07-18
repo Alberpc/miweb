@@ -4,30 +4,13 @@
    ------------------------------------------------------------- */
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Bloquear scroll inicial durante la breve carga
-    document.body.classList.add('loading');
-
-    // 1. LOADER MINIMALISTA (entrada suave, sin contador ni espera)
-    const loaderEl = document.getElementById('loader');
-
-    // Fundido de entrada rápido, sin cuenta atrás: la web aparece casi al instante
-    setTimeout(() => {
-        loaderEl.classList.add('cut-split');
-        document.body.classList.remove('loading');
-        setTimeout(() => {
-            loaderEl.style.display = 'none';
-        }, 900);
-
-        // Si se llega con un #ancla en la URL (ej. desde el diagnóstico a #contacto),
-        // el loader bloquea el scroll y el salto se pierde. Lo reejecutamos aquí.
-        if (window.location.hash) {
-            const target = document.querySelector(window.location.hash);
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
+    // Si se llega con un #ancla en la URL (ej. desde el diagnóstico a #contacto)
+    if (window.location.hash) {
+        const target = document.querySelector(window.location.hash);
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
-    }, 400);
-
+    }
 
     // 1.5 MENÚ HAMBURGUESA (MÓVIL)
     const burger = document.getElementById('nav-burger');
