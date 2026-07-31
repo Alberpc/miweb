@@ -16,8 +16,8 @@
     // ----------------------------------------------------------------------
 
     var config = {
-        // Endpoint del agente. Lo fija la tarea 4 con la ruta real del webhook.
-        endpoint: 'https://alberto-core-n8n.saeasu.easypanel.host/webhook/AGENTE-CHAT-PENDIENTE',
+        // Endpoint del agente (workflow "Agente Web - Chat" en n8n).
+        endpoint: 'https://alberto-core-n8n.saeasu.easypanel.host/webhook/agente-web-chat',
         // Webhook de leads que YA existe (el mismo del formulario de la web).
         endpointLead: 'https://alberto-core-n8n.saeasu.easypanel.host/webhook/d127116a-771a-4670-8f52-1288034a25e5',
         maxMsgLength: 500,
