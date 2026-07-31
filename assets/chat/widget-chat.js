@@ -23,7 +23,11 @@
         maxMsgLength: 500,
         maxTurns: 20,
         timeoutMs: 20000,
-        saludo: 'Hola. Soy el asistente de Alberto. Cuéntame, ¿qué es lo que más tiempo te está quitando en tu negocio ahora mismo?'
+        /* El saludo dice que es IA a proposito: el Reglamento de IA de la UE
+           exige que quien habla con un sistema de IA lo sepa. Ademas, Alberto
+           vende IA: decirlo demuestra el producto en vez de esconderlo. */
+        saludo: 'Hola, soy Alba, la asistente con IA de Alberto. Cuéntame, ¿qué es lo que más tiempo te está quitando en tu negocio ahora mismo?',
+        avisoPrivacidad: 'Guardamos la conversación para mejorar el servicio. Más info en <a href="politica-de-privacidad.html" target="_blank" rel="noopener">Privacidad</a>.'
     };
 
     // Respuestas fijas. Copia literal de _docs/agente-web-prompt-sistema.md
@@ -189,8 +193,8 @@
         // Cabecera
         var header = crear('div', 'acw-header');
         var titulos = crear('div', '',
-            '<p class="acw-header-title">Asistente de Alberto</p>' +
-            '<p class="acw-header-sub">Suele responder al momento</p>');
+            '<p class="acw-header-title">Alba</p>' +
+            '<p class="acw-header-sub">Asistente IA de Alberto</p>');
         el.close = crear('button', 'acw-close', ICONO_CERRAR);
         el.close.setAttribute('type', 'button');
         el.close.setAttribute('aria-label', 'Cerrar el chat');
@@ -272,6 +276,7 @@
         el.bubble.classList.add('acw-bubble--hidden');
         if (estado.historial.length === 0) {
             addMessage(config.saludo, 'bot');
+            mostrarAvisoPrivacidad();
         }
         el.input.focus();
     }
@@ -291,6 +296,14 @@
         m.textContent = texto;   // textContent, nunca innerHTML: el texto no se interpreta
         el.messages.insertBefore(m, el.typing);
         el.messages.scrollTop = el.messages.scrollHeight;
+    }
+
+    /* Aviso de privacidad bajo el saludo. Lleva un enlace, asi que usa
+       innerHTML, pero con texto FIJO nuestro, nunca del visitante. */
+    function mostrarAvisoPrivacidad() {
+        if (!estado.montado) { return; }
+        var aviso = crear('p', 'acw-aviso', config.avisoPrivacidad);
+        el.messages.insertBefore(aviso, el.typing);
     }
 
     function mostrarEscribiendo(on) {

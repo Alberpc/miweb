@@ -179,6 +179,27 @@
     color: #ffffff;
 }
 
+/* Aviso de privacidad bajo el saludo. Discreto, no debe competir con la
+   conversacion, pero tiene que leerse. */
+
+.acw-aviso {
+    align-self: flex-start;
+    max-width: 90%;
+    margin: -4px 0 0 0;
+    font-size: 11px;
+    line-height: 1.5;
+    color: #777777;
+}
+
+.acw-aviso a {
+    color: var(--acw-accent-soft);
+    text-decoration: underline;
+}
+
+.acw-aviso a:hover {
+    color: var(--acw-text);
+}
+
 /* Puntos de "escribiendo" */
 
 .acw-typing {
