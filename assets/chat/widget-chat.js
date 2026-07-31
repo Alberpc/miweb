@@ -126,13 +126,31 @@
     // Estado
     // ----------------------------------------------------------------------
 
+    /* Id de sesion: agrupa la conversacion en la memoria del servidor.
+       Vive solo en esta pestaña (sessionStorage): si el visitante recarga sigue
+       su charla, y si cierra el navegador empieza de cero. No identifica a nadie. */
+    function idSesion() {
+        try {
+            var guardado = sessionStorage.getItem('acw_sesion');
+            if (guardado) { return guardado; }
+            var nuevo = 'web-' + Date.now().toString(36) + '-' +
+                Math.random().toString(36).slice(2, 8);
+            sessionStorage.setItem('acw_sesion', nuevo);
+            return nuevo;
+        } catch (e) {
+            // Navegador con almacenamiento bloqueado: sesion de usar y tirar
+            return 'web-' + Date.now().toString(36);
+        }
+    }
+
     var estado = {
         abierto: false,
         turno: 0,
         historial: [],   // [{ rol: 'user'|'bot', texto: string }]
         enviando: false,
         cerrado: false,  // true cuando el lead ya se envio o se agoto el cupo
-        montado: false
+        montado: false,
+        sesion: idSesion()
     };
 
     var el = {};   // referencias del DOM, se rellenan en montar()
@@ -344,7 +362,8 @@
             body: JSON.stringify({
                 mensaje: texto,
                 historial: estado.historial.slice(-12),
-                turno: estado.turno
+                turno: estado.turno,
+                sesion: estado.sesion
             }),
             signal: control.signal
         })
