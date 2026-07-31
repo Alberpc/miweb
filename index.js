@@ -220,33 +220,22 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const submitBtn = contactForm.querySelector('.btn-submit');
-            const originalBtnText = submitBtn ? submitBtn.innerHTML : "Enviar Solicitud de Proyecto &rarr;";
-            
+            const originalBtnText = submitBtn ? submitBtn.innerHTML : "Reservar mi sesión de 20 min &rarr;";
+
             if (submitBtn) {
                 submitBtn.disabled = true;
-                submitBtn.innerHTML = "PROCESANDO SOLICITUD...";
+                submitBtn.innerHTML = "Enviando...";
             }
 
             formMessage.className = "form-message";
-            formMessage.textContent = "PROCESANDO SOLICITUD Y ENCRIPTANDO DATOS...";
-
-            // Etiqueta legible del "camino" elegido para anteponerla al mensaje
-            const selectCamino = document.getElementById('tipo-proyecto');
-            const caminoTexto = selectCamino.selectedIndex > 0
-                ? selectCamino.options[selectCamino.selectedIndex].text
-                : "";
-            const mensajeUsuario = document.getElementById('mensaje').value || "";
-            const mensajeFinal = caminoTexto
-                ? `[Cómo prefiere empezar: ${caminoTexto}]\n\n${mensajeUsuario}`
-                : mensajeUsuario;
+            formMessage.textContent = "Enviando...";
 
             const data = {
                 nombre: document.getElementById('nombre').value,
                 empresa: document.getElementById('empresa').value,
                 email: document.getElementById('email').value,
-                facturacion: document.getElementById('facturacion').value,
-                tipo_proyecto: selectCamino.value,
-                mensaje: mensajeFinal,
+                telefono: document.getElementById('telefono').value,
+                problema: document.getElementById('mensaje').value || "",
                 fecha: new Date().toISOString(),
                 origen: "Web Home v3"
             };
@@ -262,7 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (response.ok) {
                     formMessage.className = "form-message success";
-                    formMessage.textContent = "✓ ¡Solicitud enviada! Te acabo de mandar un correo para que agendes tu sesión. Revisa tu bandeja de entrada (y la carpeta de spam, por si acaso).";
+                    formMessage.textContent = "✓ Hecho. Te acabo de mandar un correo para que elijas hora. Revisa tu bandeja de entrada (y la carpeta de spam, por si acaso).";
                     contactForm.reset();
                     // Limpiar clases focused y has-value de los inputs para resetear floating labels
                     contactForm.querySelectorAll('.form-group').forEach(group => {

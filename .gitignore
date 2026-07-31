@@ -1,1 +1,4 @@
 .claude/
+
+# Documentos internos de trabajo (specs, notas) — no son parte de la web pública
+SPEC-*.md

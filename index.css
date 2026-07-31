@@ -2277,6 +2277,15 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     border-color: var(--cobalt-border);
 }
 
+.form-note {
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    color: var(--text-secondary, rgba(255, 255, 255, 0.55));
+    text-align: center;
+    margin-top: 10px;
+    line-height: 1.5;
+}
+
 .form-message {
     font-family: var(--font-body);
     font-size: 0.9rem;
@@ -2510,6 +2519,79 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     }
     100% {
         transform: scale(1) translateY(0);
+    }
+}
+
+/* =============================================================
+   PRUEBA SOCIAL — LOGOS DE CLIENTES (marquesina)
+   ============================================================= */
+
+/* Va justo antes del formulario: última validación antes de decidir.
+   Hereda el padding estándar de .section (120px). */
+
+.clientes-title {
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.logos-marquee {
+    width: 100%;
+}
+
+/* Fila fija centrada: con 4 logos una marquesina deja un hueco visible al girar */
+.logos-track {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 70px;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* Los logos originales son oscuros (Mafhesa 33% negro, Top Boutique 81%):
+   sobre fondo oscuro desaparecerían. brightness(0) invert(1) los pasa a
+   blanco puro. Requiere fondo transparente, ya eliminado de los PNG. */
+.logo-cliente {
+    height: 80px;
+    width: auto;
+    flex-shrink: 0;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    opacity: 0.6;
+    transition: opacity 0.4s ease;
+}
+
+.logo-cliente:hover {
+    opacity: 1;
+}
+
+/* En móvil una sola fila no cabe: rejilla 2x2 con celdas iguales, así
+   ningún logo queda descolgado por ser más ancho que el resto. */
+@media (max-width: 768px) {
+    .logos-track {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 32px 20px;
+        justify-items: center;
+        align-items: center;
+        padding: 0 20px;
+    }
+    .logo-cliente {
+        height: 46px;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 380px) {
+    .logo-cliente {
+        height: 38px;
     }
 }
 
