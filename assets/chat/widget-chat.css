@@ -19,31 +19,38 @@
    Burbuja
    -------------------------------------------------------------------------- */
 
-/* Va ENCIMA del boton de WhatsApp, que esta en bottom:32px con 60px de alto.
-   32 + 60 + 16 de aire = 108. Asi quedan apilados y no se pisan. */
+/* Mismo lenguaje visual que el boton de WhatsApp de la web (cristal oscuro
+   translucido con borde de color sutil), pero en el azul de marca. Va apilado
+   encima: WhatsApp esta en bottom:32px con 60px de alto, 32+60+24 de aire = 116. */
 .acw-bubble {
     position: fixed;
-    bottom: 108px;
+    bottom: 116px;
     right: 32px;
-    z-index: 9998;
+    z-index: 1000;
     width: 60px;
     height: 60px;
+    background-color: rgba(20, 20, 25, 0.6);
+    border: 1px solid rgba(59, 94, 255, 0.3);
     border-radius: 50%;
-    border: none;
-    background: var(--acw-accent);
-    color: #ffffff;
-    cursor: pointer;
     display: flex;
-    align-items: center;
     justify-content: center;
-    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.45);
-    transition: transform 0.2s ease, background 0.2s ease;
+    align-items: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
     padding: 0;
 }
 
 .acw-bubble:hover {
-    background: #5275ff;
-    transform: translateY(-2px);
+    transform: scale(1.1) translateY(-3px);
+    border-color: rgba(59, 94, 255, 0.8);
+    box-shadow: 0 15px 40px rgba(59, 94, 255, 0.25);
+}
+
+.acw-bubble:hover .acw-bubble-icon {
+    transform: rotate(10deg);
 }
 
 .acw-bubble:focus-visible {
@@ -51,14 +58,41 @@
     outline-offset: 3px;
 }
 
-.acw-bubble svg {
-    width: 26px;
-    height: 26px;
+.acw-bubble-icon {
+    width: 28px;
+    height: 28px;
+    stroke: var(--acw-accent);
+    fill: none;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     display: block;
 }
 
 .acw-bubble--hidden {
     display: none;
+}
+
+/* Tooltip, mismo patron que el de WhatsApp */
+.acw-tooltip {
+    position: absolute;
+    right: 76px;
+    top: 50%;
+    transform: translateY(-50%) translateX(10px);
+    background-color: rgba(10, 10, 12, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--acw-text);
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+.acw-bubble:hover .acw-tooltip {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
 }
 
 /* --------------------------------------------------------------------------
@@ -67,7 +101,7 @@
 
 .acw-panel {
     position: fixed;
-    bottom: 180px;
+    bottom: 188px;
     right: 32px;
     z-index: 9999;
     width: 380px;
@@ -438,12 +472,17 @@
     }
 
     /* En movil el de WhatsApp baja a bottom:20px con 54px de alto,
-       asi que 20 + 54 + 12 = 86. */
+       asi que 20 + 54 + 16 = 90. */
     .acw-bubble {
-        bottom: 86px;
+        bottom: 90px;
         right: 20px;
         width: 54px;
         height: 54px;
+    }
+
+    /* Sin raton no hay hover: el tooltip solo estorbaria */
+    .acw-tooltip {
+        display: none;
     }
 }
 
