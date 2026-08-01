@@ -167,6 +167,30 @@ a:focus-visible, button:focus-visible {
     margin: 20px 0;
 }
 
+.page .cookies-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 0.92rem;
+}
+
+.page .cookies-table th,
+.page .cookies-table td {
+    text-align: left;
+    padding: 10px 14px;
+    border: 1px solid var(--glass-border);
+}
+
+.page .cookies-table th {
+    background: rgba(13, 13, 16, 0.6);
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.page .cookies-table td {
+    color: var(--text-secondary, #aaaaaa);
+}
+
 .page .box p:last-child { margin-bottom: 0; }
 
 /* =============================================================

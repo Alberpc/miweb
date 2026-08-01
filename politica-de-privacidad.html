@@ -1,6 +1,38 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <!-- Google Consent Mode v2: denegado por defecto, o el valor ya guardado
+         por el visitante, antes de que cargue GTM (si esto llegara despues
+         de gtm.js, la etiqueta ya habria evaluado "denied" y no se re-dispara). -->
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    (function () {
+        var consentimientoGuardado = 'denied';
+        try {
+            var raw = localStorage.getItem('acc_consent_v1');
+            if (raw) {
+                var data = JSON.parse(raw);
+                if (data && data.analytics === true) consentimientoGuardado = 'granted';
+            }
+        } catch (e) { /* localStorage no disponible: se queda en denied */ }
+        gtag('consent', 'default', {
+            'analytics_storage': consentimientoGuardado,
+            'ad_storage': 'denied',
+            'ad_user_data': 'denied',
+            'ad_personalization': 'denied',
+            'wait_for_update': 500
+        });
+    })();
+    </script>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KQT7RNTB');</script>
+    <!-- End Google Tag Manager -->
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, follow">
@@ -13,7 +45,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="index.css?v=100">
-    <link rel="stylesheet" href="legal.css?v=101">
+    <link rel="stylesheet" href="legal.css?v=102">
     <style>
         /* Custom scrollbar matching index.css exactly */
         ::-webkit-scrollbar {
@@ -39,8 +71,14 @@
             padding-top: 140px;
         }
     </style>
+    <link rel="stylesheet" href="/assets/cookies/cookie-banner.css">
 </head>
 <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KQT7RNTB"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
 
     <!-- NAVEGACIÓN -->
     <nav class="navbar">
@@ -86,6 +124,7 @@
             <li><strong>Formulario de contacto:</strong> nombre, empresa, correo electrónico, facturación anual aproximada y el mensaje que escribas.</li>
             <li><strong>WhatsApp o correo electrónico:</strong> los datos de contacto y el contenido de tu mensaje cuando decides escribirme por esos canales.</li>
             <li><strong>Asistente de chat con inteligencia artificial ("Alba"):</strong> el contenido de la conversación que mantienes con él y los datos de contacto que decidas facilitarle (nombre, empresa, correo electrónico y, opcionalmente, teléfono).</li>
+            <li><strong>Cookies de analítica (Google Analytics):</strong> solo si las aceptas en el banner de cookies, datos de navegación anonimizados (páginas visitadas, duración de la visita, dispositivo aproximado). Ver <a href="/cookies">política de cookies</a>.</li>
         </ul>
         <p>No se recogen datos de categorías especiales ni se toman decisiones automatizadas que produzcan efectos jurídicos sobre ti.</p>
 
@@ -101,6 +140,7 @@
 
         <h2>5. Con quién se comparten (destinatarios)</h2>
         <p>Tus datos <strong>no se venden ni se ceden a terceros</strong> con fines comerciales. Solo pueden tratarlos, como encargados de tratamiento y con las garantías adecuadas, los proveedores tecnológicos necesarios para el funcionamiento del servicio (alojamiento web, correo electrónico y herramientas de gestión). Si alguno de estos proveedores está fuera del Espacio Económico Europeo, se garantiza que el tratamiento se ampara en las cláusulas contractuales tipo u otros mecanismos válidos de transferencia internacional.</p>
+        <p>En concreto, si aceptas las cookies de analítica, esta web usa <strong>Google Analytics</strong> (Google Ireland Limited, con transferencias a servidores en Estados Unidos). Esta transferencia internacional se ampara en las <strong>cláusulas contractuales tipo de la Comisión Europea</strong>, que Google tiene suscritas como parte de sus términos de servicio de Google Analytics. Puedes revocar tu consentimiento en cualquier momento desde el banner de cookies.</p>
 
         <h2>6. Cuánto tiempo se conservan</h2>
         <p>Los datos se conservan mientras dure la relación o comunicación contigo y, después, durante los plazos legales aplicables. Si tu consulta no acaba en colaboración, los datos se eliminan en un plazo razonable.</p>
@@ -196,5 +236,6 @@
     </footer>
 
     <script src="index.js?v=18"></script>
+    <script src="/assets/cookies/cookie-banner.js" defer></script>
 </body>
 </html>

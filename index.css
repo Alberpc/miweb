@@ -2286,6 +2286,45 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     line-height: 1.5;
 }
 
+.form-check-wrap {
+    margin-bottom: 20px;
+}
+
+.form-check {
+    position: static;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+    pointer-events: auto;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--text-secondary, rgba(255, 255, 255, 0.6));
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+}
+
+.form-check input[type="checkbox"] {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    accent-color: var(--cobalt);
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.form-check a {
+    color: var(--cobalt-soft, #8aa0ff);
+    text-decoration: underline;
+}
+
+.form-check a:hover {
+    color: #fff;
+}
+
 .form-message {
     font-family: var(--font-body);
     font-size: 0.9rem;

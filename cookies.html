@@ -1,6 +1,38 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <!-- Google Consent Mode v2: denegado por defecto, o el valor ya guardado
+         por el visitante, antes de que cargue GTM (si esto llegara despues
+         de gtm.js, la etiqueta ya habria evaluado "denied" y no se re-dispara). -->
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    (function () {
+        var consentimientoGuardado = 'denied';
+        try {
+            var raw = localStorage.getItem('acc_consent_v1');
+            if (raw) {
+                var data = JSON.parse(raw);
+                if (data && data.analytics === true) consentimientoGuardado = 'granted';
+            }
+        } catch (e) { /* localStorage no disponible: se queda en denied */ }
+        gtag('consent', 'default', {
+            'analytics_storage': consentimientoGuardado,
+            'ad_storage': 'denied',
+            'ad_user_data': 'denied',
+            'ad_personalization': 'denied',
+            'wait_for_update': 500
+        });
+    })();
+    </script>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KQT7RNTB');</script>
+    <!-- End Google Tag Manager -->
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, follow">
@@ -13,7 +45,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="index.css?v=100">
-    <link rel="stylesheet" href="legal.css?v=101">
+    <link rel="stylesheet" href="legal.css?v=102">
     <style>
         /* Custom scrollbar matching index.css exactly */
         ::-webkit-scrollbar {
@@ -39,8 +71,14 @@
             padding-top: 140px;
         }
     </style>
+    <link rel="stylesheet" href="/assets/cookies/cookie-banner.css">
 </head>
 <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KQT7RNTB"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
 
     <!-- NAVEGACIÓN -->
     <nav class="navbar">
@@ -75,15 +113,25 @@
         <p>Las cookies son pequeños archivos de texto que los sitios web guardan en tu navegador para recordar información sobre tu visita, como tus preferencias o tu actividad en la página.</p>
 
         <h2>2. Cookies que usa este sitio</h2>
-        <p>Este sitio web está diseñado para ser lo más respetuoso posible con tu privacidad:</p>
         <div class="box">
-            <p><strong>Cookies propias:</strong> este sitio no instala cookies propias de análisis, publicidad o seguimiento. Solo podrían usarse cookies técnicas estrictamente necesarias para el funcionamiento básico de la página, que no requieren consentimiento.</p>
-            <p><strong>Servicios de terceros:</strong> la web carga tipografías de Google Fonts. Este servicio puede registrar tu dirección IP al servir los archivos, pero no instala cookies de seguimiento en este sitio.</p>
+            <p><strong>Cookies necesarias (siempre activas):</strong> técnicas, estrictamente necesarias para el funcionamiento básico de la página. No requieren consentimiento y guardan, entre otras cosas, la propia preferencia de cookies que elijas en el banner.</p>
+            <p><strong>Cookies de analítica (requieren tu consentimiento):</strong> uso Google Analytics (Google Tag Manager) para saber qué páginas se visitan más y mejorar el sitio. Solo se activan si las aceptas en el banner de cookies; hasta entonces permanecen bloqueadas.</p>
+            <p><strong>Servicios de terceros:</strong> la web carga tipografías de Google Fonts, que puede registrar tu dirección IP al servir los archivos, pero no instala cookies de seguimiento.</p>
         </div>
-        <p>Actualmente <strong>no se utilizan cookies de analítica ni de publicidad</strong>. Si en el futuro se incorporara alguna herramienta que las requiera (por ejemplo, estadísticas de visitas), esta política se actualizará y se te pedirá el consentimiento correspondiente antes de instalarlas.</p>
+        <p>Puedes cambiar tu decisión sobre las cookies de analítica en cualquier momento desde el propio banner, que puedes volver a abrir <button type="button" class="acc-reopen-link" onclick="if(window.accReabrirPreferencias){accReabrirPreferencias();}" style="background:none;border:none;padding:0;color:inherit;text-decoration:underline;cursor:pointer;font:inherit;">pulsando aquí</button>.</p>
+
+        <table class="cookies-table">
+            <thead>
+                <tr><th>Cookie</th><th>Proveedor</th><th>Finalidad</th><th>Duración</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>_ga, _ga_*</td><td>Google Analytics</td><td>Distinguir usuarios y medir visitas</td><td>Hasta 2 años</td></tr>
+                <tr><td>acc_consent_v1</td><td>Propia (localStorage)</td><td>Recordar tu elección sobre cookies</td><td>Hasta que la borres</td></tr>
+            </tbody>
+        </table>
 
         <h2>3. Cómo gestionar las cookies en tu navegador</h2>
-        <p>Puedes permitir, bloquear o eliminar las cookies instaladas en tu equipo desde la configuración de tu navegador:</p>
+        <p>Además del banner de esta web, puedes permitir, bloquear o eliminar cookies desde la configuración de tu navegador:</p>
         <ul>
             <li><a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener noreferrer">Google Chrome</a></li>
             <li><a href="https://support.mozilla.org/es/kb/impedir-que-los-sitios-web-guarden-sus-preferencia" target="_blank" rel="noopener noreferrer">Mozilla Firefox</a></li>
@@ -167,5 +215,6 @@
     </footer>
 
     <script src="index.js?v=18"></script>
+    <script src="/assets/cookies/cookie-banner.js" defer></script>
 </body>
 </html>
