@@ -1,4 +1,10 @@
 .claude/
 
-# Documentos internos de trabajo (specs, notas) — no son parte de la web pública
+# Documentos internos de trabajo (specs, notas, analisis) — nunca van en esta
+# carpeta: se sirve entera en albercabrera.com. Todo lo interno va en
+# _docs/ del repo "Mi universo", no aqui. Ver SEO-*.md que se filtraron
+# al servidor publico el 1-ago-2026.
 SPEC-*.md
+SEO-*.md
+*.INTERNO.md
+*-notas.md
