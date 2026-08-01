@@ -26,8 +26,8 @@
         /* El saludo dice que es IA a proposito: el Reglamento de IA de la UE
            exige que quien habla con un sistema de IA lo sepa. Ademas, Alberto
            vende IA: decirlo demuestra el producto en vez de esconderlo. */
-        saludo: 'Hola, soy Alba, la asistente con IA de Alberto. Cuéntame, ¿qué es lo que más tiempo te está quitando en tu negocio ahora mismo?',
-        avisoPrivacidad: 'Guardamos la conversación para mejorar el servicio. Más info en <a href="politica-de-privacidad.html" target="_blank" rel="noopener">Privacidad</a>.'
+        saludo: 'Hola, soy Alba, la asistente con IA de Alberto. Puedo contarte cómo trabaja y, si le veo encaje, dejarte una llamada con él. ¿Qué te ronda?',
+        avisoPrivacidad: 'Alba es una IA y puede equivocarse. Guardamos la conversación para mejorar el servicio. <a href="politica-de-privacidad.html#asistente-ia" target="_blank" rel="noopener">Más info</a>.'
     };
 
     // Respuestas fijas. Copia literal de _docs/agente-web-prompt-sistema.md
@@ -163,7 +163,9 @@
     // Interfaz
     // ----------------------------------------------------------------------
 
-    var ICONO_CHAT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>';
+    /* Robot, no bocadillo: el bocadillo se confunde con el boton de WhatsApp
+       que hay justo debajo, y ademas deja claro de un vistazo que es una IA. */
+    var ICONO_CHAT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="8" width="16" height="12" rx="3"/><path d="M12 8V4.5"/><circle cx="12" cy="3" r="1.4"/><path d="M2 13v3M22 13v3"/><circle cx="9" cy="13.5" r="1.3" fill="currentColor" stroke="none"/><circle cx="15" cy="13.5" r="1.3" fill="currentColor" stroke="none"/><path d="M9.5 17h5"/></svg>';
     var ICONO_CERRAR = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>';
     var ICONO_ENVIAR = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>';
 

@@ -19,13 +19,15 @@
    Burbuja
    -------------------------------------------------------------------------- */
 
+/* Va ENCIMA del boton de WhatsApp, que esta en bottom:32px con 60px de alto.
+   32 + 60 + 16 de aire = 108. Asi quedan apilados y no se pisan. */
 .acw-bubble {
     position: fixed;
-    bottom: 24px;
-    right: 24px;
+    bottom: 108px;
+    right: 32px;
     z-index: 9998;
-    width: 56px;
-    height: 56px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     border: none;
     background: var(--acw-accent);
@@ -65,12 +67,12 @@
 
 .acw-panel {
     position: fixed;
-    bottom: 96px;
-    right: 24px;
+    bottom: 180px;
+    right: 32px;
     z-index: 9999;
     width: 380px;
     max-width: calc(100vw - 32px);
-    height: min(600px, calc(100vh - 140px));
+    height: min(600px, calc(100vh - 220px));
     background: var(--acw-bg);
     border: 1px solid var(--acw-border);
     border-radius: 4px;
@@ -435,9 +437,13 @@
         border: none;
     }
 
+    /* En movil el de WhatsApp baja a bottom:20px con 54px de alto,
+       asi que 20 + 54 + 12 = 86. */
     .acw-bubble {
-        bottom: 16px;
-        right: 16px;
+        bottom: 86px;
+        right: 20px;
+        width: 54px;
+        height: 54px;
     }
 }
 
