@@ -53,11 +53,13 @@ html {
     scrollbar-color: #ffffff #050506; /* Color de acento cobalto y pista oscura */
     scrollbar-width: thin;
     -webkit-font-smoothing: antialiased;
-    overflow-x: hidden; /* Corta el desborde horizontal a nivel del documento */
+    /* OJO: el overflow-x va en body, NO aqui. En html rompe position:fixed en
+       moviles WebKit (las burbujas flotantes salian cortadas contra el borde). */
 }
 
 body {
     line-height: 1.6;
+    overflow-x: hidden; /* Corta el desborde horizontal sin romper position:fixed */
     /* Eliminadas propiedades de overflow para evitar doble scrollbar en navegadores Windows */
 }
 
@@ -2766,12 +2768,9 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
         gap: 20px;
         align-items: flex-start;
     }
-    .whatsapp-float {
-        bottom: 20px;
-        right: 20px;
-        width: 54px;
-        height: 54px;
-    }
+    /* OJO: la version movil de .whatsapp-float NO va aqui. La regla de
+       escritorio se define mas abajo (~linea 2850) y la anulaba, dejandola
+       en 60px en movil. Ahora vive justo despues de esa definicion. */
 }
 
 @media (max-width: 480px) {
@@ -2870,6 +2869,19 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     cursor: pointer;
     text-decoration: none;
+}
+
+/* Version movil. Va DESPUES de la regla de escritorio a proposito: si se
+   declara antes (en el bloque @media general de arriba), la de escritorio
+   la anula y la burbuja se queda en 60px tambien en movil, desalineandose
+   de la de Alba. Mismo right y mismo tamaño que .acw-bubble en movil. */
+@media (max-width: 768px) {
+    .whatsapp-float {
+        bottom: 20px;
+        right: 20px;
+        width: 54px;
+        height: 54px;
+    }
 }
 
 .whatsapp-icon {
