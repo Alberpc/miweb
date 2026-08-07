@@ -31,7 +31,7 @@
         avisoPrivacidad: 'Alba es una IA y puede equivocarse. Guardamos la conversación para mejorar el servicio. <a href="politica-de-privacidad.html#asistente-ia" target="_blank" rel="noopener">Más info</a>.'
     };
 
-    // Respuestas fijas. Copia literal de _docs/agente-web-prompt-sistema.md
+    // Respuestas fijas. Copia literal de _docs/sistemas/agente-web-prompt-sistema.md
     var RESPUESTAS = {
         RECHAZO_TRABAJO_GRATIS: 'De eso no te puedo ayudar, que no es lo mío. Pero cuéntame una cosa: ¿qué es lo que más tiempo te está quitando en tu negocio?',
         RECHAZO_PRECIO: 'El precio depende de lo que estés perdiendo hoy, y eso se ve en 20 minutos hablando con Alberto. ¿Te cuento cómo va la llamada?',
