@@ -1,0 +1,1263 @@
+---
+layout: pagina.njk
+permalink: "/no-perder-clientes/index.html"
+title: "Sistema de seguimiento de clientes y leads | Alber Cabrera"
+description: "Sistema de seguimiento de clientes para negocios que ya reciben consultas: ordena los leads de web, WhatsApp e Instagram, avisa a quién contactar y hace el seguimiento. Montaje en semanas, sin permanencia."
+slug: "no-perder-clientes"
+ogType: "website"
+ogTitle: "No pierdas clientes que ya te escriben"
+ogDescription: "Monto el sistema que ordena tus consultas, avisa a quién hay que contestar y hace el seguimiento que hoy no hace nadie. En semanas, no en meses."
+twitterTitle: "No pierdas clientes que ya te escriben"
+twitterDescription: "El sistema que ordena tus consultas y hace el seguimiento que hoy no hace nadie."
+themeColor: "#0E1116"
+ogImage: "https://albercabrera.com/assets/img/og-image.jpg"
+ogImageHeight: "630"
+ogImageAlt: "No pierdas clientes que ya te escriben"
+robots: "index, follow"
+canonical: "https://albercabrera.com/no-perder-clientes/"
+navMinima: true
+logoEnlazado: false
+ctaHref: "#cierre"
+ctaTexto: "Pide tu llamada"
+ctaData: "cta_nav"
+baseJs: false
+footerDai360Href: "/"
+footerAgentesAut: false
+cssPagina: |
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { scroll-behavior: smooth; background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 16px; -webkit-font-smoothing: antialiased; }
+        body { overflow-x: hidden; line-height: 1.6; }
+
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+        /* ===== NAV =====
+           Pastilla clara flotando. Sobre el hero oscuro contrasta sola; al
+           hacer scroll sigue funcionando sobre el cuerpo claro. No cambia. */
+        .subnav {
+            position: fixed; top: 24px; left: 50%; transform: translateX(-50%);
+            z-index: 1000; width: calc(100% - 48px); max-width: 1200px; height: 62px;
+            display: flex; align-items: center; justify-content: space-between; padding: 0 24px;
+            background: rgba(255, 255, 255, 0.78);
+            backdrop-filter: blur(18px) saturate(180%); -webkit-backdrop-filter: blur(18px) saturate(180%);
+            border: 1px solid var(--glass-border); border-radius: 100px;
+            box-shadow: 0 8px 30px rgba(14, 17, 22, 0.14);
+        }
+        .subnav .logo { font-family: var(--font-heading); font-weight: 800; font-size: 1.3rem; color: var(--ink); text-decoration: none; letter-spacing: -0.05em; }
+        .subnav .logo img { height: 24px; width: auto; display: block; filter: invert(1) brightness(0.12); }
+        .subnav-right { display: flex; align-items: center; gap: 14px; }
+        .subnav .back { font-size: 0.85rem; color: var(--ink-mid); text-decoration: none; transition: color 0.3s ease; }
+        .subnav .back:hover { color: var(--ink); }
+        .subnav .cta {
+            font-size: 0.8rem; font-weight: 600; color: #fff; text-decoration: none;
+            background: var(--cobalt-600);
+            padding: 9px 20px; border-radius: 100px; border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .subnav .cta:hover { transform: translateY(-2px); background: var(--cobalt-700); border-color: transparent; box-shadow: 0 4px 15px var(--cobalt-glow); }
+
+        /* ===== HERO OSCURO (centrado, sin foto: fondo de degradado cobalto) =====
+           Requiere class="inverse" en el <header class="hero">. */
+        .hero.inverse {
+            position: relative; min-height: 72vh;
+            display: flex; align-items: center; overflow: hidden; padding: 150px 0 90px;
+            background:
+                radial-gradient(58% 62% at 50% 0%,  rgba(200, 168, 94, 0.20) 0%, transparent 68%),
+                radial-gradient(45% 45% at 85% 90%, rgba(200, 168, 94, 0.10) 0%, transparent 70%),
+                var(--night-900);
+        }
+        .hero.inverse::before {
+            content: ''; position: absolute; inset: 0; pointer-events: none;
+            background-image:
+                linear-gradient(rgba(245, 246, 248, 0.045) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(245, 246, 248, 0.045) 1px, transparent 1px);
+            background-size: 56px 56px;
+            -webkit-mask-image: radial-gradient(60% 60% at 50% 30%, black 0%, transparent 75%);
+            mask-image: radial-gradient(60% 60% at 50% 30%, black 0%, transparent 75%);
+        }
+        .hero-content-centered {
+            position: relative; z-index: 2; max-width: 760px; margin: 0 auto;
+            text-align: center; display: flex; flex-direction: column; align-items: center;
+        }
+
+        .hero.inverse .hero-badge {
+            display: inline-block; font-family: monospace; font-size: 0.78rem; letter-spacing: 0.3em;
+            color: var(--cobalt-300); border: 1px solid rgba(214, 186, 130, 0.30);
+            background: rgba(200, 168, 94, 0.12); padding: 7px 16px; border-radius: 50px; margin-bottom: 26px;
+        }
+        .hero.inverse h1 {
+            font-family: var(--font-heading); font-size: clamp(2.4rem, 5.4vw, 4.1rem);
+            font-weight: 400; line-height: 1.16; letter-spacing: -0.02em; margin-bottom: 22px;
+            max-width: 18ch; color: var(--on-night);
+        }
+        /* El degradado cierra en cobalto-300, no en el saturado: sobre negro,
+           el #C8A85E da 3.21:1 y solo valdría para texto muy grande. */
+        .hero.inverse h1 .hl { background: linear-gradient(118deg, var(--on-night) 6%, var(--cobalt-300) 94%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; display: inline-block; padding-bottom: 0.14em; margin-bottom: -0.14em; }
+        .hero.inverse p.sub { font-size: 1.16rem; color: var(--on-night-body); font-weight: 400; max-width: 52ch; margin: 0 auto 14px; }
+        .hero.inverse p.hero-quien { font-size: 0.92rem; color: var(--on-night-soft); font-weight: 400; max-width: 46ch; margin: 0 auto 38px; }
+        .hero-ctas { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; flex-wrap: wrap; }
+        .hero-ctas-centered { align-items: center; }
+        .hero.inverse .btn-main {
+            display: inline-block; font-size: 1rem; font-weight: 600; color: #fff; text-decoration: none;
+            background: var(--cobalt-500);
+            padding: 17px 38px; border-radius: 100px; border: 1px solid transparent;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .hero.inverse .btn-main:hover {
+            transform: translateY(-2px);
+            background: var(--cobalt-400);
+            box-shadow: 0 8px 30px rgba(200, 168, 94, 0.30);
+        }
+        .link-soft { font-size: 0.95rem; text-decoration: underline; transition: color 0.3s ease; }
+        .hero.inverse .link-soft { color: var(--on-night-soft); }
+        .hero.inverse .link-soft:hover { color: var(--on-night); }
+        .hero.inverse .hero-microcopy { font-size: 0.85rem; color: var(--on-night-mid); font-weight: 400; margin: 0; }
+
+        /* Placeholder genérico (aún en uso en mockups de imágenes pendientes) */
+        .img-placeholder {
+            display: flex; align-items: center; justify-content: center; text-align: center;
+            border: 1.5px dashed var(--cobalt-border); border-radius: 16px;
+            background: var(--cobalt-tint);
+            color: var(--ink-mid); font-family: monospace; font-size: 0.78rem; letter-spacing: 0.05em;
+            padding: 24px; line-height: 1.6;
+        }
+
+        /* ===== SECCIONES ===== */
+        .section { padding: 110px 0; position: relative; scroll-margin-top: 96px; background-color: var(--bg); }
+        .section:nth-of-type(even) { background-color: var(--bg-alt); }
+        .section + .section::before {
+            content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+            width: min(760px, 82%); height: 1px;
+            background: linear-gradient(90deg, transparent 0%, rgba(26,29,35,0.07) 30%, rgba(26,29,35,0.13) 50%, rgba(26,29,35,0.07) 70%, transparent 100%);
+        }
+        .s-label { font-family: monospace; font-size: 0.8rem; letter-spacing: 0.25em; color: var(--cobalt-600); display: block; margin-bottom: 12px; font-weight: 600; }
+        .s-title { font-family: var(--font-heading); font-size: clamp(1.7rem, 3.6vw, 2.4rem); font-weight: 800; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 16px; color: var(--ink); }
+        .s-sub { font-size: 1.05rem; color: var(--ink-soft); font-weight: 300; max-width: 62ch; }
+        .s-head { max-width: 720px; margin-bottom: 64px; }
+        .s-head.center { margin-left: auto; margin-right: auto; text-align: center; }
+
+        /* Bloque 2 — PRUEBA: capturas + logos */
+        .pruebas-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 56px; }
+        .prueba-card { display: flex; flex-direction: column; gap: 14px; }
+        .prueba-card p { font-size: 0.92rem; color: var(--ink-soft); font-weight: 300; text-align: center; }
+
+        /* Mockup del panel (sustituye a capturas reales hasta tener piloto) */
+        .mockup {
+            background: var(--bg); border: 1px solid var(--line); border-radius: 12px;
+            overflow: hidden; box-shadow: 0 12px 30px rgba(26,29,35,0.06); font-size: 0.72rem;
+        }
+        .mockup-toolbar {
+            display: flex; align-items: center; gap: 6px; padding: 10px 12px;
+            background: var(--bg-input); border-bottom: 1px solid var(--line);
+        }
+        .mockup-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--ink-decor); opacity: 1; }
+        .mockup-title { margin-left: 8px; font-weight: 600; color: var(--ink-mid); font-size: 0.7rem; }
+
+        /* Panel tipo kanban */
+        .mockup-panel { aspect-ratio: 16/10; }
+        .mockup-cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); height: calc(100% - 33px); }
+        .mockup-col { background: var(--bg); padding: 8px 6px; display: flex; flex-direction: column; gap: 6px; overflow: hidden; }
+        .mockup-col-head { font-size: 0.62rem; font-weight: 700; padding: 4px 6px; border-radius: 5px; text-align: left; }
+        .mockup-col-head em { font-style: normal; opacity: 0.6; margin-left: 3px; }
+        .mockup-col-head.lead { background: var(--rojo-bg); color: var(--rojo); }
+        .mockup-col-head.llamada { background: var(--cobalt-tint); color: var(--cobalt-700); }
+        .mockup-col-head.propuesta { background: var(--ambar-bg); color: var(--ambar); }
+        .mockup-col-head.venta { background: var(--verde-bg); color: var(--verde); }
+        .mockup-card {
+            background: var(--bg-alt); border: 1px solid var(--line); border-radius: 6px;
+            padding: 6px 8px; display: flex; flex-direction: column; gap: 2px;
+        }
+        .mockup-card strong { font-size: 0.66rem; font-weight: 600; color: var(--ink); }
+        .mockup-card span { font-size: 0.58rem; color: var(--ink-decor); }
+
+        /* Aviso de hoy */
+        .mockup-aviso { aspect-ratio: 16/10; display: flex; flex-direction: column; }
+        .mockup-aviso-body { padding: 14px; display: flex; flex-direction: column; gap: 10px; flex: 1; justify-content: center; }
+        .mockup-aviso-fecha { font-family: monospace; font-size: 0.62rem; letter-spacing: 0.1em; color: var(--ink-decor); margin-bottom: 4px; }
+        .mockup-aviso-item {
+            display: flex; align-items: center; gap: 8px; font-size: 0.72rem; color: var(--ink);
+            background: var(--bg-alt); border-radius: 8px; padding: 8px 10px;
+        }
+        .mockup-badge { font-size: 0.58rem; font-weight: 700; padding: 2px 7px; border-radius: 20px; flex: none; }
+        .mockup-badge.rojo { background: var(--rojo-bg); color: var(--rojo); }
+        .mockup-badge.ambar { background: var(--ambar-bg); color: var(--ambar); }
+        .mockup-badge.verde { background: var(--verde-bg); color: var(--verde); }
+
+        /* Ficha de lead */
+        .mockup-ficha { aspect-ratio: 16/10; }
+        .mockup-ficha-body { padding: 14px; display: flex; flex-direction: column; }
+        .mockup-ficha-nombre { font-size: 0.9rem; color: var(--ink); margin-bottom: 3px; }
+        .mockup-ficha-origen { font-size: 0.65rem; color: var(--ink-decor); margin-bottom: 14px; }
+        .mockup-timeline { display: flex; flex-direction: column; gap: 10px; }
+        .mockup-tl-item { display: flex; align-items: flex-start; gap: 8px; font-size: 0.7rem; color: var(--ink-soft); line-height: 1.4; }
+        .mockup-tl-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--cobalt-600); margin-top: 4px; flex: none; }
+        .mockup-tl-item.pend .mockup-tl-dot { background: var(--ambar); }
+        .mockup-tl-item.pend { color: var(--ambar); font-weight: 500; }
+        .confianza-bar {
+            display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 40px;
+            padding-top: 40px; border-top: 1px solid var(--line);
+        }
+        .confianza-bar span {
+            font-family: var(--font-heading); font-weight: 700; font-size: 1.05rem;
+            color: var(--ink-mid); letter-spacing: -0.01em;
+        }
+        .confianza-bar .confianza-intro {
+            font-weight: 400; font-size: 0.85rem; letter-spacing: 0.02em;
+            color: var(--ink-mid); opacity: 1;
+        }
+
+        /* Bloque 3 — EL PROBLEMA (contraste así-hoy / así-debería) */
+        .problema-grid { max-width: 900px; margin: 0 auto; }
+        .contraste-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 8px; }
+        .contraste-col { border-radius: 14px; padding: 26px 24px; border: 1px solid; }
+        .contraste-col.mal { background: var(--rojo-bg); border-color: var(--rojo-border); }
+        .contraste-col.bien { background: var(--verde-bg); border-color: var(--verde-border); }
+        .contraste-label { display: block; font-family: var(--font-heading); font-weight: 700; font-size: 0.98rem; margin-bottom: 16px; }
+        .contraste-col.mal .contraste-label { color: var(--rojo); }
+        .contraste-col.bien .contraste-label { color: var(--verde); }
+        .contraste-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+        .contraste-col li { font-size: 0.92rem; color: var(--ink-soft); font-weight: 400; line-height: 1.5; padding-left: 20px; position: relative; }
+        .contraste-col.mal li::before { content: '–'; position: absolute; left: 0; color: var(--rojo); font-weight: 700; }
+        .contraste-col.bien li::before { content: '–'; position: absolute; left: 0; color: var(--verde); font-weight: 700; }
+        .problema-frase {
+            font-family: var(--font-heading); font-size: clamp(1.15rem, 2.2vw, 1.5rem); font-weight: 700;
+            line-height: 1.4; letter-spacing: -0.01em; margin-top: 36px; max-width: 46ch; color: var(--ink);
+        }
+
+        /* Bloque 4 — BENEFICIOS */
+        .beneficios-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 22px; }
+        .beneficio { text-align: center; }
+        /* Iconos de línea (SVG inline, no emoji) en azul cobalto, consistentes en toda la página */
+        .ic-line {
+            display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;
+            width: 46px; height: 46px; border-radius: 12px;
+            background: var(--cobalt-tint); border: 1px solid var(--cobalt-border);
+        }
+        .ic-line svg { width: 22px; height: 22px; stroke: var(--cobalt-600); }
+        .beneficio h3 { font-family: var(--font-body); font-size: 1rem; font-weight: 600; margin-bottom: 8px; line-height: 1.3; color: var(--ink); }
+        .beneficio p { font-size: 0.86rem; color: var(--ink-mid); font-weight: 300; line-height: 1.5; }
+
+        /* Bloque 5 — DIFERENCIADOR (imagen + texto, 2 columnas, sin CTA) */
+        .diferenciador-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 60px; align-items: center; }
+        .diferenciador-photo {
+            width: 100%; aspect-ratio: 4/5; object-fit: cover;
+            border-radius: 20px; box-shadow: 0 30px 70px rgba(26,29,35,0.14), 0 0 0 1px var(--line);
+        }
+        .diferenciador-text p { font-size: 1.05rem; color: var(--ink-soft); font-weight: 300; margin-bottom: 18px; max-width: 54ch; }
+        .diferenciador-apoyos { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-top: 28px; }
+        .diferenciador-apoyos li { font-size: 0.95rem; color: var(--ink); font-weight: 400; padding-left: 26px; position: relative; }
+        .diferenciador-apoyos li::before { content: '✓'; position: absolute; left: 0; color: var(--cobalt-600); font-weight: 700; }
+
+        /* Bloque 6 — QUÉ SE MONTA (bento asimétrico: 1 tarjeta destacada + 2 apiladas, no 3 iguales) */
+        .servicios-bento { display: grid; grid-template-columns: 1.4fr 1fr; gap: 24px; margin-bottom: 48px; align-items: stretch; }
+        .servicios-bento-side { display: flex; flex-direction: column; gap: 24px; }
+        .servicio-card {
+            background: var(--bg); border: 1px solid var(--line); border-radius: 12px;
+            overflow: hidden; transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .servicio-card:hover { border-color: var(--cobalt-border); transform: translateY(-4px); box-shadow: 0 20px 45px rgba(26,29,35,0.10), 0 0 30px -12px var(--cobalt-glow); }
+        .servicio-card-body { padding: 26px 24px; }
+        .servicio-card-body h3 { font-family: var(--font-body); font-size: 1.08rem; font-weight: 600; margin-bottom: 10px; color: var(--ink); }
+        .servicio-card-body p { font-size: 0.92rem; color: var(--ink-soft); font-weight: 300; }
+        .servicios-cta { text-align: center; margin-bottom: 90px; }
+        .servicio-card-simple { padding: 32px 24px 8px; }
+        .servicio-ic.ic-line { margin: 0 0 6px; }
+        .servicio-card-simple .servicio-card-body { padding: 0 0 26px; }
+        /* Tarjeta destacada del bento: más grande, con eyebrow e icono mayor */
+        .servicio-card-lead {
+            padding: 40px 36px; display: flex; flex-direction: column; justify-content: center;
+            background: linear-gradient(160deg, var(--cobalt-tint), var(--bg));
+        }
+        .servicio-eyebrow {
+            display: block; font-family: monospace; font-size: 0.68rem; font-weight: 700;
+            letter-spacing: 0.14em; color: var(--cobalt-600); margin-bottom: 10px;
+        }
+        .servicio-card-lead .servicio-card-body { padding: 0; }
+        .servicio-card-lead .servicio-card-body h3 { font-size: 1.35rem; margin-bottom: 14px; }
+        .servicio-card-lead .servicio-card-body p { font-size: 1rem; max-width: 46ch; }
+        .ic-line-lg { width: 58px; height: 58px; margin-bottom: 20px !important; }
+        .ic-line-lg svg { width: 28px; height: 28px; }
+
+        /* Sub-bloque: cómo se conectan (solo texto) */
+        .flujo-head { text-align: center; max-width: 680px; margin: 0 auto 44px; }
+        .flujo-apoyos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 900px; margin: 0 auto; }
+        .flujo-apoyos-compact { margin-bottom: 40px; }
+        .flujo-apoyos-compact .flujo-apoyo strong { font-size: 0.9rem; }
+        .flujo-apoyos-compact .flujo-apoyo span { font-size: 0.82rem; }
+        .flujo-apoyo { text-align: center; }
+        .flujo-apoyo strong { display: block; font-size: 0.98rem; color: var(--ink); margin-bottom: 6px; }
+        .flujo-apoyo span { font-size: 0.88rem; color: var(--ink-soft); font-weight: 300; }
+
+        /* Flujograma de proceso: fases + estados + automatizaciones colgando */
+        .pipe-wrap {
+            max-width: 1120px; margin: 0 auto; background: var(--bg); border: 1px solid var(--line);
+            border-radius: 16px; padding: 28px 24px; box-shadow: 0 20px 50px rgba(26,29,35,0.06);
+            overflow-x: auto;
+        }
+        /* pipe-fases y pipe-track comparten la MISMA rejilla: 4 estados + 1
+           columna de resultado (algo más ancha) + 4 huecos de flecha entre
+           medias, para que las etiquetas de fase queden alineadas exactamente
+           sobre sus columnas de estado. Orden real: [Lead nuevo][→][Discovery
+           (llamada 1)][→][Llamada 2/No responde][→][Propuesta][→][Venta/No venta] */
+        .pipe-fases {
+            display: grid; grid-template-columns: 1fr 24px 1fr 24px 1.15fr 24px 1fr 24px 1fr;
+            gap: 0; min-width: 1040px; margin-bottom: 18px; padding-bottom: 12px;
+            border-bottom: 1px solid var(--line);
+        }
+        .pipe-fases span {
+            font-family: monospace; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em;
+            color: var(--cobalt-600); text-align: center;
+        }
+        /* CAPTACIÓN = Lead nuevo (col 1). NUTRICIÓN = Discovery + Llamada 2
+           (cols 3-5, cubre su flecha intermedia). CONVERSIÓN = Propuesta +
+           Resultado (cols 7-9, cubre su flecha intermedia) */
+        .pipe-fases span:nth-child(1) { grid-column: 1; }
+        .pipe-fases span:nth-child(2) { grid-column: 3 / 6; }
+        .pipe-fases span:nth-child(3) { grid-column: 7 / 10; }
+        .pipe-track {
+            display: grid; grid-template-columns: 1fr 24px 1fr 24px 1.15fr 24px 1fr 24px 1fr;
+            align-items: center; gap: 0; min-width: 1040px;
+        }
+        .pipe-col { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 0 8px; }
+        .pipe-autos { display: flex; flex-direction: column; gap: 6px; min-height: 30px; justify-content: flex-end; width: 100%; }
+        .pipe-autos.down { justify-content: flex-start; }
+        .pipe-auto {
+            font-family: monospace; font-size: 0.62rem; letter-spacing: 0.02em; color: var(--ambar);
+            background: var(--ambar-bg); border: 1px dashed var(--ambar-border); border-radius: 8px;
+            padding: 6px 8px; text-align: center; line-height: 1.35;
+        }
+        .pipe-state {
+            font-family: var(--font-heading); font-size: 0.85rem; font-weight: 700; color: var(--ink);
+            background: var(--bg-alt); border: 1px solid var(--line); border-radius: 10px;
+            padding: 12px 14px; text-align: center; width: 100%; box-shadow: 0 2px 8px rgba(26,29,35,0.04);
+        }
+        .pipe-arrow { color: var(--ink-decor); font-size: 1.1rem; text-align: center; }
+        .pipe-result-col { gap: 8px; }
+        .pipe-result {
+            font-family: var(--font-heading); font-weight: 700; font-size: 0.8rem; border-radius: 10px;
+            padding: 10px 16px; width: 100%; text-align: center;
+        }
+        .pipe-result.venta { background: var(--verde-bg); color: var(--verde); border: 1px solid var(--verde-border); }
+        .pipe-result.novent { background: var(--rojo-bg); color: var(--rojo); border: 1px solid var(--rojo-border); }
+        .auto-nota { text-align: center; max-width: 480px; margin: 20px auto 0; font-size: 0.9rem; color: var(--ink-mid); font-weight: 400; }
+
+        /* Bloque 7 — CÓMO TRABAJAMOS (reutiliza .metodo-grid del patrón DAI360) */
+        .pasos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 44px; }
+        .paso-col .p-num { font-family: monospace; font-size: 0.85rem; letter-spacing: 0.25em; color: var(--ink-decor); display: block; margin-bottom: 12px; }
+        .paso-col h3 { font-family: var(--font-heading); font-size: 1.25rem; font-weight: 800; letter-spacing: -0.01em; margin-bottom: 12px; color: var(--ink); }
+        .paso-col p { font-size: 0.94rem; color: var(--ink-soft); font-weight: 300; }
+
+        /* Bloque 8 — PARA QUIÉN SÍ / NO */
+        .quien-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 940px; margin: 0 auto; }
+        .quien-col { border-radius: 14px; padding: 30px 28px; border: 1px solid; }
+        .quien-col.si { background: var(--verde-bg); border-color: var(--verde-border); }
+        .quien-col.no { background: var(--bg-alt); border-color: var(--line); }
+        .quien-label {
+            display: block; font-family: var(--font-heading); font-weight: 700;
+            font-size: 1rem; margin-bottom: 18px;
+        }
+        .quien-col.si .quien-label { color: var(--verde); }
+        .quien-col.no .quien-label { color: var(--ink-mid); }
+        .quien-col ul { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+        .quien-col li { font-size: 0.94rem; color: var(--ink-soft); line-height: 1.5; padding-left: 26px; position: relative; }
+        .quien-col.si li::before { content: '✓'; position: absolute; left: 0; color: var(--verde); font-weight: 700; }
+        .quien-col.no li::before { content: '–'; position: absolute; left: 0; color: var(--ink-decor); font-weight: 700; }
+        @media (max-width: 900px) { .quien-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 640px) { .quien-col { padding: 24px 20px; } }
+
+        /* FAQ */
+        .faqs { max-width: 780px; margin: 0 auto; display: flex; flex-direction: column; gap: 18px; }
+        .faq { background: var(--bg); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; transition: border-color 0.3s ease; }
+        .faq:hover { border-color: var(--cobalt-border); }
+        .faq button {
+            width: 100%; background: none; border: none; cursor: pointer; text-align: left;
+            display: flex; justify-content: space-between; align-items: center; gap: 16px;
+            padding: 24px 28px; color: var(--ink); font-family: var(--font-body); font-size: 1.05rem; font-weight: 600;
+        }
+        .faq .ico { font-size: 1.4rem; font-weight: 300; color: var(--ink-mid); transition: transform 0.35s cubic-bezier(0.16,1,0.3,1); line-height: 1; }
+        .faq.open { border-color: var(--cobalt-border); }
+        .faq.open .ico { transform: rotate(45deg); color: var(--cobalt-600); }
+        .faq .body { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.16,1,0.3,1); }
+        .faq .body p { padding: 0 28px 24px; font-size: 0.95rem; color: var(--ink-soft); font-weight: 300; }
+
+        /* Bloque 10 — CIERRE + FORMULARIO */
+        .cierre-grid { display: block; max-width: 620px; margin: 0 auto; }
+        .cierre-text { text-align: center; }
+        .cierre-text h2 { font-family: var(--font-heading); font-size: clamp(1.7rem, 3.6vw, 2.3rem); font-weight: 800; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 18px; color: var(--ink); }
+        .cierre-text p { font-size: 1.05rem; color: var(--ink-soft); font-weight: 300; max-width: 46ch; margin: 0 auto 32px; }
+        .cierre-text .glass-form-container { text-align: left; }
+
+        /* Formulario glass (patrón replicado de la home) */
+        .glass-form-container {
+            max-width: 100%; margin: 0; position: relative; z-index: 1;
+            border-radius: 16px; overflow: hidden; padding: 1px;
+            background: linear-gradient(135deg, var(--cobalt-border), rgba(26,29,35,0.07));
+        }
+        .glass-form {
+            background-color: var(--bg); border: none; border-radius: 15px; padding: 40px;
+            box-shadow: 0 30px 60px rgba(26,29,35,0.09);
+            position: relative; z-index: 1;
+        }
+        .form-group { position: relative; margin-bottom: 22px; display: flex; flex-direction: column; }
+        .form-group label {
+            position: absolute; left: 18px; right: 18px; top: 17px; font-size: 0.9rem; color: var(--ink-mid);
+            pointer-events: none; transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1); margin-bottom: 0;
+            font-weight: 400; z-index: 2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+        .form-group input {
+            width: 100%; background-color: var(--bg-input); border: 1px solid var(--line-strong);
+            border-radius: 12px; padding: 24px 18px 8px 18px; color: var(--ink); font-family: var(--font-body);
+            font-size: 0.95rem; transition: all 0.3s ease; appearance: none;
+        }
+        .form-group input::placeholder { color: var(--ink-decor); opacity: 0; transition: opacity 0.2s ease; }
+        .form-group.focused input::placeholder { opacity: 1; }
+        .form-group.focused label, .form-group.has-value label { top: 6px; left: 18px; font-size: 0.72rem; color: var(--ink-mid); }
+        .form-group.focused label { color: var(--cobalt-700); }
+        .form-group input:focus { outline: none; border-color: var(--cobalt-600); background-color: var(--bg); box-shadow: 0 0 0 4px var(--cobalt-glow); }
+        .btn-submit {
+            display: block; width: 100%; font-family: var(--font-body); font-size: 1rem; font-weight: 600;
+            color: #fff; background: var(--cobalt-600); border: 1px solid transparent; padding: 18px;
+            border-radius: 999px; cursor: pointer; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .btn-submit:hover { transform: translateY(-1px); box-shadow: 0 8px 30px var(--cobalt-glow); background: var(--cobalt-700); }
+        .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+        .form-note { font-family: var(--font-body); font-size: 0.82rem; color: var(--ink-mid); text-align: center; margin-top: 10px; line-height: 1.5; }
+        .form-message { font-family: var(--font-body); font-size: 0.9rem; text-align: center; margin-top: 20px; min-height: 24px; }
+        .form-message.success { color: var(--verde); }
+        .form-message.error { color: var(--rojo); }
+
+        /* CTA final (no se usa como sección aparte: el cierre ya lleva form) */
+
+        /* Footer mini */
+        .subfooter {
+            border-top: 1px solid var(--line); padding: 32px 24px; text-align: center;
+            font-size: 0.78rem; letter-spacing: 0.12em; text-transform: lowercase; color: var(--ink-mid);
+        }
+        .subfooter a { color: var(--ink-soft); text-decoration: none; }
+        .subfooter a:hover { color: var(--ink); }
+
+        /* Reveal */
+        .reveal { opacity: 0; transform: translateY(36px); transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1); }
+        .reveal.revealed { opacity: 1; transform: translateY(0); }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .pruebas-grid, .beneficios-grid, .flujo-apoyos, .pasos-grid, .contraste-grid { grid-template-columns: 1fr; }
+            .servicios-bento { grid-template-columns: 1fr; }
+            .servicio-card-lead { padding: 32px 24px; }
+            .diferenciador-grid { grid-template-columns: 1fr; gap: 36px; }
+            .diferenciador-visual { order: -1; }
+            .diferenciador-photo { max-width: 340px; margin: 0 auto; display: block; aspect-ratio: 1/1; }
+            .section { padding: 84px 0; }
+            .subnav .back { display: none; }
+            .beneficios-grid { gap: 32px; }
+            .pasos-grid { gap: 36px; }
+        }
+
+        /* ===== MÓVIL (<=640px) — la mayoría del tráfico llega por aquí ===== */
+        @media (max-width: 640px) {
+            .container { padding: 0 20px; }
+            /* scroll-margin: la nav flotante ocupa 54px + 12px de separación
+               superior; se deja holgura para que el título no quede pegado. */
+            .section { padding: 64px 0; scroll-margin-top: 86px; }
+
+            /* Nav: más estrecha y pegada arriba, para no comerse el hero */
+            .subnav { top: 12px; width: calc(100% - 24px); height: 54px; padding: 0 8px 0 18px; }
+            .subnav .logo img { height: 20px; }
+            .subnav .cta { font-size: 0.78rem; padding: 9px 16px; }
+
+            /* Hero: menos aire muerto arriba y tipografía que respira */
+            .hero.inverse { min-height: auto; padding: 110px 0 64px; }
+            .hero.inverse h1 { font-size: clamp(2rem, 8.6vw, 2.5rem); line-height: 1.15; max-width: 100%; }
+            .hero.inverse .hero-badge { font-size: 0.62rem; letter-spacing: 0.18em; padding: 6px 12px; margin-bottom: 20px; }
+            .hero.inverse p.sub { font-size: 1.02rem; }
+            .hero.inverse p.hero-quien { margin-bottom: 30px; }
+            .hero-ctas { width: 100%; }
+            .hero.inverse .btn-main { width: 100%; text-align: center; padding: 17px 24px; }
+
+            .s-title { font-size: clamp(1.5rem, 6.4vw, 1.9rem); }
+            .s-head { margin-bottom: 40px; }
+            .s-sub { font-size: 1rem; }
+
+            /* Mockups: en móvil se ven a una columna, así que se les da
+               más alto para que el texto de dentro siga siendo legible */
+            .pruebas-grid { gap: 34px; margin-bottom: 44px; }
+            .mockup-panel { aspect-ratio: 4/3; }
+            .mockup-cols { grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(2, 1fr); }
+            .mockup-aviso, .mockup-ficha { aspect-ratio: 4/3; }
+            .confianza-bar { gap: 20px 28px; padding-top: 32px; }
+            .confianza-bar span { font-size: 0.95rem; }
+
+            .contraste-col { padding: 22px 20px; }
+            .problema-frase { margin-top: 28px; }
+
+            /* Flujograma: en escritorio es una fila con scroll lateral. En móvil
+               ese scroll no se ve y media tabla queda invisible, así que se
+               reconstruye como columna vertical con las flechas girando 90º. */
+            .pipe-wrap { padding: 20px 16px; overflow-x: visible; }
+            .pipe-fases { display: none; }
+            .pipe-track { grid-template-columns: 1fr; min-width: 0; gap: 4px; }
+            .pipe-col { padding: 0; width: 100%; }
+            .pipe-arrow { transform: rotate(90deg); font-size: 1rem; padding: 2px 0; }
+            .pipe-autos { min-height: 0; width: 100%; }
+            .pipe-auto { font-size: 0.68rem; }
+            .pipe-result-col { flex-direction: row; gap: 10px; }
+            .auto-nota { margin-top: 16px; }
+
+            /* Formulario: el padding de 40px deja los campos muy estrechos */
+            .glass-form { padding: 26px 20px; }
+            .cierre-text h2 { font-size: clamp(1.5rem, 6.4vw, 1.9rem); }
+            .faq button { padding: 20px; font-size: 0.98rem; }
+            .faq .body p { padding: 0 20px 20px; }
+
+            /* Hueco para que la barra fija de abajo no tape el footer */
+            .footer-section { padding-bottom: 100px; }
+        }
+
+        /* ===== BARRA CTA FIJA EN MÓVIL =====
+           La página es larga: sin esto, quien va por la mitad no tiene botón
+           a mano. Se oculta al llegar al formulario para no taparlo. */
+        .cta-movil {
+            display: none;
+            position: fixed; bottom: 0; left: 0; right: 0; z-index: 999;
+            padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+            border-top: 1px solid var(--line);
+            transform: translateY(110%); transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .cta-movil.visible { transform: translateY(0); }
+        .cta-movil a {
+            display: block; text-align: center; text-decoration: none;
+            background: var(--cobalt-600); color: #fff; font-weight: 600; font-size: 0.95rem;
+            padding: 15px; border-radius: 100px;
+        }
+        @media (max-width: 640px) { .cta-movil { display: block; } }
+        @media (prefers-reduced-motion: reduce) { .cta-movil { transition: none; } }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .reveal { opacity: 1; transform: none; transition: none; }
+        }
+
+        /* ===== SECCION DEL FOOTER CLASICO =====
+           Mismo negro azulado que el hero: la página abre y cierra igual.
+           Requiere class="inverse" en el <footer class="footer-section">. */
+        .footer-section.inverse {
+            position: relative; padding: 90px 0 60px 0;
+            width: 100%; border-top: 1px solid var(--night-600);
+        }
+        .footer-grid { display: grid; grid-template-columns: 1.2fr 1.8fr; gap: 60px; margin-bottom: 60px; }
+        .footer-brand-col { display: flex; flex-direction: column; gap: 20px; }
+        .footer-logo-wrap { display: flex; align-items: center; gap: 12px; color: var(--on-night); }
+        .footer-logo-wrap .logo img { height: 24px; width: auto; display: block; }
+        .footer-brand-desc { font-size: 0.9rem; line-height: 1.6; color: var(--on-night-soft); max-width: 380px; font-weight: 300; }
+        .footer-links-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+        .footer-links-title { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--on-night); font-weight: 600; margin-bottom: 24px; }
+        .footer-links-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+        .footer-links-list a { font-size: 0.8rem; color: var(--on-night-soft); text-decoration: none; transition: color 0.3s ease; font-weight: 300; }
+        .footer-links-list a:hover { color: var(--on-night); }
+        .footer-bottom-bar { border-top: 1px solid var(--night-600); padding-top: 32px; display: flex; justify-content: space-between; align-items: center; }
+        .footer-curator { font-size: 0.75rem; text-transform: lowercase; letter-spacing: 0.15em; color: var(--on-night-mid); }
+        .footer-social-wrap { display: flex; align-items: center; gap: 16px; }
+        .footer-social-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--on-night-mid); }
+        .footer-social-icons { display: flex; gap: 16px; }
+        .footer-social-icons a { color: var(--on-night-soft); transition: all 0.3s ease; display: flex; align-items: center; }
+        .footer-social-icons a:hover { color: var(--on-night); transform: translateY(-2px); }
+
+        @media (max-width: 900px) {
+            .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+            .footer-links-grid { grid-template-columns: 1fr; gap: 28px; }
+            .footer-bottom-bar { flex-direction: column; gap: 20px; text-align: center; }
+        }
+jsPagina: |
+        // Reveal al hacer scroll
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); obs.unobserve(e.target); } });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+        // FAQ acordeón
+        document.querySelectorAll('.faq button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const item = btn.parentElement;
+                const body = item.querySelector('.body');
+                const wasOpen = item.classList.contains('open');
+                document.querySelectorAll('.faq').forEach(f => { f.classList.remove('open'); f.querySelector('.body').style.maxHeight = null; });
+                if (!wasOpen) { item.classList.add('open'); body.style.maxHeight = body.scrollHeight + 'px'; }
+            });
+        });
+
+        // Floating labels del formulario
+        document.querySelectorAll('.form-group input').forEach(input => {
+            const group = input.closest('.form-group');
+            input.addEventListener('focus', () => group.classList.add('focused'));
+            input.addEventListener('blur', () => {
+                group.classList.remove('focused');
+                if (input.value.trim() !== '') group.classList.add('has-value');
+                else group.classList.remove('has-value');
+            });
+        });
+
+        // Barra CTA fija de móvil: se muestra al dejar atrás el hero y se
+        // esconde al llegar al formulario, para no tapar el botón de envío.
+        const ctaMovil = document.getElementById('cta-movil');
+        const heroEl = document.querySelector('.hero');
+        const cierreEl = document.getElementById('cierre');
+
+        if (ctaMovil && heroEl && cierreEl) {
+            let heroFuera = false;
+            let cierreDentro = false;
+
+            // El banner de cookies es fixed abajo con z-index 10000: si sigue
+            // en pantalla, taparia esta barra. Se espera a que el visitante
+            // decida (el banner se borra del DOM al aceptar/rechazar).
+            const cookiesTapando = () => !!document.querySelector('.acc-banner--on');
+
+            const pintarCta = () => {
+                ctaMovil.classList.toggle('visible', heroFuera && !cierreDentro && !cookiesTapando());
+            };
+
+            new IntersectionObserver(([e]) => {
+                heroFuera = !e.isIntersecting;
+                pintarCta();
+            }, { threshold: 0 }).observe(heroEl);
+            new IntersectionObserver(([e]) => {
+                cierreDentro = e.isIntersecting;
+                pintarCta();
+            }, { threshold: 0 }).observe(cierreEl);
+
+            // Repintar en cuanto el banner desaparezca del DOM
+            new MutationObserver(pintarCta).observe(document.body, { childList: true, subtree: true });
+        }
+
+        // Eventos de analítica para los CTA (posición) — empujados a dataLayer
+        document.querySelectorAll('[data-cta]').forEach(el => {
+            el.addEventListener('click', () => {
+                window.dataLayer = window.dataLayer || [];
+                window.dataLayer.push({ event: 'cta_click', cta_position: el.getAttribute('data-cta') });
+            });
+        });
+
+        // ENVÍO DE FORMULARIO
+        // Mismo webhook que la home (workflow "Registro CRM", nodo Webhook2).
+        // OJO: ese nodo solo lee nombre/telefono/email/empresa/problema. Cualquier
+        // campo con otro nombre NO llega a Airtable, por eso el origen y los utm
+        // se meten dentro de "problema" en vez de ir sueltos.
+        const LEADS_WEBHOOK_URL = "https://alberto-core-n8n.saeasu.easypanel.host/webhook/d127116a-771a-4670-8f52-1288034a25e5";
+
+        const leadsForm = document.getElementById('leads-form');
+        const formMessage = document.getElementById('form-message');
+
+        if (leadsForm && formMessage) {
+            leadsForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                const honey = document.getElementById('validation_honey');
+                if (honey && honey.value.trim() !== '') {
+                    console.warn("Spam bot detected. Submission aborted.");
+                    return;
+                }
+
+                const submitBtn = leadsForm.querySelector('.btn-submit');
+                const originalBtnText = submitBtn ? submitBtn.innerHTML : "Pide tu llamada de 20 minutos &rarr;";
+
+                if (submitBtn) {
+                    submitBtn.disabled = true;
+                    submitBtn.innerHTML = "Enviando...";
+                }
+
+                formMessage.className = "form-message";
+                formMessage.textContent = "Enviando...";
+
+                // Parámetros utm de la URL, para saber el origen del lead
+                const params = new URLSearchParams(window.location.search);
+
+                // El origen y los utm viajan dentro de "problema" porque es el
+                // único campo de texto libre que el workflow vuelca a Airtable.
+                const utms = ['utm_source', 'utm_medium', 'utm_campaign']
+                    .map(k => params.get(k) ? k + '=' + params.get(k) : null)
+                    .filter(Boolean)
+                    .join(' · ');
+
+                const data = {
+                    nombre: document.getElementById('nombre').value,
+                    telefono: document.getElementById('telefono').value,
+                    email: document.getElementById('email').value,
+                    empresa: document.getElementById('negocio').value || "",
+                    problema: "Landing no-perder-clientes" + (utms ? " · " + utms : ""),
+                    fecha: new Date().toISOString()
+                };
+
+                try {
+                    const response = await fetch(LEADS_WEBHOOK_URL, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(data)
+                    });
+
+                    if (response.ok) {
+                        formMessage.className = "form-message success";
+                        formMessage.textContent = "✓ Hecho. Te escribo yo para cerrar el hueco. Revisa tu correo (y la carpeta de spam, por si acaso).";
+                        leadsForm.reset();
+                        leadsForm.querySelectorAll('.form-group').forEach(group => {
+                            group.classList.remove('focused', 'has-value');
+                        });
+                    } else {
+                        throw new Error("Server error");
+                    }
+                } catch (error) {
+                    console.error("Error submitting form:", error);
+                    formMessage.className = "form-message error";
+                    formMessage.textContent = "Hubo un error al enviar la solicitud. Por favor, inténtalo de nuevo o escríbeme por WhatsApp.";
+                } finally {
+                    if (submitBtn) {
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = originalBtnText;
+                    }
+                }
+            });
+        }
+schemas:
+  - |
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "Sistema de gestión y seguimiento de leads",
+      "alternateName": "No perder clientes que ya escriben",
+      "serviceType": "Sistema de captación, control y seguimiento de consultas para negocios",
+      "url": "https://albercabrera.com/no-perder-clientes/",
+      "description": "Sistema que ordena las consultas que ya recibe un negocio, avisa a quién hay que contactar y hace el seguimiento hasta cerrar la venta. Montaje inicial y cuota mensual, sin permanencia.",
+      "provider": {
+        "@type": "Person",
+        "name": "Alberto Pérez Cabrera",
+        "email": "alberto@albercabrera.com",
+        "url": "https://albercabrera.com/"
+      },
+      "areaServed": { "@type": "Country", "name": "España" },
+      "audience": {
+        "@type": "BusinessAudience",
+        "name": "Negocios que ya reciben consultas de clientes"
+      },
+      "offers": {
+        "@type": "Offer",
+        "availability": "https://schema.org/InStock",
+        "priceCurrency": "EUR",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "priceCurrency": "EUR",
+          "description": "Montaje inicial que se paga una vez, más cuota mensual fija sin permanencia ni comisiones por venta. El importe depende del volumen de consultas y de los canales, y se cierra en la llamada previa."
+        },
+        "url": "https://albercabrera.com/no-perder-clientes/"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Qué incluye el sistema",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Camino hasta la conversación", "description": "Que quien se interesa acabe hablando contigo: página corta, formulario conectado o recogida de consultas fuera de horario." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Panel de leads", "description": "Una sola pantalla con todos los que han preguntado y en qué punto está cada uno." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Seguimiento automático", "description": "Avisos de a quién toca contactar hoy, hasta que hay respuesta." } }
+        ]
+      }
+    }
+  - |
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://albercabrera.com/" },
+        { "@type": "ListItem", "position": 2, "name": "No perder clientes" }
+      ]
+    }
+  - |
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cuánto cuesta?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Hay un montaje inicial, que se paga una vez, y luego una cuota mensual fija por llevarlo: sin comisiones por venta y sin permanencia. Los dos números dependen de cuántas consultas te entran y de por cuántos sitios te escriben, así que te los doy cerrados en la llamada, antes de que decidas nada. Lo sabes antes de empezar, no después."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Ya tenemos un CRM.",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Perfecto, entonces la mitad del trabajo está hecha. El problema casi nunca es no tener herramienta, es que nadie la mantiene viva. Lo miramos y, si sirve, se aprovecha."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Preferimos atender nosotros, no queremos robots contestando.",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Y así debe ser. Esto no contesta por ti: lo que hace es que no se te escape nadie mientras no puedes atender, y avisarte de a quién le toca. Quien habla con el cliente sigues siendo tú."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto se tarda en tenerlo funcionando?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Semanas, no meses. Se empieza por lo que más fuga tiene y se amplía después."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Y si no funciona?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El propio sistema te lo enseña: a los dos meses ves cuántos entraron y cuántos se atendieron. Si el número no mejora, no hay nada que defender."
+          }
+        }
+      ]
+    }
+---
+    <!-- HERO -->
+    <header class="hero hero-centered inverse">
+        <div class="container hero-content-centered">
+            <span class="hero-badge">SISTEMA DE SEGUIMIENTO DE CLIENTES</span>
+            <h1>Deja de perder <span class="hl">clientes que ya te estaban escribiendo</span></h1>
+            <p class="sub">Monto el sistema que ordena tus consultas, avisa a quién hay que contestar y hace el seguimiento que hoy no hace nadie. En semanas, no en meses.</p>
+            <p class="hero-quien">Para negocios que ya reciben consultas y no dan abasto para atenderlas todas.</p>
+            <div class="hero-ctas hero-ctas-centered">
+                <a href="#cierre" class="btn-main" data-cta="cta_fold">Pide tu llamada de 20 minutos &rarr;</a>
+                <p class="hero-microcopy">Sin compromiso. En la llamada te digo si tienes fuga o no, y cuánto te cuesta.</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- BLOQUE 2 · PRUEBA (sin reseñas todavía — Versión A) -->
+    <section class="section" id="prueba">
+        <div class="container">
+            <div class="s-head center reveal">
+                <span class="s-label">CÓMO ES</span>
+                <h2 class="s-title">Esto es lo que vas a tener</h2>
+            </div>
+            <div class="pruebas-grid">
+                <div class="prueba-card reveal">
+                    <div class="mockup mockup-panel" aria-hidden="true">
+                        <div class="mockup-toolbar">
+                            <span class="mockup-dot"></span><span class="mockup-dot"></span><span class="mockup-dot"></span>
+                            <span class="mockup-title">Panel de clientes</span>
+                        </div>
+                        <div class="mockup-cols">
+                            <div class="mockup-col">
+                                <span class="mockup-col-head lead">Lead nuevo <em>2</em></span>
+                                <div class="mockup-card"><strong>Marta R.</strong><span>Hoy, 09:14</span></div>
+                                <div class="mockup-card"><strong>Javier P.</strong><span>Hoy, 11:02</span></div>
+                            </div>
+                            <div class="mockup-col">
+                                <span class="mockup-col-head llamada">Discovery <em>1</em></span>
+                                <div class="mockup-card"><strong>Sonia G.</strong><span>Ayer</span></div>
+                            </div>
+                            <div class="mockup-col">
+                                <span class="mockup-col-head propuesta">Propuesta <em>1</em></span>
+                                <div class="mockup-card"><strong>Carlos M.</strong><span>3 días</span></div>
+                            </div>
+                            <div class="mockup-col">
+                                <span class="mockup-col-head venta">Venta <em>1</em></span>
+                                <div class="mockup-card"><strong>Ana T.</strong><span>5 días</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <p>Todos los que han preguntado, y en qué punto está cada uno</p>
+                </div>
+                <div class="prueba-card reveal">
+                    <div class="mockup mockup-aviso" aria-hidden="true">
+                        <div class="mockup-toolbar">
+                            <span class="mockup-dot"></span><span class="mockup-dot"></span><span class="mockup-dot"></span>
+                            <span class="mockup-title">Aviso de hoy</span>
+                        </div>
+                        <div class="mockup-aviso-body">
+                            <span class="mockup-aviso-fecha">HOY · 3 pendientes</span>
+                            <div class="mockup-aviso-item"><span class="mockup-badge rojo">2 días</span> Marta R. — sin responder</div>
+                            <div class="mockup-aviso-item"><span class="mockup-badge ambar">Hoy</span> Sonia G. — seguimiento discovery</div>
+                            <div class="mockup-aviso-item"><span class="mockup-badge verde">Nuevo</span> Javier P. — primer contacto</div>
+                        </div>
+                    </div>
+                    <p>Te avisa solo, no hay que acordarse</p>
+                </div>
+                <div class="prueba-card reveal">
+                    <div class="mockup mockup-ficha" aria-hidden="true">
+                        <div class="mockup-toolbar">
+                            <span class="mockup-dot"></span><span class="mockup-dot"></span><span class="mockup-dot"></span>
+                            <span class="mockup-title">Ficha de lead</span>
+                        </div>
+                        <div class="mockup-ficha-body">
+                            <strong class="mockup-ficha-nombre">Sonia G.</strong>
+                            <span class="mockup-ficha-origen">Origen: WhatsApp · Etapa: Discovery</span>
+                            <div class="mockup-timeline">
+                                <div class="mockup-tl-item"><span class="mockup-tl-dot"></span>Preguntó por precio y disponibilidad</div>
+                                <div class="mockup-tl-item"><span class="mockup-tl-dot"></span>Discovery: agendó visita para el jueves</div>
+                                <div class="mockup-tl-item pend"><span class="mockup-tl-dot"></span>Pendiente: confirmar recordatorio</div>
+                            </div>
+                        </div>
+                    </div>
+                    <p>Todo lo que se ha hablado con esa persona, en un sitio</p>
+                </div>
+            </div>
+            <div class="confianza-bar reveal">
+                <span class="confianza-intro">Montado ya para</span>
+                <span>Mafhesa</span>
+                <span>Top Boutique</span>
+                <span>GEKO</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- BLOQUE 3 · EL PROBLEMA -->
+    <section class="section" id="problema">
+        <div class="container problema-grid">
+            <div>
+                <div class="s-head reveal" style="margin-bottom: 28px;">
+                    <span class="s-label">POR QUÉ PASA</span>
+                    <h2 class="s-title">Casi nadie pierde ventas por falta de interés</h2>
+                    <p class="s-sub">Las pierde porque la consulta llegó un jueves a las ocho, se quedó entre otras cuarenta y nadie volvió a acordarse.</p>
+                </div>
+
+                <div class="contraste-grid reveal">
+                    <div class="contraste-col mal">
+                        <span class="contraste-label">✕&nbsp;&nbsp;Así funciona hoy</span>
+                        <ul>
+                            <li>Alguien pregunta y nadie contesta hasta dos días después</li>
+                            <li>Se contesta por WhatsApp y la conversación se pierde entre las demás</li>
+                            <li>Nadie sabe quién preguntó, quién compró y qué quedó pendiente</li>
+                            <li>No se hace seguimiento, y la venta casi nunca se cierra en el primer contacto</li>
+                        </ul>
+                    </div>
+                    <div class="contraste-col bien">
+                        <span class="contraste-label">✓&nbsp;&nbsp;Así debería funcionar</span>
+                        <ul>
+                            <li>Cada consulta queda apuntada al momento, la vea quien la vea primero</li>
+                            <li>Da igual el canal: web, WhatsApp o Instagram, todo entra al mismo sitio</li>
+                            <li>Se sabe siempre quién preguntó, en qué punto está y qué falta por hacer</li>
+                            <li>Hay un aviso de a quién toca contactar hoy, hasta que hay respuesta</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <p class="problema-frase reveal">Si no sabes a quién le toca hoy, no le llamas. Y si no le llamas, esa venta no existe, aunque la persona estuviera interesada.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- BLOQUE 4 · BENEFICIOS -->
+    <section class="section" id="beneficios">
+        <div class="container">
+            <div class="s-head center reveal">
+                <span class="s-label">QUÉ GANAS</span>
+                <h2 class="s-title">Lo que cambia desde el primer mes</h2>
+            </div>
+            <div class="beneficios-grid">
+                <div class="beneficio reveal">
+                    <span class="ic-line"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2"/><path d="M9 2h6"/></svg></span>
+                    <h3>Respuesta el mismo día</h3>
+                    <p>Nadie se queda esperando dos días a que alguien mire</p>
+                </div>
+                <div class="beneficio reveal">
+                    <span class="ic-line"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 2h6a1 1 0 0 1 1 1v2H8V3a1 1 0 0 1 1-1z"/><path d="M9 11h6M9 15h6M9 19h3"/></svg></span>
+                    <h3>Todo en un sitio</h3>
+                    <p>Quién preguntó, en qué punto está y qué quedó pendiente</p>
+                </div>
+                <div class="beneficio reveal">
+                    <span class="ic-line"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M6 8a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6"/><path d="M10.5 21a1.5 1.5 0 0 0 3 0"/></svg></span>
+                    <h3>Nadie se cae</h3>
+                    <p>Avisos automáticos de a quién toca contactar hoy</p>
+                </div>
+                <div class="beneficio reveal">
+                    <span class="ic-line"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 4v4h-4"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 20v-4h4"/></svg></span>
+                    <h3>Seguimiento hasta el final</h3>
+                    <p>La venta se cierra al segundo o tercer contacto, no al primero</p>
+                </div>
+                <div class="beneficio reveal">
+                    <span class="ic-line"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span>
+                    <h3>Sabes tu número</h3>
+                    <p>Cuántos entraron y cuántos se atendieron, en una pantalla</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BLOQUE 5 · DIFERENCIADOR -->
+    <section class="section" id="diferenciador">
+        <div class="container diferenciador-grid">
+            <div class="diferenciador-visual reveal">
+                <picture>
+                    <source srcset="img/alberto-hero.webp" type="image/webp">
+                    <img class="diferenciador-photo" src="img/alberto-hero.jpg"
+                         alt="Alberto Pérez Cabrera, consultor que monta sistemas de seguimiento de clientes"
+                         width="896" height="1200" loading="lazy" decoding="async">
+                </picture>
+            </div>
+            <div class="diferenciador-text reveal">
+                <span class="s-label">LA DIFERENCIA</span>
+                <h2 class="s-title">No te dejo una herramienta y me voy</h2>
+                <p>La mayoría de negocios ya ha probado un CRM que acabó vacío a los dos meses. La diferencia no está en la herramienta, está en que alguien la monte a la medida de cómo trabajáis y se quede a sostenerla mientras se coge la costumbre.</p>
+                <p>Yo lo monto, lo pongo en marcha con tu equipo y lo mantengo funcionando. Si algo deja de encajar, se cambia.</p>
+                <ul class="diferenciador-apoyos">
+                    <li>Se monta en semanas, no en meses</li>
+                    <li>Se adapta a cómo trabajáis ya, no al revés</li>
+                    <li>Si no hay fuga que tapar, te lo digo y no hay proyecto</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- BLOQUE 6 · QUÉ SE MONTA + CÓMO SE CONECTAN -->
+    <section class="section" id="que-se-monta">
+        <div class="container">
+            <div class="s-head center reveal">
+                <span class="s-label">QUÉ SE MONTA</span>
+                <h2 class="s-title">Tres piezas, siempre las mismas</h2>
+            </div>
+            <div class="servicios-bento">
+                <div class="servicio-card servicio-card-lead reveal">
+                    <span class="servicio-ic ic-line ic-line-lg"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span>
+                    <div class="servicio-card-body">
+                        <span class="servicio-eyebrow">Pieza 1 · Entrada</span>
+                        <h3>El camino hasta la conversación</h3>
+                        <p>Que quien se interesa acabe hablando contigo. Según el caso: una página corta donde aterrizar, un formulario conectado, o algo que recoja las consultas mientras tú no puedes atender.</p>
+                    </div>
+                </div>
+                <div class="servicios-bento-side">
+                    <div class="servicio-card servicio-card-simple reveal">
+                        <span class="servicio-ic ic-line"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 2h6a1 1 0 0 1 1 1v2H8V3a1 1 0 0 1 1-1z"/><path d="M9 11h6M9 15h6M9 19h3"/></svg></span>
+                        <div class="servicio-card-body">
+                            <h3>El panel de leads</h3>
+                            <p>Una sola pantalla con todos los que han preguntado y en qué punto está cada uno. Se abre por la mañana y ya sabes a quién llamar.</p>
+                        </div>
+                    </div>
+                    <div class="servicio-card servicio-card-simple reveal">
+                        <span class="servicio-ic ic-line"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M6 8a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6"/><path d="M10.5 21a1.5 1.5 0 0 0 3 0"/></svg></span>
+                        <div class="servicio-card-body">
+                            <h3>El seguimiento</h3>
+                            <p>Avisos para que nadie se quede colgado. Aquí es donde se recuperan las ventas que ya dabas por perdidas.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="servicios-cta reveal">
+                <a href="#cierre" class="btn-main" data-cta="cta_servicios">Pide tu llamada de 20 minutos &rarr;</a>
+            </div>
+
+            <!-- Sub-bloque: cómo funciona por dentro (entrada + sostenimiento, un solo encabezado) -->
+            <div class="flujo-head reveal">
+                <span class="s-label">CÓMO FUNCIONA POR DENTRO</span>
+                <h2 class="s-title">Da igual por dónde te escriban: acaba todo en el mismo sitio, y no se queda quieto</h2>
+                <p class="s-sub" style="margin: 0 auto;">Formulario, WhatsApp, Instagram o teléfono: cada consulta se apunta sola, en el momento. Y una vez dentro, cada cambio de estado dispara su automatización, corriendo en un servidor que reviso yo cada mes.</p>
+            </div>
+            <div class="flujo-apoyos flujo-apoyos-compact">
+                <div class="flujo-apoyo reveal">
+                    <strong>Se apunta solo</strong>
+                    <span>Nadie pasa datos de un sitio a otro a mano</span>
+                </div>
+                <div class="flujo-apoyo reveal">
+                    <strong>En el momento</strong>
+                    <span>Entra al panel en segundos, no al día siguiente</span>
+                </div>
+                <div class="flujo-apoyo reveal">
+                    <strong>Con su origen</strong>
+                    <span>Sabes si vino de web, Instagram o anuncio</span>
+                </div>
+            </div>
+            <div class="pipe-wrap reveal">
+                <div class="pipe-fases">
+                    <span>CAPTACIÓN</span><span>NUTRICIÓN</span><span>CONVERSIÓN</span>
+                </div>
+                <div class="pipe-track">
+                    <!-- Lead Nuevo -->
+                    <div class="pipe-col">
+                        <div class="pipe-autos">
+                            <div class="pipe-auto">⚡ Registro de nuevo lead</div>
+                        </div>
+                        <div class="pipe-state">Lead nuevo</div>
+                        <div class="pipe-autos down">
+                            <div class="pipe-auto">⚡ WhatsApp / email de bienvenida</div>
+                            <div class="pipe-auto">⚡ Aviso a ti de nuevo lead</div>
+                        </div>
+                    </div>
+                    <span class="pipe-arrow">&rarr;</span>
+                    <!-- Discovery: la primera llamada -->
+                    <div class="pipe-col">
+                        <div class="pipe-autos">
+                            <div class="pipe-auto">⚡ Recordatorio de la llamada</div>
+                        </div>
+                        <div class="pipe-state">Discovery (llamada 1)</div>
+                        <div class="pipe-autos down">
+                            <div class="pipe-auto">⚡ Detección de leads estancados</div>
+                        </div>
+                    </div>
+                    <span class="pipe-arrow">&rarr;</span>
+                    <!-- Llamada 2 / no responde -->
+                    <div class="pipe-col">
+                        <div class="pipe-autos">
+                            <div class="pipe-auto">⚡ Confirmación de llamada 2</div>
+                        </div>
+                        <div class="pipe-state">Llamada 2 / No responde</div>
+                        <div class="pipe-autos down">
+                            <div class="pipe-auto">⚡ Seguimiento si no responde</div>
+                        </div>
+                    </div>
+                    <span class="pipe-arrow">&rarr;</span>
+                    <!-- Propuesta -->
+                    <div class="pipe-col">
+                        <div class="pipe-autos">
+                            <div class="pipe-auto">⚡ Aviso de propuesta enviada</div>
+                        </div>
+                        <div class="pipe-state">Propuesta</div>
+                        <div class="pipe-autos down">
+                            <div class="pipe-auto">⚡ Recordatorio hasta 7 contactos</div>
+                        </div>
+                    </div>
+                    <span class="pipe-arrow">&rarr;</span>
+                    <!-- Resultado -->
+                    <div class="pipe-col pipe-result-col">
+                        <div class="pipe-result venta">✓ Venta</div>
+                        <div class="pipe-result novent">✕ No venta</div>
+                    </div>
+                </div>
+            </div>
+            <p class="auto-nota reveal">No hace falta que sepas qué es cada pieza. Lo único que importa es que corre sola, y que cada mes reviso que sigue viva.</p>
+        </div>
+    </section>
+
+    <!-- BLOQUE 7 · CÓMO TRABAJAMOS -->
+    <section class="section" id="como-trabajo">
+        <div class="container">
+            <div class="s-head center reveal">
+                <span class="s-label">EL PROCESO</span>
+                <h2 class="s-title">Así funciona por dentro</h2>
+            </div>
+            <div class="pasos-grid">
+                <div class="paso-col reveal">
+                    <span class="p-num">01</span>
+                    <h3>Llamada de 20 minutos</h3>
+                    <p>Miramos juntos cuánta gente te escribió el mes pasado y cuántos siguen sin respuesta. Si no hay agujero, te lo digo y ya está.</p>
+                </div>
+                <div class="paso-col reveal">
+                    <span class="p-num">02</span>
+                    <h3>Se monta el sistema</h3>
+                    <p>En semanas. Yo lo construyo, tú sigues trabajando. Cuando está listo, lo vemos juntos y se ajusta a cómo trabajáis.</p>
+                </div>
+                <div class="paso-col reveal">
+                    <span class="p-num">03</span>
+                    <h3>Se sostiene</h3>
+                    <p>Cada mes reviso que sigue funcionando, ajusto lo que haga falta y te enseño el número: cuántos entraron y cuántos se atendieron.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BLOQUE 8 · PARA QUIÉN SÍ / PARA QUIÉN NO (cualifica antes de la llamada) -->
+    <section class="section" id="para-quien">
+        <div class="container">
+            <div class="s-head center reveal">
+                <span class="s-label">ANTES DE ESCRIBIRME</span>
+                <h2 class="s-title">Esto no le sirve a todo el mundo</h2>
+                <p class="s-sub" style="margin: 0 auto;">Prefiero decírtelo aquí que hacerte perder veinte minutos en una llamada.</p>
+            </div>
+            <div class="quien-grid">
+                <div class="quien-col si reveal">
+                    <span class="quien-label">Encaja si</span>
+                    <ul>
+                        <li>Ya te escribe gente: web, WhatsApp, Instagram o teléfono</li>
+                        <li>Hay semanas en que no llegas a contestar a todos</li>
+                        <li>No sabrías decir cuántos preguntaron el mes pasado</li>
+                        <li>Cuando alguien no responde, ahí se queda</li>
+                    </ul>
+                </div>
+                <div class="quien-col no reveal">
+                    <span class="quien-label">No encaja si</span>
+                    <ul>
+                        <li>Todavía no te llegan consultas: lo tuyo es traer tráfico, no ordenarlo</li>
+                        <li>Ya tienes a alguien llevando el seguimiento y funciona</li>
+                        <li>Buscas un robot que conteste por ti sin que tú aparezcas</li>
+                        <li>Quieres montarlo tú y solo necesitas la herramienta</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BLOQUE 9 · FAQ -->
+    <section class="section" id="preguntas">
+        <div class="container">
+            <div class="s-head center reveal">
+                <span class="s-label">DUDAS RÁPIDAS</span>
+                <h2 class="s-title">Lo que me suelen preguntar</h2>
+            </div>
+            <div class="faqs">
+                <div class="faq reveal">
+                    <button type="button">¿Cuánto cuesta?<span class="ico">+</span></button>
+                    <div class="body"><p>Hay un montaje inicial, que se paga una vez, y luego una cuota mensual fija por llevarlo: sin comisiones por venta y sin permanencia. Los dos números dependen de cuántas consultas te entran y de por cuántos sitios te escriben, así que te los doy cerrados en la llamada, antes de que decidas nada. Lo sabes antes de empezar, no después.</p></div>
+                </div>
+                <div class="faq reveal">
+                    <button type="button">Ya tenemos un CRM.<span class="ico">+</span></button>
+                    <div class="body"><p>Perfecto, entonces la mitad del trabajo está hecha. El problema casi nunca es no tener herramienta, es que nadie la mantiene viva. Lo miramos y, si sirve, se aprovecha.</p></div>
+                </div>
+                <div class="faq reveal">
+                    <button type="button">Preferimos atender nosotros, no queremos robots contestando.<span class="ico">+</span></button>
+                    <div class="body"><p>Y así debe ser. Esto no contesta por ti: lo que hace es que no se te escape nadie mientras no puedes atender, y avisarte de a quién le toca. Quien habla con el cliente sigues siendo tú.</p></div>
+                </div>
+                <div class="faq reveal">
+                    <button type="button">¿Cuánto se tarda en tenerlo funcionando?<span class="ico">+</span></button>
+                    <div class="body"><p>Semanas, no meses. Se empieza por lo que más fuga tiene y se amplía después.</p></div>
+                </div>
+                <div class="faq reveal">
+                    <button type="button">¿Y si no funciona?<span class="ico">+</span></button>
+                    <div class="body"><p>El propio sistema te lo enseña: a los dos meses ves cuántos entraron y cuántos se atendieron. Si el número no mejora, no hay nada que defender.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BLOQUE 10 · CIERRE + FORMULARIO -->
+    <section class="section" id="cierre">
+        <div class="container cierre-grid">
+            <div class="cierre-text reveal">
+                <span class="s-label">ÚLTIMO PASO</span>
+                <h2>Vamos a ver cuántos clientes se te están escapando</h2>
+                <p>Veinte minutos. Miramos tus números, te digo si hay fuga y cuánto te está costando. Si no la hay, te lo digo igual y no te vendo nada.</p>
+
+                <div class="glass-form-container">
+                    <form id="leads-form" class="glass-form" action="#" method="POST">
+                        <div class="form-group">
+                            <label for="nombre">Tu nombre</label>
+                            <input type="text" id="nombre" name="nombre" placeholder="Ej. Carlos Mendoza" maxlength="100" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefono">Teléfono</label>
+                            <input type="tel" id="telefono" name="telefono" placeholder="Ej. 600 123 456" maxlength="30" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Correo electrónico</label>
+                            <input type="email" id="email" name="email" placeholder="carlos@empresa.com" maxlength="150" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="negocio">¿A qué se dedica tu negocio? (opcional)</label>
+                            <input type="text" id="negocio" name="negocio" placeholder="Ej. Clínica dental" maxlength="150">
+                        </div>
+                        <!-- Campo Honeypot oculto para evitar bots de spam -->
+                        <div style="display: none;">
+                            <input type="text" id="validation_honey" name="validation_honey" tabindex="-1" autocomplete="off">
+                        </div>
+                        <button type="submit" class="btn-submit" data-cta="cta_cierre">Pide tu llamada de 20 minutos &rarr;</button>
+                        <p class="form-note">Sin compromiso. Te escribo yo, no un comercial.</p>
+                        <div id="form-message" class="form-message"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA fija de móvil: aparece al pasar el hero, se esconde en el formulario -->
+    <div class="cta-movil" id="cta-movil">
+        <a href="#cierre" data-cta="cta_movil_fijo">Pide tu llamada de 20 minutos</a>
+    </div>
+
+    

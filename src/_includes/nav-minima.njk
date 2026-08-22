@@ -1,0 +1,23 @@
+{#- nav-minima.njk — cabecera reducida de las paginas de conversion
+    (servicios, diagnostico-operativo, no-perder-clientes).
+
+    Misma estructura en las 3; solo cambian los textos y los destinos,
+    que llegan por frontmatter:
+      volverHref / volverTexto  -> enlace "volver" (no-perder-clientes no lo lleva)
+      ctaHref / ctaTexto        -> el boton
+      ctaData                   -> atributo data-cta para el tracking
+      logoEnlazado: false       -> el logo va en <span>, sin enlazar
+                                   (no-perder-clientes: es una landing cerrada) -#}
+    <nav class="subnav">
+{%- if logoEnlazado == false %}
+        <span class="logo"><img src="/assets/img/logo-alber-blanco.png" alt="{{ site.nombre }}"></span>
+{%- else %}
+        <a href="/" class="logo"><img src="/assets/img/logo-alber-blanco.png" alt="{{ site.nombre }}"></a>
+{%- endif %}
+        <div class="subnav-right">
+{%- if volverTexto %}
+            <a href="{{ volverHref | default('/') }}" class="back">&larr; {{ volverTexto }}</a>
+{%- endif %}
+            <a href="{{ ctaHref }}" class="cta"{% if ctaData %} data-cta="{{ ctaData }}"{% endif %}>{{ ctaTexto }}</a>
+        </div>
+    </nav>

@@ -27,6 +27,9 @@ SUELTAS = [
     ("aviso-legal.html", "_site/aviso-legal.html"),
     ("cookies.html", "_site/cookies.html"),
     ("politica-de-privacidad.html", "_site/politica-de-privacidad.html"),
+    ("servicios.html", "_site/servicios.html"),
+    ("diagnostico-operativo/index.html", "_site/diagnostico-operativo/index.html"),
+    ("no-perder-clientes/index.html", "_site/no-perder-clientes/index.html"),
 ]
 
 def leer(p):

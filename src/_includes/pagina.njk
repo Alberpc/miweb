@@ -1,7 +1,11 @@
-{#- pagina.njk — layout de las paginas que tienen su CSS propio y no
-    comparten el de las landings (hoy: el indice del blog).
+{#- pagina.njk — layout de las paginas con CSS propio: el indice del
+    blog y las de conversion (servicios, diagnostico, no-perder-clientes).
     Comparte nav, pie, <head> y base.js; el CSS va inline en `cssPagina`
-    porque es de una sola pagina y no hay nada que deduplicar. -#}
+    porque es de una sola pagina y no hay nada que deduplicar.
+
+    `navMinima: true` cambia la cabecera por la version reducida
+    ("volver" + un boton) que usan las paginas de conversion.
+    `pie` elige otro pie: servicios.html tiene el suyo, con otro copy. -#}
 {% extends "base.njk" %}
 
 {% block estilos %}
@@ -10,4 +14,21 @@
 {{ cssPagina | safe }}
     </style>
 {%- endif %}
+{% endblock %}
+
+
+{% block cabecera %}
+{%- if navMinima %}{% include "nav-minima.njk" %}{% else %}{% include "nav.njk" %}{% endif %}
+{% endblock %}
+
+{% block scripts %}
+{%- if jsPagina %}
+    <script>
+{{ jsPagina | safe }}
+    </script>
+{%- endif %}
+{% endblock %}
+
+{% block pie %}
+{%- if pie %}{% include pie %}{% else %}{% include "footer.njk" %}{% endif %}
 {% endblock %}

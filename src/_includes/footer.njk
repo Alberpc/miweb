@@ -3,6 +3,9 @@
       footerInverse: false  -> quita la clase "inverse" (automatizar-mi-negocio)
       footerBlog:    false  -> oculta el enlace Blog (negocio-depende-de-ti)
       footerBlogHref        -> destino del enlace Blog (el blog apunta a "/")
+      footerDai360Href      -> destino de "Diagnostico DAI360" (las paginas
+                               que YA son el diagnostico apuntan a "/")
+      footerAgentesAut: false -> oculta "Agentes Autonomos" (no-perder-clientes)
     El logo pasa de ruta relativa a absoluta, igual que en nav.njk. -#}
     <footer class="footer-section{% if footerInverse != false %} inverse{% endif %} reveal">
         <div class="container">
@@ -23,13 +26,13 @@
                             <li><a href="/#soluciones">Automatización de procesos</a></li>
                             <li><a href="/#soluciones">Diseño web</a></li>
                             <li><a href="/#soluciones">Sistemas a medida</a></li>
-                            <li><a href="/#soluciones">Agentes Autónomos</a></li>
-                        </ul>
+{% if footerAgentesAut != false %}                            <li><a href="/#soluciones">Agentes Autónomos</a></li>
+{% endif %}                        </ul>
                     </div>
                     <div class="footer-links-col">
                         <h4 class="footer-links-title">El Método</h4>
                         <ul class="footer-links-list">
-                            <li><a href="/diagnostico-operativo/">Diagnóstico DAI360</a></li>
+                            <li><a href="{{ footerDai360Href | default("/diagnostico-operativo/") }}">Diagnóstico DAI360</a></li>
                             <li><a href="/#como-trabajo">Metodología</a></li>
                             <li><a href="/#sobre-mi">Sobre Mí</a></li>
 {% if footerBlog != false %}                            <li><a href="{{ footerBlogHref | default("/blog/") }}">Blog</a></li>

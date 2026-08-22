@@ -6,7 +6,8 @@ el mismo resultado. Verificar despues con verificar-migracion.py.
 """
 import io, os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from extraer import LANDINGS, OTRAS, LEGALES, extraer, extraer_legal
+from extraer import (LANDINGS, OTRAS, LEGALES, CONVERSION,
+                     extraer, extraer_legal, extraer_conversion)
 
 # Reglas propias de una pagina que difieren del CSS comun. Se conservan
 # como cssExtra en vez de unificarlas: son el aspecto real de la pagina hoy.
@@ -101,6 +102,84 @@ def main_legales():
         io.open(ruta, "w", encoding="utf-8", newline=chr(10)).write(salida)
         print("escrito %-45s %6d bytes" % (ruta, len(salida.encode("utf-8"))))
 
+
+# Cabecera reducida: los textos y destinos que tiene hoy cada pagina.
+NAV_MINIMA = {
+    "servicios": ["navMinima: true", 'volverTexto: "Volver a la web"',
+                  'ctaHref: "/#contacto"', 'ctaTexto: "Cuéntame tu caso"'],
+    "diagnostico-operativo": ["navMinima: true", 'volverTexto: "Inicio"',
+                  'ctaHref: "/#contacto"', 'ctaTexto: "Pedir mi diagnóstico"'],
+    "no-perder-clientes": ["navMinima: true", "logoEnlazado: false",
+                  'ctaHref: "#cierre"', 'ctaTexto: "Pide tu llamada"',
+                  'ctaData: "cta_nav"'],
+}
+
+# Paginas con pie propio (otro copy, no una variante del comun).
+PIE_PROPIO = {
+    "servicios": "footer-servicios.njk",
+}
+
+# Donde escribe cada pagina de conversion (se conserva la URL de hoy).
+PERMALINK_CONV = {
+    "servicios": "/servicios.html",
+    "diagnostico-operativo": "/diagnostico-operativo/index.html",
+    "no-perder-clientes": "/no-perder-clientes/index.html",
+}
+
+def main_conversion():
+    for slug in CONVERSION:
+        d = extraer_conversion(slug)
+        fm = ["---", "layout: pagina.njk",
+              "permalink: " + yaml_str(PERMALINK_CONV[slug])]
+        for k in CAMPOS:
+            if d.get(k):
+                fm.append("%s: %s" % (k, yaml_str(d[k])))
+        if not d.get("ogImageWidth"):
+            fm.append("ogImageSize: false")
+        else:
+            if d["ogImageWidth"] != "1200":
+                fm.append("ogImageWidth: " + yaml_str(d["ogImageWidth"]))
+            if d["ogImageHeight"] != "675":
+                fm.append("ogImageHeight: " + yaml_str(d["ogImageHeight"]))
+        if d.get("ogImageAlt"):
+            fm.append("ogImageAlt: " + yaml_str(d["ogImageAlt"]))
+        for k in ("robots", "canonical"):
+            if d.get(k):
+                fm.append("%s: %s" % (k, yaml_str(d[k])))
+        fm += NAV_MINIMA[slug]
+        # Con cabecera reducida no hay burger ni .reveal gestionado por
+        # base.js: estas paginas traen su propio <script>. Cargar base.js
+        # seria anyadirles codigo que hoy no tienen.
+        fm.append("baseJs: false")
+        if slug in PIE_PROPIO:
+            fm.append("pie: " + yaml_str(PIE_PROPIO[slug]))
+        if not d["footerInverse"]:
+            fm.append("footerInverse: false")
+        if not d["footerBlog"]:
+            fm.append("footerBlog: false")
+        elif d.get("footerBlogHref") and d["footerBlogHref"] != "/blog/":
+            fm.append("footerBlogHref: " + yaml_str(d["footerBlogHref"]))
+        if d.get("footerDai360Href") and d["footerDai360Href"] != "/diagnostico-operativo/":
+            fm.append("footerDai360Href: " + yaml_str(d["footerDai360Href"]))
+        if not d["footerAgentesAut"]:
+            fm.append("footerAgentesAut: false")
+        if d.get("estilo"):
+            fm += bloque_yaml("cssPagina", d["estilo"], "")
+        if d.get("script"):
+            fm += bloque_yaml("jsPagina", d["script"], "")
+        if d["schemas"]:
+            fm.append("schemas:")
+            for bloque in d["schemas"]:
+                fm.append("  - |")
+                for linea in bloque.split(chr(10)):
+                    fm.append("    " + linea)
+        fm.append("---")
+        salida = chr(10).join(fm) + chr(10) + d["cuerpo"] + chr(10)
+        ruta = os.path.join("src", "paginas", slug + ".njk")
+        io.open(ruta, "w", encoding="utf-8", newline=chr(10)).write(salida)
+        print("escrito %-45s %6d bytes" % (ruta, len(salida.encode("utf-8"))))
+
 if __name__ == "__main__":
     main()
     main_legales()
+    main_conversion()

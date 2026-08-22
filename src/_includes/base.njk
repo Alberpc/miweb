@@ -22,7 +22,7 @@
     <title>{{ title }}</title>
 
     <!-- SEO técnico -->
-    <link rel="canonical" href="{{ site.dominio }}/{{ slug }}/">
+    <link rel="canonical" href="{{ canonical | default(site.dominio + "/" + slug + "/") }}">
     <meta name="robots" content="{{ robots | default('index, follow') }}">
     <meta name="author" content="{{ site.autor }}">
     <meta name="theme-color" content="{{ themeColor | default('#0E1116') }}">
@@ -33,14 +33,17 @@
     <!-- Open Graph -->
     <meta property="og:type" content="{{ ogType | default('article') }}">
     <meta property="og:locale" content="es_ES">
-    <meta property="og:url" content="{{ site.dominio }}/{{ slug }}/">
+    <meta property="og:url" content="{{ ogUrl | default(canonical) | default(site.dominio + "/" + slug + "/") }}">
     <meta property="og:site_name" content="{{ site.autor }}">
     <meta property="og:title" content="{{ ogTitle | default(title) }}">
     <meta property="og:description" content="{{ ogDescription | default(description) }}">
     <meta property="og:image" content="{{ ogImage }}">
 {%- if ogImageSize != false %}
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="675">
+    <meta property="og:image:width" content="{{ ogImageWidth | default('1200') }}">
+    <meta property="og:image:height" content="{{ ogImageHeight | default('675') }}">
+{%- endif %}
+{%- if ogImageAlt %}
+    <meta property="og:image:alt" content="{{ ogImageAlt }}">
 {%- endif %}
 {%- if publicada %}
     <meta property="article:published_time" content="{{ publicada }}">
@@ -77,8 +80,10 @@
 
 {% block cabecera %}{% include "nav.njk" %}{% endblock %}
 {% block contenido %}{{ content | safe }}{% endblock %}
-{% include "footer.njk" %}
+{% block pie %}{% include "footer.njk" %}{% endblock %}
+{%- if baseJs != false %}
     <script src="/assets/js/base.js" defer></script>
+{%- endif %}
 {%- block scripts %}{% endblock %}
     <script src="/assets/cookies/cookie-banner.js" defer></script>
 </body>
