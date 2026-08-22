@@ -2,7 +2,10 @@
     Cambio deliberado frente al original: la ruta del logo pasa de
     "../assets/..." a "/assets/...". Relativa solo funcionaba a un nivel
     de profundidad; absoluta funciona igual en / y en /slug/.
-    `paginaActual` marca el enlace activo (las landings usan "blog"). -#}
+    `paginaActual` marca el enlace activo (las landings usan "blog").
+    `navBlogHref` existe porque hoy la pagina /blog/ enlaza "Blog" a "/"
+    en vez de a "/blog/". Se conserva tal cual para no cambiar navegacion
+    en una migracion; si es un fallo, se arregla aparte y a la vista. -#}
     <!-- NAV -->
     <nav class="subnav">
         <a href="/" class="logo"><img src="/assets/img/logo-alber-blanco.png" alt="{{ site.nombre }}"></a>
@@ -10,7 +13,7 @@
             <a href="/#soluciones"{% if paginaActual == "servicios" %} class="current"{% endif %}>Servicios</a>
             <a href="/#caminos"{% if paginaActual == "caminos" %} class="current"{% endif %}>Cómo Empezar</a>
             <a href="/#sobre-mi"{% if paginaActual == "sobre-mi" %} class="current"{% endif %}>Sobre Mí</a>
-            <a href="/blog/"{% if paginaActual == "blog" %} class="current"{% endif %}>Blog</a>
+            <a href="{{ navBlogHref | default("/blog/") }}"{% if paginaActual == "blog" %} class="current"{% endif %}>Blog</a>
         </div>
         <a href="/#contacto" class="cta">Cuéntame tu caso &rarr;</a>
         <button class="nav-burger" id="nav-burger" aria-label="Abrir menú" aria-expanded="false">
@@ -21,6 +24,6 @@
         <a href="/#soluciones">Servicios</a>
         <a href="/#caminos">Cómo Empezar</a>
         <a href="/#sobre-mi">Sobre Mí</a>
-        <a href="/blog/">Blog</a>
+        <a href="{{ navBlogHref | default("/blog/") }}">Blog</a>
         <a href="/#contacto" class="nav-mobile-cta">Cuéntame tu caso &rarr;</a>
     </div>

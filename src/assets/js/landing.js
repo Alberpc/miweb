@@ -1,32 +1,12 @@
 /* ============================================================
-   landing.js — comportamiento comun de las landings/articulos
+   landing.js — comportamiento propio de las landings/articulos
    ============================================================
-   Extraido el 23-ago-2026 del bloque <script> inline que estaba
-   duplicado literalmente en 7 landings (solo variaba un comentario).
+   FAQ acordeon y TOC. Va aparte de base.js porque /blog/ no tiene
+   ni FAQ ni TOC: cargarselo seria anyadirle codigo que hoy no tiene.
 
-   Todo es defensivo: si una pagina no tiene FAQ o no tiene TOC,
+   Es defensivo igualmente: si una landing no lleva FAQ o no lleva TOC,
    los selectores devuelven vacio y no pasa nada.
    ============================================================ */
-// Menú móvil (burger)
-const burger = document.getElementById('nav-burger');
-const mobile = document.getElementById('nav-mobile');
-if (burger && mobile) {
-    burger.addEventListener('click', () => {
-        const open = burger.classList.toggle('open');
-        mobile.classList.toggle('open', open);
-        burger.setAttribute('aria-expanded', open);
-    });
-    mobile.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-        burger.classList.remove('open'); mobile.classList.remove('open'); burger.setAttribute('aria-expanded', 'false');
-    }));
-}
-
-// Reveal al hacer scroll
-const obs = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); obs.unobserve(e.target); } });
-}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-
 // FAQ acordeón
 document.querySelectorAll('.faq-trigger').forEach(btn => {
     btn.addEventListener('click', () => {

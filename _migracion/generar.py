@@ -6,7 +6,7 @@ el mismo resultado. Verificar despues con verificar-migracion.py.
 """
 import io, os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from extraer import LANDINGS, extraer
+from extraer import LANDINGS, OTRAS, extraer
 
 # Reglas propias de una pagina que difieren del CSS comun. Se conservan
 # como cssExtra en vez de unificarlas: son el aspecto real de la pagina hoy.
@@ -23,6 +23,17 @@ CSS_EXTRA = {
 # lleva su CSS aparte en vez de romperse con el comun.
 LAYOUT = {
     "automatizar-mi-negocio": "landing-oscura.njk",
+    "blog": "pagina.njk",
+}
+
+# Parametros sueltos que conservan como esta hoy la navegacion de una pagina.
+# En /blog/ el enlace "Blog" apunta a "/" (tanto en el nav como en el pie).
+# Se conserva; si es un fallo, se arregla aparte y a la vista.
+EXTRA_FM = {
+    # /blog/ hoy no declara el tamano de la og:image (las landings si).
+    # Se conserva asi para que la migracion no cambie nada; anyadirlo es
+    # una mejora aparte, no parte de este refactor.
+    "blog": ['navBlogHref: "/"', "ogImageSize: false"],
 }
 
 CAMPOS = ("title", "description", "slug", "ogType", "ogTitle", "ogDescription",
@@ -43,7 +54,7 @@ def bloque_yaml(clave, texto, sangria="    "):
     return out
 
 def main():
-    for slug in LANDINGS:
+    for slug in LANDINGS + OTRAS:
         d = extraer(slug)
         layout = LAYOUT.get(slug, "landing.njk")
         fm = ["---", "layout: " + layout, "paginaActual: blog"]
@@ -54,6 +65,12 @@ def main():
             fm.append("footerInverse: false")
         if not d["footerBlog"]:
             fm.append("footerBlog: false")
+        elif d.get("footerBlogHref") and d["footerBlogHref"] != "/blog/":
+            fm.append("footerBlogHref: " + yaml_str(d["footerBlogHref"]))
+        for linea in EXTRA_FM.get(slug, []):
+            fm.append(linea)
+        if d.get("estilo") and slug in OTRAS:
+            fm += bloque_yaml("cssPagina", d["estilo"], "")
         if slug in CSS_EXTRA:
             fm += bloque_yaml("cssExtra", CSS_EXTRA[slug], "        ")
         if d["schemas"]:

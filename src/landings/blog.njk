@@ -1,0 +1,340 @@
+---
+layout: pagina.njk
+paginaActual: blog
+title: "Blog | Negocios que crecen sin depender de ti — Alber Cabrera"
+description: "Artículos sobre procesos, automatización con IA y cómo hacer que un negocio de servicios crezca sin depender de su dueño."
+slug: "blog"
+ogType: "website"
+ogTitle: "Blog | Negocios que crecen sin depender de ti"
+ogDescription: "Artículos sobre procesos, automatización con IA y cómo dejar de ser el cuello de botella de tu propio negocio."
+twitterTitle: "Blog | Negocios que crecen sin depender de ti"
+twitterDescription: "Procesos, automatización con IA y crecimiento para negocios de servicios."
+themeColor: "#0E1116"
+ogImage: "https://albercabrera.com/assets/img/og-image.jpg"
+footerBlogHref: "/"
+navBlogHref: "/"
+ogImageSize: false
+cssPagina: |
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { scroll-behavior: smooth; background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 16px; -webkit-font-smoothing: antialiased; }
+        body { overflow-x: hidden; line-height: 1.6; }
+
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+        /* ===== NAV (menú completo, autocontenido) ===== */
+        .subnav {
+            position: fixed; top: 24px; left: 50%; transform: translateX(-50%);
+            z-index: 1000; width: calc(100% - 48px); max-width: 1200px; height: 62px;
+            display: flex; align-items: center; justify-content: space-between; padding: 0 12px 0 24px;
+            background: rgba(255, 255, 255, 0.78);
+            backdrop-filter: blur(18px) saturate(180%); -webkit-backdrop-filter: blur(18px) saturate(180%);
+            border: 1px solid var(--glass-border); border-radius: 100px;
+            box-shadow: 0 8px 30px rgba(14, 17, 22, 0.14);
+        }
+        .subnav .logo { font-family: var(--font-heading); font-weight: 800; font-size: 1.3rem; color: var(--ink); text-decoration: none; letter-spacing: -0.05em; flex: none; }
+        .subnav .logo img { height: 24px; width: auto; display: block; filter: invert(1) brightness(0.12); }
+        .nav-menu { display: flex; align-items: center; gap: 30px; }
+        .nav-menu a { font-size: 0.9rem; color: var(--ink-mid); text-decoration: none; transition: color 0.3s ease; }
+        .nav-menu a:hover, .nav-menu a.current { color: var(--ink); }
+        .subnav .cta {
+            font-size: 0.8rem; font-weight: 600; color: #fff; text-decoration: none;
+            background: var(--cobalt-600); flex: none;
+            padding: 11px 22px; border-radius: 100px; border: 1px solid transparent;
+            transition: all 0.3s ease; white-space: nowrap;
+        }
+        .subnav .cta:hover { transform: translateY(-2px); background: var(--cobalt-700); border-color: transparent; box-shadow: 0 4px 15px var(--cobalt-glow); }
+        .nav-burger { display: none; background: none; border: none; cursor: pointer; padding: 10px; flex-direction: column; gap: 5px; }
+        .nav-burger span { display: block; width: 22px; height: 2px; background: var(--ink); border-radius: 2px; transition: all 0.3s ease; }
+        .nav-burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .nav-burger.open span:nth-child(2) { opacity: 0; }
+        .nav-burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+        .nav-mobile {
+            position: fixed; top: 98px; left: 50%; transform: translateX(-50%);
+            width: calc(100% - 48px); max-width: 1200px; z-index: 999;
+            background: rgba(255, 255, 255, 0.94); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+            border: 1px solid var(--glass-border); border-radius: 18px; padding: 14px;
+            flex-direction: column; gap: 4px; display: none;
+            box-shadow: 0 8px 30px rgba(14, 17, 22, 0.14);
+        }
+        .nav-mobile.open { display: flex; }
+        .nav-mobile a { font-size: 0.98rem; color: var(--ink-soft); text-decoration: none; padding: 12px 14px; border-radius: 10px; transition: background 0.25s ease, color 0.25s ease; }
+        .nav-mobile a:hover { background: var(--bg-alt); color: var(--ink); }
+        .nav-mobile .nav-mobile-cta { background: var(--cobalt-600); color: #fff; font-weight: 600; text-align: center; margin-top: 6px; }
+        @media (max-width: 820px) {
+            .nav-menu, .subnav > .cta { display: none; }
+            .nav-burger { display: flex; }
+        }
+
+        /* ===== HERO OSCURO DEL BLOG =====
+           Requiere class="inverse" en el <header class="blog-hero">. */
+        .blog-hero.inverse { position: relative; padding: 160px 0 40px; text-align: center; }
+        .blog-hero-inner { position: relative; z-index: 2; }
+        .blog-hero.inverse h1 { font-family: var(--font-heading); font-size: clamp(2.1rem, 4.6vw, 3.1rem); font-weight: 300; letter-spacing: -0.02em; color: var(--on-night); }
+
+        /* ===== GRID DE POSTS (cuerpo claro) ===== */
+        .posts { padding: 40px 0 90px; background-color: var(--bg-alt); }
+        .posts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+
+        .post-card {
+            display: flex; flex-direction: column; text-decoration: none;
+            background: var(--bg); border: 1px solid var(--line); border-radius: 14px;
+            overflow: hidden; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .post-card:hover { border-color: var(--cobalt-border); transform: translateY(-6px); box-shadow: 0 30px 60px rgba(26,29,35,0.14), 0 0 40px -14px var(--cobalt-glow); }
+        .post-thumb { aspect-ratio: 16 / 9; overflow: hidden; background: linear-gradient(135deg, var(--cobalt-tint), var(--bg-alt)); }
+        .post-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+        .post-card:hover .post-thumb img { transform: scale(1.05); }
+        .post-info { padding: 24px 26px 28px; display: flex; flex-direction: column; flex: 1; }
+        .post-cat { font-family: monospace; font-size: 0.7rem; letter-spacing: 0.2em; color: var(--cobalt-600); text-transform: uppercase; margin-bottom: 12px; }
+        .post-card h2 { font-family: var(--font-heading); font-size: 1.24rem; font-weight: 600; color: var(--ink); line-height: 1.3; letter-spacing: -0.01em; margin-bottom: 12px; }
+        .post-card p { font-size: 0.95rem; color: var(--ink-soft); font-weight: 300; line-height: 1.6; margin-bottom: 20px; flex: 1; }
+        .post-meta { display: flex; align-items: center; gap: 12px; font-size: 0.8rem; color: var(--ink-mid); }
+        .post-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--ink-decor); }
+        .post-more { margin-top: 18px; font-size: 0.88rem; font-weight: 600; color: var(--ink); }
+        .post-card:hover .post-more { color: var(--cobalt-600); }
+
+        /* Estado vacío (por si algún día no hay posts) */
+        .posts-empty { text-align: center; color: var(--ink-mid); font-weight: 300; padding: 40px 0; }
+
+        @media (max-width: 900px) { .posts-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 600px) { .posts-grid { grid-template-columns: 1fr; } .blog-hero.inverse { padding: 130px 0 30px; } }
+
+        /* ===== FOOTER OSCURO =====
+           Requiere class="inverse" en el <footer class="footer-section">. */
+        .footer-section.inverse { padding: 90px 0 40px; border-top: 1px solid var(--night-600); }
+        .footer-grid { display: grid; grid-template-columns: 1.4fr 2fr; gap: 60px; margin-bottom: 60px; }
+        .footer-brand-col { max-width: 340px; }
+        .footer-logo-wrap { margin-bottom: 20px; }
+        .footer-logo-wrap .logo img { height: 26px; width: auto; }
+        .footer-brand-desc { font-size: 0.92rem; color: var(--on-night-soft); font-weight: 300; line-height: 1.7; }
+        .footer-links-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .footer-links-title { font-family: var(--font-heading); font-size: 0.82rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--on-night); margin-bottom: 18px; }
+        .footer-links-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+        .footer-links-list a { font-size: 0.9rem; color: var(--on-night-soft); text-decoration: none; transition: color 0.3s ease; }
+        .footer-links-list a:hover { color: var(--on-night); }
+        .footer-bottom-bar { display: flex; align-items: center; justify-content: space-between; padding-top: 30px; border-top: 1px solid var(--night-600); flex-wrap: wrap; gap: 20px; }
+        .footer-curator { font-size: 0.82rem; color: var(--on-night-mid); }
+        .footer-social-wrap { display: flex; align-items: center; gap: 12px; }
+        .footer-social-label { font-size: 0.8rem; color: var(--on-night-soft); }
+        .footer-social-icons { display: flex; gap: 10px; }
+        .footer-social-icons a { color: var(--on-night-soft); display: flex; transition: color 0.3s ease; }
+        .footer-social-icons a:hover { color: var(--cobalt-300); }
+
+        .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal.revealed { opacity: 1; transform: none; }
+
+        @media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr; gap: 40px; } }
+        @media (max-width: 560px) { .subnav { padding: 0 12px 0 20px; } .footer-links-grid { grid-template-columns: 1fr 1fr; gap: 24px; } }
+        @media (max-width: 480px) {
+            .footer-links-grid { grid-template-columns: 1fr; gap: 24px; }
+            .footer-bottom-bar { flex-direction: column; align-items: flex-start; gap: 16px; }
+        }
+schemas:
+  - |
+        {
+          "@context": "https://schema.org",
+          "@type": "Blog",
+          "name": "Blog de Alberto Pérez Cabrera",
+          "url": "https://albercabrera.com/blog/",
+          "description": "Ideas sobre procesos, automatización con IA y crecimiento para negocios de servicios.",
+          "inLanguage": "es-ES",
+          "author": { "@type": "Person", "name": "Alberto Pérez Cabrera", "url": "https://albercabrera.com/" },
+          "blogPost": [
+            {
+              "@type": "BlogPosting",
+              "headline": "Automatizar una inmobiliaria con IA sin perder leads",
+              "url": "https://albercabrera.com/automatizar-inmobiliaria/",
+              "datePublished": "2026-07-18",
+              "author": { "@type": "Person", "name": "Alberto Pérez Cabrera" }
+            },
+            {
+              "@type": "BlogPosting",
+              "headline": "Automatizar una asesoría o gestoría con IA",
+              "url": "https://albercabrera.com/automatizar-asesoria/",
+              "datePublished": "2026-07-18",
+              "author": { "@type": "Person", "name": "Alberto Pérez Cabrera" }
+            },
+            {
+              "@type": "BlogPosting",
+              "headline": "Por qué tu negocio depende de ti y no crece (y cómo salir de esa trampa)",
+              "url": "https://albercabrera.com/negocio-depende-de-ti/",
+              "datePublished": "2026-07-11",
+              "author": { "@type": "Person", "name": "Alberto Pérez Cabrera" }
+            },
+            {
+              "@type": "BlogPosting",
+              "headline": "Sistematizar un negocio local sin herramientas complejas",
+              "url": "https://albercabrera.com/sistematizar-negocio-local/",
+              "datePublished": "2026-04-05",
+              "author": { "@type": "Person", "name": "Alberto Pérez Cabrera" }
+            },
+            {
+              "@type": "BlogPosting",
+              "headline": "Sistematizar cursos y alumnos en un centro de formación",
+              "url": "https://albercabrera.com/sistematizar-centro-formacion/",
+              "datePublished": "2026-04-10",
+              "author": { "@type": "Person", "name": "Alberto Pérez Cabrera" }
+            },
+            {
+              "@type": "BlogPosting",
+              "headline": "Automatizar el seguimiento de leads en clínicas",
+              "url": "https://albercabrera.com/automatizar-leads-clinicas/",
+              "datePublished": "2026-06-03",
+              "author": { "@type": "Person", "name": "Alberto Pérez Cabrera" }
+            }
+          ]
+        }
+  - |
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://albercabrera.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Blog" }
+          ]
+        }
+---
+    <!-- HERO -->
+    <header class="blog-hero inverse">
+        <div class="container blog-hero-inner">
+            <h1>Blog</h1>
+        </div>
+    </header>
+
+    <!-- POSTS -->
+    <section class="posts">
+        <div class="container">
+            <div class="posts-grid">
+
+                <!-- POST NUEVO: INMOBILIARIA -->
+                <a href="/automatizar-inmobiliaria/" class="post-card reveal">
+                    <div class="post-thumb">
+                        <img src="../assets/img/inmobiliaria-casa-iluminada.jpg" alt="Casa iluminada sobre un teclado, representando la automatización de una inmobiliaria con IA">
+                    </div>
+                    <div class="post-info">
+                        <span class="post-cat">Automatización con IA</span>
+                        <h2>Automatizar una inmobiliaria con IA sin perder leads</h2>
+                        <p>En captación inmobiliaria gana quien responde primero. Qué automatizar para no perder visitas por llegar tarde al lead.</p>
+                        <div class="post-meta">
+                            <time datetime="2026-07-18">18 jul 2026</time>
+                            <span class="dot"></span>
+                            <span>7 min</span>
+                        </div>
+                        <span class="post-more">Leer artículo &rarr;</span>
+                    </div>
+                </a>
+
+                <!-- POST NUEVO: ASESORÍA -->
+                <a href="/automatizar-asesoria/" class="post-card reveal">
+                    <div class="post-thumb">
+                        <img src="../assets/img/asesoria-escritorio-negro.jpg" alt="Escritorio de asesoría sobre fondo negro con portátil, calculadora y café, vista cenital">
+                    </div>
+                    <div class="post-info">
+                        <span class="post-cat">Automatización con IA</span>
+                        <h2>Automatizar una asesoría o gestoría con IA</h2>
+                        <p>Facturas, conciliación, gestión documental y atención al cliente: qué automatizar primero sin cambiar de software contable.</p>
+                        <div class="post-meta">
+                            <time datetime="2026-07-18">18 jul 2026</time>
+                            <span class="dot"></span>
+                            <span>7 min</span>
+                        </div>
+                        <span class="post-more">Leer artículo &rarr;</span>
+                    </div>
+                </a>
+
+                <!-- POST 0 -->
+                <a href="/automatizar-mi-negocio/" class="post-card reveal">
+                    <div class="post-thumb">
+                        <img src="../assets/img/cover-automatizar-negocio.jpg" alt="Dueño de un negocio revisando papeles y hablando por el móvil fuera de su horario" loading="lazy" decoding="async">
+                    </div>
+                    <div class="post-info">
+                        <span class="post-cat">Automatización y procesos</span>
+                        <h2>Cómo automatizar mi negocio: por dónde empezar</h2>
+                        <p>Antes de contratar ninguna herramienta: cómo calcular qué tarea te está costando más horas al mes, qué no conviene automatizar y en qué orden hacerlo.</p>
+                        <div class="post-meta">
+                            <time datetime="2026-07-29">29 jul 2026</time>
+                            <span class="dot"></span>
+                            <span>7 min</span>
+                        </div>
+                        <span class="post-more">Leer artículo &rarr;</span>
+                    </div>
+                </a>
+
+                <!-- POST 1 -->
+                <a href="/negocio-depende-de-ti/" class="post-card reveal">
+                    <div class="post-thumb">
+                        <img src="../assets/img/photo-tired-redhead-businessman-touching-his-head-looking-digital-tablet-scaled.jpg" alt="Dueño de un negocio agotado frente a una tablet">
+                    </div>
+                    <div class="post-info">
+                        <span class="post-cat">Negocio y procesos</span>
+                        <h2>Por qué tu negocio depende de ti y no crece</h2>
+                        <p>No es que seas imprescindible: es que el negocio está montado sobre ti, no sobre procesos. Cómo salir de la trampa, área por área.</p>
+                        <div class="post-meta">
+                            <time datetime="2026-07-11">11 jul 2026</time>
+                            <span class="dot"></span>
+                            <span>9 min</span>
+                        </div>
+                        <span class="post-more">Leer artículo &rarr;</span>
+                    </div>
+                </a>
+
+                <!-- POST 2 -->
+                <a href="/automatizar-leads-clinicas/" class="post-card reveal">
+                    <div class="post-thumb">
+                        <img src="../assets/img/clinic-room-neurological-diagnosis.jpg" alt="Sala de consulta de una clínica donde se gestiona el seguimiento de pacientes">
+                    </div>
+                    <div class="post-info">
+                        <span class="post-cat">Automatización con IA</span>
+                        <h2>Automatizar el seguimiento de leads en clínicas</h2>
+                        <p>Qué automatizar primero en el seguimiento de leads de una clínica, y qué cambia en la agenda y en los pacientes nuevos.</p>
+                        <div class="post-meta">
+                            <time datetime="2026-06-03">3 jun 2026</time>
+                            <span class="dot"></span>
+                            <span>6 min</span>
+                        </div>
+                        <span class="post-more">Leer artículo &rarr;</span>
+                    </div>
+                </a>
+
+                <!-- POST 3 -->
+                <a href="/sistematizar-centro-formacion/" class="post-card reveal">
+                    <div class="post-thumb">
+                        <img src="../assets/img/vitaly-gariev-Ad2TAPEhliE-unsplash.jpg" alt="Responsable de un centro de formación organizando la gestión de cursos y alumnos">
+                    </div>
+                    <div class="post-info">
+                        <span class="post-cat">Automatización con IA</span>
+                        <h2>Sistematizar cursos y alumnos en un centro de formación</h2>
+                        <p>Qué automatizar primero en la gestión de un centro de formación, y qué gana el equipo y el alumno con ello.</p>
+                        <div class="post-meta">
+                            <time datetime="2026-04-10">10 abr 2026</time>
+                            <span class="dot"></span>
+                            <span>6 min</span>
+                        </div>
+                        <span class="post-more">Leer artículo &rarr;</span>
+                    </div>
+                </a>
+
+                <!-- POST 4 -->
+                <a href="/sistematizar-negocio-local/" class="post-card reveal">
+                    <div class="post-thumb">
+                        <img src="../assets/img/cover-image.jpg" alt="Dueño de negocio local organizando y documentando procesos de trabajo">
+                    </div>
+                    <div class="post-info">
+                        <span class="post-cat">Negocio y procesos</span>
+                        <h2>Sistematizar un negocio local sin herramientas complejas</h2>
+                        <p>Con documentación simple, hábitos claros y formación constante ganas eficiencia y rentabilidad, sin software complejo.</p>
+                        <div class="post-meta">
+                            <time datetime="2026-04-05">5 abr 2026</time>
+                            <span class="dot"></span>
+                            <span>6 min</span>
+                        </div>
+                        <span class="post-more">Leer artículo &rarr;</span>
+                    </div>
+                </a>
+
+                <!-- Duplica el bloque <a class="post-card"> de arriba por cada post nuevo -->
+
+            </div>
+        </div>
+    </section>

@@ -9,6 +9,11 @@ LANDINGS = [
     "sistematizar-centro-formacion", "sistematizar-negocio-local",
 ]
 
+# El indice del blog tiene la misma estructura (nav + cuerpo + pie) pero su
+# propio CSS y su propio nav ("Blog" apunta a "/"), asi que se extrae igual
+# pero con su layout y sus parametros.
+OTRAS = ["blog"]
+
 def meta(html, attr, name):
     m = re.search(r'<meta\s+%s="%s"\s+content="(.*?)"\s*/?>' % (attr, re.escape(name)), html, re.S)
     return m.group(1) if m else None
@@ -28,6 +33,10 @@ def extraer(slug):
     d["publicada"]      = meta(html, "property", "article:published_time")
     d["modificada"]     = meta(html, "property", "article:modified_time")
 
+    # Bloque <style> propio de la pagina (el blog tiene el suyo)
+    m = re.search(r"    <style>\n(.*?)\n    </style>", html, re.S)
+    d["estilo"] = m.group(1) if m else None
+
     # Bloques JSON-LD, tal cual estan (se re-serializan indentados igual)
     d["schemas"] = re.findall(
         r'<script type="application/ld\+json">\s*\n(.*?)\n\s*</script>', html, re.S)
@@ -43,7 +52,11 @@ def extraer(slug):
     # Variantes del pie detectadas en el original
     pie = html[fin:]
     d["footerInverse"] = "footer-section inverse" in pie
-    d["footerBlog"]    = '<li><a href="/blog/">Blog</a></li>' in pie
+    # Hay o no enlace "Blog" en el pie, apunte a donde apunte: /blog/ la
+    # mayoria, "/" en la propia pagina del blog.
+    mb = re.search(r'<li><a href="([^"]*)">Blog</a></li>', pie)
+    d["footerBlog"]     = bool(mb)
+    d["footerBlogHref"] = mb.group(1) if mb else None
     return d
 
 if __name__ == "__main__":

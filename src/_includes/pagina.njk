@@ -1,0 +1,13 @@
+{#- pagina.njk — layout de las paginas que tienen su CSS propio y no
+    comparten el de las landings (hoy: el indice del blog).
+    Comparte nav, pie, <head> y base.js; el CSS va inline en `cssPagina`
+    porque es de una sola pagina y no hay nada que deduplicar. -#}
+{% extends "base.njk" %}
+
+{% block estilos %}
+{%- if cssPagina %}
+    <style>
+{{ cssPagina | safe }}
+    </style>
+{%- endif %}
+{% endblock %}

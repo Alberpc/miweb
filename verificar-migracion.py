@@ -19,6 +19,7 @@ PAGINAS = [
     "automatizar-asesoria", "automatizar-inmobiliaria", "automatizar-leads-clinicas",
     "automatizar-mi-negocio", "negocio-depende-de-ti",
     "sistematizar-centro-formacion", "sistematizar-negocio-local",
+    "blog",
 ]
 
 def leer(p):
