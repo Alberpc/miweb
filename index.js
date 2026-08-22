@@ -209,14 +209,22 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 7. MALLA ONDULANTE DEL HERO (rejilla de puntos dorados, oleaje lento)
+    // 7. MASA DE FIBRAS 3D DEL HERO
+    //    Hélices que recorren un volumen de sección irregular en diagonal
+    //    ascendente. Cada fibra se dibuja por tramos ordenados por
+    //    profundidad, de modo que las cercanas ocultan a las lejanas: eso
+    //    es lo que da la lectura de volumen y de fibras entrelazadas.
+    //    El tiempo nunca se SUMA a la posición (eso haría viajar la masa
+    //    fuera del cuadro); solo MODULA amplitudes, así la forma queda
+    //    anclada y lo que gira es el material sobre su propio eje.
     const meshCanvas = document.getElementById('hero-mesh');
     if (meshCanvas) {
         const mctx = meshCanvas.getContext('2d');
-        let W, H, dpr;
-        let points = [];
         const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        const SPACING = 34; // separación de la rejilla en px CSS
+
+        let W, H, dpr, FIBERS, PORTRAIT = 0;
+        const BOTTOM_FADE = 0.30;  // último 30%: los hilos se apagan antes del corte
+        const STEPS = 96, SEG = 6, CAM = 4.4;
 
         function resizeMesh() {
             dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -225,46 +233,202 @@ document.addEventListener('DOMContentLoaded', () => {
             meshCanvas.width = W * dpr;
             meshCanvas.height = H * dpr;
             mctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-            points = [];
-            const cols = Math.ceil(W / SPACING) + 1;
-            const rows = Math.ceil(H / SPACING) + 1;
-            for (let row = 0; row < rows; row++) {
-                for (let col = 0; col < cols; col++) {
-                    const x = col * SPACING;
-                    const y = row * SPACING;
-                    // Distancia al centro del canvas: la malla se desvanece hacia los bordes
-                    const dx = (x - W / 2) / (W / 2);
-                    const dy = (y - H / 2) / (H / 2);
-                    const edgeFade = Math.max(0, 1 - Math.sqrt(dx * dx + dy * dy));
-                    points.push({ x, y, phase: (col * 0.5 + row * 0.35), edgeFade });
-                }
-            }
+            // Menos fibras en pantallas pequeñas: ahorra CPU y batería
+            FIBERS = W < 700 ? 58 : (W < 1100 ? 88 : 120);
+            // En formato vertical (móvil) la diagonal hay que TUMBARLA y
+            // alargarla: si no, el recorrido se comprime, sale casi
+            // vertical y muere contra el borde de arriba.
+            PORTRAIT = Math.max(0, Math.min(1, (H / W - 1.0) / 0.9));
         }
         resizeMesh();
         window.addEventListener('resize', resizeMesh);
 
-        function drawMesh(t) {
+        // Eje de la masa: diagonal fija abajo-izquierda → arriba-derecha.
+        // En vertical se alarga el recorrido horizontal y se recorta el
+        // ascenso, para que cruce en diagonal en vez de dispararse arriba.
+        function axis(u, t) {
+            const s1 = Math.sin(u * 3.1), s2 = Math.sin(u * 5.4), s3 = Math.cos(u * 2.2);
+            const spanX = 3.5 + PORTRAIT * 1.5;    // más ancho al estrecharse
+            const startX = -1.75 - PORTRAIT * 0.75;
+            const rise = 2.30 - PORTRAIT * 0.95;   // menos subida: se tumba
+            const startY = 1.15 - PORTRAIT * 0.28;
+            return {
+                x: startX + u * spanX + s2 * 0.14 * (0.6 + 0.4 * Math.sin(t * 0.42)),
+                y: startY - u * rise + s1 * 0.16 * (0.6 + 0.4 * Math.sin(t * 0.33)),
+                z: s3 * 0.50 * (0.5 + 0.5 * Math.sin(t * 0.27 + 1.4))
+            };
+        }
+
+        function tangent(u, t) {
+            const e = 0.005;
+            const a = axis(Math.max(0, u - e), t), b = axis(Math.min(1, u + e), t);
+            const d = { x: b.x - a.x, y: b.y - a.y, z: b.z - a.z };
+            const L = Math.hypot(d.x, d.y, d.z) || 1;
+            return { x: d.x / L, y: d.y / L, z: d.z / L };
+        }
+
+        // Dos perpendiculares al eje: definen la sección del volumen
+        function frame(u, t) {
+            const T = tangent(u, t);
+            const up = Math.abs(T.z) > 0.9 ? { x: 0, y: 1, z: 0 } : { x: 0, y: 0, z: 1 };
+            let n1 = {
+                x: T.y * up.z - T.z * up.y,
+                y: T.z * up.x - T.x * up.z,
+                z: T.x * up.y - T.y * up.x
+            };
+            const L = Math.hypot(n1.x, n1.y, n1.z) || 1;
+            n1 = { x: n1.x / L, y: n1.y / L, z: n1.z / L };
+            const n2 = {
+                x: T.y * n1.z - T.z * n1.y,
+                y: T.z * n1.x - T.x * n1.z,
+                z: T.x * n1.y - T.y * n1.x
+            };
+            return { n1, n2 };
+        }
+
+        // Sección irregular a propósito: un radio constante se leería
+        // como un tubo literal en vez de como una masa de fibras.
+        function radius(u, a, t) {
+            const body = 0.30 + Math.sin(Math.PI * Math.pow(u, 0.9)) * 0.85;
+            const lobe = 1 + Math.sin(a * 2 + u * 3.0) * 0.26
+                           + Math.sin(a * 3 - u * 2.1) * 0.15
+                           + Math.sin(u * 6.0) * 0.12 * Math.sin(t * 0.3);
+            return 0.34 * body * lobe;
+        }
+
+        function point(a0, u, t, shell) {
+            const c = axis(u, t);
+            const fr = frame(u, t);
+            const ang = a0 + u * 5.0 + t * 0.55;
+            const r = radius(u, ang, t) * shell;
+            const ca = Math.cos(ang), sa = Math.sin(ang);
+            return {
+                x: c.x + (fr.n1.x * ca + fr.n2.x * sa) * r,
+                y: c.y + (fr.n1.y * ca + fr.n2.y * sa) * r,
+                z: c.z + (fr.n1.z * ca + fr.n2.z * sa) * r,
+                nz: (fr.n1.z * ca + fr.n2.z * sa)
+            };
+        }
+
+        function project(p) {
+            const k = CAM / Math.max(0.6, CAM - p.z);
+            const S = Math.min(W, H * 1.75) * 0.29;
+            // En vertical la masa se centra y baja: deja respirar el
+            // titular arriba y ocupa la mitad inferior del hero.
+            const cx = 0.66 - PORTRAIT * 0.10;
+            const cy = 0.50 + PORTRAIT * 0.16;
+            return { x: W * cx + p.x * k * S, y: H * cy + p.y * k * S, k };
+        }
+
+        // Desvanecido de borde: ninguna fibra llega viva al corte con la
+        // sección clara de debajo, ni choca contra la barra de navegación.
+        function edgeFade(y) {
+            const bottom = 1 - Math.max(0, (y - H * (1 - BOTTOM_FADE)) / (H * BOTTOM_FADE));
+            const top = Math.max(0, Math.min(1, y / (H * 0.10)));
+            return Math.max(0, Math.min(1, bottom)) * top;
+        }
+
+        const dotSeeds = Array.from({ length: 1400 }, () => ({
+            a0: Math.random() * Math.PI * 2 * 3.2,
+            u: Math.random(),
+            shell: 0.42 + Math.random() * 0.85,
+            r: 0.4 + Math.random() * 0.9,
+            a: 0.25 + Math.random() * 0.65,
+            ph: Math.random() * 10
+        }));
+
+        function drawMesh(now) {
+            const t = prefersReduced ? 0 : now * 0.00010;   // movimiento lento y sereno
             mctx.clearRect(0, 0, W, H);
-            const time = t * 0.00035;
-            for (const p of points) {
-                // Oleaje: desplazamiento vertical por seno con fase dependiente de la posición
-                const wave = Math.sin(time + p.phase) * 6;
-                const y = p.y + wave;
-                const shimmer = (Math.sin(time * 1.6 + p.phase * 1.3) + 1) / 2; // 0..1
-                const alpha = p.edgeFade * (0.16 + shimmer * 0.38);
-                if (alpha <= 0.01) continue;
-                mctx.fillStyle = `rgba(200, 168, 94, ${alpha})`;
+
+            const segs = [];
+            for (let i = 0; i < FIBERS; i++) {
+                const a0 = (i / FIBERS) * Math.PI * 2 * 3.2;
+                const shell = 0.42 + ((i * 0.618) % 1) * 0.78;
+                let pts = [], zs = 0, ks = 0, nz = 0, n = 0;
+                for (let s = 0; s <= STEPS; s++) {
+                    const P3 = point(a0, s / STEPS, t, shell);
+                    const P = project(P3);
+                    pts.push(P); zs += P3.z; ks += P.k; nz += P3.nz; n++;
+                    if (pts.length >= SEG || s === STEPS) {
+                        segs.push({ pts: pts.slice(), z: zs / n, k: ks / n, nz: nz / n });
+                        pts = [P]; zs = 0; ks = 0; nz = 0; n = 0;
+                    }
+                }
+            }
+
+            // Pintor: del fondo hacia delante, para que lo cercano oculte
+            segs.sort((a, b) => a.z - b.z);
+
+            for (const sg of segs) {
+                const near = Math.max(0.25, Math.min(1.9, sg.k));
+                const fog = Math.max(0, Math.min(1, (near - 0.62) / 0.75));
+                const lit = Math.max(0, sg.nz) * 0.8 + 0.2;
+                const fade = edgeFade(sg.pts[Math.floor(sg.pts.length / 2)].y);
+                if (fade <= 0.02) continue;
+
+                const path = () => {
+                    mctx.beginPath();
+                    mctx.moveTo(sg.pts[0].x, sg.pts[0].y);
+                    for (let i = 1; i < sg.pts.length; i++) mctx.lineTo(sg.pts[i].x, sg.pts[i].y);
+                };
+
+                // Oclusión: las fibras del frente borran lo que pasa detrás
+                if (fog > 0.60) {
+                    path();
+                    mctx.strokeStyle = `rgba(15, 31, 27, ${(fog - 0.60) * 1.7 * fade})`;
+                    mctx.lineWidth = 2.4 * near;
+                    mctx.stroke();
+                }
+
+                path();
+                const light = lit * (0.35 + fog * 0.75);
+                const lum = 58 + light * 128;
+                mctx.strokeStyle = `rgba(${Math.round(lum * 0.40)}, ${Math.round(lum)}, ${Math.round(lum * 0.62)}, ${(0.05 + light * 0.34) * fade})`;
+                mctx.lineWidth = 0.40 + near * 0.42;
+                mctx.stroke();
+            }
+
+            // Polvo dorado sobre la masa. En pantallas pequeñas se dibuja
+            // solo una parte de las semillas: mantiene la densidad visual
+            // sin cargar el móvil con 1400 puntos por fotograma.
+            const dotCount = W < 700 ? 520 : (W < 1100 ? 900 : dotSeeds.length);
+            for (let di = 0; di < dotCount; di++) {
+                const d = dotSeeds[di];
+                const P = project(point(d.a0, d.u, t, d.shell));
+                // En escritorio el texto ocupa la izquierda, así que el
+                // polvo se recorta ahí. En móvil el texto es a todo ancho:
+                // el recorte lateral no aplica, protege el desvanecido.
+                if (P.x < W * 0.28 * (1 - PORTRAIT)) continue;
+                const near = Math.max(0.25, Math.min(1.9, P.k));
+                const fog = Math.max(0, Math.min(1, (near - 0.62) / 0.75));
+                // Titileo lento y desfasado: sin filo dorado, el polvo es
+                // el único acento cálido, así que se le da más presencia.
+                const tw = (Math.sin(t * 1.4 + d.ph * 3.1) + 1) / 2;
+                const alpha = d.a * (0.20 + fog * 0.80) * (0.28 + tw * 0.72) * 0.80 * edgeFade(P.y);
+                if (alpha < 0.02) continue;
+                mctx.fillStyle = `rgba(222, 196, 142, ${alpha})`;
                 mctx.beginPath();
-                mctx.arc(p.x, y, 1.6, 0, Math.PI * 2);
+                mctx.arc(P.x, P.y, d.r * (0.6 + near * 0.5), 0, Math.PI * 2);
                 mctx.fill();
             }
-            if (!prefersReduced) requestAnimationFrame(drawMesh);
+
+            if (!prefersReduced && heroVisible) requestAnimationFrame(drawMesh);
         }
+
+        // Solo se anima mientras el hero está en pantalla: fuera de vista
+        // no se gasta CPU ni batería en dibujar algo que nadie ve.
+        let heroVisible = true;
         if (prefersReduced) {
             drawMesh(0);
         } else {
             requestAnimationFrame(drawMesh);
+            const heroEl = meshCanvas.closest('.hero-section') || meshCanvas;
+            new IntersectionObserver((entries) => {
+                const wasVisible = heroVisible;
+                heroVisible = entries[0].isIntersecting;
+                if (heroVisible && !wasVisible) requestAnimationFrame(drawMesh);
+            }, { threshold: 0 }).observe(heroEl);
         }
     }
 

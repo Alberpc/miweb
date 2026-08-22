@@ -42,7 +42,7 @@
     <link rel="canonical" href="https://albercabrera.com/blog/">
     <meta name="robots" content="index, follow">
     <meta name="author" content="Alberto Pérez Cabrera">
-    <meta name="theme-color" content="#070708">
+    <meta name="theme-color" content="#0E1116">
     <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon-32.png">
     <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico">
     <link rel="apple-touch-icon" href="../assets/img/favicon-512.png">
@@ -129,40 +129,17 @@
     }
     </script>
 
-    <!-- Fuentes: Inter + Syne (idénticas a la home) -->
+    <!-- Fuente: Inter (Syne retirada: no la usaba ninguna regla) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/design-system/tokens.css?v=1">
 
     <style>
-        :root {
-            --bg: #0a0908;
-            --bg-alt: #0d0c0a;
-            --ink: #f6f5f2;
-            --ink-soft: #9a9a95;
-            --ink-mute: #888888;
-            --ink-faint: #444444;
-            --cobalt: #3b5eff;
-            --cobalt-soft: #8aa0ff;
-            --cobalt-glow: rgba(59, 94, 255, 0.15);
-            --cobalt-border: rgba(59, 94, 255, 0.3);
-            --glass-bg: rgba(10, 9, 8, 0.75);
-            --glass-border: rgba(255, 255, 255, 0.06);
-            --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        }
-
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        html { scroll-behavior: smooth; background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 16px; -webkit-font-smoothing: antialiased; scrollbar-color: #ffffff #050506; scrollbar-width: thin; }
+        html { scroll-behavior: smooth; background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 16px; -webkit-font-smoothing: antialiased; }
         body { overflow-x: hidden; line-height: 1.6; }
-
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #050506; }
-        ::-webkit-scrollbar-thumb { background: #ffffff; border-radius: 4px; border: 2px solid #050506; }
-        ::-webkit-scrollbar-thumb:hover { background: #5275ff; }
-        ::selection { background: rgba(59, 94, 255, 0.35); color: #fff; }
-        a:focus-visible, button:focus-visible { outline: 2px solid rgba(59, 94, 255, 0.65); outline-offset: 3px; border-radius: 4px; }
 
         .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
@@ -171,22 +148,23 @@
             position: fixed; top: 24px; left: 50%; transform: translateX(-50%);
             z-index: 1000; width: calc(100% - 48px); max-width: 1200px; height: 62px;
             display: flex; align-items: center; justify-content: space-between; padding: 0 12px 0 24px;
-            background: rgba(7, 7, 8, 0.38);
+            background: rgba(255, 255, 255, 0.78);
             backdrop-filter: blur(18px) saturate(180%); -webkit-backdrop-filter: blur(18px) saturate(180%);
             border: 1px solid var(--glass-border); border-radius: 100px;
+            box-shadow: 0 8px 30px rgba(14, 17, 22, 0.14);
         }
         .subnav .logo { font-family: var(--font-heading); font-weight: 800; font-size: 1.3rem; color: var(--ink); text-decoration: none; letter-spacing: -0.05em; flex: none; }
-        .subnav .logo img { height: 24px; width: auto; display: block; }
+        .subnav .logo img { height: 24px; width: auto; display: block; filter: invert(1) brightness(0.12); }
         .nav-menu { display: flex; align-items: center; gap: 30px; }
-        .nav-menu a { font-size: 0.9rem; color: var(--ink-mute); text-decoration: none; transition: color 0.3s ease; }
+        .nav-menu a { font-size: 0.9rem; color: var(--ink-mid); text-decoration: none; transition: color 0.3s ease; }
         .nav-menu a:hover, .nav-menu a.current { color: var(--ink); }
         .subnav .cta {
-            font-size: 0.8rem; font-weight: 600; color: var(--bg); text-decoration: none;
-            background: var(--ink); flex: none;
+            font-size: 0.8rem; font-weight: 600; color: #fff; text-decoration: none;
+            background: var(--cobalt-600); flex: none;
             padding: 11px 22px; border-radius: 100px; border: 1px solid transparent;
             transition: all 0.3s ease; white-space: nowrap;
         }
-        .subnav .cta:hover { transform: translateY(-2px); border-color: var(--cobalt-border); box-shadow: 0 4px 15px var(--cobalt-glow); }
+        .subnav .cta:hover { transform: translateY(-2px); background: var(--cobalt-700); border-color: transparent; box-shadow: 0 4px 15px var(--cobalt-glow); }
         .nav-burger { display: none; background: none; border: none; cursor: pointer; padding: 10px; flex-direction: column; gap: 5px; }
         .nav-burger span { display: block; width: 22px; height: 2px; background: var(--ink); border-radius: 2px; transition: all 0.3s ease; }
         .nav-burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
@@ -195,71 +173,74 @@
         .nav-mobile {
             position: fixed; top: 98px; left: 50%; transform: translateX(-50%);
             width: calc(100% - 48px); max-width: 1200px; z-index: 999;
-            background: rgba(10, 9, 8, 0.92); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+            background: rgba(255, 255, 255, 0.94); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
             border: 1px solid var(--glass-border); border-radius: 18px; padding: 14px;
             flex-direction: column; gap: 4px; display: none;
+            box-shadow: 0 8px 30px rgba(14, 17, 22, 0.14);
         }
         .nav-mobile.open { display: flex; }
         .nav-mobile a { font-size: 0.98rem; color: var(--ink-soft); text-decoration: none; padding: 12px 14px; border-radius: 10px; transition: background 0.25s ease, color 0.25s ease; }
-        .nav-mobile a:hover { background: rgba(255,255,255,0.04); color: var(--ink); }
-        .nav-mobile .nav-mobile-cta { background: var(--ink); color: var(--bg); font-weight: 600; text-align: center; margin-top: 6px; }
+        .nav-mobile a:hover { background: var(--bg-alt); color: var(--ink); }
+        .nav-mobile .nav-mobile-cta { background: var(--cobalt-600); color: #fff; font-weight: 600; text-align: center; margin-top: 6px; }
         @media (max-width: 820px) {
             .nav-menu, .subnav > .cta { display: none; }
             .nav-burger { display: flex; }
         }
 
-        /* ===== HERO DEL BLOG ===== */
-        .blog-hero { position: relative; padding: 160px 0 40px; text-align: center; background: var(--bg); }
+        /* ===== HERO OSCURO DEL BLOG =====
+           Requiere class="inverse" en el <header class="blog-hero">. */
+        .blog-hero.inverse { position: relative; padding: 160px 0 40px; text-align: center; }
         .blog-hero-inner { position: relative; z-index: 2; }
-        .blog-hero h1 { font-family: var(--font-heading); font-size: clamp(2.1rem, 4.6vw, 3.1rem); font-weight: 300; letter-spacing: -0.02em; }
+        .blog-hero.inverse h1 { font-family: var(--font-heading); font-size: clamp(2.1rem, 4.6vw, 3.1rem); font-weight: 300; letter-spacing: -0.02em; color: var(--on-night); }
 
-        /* ===== GRID DE POSTS ===== */
+        /* ===== GRID DE POSTS (cuerpo claro) ===== */
         .posts { padding: 40px 0 90px; background-color: var(--bg-alt); }
         .posts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
 
         .post-card {
             display: flex; flex-direction: column; text-decoration: none;
-            background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 14px;
+            background: var(--bg); border: 1px solid var(--line); border-radius: 14px;
             overflow: hidden; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .post-card:hover { border-color: var(--cobalt-border); transform: translateY(-6px); box-shadow: 0 30px 60px rgba(0,0,0,0.55), 0 0 40px -14px var(--cobalt-glow); }
-        .post-thumb { aspect-ratio: 16 / 9; overflow: hidden; background: linear-gradient(135deg, rgba(59,94,255,0.10), rgba(13,13,18,0.6)); }
+        .post-card:hover { border-color: var(--cobalt-border); transform: translateY(-6px); box-shadow: 0 30px 60px rgba(26,29,35,0.14), 0 0 40px -14px var(--cobalt-glow); }
+        .post-thumb { aspect-ratio: 16 / 9; overflow: hidden; background: linear-gradient(135deg, var(--cobalt-tint), var(--bg-alt)); }
         .post-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
         .post-card:hover .post-thumb img { transform: scale(1.05); }
         .post-info { padding: 24px 26px 28px; display: flex; flex-direction: column; flex: 1; }
-        .post-cat { font-family: monospace; font-size: 0.7rem; letter-spacing: 0.2em; color: var(--cobalt-soft); text-transform: uppercase; margin-bottom: 12px; }
+        .post-cat { font-family: monospace; font-size: 0.7rem; letter-spacing: 0.2em; color: var(--cobalt-600); text-transform: uppercase; margin-bottom: 12px; }
         .post-card h2 { font-family: var(--font-heading); font-size: 1.24rem; font-weight: 600; color: var(--ink); line-height: 1.3; letter-spacing: -0.01em; margin-bottom: 12px; }
         .post-card p { font-size: 0.95rem; color: var(--ink-soft); font-weight: 300; line-height: 1.6; margin-bottom: 20px; flex: 1; }
-        .post-meta { display: flex; align-items: center; gap: 12px; font-size: 0.8rem; color: var(--ink-mute); }
-        .post-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--ink-faint); }
+        .post-meta { display: flex; align-items: center; gap: 12px; font-size: 0.8rem; color: var(--ink-mid); }
+        .post-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--ink-decor); }
         .post-more { margin-top: 18px; font-size: 0.88rem; font-weight: 600; color: var(--ink); }
-        .post-card:hover .post-more { color: var(--cobalt-soft); }
+        .post-card:hover .post-more { color: var(--cobalt-600); }
 
         /* Estado vacío (por si algún día no hay posts) */
-        .posts-empty { text-align: center; color: var(--ink-mute); font-weight: 300; padding: 40px 0; }
+        .posts-empty { text-align: center; color: var(--ink-mid); font-weight: 300; padding: 40px 0; }
 
         @media (max-width: 900px) { .posts-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 600px) { .posts-grid { grid-template-columns: 1fr; } .blog-hero { padding: 130px 0 30px; } }
+        @media (max-width: 600px) { .posts-grid { grid-template-columns: 1fr; } .blog-hero.inverse { padding: 130px 0 30px; } }
 
-        /* ===== FOOTER (idéntico a la home: tono más oscuro = --bg) ===== */
-        .footer-section { padding: 90px 0 40px; background: var(--bg); border-top: 1px solid rgba(255, 255, 255, 0.08); }
+        /* ===== FOOTER OSCURO =====
+           Requiere class="inverse" en el <footer class="footer-section">. */
+        .footer-section.inverse { padding: 90px 0 40px; border-top: 1px solid var(--night-600); }
         .footer-grid { display: grid; grid-template-columns: 1.4fr 2fr; gap: 60px; margin-bottom: 60px; }
         .footer-brand-col { max-width: 340px; }
         .footer-logo-wrap { margin-bottom: 20px; }
         .footer-logo-wrap .logo img { height: 26px; width: auto; }
-        .footer-brand-desc { font-size: 0.92rem; color: var(--ink-mute); font-weight: 300; line-height: 1.7; }
+        .footer-brand-desc { font-size: 0.92rem; color: var(--on-night-soft); font-weight: 300; line-height: 1.7; }
         .footer-links-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
-        .footer-links-title { font-family: var(--font-heading); font-size: 0.82rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink); margin-bottom: 18px; }
+        .footer-links-title { font-family: var(--font-heading); font-size: 0.82rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--on-night); margin-bottom: 18px; }
         .footer-links-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-        .footer-links-list a { font-size: 0.9rem; color: var(--ink-mute); text-decoration: none; transition: color 0.3s ease; }
-        .footer-links-list a:hover { color: var(--ink); }
-        .footer-bottom-bar { display: flex; align-items: center; justify-content: space-between; padding-top: 30px; border-top: 1px solid var(--glass-border); flex-wrap: wrap; gap: 20px; }
-        .footer-curator { font-size: 0.82rem; color: var(--ink-faint); }
+        .footer-links-list a { font-size: 0.9rem; color: var(--on-night-soft); text-decoration: none; transition: color 0.3s ease; }
+        .footer-links-list a:hover { color: var(--on-night); }
+        .footer-bottom-bar { display: flex; align-items: center; justify-content: space-between; padding-top: 30px; border-top: 1px solid var(--night-600); flex-wrap: wrap; gap: 20px; }
+        .footer-curator { font-size: 0.82rem; color: var(--on-night-mid); }
         .footer-social-wrap { display: flex; align-items: center; gap: 12px; }
-        .footer-social-label { font-size: 0.8rem; color: var(--ink-mute); }
+        .footer-social-label { font-size: 0.8rem; color: var(--on-night-soft); }
         .footer-social-icons { display: flex; gap: 10px; }
-        .footer-social-icons a { color: var(--ink-mute); display: flex; transition: color 0.3s ease; }
-        .footer-social-icons a:hover { color: var(--cobalt-soft); }
+        .footer-social-icons a { color: var(--on-night-soft); display: flex; transition: color 0.3s ease; }
+        .footer-social-icons a:hover { color: var(--cobalt-300); }
 
         .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
         .reveal.revealed { opacity: 1; transform: none; }
@@ -303,7 +284,7 @@
     </div>
 
     <!-- HERO -->
-    <header class="blog-hero">
+    <header class="blog-hero inverse">
         <div class="container blog-hero-inner">
             <h1>Blog</h1>
         </div>
@@ -447,7 +428,7 @@
     </section>
 
     <!-- FOOTER -->
-    <footer class="footer-section reveal">
+    <footer class="footer-section inverse reveal">
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-brand-col">

@@ -4,14 +4,23 @@
    ni que index.css pise esto. Paleta tomada de la web actual.
    ========================================================================== */
 
+/* Paleta alineada con el sistema Bosque Inteligente (design-system/tokens.css).
+   Antes usaba el azul cobalto #3b5eff de la etapa anterior de la web.
+   Los valores van literales, no con var(--cobalt-*), porque este CSS se
+   carga suelto en páginas donde tokens.css puede no estar presente.
+
+   --acw-accent es FONDO con texto blanco encima (burbuja de usuario,
+   botón de enviar): por eso es el dorado oscuro --cobalt-600 (#6E5628),
+   que da 6.94 de contraste con blanco. Un dorado claro ahí suspendería.
+   --acw-accent-soft es TEXTO y bordes sobre fondo oscuro: --cobalt-300. */
 .acw-root {
-    --acw-bg: #0d0d0d;
-    --acw-bg-deep: #0a0908;
-    --acw-text: #f6f5f2;
-    --acw-text-soft: #aaaaaa;
-    --acw-accent: #3b5eff;
-    --acw-accent-soft: #8aa0ff;
-    --acw-border: rgba(255, 255, 255, 0.06);
+    --acw-bg: #131F1B;
+    --acw-bg-deep: #0F1F1B;
+    --acw-text: #F3F5F2;
+    --acw-text-soft: #9EA89F;
+    --acw-accent: #6E5628;
+    --acw-accent-soft: #D6BA82;
+    --acw-border: rgba(214, 186, 130, 0.12);
     --acw-font: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
@@ -20,8 +29,11 @@
    -------------------------------------------------------------------------- */
 
 /* Mismo lenguaje visual que el boton de WhatsApp de la web (cristal oscuro
-   translucido con borde de color sutil), pero en el azul de marca. Va apilado
+   translucido con borde de color sutil), en el dorado de marca. Va apilado
    encima: WhatsApp esta en bottom:32px con 60px de alto, 32+60+24 de aire = 116. */
+/* Fondo dorado SÓLIDO, no cristal translúcido: la burbuja flota sobre
+   secciones claras y oscuras, y un fondo semitransparente se lavaba
+   contra el marfil y perdía todo el contraste. */
 .acw-bubble {
     position: fixed;
     bottom: 116px;
@@ -29,15 +41,15 @@
     z-index: 1000;
     width: 60px;
     height: 60px;
-    background-color: rgba(20, 20, 25, 0.6);
-    border: 1px solid rgba(59, 94, 255, 0.3);
+    background-color: var(--acw-accent-soft);
+    border: 1px solid var(--acw-accent);
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    /* Sombra en verde bosque, no negra. Sin backdrop-filter: con fondo
+       sólido no aporta nada y cuesta rendimiento. */
+    box-shadow: 0 6px 20px rgba(15, 31, 27, 0.22);
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     cursor: pointer;
     padding: 0;
@@ -45,8 +57,8 @@
 
 .acw-bubble:hover {
     transform: scale(1.1) translateY(-3px);
-    border-color: rgba(59, 94, 255, 0.8);
-    box-shadow: 0 15px 40px rgba(59, 94, 255, 0.25);
+    background-color: #E4D0A6;
+    box-shadow: 0 15px 40px rgba(15, 31, 27, 0.28);
 }
 
 .acw-bubble:hover .acw-bubble-icon {
@@ -58,10 +70,12 @@
     outline-offset: 3px;
 }
 
+/* Icono oscuro sobre el dorado sólido: 9.09 de contraste, legible en
+   cualquier fondo por el que pase la burbuja. */
 .acw-bubble-icon {
     width: 28px;
     height: 28px;
-    stroke: var(--acw-accent);
+    stroke: var(--acw-bg-deep);
     fill: none;
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     display: block;
@@ -337,7 +351,7 @@
 }
 
 .acw-send:hover:not(:disabled) {
-    background: #5275ff;
+    background: #D6BA82;
 }
 
 .acw-send:disabled {
@@ -425,7 +439,7 @@
 }
 
 .acw-submit:hover:not(:disabled) {
-    background: #5275ff;
+    background: #D6BA82;
 }
 
 .acw-submit:disabled {

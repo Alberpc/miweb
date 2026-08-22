@@ -42,7 +42,7 @@
     <link rel="canonical" href="https://albercabrera.com/servicios.html">
     <meta name="robots" content="index, follow">
     <meta name="author" content="Alberto Pérez Cabrera">
-    <meta name="theme-color" content="#070708">
+    <meta name="theme-color" content="#0E1116">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
     <link rel="apple-touch-icon" href="assets/img/favicon-512.png">
@@ -81,53 +81,19 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/design-system/tokens.css?v=1">
     <style>
-        :root {
-            --bg: #070708;
-            --ink: #f4f4f5;
-            --ink-soft: #a1a1aa;
-            --ink-faint: #71717a;
-            --cobalt: #3b5eff;
-            --cobalt-soft: #5275ff;
-            --cobalt-glow: rgba(59, 94, 255, 0.15);
-            --glass-bg: rgba(13, 13, 16, 0.6);
-            --glass-border: rgba(255, 255, 255, 0.05);
-            --font-heading: 'Syne', sans-serif;
-            --font-body: 'Inter', sans-serif;
-        }
-
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html { 
-            scroll-behavior: smooth; 
-            background: var(--bg); 
-            color: var(--ink); 
-            font-family: var(--font-body); 
-            font-size: 16px; 
-            -webkit-font-smoothing: antialiased; 
-            scrollbar-color: #ffffff #050506;
-            scrollbar-width: thin;
+        html {
+            scroll-behavior: smooth;
+            background: var(--bg);
+            color: var(--ink);
+            font-family: var(--font-body);
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
         }
         body { overflow-x: hidden; line-height: 1.6; }
-        ::selection { background: rgba(59, 94, 255, 0.35); color: #fff; }
-        
-        /* PERSONALIZACIÓN DEL SCROLLBAR */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #050506;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #ffffff;
-            border-radius: 4px;
-            border: 2px solid #050506;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #5275ff;
-        }
-        
-        a:focus-visible, button:focus-visible { outline: 2px solid rgba(59, 94, 255, 0.65); outline-offset: 3px; border-radius: 4px; }
 
         .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
@@ -136,22 +102,24 @@
             position: fixed; top: 24px; left: 50%; transform: translateX(-50%);
             z-index: 1000; width: calc(100% - 48px); max-width: 1200px; height: 62px;
             display: flex; align-items: center; justify-content: space-between; padding: 0 24px;
-            background: rgba(7, 7, 8, 0.38);
+            background: rgba(255, 255, 255, 0.78);
             backdrop-filter: blur(18px) saturate(180%); -webkit-backdrop-filter: blur(18px) saturate(180%);
             border: 1px solid var(--glass-border); border-radius: 100px;
+            box-shadow: 0 8px 30px rgba(14, 17, 22, 0.14);
         }
         .subnav .logo { font-family: var(--font-heading); font-weight: 800; font-size: 1.3rem; color: var(--ink); text-decoration: none; letter-spacing: -0.05em; }
         .subnav .logo img, .footer-logo-wrap .logo img { height: 24px; width: auto; display: block; }
+        .subnav .logo img { filter: invert(1) brightness(0.12); }
         .subnav-right { display: flex; align-items: center; gap: 14px; }
-        .subnav .back { font-size: 0.85rem; color: var(--ink-soft); text-decoration: none; transition: color 0.3s ease; }
+        .subnav .back { font-size: 0.85rem; color: var(--ink-mid); text-decoration: none; transition: color 0.3s ease; }
         .subnav .back:hover { color: var(--ink); }
         .subnav .cta {
-            font-size: 0.8rem; font-weight: 600; color: #070708; text-decoration: none;
-            background: linear-gradient(135deg, #ffffff 0%, #c8c8c8 50%, #ffffff 100%);
-            padding: 9px 20px; border-radius: 100px; border: 1px solid rgba(255,255,255,0.35);
+            font-size: 0.8rem; font-weight: 600; color: #fff; text-decoration: none;
+            background: var(--cobalt-600);
+            padding: 9px 20px; border-radius: 100px; border: 1px solid transparent;
             transition: all 0.3s ease;
         }
-        .subnav .cta:hover { transform: translateY(-2px); box-shadow: 0 0 20px rgba(255,255,255,0.25); }
+        .subnav .cta:hover { transform: translateY(-2px); background: var(--cobalt-700); box-shadow: 0 4px 15px var(--cobalt-glow); }
 
         /* HERO con video de fondo a pantalla completa */
         .hero {
@@ -184,58 +152,58 @@
         .hero-video-overlay {
             position: absolute;
             inset: 0;
-            background-image: 
-                radial-gradient(circle at 50% 38%, rgba(7, 7, 8, 0.95) 0%, rgba(7, 7, 8, 0.25) 32%, transparent 58%),
+            background-image:
+                radial-gradient(circle at 50% 38%, rgba(14, 17, 22, 0.95) 0%, rgba(14, 17, 22, 0.25) 32%, transparent 58%),
                 linear-gradient(to bottom, transparent 72%, var(--bg) 100%);
             z-index: 2;
         }
         .hero > .container { position: relative; z-index: 3; }
         .hero-badge {
             display: inline-block; font-family: monospace; font-size: 0.78rem; letter-spacing: 0.3em;
-            color: var(--cobalt-soft); border: 1px solid rgba(59, 94, 255, 0.35);
-            background: rgba(59, 94, 255, 0.06); padding: 7px 16px; border-radius: 50px; margin-bottom: 26px;
+            color: var(--cobalt-300); border: 1px solid var(--cobalt-border);
+            background: var(--cobalt-tint); padding: 7px 16px; border-radius: 50px; margin-bottom: 26px;
         }
-        .hero h1 { font-family: var(--font-heading); font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 20px; }
-        .hero h1 .hl { background: linear-gradient(120deg, #fff 10%, var(--cobalt-soft) 60%, var(--cobalt) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; display: inline-block; padding-bottom: 0.14em; margin-bottom: -0.14em; }
-        .hero p { font-size: 1.1rem; color: var(--ink-soft); font-weight: 300; max-width: 58ch; margin: 0 auto; }
+        .hero h1 { font-family: var(--font-heading); font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 20px; color: var(--on-night); }
+        .hero h1 .hl { background: linear-gradient(120deg, var(--on-night) 10%, var(--cobalt-300) 94%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; display: inline-block; padding-bottom: 0.14em; margin-bottom: -0.14em; }
+        .hero p { font-size: 1.1rem; color: var(--on-night-body); font-weight: 300; max-width: 58ch; margin: 0 auto; }
 
         /* Índice de servicios (chips) */
         .indice { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 44px; }
         .indice a {
-            font-size: 0.85rem; color: var(--ink-soft); text-decoration: none;
-            border: 1px solid var(--glass-border); background: rgba(13,13,16,0.55);
+            font-size: 0.85rem; color: var(--on-night-soft); text-decoration: none;
+            border: 1px solid var(--glass-border); background: var(--night-800);
             padding: 9px 18px; border-radius: 100px; transition: all 0.3s ease;
         }
-        .indice a:hover { color: var(--ink); border-color: rgba(59, 94, 255, 0.45); background: rgba(59, 94, 255, 0.08); }
+        .indice a:hover { color: var(--on-night); border-color: var(--cobalt-border); background: var(--cobalt-tint); }
 
         /* ESTRUCTURA GENERAL DE SERVICIOS LINEALES */
-        .servicio { padding: 120px 0; position: relative; scroll-margin-top: 100px; }
+        .servicio { padding: 120px 0; position: relative; scroll-margin-top: 100px; background-color: var(--bg); }
+        .servicio.alt { background-color: var(--bg-alt); }
         .servicio + .servicio::before {
             content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
             width: min(760px, 82%); height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(59,94,255,0.22) 30%, rgba(255,255,255,0.14) 50%, rgba(59,94,255,0.22) 70%, transparent);
+            background: linear-gradient(90deg, transparent, var(--cobalt-border) 30%, var(--line-strong) 50%, var(--cobalt-border) 70%, transparent);
         }
-        
+
         .servicio-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 70px; align-items: center; }
         .servicio.alt .servicio-grid { grid-template-columns: 0.95fr 1.05fr; }
         .servicio.alt .servicio-main { order: 2; }
         .servicio.alt .servicio-side { order: 1; }
 
-        .s-num { 
-            font-family: monospace; 
-            font-size: 0.8rem; 
-            letter-spacing: 0.25em; 
-            color: var(--ink-soft); 
-            display: block; 
-            margin-bottom: 12px; 
-            font-weight: 600; 
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+        .s-num {
+            font-family: monospace;
+            font-size: 0.8rem;
+            letter-spacing: 0.25em;
+            color: var(--ink-mid);
+            display: block;
+            margin-bottom: 12px;
+            font-weight: 600;
         }
-        .servicio h2 { font-family: var(--font-heading); font-size: clamp(1.6rem, 3.4vw, 2.3rem); font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 18px; }
+        .servicio h2 { font-family: var(--font-heading); font-size: clamp(1.6rem, 3.4vw, 2.3rem); font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 18px; color: var(--ink); }
         .servicio .desc { font-size: 1.05rem; color: var(--ink-soft); font-weight: 300; margin-bottom: 16px; max-width: 58ch; }
         .servicio .ideal {
-            display: inline-block; margin-top: 8px; font-size: 0.85rem; color: var(--cobalt-soft);
-            background: rgba(59, 94, 255, 0.07); border: 1px solid rgba(59, 94, 255, 0.25);
+            display: inline-block; margin-top: 8px; font-size: 0.85rem; color: var(--cobalt-700);
+            background: var(--cobalt-tint); border: 1px solid var(--cobalt-border);
             border-radius: 8px; padding: 10px 16px;
         }
 
@@ -246,18 +214,18 @@
             gap: 16px;
         }
         .use-case-card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
+            background: var(--bg-alt);
+            border: 1px solid var(--line);
             border-radius: 12px;
             padding: 20px;
             transition: all 0.4s ease;
         }
         .use-case-card:hover {
-            border-color: rgba(59, 94, 255, 0.35);
-            background: rgba(13, 13, 16, 0.7);
+            border-color: var(--cobalt-border);
+            background: var(--bg);
             transform: translateY(-2px);
         }
-        .use-case-title { font-size: 0.92rem; font-weight: 600; color: #fff; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        .use-case-title { font-size: 0.92rem; font-weight: 600; color: var(--ink); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
         .use-case-desc { font-size: 0.82rem; color: var(--ink-soft); font-weight: 300; line-height: 1.45; }
         .use-case-desc strong { color: var(--ink); font-weight: 500; }
 
@@ -268,8 +236,8 @@
             gap: 14px;
         }
         .process-step {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
+            background: var(--bg);
+            border: 1px solid var(--line);
             border-radius: 10px;
             padding: 16px 20px;
             display: flex;
@@ -278,14 +246,14 @@
             transition: all 0.3s ease;
         }
         .process-step:hover {
-            border-color: rgba(59, 94, 255, 0.25);
-            background: rgba(13, 13, 16, 0.75);
+            border-color: var(--cobalt-border);
+            background: var(--bg-alt);
         }
         .process-step-num {
             font-family: monospace;
             font-size: 0.8rem;
-            color: var(--cobalt-soft);
-            background: rgba(59, 94, 255, 0.08);
+            color: var(--cobalt-700);
+            background: var(--cobalt-tint);
             width: 28px;
             height: 28px;
             border-radius: 50%;
@@ -294,7 +262,7 @@
             justify-content: center;
             font-weight: 600;
             flex-shrink: 0;
-            border: 1px solid rgba(59, 94, 255, 0.2);
+            border: 1px solid var(--cobalt-border);
         }
         .process-step-text {
             font-size: 0.86rem;
@@ -303,7 +271,7 @@
             line-height: 1.4;
         }
         .process-step-text strong {
-            color: #fff;
+            color: var(--ink);
             font-weight: 500;
             display: block;
             margin-bottom: 2px;
@@ -316,17 +284,17 @@
             gap: 16px;
         }
         .spec-card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
+            background: var(--bg-alt);
+            border: 1px solid var(--line);
             border-radius: 12px;
             padding: 22px;
             transition: all 0.3s ease;
         }
         .spec-card:hover {
-            border-color: rgba(59, 94, 255, 0.3);
-            background: rgba(13, 13, 16, 0.7);
+            border-color: var(--cobalt-border);
+            background: var(--bg);
         }
-        .spec-title { font-size: 0.94rem; font-weight: 600; color: #fff; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+        .spec-title { font-size: 0.94rem; font-weight: 600; color: var(--ink); margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
         .spec-desc { font-size: 0.82rem; color: var(--ink-soft); font-weight: 300; line-height: 1.4; }
 
         /* LAYOUT 4 (SISTEMAS A MEDIDA): Cuadrícula Bento de Sistemas */
@@ -336,39 +304,39 @@
             gap: 16px;
         }
         .system-card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
+            background: var(--bg);
+            border: 1px solid var(--line);
             border-radius: 12px;
             padding: 22px;
             transition: all 0.3s ease;
         }
         .system-card:hover {
-            border-color: rgba(59, 94, 255, 0.3);
-            background: rgba(13, 13, 16, 0.7);
+            border-color: var(--cobalt-border);
+            background: var(--bg-alt);
         }
-        .system-title { font-size: 0.94rem; font-weight: 600; color: #fff; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+        .system-title { font-size: 0.94rem; font-weight: 600; color: var(--ink); margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
         .system-desc { font-size: 0.82rem; color: var(--ink-soft); font-weight: 300; line-height: 1.4; }
 
         /* LAYOUT 5 (INTEGRACIONES): Hub visual de herramientas conectadas */
         .hub-container {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
+            background: var(--bg-alt);
+            border: 1px solid var(--line);
             border-radius: 16px;
             padding: 36px 30px;
             display: flex;
             flex-direction: column;
             gap: 20px;
             align-items: center;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+            box-shadow: 0 20px 50px rgba(26, 29, 35, 0.06);
         }
         .hub-title {
             font-family: monospace;
             font-size: 0.72rem;
             letter-spacing: 0.22em;
-            color: var(--ink-faint);
+            color: var(--ink-decor);
             text-transform: uppercase;
             text-align: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            border-bottom: 1px solid var(--line);
             padding-bottom: 10px;
             width: 100%;
         }
@@ -382,8 +350,8 @@
         .hub-pill {
             font-size: 0.86rem;
             color: var(--ink);
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--glass-border);
+            background: var(--bg);
+            border: 1px solid var(--line);
             padding: 10px 20px;
             border-radius: 50px;
             display: flex;
@@ -392,73 +360,58 @@
             transition: all 0.3s ease;
         }
         .hub-pill:hover {
-            background: rgba(59, 94, 255, 0.08);
-            border-color: rgba(59, 94, 255, 0.35);
+            background: var(--cobalt-tint);
+            border-color: var(--cobalt-border);
         }
         .hub-arrow {
             font-size: 0.85rem;
-            color: var(--cobalt-soft);
+            color: var(--cobalt-700);
         }
 
-        /* 06 AVANZADO: ECOSISTEMAS DE AGENTES */
+        /* 06 AVANZADO: ECOSISTEMAS DE AGENTES (tarjeta oscura destacada dentro de flujo claro) */
         .avanzado-wrap {
-            background: linear-gradient(160deg, rgba(20, 27, 60, 0.45), rgba(10, 11, 18, 0.75));
-            border: 1px solid rgba(59, 94, 255, 0.35); border-radius: 16px;
+            background: var(--night-800);
+            border: 1px solid var(--cobalt-border); border-radius: 16px;
             padding: 64px 56px; position: relative; overflow: hidden;
-            box-shadow: 0 30px 80px rgba(0,0,0,0.55), 0 0 60px -22px var(--cobalt-glow);
+            box-shadow: 0 30px 80px rgba(14,17,22,0.35), 0 0 60px -22px var(--cobalt-glow);
         }
-        .avanzado-wrap::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(60% 90% at 80% -10%, rgba(59, 94, 255, 0.15), transparent 60%); }
+        .avanzado-wrap::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(60% 90% at 80% -10%, var(--cobalt-glow), transparent 60%); }
         .avanzado-tag {
             display: inline-block; font-family: monospace; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.25em;
-            background: linear-gradient(135deg, #3b5eff 0%, #8ca4ff 100%); color: #fff;
+            background: linear-gradient(135deg, var(--cobalt-600) 0%, var(--cobalt-300) 100%); color: #fff;
             padding: 5px 15px; border-radius: 50px; margin-bottom: 22px;
-            box-shadow: 0 4px 15px rgba(59, 94, 255, 0.35);
+            box-shadow: 0 4px 15px var(--cobalt-glow);
         }
-        .avanzado-wrap h2 { font-family: var(--font-heading); font-size: clamp(1.6rem, 3.2vw, 2.2rem); font-weight: 800; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 18px; max-width: 22ch; }
-        .avanzado-wrap .desc { font-size: 1.02rem; color: var(--ink-soft); font-weight: 300; max-width: 62ch; margin-bottom: 14px; }
+        .avanzado-wrap h2 { font-family: var(--font-heading); font-size: clamp(1.6rem, 3.2vw, 2.2rem); font-weight: 800; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 18px; max-width: 22ch; color: var(--on-night); }
+        .avanzado-wrap .desc { font-size: 1.02rem; color: var(--on-night-body); font-weight: 300; max-width: 62ch; margin-bottom: 14px; }
         .avanzado-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 34px; position: relative; z-index: 1; }
-        .avanzado-item { background: rgba(10, 11, 18, 0.6); border: 1px solid rgba(59, 94, 255, 0.2); border-radius: 10px; padding: 22px; }
-        .avanzado-item h4 { font-size: 0.98rem; font-weight: 600; margin-bottom: 8px; }
-        .avanzado-item p { font-size: 0.87rem; color: var(--ink-soft); font-weight: 300; }
+        .avanzado-item { background: var(--night-900); border: 1px solid var(--cobalt-border); border-radius: 10px; padding: 22px; }
+        .avanzado-item h4 { font-size: 0.98rem; font-weight: 600; margin-bottom: 8px; color: var(--on-night); }
+        .avanzado-item p { font-size: 0.87rem; color: var(--on-night-body); font-weight: 300; }
 
         /* No sabes cuál → caminos */
-        .cual { padding: 110px 0; text-align: center; position: relative; }
+        .cual { padding: 110px 0; text-align: center; position: relative; background-color: var(--bg); }
         .cual::before {
             content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
             width: min(760px, 82%); height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(59,94,255,0.22) 30%, rgba(255,255,255,0.14) 50%, rgba(59,94,255,0.22) 70%, transparent);
+            background: linear-gradient(90deg, transparent, var(--cobalt-border) 30%, var(--line-strong) 50%, var(--cobalt-border) 70%, transparent);
         }
-        .cual h2 { font-family: var(--font-heading); font-size: clamp(1.7rem, 3.6vw, 2.4rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 14px; }
+        .cual h2 { font-family: var(--font-heading); font-size: clamp(1.7rem, 3.6vw, 2.4rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 14px; color: var(--ink); }
         .cual p { color: var(--ink-soft); font-weight: 300; font-size: 1.05rem; max-width: 56ch; margin: 0 auto 36px; }
         .cual-ctas { display: flex; justify-content: center; gap: 18px; flex-wrap: wrap; }
         .btn-main {
-            display: inline-block; font-size: 1rem; font-weight: 600; color: #070708; text-decoration: none;
-            background: linear-gradient(135deg, #ffffff 0%, #c8c8c8 50%, #ffffff 100%);
-            padding: 16px 34px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.4);
-            box-shadow: 0 0 25px rgba(255,255,255,0.08);
+            display: inline-block; font-size: 1rem; font-weight: 600; color: #fff; text-decoration: none;
+            background: var(--cobalt-600);
+            padding: 16px 34px; border-radius: 4px; border: 1px solid transparent;
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .btn-main:hover { transform: translateY(-3px); box-shadow: 0 0 35px rgba(255,255,255,0.25); }
+        .btn-main:hover { transform: translateY(-3px); background: var(--cobalt-700); box-shadow: 0 8px 30px var(--cobalt-glow); }
         .btn-outline {
             display: inline-block; font-size: 1rem; font-weight: 600; color: var(--ink); text-decoration: none;
-            border: 1px solid rgba(59, 94, 255, 0.5); background: rgba(59, 94, 255, 0.06);
+            border: 1px solid var(--cobalt-border); background: var(--cobalt-tint);
             padding: 16px 34px; border-radius: 4px; transition: all 0.3s ease;
         }
-        .btn-outline:hover { background: rgba(59, 94, 255, 0.14); border-color: var(--cobalt); transform: translateY(-3px); }
-
-        /* Fondo espacial estático */
-        .space-bg {
-            background-image:
-                linear-gradient(to bottom,
-                    var(--bg) 0%,
-                    rgba(7, 7, 8, 0.05) 15%,
-                    rgba(7, 7, 8, 0.05) 85%,
-                    var(--bg) 100%),
-                url('assets/img/Obsidian-black_cosmic_void_stars_202607042140.jpeg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
+        .btn-outline:hover { background: var(--cobalt-600); color: #fff; border-color: var(--cobalt-600); transform: translateY(-3px); }
 
         /* Footer completo (unificado con la home, sin vídeo) */
         /* =============================================================
@@ -481,9 +434,9 @@
             margin: 0 auto;
             border-radius: 24px;
             padding: 60px 40px 40px 40px;
-            color: rgba(255, 255, 255, 0.7);
+            color: var(--on-night-soft);
             font-family: var(--font-body);
-            
+
             /* Reglas de cristal líquido */
             background: rgba(255, 255, 255, 0.02);
             background-blend-mode: luminosity;
@@ -534,10 +487,10 @@
         .footer-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(to bottom, 
-                            var(--bg) 0%, 
-                            rgba(3, 3, 4, 0.4) 35%, 
-                            rgba(3, 3, 4, 0.2) 60%, 
+            background: linear-gradient(to bottom,
+                            var(--bg) 0%,
+                            rgba(14, 17, 22, 0.4) 35%,
+                            rgba(14, 17, 22, 0.2) 60%,
                             var(--bg) 100%);
             z-index: 1;
         }
@@ -566,14 +519,14 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            color: var(--ink);
+            color: var(--on-night);
         }
 
         .footer-logo-wrap .logo {
             font-family: var(--font-heading);
             font-weight: 800;
             font-size: 1.3rem;
-            color: var(--ink);
+            color: var(--on-night);
             text-decoration: none;
             letter-spacing: -0.05em;
         }
@@ -581,7 +534,7 @@
         .footer-brand-desc {
             font-size: 0.9rem;
             line-height: 1.6;
-            color: var(--ink-soft);
+            color: var(--on-night-soft);
             max-width: 380px;
             font-weight: 300;
         }
@@ -596,7 +549,7 @@
         .footer-links-title {
             font-size: 0.85rem;
             text-transform: uppercase;
-            color: var(--ink);
+            color: var(--on-night);
             font-weight: 600;
             margin-bottom: 20px;
         }
@@ -610,19 +563,19 @@
 
         .footer-links-list a {
             font-size: 0.8rem;
-            color: var(--ink-soft);
+            color: var(--on-night-soft);
             text-decoration: none;
             transition: color 0.3s ease;
             font-weight: 300;
         }
 
         .footer-links-list a:hover {
-            color: var(--ink);
+            color: var(--on-night);
         }
 
         /* Fila Inferior (Bottom Bar) */
         .footer-bottom-bar {
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            border-top: 1px solid var(--night-600);
             padding-top: 24px;
             display: flex;
             justify-content: space-between;
@@ -633,7 +586,7 @@
             font-size: 0.75rem;
             text-transform: lowercase;
             letter-spacing: 0.15em;
-            color: var(--ink-faint);
+            color: var(--on-night-mid);
         }
 
         .footer-social-wrap {
@@ -646,7 +599,7 @@
             font-size: 0.7rem;
             text-transform: uppercase;
             letter-spacing: 0.15em;
-            color: var(--ink-faint);
+            color: var(--on-night-mid);
         }
 
         .footer-social-icons {
@@ -655,14 +608,14 @@
         }
 
         .footer-social-icons a {
-            color: var(--ink-soft);
+            color: var(--on-night-soft);
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
         }
 
         .footer-social-icons a:hover {
-            color: var(--ink);
+            color: var(--on-night);
             transform: translateY(-2px);
         }
 
@@ -731,7 +684,7 @@
     </nav>
 
     <!-- HERO -->
-    <header class="hero">
+    <header class="hero inverse">
         <!-- Video de la Nebulosa de fondo en bucle perfecto nativo (procesado con FFmpeg) -->
         <div class="hero-video-container">
             <video autoplay loop muted playsinline class="hero-video-bg" style="opacity: 0.92;">
@@ -935,7 +888,7 @@
             <div class="avanzado-wrap reveal">
                 <span class="avanzado-tag">NIVEL AVANZADO</span>
                 <h2>Agentes autónomos de IA: ecosistemas para tu negocio.</h2>
-                <p class="desc">Para empresas que quieren ir un paso más allá del asistente que responde mensajes: <strong style="color:#f4f4f5">equipos de agentes de IA que trabajan coordinados</strong>, cada uno con su especialidad, operando procesos completos del negocio — investigan, redactan, gestionan, se pasan el trabajo entre ellos y te reportan a ti.</p>
+                <p class="desc">Para empresas que quieren ir un paso más allá del asistente que responde mensajes: <strong style="color:var(--on-night)">equipos de agentes de IA que trabajan coordinados</strong>, cada uno con su especialidad, operando procesos completos del negocio — investigan, redactan, gestionan, se pasan el trabajo entre ellos y te reportan a ti.</p>
                 <p class="desc">Es la tecnología con la que opero mi propio negocio a diario (ecosistemas sobre Claude y sistemas de agentes autónomos de última generación), aplicada al tuyo. Pocas agencias en España están construyendo esto hoy.</p>
                 <div class="avanzado-grid">
                     <div class="avanzado-item">
@@ -968,7 +921,7 @@
     </section>
 
     <!-- SECCIÓN DEL FOOTER CON VÍDEO DETRÁS -->
-    <div class="footer-section">
+    <div class="footer-section inverse">
         <!-- Contenedor del video de fondo del terreno volcánico con doble reproductor para fundido cruzado (bucle sin cortes) -->
         <div class="footer-video-container">
             <video id="footer-video-1" autoplay muted playsinline class="footer-video-bg" style="opacity: 0.45; transition: opacity 1.2s ease;">

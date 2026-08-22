@@ -3,14 +3,22 @@
    Prefijo .acc- (alber cookie consent) para no pisar index.css ni el chat.
    ========================================================================== */
 
+/* Paleta alineada con el sistema Bosque Inteligente (design-system/tokens.css).
+   Antes usaba el azul cobalto #3b5eff de la etapa anterior de la web.
+   Los valores van literales, no con var(--cobalt-*), porque este banner
+   se carga en páginas donde tokens.css puede no estar presente.
+
+   --acc-accent es FONDO con texto blanco encima (botón primario, switch):
+   por eso es --cobalt-600 (#6E5628), 6.94 de contraste con blanco.
+   --acc-accent-soft es TEXTO sobre fondo oscuro: --cobalt-300 (9.09). */
 .acc-root {
-    --acc-bg: #0d0d0d;
-    --acc-bg-deep: #0a0908;
-    --acc-text: #f6f5f2;
-    --acc-text-soft: #aaaaaa;
-    --acc-accent: #3b5eff;
-    --acc-accent-soft: #8aa0ff;
-    --acc-border: rgba(255, 255, 255, 0.08);
+    --acc-bg: #131F1B;
+    --acc-bg-deep: #0F1F1B;
+    --acc-text: #F3F5F2;
+    --acc-text-soft: #9EA89F;
+    --acc-accent: #6E5628;
+    --acc-accent-soft: #D6BA82;
+    --acc-border: rgba(214, 186, 130, 0.14);
     --acc-font: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
@@ -90,8 +98,8 @@
 }
 
 .acc-btn--primary:hover {
-    background: #5275ff;
-    border-color: #5275ff;
+    background: #D6BA82;
+    border-color: #D6BA82;
 }
 
 .acc-btn:focus-visible {

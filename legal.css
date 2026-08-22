@@ -1,15 +1,10 @@
 /* -------------------------------------------------------------
    PÁGINAS SECUNDARIAS (LEGALES) — misma marca, versión ligera
    ALBER CABRERA - WEB PREMIUM
+   Color: cuerpo claro (lectura larga), nav pill clara flotante,
+   footer oscuro .inverse. Tokens en design-system/tokens.css.
    ------------------------------------------------------------- */
 :root {
-    --bg-color: #0a0908;
-    --text-primary: #f6f5f2;
-    --text-secondary: #888888;
-    --text-tertiary: #444444;
-    --cobalt: #3b5eff;
-    --cobalt-soft: #8aa0ff;
-    --glass-border: rgba(255, 255, 255, 0.06);
     --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
@@ -17,14 +12,12 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html {
-    background-color: var(--bg-color);
-    color: var(--text-primary);
+    background-color: var(--bg);
+    color: var(--ink);
     font-family: var(--font-body);
     font-size: 16px;
     -webkit-font-smoothing: antialiased;
     scroll-behavior: smooth;
-    scrollbar-color: #ffffff #050506; /* Color de acento Vercel (blanco) y pista oscura */
-    scrollbar-width: thin;
 }
 
 body {
@@ -33,20 +26,10 @@ body {
     min-height: 100dvh;
     display: flex;
     flex-direction: column;
-    background-color: var(--bg-color);
-    background-image: radial-gradient(50% 100% at 50% 0%, rgba(255, 255, 255, 0.05), transparent 75%);
-    background-attachment: fixed;
+    background-color: var(--bg);
 }
 
-::selection { background: rgba(59, 94, 255, 0.35); color: #fff; }
-
-a:focus-visible, button:focus-visible {
-    outline: 2px solid rgba(59, 94, 255, 0.65);
-    outline-offset: 3px;
-    border-radius: 4px;
-}
-
-/* NAV simple (pill) */
+/* NAV simple (pill), clara y flotante — igual que en el resto del sitio */
 .subnav {
     position: sticky;
     top: 24px;
@@ -59,18 +42,19 @@ a:focus-visible, button:focus-visible {
     align-items: center;
     justify-content: space-between;
     padding: 0 24px;
-    background-color: rgba(7, 7, 8, 0.75);
+    background-color: rgba(255, 255, 255, 0.78);
     backdrop-filter: blur(16px) saturate(180%);
     -webkit-backdrop-filter: blur(16px) saturate(180%);
     border: 1px solid var(--glass-border);
     border-radius: 100px;
+    box-shadow: 0 8px 30px rgba(14, 17, 22, 0.14);
 }
 
 .subnav .logo {
     font-family: var(--font-heading);
     font-weight: 800;
     font-size: 1.3rem;
-    color: var(--text-primary);
+    color: var(--ink);
     text-decoration: none;
     letter-spacing: -0.05em;
 }
@@ -79,19 +63,20 @@ a:focus-visible, button:focus-visible {
     height: 24px;
     width: auto;
     display: block;
+    filter: invert(1) brightness(0.12);
 }
 
 .subnav .back {
     font-size: 0.85rem;
-    color: var(--text-secondary);
+    color: var(--ink-mid);
     text-decoration: none;
     padding: 8px 18px;
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    border: 1px solid var(--line-strong);
     border-radius: 100px;
     transition: all 0.3s ease;
 }
 
-.subnav .back:hover { color: var(--text-primary); border-color: rgba(255, 255, 255, 0.35); }
+.subnav .back:hover { color: var(--ink); border-color: var(--cobalt-border); }
 
 /* CONTENIDO */
 .page {
@@ -106,7 +91,7 @@ a:focus-visible, button:focus-visible {
     font-family: monospace;
     font-size: 0.8rem;
     letter-spacing: 0.25em;
-    color: var(--cobalt-soft);
+    color: var(--cobalt-600);
     display: block;
     margin-bottom: 14px;
 }
@@ -118,11 +103,12 @@ a:focus-visible, button:focus-visible {
     letter-spacing: -0.02em;
     line-height: 1.15;
     margin-bottom: 12px;
+    color: var(--ink);
 }
 
 .page-updated {
     font-size: 0.85rem;
-    color: var(--text-tertiary);
+    color: var(--ink-mid);
     margin-bottom: 56px;
 }
 
@@ -134,6 +120,7 @@ a:focus-visible, button:focus-visible {
     margin: 48px 0 16px;
     padding-top: 28px;
     position: relative;
+    color: var(--ink);
 }
 
 .page h2::before {
@@ -143,25 +130,25 @@ a:focus-visible, button:focus-visible {
     left: 0;
     width: 72px;
     height: 1px;
-    background: linear-gradient(90deg, var(--cobalt), transparent);
+    background: linear-gradient(90deg, var(--cobalt-600), transparent);
 }
 
 .page p, .page li {
     font-size: 0.98rem;
-    color: var(--text-secondary);
+    color: var(--ink-soft);
     font-weight: 300;
     margin-bottom: 14px;
 }
 
 .page ul { padding-left: 22px; margin-bottom: 14px; }
 .page li { margin-bottom: 8px; }
-.page strong { color: var(--text-primary); font-weight: 600; }
-.page a { color: var(--cobalt-soft); text-decoration: none; border-bottom: 1px solid rgba(59, 94, 255, 0.35); }
-.page a:hover { color: #fff; border-color: rgba(255, 255, 255, 0.6); }
+.page strong { color: var(--ink); font-weight: 600; }
+.page a { color: var(--cobalt-700); text-decoration: none; border-bottom: 1px solid var(--cobalt-border); }
+.page a:hover { color: var(--cobalt-800); border-color: var(--cobalt-600); }
 
 .page .box {
-    background: rgba(13, 13, 16, 0.6);
-    border: 1px solid var(--glass-border);
+    background: var(--bg-alt);
+    border: 1px solid var(--line);
     border-radius: 10px;
     padding: 24px 28px;
     margin: 20px 0;
@@ -178,35 +165,32 @@ a:focus-visible, button:focus-visible {
 .page .cookies-table td {
     text-align: left;
     padding: 10px 14px;
-    border: 1px solid var(--glass-border);
+    border: 1px solid var(--line);
 }
 
 .page .cookies-table th {
-    background: rgba(13, 13, 16, 0.6);
-    color: var(--text-primary);
+    background: var(--bg-alt);
+    color: var(--ink);
     font-weight: 600;
 }
 
 .page .cookies-table td {
-    color: var(--text-secondary, #aaaaaa);
+    color: var(--ink-soft);
 }
 
 .page .box p:last-child { margin-bottom: 0; }
 
 /* =============================================================
-   FOOTER PREMIUM: ESTILO INTEGRADO CLÁSICO (UNIFICADO CON LA HOME)
+   FOOTER OSCURO (clase .inverse en el <footer>, definida en tokens.css)
    ============================================================= */
 
-/* Contenedor principal de la sección del footer */
-.footer-section {
+.footer-section.inverse {
     position: relative;
-    background-color: var(--bg-color); /* Negro puro para cierre abisal */
-    padding: 80px 0 40px 0; /* Padding superior generoso para dar espacio */
+    padding: 80px 0 40px 0;
     width: 100%;
-    border-top: 1px solid rgba(255, 255, 255, 0.08); /* Línea de división superior de estilo Apple/Vercel */
+    border-top: 1px solid var(--night-600);
 }
 
-/* Layout Grid Superior */
 .footer-grid {
     display: grid;
     grid-template-columns: 1.2fr 1.8fr;
@@ -229,7 +213,7 @@ a:focus-visible, button:focus-visible {
     display: flex;
     align-items: center;
     gap: 12px;
-    color: var(--text-primary);
+    color: var(--on-night);
 }
 
 .footer-logo-wrap img {
@@ -242,7 +226,7 @@ a:focus-visible, button:focus-visible {
     font-family: var(--font-heading);
     font-weight: 800;
     font-size: 1.3rem;
-    color: var(--text-primary);
+    color: var(--on-night);
     text-decoration: none;
     letter-spacing: -0.05em;
 }
@@ -250,7 +234,7 @@ a:focus-visible, button:focus-visible {
 .footer-brand-desc {
     font-size: 0.9rem;
     line-height: 1.6;
-    color: var(--text-secondary);
+    color: var(--on-night-soft);
     max-width: 380px;
     font-weight: 300;
 }
@@ -266,7 +250,7 @@ a:focus-visible, button:focus-visible {
     font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 0.15em;
-    color: var(--text-primary);
+    color: var(--on-night);
     font-weight: 600;
     margin-bottom: 24px;
 }
@@ -280,7 +264,7 @@ a:focus-visible, button:focus-visible {
 
 .footer-links-list a {
     font-size: 0.8rem;
-    color: var(--text-secondary);
+    color: var(--on-night-soft);
     text-decoration: none;
     transition: color 0.3s ease;
     font-weight: 300;
@@ -288,12 +272,12 @@ a:focus-visible, button:focus-visible {
 }
 
 .footer-links-list a:hover {
-    color: var(--text-primary);
+    color: var(--on-night);
 }
 
 /* Fila Inferior (Bottom Bar) */
 .footer-bottom-bar {
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid var(--night-600);
     padding-top: 32px;
     width: 100%;
     max-width: 1200px;
@@ -309,7 +293,7 @@ a:focus-visible, button:focus-visible {
     font-size: 0.75rem;
     text-transform: lowercase;
     letter-spacing: 0.15em;
-    color: var(--text-tertiary);
+    color: var(--on-night-mid);
 }
 
 .footer-social-wrap {
@@ -322,7 +306,7 @@ a:focus-visible, button:focus-visible {
     font-size: 0.7rem;
     text-transform: uppercase;
     letter-spacing: 0.15em;
-    color: var(--text-tertiary);
+    color: var(--on-night-mid);
 }
 
 .footer-social-icons {
@@ -331,7 +315,7 @@ a:focus-visible, button:focus-visible {
 }
 
 .footer-social-icons a {
-    color: var(--text-secondary);
+    color: var(--on-night-soft);
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
@@ -339,7 +323,7 @@ a:focus-visible, button:focus-visible {
 }
 
 .footer-social-icons a:hover {
-    color: var(--text-primary);
+    color: var(--on-night);
     transform: translateY(-2px);
 }
 
@@ -371,39 +355,22 @@ a:focus-visible, button:focus-visible {
 
 /* Footer mini para páginas legales */
 .subfooter {
-    border-top: 1px solid rgba(255,255,255,0.05);
+    border-top: 1px solid var(--line);
     padding: 48px 24px 32px;
     text-align: center;
     font-size: 0.78rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--text-tertiary);
+    color: var(--ink-mid);
     width: 100%;
     margin-top: auto; /* Empuja el footer hacia abajo si el contenido es corto */
 }
 .subfooter a {
-    color: var(--text-secondary);
+    color: var(--ink-soft);
     text-decoration: none;
     margin: 0 8px;
     border-bottom: none;
 }
 .subfooter a:hover {
-    color: var(--text-primary);
+    color: var(--ink);
 }
-
-/* Custom scrollbar matching index.css exactly */
-::-webkit-scrollbar {
-    width: 8px;
-}
-::-webkit-scrollbar-track {
-    background: #050506;
-}
-::-webkit-scrollbar-thumb {
-    background: #ffffff;
-    border-radius: 4px;
-    border: 2px solid #050506;
-}
-::-webkit-scrollbar-thumb:hover {
-    background: #5275ff;
-}
-

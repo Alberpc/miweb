@@ -125,10 +125,10 @@
     }
     </script>
 
-    <!-- Fuentes: Inter + Syne (idénticas a la home) -->
+    <!-- Fuente: Inter (Syne retirada: no la usaba ninguna regla) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
@@ -138,10 +138,10 @@
             --ink-soft: #9a9a95;
             --ink-mute: #888888;
             --ink-faint: #444444;
-            --cobalt: #3b5eff;
-            --cobalt-soft: #8aa0ff;
-            --cobalt-glow: rgba(59, 94, 255, 0.15);
-            --cobalt-border: rgba(59, 94, 255, 0.3);
+            --cobalt: #C8A85E;
+            --cobalt-soft: #D6BA82;
+            --cobalt-glow: rgba(200, 168, 94, 0.15);
+            --cobalt-border: rgba(200, 168, 94, 0.3);
             --glass-bg: rgba(10, 9, 8, 0.75);
             --glass-border: rgba(255, 255, 255, 0.06);
             --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -156,10 +156,10 @@
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #050506; }
         ::-webkit-scrollbar-thumb { background: #ffffff; border-radius: 4px; border: 2px solid #050506; }
-        ::-webkit-scrollbar-thumb:hover { background: #5275ff; }
+        ::-webkit-scrollbar-thumb:hover { background: #D6BA82; }
 
-        ::selection { background: rgba(59, 94, 255, 0.35); color: #fff; }
-        a:focus-visible, button:focus-visible { outline: 2px solid rgba(59, 94, 255, 0.65); outline-offset: 3px; border-radius: 4px; }
+        ::selection { background: rgba(200, 168, 94, 0.35); color: #fff; }
+        a:focus-visible, button:focus-visible { outline: 2px solid rgba(200, 168, 94, 0.65); outline-offset: 3px; border-radius: 4px; }
 
         .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
@@ -210,7 +210,7 @@
         .article-hero { position: relative; padding: 150px 0 60px; background: var(--bg); }
         .article-hero::before {
             content: ''; position: absolute; inset: 0; pointer-events: none;
-            background: radial-gradient(60% 50% at 80% 20%, rgba(59, 94, 255, 0.10) 0%, transparent 62%);
+            background: radial-gradient(60% 50% at 80% 20%, rgba(200, 168, 94, 0.10) 0%, transparent 62%);
         }
         .hero-inner { position: relative; z-index: 2; max-width: 820px; }
 
@@ -222,7 +222,7 @@
         .hero-cat {
             display: inline-block; font-family: monospace; font-size: 0.74rem; letter-spacing: 0.3em;
             color: var(--cobalt-soft); border: 1px solid var(--cobalt-border);
-            background: rgba(59, 94, 255, 0.06); padding: 6px 15px; border-radius: 50px; margin-bottom: 26px;
+            background: rgba(200, 168, 94, 0.06); padding: 6px 15px; border-radius: 50px; margin-bottom: 26px;
             text-transform: uppercase;
         }
         .article-hero h1 {
@@ -246,7 +246,7 @@
             position: relative; border-radius: 16px; overflow: hidden;
             border: 1px solid var(--glass-border);
             aspect-ratio: 16 / 8; max-width: 100%;
-            background: linear-gradient(135deg, rgba(59,94,255,0.10), rgba(13,13,18,0.6));
+            background: linear-gradient(135deg, rgba(200, 168, 94, 0.10), rgba(13,13,18,0.6));
             box-shadow: 0 40px 80px -30px rgba(0,0,0,0.8), inset 0 0 60px -30px var(--cobalt);
         }
         .hero-figure img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -306,7 +306,7 @@
             font-size: 1.32rem; line-height: 1.5; font-weight: 300; color: var(--ink);
         }
         .stat-box {
-            background: rgba(59, 94, 255, 0.05); border: 1px solid var(--cobalt-border);
+            background: rgba(200, 168, 94, 0.05); border: 1px solid var(--cobalt-border);
             border-radius: 10px; padding: 22px 26px; margin: 32px 0;
         }
         .stat-box .stat-num { font-family: var(--font-heading); font-weight: 800; font-size: 1.7rem; color: var(--cobalt-soft); display: block; margin-bottom: 4px; letter-spacing: -0.02em; }
@@ -324,6 +324,35 @@
             content: ''; flex: none; width: 8px; height: 8px; border-radius: 50%;
             background: var(--cobalt); box-shadow: 0 0 8px var(--cobalt-glow); margin-top: 7px;
         }
+
+        /* ===== CTA EMBEBIDO EN EL CUERPO ===== */
+        .inline-cta {
+            background: linear-gradient(160deg, rgba(200, 168, 94, 0.08), rgba(13,13,18,0.5));
+            border: 1px solid var(--cobalt-border); border-radius: 16px;
+            padding: 34px 36px; margin: 44px 0 48px;
+        }
+        .inline-cta .ic-label { font-family: monospace; font-size: 0.72rem; letter-spacing: 0.22em; color: var(--cobalt-soft); text-transform: uppercase; display: block; margin-bottom: 10px; }
+        .inline-cta h3 { font-family: var(--font-heading); font-size: 1.28rem; font-weight: 700; color: var(--ink); margin: 0 0 10px; letter-spacing: -0.01em; }
+        .inline-cta p { font-size: 0.98rem; color: var(--ink-soft); font-weight: 300; margin: 0 0 22px; max-width: 52ch; }
+        .inline-cta .btn-inline { display: inline-flex; flex-direction: column; align-items: flex-start; gap: 4px; text-decoration: none; }
+        .inline-cta .btn-inline .btn-label {
+            font-size: 0.96rem; font-weight: 600; color: var(--bg); text-decoration: none;
+            background: var(--ink); padding: 14px 28px; border-radius: 100px; border: 1px solid transparent;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1); display: inline-block;
+        }
+        .inline-cta .btn-inline:hover .btn-label { transform: translateY(-2px); background: #fff; border-color: var(--cobalt-border); box-shadow: 0 8px 26px var(--cobalt-glow); }
+        .inline-cta .btn-sub { font-size: 0.8rem; color: var(--ink-faint); padding-left: 4px; }
+
+        /* ===== "ESTO ME PREGUNTAN" ===== */
+        .asked-box {
+            background: var(--glass-bg); border: 1px solid var(--glass-border);
+            border-radius: 12px; padding: 28px 30px; margin: 30px 0;
+        }
+        .asked-box .asked-q { font-size: 1.02rem; color: var(--ink); font-weight: 500; margin-bottom: 12px; line-height: 1.5; }
+        .asked-box .asked-q::before { content: '"'; color: var(--cobalt-soft); }
+        .asked-box .asked-q::after { content: '"'; color: var(--cobalt-soft); }
+        .asked-box .asked-who { font-family: monospace; font-size: 0.76rem; letter-spacing: 0.1em; color: var(--ink-faint); text-transform: uppercase; margin-bottom: 16px; display: block; }
+        .asked-box .asked-a { font-size: 0.98rem; color: var(--ink-soft); font-weight: 300; line-height: 1.65; margin: 0; }
 
         /* ===== SIGUE LEYENDO ===== */
         .related { padding: 20px 0 40px; }
@@ -364,13 +393,14 @@
         .cta-final { padding: 20px 0 110px; }
         .cta-card {
             max-width: 900px; margin: 0 auto; text-align: center;
-            background: linear-gradient(160deg, rgba(59,94,255,0.08), rgba(13,13,18,0.5));
+            background: linear-gradient(160deg, rgba(200, 168, 94, 0.08), rgba(13,13,18,0.5));
             border: 1px solid var(--cobalt-border); border-radius: 20px;
             padding: 60px 40px;
             box-shadow: 0 40px 90px -40px rgba(0,0,0,0.8), inset 0 0 80px -50px var(--cobalt);
         }
         .cta-card h2 { font-family: var(--font-heading); font-size: clamp(1.6rem, 3.4vw, 2.3rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 16px; max-width: 22ch; margin-left: auto; margin-right: auto; }
-        .cta-card p { font-size: 1.08rem; color: var(--ink-soft); font-weight: 300; max-width: 54ch; margin: 0 auto 32px; }
+        .cta-card p { font-size: 1.08rem; color: var(--ink-soft); font-weight: 300; max-width: 54ch; margin: 0 auto 12px; }
+        .cta-card .btn-final-sub { font-size: 0.86rem; color: var(--ink-faint); margin: 0 auto 32px; }
         .cta-card .btn-main {
             display: inline-block; font-size: 1rem; font-weight: 600; color: var(--bg); text-decoration: none;
             background: var(--ink); padding: 17px 40px; border-radius: 100px; border: 1px solid transparent;
@@ -549,6 +579,16 @@
                         <p>Una tarea de cinco minutos que repites cuarenta veces por semana son <strong>más de trece horas al mes</strong>. Por eso se cuenta antes de decidir: lo que parece pequeño casi nunca lo es.</p>
                     </div>
 
+                    <div class="inline-cta reveal">
+                        <span class="ic-label">Aplícalo a tu caso</span>
+                        <h3>¿Ya tienes tu lista? ¿Cuál sale primero?</h3>
+                        <p>Si has hecho el cálculo y no tienes claro cuál de tus tareas automatizar primero, cuéntamelo y te digo cuál da más resultado empezando por ella.</p>
+                        <a href="/?origen=blog-automatizar-mi-negocio#contacto" class="btn-inline">
+                            <span class="btn-label">Ver qué automatizar primero &rarr;</span>
+                            <span class="btn-sub">20 min · Te digo por dónde empezar aunque no trabajes conmigo</span>
+                        </a>
+                    </div>
+
                     <h2 id="que-no">¿Qué NO conviene automatizar?</h2>
                     <p>
                         Esta parte se cuenta poco porque no vende herramientas, pero ahorra más dinero que la anterior. Hay tres tipos de tarea que es mejor dejar como están.
@@ -584,6 +624,12 @@
                     <p>
                         Si has hecho el cálculo de horas y no tienes claro cuál de todas las tareas merece la pena tocar primero, esa es exactamente la pregunta que responde un <a href="/diagnostico-operativo/">diagnóstico operativo</a>: mirar el negocio entero, medir dónde se va el tiempo y devolverte el orden en el que conviene atacarlo.
                     </p>
+
+                    <div class="asked-box">
+                        <p class="asked-q">¿Y si me equivoco al elegir la primera tarea?</p>
+                        <span class="asked-who">Pregunta real en una llamada</span>
+                        <p class="asked-a">Es la duda más habitual, y el cálculo de horas ya reduce mucho el riesgo de fallar. Pero si aun así la primera no rinde como esperabas, no se pierde el trabajo: casi siempre sirve de plantilla para la segunda, que siempre sale más rápido que la primera.</p>
+                    </div>
 
                 </article>
             </div>
@@ -670,9 +716,10 @@
     <section class="cta-final">
         <div class="container">
             <div class="cta-card reveal">
-                <h2>¿No sabes por dónde empezar a automatizar?</h2>
-                <p>Cuéntame cómo trabajas y te ayudo a ver por dónde empezar a sistematizar y organizar tus operaciones, sin herramientas complejas ni compromiso.</p>
-                <a href="/#contacto" class="btn-main">Cuéntame tu caso &rarr;</a>
+                <h2>¿Cuál de tus tareas automatizarías primero?</h2>
+                <p>Cuéntame cómo trabajas hoy y te ayudo a ver, con este mismo método, por dónde empezar a automatizar sin herramientas complejas.</p>
+                <p class="btn-final-sub">20 minutos · Te digo por dónde empezar aunque no trabajes conmigo</p>
+                <a href="/?origen=blog-automatizar-mi-negocio#contacto" class="btn-main">Ver qué automatizar primero &rarr;</a>
             </div>
         </div>
     </section>
