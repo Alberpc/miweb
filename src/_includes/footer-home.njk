@@ -1,0 +1,75 @@
+{#- footer-home.njk — pie de la home.
+
+    No es el pie comun: sus enlaces de "Servicios" son los dolores
+    ("Clientes que se pierden", "Tiempo que se va", "Control que no
+    tienes") y no los nombres de servicio del resto del sitio; los
+    anclajes son locales; y la firma pone "albercabrera", sin .com.
+    Todo eso es copy de la home, no una variante del pie: se conserva. -#}
+    <footer class="footer-section inverse reveal">
+        <div class="container">
+                <!-- Grid principal superior -->
+                <div class="footer-grid">
+                    <!-- Columna Logo y Descripción -->
+                    <div class="footer-brand-col">
+                        <div class="footer-logo-wrap">
+                            <a href="#" class="logo"><img src="/assets/img/logo-alber-blanco.png" alt="{{ site.nombre }}"></a>
+                        </div>
+                        <p class="footer-brand-desc">
+                            Aporto claridad y sistemas de automatización con inteligencia artificial para negocios. Soluciones premium y estables para que tu negocio crezca solo.
+                        </p>
+                    </div>
+
+                    <!-- Columnas de Enlaces -->
+                    <div class="footer-links-grid">
+                        <!-- Soluciones -->
+                        <div class="footer-links-col">
+                            <h4 class="footer-links-title">Servicios</h4>
+                            <ul class="footer-links-list">
+                                <li><a href="#soluciones">Clientes que se pierden</a></li>
+                                <li><a href="#soluciones">Tiempo que se va</a></li>
+                                <li><a href="#soluciones">Control que no tienes</a></li>
+                            </ul>
+                        </div>
+                        <!-- El Método -->
+                        <div class="footer-links-col">
+                            <h4 class="footer-links-title">El Método</h4>
+                            <ul class="footer-links-list">
+                                <li><a href="/diagnostico-operativo/">Diagnóstico DAI360</a></li>
+                                <li><a href="#como-trabajo">Metodología</a></li>
+                                <li><a href="#sobre-mi">Sobre Mí</a></li>
+                                <li><a href="/blog/">Blog</a></li>
+                            </ul>
+                        </div>
+                        <!-- Legal -->
+                        <div class="footer-links-col">
+                            <h4 class="footer-links-title">Legal</h4>
+                            <ul class="footer-links-list">
+                                <li><a href="/aviso-legal">Aviso Legal</a></li>
+                                <li><a href="/politica-de-privacidad">Privacidad</a></li>
+                                <li><a href="/cookies">Cookies</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fila Inferior (Bottom Bar) -->
+                <div class="footer-bottom-bar">
+                    <p class="footer-curator">albercabrera &copy; {{ anio }}</p>
+                    
+                    <div class="footer-social-wrap">
+                        <span class="footer-social-label">Sígueme:</span>
+                        <div class="footer-social-icons">
+                            <a href="https://www.linkedin.com/in/alberto-p%C3%A9rez-cabrera" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                                <!-- SVG LinkedIn -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                            </a>
+                            <a href="https://www.instagram.com/albercabrera.ia" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                                <!-- SVG Instagram -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37zM17.5 6.5h.01"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>

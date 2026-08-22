@@ -1,0 +1,82 @@
+<h1>HyperFrames Composition Project</h1>
+<h2>Skills — USE THESE FIRST</h2>
+<p><strong>Always invoke the relevant skill before writing or modifying compositions.</strong> Skills encode framework-specific patterns (e.g., <code>window.__timelines</code> registration, <code>data-*</code> attribute semantics, shader-compatible CSS rules) that are NOT in generic web docs. Skipping them produces broken compositions.</p>
+<p><strong>Doing anything with HyperFrames?</strong> Start at <code>/hyperframes</code> — it tells you what HyperFrames can do and which skill or workflow handles your intent (make a video, TTS / BGM, prep footage, author / animate, render, install blocks), confirms your brief up front (the intent layer), and routes every &quot;make me a…&quot; request (a video, a deck, a composition port) to the right workflow. Read it first, especially when there's no project context to orient you. The workflows it routes to:</p>
+<ul>
+<li><code>/product-launch-video</code> — any <strong>website</strong> URL or brief / script → a product launch / SaaS / promo video, or a site tour / showcase featuring the site's own captured visuals.</li>
+<li><code>/faceless-explainer</code> — arbitrary text (topic / article / notes), <strong>no URL, no website capture</strong> → 60-90s faceless explainer.</li>
+<li><code>/embedded-captions</code> — an existing talking-head video (MP4) → the same footage with captions / subtitles added (rail + embed, or pure-cinematic embed); the footage itself is untouched.</li>
+<li><code>/talking-head-recut</code> — an existing talking-head / interview / podcast video (MP4) → the same footage <strong>packaged with designed graphic overlays</strong> (kinetic titles, lower-thirds, data callouts, pull-quotes, side panels, pip) synced to the transcript; the clip plays unchanged underneath. (Plain captions/subtitles → <code>/embedded-captions</code>.)</li>
+<li><code>/pr-to-video</code> — a GitHub PR (URL / <code>owner/repo#N</code> / &quot;this PR&quot;) → 30-90s code-change explainer (changelog / feature reveal / fix / refactor).</li>
+<li><code>/motion-graphics</code> — a short (typically under 10s) design-led <strong>motion graphic</strong>, motion-is-the-message, no narration: kinetic type, a stat / number count-up, a chart, a logo sting, a lower-third / overlay, or an animated tweet / headline / captured-page highlight; rendered to MP4 or a transparent overlay. Longer / narrated / custom → <code>/general-video</code>.</li>
+<li><code>/music-to-video</code> — a <strong>music track</strong> (audio file, video to pull audio from, or one generated from a mood brief) → beat-synced video (lyric / slideshow / kinetic promo). Music drives pacing; user-supplied images / videos are cut onto the same beat grid.</li>
+<li><code>/slideshow</code> — a <strong>presentation / pitch deck / interactive deck</strong> — discrete slides, fragment reveals, branching, hotspot navigation, presenter mode. Output is a navigable deck, not a rendered video.</li>
+<li><code>/general-video</code> — fallback for any other video (title card, longer brand / sizzle reel, multi-scene montage, static loop, custom composition) and the home of <strong>companion mode</strong> — co-create with the full HyperFrames toolbox; the original hyperframes authoring flow, any length.</li>
+</ul>
+<p><strong>Porting an existing composition?</strong> <code>/remotion-to-hyperframes</code> translates a Remotion (React) composition into HyperFrames HTML — a source migration, separate from the creation workflows above.</p>
+<p>The domain skills (<code>/hyperframes-core</code>, <code>/hyperframes-animation</code>, <code>/hyperframes-keyframes</code>, <code>/hyperframes-creative</code>, <code>/hyperframes-cli</code>, <code>/media-use</code>, <code>/hyperframes-audio</code>, <code>/hyperframes-registry</code>, <code>/figma</code>) and the full capability map live inside <code>/hyperframes</code> — it is the single source of truth for which skill handles which intent.</p>
+<p><strong>Changing how real footage or images look or reveal?</strong> Load <code>/media-use</code> and read its <code>references/media-treatments.md</code> before editing, even when the request only says dark, flat, boring, retro, private, or “make the reveal cooler.” It governs how footage is treated, never whether media may be used. Use canonical media treatments and seek-safe motion; do not improvise equivalent CSS/SVG filters or overlays.</p>
+<blockquote>
+<p><strong>Tailwind v4 projects</strong> (<code>hyperframes init --tailwind</code>): see <code>/hyperframes-core</code> → <code>references/tailwind.md</code>.</p>
+</blockquote>
+<blockquote>
+<p><strong>Skill missing or stale?</strong> Run <code>npx hyperframes skills update &lt;name&gt;</code> to install/refresh
+the specific skill you need (the <code>/hyperframes</code> router does this automatically before
+entering a workflow), or bare <code>npx hyperframes skills update</code> to refresh the core set plus
+everything already installed — neither pulls the full set. Restart the agent session so
+newly installed skills load.</p>
+</blockquote>
+<h2>Commands</h2>
+<pre><code class="language-bash">npm run dev          # human-operated foreground preview (blocks until stopped)
+npx hyperframes preview --background  # agent-safe persistent Studio preview
+npx hyperframes preview --status      # verify the persistent preview is listening
+npx hyperframes preview --stop        # stop it when review is finished
+npm run check        # lint + runtime + layout + motion + contrast (one command)
+npm run render       # render to MP4
+npm run publish      # publish and get a shareable link
+npx hyperframes lint --verbose  # include info-level findings
+npx hyperframes lint --json     # machine-readable output for CI
+npx hyperframes docs &lt;topic&gt; # reference docs in terminal
+</code></pre>
+<blockquote>
+<p><strong>Agents must use <code>npx hyperframes preview --background</code> for Studio handoff.</strong> Do not rely
+on a shell/tool <code>run_in_background</code> wrapper around <code>npm run dev</code>: that foreground process
+remains owned by the invoking session and can disappear while the browser stays open,
+leaving refreshes at <code>ERR_CONNECTION_TIMED_OUT</code>. Verify with <code>preview --status</code>, keep it
+alive through review, and stop it explicitly with <code>preview --stop</code> afterward.</p>
+</blockquote>
+<blockquote>
+<p><strong>Pinned CLI version.</strong> These scripts pin an exact <code>hyperframes@X.Y.Z</code> so this project re-renders identically over time. Weeks later that pin lags fixes shipped since. To move up: <code>npx hyperframes@latest upgrade --project . --check</code> (shows the delta), then <code>npx hyperframes@latest upgrade --project .</code> to rewrite the pins. Always unpinned — the pinned script re-runs the old version against itself.</p>
+</blockquote>
+<h2>Documentation</h2>
+<p><strong>For quick reference</strong>, use the local CLI docs command (no network required):</p>
+<pre><code class="language-bash">npx hyperframes docs &lt;topic&gt;
+</code></pre>
+<p>Topics: <code>data-attributes</code>, <code>gsap</code>, <code>compositions</code>, <code>rendering</code>, <code>examples</code>, <code>troubleshooting</code></p>
+<p><strong>For full documentation</strong>, discover pages via the machine-readable index — do NOT guess URLs:</p>
+<pre><code>https://hyperframes.heygen.com/llms.txt
+</code></pre>
+<h2>Project Structure</h2>
+<ul>
+<li><code>index.html</code> — main composition (root timeline)</li>
+<li><code>compositions/</code> — sub-compositions referenced via <code>data-composition-src</code></li>
+<li><code>meta.json</code> — project metadata (id, name)</li>
+<li><code>transcript.json</code> — whisper word-level transcript (if generated)</li>
+</ul>
+<h2>Linting — ALWAYS RUN AFTER CHANGES</h2>
+<p>After creating or editing any <code>.html</code> composition, <strong>always</strong> run the full check before considering the task complete:</p>
+<pre><code class="language-bash">npm run check
+</code></pre>
+<p>Fix all errors before presenting the result. Warnings should be reviewed before rendering.</p>
+<h2>Key Rules</h2>
+<ol>
+<li>Every timed element needs <code>data-start</code>, <code>data-duration</code>, and <code>data-track-index</code></li>
+<li>Elements with timing <strong>MUST</strong> have <code>class=&quot;clip&quot;</code> — the framework uses this for visibility control</li>
+<li>Timelines must be paused and registered on <code>window.__timelines</code>:<pre><code class="language-js">window.__timelines = window.__timelines || {};
+window.__timelines[&quot;composition-id&quot;] = gsap.timeline({ paused: true });
+</code></pre>
+</li>
+<li>Videos use <code>muted</code> with a separate <code>&lt;audio&gt;</code> element for the audio track</li>
+<li>Sub-compositions use <code>data-composition-src=&quot;compositions/file.html&quot;</code> to reference other HTML files</li>
+<li>Only deterministic logic — no <code>Date.now()</code>, no <code>Math.random()</code>, no network fetches</li>
+</ol>

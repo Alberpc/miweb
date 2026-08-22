@@ -1,5 +1,9 @@
 {
   "indexCss": 101,
   "legalCss": 102,
-  "indexJs": 18
+  "indexJs": 18,
+  "homeCss": 41,
+  "homeJs": 20,
+  "chatCss": 4,
+  "chatJs": 3
 }

@@ -1,0 +1,60 @@
+{
+  "category": "charts",
+  "category_note": "No category in the Director's top-level table literally covers a node+connector diagram. Closest formal fit is 'charts' (structured data-viz, asset-free, motion-is-the-message) rather than kinetic-type/stat/logo-reveal/lower-thirds/maps/webpage/news/tweet/asset-fusion, none of which apply to a convergence diagram. The actual catalog block to reuse is 'flowchart' (catalog-map.md, row 'diagram': SVG connectors + nodes, customize nodes/edges/labels) — confirmed via catalog-map.md since categories/flowchart/module.md does not exist as a standalone category module.",
+
+  "duration_s": 3.5,
+  "fps": 30,
+  "canvas": { "w": 800, "h": 600, "aspect": "4:3" },
+
+  "style": "Dark glass UI motion graphic, matching the two sibling service-card animations already in production on albercabrera.com (a browser-with-clicking-cursor card and an Email→IA→Agenda/Factura node-flow card with animated SVG wires). Minimal, premium, quiet — not decorative. Linear-icon language (Lucide-style, stroke-width 2, rounded caps/joins), no fills except the cobalt accent and the central panel glass surface. No text/copy in-shot (silent card visual, message is carried by the surrounding UI card, not by this loop).",
+
+  "palette": ["#070708", "rgba(0,0,0,0.2)", "#aebbff", "#5275ff", "#3b5eff"],
+  "font": "Inter",
+  "beats": [0, 1.2, 2.4, 3.5],
+  "export": "mp4",
+
+  "asset_needs": [],
+
+  "block": "flowchart",
+  "customize": {
+    "nodes": [
+      { "id": "whatsapp", "label": "WhatsApp", "icon": "message-circle", "position": "top-left" },
+      { "id": "email", "label": "Email", "icon": "mail", "position": "top-right" },
+      { "id": "sheet", "label": "Hoja de cálculo", "icon": "table", "position": "bottom-left" },
+      { "id": "calendar", "label": "Agenda", "icon": "calendar", "position": "bottom-right" },
+      { "id": "panel", "label": "Panel de control", "icon": "layout-dashboard", "position": "center", "role": "hub", "state": "live" }
+    ],
+    "edges": [
+      { "from": "whatsapp", "to": "panel" },
+      { "from": "email", "to": "panel" },
+      { "from": "sheet", "to": "panel" },
+      { "from": "calendar", "to": "panel" }
+    ],
+    "palette": ["#aebbff", "#5275ff", "#3b5eff"],
+    "background": "#070708",
+    "background_alpha_over": "rgba(0,0,0,0.2)",
+    "stroke_style": "lucide-linear, stroke-width:2, round caps/joins",
+    "hub_treatment": "glass dark panel, cobalt gradient border/glow, small live-status pulse (dot or ring) instead of any numeric KPI"
+  },
+
+  "content": {
+    "type": "diagram",
+    "nodes": [
+      { "id": "whatsapp", "label": "WhatsApp" },
+      { "id": "email", "label": "Email" },
+      { "id": "sheet", "label": "Hoja de cálculo" },
+      { "id": "calendar", "label": "Agenda" },
+      { "id": "panel", "label": "Panel de control" }
+    ],
+    "edges": [
+      { "from": "whatsapp", "to": "panel" },
+      { "from": "email", "to": "panel" },
+      { "from": "sheet", "to": "panel" },
+      { "from": "calendar", "to": "panel" }
+    ],
+    "headline": null,
+    "axes": false
+  },
+
+  "shot_brief": "Four scattered, dispersed data-source icons (WhatsApp, Email, a spreadsheet, a calendar) sit loosely around the edges of the frame, faint and slightly adrift. In a single dominant motion, cobalt-gradient SVG wires draw on from each source and pull inward, converging into one central glass panel that assembles/locks into place at the center — its border catching the #aebbff→#5275ff→#3b5eff gradient and a small live-status pulse animating once it settles, reading as 'always current' rather than 'growing'. No numbers, no growth chart, no count-up — the entire idea is convergence and live status, not performance. Motion is the message: dispersed → connected → centralized, in one continuous move, looping seamlessly back to the scattered start for autoplay."
+}

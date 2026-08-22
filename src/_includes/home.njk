@@ -1,0 +1,89 @@
+{#- ============================================================
+    home.njk — layout de la home
+    ============================================================
+    NO extiende base.njk: la home es la unica pagina con la fuente
+    Instrument Serif, con el widget de chat y con index.css como hoja
+    principal. Su cabecera y su pie tambien son propios (anclajes de la
+    misma pagina, y otro copy en los enlaces del pie).
+
+    Lo que si comparte y aqui se reutiliza: el bloque de consent+GTM.
+
+    Al cambiar el widget del chat, subir la version en src/_data/v.json:
+    la cache es de 1 anyo (ver .htaccess).
+    ============================================================ -#}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+{% include "consent-gtm.njk" %}
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{ description }}">
+    <title>{{ title }}</title>
+
+    <!-- SEO técnico -->
+    <link rel="canonical" href="{{ canonical }}">
+    <meta name="robots" content="{{ robots | default('index, follow') }}">
+    <meta name="author" content="{{ site.autor }}">
+    <meta name="theme-color" content="{{ themeColor }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png">
+    <link rel="icon" type="image/x-icon" href="/assets/img/favicon.ico">
+    <link rel="apple-touch-icon" href="/assets/img/favicon-512.png">
+
+    <!-- Open Graph (compartir en redes / WhatsApp) -->
+    <meta property="og:type" content="{{ ogType }}">
+    <meta property="og:locale" content="es_ES">
+    <meta property="og:url" content="{{ canonical }}">
+    <meta property="og:site_name" content="{{ site.autor }}">
+    <meta property="og:title" content="{{ ogTitle }}">
+    <meta property="og:description" content="{{ ogDescription }}">
+    <meta property="og:image" content="{{ ogImage }}">
+    <meta property="og:image:width" content="{{ ogImageWidth }}">
+    <meta property="og:image:height" content="{{ ogImageHeight }}">
+
+    <!-- Twitter/X Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ twitterTitle }}">
+    <meta name="twitter:description" content="{{ twitterDescription }}">
+    <meta name="twitter:image" content="{{ ogImage }}">
+
+    <!-- Datos estructurados para Google -->
+{% for bloque in schemas %}
+    <script type="application/ld+json">
+{{ bloque | safe }}
+    </script>
+{% endfor %}
+
+    <!-- Google Fonts: Instrument Serif (titulares) e Inter (cuerpo) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <!-- Hojas de Estilos -->
+    <link rel="stylesheet" href="/index.css?v={{ v.homeCss }}">
+    <link rel="stylesheet" href="/design-system/tokens.css?v={{ site.cssVersion }}">
+    <link rel="stylesheet" href="/assets/cookies/cookie-banner.css">
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ site.gtm }}"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+
+    <!-- NAVEGACIÓN -->
+{% include "nav-home.njk" %}
+
+{{ content | safe }}
+
+{% include "footer-home.njk" %}
+{{ trasPie | safe }}
+
+    <!-- Script de interactividad -->
+    <script src="/index.js?v={{ v.homeJs }}"></script>
+
+    <!-- Widget del asistente. Versionar (?v=N) al cambiarlo: la cache es de 1 año -->
+    <link rel="stylesheet" href="/assets/chat/widget-chat.css?v={{ v.chatCss }}">
+    <script src="/assets/chat/widget-chat.js?v={{ v.chatJs }}" defer></script>
+    <script src="/assets/cookies/cookie-banner.js" defer></script>
+</body>
+</html>

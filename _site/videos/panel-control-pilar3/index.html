@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=800, height=480" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 800px;
+        height: 480px;
+        overflow: hidden;
+        background: #070708;
+      }
+      body {
+        font-family: "Inter", sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="3.35"
+      data-width="800"
+      data-height="480"
+      style="position: relative; width: 800px; height: 480px; background: #070708; overflow: hidden;"
+    >
+      <div
+        id="scene"
+        class="clip"
+        data-start="0"
+        data-duration="3.35"
+        data-track-index="0"
+        style="position: absolute; inset: 0;"
+      >
+        <!-- Ambient background glow field, fixed and un-triggered -->
+        <div class="bg-field"></div>
+
+        <!-- Wires + particle flow: from each source node to the central hub -->
+        <svg width="800" height="480" viewBox="0 0 800 480" style="position: absolute; inset: 0; z-index: 1;">
+          <defs>
+            <linearGradient id="wireGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#aebbff" />
+              <stop offset="50%" stop-color="#5275ff" />
+              <stop offset="100%" stop-color="#3b5eff" />
+            </linearGradient>
+            <radialGradient id="hubGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#5275ff" stop-opacity="0.55" />
+              <stop offset="55%" stop-color="#3b5eff" stop-opacity="0.22" />
+              <stop offset="100%" stop-color="#3b5eff" stop-opacity="0" />
+            </radialGradient>
+            <filter id="wireBlur" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="3" />
+            </filter>
+          </defs>
+
+          <!-- soft blurred backing strokes (depth) -->
+          <path id="wire-tl-soft" class="wire-soft" d="M 128 96 Q 300 168 366 236" fill="none" stroke="#3b5eff" stroke-width="6" stroke-linecap="round" opacity="0" filter="url(#wireBlur)" />
+          <path id="wire-tr-soft" class="wire-soft" d="M 672 96 Q 500 168 434 236" fill="none" stroke="#3b5eff" stroke-width="6" stroke-linecap="round" opacity="0" filter="url(#wireBlur)" />
+          <path id="wire-bl-soft" class="wire-soft" d="M 128 384 Q 300 312 366 244" fill="none" stroke="#3b5eff" stroke-width="6" stroke-linecap="round" opacity="0" filter="url(#wireBlur)" />
+          <path id="wire-br-soft" class="wire-soft" d="M 672 384 Q 500 312 434 244" fill="none" stroke="#3b5eff" stroke-width="6" stroke-linecap="round" opacity="0" filter="url(#wireBlur)" />
+
+          <!-- crisp foreground wires -->
+          <path id="wire-tl" d="M 128 96 Q 300 168 366 236" fill="none" stroke="url(#wireGrad)" stroke-width="2.5" stroke-linecap="round" />
+          <path id="wire-tr" d="M 672 96 Q 500 168 434 236" fill="none" stroke="url(#wireGrad)" stroke-width="2.5" stroke-linecap="round" />
+          <path id="wire-bl" d="M 128 384 Q 300 312 366 244" fill="none" stroke="url(#wireGrad)" stroke-width="2.5" stroke-linecap="round" />
+          <path id="wire-br" d="M 672 384 Q 500 312 434 244" fill="none" stroke="url(#wireGrad)" stroke-width="2.5" stroke-linecap="round" />
+
+          <circle id="hub-glow-ring" cx="400" cy="240" r="150" fill="url(#hubGlow)" opacity="0" />
+
+          <!-- traveling particles, positioned via getPointAtLength along each wire -->
+          <g id="particles"></g>
+        </svg>
+
+        <!-- Source node: WhatsApp (top-left) -->
+        <div id="node-whatsapp" class="src-node" style="left: 128px; top: 96px;">
+          <div class="src-node-glow"></div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#c3ccff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="30" height="30">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+          </svg>
+        </div>
+
+        <!-- Source node: Email (top-right) -->
+        <div id="node-email" class="src-node" style="left: 672px; top: 96px;">
+          <div class="src-node-glow"></div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#c3ccff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="30" height="30">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+          </svg>
+        </div>
+
+        <!-- Source node: Hoja de cálculo (bottom-left) -->
+        <div id="node-sheet" class="src-node" style="left: 128px; top: 384px;">
+          <div class="src-node-glow"></div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#c3ccff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="30" height="30">
+            <rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="12" y1="3" x2="12" y2="21"/>
+          </svg>
+        </div>
+
+        <!-- Source node: Agenda (bottom-right) -->
+        <div id="node-calendar" class="src-node" style="left: 672px; top: 384px;">
+          <div class="src-node-glow"></div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#c3ccff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="30" height="30">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+          </svg>
+        </div>
+
+        <!-- Central hub: panel de control -->
+        <div id="hub" style="position: absolute; left: 400px; top: 240px; transform-origin: center; z-index: 3;">
+          <div id="hub-outer-glow"></div>
+          <div id="hub-panel">
+            <div id="hub-sheen"></div>
+            <svg viewBox="0 0 24 24" fill="none" stroke="#dbe1ff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" width="52" height="52">
+              <rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/>
+            </svg>
+            <span id="hub-pulse-ring"></span>
+            <span id="hub-pulse-dot"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      .bg-field {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        background:
+          radial-gradient(ellipse 480px 320px at 50% 50%, rgba(59, 94, 255, 0.10), transparent 70%);
+      }
+
+      .src-node {
+        position: absolute;
+        width: 64px;
+        height: 64px;
+        border-radius: 18px;
+        background: linear-gradient(160deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.015));
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid rgba(174, 187, 255, 0.16);
+        box-shadow:
+          0 10px 24px rgba(0, 0, 0, 0.45),
+          inset 0 1px 0 rgba(255, 255, 255, 0.06);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0;
+        z-index: 2;
+      }
+      .src-node-glow {
+        position: absolute;
+        inset: -14px;
+        border-radius: 26px;
+        background: radial-gradient(circle, rgba(82, 117, 255, 0.28), transparent 70%);
+        opacity: 0;
+        z-index: -1;
+      }
+      .wire-soft {
+        opacity: 0;
+      }
+
+      #hub {
+        width: 152px;
+        height: 152px;
+      }
+      #hub-outer-glow {
+        position: absolute;
+        inset: -60px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(82, 117, 255, 0.35), rgba(59, 94, 255, 0.08) 55%, transparent 75%);
+        opacity: 0;
+        z-index: -1;
+      }
+      #hub-panel {
+        position: relative;
+        width: 152px;
+        height: 152px;
+        border-radius: 32px;
+        background: linear-gradient(165deg, rgba(32, 36, 58, 0.65), rgba(16, 18, 30, 0.55));
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border: 1.5px solid rgba(174, 187, 255, 0.30);
+        box-shadow:
+          0 24px 60px rgba(0, 0, 0, 0.55),
+          inset 0 1px 0 rgba(255, 255, 255, 0.10),
+          inset 0 -12px 30px rgba(59, 94, 255, 0.08);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+      #hub-sheen {
+        position: absolute;
+        top: 0;
+        left: -40%;
+        width: 40%;
+        height: 100%;
+        background: linear-gradient(105deg, transparent, rgba(255, 255, 255, 0.10), transparent);
+        opacity: 0;
+        will-change: transform, opacity;
+      }
+      #hub-pulse-ring {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        border: 1.5px solid rgba(82, 117, 255, 0.9);
+        opacity: 0;
+      }
+      #hub-pulse-dot {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #7d97ff;
+        box-shadow: 0 0 10px 2px rgba(82, 117, 255, 0.8);
+        opacity: 0;
+      }
+
+      .particle {
+        opacity: 0;
+      }
+    </style>
+
+    <script>
+      (function () {
+        window.__timelines = window.__timelines || {};
+        const tl = gsap.timeline({ paused: true });
+
+        const sources = ["#node-whatsapp", "#node-email", "#node-sheet", "#node-calendar"];
+        const wires = ["#wire-tl", "#wire-tr", "#wire-bl", "#wire-br"];
+        const wiresSoft = ["#wire-tl-soft", "#wire-tr-soft", "#wire-bl-soft", "#wire-br-soft"];
+        const glows = document.querySelectorAll(".src-node-glow");
+
+        gsap.set(wires, { strokeDasharray: 180, strokeDashoffset: 180 });
+        gsap.set(wiresSoft, { strokeDasharray: 180, strokeDashoffset: 180 });
+        gsap.set("#hub", { xPercent: -50, yPercent: -50, scale: 0 });
+
+        // ---- Traveling particles: 2 per wire, seeded stagger, following the path exactly ----
+        const particleLayer = document.getElementById("particles");
+        const wirePaths = wires.map((sel) => document.querySelector(sel));
+        const PARTICLES_PER_WIRE = 2;
+        const particles = [];
+        wirePaths.forEach((path, wi) => {
+          const len = path.getTotalLength(); // measured once at setup — never inside onUpdate
+          for (let i = 0; i < PARTICLES_PER_WIRE; i++) {
+            const el = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+            el.setAttribute("r", i === 0 ? "3.2" : "2.2");
+            el.setAttribute("fill", i === 0 ? "#c3ccff" : "#7d97ff");
+            el.setAttribute("class", "particle");
+            particleLayer.appendChild(el);
+            particles.push({ el, path, len, phaseOffset: i * 0.42 });
+          }
+        });
+
+        // ---- Prep (hub-panel visual) ----
+        gsap.set("#hub-pulse-ring", { scale: 1 });
+
+        // 1. Source nodes spring in with their glow + label, filling the frame
+        tl.to(sources, { scale: 1, opacity: 1, duration: 0.5, stagger: 0.09, ease: "back.out(1.6)" }, 0);
+        tl.to(glows, { opacity: 1, duration: 0.5, stagger: 0.09, ease: "power1.out" }, 0);
+
+        tl.addLabel("hold1", 0.6);
+
+        // 2. Wires draw on (soft backing + crisp foreground together), converging to hub
+        tl.to([...wires, ...wiresSoft], { strokeDashoffset: 0, duration: 0.6, stagger: 0.05, ease: "power2.inOut" }, "hold1");
+        tl.to(wiresSoft, { opacity: 0.5, duration: 0.3 }, "hold1");
+
+        // 3. Ambient hub glow blooms in (lands as the wires finish connecting)
+        tl.to("#hub-outer-glow", { opacity: 1, duration: 0.55, ease: "power2.out" }, "hold1+=0.35");
+        tl.to("#hub-glow-ring", { opacity: 1, duration: 0.6, ease: "power2.out" }, "hold1+=0.35");
+
+        // 4. Hub panel assembles — glass, elevated, sheen sweep on landing
+        const hubSettleAt = "hold1+=0.65";
+        tl.to("#hub", { xPercent: -50, yPercent: -50, scale: 1, duration: 0.5, ease: "back.out(2.0)" }, hubSettleAt);
+        tl.fromTo("#hub-sheen", { x: 0, opacity: 0 }, { x: 210, opacity: 1, duration: 0.5, ease: "power2.inOut" }, hubSettleAt);
+        tl.to("#hub-sheen", { opacity: 0, duration: 0.2 }, `${hubSettleAt}+=0.5`);
+
+        // 5. Live-status pulse — ring expands + fades, dot glows, once settled
+        tl.to("#hub-pulse-dot", { opacity: 1, duration: 0.25 }, "hold1+=1.05");
+        tl.fromTo(
+          "#hub-pulse-ring",
+          { opacity: 0.9, scale: 1 },
+          { opacity: 0, scale: 2.2, duration: 0.9, ease: "power1.out" },
+          "hold1+=1.05"
+        );
+
+        // 6. Hold the fully-connected, glowing state
+        tl.addLabel("hold2", "hold1+=1.95");
+
+        // ---- Traveling particle driver: runs across the wire-draw + settle + hold window,
+        // ending exactly at hold2 so its own per-particle fadeOut clears them before the
+        // group fade-out below — no separate opacity reset needed.
+        const PARTICLE_START = 0.6 + 0.15; // just after wires start drawing
+        const PARTICLE_DUR = 2.55 - PARTICLE_START;
+        const driver = { t: 0 };
+        tl.to(
+          driver,
+          {
+            t: 1,
+            duration: PARTICLE_DUR,
+            ease: "none",
+            onUpdate: () => {
+              particles.forEach((p) => {
+                let localT = driver.t * 2.1 - p.phaseOffset; // laps sized so the last lap's fadeOut lands at driver end
+                localT = localT % 1;
+                if (localT < 0) localT += 1;
+                const pt = p.path.getPointAtLength(localT * p.len);
+                p.el.setAttribute("cx", pt.x);
+                p.el.setAttribute("cy", pt.y);
+                const fadeIn = Math.min(1, localT / 0.08);
+                const fadeOut = Math.min(1, (1 - localT) / 0.08);
+                // also ride the driver's own global fade-out over its final 12%, so every
+                // particle is provably at 0 by t=1 regardless of its lap phase
+                const globalFadeOut = Math.min(1, (1 - driver.t) / 0.12);
+                p.el.style.opacity = String(Math.min(fadeIn, fadeOut, globalFadeOut) * 0.9);
+              });
+            },
+          },
+          PARTICLE_START
+        );
+
+        // 7. Fade hub + wires + glow back out, sources stay put as the loop anchor
+        tl.to(
+          ["#hub", "#hub-outer-glow", "#hub-glow-ring", ...wires, ...wiresSoft],
+          { opacity: 0, duration: 0.4, ease: "power1.in" },
+          "hold2"
+        );
+        tl.set(["#hub"], { xPercent: -50, yPercent: -50, scale: 0 }, "hold2+=0.4");
+        tl.set(wires, { strokeDashoffset: 180 }, "hold2+=0.4");
+        tl.set(wiresSoft, { strokeDashoffset: 180, opacity: 0 }, "hold2+=0.4");
+        tl.set(["#hub-outer-glow", "#hub-glow-ring"], { opacity: 0 }, "hold2+=0.4");
+
+        // 8. Hold the scattered, disconnected state — mirrors frame 0 for a seamless loop
+        tl.addLabel("hold3", "hold2+=0.75");
+
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>

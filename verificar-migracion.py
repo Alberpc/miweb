@@ -30,6 +30,7 @@ SUELTAS = [
     ("servicios.html", "_site/servicios.html"),
     ("diagnostico-operativo/index.html", "_site/diagnostico-operativo/index.html"),
     ("no-perder-clientes/index.html", "_site/no-perder-clientes/index.html"),
+    ("index.html", "_site/index.html"),
 ]
 
 def leer(p):

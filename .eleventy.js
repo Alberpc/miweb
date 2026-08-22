@@ -27,8 +27,8 @@ export default function (eleventyConfig) {
     // Estos archivos viven dentro de carpetas que se copian tal cual; sin
     // esto Eleventy los trataria como plantillas y los reescribiria
     // (test-guardrails.html -> test-guardrails/index.html, README.md -> HTML).
-    eleventyConfig.ignores.add("src/assets/**");
-    eleventyConfig.ignores.add("src/design-system/**");
+    eleventyConfig.ignores.add("src/assets/**/*");
+    eleventyConfig.ignores.add("src/design-system/**/*");
 
     return {
         dir: {
