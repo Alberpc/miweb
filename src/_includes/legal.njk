@@ -1,0 +1,56 @@
+{#- ============================================================
+    legal.njk — layout de aviso legal, cookies y privacidad
+    ============================================================
+    NO extiende base.njk: su <head> es distinto de verdad, no por
+    descuido. Son paginas noindex, sin Open Graph ni Twitter Card ni
+    JSON-LD, con otra cabecera (<nav class="navbar">) y con el CSS y el
+    JS de la home (index.css / index.js) en vez de los de las landings.
+    Forzarlas dentro de base.njk seria cambiarlas, no reutilizar.
+
+    Lo que si comparten y aqui se reutiliza: el bloque de consent+GTM,
+    el pie y el banner de cookies.
+    ============================================================ -#}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+{% include "consent-gtm.njk" %}
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="{{ robots | default('noindex, follow') }}">
+    <title>{{ title }}</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png">
+    <link rel="icon" type="image/x-icon" href="/assets/img/favicon.ico">
+    <link rel="apple-touch-icon" href="/assets/img/favicon-512.png">
+    <meta name="theme-color" content="{{ themeColor | default('#0E1116') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/index.css?v={{ v.indexCss }}">
+    <link rel="stylesheet" href="/legal.css?v={{ v.legalCss }}">
+    <link rel="stylesheet" href="/design-system/tokens.css?v={{ site.cssVersion }}">
+    <style>
+        /* Ajustar padding superior de la página para evitar solapamiento con el nav fixed */
+        .page {
+            padding-top: 140px;
+        }
+    </style>
+    <link rel="stylesheet" href="/assets/cookies/cookie-banner.css">
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ site.gtm }}"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+
+    <!-- NAVEGACIÓN -->
+{% include "nav-legal.njk" %}
+
+{{ content | safe }}
+
+{% include "footer.njk" %}
+    <script src="/index.js?v={{ v.indexJs }}"></script>
+    <script src="/assets/cookies/cookie-banner.js" defer></script>
+</body>
+</html>

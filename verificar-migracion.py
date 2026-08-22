@@ -22,6 +22,13 @@ PAGINAS = [
     "blog",
 ]
 
+# Paginas sueltas en la raiz: la ruta del original y la del generado.
+SUELTAS = [
+    ("aviso-legal.html", "_site/aviso-legal.html"),
+    ("cookies.html", "_site/cookies.html"),
+    ("politica-de-privacidad.html", "_site/politica-de-privacidad.html"),
+]
+
 def leer(p):
     return io.open(p, encoding="utf-8").read()
 
@@ -160,9 +167,13 @@ def props_por_selector(css):
     return fin
 
 fallos = 0
-for slug in PAGINAS:
-    orig = leer(os.path.join(slug, "index.html"))
-    nuevo = leer(os.path.join("_site", slug, "index.html"))
+TODAS = ([(s, os.path.join(s, "index.html"), os.path.join("_site", s, "index.html"))
+          for s in PAGINAS]
+         + [(o.replace(".html", ""), o, n) for o, n in SUELTAS])
+
+for slug, ruta_orig, ruta_nueva in TODAS:
+    orig = leer(ruta_orig)
+    nuevo = leer(ruta_nueva)
     problemas = []
     avisos = []
 
@@ -210,5 +221,5 @@ for slug in PAGINAS:
         extra = ("  [%s]" % "; ".join(avisos)) if avisos else ""
         print("OK     %-32s texto, enlaces, SEO, JSON-LD, CSS y JS equivalentes%s" % (slug, extra))
 
-print("\n%d/%d paginas verificadas" % (len(PAGINAS) - fallos, len(PAGINAS)))
+print("\n%d/%d paginas verificadas" % (len(TODAS) - fallos, len(TODAS)))
 sys.exit(1 if fallos else 0)

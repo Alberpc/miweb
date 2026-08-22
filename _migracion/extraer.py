@@ -14,9 +14,25 @@ LANDINGS = [
 # pero con su layout y sus parametros.
 OTRAS = ["blog"]
 
+# Paginas legales: viven sueltas en la raiz (aviso-legal.html), no en
+# carpeta, y tienen su propio layout. Solo se les extrae el titulo y el
+# cuerpo; el resto del <head> es fijo y vive en legal.njk.
+LEGALES = ["aviso-legal", "cookies", "politica-de-privacidad"]
+
 def meta(html, attr, name):
     m = re.search(r'<meta\s+%s="%s"\s+content="(.*?)"\s*/?>' % (attr, re.escape(name)), html, re.S)
     return m.group(1) if m else None
+
+def extraer_legal(slug):
+    """El cuerpo de una pagina legal: entre el cierre del nav y el pie."""
+    html = io.open(slug + ".html", encoding="utf-8").read()
+    d = {"slug": slug}
+    d["title"] = re.search(r"<title>(.*?)</title>", html, re.S).group(1)
+    d["robots"] = meta(html, "name", "robots")
+    ini = html.index("</nav>") + len("</nav>")
+    fin = html.rindex('<footer class="footer-section')
+    d["cuerpo"] = html[ini:fin].strip(chr(10))
+    return d
 
 def extraer(slug):
     html = io.open(os.path.join(slug, "index.html"), encoding="utf-8").read()

@@ -6,7 +6,7 @@ el mismo resultado. Verificar despues con verificar-migracion.py.
 """
 import io, os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from extraer import LANDINGS, OTRAS, extraer
+from extraer import LANDINGS, OTRAS, LEGALES, extraer, extraer_legal
 
 # Reglas propias de una pagina que difieren del CSS comun. Se conservan
 # como cssExtra en vez de unificarlas: son el aspecto real de la pagina hoy.
@@ -85,5 +85,22 @@ def main():
         io.open(ruta, "w", encoding="utf-8", newline=chr(10)).write(salida)
         print("escrito %-45s %6d bytes" % (ruta, len(salida.encode("utf-8"))))
 
+def main_legales():
+    """Las legales van sueltas en la raiz: /aviso-legal.html, no carpeta.
+    Se conserva esa ruta exacta para no romper los enlaces del pie."""
+    for slug in LEGALES:
+        d = extraer_legal(slug)
+        fm = ["---", "layout: legal.njk",
+              "title: " + yaml_str(d["title"]),
+              "permalink: " + yaml_str("/" + slug + ".html")]
+        if d.get("robots"):
+            fm.append("robots: " + yaml_str(d["robots"]))
+        fm.append("---")
+        salida = chr(10).join(fm) + chr(10) + d["cuerpo"] + chr(10)
+        ruta = os.path.join("src", "paginas", slug + ".njk")
+        io.open(ruta, "w", encoding="utf-8", newline=chr(10)).write(salida)
+        print("escrito %-45s %6d bytes" % (ruta, len(salida.encode("utf-8"))))
+
 if __name__ == "__main__":
     main()
+    main_legales()
