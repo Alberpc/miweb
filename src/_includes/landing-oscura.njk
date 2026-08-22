@@ -1,0 +1,18 @@
+{#- landing-oscura.njk — layout de automatizar-mi-negocio.
+    Identico a landing.njk salvo el CSS: esta pagina tiene el suyo
+    propio porque no usa el sistema .inverse (ver landing-oscura.css).
+    Comparte nav, pie, JS y todo el <head> con el resto. -#}
+{% extends "base.njk" %}
+
+{% block estilos %}
+    <link rel="stylesheet" href="/css/landing-oscura.css?v={{ site.cssVersion }}">
+{%- if cssExtra %}
+    <style>
+{{ cssExtra | safe }}
+    </style>
+{%- endif %}
+{% endblock %}
+
+{% block scripts %}
+    <script src="/assets/js/landing.js" defer></script>
+{% endblock %}

@@ -1,0 +1,213 @@
+<h1>Sistema de diseño — albercabrera.com</h1>
+<p>Fuente de verdad del color del sitio. Los valores viven en
+<code>design-system/tokens.css</code>; este documento explica el porqué y las reglas
+de uso.</p>
+<hr>
+<h2>1. Dirección de marca</h2>
+<p><strong>Cuerpo claro, hero y footer oscuros, cobalto como único color de marca.</strong></p>
+<h3>Por qué cobalto</h3>
+<p>Es el color de la fiabilidad y la competencia técnica sin caer en el azul
+corporativo genérico. El cliente compra un sistema que no entiende
+técnicamente y tiene que confiar en que no le va a romper el negocio: el
+cobalto compra esa confianza antes de que lea una palabra.</p>
+<h3>Por qué no hay color de acento</h3>
+<p>Se evaluaron y descartaron tres:</p>
+<ul>
+<li><strong>Cian</strong> — lo usa la mayoría de webs del sector IA. Parecerse a todas
+las demás contradice la promesa de la marca.</li>
+<li><strong>Lima eléctrico</strong> — proyecta startup y gaming.</li>
+<li><strong>Naranja</strong> — proyecta urgencia y descuento, contrario a un
+posicionamiento consultivo.</li>
+</ul>
+<p>Sobre fondo claro el cobalto ya destaca lo suficiente. Un solo color es
+mejor marca que dos.</p>
+<h3>Por qué el cuerpo va en claro</h3>
+<p>La audiencia son dueños de pymes de servicios, 40-55 años, mayoría en
+móvil y a plena luz. El sitio tiene bloques de lectura larga (FAQ,
+&quot;Sobre mí&quot;, descripciones de servicio) que son exactamente donde se
+resuelven las objeciones y se decide la venta. En oscuro esos bloques
+cansan al doble. Además, el fondo claro se percibe como más transparente
+en sectores donde el cliente arriesga dinero sin dominar la tecnología.</p>
+<h3>Por qué el hero sigue oscuro</h3>
+<p>Conserva el impacto visual y el vídeo de fondo, y hace que la página abra
+y cierre igual con el cuerpo claro en medio. El contraste hero → cuerpo
+es intencional: marca el paso de &quot;impresión&quot; a &quot;lectura&quot;.</p>
+<hr>
+<h2>2. Reglas de uso</h2>
+<p>Estas reglas no son estéticas: cada una evita un fallo concreto de
+contraste o de jerarquía.</p>
+<ol>
+<li><strong>Ningún valor de color literal fuera de <code>tokens.css</code>.</strong> Ni en CSS, ni
+inline en HTML, ni en SVG.</li>
+<li><strong>Ninguna página define su propio <code>:root</code> de color.</strong> Si una zona
+necesita fondo oscuro, se le pone <code>class=&quot;inverse&quot;</code>. Un <code>:root</code>
+paralelo por página es lo que produjo la incoherencia actual.</li>
+<li><strong>El tono de cobalto depende del fondo.</strong> Sobre claro: <code>--cobalt-600</code>
+para relleno y <code>--cobalt-700</code> para texto. Sobre oscuro:
+<code>--cobalt-500</code> para relleno y <code>--cobalt-300</code> para texto. El saturado
+sobre negro da 3.21:1 y solo vale para texto muy grande.</li>
+<li><strong><code>--ink-decor</code> y <code>--cobalt-400</code> nunca en texto.</strong> Solo bordes,
+puntos, iconos decorativos y scrollbar.</li>
+<li><strong>Un solo CTA de color pleno por pantalla.</strong> El resto en variante
+fantasma (borde + texto). Si el botón de marca aparece cuatro veces
+en una vista, deja de significar nada.</li>
+<li><strong>Foco visible obligatorio</strong> en todo elemento interactivo. Es el
+punto donde más webs suspenden AA y es una línea de código.</li>
+<li><strong>Mínimo WCAG 2.1 AA:</strong> 4.5:1 texto normal, 3:1 texto ≥24px y
+componentes de interfaz.</li>
+<li><strong>Overlay de vídeo en <code>rgba(14,17,22,…)</code></strong>, nunca negro puro.</li>
+</ol>
+<hr>
+<h2>3. Mapa de aplicación</h2>
+<table>
+<thead>
+<tr>
+<th>Zona</th>
+<th>Fondo</th>
+<th>Texto principal</th>
+<th>Acción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hero</td>
+<td><code>--night-900</code> (<code>.inverse</code>)</td>
+<td><code>--on-night</code></td>
+<td><code>--cobalt-500</code></td>
+</tr>
+<tr>
+<td>Secciones impares</td>
+<td><code>--bg</code></td>
+<td><code>--ink</code></td>
+<td><code>--cobalt-600</code></td>
+</tr>
+<tr>
+<td>Secciones pares</td>
+<td><code>--bg-alt</code></td>
+<td><code>--ink</code></td>
+<td><code>--cobalt-600</code></td>
+</tr>
+<tr>
+<td>Tarjetas</td>
+<td><code>--bg</code> + <code>--line</code></td>
+<td><code>--ink</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td>Inputs</td>
+<td><code>--bg-input</code> + <code>--line-strong</code></td>
+<td><code>--ink</code></td>
+<td>foco <code>--cobalt-600</code></td>
+</tr>
+<tr>
+<td>Footer</td>
+<td><code>--night-900</code> (<code>.inverse</code>)</td>
+<td><code>--on-night</code></td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>Eyebrows y etiquetas de sección: <code>--cobalt-600</code> en claro,
+<code>--cobalt-300</code> en oscuro.</p>
+<hr>
+<h2>4. Estado del sitio antes de la migración</h2>
+<p>Conviven dos sistemas incompatibles:</p>
+<table>
+<thead>
+<tr>
+<th>Zona</th>
+<th>Fondo actual</th>
+<th>Origen</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Home <code>/</code></td>
+<td>Oscuro <code>#070708</code></td>
+<td>Migración parcial desde el tema dorado</td>
+</tr>
+<tr>
+<td>Landing <code>/no-perder-clientes/</code></td>
+<td>Claro cálido <code>#fbfaf8</code></td>
+<td>Diseñada aparte, sin publicar</td>
+</tr>
+<tr>
+<td>Footers</td>
+<td><code>#171614</code></td>
+<td>Resto del tema dorado</td>
+</tr>
+</tbody>
+</table>
+<p>La landing <strong>no está publicada</strong>: es el banco de pruebas donde se validó
+esta paleta antes de tocar el resto.</p>
+<h3>Deuda técnica confirmada</h3>
+<table>
+<thead>
+<tr>
+<th>Problema</th>
+<th>Ratio</th>
+<th>Impacto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--ink-faint: #a3a099</code> usado como texto</td>
+<td><strong>2.50:1</strong></td>
+<td>Suspende AA. Afecta al microcopy del hero, <code>.beneficio p</code>, <code>.auto-nota</code></td>
+</tr>
+<tr>
+<td><code>--cobalt: #3b5eff</code></td>
+<td>4.76 texto / 4.96 botón</td>
+<td>Pasa raspando y vibra sobre base cálida</td>
+</tr>
+<tr>
+<td>Verde <code>#1a8a4c</code></td>
+<td><strong>4.21:1</strong></td>
+<td>Suspende AA</td>
+</tr>
+<tr>
+<td>Rojo de error <code>#d43737</code></td>
+<td>4.57:1</td>
+<td>Al límite, en validación de formulario</td>
+</tr>
+<tr>
+<td><code>.faq:hover { border-color: rgba(255,255,255,0.12) }</code></td>
+<td>—</td>
+<td>Resto del tema oscuro: invisible sobre claro. El hover del FAQ no hace nada hoy</td>
+</tr>
+<tr>
+<td><code>.subfooter { border-top: rgba(255,255,255,0.05) }</code></td>
+<td>—</td>
+<td>Mismo caso</td>
+</tr>
+<tr>
+<td>Opacidades sueltas en footer (<code>rgba(246,245,242,0.4)</code>)</td>
+<td>—</td>
+<td>Sin contraste medido; el copyright queda al límite</td>
+</tr>
+<tr>
+<td><code>&lt;meta name=&quot;theme-color&quot;&gt;</code></td>
+<td>—</td>
+<td>Inconsistente entre páginas</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>5. Fuera de alcance</h2>
+<ul>
+<li><strong>Tipografía.</strong> El Cormorant Garamond en titulares se eligió para
+acompañar al dorado y ya no encaja. Decisión pendiente, aparte.</li>
+<li><strong>Copy y estructura de secciones.</strong></li>
+<li><strong>Layout.</strong></li>
+</ul>
+<hr>
+<h2>6. Activos que hay que revisar</h2>
+<ul>
+<li><strong>Logos de cliente</strong> en versión blanca (Mafhesa, Top Boutique, GEKO,
+Bioresina): invisibles si su franja pasa a fondo claro. Necesitan
+versión en positivo, o esa franja se marca como <code>.inverse</code>.</li>
+<li><strong>Logo de la nav</strong>: es un PNG blanco con <code>filter: invert(1)</code>.
+Funciona sobre claro; sobre el hero oscuro queda negro sobre negro.</li>
+<li><strong>Botón flotante de WhatsApp</strong>: sobre cuerpo claro competirá
+directamente con el CTA de cobalto. Valorar quitarle peso.</li>
+</ul>

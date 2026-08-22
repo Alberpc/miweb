@@ -1,0 +1,376 @@
+/* -------------------------------------------------------------
+   PÁGINAS SECUNDARIAS (LEGALES) — misma marca, versión ligera
+   ALBER CABRERA - WEB PREMIUM
+   Color: cuerpo claro (lectura larga), nav pill clara flotante,
+   footer oscuro .inverse. Tokens en design-system/tokens.css.
+   ------------------------------------------------------------- */
+:root {
+    --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+    background-color: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+}
+
+body {
+    line-height: 1.7;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg);
+}
+
+/* NAV simple (pill), clara y flotante — igual que en el resto del sitio */
+.subnav {
+    position: sticky;
+    top: 24px;
+    z-index: 100;
+    width: calc(100% - 48px);
+    max-width: 1200px;
+    margin: 24px auto 0;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    background-color: rgba(255, 255, 255, 0.78);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    border-radius: 100px;
+    box-shadow: 0 8px 30px rgba(14, 17, 22, 0.14);
+}
+
+.subnav .logo {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 1.3rem;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: -0.05em;
+}
+
+.subnav .logo img {
+    height: 24px;
+    width: auto;
+    display: block;
+    filter: invert(1) brightness(0.12);
+}
+
+.subnav .back {
+    font-size: 0.85rem;
+    color: var(--ink-mid);
+    text-decoration: none;
+    padding: 8px 18px;
+    border: 1px solid var(--line-strong);
+    border-radius: 100px;
+    transition: all 0.3s ease;
+}
+
+.subnav .back:hover { color: var(--ink); border-color: var(--cobalt-border); }
+
+/* CONTENIDO */
+.page {
+    width: 100%;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 80px 24px 100px;
+    flex: 1;
+}
+
+.page-label {
+    font-family: monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.25em;
+    color: var(--cobalt-600);
+    display: block;
+    margin-bottom: 14px;
+}
+
+.page h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 12px;
+    color: var(--ink);
+}
+
+.page-updated {
+    font-size: 0.85rem;
+    color: var(--ink-mid);
+    margin-bottom: 56px;
+}
+
+.page h2 {
+    font-family: var(--font-heading);
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    margin: 48px 0 16px;
+    padding-top: 28px;
+    position: relative;
+    color: var(--ink);
+}
+
+.page h2::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 72px;
+    height: 1px;
+    background: linear-gradient(90deg, var(--cobalt-600), transparent);
+}
+
+.page p, .page li {
+    font-size: 0.98rem;
+    color: var(--ink-soft);
+    font-weight: 300;
+    margin-bottom: 14px;
+}
+
+.page ul { padding-left: 22px; margin-bottom: 14px; }
+.page li { margin-bottom: 8px; }
+.page strong { color: var(--ink); font-weight: 600; }
+.page a { color: var(--cobalt-700); text-decoration: none; border-bottom: 1px solid var(--cobalt-border); }
+.page a:hover { color: var(--cobalt-800); border-color: var(--cobalt-600); }
+
+.page .box {
+    background: var(--bg-alt);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 24px 28px;
+    margin: 20px 0;
+}
+
+.page .cookies-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 0.92rem;
+}
+
+.page .cookies-table th,
+.page .cookies-table td {
+    text-align: left;
+    padding: 10px 14px;
+    border: 1px solid var(--line);
+}
+
+.page .cookies-table th {
+    background: var(--bg-alt);
+    color: var(--ink);
+    font-weight: 600;
+}
+
+.page .cookies-table td {
+    color: var(--ink-soft);
+}
+
+.page .box p:last-child { margin-bottom: 0; }
+
+/* =============================================================
+   FOOTER OSCURO (clase .inverse en el <footer>, definida en tokens.css)
+   ============================================================= */
+
+.footer-section.inverse {
+    position: relative;
+    padding: 80px 0 40px 0;
+    width: 100%;
+    border-top: 1px solid var(--night-600);
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1.8fr;
+    gap: 60px;
+    margin-bottom: 60px;
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 24px;
+}
+
+.footer-brand-col {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.footer-logo-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--on-night);
+}
+
+.footer-logo-wrap img {
+    height: 24px;
+    width: auto;
+    display: block;
+}
+
+.footer-logo-wrap .logo {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 1.3rem;
+    color: var(--on-night);
+    text-decoration: none;
+    letter-spacing: -0.05em;
+}
+
+.footer-brand-desc {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--on-night-soft);
+    max-width: 380px;
+    font-weight: 300;
+}
+
+/* Grid de Enlaces */
+.footer-links-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+}
+
+.footer-links-title {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--on-night);
+    font-weight: 600;
+    margin-bottom: 24px;
+}
+
+.footer-links-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.footer-links-list a {
+    font-size: 0.8rem;
+    color: var(--on-night-soft);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-weight: 300;
+    border-bottom: none; /* Evitar la regla general de links de legales */
+}
+
+.footer-links-list a:hover {
+    color: var(--on-night);
+}
+
+/* Fila Inferior (Bottom Bar) */
+.footer-bottom-bar {
+    border-top: 1px solid var(--night-600);
+    padding-top: 32px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 24px;
+    padding-right: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-curator {
+    font-size: 0.75rem;
+    text-transform: lowercase;
+    letter-spacing: 0.15em;
+    color: var(--on-night-mid);
+}
+
+.footer-social-wrap {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.footer-social-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--on-night-mid);
+}
+
+.footer-social-icons {
+    display: flex;
+    gap: 16px;
+}
+
+.footer-social-icons a {
+    color: var(--on-night-soft);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    border-bottom: none; /* Evitar la regla general de links de legales */
+}
+
+.footer-social-icons a:hover {
+    color: var(--on-night);
+    transform: translateY(-2px);
+}
+
+/* ── Responsivo (Móvil y Tablet) ── */
+@media (max-width: 768px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    .footer-links-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+    }
+    .footer-bottom-bar {
+        flex-direction: column;
+        gap: 20px;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-links-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+}
+
+
+
+/* Footer mini para páginas legales */
+.subfooter {
+    border-top: 1px solid var(--line);
+    padding: 48px 24px 32px;
+    text-align: center;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+    width: 100%;
+    margin-top: auto; /* Empuja el footer hacia abajo si el contenido es corto */
+}
+.subfooter a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    margin: 0 8px;
+    border-bottom: none;
+}
+.subfooter a:hover {
+    color: var(--ink);
+}

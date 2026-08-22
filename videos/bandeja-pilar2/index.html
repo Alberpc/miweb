@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=800, height=480" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 800px;
+        height: 480px;
+        overflow: hidden;
+        background: #070708;
+      }
+      body {
+        font-family: "Inter", sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="3.45"
+      data-width="800"
+      data-height="480"
+      style="position: relative; width: 800px; height: 480px; background: #070708; overflow: hidden;"
+    >
+      <div
+        id="scene"
+        class="clip"
+        data-start="0"
+        data-duration="3.45"
+        data-track-index="0"
+        style="position: absolute; inset: 0;"
+      >
+        <div class="bg-field"></div>
+
+        <!-- Horizontal process rail + the checkpoint ring, full-width composition -->
+        <svg id="rail-svg" width="800" height="480" viewBox="0 0 800 480" style="position: absolute; inset: 0; z-index: 1; pointer-events: none;">
+          <defs>
+            <linearGradient id="railGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#3b5eff" stop-opacity="0.12" />
+              <stop offset="35%" stop-color="#5275ff" stop-opacity="0.5" />
+              <stop offset="65%" stop-color="#5275ff" stop-opacity="0.5" />
+              <stop offset="100%" stop-color="#3b5eff" stop-opacity="0.12" />
+            </linearGradient>
+          </defs>
+          <line x1="100" y1="240" x2="700" y2="240" stroke="url(#railGrad)" stroke-width="2" />
+        </svg>
+
+        <!-- Checkpoint ring (glass), centered -->
+        <div id="checkpoint">
+          <div id="checkpoint-pulse-ring"></div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#7d97ff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="26" height="26" style="opacity: 0.55;">
+            <path d="M20 6L9 17l-5-5"/>
+          </svg>
+        </div>
+
+        <!-- 3 documents, staggered, entering left and traveling right through the checkpoint -->
+        <div id="doc-1" class="doc-item">
+          <svg class="doc-icon-raw" viewBox="0 0 24 24" fill="none" stroke="#c3ccff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="26" height="26">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
+          </svg>
+          <svg class="doc-icon-done" viewBox="0 0 24 24" fill="none" stroke="#7d97ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="26" height="26">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </div>
+        <div id="doc-2" class="doc-item">
+          <svg class="doc-icon-raw" viewBox="0 0 24 24" fill="none" stroke="#c3ccff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="26" height="26">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+          </svg>
+          <svg class="doc-icon-done" viewBox="0 0 24 24" fill="none" stroke="#7d97ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="26" height="26">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </div>
+        <div id="doc-3" class="doc-item">
+          <svg class="doc-icon-raw" viewBox="0 0 24 24" fill="none" stroke="#c3ccff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="26" height="26">
+            <rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 10h20"/>
+          </svg>
+          <svg class="doc-icon-done" viewBox="0 0 24 24" fill="none" stroke="#7d97ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="26" height="26">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </div>
+
+        <!-- Archived stack panel (glass), growing on the right -->
+        <div id="stack-panel">
+          <div class="panel-sheen" id="stack-sheen"></div>
+          <div class="stack-header">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#aebbff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18">
+              <path d="M21 8v13H3V8"/><path d="M1 3h22v5H1z"/><path d="M10 12h4"/>
+            </svg>
+            <span class="stack-label">Archivado</span>
+          </div>
+          <div class="stack-rows">
+            <div class="stack-row" id="stack-row-1"></div>
+            <div class="stack-row" id="stack-row-2"></div>
+            <div class="stack-row" id="stack-row-3"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      .bg-field {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        background: radial-gradient(ellipse 520px 320px at 50% 50%, rgba(59, 94, 255, 0.08), transparent 70%);
+      }
+
+      #checkpoint {
+        position: absolute;
+        left: 400px;
+        top: 240px;
+        width: 84px;
+        height: 84px;
+        border-radius: 50%;
+        background: linear-gradient(165deg, rgba(32, 36, 58, 0.6), rgba(16, 18, 30, 0.5));
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1.5px solid rgba(174, 187, 255, 0.30);
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        z-index: 3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      #checkpoint-pulse-ring {
+        position: absolute;
+        inset: -6px;
+        border-radius: 50%;
+        border: 1.5px solid rgba(82, 117, 255, 0.7);
+        opacity: 0;
+      }
+
+      .doc-item {
+        position: absolute;
+        left: 130px;
+        top: 240px;
+        width: 54px;
+        height: 54px;
+        border-radius: 14px;
+        background: linear-gradient(160deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.015));
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid rgba(174, 187, 255, 0.18);
+        box-shadow: 0 10px 22px rgba(0, 0, 0, 0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 4;
+        opacity: 0;
+      }
+      .doc-icon-raw,
+      .doc-icon-done {
+        position: absolute;
+      }
+      .doc-icon-done {
+        opacity: 0;
+      }
+
+      #stack-panel {
+        position: absolute;
+        left: 650px;
+        top: 240px;
+        width: 220px;
+        height: 220px;
+        border-radius: 24px;
+        background: linear-gradient(165deg, rgba(32, 36, 58, 0.55), rgba(16, 18, 30, 0.48));
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border: 1.5px solid rgba(174, 187, 255, 0.20);
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        overflow: hidden;
+        z-index: 2;
+        opacity: 0;
+      }
+      .panel-sheen {
+        position: absolute;
+        top: 0;
+        left: -40%;
+        width: 40%;
+        height: 100%;
+        background: linear-gradient(105deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+        opacity: 0;
+        will-change: transform, opacity;
+      }
+      .stack-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 18px 20px 0;
+      }
+      .stack-label {
+        font-size: 13px;
+        font-weight: 500;
+        color: rgba(210, 216, 255, 0.75);
+      }
+      .stack-rows {
+        margin: 20px 20px 0;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .stack-row {
+        height: 22px;
+        border-radius: 8px;
+        background: linear-gradient(160deg, rgba(82, 117, 255, 0.16), rgba(59, 94, 255, 0.08));
+        border: 1px solid rgba(174, 187, 255, 0.16);
+        opacity: 0;
+      }
+    </style>
+
+    <script>
+      (function () {
+        window.__timelines = window.__timelines || {};
+        const tl = gsap.timeline({ paused: true });
+
+        gsap.set("#checkpoint", { xPercent: -50, yPercent: -50, scale: 0, opacity: 0 });
+        gsap.set("#stack-panel", { xPercent: -50, yPercent: -50, scale: 0, opacity: 0 });
+        gsap.set(["#doc-1", "#doc-2", "#doc-3"], { xPercent: -50, yPercent: -50, x: 0, y: 0, scale: 0 });
+        gsap.set(".doc-icon-done", { opacity: 0 });
+        gsap.set(".stack-row", { scaleX: 0.6, opacity: 0, transformOrigin: "left center" });
+
+        const DOC_X = 130; // doc spawn x
+        const CHECK_X = 400; // checkpoint center x
+        const STACK_X = 650; // stack panel center x
+
+        // ---- Checkpoint + stack panel arrive first, establishing the pipeline ----
+        tl.to("#checkpoint", { xPercent: -50, yPercent: -50, scale: 1, opacity: 1, duration: 0.45, ease: "power3.out" }, 0);
+        tl.to("#stack-panel", { xPercent: -50, yPercent: -50, scale: 1, opacity: 1, duration: 0.45, ease: "power3.out" }, 0.12);
+        tl.fromTo("#stack-sheen", { x: 0, opacity: 0 }, { x: 300, opacity: 1, duration: 0.5, ease: "power2.inOut" }, 0.3);
+        tl.to("#stack-sheen", { opacity: 0, duration: 0.2 }, 0.8);
+
+        // ---- Each document: spawn on the left, travel right through the checkpoint, land in the stack ----
+        const docs = ["#doc-1", "#doc-2", "#doc-3"];
+        const DOC_STAGGER = 0.42;
+        const START_AT = 0.4;
+
+        docs.forEach((sel, i) => {
+          const t0 = START_AT + i * DOC_STAGGER;
+
+          // spawn (pop in at rail start)
+          tl.fromTo(sel, { xPercent: -50, yPercent: -50, x: 0, y: 0, scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: "power3.out" }, t0);
+
+          // travel to checkpoint
+          tl.to(sel, { xPercent: -50, yPercent: -50, x: CHECK_X - DOC_X, y: 0, duration: 0.55, ease: "power1.in" }, t0 + 0.15);
+
+          // at checkpoint: pulse the ring, raw icon -> done icon (the "processed" moment)
+          const arriveAt = t0 + 0.15 + 0.55;
+          tl.to("#checkpoint-pulse-ring", { opacity: 0.8, scale: 1.35, duration: 0.3, ease: "power2.out" }, arriveAt);
+          tl.to("#checkpoint-pulse-ring", { opacity: 0, duration: 0.25 }, arriveAt + 0.28);
+          tl.set("#checkpoint-pulse-ring", { scale: 1 }, arriveAt + 0.53);
+          tl.to(`${sel} .doc-icon-raw`, { opacity: 0, duration: 0.18 }, arriveAt + 0.05);
+          tl.to(`${sel} .doc-icon-done`, { opacity: 1, duration: 0.18 }, arriveAt + 0.05);
+
+          // continue right into the stack panel, settle
+          tl.to(sel, { xPercent: -50, yPercent: -50, x: STACK_X - DOC_X, y: 0, duration: 0.4, ease: "power2.in" }, arriveAt + 0.15);
+          tl.to(sel, { scale: 0, opacity: 0, duration: 0.15, ease: "power1.in" }, arriveAt + 0.5);
+
+          // the archived stack panel gains a row as the document lands
+          tl.to(`#stack-row-${i + 1}`, { scaleX: 1, opacity: 1, duration: 0.3, ease: "power3.out" }, arriveAt + 0.5);
+        });
+
+        const lastArriveAt = START_AT + (docs.length - 1) * DOC_STAGGER + 0.15 + 0.55;
+        tl.addLabel("hold", lastArriveAt + 0.75);
+
+        // ---- Fade everything back out for a seamless loop ----
+        tl.to(
+          ["#checkpoint", "#stack-panel", ...docs],
+          { opacity: 0, duration: 0.4, ease: "power1.in" },
+          "hold"
+        );
+        tl.set("#checkpoint", { xPercent: -50, yPercent: -50, scale: 0 }, "hold+=0.4");
+        tl.set("#stack-panel", { xPercent: -50, yPercent: -50, scale: 0 }, "hold+=0.4");
+        tl.set(docs, { xPercent: -50, yPercent: -50, x: 0, y: 0, scale: 0 }, "hold+=0.4");
+        tl.set(".doc-icon-raw", { opacity: 1 }, "hold+=0.4");
+        tl.set(".doc-icon-done", { opacity: 0 }, "hold+=0.4");
+        tl.set(".stack-row", { scaleX: 0.6, opacity: 0 }, "hold+=0.4");
+
+        tl.addLabel("loopEnd", "hold+=0.6");
+
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>

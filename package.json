@@ -1,0 +1,20 @@
+{
+  "name": "miweb-premium",
+  "version": "1.0.0",
+  "description": "albercabrera.com — sitio estatico generado con Eleventy",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "eleventy",
+    "serve": "eleventy --serve",
+    "watch": "eleventy --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alberpc/miweb.git"
+  },
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.6"
+  }
+}

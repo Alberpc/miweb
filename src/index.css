@@ -1,0 +1,2188 @@
+/* -------------------------------------------------------------
+   SISTEMA DE DISEÑO: CROMO LÍQUIDO & TITANIO
+   ALBER CABRERA - WEB PREMIUM
+   ------------------------------------------------------------- */
+
+/* VARIABLES GLOBALES — color y tipografía en design-system/tokens.css. Aquí solo lo que no vive allí. */
+:root {
+    /* Altura Navbar */
+    --nav-height: 80px;
+
+    /* tokens.css no trae --glass-shadow: sombra de profundidad pura, no color de marca */
+    --glass-shadow: rgba(15, 31, 27, 0.06);
+}
+
+/* RESET GENERAL */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    background-color: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    scrollbar-width: thin;
+    -webkit-font-smoothing: antialiased;
+    /* OJO: el overflow-x va en body, NO aqui. En html rompe position:fixed en
+       moviles WebKit (las burbujas flotantes salian cortadas contra el borde). */
+}
+
+body {
+    line-height: 1.6;
+    overflow-x: hidden; /* Corta el desborde horizontal sin romper position:fixed */
+    /* Eliminadas propiedades de overflow para evitar doble scrollbar en navegadores Windows */
+}
+
+/* CONTENEDORES */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.section {
+    padding: 120px 0;
+    position: relative;
+    scroll-margin-top: 96px; /* que el anchor no quede tapado por la navbar */
+}
+
+/* Separador difuminado entre secciones: línea que nace y muere en transparente
+   (sustituye al antiguo border-bottom que hacía un corte duro) */
+.section + .section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(760px, 82%);
+    height: 1px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        var(--line) 30%,
+        var(--line-strong) 50%,
+        var(--line) 70%,
+        transparent 100%);
+    pointer-events: none;
+}
+
+/* NAVEGACIÓN STICKY ESTILO PILL FLOTANTE — pastilla clara, igual que el resto del sitio */
+.navbar {
+    position: fixed;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-20px);
+    width: calc(100% - 48px);
+    max-width: 1200px; /* Alineado con el max-width de .container */
+    height: 64px;
+    background-color: rgba(255, 255, 255, 0.78);
+    backdrop-filter: blur(18px) saturate(180%);
+    -webkit-backdrop-filter: blur(18px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    border-radius: 100px;
+    box-shadow: 0 8px 30px rgba(14, 17, 22, 0.14);
+    z-index: 1000;
+    /* Aparicion suave desde el primer frame: sin el delay 0.7s que antes
+       esperaba a que se fuera el loader (ya eliminado). */
+    animation: fadeInFloatingNav 360ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes fadeInFloatingNav {
+    0% {
+        opacity: 0.4;
+        transform: translateX(-50%) translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+.nav-container {
+    height: 100%;
+    width: 100%;
+    padding: 0 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: var(--font-heading);
+    font-weight: 300;
+    font-size: 1.4rem;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: -0.05em;
+    position: relative;
+    transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+.logo img {
+    height: 24px;
+    width: auto;
+    display: block;
+    filter: invert(1) brightness(0.12);
+}
+
+.nav-menu {
+    display: flex;
+    gap: 32px;
+}
+
+.nav-link {
+    color: var(--ink-mid);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    transition: color 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.nav-link:hover {
+    color: var(--ink);
+}
+
+.nav-btn {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--night-900);
+    text-decoration: none;
+    padding: 0 18px;
+    min-height: 40px;
+    line-height: 40px;
+    background: var(--cobalt-400);
+    border: 1px solid transparent;
+    border-radius: 8px; /* Sistema Bosque Inteligente: radio fijo, nunca píldora */
+    transition: all 150ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.nav-btn .short-text {
+    display: none;
+}
+
+@media (max-width: 900px) {
+    .nav-btn .full-text {
+        display: none;
+    }
+    .nav-btn .short-text {
+        display: inline;
+    }
+}
+
+.nav-btn:hover {
+    background-color: var(--cobalt-300);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 30px var(--cobalt-glow);
+}
+
+/* ---- Hamburguesa (solo móvil) ---- */
+.nav-burger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 42px;
+    height: 42px;
+    padding: 10px;
+    background: none;
+    border: 1px solid var(--line-strong);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.nav-burger span {
+    display: block;
+    width: 100%;
+    height: 1.5px;
+    background: var(--ink);
+    border-radius: 2px;
+    transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1), opacity 150ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.nav-burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-burger.open span:nth-child(2) { opacity: 0; }
+.nav-burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* Panel desplegable móvil */
+.nav-mobile {
+    position: absolute;
+    top: calc(100% + 12px);
+    left: 0;
+    right: 0;
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    padding: 18px;
+    background-color: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px; /* Sistema Bosque Inteligente: radius-xl, contenedores especiales */
+    box-shadow: 0 30px 60px rgba(15, 31, 27, 0.14);
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: opacity 220ms cubic-bezier(0.2, 0.8, 0.2, 1), transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    pointer-events: none;
+}
+
+.nav-mobile.open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.nav-mobile-link {
+    color: var(--ink-mid);
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 12px 16px;
+    border-radius: 12px;
+    transition: all 150ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.nav-mobile-link:hover {
+    color: var(--ink);
+    background: var(--bg-alt);
+}
+
+.nav-mobile-cta {
+    margin-top: 10px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--night-900);
+    background: var(--cobalt-400);
+    padding: 14px 16px;
+    border-radius: 8px; /* Sistema Bosque Inteligente: radio fijo, nunca píldora */
+    text-decoration: none;
+}
+
+/* HERO SECTION (CABECERA) */
+.hero-section {
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding-top: var(--nav-height);
+    background-color: var(--night-900); /* Unificado con el color de fondo general del hero */
+    overflow: hidden;
+}
+
+/* Masa de fibras 3D de fondo: hélices animadas vía JS (index.js).
+   El propio dibujo se desvanece hacia el borde inferior para que ninguna
+   fibra llegue viva al corte con la sección clara que va debajo. */
+.hero-mesh {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1200px; /* Alineado con .container y .navbar */
+    margin: 0 auto;
+    text-align: left;
+    padding: 0 24px; /* Alineado con .container y .navbar */
+    /* El hero arranca VISIBLE (opacity:1) para que el h1 sea LCP inmediato.
+       La entrada es solo un matiz de escala, sin fundido desde invisible ni
+       delay: si el texto naciera en opacity:0, Lighthouse no detecta LCP. */
+    animation: zoom3dIn 360ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+/* El texto del hero no ocupa toda la caja: deja respirar la esfera a la derecha */
+.hero-content > * {
+    max-width: 620px;
+}
+
+.hero-badge {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    color: var(--cobalt-400);
+    border: 1px solid var(--cobalt-border);
+    background-color: var(--cobalt-tint);
+    padding: 6px 16px;
+    border-radius: 50px;
+    margin-bottom: 24px;
+}
+
+.hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.3rem, 4.4vw, 3.6rem); /* Instrument Serif es más estrecho que Inter: subido para que cada frase (separada por <br>) siga cabiendo en 1 línea sin quedar pequeño */
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin-bottom: 24px;
+}
+
+/* El H1 tiene <br> forzado entre las 2 frases: le damos ancho de sobra
+   para que ninguna de las dos se rompa en escritorio */
+@media (min-width: 768px) {
+    .hero-content > .hero-title { max-width: 900px; }
+}
+
+/* "con IA." en azul cobalto de marca (acento del hero) */
+.chrome-text {
+    /* "No sabes por dónde empezar." con degradado azul de marca (claro arriba
+       → cobalto abajo), único punto de color del hero para que el ojo vaya
+       al remate de la segunda frase. */
+    background: linear-gradient(100deg, var(--cobalt-300) 0%, var(--cobalt-400) 30%, var(--cobalt-500) 65%, var(--cobalt-600) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: var(--cobalt-400); /* fallback si el navegador no soporta clip */
+    text-shadow: 0 0 32px var(--cobalt-glow);
+    /* Fix: el relleno transparente cortaba los descendentes ("por", "empezar")
+       — damos aire extra al fondo recortado sin mover el layout. Instrument
+       Serif tiene descendentes más largos que Inter, de ahí el valor mayor. */
+    display: inline-block;
+    padding-bottom: 0.18em;
+    margin-bottom: -0.18em;
+}
+
+.hero-subtitle {
+    font-size: 1.15rem;
+    color: var(--ink-soft);
+    max-width: 580px;
+    margin: 0 0 40px 0;
+    font-weight: 300;
+}
+
+/* CTA WRAPPER */
+.hero-cta-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+/* Botón con brillo de cromo líquido metálico */
+.btn-primary {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 0.94rem;
+    font-weight: 600;
+    color: var(--night-900);
+    background: var(--cobalt-400);
+    padding: 0 24px;
+    min-height: 52px;
+    line-height: 52px;
+    border-radius: 8px; /* Sistema Bosque Inteligente: radio fijo, nunca píldora */
+    text-decoration: none;
+    transition: all 150ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    border: 1px solid transparent;
+}
+
+.btn-primary:hover {
+    transform: translateY(-1px);
+    background: var(--cobalt-300);
+    box-shadow: 0 8px 30px var(--cobalt-glow);
+}
+
+/* SECCIONES: CABECERAS Y TEXTOS COMUNES */
+.section-header {
+    max-width: 700px;
+    margin-bottom: 80px;
+}
+
+.section-header.centered {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.section-label {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.25em;
+    color: var(--cobalt-550);
+    display: block;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.inverse .section-label {
+    color: var(--cobalt-400); /* dorado brillante: --cobalt-700 se pierde sobre fondo oscuro */
+}
+
+.section-title {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+    line-height: 1.2;
+    color: var(--ink);
+}
+
+.section-subtitle {
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+    font-weight: 300;
+}
+
+.glass-card {
+    background-color: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    padding: 40px 32px;
+    box-shadow: 0 20px 40px var(--glass-shadow);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    transition: all 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    transform-style: preserve-3d;
+    transform: perspective(1000px);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efecto Spotlight (Resplandor que sigue al ratón) */
+.glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    background: radial-gradient(350px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), var(--cobalt-tint), transparent 80%);
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 360ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.glass-card:hover::before {
+    opacity: 1;
+}
+
+/* Asegurar que el contenido de la tarjeta esté por encima del resplandor */
+.glass-card > * {
+    position: relative;
+    z-index: 2;
+}
+
+.glass-card:hover {
+    border-color: var(--line-strong);
+    box-shadow: 0 30px 60px var(--glass-shadow);
+    transform: translateY(-5px);
+}
+
+.card-num {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 32px;
+}
+
+.card-title {
+    font-family: var(--font-body);
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: var(--ink);
+}
+
+.card-desc {
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    font-weight: 300;
+}
+
+@keyframes pulseNebula {
+    0% { transform: scale(0.9); opacity: 0.7; }
+    100% { transform: scale(1.1); opacity: 1.1; }
+}
+
+/* ---- SECCIÓN CASOS REALES (carrusel) ---- */
+.caso-section .section-header.centered { max-width: 640px; }
+
+.caso-carousel {
+    margin-top: 48px; /* Sistema Bosque Inteligente: space-7 */
+    overflow: hidden;
+}
+
+.caso-track {
+    display: flex;
+    transition: transform 360ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.caso-slide {
+    flex: 0 0 100%;
+    min-width: 0;
+}
+
+/* Casos y logos son la misma idea (prueba social): se acercan en vez de
+   quedar separados por los 120px genéricos de cada sección. */
+.caso-section {
+    padding-bottom: 64px;
+}
+
+.caso-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 28px;
+}
+
+.caso-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--line-strong);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: all 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.caso-dot.is-active {
+    background: var(--cobalt-600);
+    width: 22px;
+    border-radius: 4px;
+}
+
+.caso-quote-pending {
+    color: var(--ink-mid);
+    font-style: italic;
+}
+
+/* Sin comilla decorativa (.caso-quote-mark), no hace falta el hueco que le deja sitio */
+.caso-quote-col:not(:has(.caso-quote-mark)) .caso-quote-text,
+.caso-quote-col:not(:has(.caso-quote-mark)) .caso-quote-author {
+    padding-left: 0;
+}
+
+.caso-steps {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+    align-items: stretch;
+    margin-bottom: 32px;
+}
+
+/* Las tarjetas iban en --bg sobre una sección que también es --bg: se
+   confundían con el fondo y solo las separaba una sombra difusa, que es
+   lo que se leía como manchón. Ahora tienen superficie propia (arena)
+   y borde definido: se sostienen sin depender de la sombra. */
+.caso-step-card {
+    background-color: var(--bg-alt);
+    border: 1px solid var(--line);
+    border-radius: 12px; /* Sistema Bosque Inteligente: radius-md, cards */
+    padding: 28px 24px;
+    box-shadow: none;
+}
+
+.caso-step-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 14px;
+    color: var(--ink-faint);
+    font-size: 1.3rem;
+}
+
+/* La destacada ya contrasta por color (verde oscuro sobre arena): no
+   necesita halo dorado, que era lo que hacía el borrón alrededor. */
+.caso-step-highlight {
+    background: linear-gradient(155deg, var(--night-800), var(--night-900));
+    border-color: transparent;
+    box-shadow: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.caso-step-highlight::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--cobalt-300), var(--cobalt-400), var(--cobalt-300));
+}
+
+.caso-step-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--cobalt-400);
+    border: 1px solid var(--cobalt-400);
+    color: var(--night-900);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.caso-step-icon-solid {
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    box-shadow: none;
+}
+
+.caso-step-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: var(--cobalt-550);
+    font-weight: 600;
+    display: block;
+    margin-bottom: 14px;
+}
+
+.caso-step-label-solid { color: #fff; }
+
+/* En la tarjeta de empresa el logo SUSTITUYE al icono genérico (antes se
+   apilaban los dos y esa tarjeta quedaba un escalón por debajo de las
+   otras tres). Ocupa la misma caja que .caso-step-icon —44px + 20px de
+   margen— para que etiqueta y título alineen con el resto de tarjetas. */
+.caso-step-logo {
+    height: 44px;
+    width: auto;
+    max-width: 130px;
+    object-fit: contain;
+    object-position: left center;
+    filter: brightness(0);
+    opacity: 0.75;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.caso-step-title {
+    font-size: 1.15rem;
+    font-weight: 500;
+    line-height: 1.35;
+    margin-bottom: 12px;
+    color: var(--ink);
+}
+
+.caso-step-highlight .caso-step-title { color: var(--on-night); }
+
+.caso-step-desc {
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    font-weight: 300;
+    line-height: 1.5;
+}
+
+.caso-step-desc-solid { color: rgba(255, 255, 255, 0.82); }
+
+.caso-quote-card {
+    background-color: var(--bg-alt);
+    border: 1px solid var(--line);
+    border-radius: 12px; /* Sistema Bosque Inteligente: radius-md, cards */
+    box-shadow: none;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    overflow: hidden;
+}
+
+.caso-quote-col {
+    padding: 34px 36px;
+    border-right: 1px solid var(--line);
+    position: relative;
+}
+
+.caso-quote-mark {
+    position: absolute;
+    top: 6px;
+    left: 40px;
+    font-family: var(--font-display);
+    font-size: 5.5rem; /* subido: sin peso 700 real, el trazo de Instrument Serif es más fino */
+    font-weight: 400;
+    line-height: 1;
+    color: var(--cobalt-600);
+    user-select: none;
+}
+
+.caso-quote-text {
+    font-size: 1.25rem;
+    font-weight: 300;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    padding-left: 40px;
+}
+
+.caso-quote-author {
+    font-size: 0.9rem;
+    color: var(--ink-mid);
+    font-weight: 400;
+    margin-top: 20px;
+    padding-left: 40px;
+}
+
+.caso-impact-col { padding: 34px 36px; }
+
+.caso-impact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    margin-top: 28px;
+}
+
+.caso-impact-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.caso-impact-item svg { flex-shrink: 0; }
+
+.caso-impact-num {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    color: var(--cobalt-600);
+}
+
+.caso-impact-label {
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    font-weight: 300;
+    margin-top: 6px;
+}
+
+
+@media (max-width: 900px) {
+    .caso-steps {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    .caso-step-arrow {
+        transform: rotate(90deg);
+        padding: 4px 0;
+    }
+    .caso-quote-card {
+        grid-template-columns: 1fr;
+    }
+    .caso-quote-col {
+        border-right: none;
+        border-bottom: 1px solid var(--glass-border);
+    }
+}
+
+/* ---- GRID DE SERVICIOS EN HOME ---- */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-top: 48px; /* Sistema Bosque Inteligente: space-7 */
+    width: 100%;
+}
+
+/* Las tres tarjetas de pilar llevan filo dorado permanente arriba, igual
+   que .timeline-item: es el acento de marca lo que las separa del fondo
+   arena, no solo el borde gris. */
+.service-card {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--cobalt-400);
+    border-radius: 12px; /* Sistema Bosque Inteligente: radius-md, cards */
+    padding: 32px 30px 36px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    transition: all 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 16px var(--glass-shadow);
+}
+
+.service-card:hover {
+    border-color: var(--line-strong);
+    border-top-color: var(--cobalt-500);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(15, 31, 27, 0.12);
+}
+
+.service-card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* La etiqueta es lo que dice de qué va el pilar: se le da rango con un
+   filo dorado delante en vez de dejarla como texto suelto. Mantiene
+   --cobalt-550 porque es el único dorado que cumple AA sobre --bg-alt
+   (5.50); los tonos más claros lo suspenden en texto pequeño. */
+.service-card .section-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    color: var(--cobalt-550);
+    margin-bottom: 0;
+    text-transform: uppercase;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.service-card .section-label::before {
+    content: "";
+    width: 22px;
+    height: 2px;
+    background: var(--cobalt-500);
+    flex-shrink: 0;
+}
+
+.service-card .card-title {
+    font-family: var(--font-display);
+    font-size: 1.45rem;
+    font-weight: 400;
+    color: var(--ink);
+    margin-top: 4px;
+    line-height: 1.2;
+}
+
+.service-card .card-desc {
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    margin-bottom: 0;
+}
+
+/* Los bullets salían con el punto gris del navegador, que es lo que más
+   abarataba la tarjeta. Marcador dorado propio y texto con más aire. */
+.service-card .card-bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+}
+
+.service-card .card-bullets li {
+    position: relative;
+    padding-left: 20px;
+    font-size: 0.93rem;
+    line-height: 1.55;
+    color: var(--ink-soft);
+}
+
+.service-card .card-bullets li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.58em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--cobalt-500);
+}
+
+/* Separador entre la entradilla y la lista: ordena la lectura sin
+   necesidad de meter más texto ni bordes duros. */
+.service-card .card-bullets {
+    margin-top: 4px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+}
+
+/* SECCIÓN EL MÉTODO (LÍNEA DE TIEMPO / TIMELINE) */
+.timeline {
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+}
+
+/* La tarjeta es .timeline-item entero: superficie propia con contraste
+   real contra el fondo oscuro de la sección, no un contenedor plano
+   que se confunde con el fondo. Borde superior de acento en hover. */
+.timeline-item {
+    background-color: var(--night-800);
+    border: 1px solid var(--night-600);
+    border-top: 3px solid var(--cobalt-400);
+    border-radius: 12px; /* Sistema Bosque Inteligente: radius-md, cards */
+    padding: 8px 32px 32px;
+    overflow: hidden;
+    transition: border-color 220ms cubic-bezier(0.2, 0.8, 0.2, 1), transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.timeline-item:hover {
+    border-color: var(--cobalt-border);
+    border-top-color: var(--cobalt-400);
+    transform: translateY(-4px);
+}
+
+/* Número gigante como marca de agua tipográfica: protagonista real
+   del paso en vez de un círculo pequeño casi invisible sobre oscuro. */
+.timeline-number {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-style: italic;
+    font-size: 5rem;
+    line-height: 1;
+    color: var(--cobalt-400);
+    opacity: 0.5;
+    margin: 0 0 -12px -4px;
+    transition: opacity 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.timeline-item:hover .timeline-number {
+    opacity: 0.85;
+}
+
+.timeline-content {
+    position: relative;
+}
+
+.timeline-title {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 400;
+    margin-bottom: 14px;
+    color: var(--on-night);
+}
+
+.timeline-desc {
+    font-size: 0.95rem;
+    color: var(--on-night-body);
+    font-weight: 300;
+    margin-bottom: 0;
+}
+
+@media (max-width: 900px) {
+    .timeline {
+        grid-template-columns: 1fr;
+        max-width: 600px;
+        gap: 20px;
+    }
+
+    .timeline-number {
+        font-size: 3.5rem;
+    }
+}
+
+
+/* SECCIÓN SOBRE MÍ */
+.grid-two-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+}
+
+/* Eliminadas definiciones duplicadas de retrato y brillo */
+
+/* SECCIÓN SOBRE MÍ: DISEÑO DE MONOLITO DE ALTO IMPACTO */
+.sobremi-section {
+    position: relative;
+    padding: 120px 0 0 0 !important; /* Sin padding inferior para que la silueta descanse en la base */
+    overflow: hidden;
+    min-height: 720px;
+    display: flex;
+    align-items: flex-end;
+}
+
+/* Marca de agua de fondo gigante con texto delineado (detrás de Alberto) */
+.sobremi-bg-text {
+    display: none; /* Ocultado: la foto respira sola sobre el fondo negro (más limpio y premium) */
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 1200px; /* Restauramos la alineación con la cuadrícula de la web */
+    text-align: center; /* Centrado matemático perfecto */
+    font-family: var(--font-body); /* Usamos Inter para evitar la A geométrica de Syne */
+    font-size: clamp(8rem, 29vw, 365px); /* Restauramos el tamaño máximo para que encaje de forma impecable */
+    font-weight: 400; /* Ultra negrita */
+    line-height: 0.8;
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.08); /* Restablecido al delineado sutil original */
+    pointer-events: none;
+    z-index: 0; /* Forzado al fondo del todo */
+    letter-spacing: -0.03em; /* Restablecido al espaciado original */
+    text-transform: uppercase;
+    user-select: none;
+    white-space: nowrap;
+    overflow: hidden;
+    /* Difuminado vertical en las letras para que se disuelvan antes de tocar los bordes de la sección */
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
+}
+
+
+/* Eliminada sobreescritura para mantener el tamaño seguro de 25vw */
+
+.sobremi-visual {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end; /* Alineación al fondo */
+    position: relative;
+    height: 100%;
+    border-radius: 20px; /* Sistema Bosque Inteligente: radius-xl, contenedores especiales */
+    overflow: hidden;
+    padding-top: 40px;
+}
+
+/* Contenedor del retrato de perfil (horizontal), grande e integrado en negro sin marco */
+.sobremi-portrait-container {
+    position: relative;
+    width: 100%; /* Ajustado al ancho de la columna del grid */
+    max-width: none;
+    aspect-ratio: 823 / 744; /* Relación de aspecto del retrato recortado sin márgenes transparentes */
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    transition: all 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    z-index: 2;
+    overflow: visible;
+    margin-bottom: 0;
+    margin-left: 0; /* Sin desborde a la izquierda */
+}
+
+.sobremi-portrait-container:hover {
+    border-color: transparent;
+    box-shadow: none;
+}
+
+.sobremi-portrait {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: none;
+    border-radius: 0;
+    transition: none; /* Inmóvil, sin zoom */
+    /* Fundido en la base ultra difuminado para integrar suavemente la chaqueta con el fondo negro */
+    -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 95%);
+    mask-image: linear-gradient(to bottom, black 55%, transparent 95%);
+}
+
+.sobremi-portrait-container:hover .sobremi-portrait {
+    transform: none; /* Sin zoom */
+}
+
+/* Eliminada capa de división overlay para evitar bordes cortados */
+
+/* Brillo nebuloso cobalto animado detrás de la foto gigante */
+.portrait-glow {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, var(--cobalt-glow), transparent 70%);
+    pointer-events: none;
+    z-index: -1;
+    filter: blur(35px);
+    animation: pulseNebula 8s ease-in-out infinite alternate;
+}
+
+@media (min-width: 992px) {
+    .sobremi-section .container.grid-two-cols {
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 40px;
+        align-items: flex-end; /* Alinea los contenidos de ambas columnas abajo */
+        height: 100%;
+        position: relative;
+        z-index: 2; /* Capa base para el contenedor */
+    }
+    .sobremi-visual {
+        justify-content: flex-start; /* Desplazar la silueta de Alberto hacia el borde izquierdo */
+        padding-left: 0;
+        z-index: 3; /* Forzamos un z-index superior en la silueta para corregir el bug de renderizado de Chrome */
+    }
+    .sobremi-text {
+        padding-bottom: 120px; /* Compensa la altura empujando el texto hacia arriba */
+        margin-left: 0; /* Sin superposición negativa */
+        z-index: 5;
+        position: relative;
+    }
+}
+
+/* Responsive para pantallas medianas/móviles */
+@media (max-width: 991px) {
+    .sobremi-section {
+        padding: 80px 0 !important;
+        min-height: auto;
+        display: block;
+    }
+    .sobremi-bg-text {
+        display: none; /* Se oculta en móviles para evitar colisiones y el efecto de letras cortadas por el fade de la foto */
+    }
+    .sobremi-visual {
+        align-items: center;
+        margin-bottom: 30px;
+    }
+    .sobremi-portrait-container {
+        max-width: 500px; /* Foto de perfil horizontal centrada en móvil */
+        aspect-ratio: 823 / 744;
+        width: 100%;
+        margin: 0 auto;
+        margin-left: auto;
+    }
+    .sobremi-portrait {
+        position: relative;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        max-width: 100%;
+        -webkit-mask-image: linear-gradient(to bottom, black 65%, transparent 95%);
+        mask-image: linear-gradient(to bottom, black 65%, transparent 95%);
+    }
+    .sobremi-text {
+        text-align: center;
+        align-items: center;
+        padding-bottom: 0;
+    }
+    .sobremi-text .hero-badge {
+        align-self: center !important;
+    }
+}
+
+.sobremi-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.sobremi-p {
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+    font-weight: 300;
+    margin-bottom: 24px;
+}
+
+/* SECCIÓN FORMULARIO DE RESERVA (DISEÑO PREMIUM CON BORDER BEAM MINIMALISTA) */
+.glass-form-container {
+    max-width: 750px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    border-radius: 12px;
+    overflow: hidden; /* Corta el haz de luz giratorio para que solo se vea en el borde */
+    padding: 1px; /* Espacio de 1px que actuará como borde animado */
+    background: transparent; /* Transparente por defecto para dejar ver el haz de luz siempre */
+}
+
+/* El haz de luz cobalto giratorio súper lento y sutil (estilo minimalista) activo por defecto */
+.glass-form-container::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(
+        from 0deg,
+        transparent 0deg,
+        transparent 160deg,
+        var(--cobalt-border) 270deg,
+        transparent 360deg
+    );
+    animation: rotateBorderBeam 12s linear infinite; /* Animación ultra lenta (12 segundos) */
+    z-index: -2;
+    pointer-events: none;
+    opacity: 0.5; /* Reducido: destello más sutil, menos protagonista */
+}
+
+.glass-form {
+    background-color: var(--bg); /* Fondo claro que bloquea la luz central y deja ver el borde cristalino */
+    border: none; /* Quitamos el borde por defecto ya que el contenedor con padding hace de borde */
+    border-radius: 11px; /* Ligeramente menor para encajar perfecto */
+    padding: 48px;
+    box-shadow: 0 30px 60px var(--glass-shadow);
+    position: relative;
+    z-index: 1;
+}
+
+@keyframes rotateBorderBeam {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    position: absolute;
+    left: 18px;
+    right: 18px;
+    top: 17px;
+    font-size: 0.9rem;
+    color: var(--ink-mid);
+    pointer-events: none;
+    transition: all 150ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    margin-bottom: 0;
+    font-weight: 400;
+    z-index: 2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* En el área de texto la etiqueta se alinea más arriba */
+.form-group textarea ~ label {
+    top: 18px;
+}
+
+.form-group input,
+.form-group textarea {
+    background-color: var(--bg-input);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 24px 18px 8px 18px; /* Espacio superior para alojar la etiqueta flotada */
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    transition: all 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    position: relative;
+    z-index: 1;
+}
+
+/* Ocultar placeholders por defecto y mostrarlos solo en focus */
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: var(--ink-faint);
+    opacity: 0;
+    transition: opacity 150ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.form-group.focused input::placeholder,
+.form-group.focused textarea::placeholder {
+    opacity: 1;
+}
+
+/* Estado de etiqueta flotada activa */
+.form-group.focused label,
+.form-group.has-value label {
+    top: 6px;
+    left: 18px;
+    font-size: 0.72rem;
+    color: var(--ink-mid);
+}
+
+.form-group.focused label {
+    color: var(--cobalt-600); /* Color de acento cobalto activo */
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--cobalt-border);
+    background-color: var(--bg);
+    box-shadow: 0 0 20px var(--cobalt-glow);
+}
+
+/* Botón de envío de formulario en cobalto */
+.btn-submit {
+    display: block;
+    width: 100%;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--night-900);
+    background: var(--cobalt-400);
+    border: 1px solid transparent;
+    padding: 16px;
+    min-height: 52px;
+    border-radius: 8px; /* Sistema Bosque Inteligente: radio fijo, nunca píldora */
+    cursor: pointer;
+    transition: all 150ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    box-shadow: 0 8px 20px var(--cobalt-glow);
+}
+
+.btn-submit:hover {
+    transform: translateY(-1px);
+    background: var(--cobalt-300);
+    box-shadow: 0 8px 30px var(--cobalt-glow);
+}
+
+.form-note {
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    color: var(--ink-mid);
+    text-align: center;
+    margin-top: 10px;
+    line-height: 1.5;
+}
+
+.form-check-wrap {
+    margin-bottom: 20px;
+}
+
+.form-check {
+    position: static;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+    pointer-events: auto;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--ink-mid);
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+}
+
+.form-check input[type="checkbox"] {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    accent-color: var(--cobalt-600);
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.form-check a {
+    color: var(--cobalt-700);
+    text-decoration: underline;
+}
+
+.form-check a:hover {
+    color: var(--cobalt-800);
+}
+
+.form-message {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    text-align: center;
+    margin-top: 20px;
+    min-height: 24px;
+}
+
+.form-message.success {
+    color: var(--verde);
+}
+
+.form-message.error {
+    color: var(--rojo);
+}
+
+/* =============================================================
+   FOOTER PREMIUM: CRISTAL LÍQUIDO & VÍDEO VOLCÁNICO DE FONDO
+   ============================================================= */
+
+/* Contenedor principal de la sección del footer (Estilo integrado clásico) */
+.footer-section {
+    position: relative;
+    padding: 96px 0 64px 0; /* Sistema Bosque Inteligente: space-10 arriba, space-8 abajo */
+    width: 100%;
+    border-top: 1px solid var(--night-600); /* Línea de división superior de estilo Apple/Vercel */
+}
+
+
+/* Layout Grid Superior */
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1.8fr;
+    gap: 64px; /* Sistema Bosque Inteligente: space-8 */
+    margin-bottom: 64px;
+}
+
+.footer-brand-col {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.footer-logo-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--on-night);
+}
+
+.footer-logo-wrap svg {
+    color: var(--on-night);
+}
+
+.footer-brand-desc {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--on-night-soft);
+    max-width: 380px;
+    font-weight: 300;
+}
+
+/* Grid de Enlaces */
+.footer-links-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+}
+
+.footer-links-title {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    tracking-wider: 0.15em;
+    color: var(--on-night);
+    font-weight: 600;
+    margin-bottom: 24px;
+}
+
+.footer-links-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.footer-links-list a {
+    font-size: 0.8rem;
+    color: var(--on-night-soft);
+    text-decoration: none;
+    transition: color 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    font-weight: 300;
+}
+
+.footer-links-list a:hover {
+    color: var(--on-night);
+}
+
+/* Fila Inferior (Bottom Bar) */
+.footer-bottom-bar {
+    border-top: 1px solid var(--night-600);
+    padding-top: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-curator {
+    font-size: 0.75rem;
+    text-transform: lowercase;
+    letter-spacing: 0.15em;
+    color: var(--on-night-mid);
+}
+
+.footer-social-wrap {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.footer-social-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--on-night-mid);
+}
+
+.footer-social-icons {
+    display: flex;
+    gap: 16px;
+}
+
+.footer-social-icons a {
+    color: var(--on-night-soft);
+    transition: all 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    display: flex;
+    align-items: center;
+}
+
+.footer-social-icons a:hover {
+    color: var(--on-night);
+    transform: translateY(-2px);
+}
+
+/* ANIMACIONES COMUNES */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes zoom3dIn {
+    0% {
+        /* sin opacity:0 — el texto es visible desde el primer frame (LCP) */
+        transform: scale(0.98) translateY(8px);
+    }
+    100% {
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* =============================================================
+   PRUEBA SOCIAL — LOGOS DE CLIENTES (marquesina)
+   ============================================================= */
+
+/* Va justo antes del formulario: última validación antes de decidir.
+   Hereda el padding estándar de .section (120px). */
+
+/* Los logos son el cierre de la prueba social que empieza en los casos,
+   no una sección aparte: con los 120px genéricos arriba y abajo quedaba
+   un vacío de más de 300px contra el carrusel. Se comprime a la mitad. */
+.clientes-section {
+    padding-top: 56px;
+    padding-bottom: 72px;
+}
+
+.clientes-title {
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.logos-marquee {
+    width: 100%;
+}
+
+/* Fila fija centrada: con 4 logos una marquesina deja un hueco visible al girar */
+.logos-track {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 70px;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* Fondo claro: brightness(0) deja los logos en negro puro, sin invert.
+   No todos los PNG/SVG traen color de marca propio (ej. Mafhesa es blanco
+   puro sin brightness(0)), así que el filtro se queda fijo siempre: no se
+   puede prometer color real en hover para los 4 por igual. */
+.logo-cliente {
+    height: 80px;
+    width: auto;
+    flex-shrink: 0;
+    object-fit: contain;
+    filter: brightness(0);
+    opacity: 0.75;
+    transition: opacity 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.logo-cliente:hover {
+    opacity: 1;
+}
+
+/* En móvil una sola fila no cabe: rejilla 2x2 con celdas iguales, así
+   ningún logo queda descolgado por ser más ancho que el resto. */
+@media (max-width: 768px) {
+    .logos-track {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 32px 20px;
+        justify-items: center;
+        align-items: center;
+        padding: 0 20px;
+    }
+    .logo-cliente {
+        height: 46px;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 380px) {
+    .logo-cliente {
+        height: 38px;
+    }
+}
+
+/* MEDIA QUERIES (DISEÑO RESPONSIVE) */
+@media (max-width: 1024px) {
+    .hero-title {
+        font-size: 3.6rem; /* Instrument Serif más estrecho que Inter: recalibrado junto al clamp de arriba */
+    }
+    .services-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+    }
+    .grid-two-cols {
+        grid-template-columns: 1fr;
+        gap: 48px;
+    }
+    .sobremi-visual {
+        order: 2;
+    }
+    .sobremi-text {
+        order: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    .service-card {
+        min-height: auto;
+        padding: 28px 22px;
+    }
+    .nav-menu, .nav-btn {
+        display: none; /* En móvil manda la hamburguesa */
+    }
+    .nav-burger {
+        display: flex;
+    }
+    .nav-mobile {
+        display: flex; /* visible pero oculto por opacity hasta .open */
+    }
+    .hero-title {
+        font-size: 2.8rem; /* Instrument Serif más estrecho que Inter: recalibrado junto al clamp de arriba */
+    }
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+    .hero-content {
+        padding: 0 24px;
+    }
+    .hero-content > * {
+        text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+    }
+    .section {
+        padding: 80px 0;
+    }
+    .section-title {
+        font-size: 2rem;
+    }
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+    .glass-form {
+        padding: 32px 24px;
+    }
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    .footer-links-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+    }
+    .footer-bottom-bar {
+        flex-direction: column;
+        gap: 20px;
+        align-items: flex-start;
+    }
+    /* OJO: la version movil de .whatsapp-float NO va aqui. La regla de
+       escritorio se define mas abajo (~linea 2850) y la anulaba, dejandola
+       en 60px en movil. Ahora vive justo despues de esa definicion. */
+}
+
+@media (max-width: 480px) {
+    .footer-links-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+    .hero-subtitle {
+        color: rgba(246, 245, 242, 0.82); /* --text-primary atenuado: legible sin ser blanco puro */
+        font-size: 0.95rem;
+    }
+    .hero-content > * {
+        text-shadow: 0 2px 16px rgba(0, 0, 0, 0.85);
+    }
+    .glass-form {
+        padding: 24px 16px;
+    }
+    .form-group input,
+    .form-group textarea {
+        padding: 22px 14px 8px 14px;
+        font-size: 1rem; /* evita el zoom automático de iOS en inputs <16px */
+    }
+    .form-group label {
+        left: 14px;
+    }
+}
+
+/* =============================================================
+   ADICIONES: SCROLL REVEAL, WHATSAPP FLOATING Y SCROLLBAR
+   ============================================================= */
+
+/* SCROLL REVEAL ANIMATIONS */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 360ms cubic-bezier(0.2, 0.8, 0.2, 1), 
+                transform 360ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Retrasos secuenciales adicionales */
+.timeline-item:nth-child(1) { transition-delay: 0.1s; }
+.timeline-item:nth-child(2) { transition-delay: 0.2s; }
+.timeline-item:nth-child(3) { transition-delay: 0.3s; }
+
+.caminos-section .grid-two-cols > div:nth-child(1) { transition-delay: 0.1s; }
+.caminos-section .grid-two-cols > div:nth-child(2) { transition-delay: 0.25s; }
+
+/* BOTÓN DE WHATSAPP FLOTANTE */
+.whatsapp-float {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    width: 60px;
+    height: 60px;
+    /* Dorado sólido, igual que la burbuja de Alba: el dorado es el ÚNICO
+       color de marca del sistema, así que el verde oficial de WhatsApp
+       queda fuera. El icono sigue siendo el logo reconocible de WhatsApp. */
+    background-color: var(--cobalt-300);
+    border: 1px solid var(--cobalt-600);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    /* Sombra suave en verde bosque, no negra: con fondo sólido la sombra
+       negra ensuciaba el halo. Sin backdrop-filter, que ya no aplica. */
+    box-shadow: 0 6px 20px rgba(15, 31, 27, 0.22);
+    transition: all 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+/* Version movil. Va DESPUES de la regla de escritorio a proposito: si se
+   declara antes (en el bloque @media general de arriba), la de escritorio
+   la anula y la burbuja se queda en 60px tambien en movil, desalineandose
+   de la de Alba. Mismo right y mismo tamaño que .acw-bubble en movil. */
+@media (max-width: 768px) {
+    .whatsapp-float {
+        bottom: 20px;
+        right: 20px;
+        width: 54px;
+        height: 54px;
+    }
+}
+
+/* Icono en verde bosque sobre el dorado: mismo tratamiento que la burbuja
+   de Alba, para que los dos widgets se lean como pareja. */
+.whatsapp-icon {
+    width: 30px;
+    height: 30px;
+    fill: var(--night-900);
+    transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1) translateY(-3px);
+    background-color: var(--cobalt-200);
+    box-shadow: 0 15px 40px rgba(15, 31, 27, 0.28);
+}
+
+.whatsapp-float:hover .whatsapp-icon {
+    transform: rotate(10deg);
+}
+
+/* Tooltip de WhatsApp: burbuja oscura flotante, independiente del fondo bajo ella */
+.whatsapp-tooltip {
+    position: absolute;
+    right: 76px;
+    top: 50%;
+    transform: translateY(-50%) translateX(10px);
+    background-color: var(--night-900);
+    border: 1px solid var(--night-600);
+    color: var(--on-night);
+    padding: 8px 16px;
+    border-radius: 8px; /* Sistema Bosque Inteligente: radius-sm */
+    font-size: 0.8rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    box-shadow: 0 10px 20px rgba(15, 31, 27, 0.3);
+}
+
+.whatsapp-float:hover .whatsapp-tooltip {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+}
+
+/* Scrollbar: reglas transversales ya en design-system/tokens.css */
+
+/* =============================================================
+   ESTILOS DE CONTENIDO ADICIONALES (FAQ, BOTONES, FORMATO)
+   ============================================================= */
+
+/* Botón secundario de texto en Hero */
+/* Botón primario de tarjetas secundarias, en dorado */
+.btn-primary-small {
+    display: inline-block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--night-900);
+    background: var(--cobalt-400);
+    padding: 0 20px;
+    min-height: 48px;
+    line-height: 48px;
+    border-radius: 8px; /* Sistema Bosque Inteligente: radio fijo, nunca píldora */
+    text-decoration: none;
+    transition: all 150ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    border: 1px solid transparent;
+}
+
+.btn-primary-small:hover {
+    transform: translateY(-1px);
+    background: var(--cobalt-300);
+    box-shadow: 0 4px 15px var(--cobalt-glow);
+}
+
+/* Fila de CTAs dentro de tarjeta (botón + enlace fantasma) */
+.card-cta-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.btn-ghost-link {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--ink-mid);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line-strong);
+    padding-bottom: 2px;
+    transition: all 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.btn-ghost-link:hover {
+    color: var(--ink);
+    border-color: var(--ink-mid);
+}
+
+/* Ajuste de espacio para dos columnas */
+.gap-40 {
+    gap: 40px !important;
+}
+
+/* Estilo para las FAQ */
+.faq-container {
+    max-width: 850px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.faq-item {
+    background-color: var(--bg);
+    border: 1px solid var(--line);
+    border-left: 3px solid transparent;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px var(--glass-shadow);
+    transition: all 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    overflow: hidden;
+}
+
+.faq-item:hover {
+    border-color: var(--line-strong);
+    border-left-color: var(--cobalt-border);
+}
+
+.faq-trigger {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 26px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    cursor: pointer;
+    text-align: left;
+    outline: none;
+}
+
+.faq-question {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0;
+}
+
+.faq-icon {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--cobalt-600);
+    background: var(--cobalt-tint);
+    border: 1px solid var(--cobalt-border);
+    border-radius: 50%;
+    transition: all 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    line-height: 1;
+}
+
+.faq-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    padding: 0; /* Sin padding en el contenedor animado para evitar bugs de scrollHeight */
+}
+
+.faq-answer {
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    font-weight: 300;
+    line-height: 1.6;
+    margin: 0;
+    padding: 8px 32px 32px 32px; /* Padding interior completo en el propio párrafo (evita cortes de bordes) */
+}
+
+.faq-item.active {
+    border-color: var(--cobalt-border);
+    border-left-color: var(--cobalt-600);
+    background-color: var(--cobalt-tint);
+}
+
+.faq-item.active .faq-icon {
+    transform: rotate(45deg); /* '+' se convierte en 'x' */
+    color: var(--night-900);
+    background: var(--cobalt-400);
+    border-color: var(--cobalt-400);
+}
+
+.faq-item.active .faq-content {
+    /* El padding ya se maneja de forma segura en .faq-answer */
+}
+
+/* =============================================================
+   HIGHLIGHT CAMINO B (DAI360) - ACCENTUACIÓN DE LA ESTRUCTURA
+   ============================================================= */
+.caminos-section .grid-two-cols > div:last-child {
+    border-color: var(--cobalt-border) !important;
+    box-shadow: 0 4px 16px var(--glass-shadow);
+    position: relative;
+}
+
+/* Badge en ::after (el ::before lo usa el spotlight de .glass-card — antes chocaban
+   y al hacer hover el badge se estiraba a toda la tarjeta en azul) */
+.caminos-section .grid-two-cols > div:last-child::after {
+    content: 'CAMINO RECOMENDADO';
+    position: absolute;
+    width: auto;
+    height: auto;
+    top: 20px;
+    right: 20px;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    background: linear-gradient(135deg, var(--cobalt-500) 0%, var(--cobalt-700) 100%);
+    color: #ffffff;
+    padding: 4px 14px;
+    border-radius: 50px;
+    box-shadow: 0 4px 15px var(--cobalt-glow);
+    z-index: 5;
+    opacity: 1;
+    pointer-events: none;
+}
+
+/* =============================================================
+   LOS DOS CAMINOS — tratamiento especial
+   ============================================================= */
+.caminos-wrap { position: relative; }
+
+.camino-card {
+    padding: 52px 40px 44px;
+    overflow: hidden; /* contiene la letra gigante */
+}
+
+/* Letra gigante fantasma de fondo */
+.camino-letra {
+    position: absolute;
+    right: -14px;
+    bottom: -58px;
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 13rem;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    color: var(--ink-decor);
+    opacity: 0.06;
+    pointer-events: none;
+    user-select: none;
+    z-index: 1;
+    transition: color 360ms cubic-bezier(0.2, 0.8, 0.2, 1), opacity 360ms cubic-bezier(0.2, 0.8, 0.2, 1), transform 360ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.camino-b .camino-letra { color: var(--cobalt-600); opacity: 0.05; }
+.camino-card:hover .camino-letra { transform: translateY(-8px); }
+.camino-card:hover.camino-b .camino-letra { opacity: 0.09; }
+
+/* Línea de acento en el borde superior de cada tarjeta */
+.camino-edge {
+    position: absolute;
+    top: 0;
+    left: 10%;
+    right: 10%;
+    height: 1.5px;
+    background: linear-gradient(90deg, transparent, var(--line-strong), transparent);
+    z-index: 3;
+}
+
+.camino-b .camino-edge {
+    background: linear-gradient(90deg, transparent, var(--cobalt-600), transparent);
+    box-shadow: 0 0 14px var(--cobalt-glow);
+}
+
+/* Conector "o" entre las dos tarjetas (una u otra) */
+.caminos-vs {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 46px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--ink-mid);
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    box-shadow: 0 0 0 8px var(--bg-alt), 0 0 30px var(--cobalt-tint);
+    z-index: 6;
+    pointer-events: none;
+}
+
+@media (max-width: 1024px) {
+    .caminos-vs { display: none; } /* en columna no tiene sentido el conector */
+    .camino-letra { font-size: 9rem; bottom: -40px; }
+}
+
+/* Ajustes adicionales del Problema */
+.problema-body {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.problema-text {
+    font-size: 1.1rem;
+    color: var(--ink-soft);
+    font-weight: 300;
+}
+
+.problema-text.highlight {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.3;
+}
+
+/* =============================================================
+   FONDOS ALTERNOS DE SECCIÓN (ritmo claro/gris entre bloques)
+   ============================================================= */
+.problema-section {
+    background: var(--bg);
+}
+
+.soluciones-section {
+    background: var(--bg-alt);
+}
+
+/* El titular gana rango por tamaño y ancho de línea, no por grosor:
+   Instrument Serif solo tiene un peso, y forzar negrita la emborrona. */
+.soluciones-section .section-title {
+    font-size: 2.7rem;
+    letter-spacing: -0.025em;
+    max-width: 22ch;
+}
+
+.soluciones-section .section-subtitle {
+    max-width: 62ch;
+    line-height: 1.7;
+}
+
+.caminos-section:not(.inverse) {
+    background-color: var(--bg);
+}
+
+.contacto-section {
+    background-color: var(--bg-alt) !important;
+    padding-bottom: 120px !important; /* Espaciado estándar restaurado para separar del footer */
+}
+
+/* FONDOS ALTERNOS DE SECCIONES (ESTILO APPLE/VERCEL) */
+.faq-section {
+    background-color: var(--bg-alt);
+}
+
+/* =============================================================
+   FONDO ESTÁTICO DE ESTRELLAS (CRISP & DETALLADO)
+   ============================================================= */
+/* =============================================================
+   ACCESIBILIDAD: MOVIMIENTO REDUCIDO
+   ============================================================= */
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .hero-content, .navbar { animation-duration: 0.01s; animation-delay: 0s; }
+    .glass-form-container::before { animation: none; }
+}

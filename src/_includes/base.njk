@@ -1,0 +1,112 @@
+{#- ============================================================
+    base.njk — esqueleto comun de todas las paginas
+    ============================================================
+    Reproduce el <head> que hoy esta copiado en 12 paginas. El orden
+    de las etiquetas es el del original a proposito: el Consent Mode
+    tiene que ir ANTES de GTM (si llega despues, la etiqueta ya habria
+    evaluado "denied" y no se re-dispara).
+
+    Variables que espera del frontmatter de cada pagina:
+      title, description, slug, ogType, ogTitle, ogDescription, ogImage,
+      publicada, modificada, schemas (lista de bloques JSON-LD ya
+      serializados), cssExtra, paginaActual
+    ============================================================ -#}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Google Consent Mode v2: denegado por defecto, o el valor ya guardado
+         por el visitante, antes de que cargue GTM (si esto llegara despues
+         de gtm.js, la etiqueta ya habria evaluado "denied" y no se re-dispara). -->
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    (function () {
+        var consentimientoGuardado = 'denied';
+        try {
+            var raw = localStorage.getItem('acc_consent_v1');
+            if (raw) {
+                var data = JSON.parse(raw);
+                if (data && data.analytics === true) consentimientoGuardado = 'granted';
+            }
+        } catch (e) { /* localStorage no disponible: se queda en denied */ }
+        gtag('consent', 'default', {
+            'analytics_storage': consentimientoGuardado,
+            'ad_storage': 'denied',
+            'ad_user_data': 'denied',
+            'ad_personalization': 'denied',
+            'wait_for_update': 500
+        });
+    })();
+    </script>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','{{ site.gtm }}');</script>
+    <!-- End Google Tag Manager -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{ description }}">
+    <title>{{ title }}</title>
+
+    <!-- SEO técnico -->
+    <link rel="canonical" href="{{ site.dominio }}/{{ slug }}/">
+    <meta name="robots" content="{{ robots | default('index, follow') }}">
+    <meta name="author" content="{{ site.autor }}">
+    <meta name="theme-color" content="{{ themeColor | default('#0E1116') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png">
+    <link rel="icon" type="image/x-icon" href="/assets/img/favicon.ico">
+    <link rel="apple-touch-icon" href="/assets/img/favicon-512.png">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="{{ ogType | default('article') }}">
+    <meta property="og:locale" content="es_ES">
+    <meta property="og:url" content="{{ site.dominio }}/{{ slug }}/">
+    <meta property="og:site_name" content="{{ site.autor }}">
+    <meta property="og:title" content="{{ ogTitle | default(title) }}">
+    <meta property="og:description" content="{{ ogDescription | default(description) }}">
+    <meta property="og:image" content="{{ ogImage }}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="675">
+{%- if publicada %}
+    <meta property="article:published_time" content="{{ publicada }}">
+    <meta property="article:modified_time" content="{{ modificada | default(publicada) }}">
+    <meta property="article:author" content="{{ site.autor }}">
+{%- endif %}
+
+    <!-- Twitter/X Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ twitterTitle | default(ogTitle) | default(title) }}">
+    <meta name="twitter:description" content="{{ twitterDescription | default(ogDescription) | default(description) }}">
+    <meta name="twitter:image" content="{{ ogImage }}">
+{%- if schemas %}
+{% for bloque in schemas %}
+    <script type="application/ld+json">
+{{ bloque | safe }}
+    </script>
+{% endfor %}
+{%- endif %}
+
+    <!-- Fuente: Inter (Syne retirada: no la usaba ninguna regla) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/design-system/tokens.css?v={{ site.cssVersion }}">
+{%- block estilos %}{% endblock %}
+    <link rel="stylesheet" href="/assets/cookies/cookie-banner.css">
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ site.gtm }}"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+{% include "nav.njk" %}
+{% block contenido %}{{ content | safe }}{% endblock %}
+{% include "footer.njk" %}
+{%- block scripts %}{% endblock %}
+    <script src="/assets/cookies/cookie-banner.js" defer></script>
+</body>
+</html>

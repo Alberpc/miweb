@@ -1,0 +1,250 @@
+/* ==========================================================================
+   Banner de consentimiento de cookies - albercabrera.com
+   Prefijo .acc- (alber cookie consent) para no pisar index.css ni el chat.
+   ========================================================================== */
+
+/* Paleta alineada con el sistema Bosque Inteligente (design-system/tokens.css).
+   Antes usaba el azul cobalto #3b5eff de la etapa anterior de la web.
+   Los valores van literales, no con var(--cobalt-*), porque este banner
+   se carga en páginas donde tokens.css puede no estar presente.
+
+   --acc-accent es FONDO con texto blanco encima (botón primario, switch):
+   por eso es --cobalt-600 (#6E5628), 6.94 de contraste con blanco.
+   --acc-accent-soft es TEXTO sobre fondo oscuro: --cobalt-300 (9.09). */
+.acc-root {
+    --acc-bg: #131F1B;
+    --acc-bg-deep: #0F1F1B;
+    --acc-text: #F3F5F2;
+    --acc-text-soft: #9EA89F;
+    --acc-accent: #6E5628;
+    --acc-accent-soft: #D6BA82;
+    --acc-border: rgba(214, 186, 130, 0.14);
+    --acc-font: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.acc-banner {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10000;
+    display: none;
+    justify-content: center;
+    padding: 20px;
+    font-family: var(--acc-font);
+}
+
+.acc-banner--on {
+    display: flex;
+}
+
+.acc-card {
+    width: 100%;
+    max-width: 720px;
+    background: var(--acc-bg);
+    border: 1px solid var(--acc-border);
+    border-radius: 8px;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
+    padding: 22px 24px;
+    color: var(--acc-text);
+}
+
+.acc-text {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--acc-text-soft);
+    margin: 0 0 16px 0;
+}
+
+.acc-text a {
+    color: var(--acc-accent-soft);
+    text-decoration: underline;
+}
+
+.acc-text a:hover {
+    color: var(--acc-text);
+}
+
+.acc-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.acc-btn {
+    font-family: var(--acc-font);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    border-radius: 4px;
+    padding: 11px 18px;
+    cursor: pointer;
+    border: 1px solid var(--acc-border);
+    background: transparent;
+    color: var(--acc-text-soft);
+    transition: all 0.2s ease;
+}
+
+.acc-btn:hover {
+    color: var(--acc-text);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.acc-btn--primary {
+    background: var(--acc-accent);
+    border-color: var(--acc-accent);
+    color: #ffffff;
+}
+
+.acc-btn--primary:hover {
+    background: #D6BA82;
+    border-color: #D6BA82;
+}
+
+.acc-btn:focus-visible {
+    outline: 2px solid var(--acc-accent-soft);
+    outline-offset: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   Panel de preferencias (categorias)
+   -------------------------------------------------------------------------- */
+
+.acc-prefs {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    margin: 4px 0 16px 0;
+    padding-top: 14px;
+    border-top: 1px solid var(--acc-border);
+}
+
+.acc-prefs--on {
+    display: flex;
+}
+
+.acc-pref-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.acc-pref-info {
+    flex: 1 1 auto;
+}
+
+.acc-pref-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--acc-text);
+    margin: 0 0 2px 0;
+}
+
+.acc-pref-desc {
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--acc-text-soft);
+    margin: 0;
+}
+
+/* Switch */
+.acc-switch {
+    position: relative;
+    flex-shrink: 0;
+    width: 40px;
+    height: 22px;
+}
+
+.acc-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.acc-switch-track {
+    position: absolute;
+    inset: 0;
+    background: #333333;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.acc-switch-track::before {
+    content: "";
+    position: absolute;
+    left: 3px;
+    top: 3px;
+    width: 16px;
+    height: 16px;
+    background: #ffffff;
+    border-radius: 50%;
+    transition: transform 0.2s ease;
+}
+
+.acc-switch input:checked + .acc-switch-track {
+    background: var(--acc-accent);
+}
+
+.acc-switch input:checked + .acc-switch-track::before {
+    transform: translateX(18px);
+}
+
+.acc-switch input:disabled + .acc-switch-track {
+    background: #444444;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.acc-switch input:focus-visible + .acc-switch-track {
+    outline: 2px solid var(--acc-accent-soft);
+    outline-offset: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   Boton flotante para reabrir preferencias (footer / esquina)
+   -------------------------------------------------------------------------- */
+
+.acc-reopen {
+    background: none;
+    border: none;
+    padding: 0;
+    color: inherit;
+    font: inherit;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* --------------------------------------------------------------------------
+   Movil
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 640px) {
+    .acc-banner {
+        padding: 12px;
+    }
+
+    .acc-card {
+        padding: 18px 16px;
+    }
+
+    .acc-actions {
+        flex-direction: column-reverse;
+    }
+
+    .acc-btn {
+        width: 100%;
+        text-align: center;
+        padding: 13px 18px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .acc-btn,
+    .acc-switch-track,
+    .acc-switch-track::before {
+        transition: none;
+    }
+}

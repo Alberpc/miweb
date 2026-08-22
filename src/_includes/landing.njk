@@ -1,0 +1,19 @@
+{#- landing.njk — layout de las landings/articulos del blog.
+    Anyade sobre base.njk lo que solo necesitan estas paginas:
+    el CSS que antes iba inline (261 lineas x 6 copias) y el JS comun.
+    `cssExtra` permite a una pagina suelta meter reglas propias sin
+    volver a duplicar el bloque entero. -#}
+{% extends "base.njk" %}
+
+{% block estilos %}
+    <link rel="stylesheet" href="/css/landing.css?v={{ site.cssVersion }}">
+{%- if cssExtra %}
+    <style>
+{{ cssExtra | safe }}
+    </style>
+{%- endif %}
+{% endblock %}
+
+{% block scripts %}
+    <script src="/assets/js/landing.js" defer></script>
+{% endblock %}
