@@ -1,0 +1,130 @@
+/* Alberto Cabrera — Bosque Inteligente v1.0
+   Design system tokens. Keep this file as source of truth.
+*/
+:root {
+  /* Color */
+  --ac-color-forest-950: #0F1F1B;
+  --ac-color-forest-800: #274C3B;
+  --ac-color-sage-500: #5E7F6D;
+  --ac-color-ivory-050: #F3F5F2;
+  --ac-color-sand-100: #E6E1D7;
+  --ac-color-gold-500: #C8A85E;
+
+  --ac-color-text-on-dark: var(--ac-color-ivory-050);
+  --ac-color-text-on-light: var(--ac-color-forest-950);
+  --ac-color-text-muted: var(--ac-color-sage-500);
+  --ac-color-surface-primary: var(--ac-color-forest-950);
+  --ac-color-surface-secondary: var(--ac-color-forest-800);
+  --ac-color-surface-light: var(--ac-color-ivory-050);
+  --ac-color-surface-warm: var(--ac-color-sand-100);
+  --ac-color-accent: var(--ac-color-gold-500);
+
+  /* Typography */
+  --ac-font-display: "Instrument Serif", Georgia, serif;
+  --ac-font-ui: "Inter", Arial, sans-serif;
+
+  --ac-type-display-xl-size: 64px;
+  --ac-type-display-xl-line: 66px;
+  --ac-type-display-lg-size: 52px;
+  --ac-type-display-lg-line: 56px;
+  --ac-type-h1-size: 44px;
+  --ac-type-h1-line: 48px;
+  --ac-type-h2-size: 32px;
+  --ac-type-h2-line: 38px;
+  --ac-type-h3-size: 24px;
+  --ac-type-h3-line: 30px;
+  --ac-type-body-lg-size: 18px;
+  --ac-type-body-lg-line: 29px;
+  --ac-type-body-size: 16px;
+  --ac-type-body-line: 26px;
+  --ac-type-body-sm-size: 14px;
+  --ac-type-body-sm-line: 22px;
+  --ac-type-label-size: 12px;
+  --ac-type-label-line: 16px;
+  --ac-type-button-size: 15px;
+  --ac-type-button-line: 20px;
+
+  /* Spacing */
+  --ac-space-1: 4px;
+  --ac-space-2: 8px;
+  --ac-space-3: 12px;
+  --ac-space-4: 16px;
+  --ac-space-5: 24px;
+  --ac-space-6: 32px;
+  --ac-space-7: 48px;
+  --ac-space-8: 64px;
+  --ac-space-9: 80px;
+  --ac-space-10: 96px;
+  --ac-space-11: 120px;
+
+  /* Radius */
+  --ac-radius-sm: 8px;
+  --ac-radius-md: 12px;
+  --ac-radius-lg: 16px;
+  --ac-radius-xl: 20px;
+  --ac-radius-pill: 999px;
+
+  /* Layout */
+  --ac-container-max: 1200px;
+  --ac-container-wide: 1280px;
+  --ac-gutter-desktop: 32px;
+  --ac-gutter-tablet: 24px;
+  --ac-gutter-mobile: 20px;
+  --ac-grid-gap: 24px;
+
+  /* Motion */
+  --ac-motion-fast: 150ms;
+  --ac-motion-base: 220ms;
+  --ac-motion-slow: 360ms;
+  --ac-ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  /* Shadows */
+  --ac-shadow-subtle: 0 8px 24px rgba(15, 31, 27, 0.08);
+  --ac-shadow-soft: 0 16px 40px rgba(15, 31, 27, 0.10);
+}
+
+/* Component examples */
+.ac-btn {
+  min-height: 48px;
+  padding: 0 20px;
+  border-radius: var(--ac-radius-sm);
+  font-family: var(--ac-font-ui);
+  font-size: var(--ac-type-button-size);
+  line-height: var(--ac-type-button-line);
+  font-weight: 600;
+  transition: transform var(--ac-motion-fast) var(--ac-ease-standard),
+              background-color var(--ac-motion-fast) var(--ac-ease-standard);
+}
+
+.ac-btn--primary {
+  background: var(--ac-color-accent);
+  color: var(--ac-color-forest-950);
+}
+
+.ac-btn--secondary {
+  background: transparent;
+  color: currentColor;
+  border: 1px solid currentColor;
+}
+
+.ac-card {
+  border-radius: var(--ac-radius-md);
+  padding: var(--ac-space-6);
+}
+
+.ac-container {
+  width: min(100% - (2 * var(--ac-gutter-mobile)), var(--ac-container-max));
+  margin-inline: auto;
+}
+
+@media (min-width: 768px) {
+  .ac-container {
+    width: min(100% - (2 * var(--ac-gutter-tablet)), var(--ac-container-max));
+  }
+}
+
+@media (min-width: 1024px) {
+  .ac-container {
+    width: min(100% - (2 * var(--ac-gutter-desktop)), var(--ac-container-max));
+  }
+}

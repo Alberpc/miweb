@@ -115,95 +115,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // 4. SISTEMA DE PARTÍCULAS TÉCNICAS (CANVAS 2D) — desactivado: se deja solo el vídeo del hero
-    const canvas = document.getElementById('hero-particles');
-    if (canvas) {
-    const ctx = canvas.getContext('2d');
-
-    let particlesArray = [];
-    const numberOfParticles = 65;
-    
-    // Dimensiones dinámicas
-    function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    }
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-
-    // Clase Partícula
-    class Particle {
-        constructor() {
-            this.x = Math.random() * canvas.width;
-            this.y = Math.random() * canvas.height;
-            this.size = Math.random() * 1.5 + 0.5; // Partículas muy finas como polvo
-            this.speedX = Math.random() * 0.4 - 0.2;
-            this.speedY = Math.random() * 0.4 - 0.2;
-            this.opacity = Math.random() * 0.5 + 0.1;
-        }
-
-        update() {
-            this.x += this.speedX;
-            this.y += this.speedY;
-
-            // Rebotar en bordes
-            if (this.x > canvas.width || this.x < 0) this.speedX = -this.speedX;
-            if (this.y > canvas.height || this.y < 0) this.speedY = -this.speedY;
-        }
-
-        draw() {
-            ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fill();
-        }
-    }
-
-    // Inicializar array
-    function initParticles() {
-        particlesArray = [];
-        for (let i = 0; i < numberOfParticles; i++) {
-            particlesArray.push(new Particle());
-        }
-    }
-    initParticles();
-
-    // Dibujar conexiones finas entre partículas cercanas
-    function connectParticles() {
-        for (let a = 0; a < particlesArray.length; a++) {
-            for (let b = a; b < particlesArray.length; b++) {
-                const dx = particlesArray[a].x - particlesArray[b].x;
-                const dy = particlesArray[a].y - particlesArray[b].y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-
-                if (distance < 120) { // Distancia máxima de enlace
-                    const opacity = (1 - (distance / 120)) * 0.06; // Enlaces casi invisibles, ultra-elegante
-                    ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
-                    ctx.lineWidth = 0.5;
-                    ctx.beginPath();
-                    ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
-                    ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
-                    ctx.stroke();
-                }
-            }
-        }
-    }
-
-    // Loop de animación
-    function animateParticles() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
-        for (let i = 0; i < particlesArray.length; i++) {
-            particlesArray[i].update();
-            particlesArray[i].draw();
-        }
-        connectParticles();
-        requestAnimationFrame(animateParticles);
-    }
-    animateParticles();
-    } // fin if(canvas) — partículas desactivadas
-
-
     // 5. ENVÍO DE FORMULARIO DE CONTACTO INTERACTIVO
     const contactForm = document.getElementById('diagnostico-form');
     const formMessage = document.getElementById('form-message');
@@ -298,130 +209,63 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 7. RED NEURONAL VIVA DEL HERO (nodos cobalto conectados, movimiento lento)
-    const neuralCanvas = document.getElementById('hero-neural');
-    if (neuralCanvas) {
-        const nctx = neuralCanvas.getContext('2d');
-        let nodes = [];
-        let W, H;
+    // 7. MALLA ONDULANTE DEL HERO (rejilla de puntos dorados, oleaje lento)
+    const meshCanvas = document.getElementById('hero-mesh');
+    if (meshCanvas) {
+        const mctx = meshCanvas.getContext('2d');
+        let W, H, dpr;
+        let points = [];
         const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const SPACING = 34; // separación de la rejilla en px CSS
 
-        function resizeNeural() {
-            W = neuralCanvas.width = neuralCanvas.offsetWidth;
-            H = neuralCanvas.height = neuralCanvas.offsetHeight;
-            // Densidad según ancho (menos nodos en móvil para rendimiento)
-            const count = Math.min(70, Math.floor(W / 22));
-            nodes = [];
-            for (let i = 0; i < count; i++) {
-                nodes.push({
-                    x: Math.random() * W,
-                    y: Math.random() * H,
-                    vx: (Math.random() - 0.5) * 0.22, // movimiento MUY lento
-                    vy: (Math.random() - 0.5) * 0.22,
-                    r: Math.random() * 1.6 + 0.8
-                });
-            }
-        }
-        resizeNeural();
-        window.addEventListener('resize', resizeNeural);
+        function resizeMesh() {
+            dpr = Math.min(window.devicePixelRatio || 1, 2);
+            W = meshCanvas.offsetWidth;
+            H = meshCanvas.offsetHeight;
+            meshCanvas.width = W * dpr;
+            meshCanvas.height = H * dpr;
+            mctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-        const LINK_DIST = 150;
-        function drawNeural() {
-            nctx.clearRect(0, 0, W, H);
-            // Mover nodos
-            for (const n of nodes) {
-                n.x += n.vx; n.y += n.vy;
-                if (n.x < 0 || n.x > W) n.vx *= -1;
-                if (n.y < 0 || n.y > H) n.vy *= -1;
-            }
-            // Líneas de conexión (sinapsis)
-            for (let i = 0; i < nodes.length; i++) {
-                for (let j = i + 1; j < nodes.length; j++) {
-                    const dx = nodes[i].x - nodes[j].x;
-                    const dy = nodes[i].y - nodes[j].y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < LINK_DIST) {
-                        const alpha = (1 - dist / LINK_DIST) * 0.28;
-                        nctx.strokeStyle = `rgba(90, 125, 255, ${alpha})`;
-                        nctx.lineWidth = 1;
-                        nctx.beginPath();
-                        nctx.moveTo(nodes[i].x, nodes[i].y);
-                        nctx.lineTo(nodes[j].x, nodes[j].y);
-                        nctx.stroke();
-                    }
+            points = [];
+            const cols = Math.ceil(W / SPACING) + 1;
+            const rows = Math.ceil(H / SPACING) + 1;
+            for (let row = 0; row < rows; row++) {
+                for (let col = 0; col < cols; col++) {
+                    const x = col * SPACING;
+                    const y = row * SPACING;
+                    // Distancia al centro del canvas: la malla se desvanece hacia los bordes
+                    const dx = (x - W / 2) / (W / 2);
+                    const dy = (y - H / 2) / (H / 2);
+                    const edgeFade = Math.max(0, 1 - Math.sqrt(dx * dx + dy * dy));
+                    points.push({ x, y, phase: (col * 0.5 + row * 0.35), edgeFade });
                 }
             }
-            // Nodos
-            for (const n of nodes) {
-                nctx.fillStyle = 'rgba(120, 150, 255, 0.75)';
-                nctx.beginPath();
-                nctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-                nctx.fill();
-            }
-            if (!prefersReduced) requestAnimationFrame(drawNeural);
         }
-        drawNeural();
-    }
+        resizeMesh();
+        window.addEventListener('resize', resizeMesh);
 
-    // 8. BUCLE SIN CORTES PARA EL VÍDEO DEL FOOTER (FUNDIDO CRUZADO)
-    const fvid1 = document.getElementById('footer-video-1');
-    const fvid2 = document.getElementById('footer-video-2');
-
-    if (fvid1 && fvid2) {
-        let isFooterCrossfading = false;
-
-        const onFooterTimeUpdate = (e) => {
-            const active = e.target;
-            const idle = active === fvid1 ? fvid2 : fvid1;
-            const duration = active.duration;
-
-            if (!duration || isFooterCrossfading) return;
-
-            // Iniciamos el fundido cruzado 1.5 segundos antes de que termine el vídeo
-            if (active.currentTime >= duration - 1.5) {
-                isFooterCrossfading = true;
-                idle.currentTime = 0;
-                idle.play().then(() => {
-                    idle.style.opacity = '0.45';
-                    active.style.opacity = '0';
-
-                    setTimeout(() => {
-                        active.pause();
-                        isFooterCrossfading = false;
-                    }, 1300); // solape limpio
-                }).catch(() => {
-                    isFooterCrossfading = false;
-                });
+        function drawMesh(t) {
+            mctx.clearRect(0, 0, W, H);
+            const time = t * 0.00035;
+            for (const p of points) {
+                // Oleaje: desplazamiento vertical por seno con fase dependiente de la posición
+                const wave = Math.sin(time + p.phase) * 6;
+                const y = p.y + wave;
+                const shimmer = (Math.sin(time * 1.6 + p.phase * 1.3) + 1) / 2; // 0..1
+                const alpha = p.edgeFade * (0.16 + shimmer * 0.38);
+                if (alpha <= 0.01) continue;
+                mctx.fillStyle = `rgba(200, 168, 94, ${alpha})`;
+                mctx.beginPath();
+                mctx.arc(p.x, y, 1.6, 0, Math.PI * 2);
+                mctx.fill();
             }
-        };
-
-        fvid1.addEventListener('timeupdate', onFooterTimeUpdate);
-        fvid2.addEventListener('timeupdate', onFooterTimeUpdate);
-    }
-
-    // 9. REVELADO DE TEXTO SCROLL-DRIVEN (ESTILO APPLE)
-    const revealTexts = document.querySelectorAll('.reveal-text');
-    function handleTextReveal() {
-        const viewportCenter = window.innerHeight / 2;
-        revealTexts.forEach(el => {
-            const rect = el.getBoundingClientRect();
-            const elementCenter = rect.top + rect.height / 2;
-            
-            // Distancia del centro del elemento al centro de la pantalla
-            const distanceFromCenter = Math.abs(elementCenter - viewportCenter);
-            const maxDistance = window.innerHeight * 0.45; // Radio de atenuación
-            
-            // Opacidad de 0.35 (en los bordes) a 1.0 (en el centro)
-            let opacity = 1 - (distanceFromCenter / maxDistance);
-            opacity = Math.max(0.35, Math.min(1.0, opacity));
-            
-            el.style.opacity = opacity;
-        });
-    }
-    if (revealTexts.length > 0) {
-        window.addEventListener('scroll', handleTextReveal);
-        window.addEventListener('resize', handleTextReveal);
-        handleTextReveal(); // Ejecución inicial
+            if (!prefersReduced) requestAnimationFrame(drawMesh);
+        }
+        if (prefersReduced) {
+            drawMesh(0);
+        } else {
+            requestAnimationFrame(drawMesh);
+        }
     }
 
     // 10. INPUTS DE FORMULARIO ESTILO VERCEL (FLOATING LABELS)
@@ -457,4 +301,21 @@ document.addEventListener('DOMContentLoaded', () => {
             group.classList.add('has-value');
         }
     });
+
+    // CARRUSEL DE CASOS REALES
+    const casoTrack = document.querySelector('.caso-track');
+    const casoDots = document.querySelectorAll('.caso-dot');
+
+    if (casoTrack && casoDots.length) {
+        const goToSlide = (index) => {
+            casoTrack.style.transform = `translateX(-${index * 100}%)`;
+            casoDots.forEach((dot, i) => dot.classList.toggle('is-active', i === index));
+        };
+
+        casoDots.forEach((dot) => {
+            dot.addEventListener('click', () => {
+                goToSlide(parseInt(dot.dataset.slide, 10));
+            });
+        });
+    }
 });
