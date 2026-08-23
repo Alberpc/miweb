@@ -298,6 +298,18 @@ CAMBIOS_QUERIDOS = {
     # un H1 de otra familia. Ahora las 14 llevan Instrument Serif 400.
     ".blog-hero.inverse h1":     {"font-family", "font-weight"},
     ".page h1":                  {"font-family", "font-weight"},
+    # 23-ago: la columna derecha de "LA REALIDAD" pasa a ser una caja
+    # oscura con la frase de aviso y cuatro sintomas, para que el dueño
+    # se vea reflejado. Las legales tambien cargan index.css, por eso les
+    # llega el cambio aunque no tengan esa seccion.
+    ".problema-body":            {"gap", "padding", "background",
+                                  "border", "border-radius", "box-shadow"},
+    ".problema-text":            {"font-size", "color", "line-height"},
+    ".problema-text.highlight":  {"display", "align-items", "gap",
+                                  "font-family", "font-size", "font-weight",
+                                  "font-style", "line-height", "color",
+                                  "margin", "padding", "background",
+                                  "border", "border-left", "border-radius"},
     ".faq-section":              {"padding"},
     ".faq-head":                 {"margin"},
     ".faq-container":            {"gap"},
@@ -458,6 +470,19 @@ def es_querido(cambio, esperados):
 
 # Cambios queridos cuyo valor final no es un token (se aceptan tal cual).
 VALOR_LIBRE = {
+    # La caja de "LA REALIDAD": tamaños en rem y la sombra, que no
+    # salen de un token.
+    (".problema-text", "font-size"), (".problema-text", "color"),
+    (".problema-text", "line-height"),
+    (".problema-body", "background"), (".problema-body", "box-shadow"),
+    (".problema-text.highlight", "font-size"),
+    (".problema-text.highlight", "font-weight"),
+    (".problema-text.highlight", "font-style"),
+    (".problema-text.highlight", "line-height"),
+    (".problema-text.highlight", "display"),
+    (".problema-text.highlight", "align-items"),
+    (".problema-text.highlight", "background"),
+    (".problema-text.highlight", "margin"),
     (".blog-hero.inverse h1", "font-weight"), (".page h1", "font-weight"),
     # La FAQ de las landings adopta la de la home: transicion del sistema
     # (220ms) en vez de 0.4s, y los tamanos de la version buena.
@@ -561,6 +586,13 @@ TEXTO_NUEVO = {
         "a medida. "
         "Abajo van ejemplos, no un catálogo: se empieza por donde más "
         "duela en tu caso. "
+        # 23-ago: los cuatro sintomas de "LA REALIDAD", para que el dueño
+        # se vea reflejado. Con icono, NO con check: un check dice
+        # "conseguido" y esto son problemas.
+        "Presupuestos y facturas hechos a mano "
+        "Consultas que llegan fuera de hora y se enfrían "
+        "Los datos, repartidos en cuatro sitios distintos "
+        "Sin margen para crecer sin contratar "
         # sale: la version anterior de esos dos
         "Si la herramienta que te hace falta no existe, te la construyo. "
         "Se empieza por donde más duela en tu caso, no por los tres a la vez. "
