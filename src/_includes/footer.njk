@@ -1,5 +1,15 @@
-{#- Pie de pagina. Era identico byte a byte en 5 landings; las 3 variantes
-    que existian quedan como parametros en vez de como copias:
+{%- set raizPie = "" if navLocal else "/" -%}
+{#- ============================================================
+    footer.njk — EL pie del sitio. Uno solo, para las 14 paginas.
+    ============================================================
+    Antes habia dos includes casi iguales (este y footer-home.njk) y la
+    unica diferencia real era la columna "Servicios". Se queda la version
+    de la home, que lidera con el DOLOR y no con la tecnologia.
+
+    `raizPie` vale "" en la home (anclajes de la misma pagina) y "/" en
+    el resto. Lo pone el layout, no hay que tocarlo por pagina.
+
+    Parametros que siguen existiendo:
       footerInverse: false  -> quita la clase "inverse" (automatizar-mi-negocio)
       footerBlog:    false  -> oculta el enlace Blog (negocio-depende-de-ti)
       footerBlogHref        -> destino del enlace Blog (el blog apunta a "/")
@@ -22,19 +32,16 @@
                     <div class="footer-links-col">
                         <h4 class="footer-links-title">Servicios</h4>
                         <ul class="footer-links-list">
-                            <li><a href="/#soluciones">Agentes de IA</a></li>
-                            <li><a href="/#soluciones">Automatización de procesos</a></li>
-                            <li><a href="/#soluciones">Diseño web</a></li>
-                            <li><a href="/#soluciones">Sistemas a medida</a></li>
-{% if footerAgentesAut != false %}                            <li><a href="/#soluciones">Agentes Autónomos</a></li>
-{% endif %}                        </ul>
+                            <li><a href="{{ raizPie }}#soluciones">Clientes que se pierden</a></li>
+                            <li><a href="{{ raizPie }}#soluciones">Tiempo que se va</a></li>
+                            <li><a href="{{ raizPie }}#soluciones">Control que no tienes</a></li>                        </ul>
                     </div>
                     <div class="footer-links-col">
                         <h4 class="footer-links-title">El Método</h4>
                         <ul class="footer-links-list">
                             <li><a href="{{ footerDai360Href | default("/diagnostico-operativo/") }}">Diagnóstico DAI360</a></li>
-                            <li><a href="/#como-trabajo">Metodología</a></li>
-                            <li><a href="/#sobre-mi">Sobre Mí</a></li>
+                            <li><a href="{{ raizPie }}#como-trabajo">Metodología</a></li>
+                            <li><a href="{{ raizPie }}#sobre-mi">Sobre Mí</a></li>
 {% if footerBlog != false %}                            <li><a href="{{ footerBlogHref | default("/blog/") }}">Blog</a></li>
 {% endif %}                        </ul>
                     </div>

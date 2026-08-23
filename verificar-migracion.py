@@ -430,6 +430,12 @@ VALOR_LIBRE = {
 # (Servicios, Como Empezar, Sobre Mi, Blog), que antes no tenian.
 NAV_CAMBIADO = {"diagnostico-operativo/index", "no-perder-clientes/index"}
 
+# 23-ago: el pie pasa a ser UN solo include para las 14 paginas, con el
+# copy de la home (los dolores: "Clientes que se pierden", "Tiempo que se
+# va", "Control que no tienes") en vez de la lista de servicios. Cambia el
+# texto de esa columna en 13 paginas; no se pierde ningun enlace.
+PIE_UNIFICADO = True
+
 REDISENADAS = {
     # 23-ago: tenia su propia paleta (fondo negro #0a0908) y su CSS aparte.
     # Pasa al verde del sistema y al mismo landing.css que los otros 6.
@@ -482,6 +488,8 @@ for slug, ruta_orig, ruta_nueva in TODAS:
         # asi que el post mas nuevo subio al primer puesto. Se avisa, no falla.
         if sorted(to.split()) == sorted(tn.split()):
             avisos.append("texto reordenado, ni una palabra distinta")
+        elif PIE_UNIFICADO and "Clientes que se pierden" in tn:
+            avisos.append("pie: copy unificado con el de la home")
         elif slug in NAV_CAMBIADO:
             # el unico texto que cambia es el menu del nav comun, que
             # sustituye al "volver" de la cabecera reducida
@@ -497,7 +505,14 @@ for slug, ruta_orig, ruta_nueva in TODAS:
         elif nuevos:
             avisos.append("+%d enlaces del menu comun" % len(nuevos))
     elif eo != en:
-        problemas.append("enlaces (%s)" % (set(eo) ^ set(en)))
+        dif = set(eo) ^ set(en)
+        # el logo del pie de la home apuntaba a "#"; con el pie comun va
+        # a "/", que es lo correcto. No se pierde ningun destino.
+        if dif == {"/"} and not (set(eo) - set(en)):
+            avisos.append("pie: el logo pasa de # a /")
+            dif = set()
+        if dif:
+            problemas.append("enlaces (%s)" % dif)
     mo, mn = metas(orig), metas(nuevo)
     if mo != mn:
         dif = {k: (mo.get(k), mn.get(k)) for k in set(mo) | set(mn) if mo.get(k) != mn.get(k)}
