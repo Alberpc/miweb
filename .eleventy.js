@@ -22,13 +22,23 @@ export default function (eleventyConfig) {
     eleventyConfig.addPassthroughCopy({ "src/index.css": "index.css" });
     eleventyConfig.addPassthroughCopy({ "src/index.js": "index.js" });
     eleventyConfig.addPassthroughCopy({ "src/legal.css": "legal.css" });
-    eleventyConfig.addPassthroughCopy({ "src/videos": "videos" });
+    // De videos/ solo se despliega lo que se ve (el HTML del proyecto y sus
+    // renders/snapshots). Los .md y los package.json son notas y config
+    // internas: se quedan en el repo, no en el servidor publico.
+    eleventyConfig.addPassthroughCopy({ "src/videos": "videos" }, {
+        filter: (ruta) => !/\.(md|json)$/i.test(ruta),
+    });
 
     // Estos archivos viven dentro de carpetas que se copian tal cual; sin
     // esto Eleventy los trataria como plantillas y los reescribiria
     // (test-guardrails.html -> test-guardrails/index.html, README.md -> HTML).
     eleventyConfig.ignores.add("src/assets/**/*");
     eleventyConfig.ignores.add("src/design-system/**/*");
+    // videos/ son proyectos de HyperFrames (AGENTS.md, CLAUDE.md, package.json).
+    // Sin esto Eleventy los renderiza y publica las notas internas como
+    // paginas: /videos/<x>/AGENTS/ y /videos/<x>/CLAUDE/. Ver la regla de
+    // no dejar notas internas en carpetas desplegadas.
+    eleventyConfig.ignores.add("src/videos/**/*");
 
     return {
         dir: {

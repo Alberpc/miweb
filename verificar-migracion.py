@@ -225,5 +225,42 @@ for slug, ruta_orig, ruta_nueva in TODAS:
         extra = ("  [%s]" % "; ".join(avisos)) if avisos else ""
         print("OK     %-32s texto, enlaces, SEO, JSON-LD, CSS y JS equivalentes%s" % (slug, extra))
 
+# --- Paginas que aparecen de la nada -------------------------------
+# Comparar solo las paginas conocidas no basta: Eleventy puede renderizar
+# un .md que solo era una nota interna y publicarlo. Paso el 23-ago con
+# los AGENTS.md/CLAUDE.md de videos/. Aqui se comprueba que _site/ no
+# tiene ninguna pagina que no estuviera ya en el repo.
+def rutas_publicadas(raiz):
+    out = set()
+    for base, _dirs, ficheros in os.walk(raiz):
+        for f in ficheros:
+            if f.endswith(('.html', '.md')):
+                r = os.path.relpath(os.path.join(base, f), raiz)
+                out.add(r.replace(os.sep, '/'))
+    return out
+
+def comprobar_paginas_nuevas():
+    antes = set()
+    for o, _n in SUELTAS:
+        antes.add(o)
+    for s in PAGINAS:
+        antes.add(s + '/index.html')
+    # lo que ya venia servido tal cual desde carpetas copiadas
+    for extra in ('assets', 'videos', 'design-system'):
+        antes |= {extra + '/' + r for r in rutas_publicadas(os.path.join('src', extra))}
+    ahora = rutas_publicadas('_site')
+    nuevas = sorted(ahora - antes)
+    if nuevas:
+        print('')
+        print('AVISO: %d pagina(s) que no existian antes:' % len(nuevas))
+        for r in nuevas:
+            print('   +', r)
+        return 1
+    print('')
+    print('Sin paginas nuevas: _site/ no publica nada que no estuviera ya.')
+    return 0
+
+fallos += comprobar_paginas_nuevas()
+
 print("\n%d/%d paginas verificadas" % (len(TODAS) - fallos, len(TODAS)))
 sys.exit(1 if fallos else 0)
