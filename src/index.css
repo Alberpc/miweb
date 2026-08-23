@@ -1828,6 +1828,32 @@ html {
     background: var(--bg);
 }
 
+/* La caja de la derecha pesa el triple que el titular de la izquierda
+   (431px contra 127px), asi que a 1fr/1fr y centrado vertical la seccion
+   se iba de peso a un lado y la izquierda quedaba flotando en el hueco.
+   Se le da menos ancho a la caja y las dos columnas arrancan arriba. */
+.problema-section .grid-two-cols {
+    grid-template-columns: 0.85fr 1fr;
+    gap: var(--space-8);
+    align-items: start;
+}
+.problema-header {
+    /* pegado al borde de arriba de la caja */
+    padding-top: var(--space-2);
+}
+/* Sin esto la columna izquierda son tres lineas frente a una caja de
+   431px, y la seccion se va de peso a la derecha. */
+.problema-apunte {
+    margin-top: var(--space-6);
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--line);
+    font-size: 0.95rem;
+    font-weight: 300;
+    line-height: 1.65;
+    color: var(--ink-mid);
+    max-width: 42ch;
+}
+
 .soluciones-section {
     background: var(--bg-alt);
 }

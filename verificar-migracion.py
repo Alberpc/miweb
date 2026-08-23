@@ -593,6 +593,11 @@ TEXTO_NUEVO = {
         "Consultas que llegan fuera de hora y se enfrían "
         "Los datos, repartidos en cuatro sitios distintos "
         "Sin margen para crecer sin contratar "
+        # El apunte de la columna izquierda: sin el, tres lineas frente a
+        # una caja de 431px y la seccion se iba de peso a la derecha.
+        "Si te reconoces en lo de al lado, no es falta de organización: "
+        "es que el negocio se sostiene sobre trabajo manual, y eso tiene "
+        "un techo. "
         # sale: la version anterior de esos dos
         "Si la herramienta que te hace falta no existe, te la construyo. "
         "Se empieza por donde más duela en tu caso, no por los tres a la vez. "
