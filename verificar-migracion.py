@@ -272,8 +272,13 @@ CAMBIOS_QUERIDOS = {
     ".nav-mobile":               {"border-radius"},
     ".nav-mobile a":             {"border-radius"},
     ".article-hero.inverse":     {"padding"},
+    # 23-ago: fuera el resplandor dorado del hero. Era un radial al 18%
+    # ocupando media pantalla y sobre el verde viraba a amarillo turbio.
+    # El sistema lo lista como cosa a evitar: "dorado por toda la pagina".
+    ".article-hero.inverse::before": {"content", "position", "inset",
+                                      "pointer-events", "background"},
+    ".hero-figure":              {"border-radius", "background", "box-shadow"},
     ".article-hero.inverse .hero-cat": {"border-radius"},
-    ".hero-figure":              {"border-radius"},
     ".article-body":             {"padding"},
     ".prose .lead-answer":       {"border-radius"},
     ".stat-box":                 {"border-radius"},
@@ -347,6 +352,12 @@ VALOR_LIBRE = {
     (".cta-card", "background"), (".cta-card", "border"),
     (".cta-card", "box-shadow"), (".cta-card", "border-radius"),
     (".cta-card", "padding"),
+    (".article-hero.inverse::before", "content"),
+    (".article-hero.inverse::before", "position"),
+    (".article-hero.inverse::before", "inset"),
+    (".article-hero.inverse::before", "pointer-events"),
+    (".article-hero.inverse::before", "background"),
+    (".hero-figure", "background"), (".hero-figure", "box-shadow"),
     (".cta-final.inverse", "padding"),
     (".cta-card .btn-main", "padding"), (".cta-card .btn-main", "font-size"),
     (".cta-card .btn-main", "border-radius"), (".cta-card .btn-main", "transition"),
