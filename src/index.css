@@ -687,6 +687,20 @@ html {
     gap: var(--space-7);
 }
 
+/* Cada beneficio es una tarjeta centrada. El centrado necesita la caja:
+   suelto sobre el fondo, un texto centrado sin borde que lo contenga
+   queda flotando y no se sabe donde empieza y acaba cada uno. */
+.beneficio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: var(--space-6) var(--space-5);
+    background: var(--bg-alt);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+}
+
 .beneficio-icono {
     display: flex;
     align-items: center;
@@ -705,6 +719,14 @@ html {
     border: 1px solid rgba(200, 168, 94, 0.4);
 }
 .beneficio-icono svg { width: 24px; height: 24px; }
+
+.beneficio-texto {
+    font-size: 0.9rem;
+    font-weight: 300;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin-top: var(--space-2);
+}
 
 .beneficio-titulo {
     font-family: var(--font-display);
@@ -735,7 +757,9 @@ html {
         margin-bottom: var(--space-3);
     }
     .beneficio-icono svg { width: 20px; height: 20px; }
-    .beneficio-titulo { font-size: 1.08rem; }
+    .beneficio { padding: var(--space-5) var(--space-4); }
+    .beneficio-titulo { font-size: 1.02rem; }
+    .beneficio-texto { font-size: 0.85rem; }
 }
 
 /* SECCIÓN EL MÉTODO (LÍNEA DE TIEMPO / TIMELINE) */

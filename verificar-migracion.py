@@ -517,13 +517,16 @@ TEXTO_NUEVO = {
     # Los 4 titulares y sus 4 parrafos. Se listan enteros a proposito: si
     # manyana se toca el copy de la home, el verificador tiene que saltar.
     "index": (
-        # Los 4 titulares de la franja, y nada mas: la seccion es solo
-        # icono + titular. Si manyana se anyade texto ahi, tiene que
-        # saltar y declararse, no colarse.
+        # Los 4 titulares de la franja y su linea de apoyo. Se listan
+        # enteros: si manyana se toca este copy, tiene que saltar.
         "Más oportunidades "
+        "Ninguna consulta se queda sin contestar. "
         "Menos tareas manuales "
+        "Lo repetitivo lo hace el sistema, no tú. "
         "Más control "
+        "Sabes en qué punto está cada cliente. "
         "Sistemas escalables "
+        "Más volumen sin contratar a nadie. "
         # el enlace del pie pasa de "albercabrera" a "albercabrera.com"
         "albercabrera albercabrera.com"),
 }
