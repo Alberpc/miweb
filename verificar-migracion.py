@@ -517,8 +517,7 @@ TEXTO_NUEVO = {
     # Los 4 titulares y sus 4 parrafos. Se listan enteros a proposito: si
     # manyana se toca el copy de la home, el verificador tiene que saltar.
     "index": (
-        # Los 4 titulares de la franja y su linea de apoyo. Se listan
-        # enteros: si manyana se toca este copy, tiene que saltar.
+        # La franja de beneficios (icono + titular + una linea).
         "Más oportunidades "
         "Ninguna consulta se queda sin contestar. "
         "Menos tareas manuales "
@@ -527,6 +526,50 @@ TEXTO_NUEVO = {
         "Sabes en qué punto está cada cliente. "
         "Sistemas escalables "
         "Más volumen sin contratar a nadie. "
+        # 23-ago: la seccion de soluciones pasa a nombrar SERVICIOS. Los
+        # tres titulares eran dolores ("Clientes que se pierden"), y
+        # llegando desde "LA REALIDAD" el visitante recibia dolor sobre
+        # dolor y seguia sin saber que se contrata.
+        "QUÉ HAGO "
+        "Tres frentes: captar, quitarte trabajo y saber cómo va "
+        "Casi nadie necesita \"IA\". Necesita que no se le escape ningún "
+        "cliente, que el trabajo repetitivo deje de comerle la mañana y "
+        "poder ver cómo va el negocio sin preguntar a nadie. Se empieza "
+        "por donde más duela en tu caso, no por los tres a la vez. "
+        "Captación y seguimiento "
+        "Que ninguna consulta se quede sin respuesta "
+        "Se atiende al momento lo que entra por la web, WhatsApp o email, "
+        "a cualquier hora. "
+        "Cada consulta cae en el CRM ordenada, con su estado y a quién "
+        "le toca. "
+        "Automatización de procesos "
+        "Tus herramientas se hablan entre ellas: se acabó copiar datos "
+        "de un sitio a otro. "
+        "Control operativo "
+        "Un panel con lo que importa: qué está entrando, qué se cierra "
+        "y qué quedó pendiente. "
+        "Los números del mes salen solos, sin que nadie los cuadre a mano. "
+        # Y el copy VIEJO de esa seccion, el que sale. Tienen que estar
+        # los dos lados: si solo listas lo que entra, cualquier texto que
+        # DESAPAREZCA pasa desapercibido, que es justo lo grave.
+        "SOLUCIONES "
+        "Tres cosas se te están yendo: clientes, tiempo y control "
+        "Casi nadie necesita \"IA\". Necesita dejar de perder clientes que "
+        "ya le escriben, dejar de gastar mañanas en trabajo que no las "
+        "merece, y saber cómo va el negocio sin preguntar a nadie. En eso "
+        "trabajo, y en el orden que le toque a tu negocio. "
+        "Clientes que se pierden "
+        "Que no te dejen esperando, ni tú a ellos "
+        "Un agente atiende al momento, por WhatsApp o por la web, a "
+        "cualquier hora. "
+        "Cualifica, agenda la cita y avisa a tu equipo, siguiendo tus reglas. "
+        "Tiempo que se va "
+        "Un agente también trabaja hacia dentro: contesta a tu equipo y "
+        "busca en tus documentos. "
+        "Control que no tienes "
+        "Lo ves en un sitio y actualizado: qué está entrando, qué se "
+        "está cerrando y qué quedó pendiente. "
+        "Sabes cómo va el negocio hoy, no cómo iba el mes pasado. "
         # el enlace del pie pasa de "albercabrera" a "albercabrera.com"
         "albercabrera albercabrera.com"),
 }
