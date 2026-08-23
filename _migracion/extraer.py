@@ -23,7 +23,6 @@ LEGALES = ["aviso-legal", "cookies", "politica-de-privacidad"]
 # <script> al final. Comparten pie y bloque de consent+GTM.
 # La clave es el slug; el valor, donde vive el HTML original.
 CONVERSION = {
-    "servicios": "servicios.html",
     "diagnostico-operativo": "diagnostico-operativo/index.html",
     "no-perder-clientes": "no-perder-clientes/index.html",
 }

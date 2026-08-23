@@ -35,7 +35,6 @@ SUELTAS = [
     "aviso-legal.html",
     "cookies.html",
     "politica-de-privacidad.html",
-    "servicios.html",
     "diagnostico-operativo/index.html",
     "no-perder-clientes/index.html",
     "index.html",

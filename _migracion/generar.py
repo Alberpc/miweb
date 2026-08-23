@@ -105,8 +105,6 @@ def main_legales():
 
 # Cabecera reducida: los textos y destinos que tiene hoy cada pagina.
 NAV_MINIMA = {
-    "servicios": ["navMinima: true", 'volverTexto: "Volver a la web"',
-                  'ctaHref: "/#contacto"', 'ctaTexto: "Cuéntame tu caso"'],
     "diagnostico-operativo": ["navMinima: true", 'volverTexto: "Inicio"',
                   'ctaHref: "/#contacto"', 'ctaTexto: "Pedir mi diagnóstico"'],
     "no-perder-clientes": ["navMinima: true", "logoEnlazado: false",
@@ -115,13 +113,10 @@ NAV_MINIMA = {
 }
 
 # Paginas con pie propio (otro copy, no una variante del comun).
-PIE_PROPIO = {
-    "servicios": "footer-servicios.njk",
-}
+PIE_PROPIO = {}
 
 # Donde escribe cada pagina de conversion (se conserva la URL de hoy).
 PERMALINK_CONV = {
-    "servicios": "/servicios.html",
     "diagnostico-operativo": "/diagnostico-operativo/index.html",
     "no-perder-clientes": "/no-perder-clientes/index.html",
 }

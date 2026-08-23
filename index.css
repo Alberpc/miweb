@@ -1435,6 +1435,16 @@ body {
     color: var(--on-night);
 }
 
+/* El logo del pie va sobre fondo oscuro, asi que se queda BLANCO.
+   Sin esto hereda el `filter: invert(1)` de `.logo img`, que existe para
+   el nav (pastilla clara) y aqui lo pintaba negro sobre negro. */
+.footer-logo-wrap .logo img {
+    height: 26px;
+    width: auto;
+    display: block;
+    filter: none;
+}
+
 .footer-brand-desc {
     font-size: 0.9rem;
     line-height: 1.6;
