@@ -30,6 +30,10 @@ PAGINAS = [
 # de Hostinger (que sube la raiz) siga funcionando sin tocar su panel.
 SALIDA = "."
 
+# Los dos lados de la comparacion.
+ORIG = os.path.join("_migracion", "originales")   # el HTML y el CSS de antes
+NUEVO = SALIDA                                     # lo que genera Eleventy hoy
+
 # Paginas sueltas en la raiz (mismo nombre en el original y en lo generado).
 SUELTAS = [
     "aviso-legal.html",
@@ -92,14 +96,22 @@ def norm_css(t):
     return re.sub(r"\s+", " ", t).strip()
 
 def resolver(base, href):
-    """Encuentra un asset local. Los originales apuntan a rutas que hoy viven
-    bajo src/ (design-system, assets), asi que se busca tambien alli: si no,
-    la comparacion daria falsos positivos por archivos no resueltos."""
+    """Encuentra un asset local dentro de `base`, y SOLO dentro de `base`.
+
+    Antes caia a "src" y "." si no lo encontraba, y eso rompia la
+    comparacion sin avisar: el lado "original" acababa leyendo el CSS
+    ACTUAL, asi que se comparaba consigo mismo y no detectaba nada. Por eso
+    _migracion/originales/ guarda tambien su copia de los CSS.
+    """
     rel = href.split("?")[0].lstrip("/")
-    for raiz in (base, "src", "."):
-        ruta = os.path.join(raiz, rel)
-        if os.path.exists(ruta):
-            return ruta
+    ruta = os.path.join(base, rel)
+    if os.path.exists(ruta):
+        return ruta
+    # la salida es la raiz del repo: ahi los assets viven bajo src/
+    if base == NUEVO:
+        alt = os.path.join("src", rel)
+        if os.path.exists(alt):
+            return alt
     return None
 
 def css_efectivo(h, base):
@@ -226,18 +238,69 @@ CAMBIOS_QUERIDOS = {
     ".faq-section":              {"padding"},
     ".faq-item":                 {"border-radius"},
     ".footer-section.inverse":   {"padding"},
+    # 23-ago, la home a la misma escala. De estos 25, solo 3 mueven un pixel:
+    # las barritas del burger (2->8), el punto activo (4->8) y el formulario
+    # (11->12, tenia ese valor "para encajar"). El resto es el mismo numero
+    # escrito como token.
+    ".section":                  {"padding"},
+    ".navbar":                   {"border-radius"},
+    ".nav-btn":                  {"border-radius"},
+    ".nav-mobile":               {"border-radius"},
+    ".nav-mobile-link":          {"border-radius"},
+    ".nav-mobile-cta":           {"border-radius"},
+    ".hero-badge":               {"border-radius"},
+    ".btn-primary":              {"border-radius"},
+    ".btn-primary-small":        {"border-radius"},
+    ".btn-submit":               {"border-radius"},
+    ".glass-card":               {"border-radius"},
+    ".glass-form":               {"border-radius"},
+    ".glass-form-container":     {"border-radius"},
+    ".form-group input, .form-group textarea": {"border-radius"},
+    ".caso-dot.is-active":       {"border-radius"},
+    ".caso-step-card":           {"border-radius"},
+    ".caso-step-arrow":          {"padding"},
+    ".caso-quote-card":          {"border-radius"},
+    ".service-card":             {"border-radius"},
+    ".timeline-item":            {"border-radius"},
+    ".sobremi-visual":           {"border-radius"},
+    ".whatsapp-tooltip":         {"border-radius"},
+    ".caminos-section .grid-two-cols > div:last-child::after": {"border-radius"},
 }
 
-def es_querido(cambio):
-    sel = cambio.split("{")[0].strip()
-    prop = cambio.split("{", 1)[1].split(":", 1)[0].strip() if "{" in cambio else ""
-    return prop in CAMBIOS_QUERIDOS.get(sel, set())
+def es_querido(cambio, esperados):
+    """Un cambio esta permitido solo si ADEMAS acaba en el valor previsto.
 
+    Antes bastaba con que el selector y la propiedad estuvieran en la lista,
+    y eso se tragaba cualquier cosa: probado metiendo un `color: red` en
+    .btn-primary, no lo detectaba. Ahora se exige que el valor nuevo sea
+    el que se declaro.
+    """
+    sel = cambio.split("{")[0].strip()
+    if "{" not in cambio:
+        return False
+    dentro = cambio.split("{", 1)[1].rstrip("}")
+    prop = dentro.split(":", 1)[0].strip()
+    if prop not in CAMBIOS_QUERIDOS.get(sel, set()):
+        return False
+    # el valor final tiene que ser un token del sistema o estar declarado
+    nuevo_val = dentro.split("->")[-1].strip() if "->" in dentro else ""
+    return nuevo_val.startswith("var(--") or (sel, prop) in esperados
+
+
+# Cambios queridos cuyo valor final no es un token (se aceptan tal cual).
+VALOR_LIBRE = {
+    (".cta-card", "background"), (".cta-card", "border"),
+    (".cta-card", "box-shadow"), (".cta-card", "border-radius"),
+    (".cta-final.inverse", "padding"),
+    (".cta-card .btn-main", "padding"), (".cta-card .btn-main", "font-size"),
+    (".cta-card .btn-main", "border-radius"), (".cta-card .btn-main", "transition"),
+    (".cta-card .btn-main:hover", "transform"), (".cta-card .btn-main:hover", "background"),
+    (".cta-card .btn-main:hover", "box-shadow"),
+    (".prose h2", "font-weight"), (".related h2", "font-weight"),
+    (".faq-head h2", "font-weight"), (".cta-card h2", "font-weight"),
+}
 
 fallos = 0
-# De donde sale cada lado de la comparacion.
-ORIG = os.path.join("_migracion", "originales")   # el HTML de antes, congelado
-NUEVO = SALIDA                                     # lo que genera Eleventy hoy
 
 TODAS = ([(s, os.path.join(ORIG, s, "index.html"),
            os.path.join(NUEVO, s, "index.html")) for s in PAGINAS]
@@ -278,8 +341,8 @@ for slug, ruta_orig, ruta_nueva in TODAS:
             for k, v in d.items():
                 if dn.get(k) != v:
                     cambiados.append("%s{%s: %s -> %s}" % (sel, k, v, dn.get(k)))
-        queridos = [c for c in cambiados if es_querido(c)]
-        cambiados = [c for c in cambiados if not es_querido(c)]
+        queridos = [c for c in cambiados if es_querido(c, VALOR_LIBRE)]
+        cambiados = [c for c in cambiados if not es_querido(c, VALOR_LIBRE)]
         if queridos:
             avisos.append("CSS: %d cambio(s) de diseno a proposito (%s)" % (
                 len(queridos), queridos[0].split("{")[0]))

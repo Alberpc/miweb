@@ -46,7 +46,7 @@ body {
 }
 
 .section {
-    padding: 120px 0;
+    padding: var(--space-11) 0;
     position: relative;
     scroll-margin-top: 96px; /* que el anchor no quede tapado por la navbar */
 }
@@ -83,7 +83,7 @@ body {
     backdrop-filter: blur(18px) saturate(180%);
     -webkit-backdrop-filter: blur(18px) saturate(180%);
     border: 1px solid var(--glass-border);
-    border-radius: 100px;
+    border-radius: var(--radius-pill);
     box-shadow: 0 8px 30px rgba(14, 17, 22, 0.14);
     z-index: 1000;
     /* Aparicion suave desde el primer frame: sin el delay 0.7s que antes
@@ -161,7 +161,7 @@ body {
     line-height: 40px;
     background: var(--cobalt-400);
     border: 1px solid transparent;
-    border-radius: 8px; /* Sistema Bosque Inteligente: radio fijo, nunca píldora */
+    border-radius: var(--radius-sm); /* Sistema Bosque Inteligente: radio fijo, nunca píldora */
     transition: all 150ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
@@ -204,7 +204,7 @@ body {
     width: 100%;
     height: 1.5px;
     background: var(--ink);
-    border-radius: 2px;
+    border-radius: var(--radius-sm);
     transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1), opacity 150ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
@@ -226,7 +226,7 @@ body {
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     border: 1px solid var(--glass-border);
-    border-radius: 20px; /* Sistema Bosque Inteligente: radius-xl, contenedores especiales */
+    border-radius: var(--radius-xl); /* Sistema Bosque Inteligente: radius-xl, contenedores especiales */
     box-shadow: 0 30px 60px rgba(15, 31, 27, 0.14);
     opacity: 0;
     transform: translateY(-8px);
@@ -245,7 +245,7 @@ body {
     text-decoration: none;
     font-size: 1rem;
     padding: 12px 16px;
-    border-radius: 12px;
+    border-radius: var(--radius-md);
     transition: all 150ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
@@ -262,7 +262,7 @@ body {
     color: var(--night-900);
     background: var(--cobalt-400);
     padding: 14px 16px;
-    border-radius: 8px; /* Sistema Bosque Inteligente: radio fijo, nunca píldora */
+    border-radius: var(--radius-sm); /* Sistema Bosque Inteligente: radio fijo, nunca píldora */
     text-decoration: none;
 }
 
@@ -320,7 +320,7 @@ body {
     border: 1px solid var(--cobalt-border);
     background-color: var(--cobalt-tint);
     padding: 6px 16px;
-    border-radius: 50px;
+    border-radius: var(--radius-pill);
     margin-bottom: 24px;
 }
 
@@ -385,7 +385,7 @@ body {
     padding: 0 24px;
     min-height: 52px;
     line-height: 52px;
-    border-radius: 8px; /* Sistema Bosque Inteligente: radio fijo, nunca píldora */
+    border-radius: var(--radius-sm); /* Sistema Bosque Inteligente: radio fijo, nunca píldora */
     text-decoration: none;
     transition: all 150ms cubic-bezier(0.2, 0.8, 0.2, 1);
     border: 1px solid transparent;
@@ -442,7 +442,7 @@ body {
 .glass-card {
     background-color: var(--glass-bg);
     border: 1px solid var(--glass-border);
-    border-radius: 8px;
+    border-radius: var(--radius-sm);
     padding: 40px 32px;
     box-shadow: 0 20px 40px var(--glass-shadow);
     backdrop-filter: blur(16px);
@@ -558,7 +558,7 @@ body {
 .caso-dot.is-active {
     background: var(--cobalt-600);
     width: 22px;
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
 }
 
 .caso-quote-pending {
@@ -586,7 +586,7 @@ body {
 .caso-step-card {
     background-color: var(--bg-alt);
     border: 1px solid var(--line);
-    border-radius: 12px; /* Sistema Bosque Inteligente: radius-md, cards */
+    border-radius: var(--radius-md); /* Sistema Bosque Inteligente: radius-md, cards */
     padding: 28px 24px;
     box-shadow: none;
 }
@@ -687,7 +687,7 @@ body {
 .caso-quote-card {
     background-color: var(--bg-alt);
     border: 1px solid var(--line);
-    border-radius: 12px; /* Sistema Bosque Inteligente: radius-md, cards */
+    border-radius: var(--radius-md); /* Sistema Bosque Inteligente: radius-md, cards */
     box-shadow: none;
     display: grid;
     grid-template-columns: 1.1fr 1fr;
@@ -770,7 +770,7 @@ body {
     }
     .caso-step-arrow {
         transform: rotate(90deg);
-        padding: 4px 0;
+        padding: var(--space-1) 0;
     }
     .caso-quote-card {
         grid-template-columns: 1fr;
@@ -797,7 +797,7 @@ body {
     background: var(--bg);
     border: 1px solid var(--line);
     border-top: 3px solid var(--cobalt-400);
-    border-radius: 12px; /* Sistema Bosque Inteligente: radius-md, cards */
+    border-radius: var(--radius-md); /* Sistema Bosque Inteligente: radius-md, cards */
     padding: 32px 30px 36px;
     display: flex;
     flex-direction: column;
@@ -916,7 +916,7 @@ body {
     background-color: var(--night-800);
     border: 1px solid var(--night-600);
     border-top: 3px solid var(--cobalt-400);
-    border-radius: 12px; /* Sistema Bosque Inteligente: radius-md, cards */
+    border-radius: var(--radius-md); /* Sistema Bosque Inteligente: radius-md, cards */
     padding: 8px 32px 32px;
     overflow: hidden;
     transition: border-color 220ms cubic-bezier(0.2, 0.8, 0.2, 1), transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -1035,7 +1035,7 @@ body {
     align-items: flex-end; /* Alineación al fondo */
     position: relative;
     height: 100%;
-    border-radius: 20px; /* Sistema Bosque Inteligente: radius-xl, contenedores especiales */
+    border-radius: var(--radius-xl); /* Sistema Bosque Inteligente: radius-xl, contenedores especiales */
     overflow: hidden;
     padding-top: 40px;
 }
@@ -1177,7 +1177,7 @@ body {
     margin: 0 auto;
     position: relative;
     z-index: 1;
-    border-radius: 12px;
+    border-radius: var(--radius-md);
     overflow: hidden; /* Corta el haz de luz giratorio para que solo se vea en el borde */
     padding: 1px; /* Espacio de 1px que actuará como borde animado */
     background: transparent; /* Transparente por defecto para dejar ver el haz de luz siempre */
@@ -1207,7 +1207,7 @@ body {
 .glass-form {
     background-color: var(--bg); /* Fondo claro que bloquea la luz central y deja ver el borde cristalino */
     border: none; /* Quitamos el borde por defecto ya que el contenedor con padding hace de borde */
-    border-radius: 11px; /* Ligeramente menor para encajar perfecto */
+    border-radius: var(--radius-md);
     padding: 48px;
     box-shadow: 0 30px 60px var(--glass-shadow);
     position: relative;
@@ -1262,7 +1262,7 @@ body {
 .form-group textarea {
     background-color: var(--bg-input);
     border: 1px solid var(--line);
-    border-radius: 12px;
+    border-radius: var(--radius-md);
     padding: 24px 18px 8px 18px; /* Espacio superior para alojar la etiqueta flotada */
     color: var(--ink);
     font-family: var(--font-body);
@@ -1321,7 +1321,7 @@ body {
     border: 1px solid transparent;
     padding: 16px;
     min-height: 52px;
-    border-radius: 8px; /* Sistema Bosque Inteligente: radio fijo, nunca píldora */
+    border-radius: var(--radius-sm); /* Sistema Bosque Inteligente: radio fijo, nunca píldora */
     cursor: pointer;
     transition: all 150ms cubic-bezier(0.2, 0.8, 0.2, 1);
     box-shadow: 0 8px 20px var(--cobalt-glow);
@@ -1701,7 +1701,7 @@ body {
         text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
     }
     .section {
-        padding: 80px 0;
+        padding: var(--space-9) 0;
     }
     .section-title {
         font-size: 2rem;
@@ -1848,7 +1848,7 @@ body {
     border: 1px solid var(--night-600);
     color: var(--on-night);
     padding: 8px 16px;
-    border-radius: 8px; /* Sistema Bosque Inteligente: radius-sm */
+    border-radius: var(--radius-sm); /* Sistema Bosque Inteligente: radius-sm */
     font-size: 0.8rem;
     white-space: nowrap;
     opacity: 0;
@@ -1879,7 +1879,7 @@ body {
     padding: 0 20px;
     min-height: 48px;
     line-height: 48px;
-    border-radius: 8px; /* Sistema Bosque Inteligente: radio fijo, nunca píldora */
+    border-radius: var(--radius-sm); /* Sistema Bosque Inteligente: radio fijo, nunca píldora */
     text-decoration: none;
     transition: all 150ms cubic-bezier(0.2, 0.8, 0.2, 1);
     border: 1px solid transparent;
@@ -1932,7 +1932,7 @@ body {
     background-color: var(--bg);
     border: 1px solid var(--line);
     border-left: 3px solid transparent;
-    border-radius: 8px;
+    border-radius: var(--radius-sm);
     box-shadow: 0 4px 16px var(--glass-shadow);
     transition: all 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
     overflow: hidden;
@@ -2040,7 +2040,7 @@ body {
     background: linear-gradient(135deg, var(--cobalt-500) 0%, var(--cobalt-700) 100%);
     color: #ffffff;
     padding: 4px 14px;
-    border-radius: 50px;
+    border-radius: var(--radius-pill);
     box-shadow: 0 4px 15px var(--cobalt-glow);
     z-index: 5;
     opacity: 1;
