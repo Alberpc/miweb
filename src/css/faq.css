@@ -1,0 +1,122 @@
+/* ============================================================
+   faq.css — EL acordeon de preguntas frecuentes
+   ============================================================
+   Estaba en index.css (la home) y otra vez en landing.css (las 6
+   landings), con valores distintos: gap 24 vs 18, hover con filo
+   izquierdo vs sin el, e icono en circulo vs solo un signo.
+
+   Se queda la version de la home, que es la mas trabajada, y pasa a
+   los tokens del sistema. Lo que se cambie aqui vale para las 14.
+   ============================================================ */
+
+/* La seccion, cuando la FAQ va en su propio bloque (landings). */
+.faq-section { padding: var(--space-10) 0; background-color: var(--bg-alt); }
+.faq-head { max-width: 720px; margin: 0 auto var(--space-8); text-align: center; }
+.faq-head .s-label {
+    font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.25em;
+    color: var(--cobalt-600); display: block; margin-bottom: var(--space-3);
+    font-weight: 600;
+}
+.faq-head h2 {
+    font-family: var(--font-display); font-size: clamp(1.7rem, 3.4vw, 2.3rem);
+    font-weight: 400; letter-spacing: -0.02em; color: var(--ink);
+}
+
+.faq-container {
+    max-width: 850px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+}
+
+.faq-item {
+    /* Las dos: unas paginas traian el atajo y otras la longhand. */
+    background: var(--bg);
+    background-color: var(--bg);
+    border: 1px solid var(--line);
+    /* Filo izquierdo transparente: al pasar por encima y al abrir se
+       tinta, y la fila no se mueve porque el ancho ya esta reservado. */
+    border-left: 3px solid transparent;
+    border-radius: var(--radius-sm);
+    box-shadow: 0 4px 16px var(--glass-shadow);
+    transition: all var(--motion-base) var(--ease-standard);
+    overflow: hidden;
+}
+.faq-item:hover {
+    border-color: var(--line-strong);
+    border-left-color: var(--cobalt-border);
+}
+
+.faq-trigger {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: var(--space-5) var(--space-6);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-4);
+    cursor: pointer;
+    text-align: left;
+    outline: none;
+}
+
+.faq-question {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0;
+    /* aire para que no se pegue al icono */
+    padding-right: var(--space-4);
+}
+
+.faq-icon {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--cobalt-600);
+    background: var(--cobalt-tint);
+    border: 1px solid var(--cobalt-border);
+    border-radius: 50%;
+    transition: all var(--motion-base) var(--ease-standard);
+    line-height: 1;
+}
+
+.faq-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--motion-base) var(--ease-standard);
+    /* Sin padding en el contenedor animado: falsea scrollHeight y el
+       acordeon corta el texto. El aire va en .faq-answer. */
+    padding: 0;
+}
+
+.faq-answer {
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    font-weight: 300;
+    line-height: 1.6;
+    margin: 0;
+    padding: var(--space-2) var(--space-6) var(--space-6);
+}
+
+.faq-item.active {
+    background: var(--cobalt-tint);
+    background-color: var(--cobalt-tint);
+    border-color: var(--cobalt-border);
+    border-left-color: var(--cobalt-600);
+    background-color: var(--cobalt-tint);
+}
+.faq-item.active .faq-icon {
+    transform: rotate(45deg);   /* el '+' se convierte en 'x' */
+    color: var(--night-900);
+    background: var(--cobalt-400);
+    border-color: var(--cobalt-400);
+}

@@ -227,6 +227,35 @@ def props_por_selector(css):
                 d[k.strip()] = v.strip()
     return fin
 
+def _tokens_de_escala():
+    """Lee de tokens.css los tokens que son una MEDIDA (px), para poder
+    resolverlos al comparar.
+
+    Sin esto, cambiar `24px` por `var(--space-5)` salta como regresion
+    aunque pinte exactamente lo mismo: el verificador compara texto. Con
+    esto se compara el pixel, asi que una conversion a token se prueba
+    identica en vez de declararse a mano (que es fiarse de mi palabra).
+    Medidas (px), duraciones (ms) y curvas de easing. Los colores NO se
+    resuelven: ahi el nombre del token si importa y un cambio de color
+    tiene que saltar.
+    """
+    ruta = os.path.join("src", "design-system", "tokens.css")
+    if not os.path.exists(ruta):
+        return {}
+    txt = open(ruta, encoding="utf-8").read()
+    patron = r"(--[\w-]+)\s*:\s*(-?[\d.]+(?:px|ms|s)|cubic-bezier\([^)]*\))\s*;"
+    return {n: v.strip() for n, v in re.findall(patron, txt)}
+
+TOKENS_ESCALA = _tokens_de_escala()
+
+def resolver_tokens(valor):
+    """Sustituye var(--x) por su px cuando --x es una medida conocida."""
+    if not valor or "var(" not in valor:
+        return valor
+    def rep(m):
+        return TOKENS_ESCALA.get(m.group(1), m.group(0))
+    return re.sub(r"var\((--[\w-]+)\)", rep, valor)
+
 # --- Cambios de diseno hechos a proposito -------------------------------
 # El verificador nacio para probar que la migracion no cambiaba NADA. Desde
 # que ademas se retoca el diseno, hay cambios que si son queridos: se listan
@@ -259,6 +288,27 @@ CAMBIOS_QUERIDOS = {
     # poniendo a ojo. Ahora todo sale de --space-* y --radius-*.
     # Nueve de estos son identicos en pantalla (8/12/16/100 -> su token);
     # el resto sube o baja al escalon mas cercano de la escala.
+    # 23-ago: la FAQ pasa a ser un componente (css/faq.css). Estaba en
+    # index.css y otra vez en landing.css con valores distintos; se queda
+    # la version de la home, que es la mas trabajada (icono en circulo,
+    # filo izquierdo al abrir), y sus medidas suben al escalon de la
+    # escala mas cercano: 26->24, 20->16, 54->64, 18->24.
+    ".faq-section":              {"padding"},
+    ".faq-head":                 {"margin"},
+    ".faq-container":            {"gap"},
+    ".faq-item":                 {"transition", "border-left", "box-shadow",
+                                  "border-radius"},
+    ".faq-item:hover":           {"border-color", "border-left-color"},
+    ".faq-trigger":              {"padding", "gap"},
+    ".faq-question":             {"padding-right"},
+    ".faq-icon":                 {"font-size", "font-weight", "color", "background",
+                                  "border", "border-radius", "width", "height",
+                                  "display", "align-items", "justify-content",
+                                  "flex-shrink", "transition"},
+    ".faq-content":              {"transition", "padding"},
+    ".faq-answer":               {"font-size", "line-height", "padding"},
+    ".faq-item.active":          {"border-left-color", "background", "background-color"},
+    ".faq-item.active .faq-icon": {"color", "background", "border-color"},
     ".subnav":                   {"border-radius", "background"},
     # 23-ago: el CTA del nav en blog y posts iba en --cobalt-600 (#6E5628),
     # un dorado tan oscurecido que se leia MARRON, con texto blanco, y al
@@ -308,8 +358,8 @@ CAMBIOS_QUERIDOS = {
     ".key-points li":            {"border-radius"},
     ".related":                  {"padding"},
     ".related-card":             {"border-radius"},
-    ".faq-section":              {"padding"},
-    ".faq-item":                 {"border-radius"},
+    # .faq-section y .faq-item se declaran mas arriba, en el bloque de la
+    # FAQ. Estaban tambien aqui y la segunda pisaba a la primera.
     ".footer-section.inverse":   {"padding"},
     # 23-ago, la home a la misma escala. De estos 25, solo 3 mueven un pixel:
     # las barritas del burger (2->8), el punto activo (4->8) y el formulario
@@ -393,13 +443,21 @@ def es_querido(cambio, esperados):
     prop = dentro.split(":", 1)[0].strip()
     if prop not in CAMBIOS_QUERIDOS.get(sel, set()):
         return False
-    # el valor final tiene que ser un token del sistema o estar declarado
+    # el valor final tiene que APOYARSE en el sistema (llevar al menos un
+    # token) o estar declarado a mano. Antes se exigia que EMPEZARA por
+    # "var(--", asi que un valor compuesto legitimo como
+    # "0 auto var(--space-8)" se colaba como regresion.
     nuevo_val = dentro.split("->")[-1].strip() if "->" in dentro else ""
-    return nuevo_val.startswith("var(--") or (sel, prop) in esperados
+    return "var(--" in nuevo_val or (sel, prop) in esperados
 
 
 # Cambios queridos cuyo valor final no es un token (se aceptan tal cual).
 VALOR_LIBRE = {
+    # La FAQ de las landings adopta la de la home: transicion del sistema
+    # (220ms) en vez de 0.4s, y los tamanos de la version buena.
+    (".faq-item", "transition"),
+    (".faq-icon", "font-size"), (".faq-icon", "font-weight"),
+    (".faq-answer", "font-size"), (".faq-answer", "line-height"),
     (".cta-card", "background"), (".cta-card", "border"),
     (".cta-card", "box-shadow"), (".cta-card", "border-radius"),
     (".cta-card", "padding"),
@@ -473,9 +531,14 @@ def _sin_claves_repetidas(ruta):
                     repes.append(m.group(1))
                 vistas.add(m.group(1))
     if repes:
-        print("AVISO: claves repetidas en CAMBIOS_QUERIDOS: %s" % ", ".join(repes))
+        # ABORTA, no avisa. Como aviso ya se colo tres veces: se imprime
+        # arriba del todo y se pierde entre las 14 lineas de resultado,
+        # asi que la clave pisada se da por declarada y el verificador
+        # dice OK sobre un cambio que nadie ha mirado.
+        print("ERROR: claves repetidas en CAMBIOS_QUERIDOS: %s" % ", ".join(repes))
         print("       la ultima pisa a la anterior; hay que fusionarlas.")
-    return not repes
+        sys.exit(2)
+    return True
 
 _sin_claves_repetidas(__file__)
 
@@ -546,8 +609,11 @@ for slug, ruta_orig, ruta_nueva in TODAS:
         for sel, d in po.items():
             dn = pn.get(sel, {})
             for k, v in d.items():
-                if dn.get(k) != v:
-                    cambiados.append("%s{%s: %s -> %s}" % (sel, k, v, dn.get(k)))
+                nv = dn.get(k)
+                # Se comparan los pixeles, no el texto: pasar un 24px a
+                # var(--space-5) no es un cambio, es el mismo valor.
+                if nv != v and resolver_tokens(nv) != resolver_tokens(v):
+                    cambiados.append("%s{%s: %s -> %s}" % (sel, k, v, nv))
         queridos = [c for c in cambiados if es_querido(c, VALOR_LIBRE)]
         cambiados = [c for c in cambiados if not es_querido(c, VALOR_LIBRE)]
         if queridos:
