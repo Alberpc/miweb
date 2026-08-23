@@ -45,6 +45,15 @@ export default function (eleventyConfig) {
     eleventyConfig.ignores.add("_migracion/**/*");
     eleventyConfig.ignores.add("_site/**/*");
 
+    // Los posts del blog, del mas nuevo al mas viejo. Se ordena por el campo
+    // `fecha` del frontmatter y no por la fecha del archivo: la del archivo
+    // cambia sola al editarlo y reordenaria el indice sin querer.
+    // Ojo: YAML convierte 2026-07-29 en un Date, no en un texto, asi que se
+    // compara por tiempo. Comparar como cadena no ordenaba nada.
+    eleventyConfig.addCollection("postsPorFecha", (api) =>
+        api.getFilteredByTag("posts")
+           .sort((a, b) => new Date(b.data.fecha) - new Date(a.data.fecha)));
+
     return {
         dir: {
             input: "src",

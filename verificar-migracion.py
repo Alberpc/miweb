@@ -193,8 +193,15 @@ for slug, ruta_orig, ruta_nueva in TODAS:
     problemas = []
     avisos = []
 
-    if texto_visible(orig) != texto_visible(nuevo):
-        problemas.append("texto visible")
+    to, tn = texto_visible(orig), texto_visible(nuevo)
+    if to != tn:
+        # Mismas palabras en otro orden no es perdida de contenido. Pasa en
+        # /blog/: las tarjetas ahora salen de la coleccion ordenada por fecha,
+        # asi que el post mas nuevo subio al primer puesto. Se avisa, no falla.
+        if sorted(to.split()) == sorted(tn.split()):
+            avisos.append("texto reordenado, ni una palabra distinta")
+        else:
+            problemas.append("texto visible")
     eo, en = enlaces(orig), enlaces(nuevo)
     if eo != en:
         problemas.append("enlaces (%s)" % (set(eo) ^ set(en)))
