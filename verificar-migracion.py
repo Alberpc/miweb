@@ -177,6 +177,24 @@ def props_por_selector(css):
                 d[k.strip()] = v.strip()
     return fin
 
+# --- Cambios de diseno hechos a proposito -------------------------------
+# El verificador nacio para probar que la migracion no cambiaba NADA. Desde
+# que ademas se retoca el diseno, hay cambios que si son queridos: se listan
+# aqui para que no se confundan con una regresion. Si un cambio no esta en
+# esta lista, sigue saltando como fallo.
+CAMBIOS_QUERIDOS = {
+    # 23-ago: el CTA usaba --night-800, un verde mas claro que su seccion,
+    # y competia con el pie, que es de ese mismo verde. Ahora se separa por
+    # profundidad (velo + sombra), no por color.
+    ".cta-card": {"background", "border", "box-shadow"},
+}
+
+def es_querido(cambio):
+    sel = cambio.split("{")[0].strip()
+    prop = cambio.split("{", 1)[1].split(":", 1)[0].strip() if "{" in cambio else ""
+    return prop in CAMBIOS_QUERIDOS.get(sel, set())
+
+
 fallos = 0
 # De donde sale cada lado de la comparacion.
 ORIG = os.path.join("_migracion", "originales")   # el HTML de antes, congelado
@@ -221,6 +239,11 @@ for slug, ruta_orig, ruta_nueva in TODAS:
             for k, v in d.items():
                 if dn.get(k) != v:
                     cambiados.append("%s{%s: %s -> %s}" % (sel, k, v, dn.get(k)))
+        queridos = [c for c in cambiados if es_querido(c)]
+        cambiados = [c for c in cambiados if not es_querido(c)]
+        if queridos:
+            avisos.append("CSS: %d cambio(s) de diseno a proposito (%s)" % (
+                len(queridos), queridos[0].split("{")[0]))
         if cambiados:
             problemas.append("CSS cambia el resultado: %d (%s)" % (
                 len(cambiados), cambiados[0][:90]))

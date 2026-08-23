@@ -217,10 +217,16 @@ body { overflow-x: hidden; line-height: 1.6; }
 .cta-final.inverse { padding: 90px 0 110px; }
 .cta-card {
     max-width: 900px; margin: 0 auto; text-align: center;
-    background: linear-gradient(160deg, rgba(200, 168, 94, 0.16), var(--night-800));
-    border: 1px solid rgba(214, 186, 130, 0.30); border-radius: 20px;
+    /* La tarjeta se separa del fondo por PROFUNDIDAD, no por color: antes
+       usaba --night-800 (#274C3B), un verde bastante mas claro que la
+       seccion, y acababa compitiendo con el pie, que es del mismo verde.
+       Ahora es un velo blanco al 3% sobre el propio fondo: se lee como
+       una tarjeta elevada sin introducir un verde nuevo. El dorado queda
+       para el borde y el boton, que es donde tiene que llamar. */
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(214, 186, 130, 0.22); border-radius: 20px;
     padding: 60px 40px;
-    box-shadow: 0 40px 90px -40px rgba(0,0,0,0.8), inset 0 0 80px -50px var(--cobalt-500);
+    box-shadow: 0 40px 90px -40px rgba(0, 0, 0, 0.55);
 }
 .cta-card h2 { font-family: var(--font-heading); font-size: clamp(1.6rem, 3.4vw, 2.3rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 16px; max-width: 22ch; margin-left: auto; margin-right: auto; color: var(--on-night); }
 .cta-card p { font-size: 1.08rem; color: var(--on-night-body); font-weight: 300; max-width: 54ch; margin: 0 auto 32px; }
