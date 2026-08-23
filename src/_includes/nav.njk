@@ -1,29 +1,46 @@
-{#- Cabecera. Era identica byte a byte en las 7 landings.
-    Cambio deliberado frente al original: la ruta del logo pasa de
-    "../assets/..." a "/assets/...". Relativa solo funcionaba a un nivel
-    de profundidad; absoluta funciona igual en / y en /slug/.
-    `paginaActual` marca el enlace activo (las landings usan "blog").
-    `navBlogHref` existe porque hoy la pagina /blog/ enlaza "Blog" a "/"
-    en vez de a "/blog/". Se conserva tal cual para no cambiar navegacion
-    en una migracion; si es un fallo, se arregla aparte y a la vista. -#}
-    <!-- NAV -->
-    <nav class="subnav">
-        <a href="/" class="logo"><img src="/assets/img/logo-alber-blanco.png" alt="{{ site.nombre }}"></a>
-        <div class="nav-menu">
-            <a href="/#soluciones"{% if paginaActual == "servicios" %} class="current"{% endif %}>Servicios</a>
-            <a href="/#caminos"{% if paginaActual == "caminos" %} class="current"{% endif %}>Cómo Empezar</a>
-            <a href="/#sobre-mi"{% if paginaActual == "sobre-mi" %} class="current"{% endif %}>Sobre Mí</a>
-            <a href="{{ navBlogHref | default("/blog/") }}"{% if paginaActual == "blog" %} class="current"{% endif %}>Blog</a>
+{#- ============================================================
+    nav.njk — LA cabecera del sitio. Una sola, para todas.
+    ============================================================
+    Antes habia dos casi identicas (.navbar en la home, .subnav en
+    blog y posts) mas una tercera copia del CSS dentro del propio
+    blog. De ahi venia que el boton del blog se quedara MARRON
+    mientras el de la home ya era dorado: al estar duplicadas, se
+    desincronizaban.
+
+    Parametros (frontmatter de cada pagina):
+      navLocal: true   -> enlaces al ancla de la MISMA pagina
+                          (#soluciones en vez de /#soluciones). Solo
+                          la home, que es donde viven esas secciones.
+      navCtaHref/Texto -> el boton. La home lleva al diagnostico;
+                          blog y posts, a contacto.
+      navCtaCorto      -> version corta del texto para pantallas
+                          estrechas (la home la usa).
+      paginaActual     -> marca el enlace activo.
+      navBlogHref      -> destino de "Blog" (en /blog/ apunta a "/").
+    ============================================================ -#}
+{%- set raiz = "" if navLocal else "/" -%}
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="{{ "#" if navLocal else "/" }}" class="logo"><img src="/assets/img/logo-alber-blanco.png" alt="{{ site.nombre }}"></a>
+            <div class="nav-menu">
+                <a href="{{ raiz }}#soluciones" class="nav-link{% if paginaActual == "servicios" %} current{% endif %}">Servicios</a>
+                <a href="{{ raiz }}#caminos" class="nav-link{% if paginaActual == "caminos" %} current{% endif %}">Cómo Empezar</a>
+                <a href="{{ raiz }}#sobre-mi" class="nav-link{% if paginaActual == "sobre-mi" %} current{% endif %}">Sobre Mí</a>
+                <a href="{{ navBlogHref | default("/blog/") }}" class="nav-link{% if paginaActual == "blog" %} current{% endif %}">Blog</a>
+            </div>
+            <a href="{{ navCtaHref | default("/#contacto") }}" class="nav-btn">
+{%- if navCtaCorto %}<span class="full-text">{{ navCtaTexto | safe }}</span><span class="short-text">{{ navCtaCorto | safe }}</span>
+{%- else %}{{ navCtaTexto | default("Cuéntame tu caso &rarr;") | safe }}
+{%- endif %}</a>
+            <button class="nav-burger" id="nav-burger" aria-label="Abrir menú" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
         </div>
-        <a href="/#contacto" class="cta">Cuéntame tu caso &rarr;</a>
-        <button class="nav-burger" id="nav-burger" aria-label="Abrir menú" aria-expanded="false">
-            <span></span><span></span><span></span>
-        </button>
+        <div class="nav-mobile" id="nav-mobile">
+            <a href="{{ raiz }}#soluciones" class="nav-mobile-link">Servicios</a>
+            <a href="{{ raiz }}#caminos" class="nav-mobile-link">Cómo Empezar</a>
+            <a href="{{ raiz }}#sobre-mi" class="nav-mobile-link">Sobre Mí</a>
+            <a href="{{ navBlogHref | default("/blog/") }}" class="nav-mobile-link">Blog</a>
+            <a href="{{ navCtaHref | default("/#contacto") }}" class="nav-mobile-cta">{{ navCtaTexto | default("Cuéntame tu caso &rarr;") | safe }}</a>
+        </div>
     </nav>
-    <div class="nav-mobile" id="nav-mobile">
-        <a href="/#soluciones">Servicios</a>
-        <a href="/#caminos">Cómo Empezar</a>
-        <a href="/#sobre-mi">Sobre Mí</a>
-        <a href="{{ navBlogHref | default("/blog/") }}">Blog</a>
-        <a href="/#contacto" class="nav-mobile-cta">Cuéntame tu caso &rarr;</a>
-    </div>

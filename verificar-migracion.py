@@ -168,6 +168,38 @@ def selector_usado(regla, html):
         return True   # selectores de elemento/pseudo: se asumen vivos
     return any(re.search(r"[\"'\s]%s[\"'\s]" % re.escape(n), html) for n in nombres)
 
+def sin_media(css):
+    """Quita los bloques @media/@supports enteros.
+
+    Hace falta porque reglas() parte por "}" y eso descuartiza un @media:
+    la regla de dentro pierde su prefijo y pasa por regla base. Asi el pie
+    del blog parecia cambiar de 3 columnas a 2 cuando no cambiaba nada.
+    """
+    out, i, n = [], 0, len(css)
+    while i < n:
+        j = css.find("@media", i)
+        k = css.find("@supports", i)
+        j = min(x for x in (j, k) if x != -1) if (j != -1 or k != -1) else -1
+        if j == -1:
+            out.append(css[i:])
+            break
+        out.append(css[i:j])
+        # saltar el bloque completo contando llaves
+        prof, m = 0, css.find("{", j)
+        if m == -1:
+            break
+        i = m
+        while i < n:
+            if css[i] == "{":
+                prof += 1
+            elif css[i] == "}":
+                prof -= 1
+                if prof == 0:
+                    i += 1
+                    break
+            i += 1
+    return "".join(out)
+
 def props_por_selector(css):
     """Para cada selector, el valor que GANA de cada propiedad.
 
@@ -178,9 +210,15 @@ def props_por_selector(css):
     solo el orden dentro del mismo selector.
     """
     fin = {}
-    for r in reglas(css):
+    for r in reglas(sin_media(css)):
         if "{" not in r: continue
         sel = r.split("{")[0].strip()
+        # Lo de dentro de un @media depende del ancho de pantalla, asi que
+        # no "gana" sin mas: mezclarlo con la regla base daba falsos
+        # positivos (el pie del blog parecia cambiar de 3 columnas a 2 solo
+        # porque el @media quedaba el ultimo del archivo).
+        if sel.startswith("@media") or sel.startswith("@supports"):
+            continue
         cuerpo = r[r.index("{") + 1:r.rindex("}")]
         d = fin.setdefault(sel, {})
         for decl in cuerpo.split(";"):
@@ -210,7 +248,7 @@ CAMBIOS_QUERIDOS = {
     # La seccion del CTA deja de ser .inverse: iban tres franjas verdes
     # seguidas (CTA + pie) y se leian como un solo bloque.
     ".cta-final.inverse":       {"padding"},
-    ".cta-card":                {"background", "border", "border-radius", "box-shadow"},
+    ".cta-card":                {"background", "border", "border-radius", "box-shadow", "padding"},
     # El boton pasa a ser el mismo que .btn-primary de la home: radio 8px
     # (el sistema prohibe la pildora) y texto oscuro sobre el dorado.
     ".cta-card .btn-main":      {"font-size", "color", "background", "padding",
@@ -222,7 +260,14 @@ CAMBIOS_QUERIDOS = {
     # Nueve de estos son identicos en pantalla (8/12/16/100 -> su token);
     # el resto sube o baja al escalon mas cercano de la escala.
     ".subnav":                   {"border-radius"},
-    ".subnav .cta":              {"border-radius"},
+    # 23-ago: el CTA del nav en blog y posts iba en --cobalt-600 (#6E5628),
+    # un dorado tan oscurecido que se leia MARRON, con texto blanco, y al
+    # pasar el raton se oscurecia mas todavia. Ahora es el mismo boton que
+    # .nav-btn en la home: dorado --cobalt-400 y texto oscuro.
+    ".subnav .cta":              {"border-radius", "color", "background", "padding",
+                                  "min-height", "line-height", "transition"},
+    ".subnav .cta:hover":        {"background", "transform", "box-shadow", "border-color"},
+    ".nav-mobile .nav-mobile-cta": {"background", "color"},
     ".nav-burger span":          {"border-radius"},
     ".nav-mobile":               {"border-radius"},
     ".nav-mobile a":             {"border-radius"},
@@ -267,6 +312,12 @@ CAMBIOS_QUERIDOS = {
     ".caminos-section .grid-two-cols > div:last-child::after": {"border-radius"},
 }
 
+# El nav se unifico el 23-ago: blog y posts usaban .subnav, la home
+# .navbar, y ademas el blog tenia su propia copia del CSS. Ahora hay un
+# solo componente (.navbar, en css/nav.css), asi que TODAS las reglas
+# .subnav* desaparecen. No es una perdida: es la deduplicacion.
+NAV_UNIFICADO = re.compile(r"^\.subnav|^\.nav-(menu|mobile|burger|link|btn)|^\.logo")
+
 def es_querido(cambio, esperados):
     """Un cambio esta permitido solo si ADEMAS acaba en el valor previsto.
 
@@ -276,6 +327,10 @@ def es_querido(cambio, esperados):
     el que se declaro.
     """
     sel = cambio.split("{")[0].strip()
+    # tambien cuando la regla del nav va dentro de un @media
+    if NAV_UNIFICADO.match(sel) or (sel.startswith("@media") and
+            ("nav-" in cambio or "subnav" in cambio)):
+        return True
     if "{" not in cambio:
         return False
     dentro = cambio.split("{", 1)[1].rstrip("}")
@@ -291,12 +346,17 @@ def es_querido(cambio, esperados):
 VALOR_LIBRE = {
     (".cta-card", "background"), (".cta-card", "border"),
     (".cta-card", "box-shadow"), (".cta-card", "border-radius"),
+    (".cta-card", "padding"),
     (".cta-final.inverse", "padding"),
     (".cta-card .btn-main", "padding"), (".cta-card .btn-main", "font-size"),
     (".cta-card .btn-main", "border-radius"), (".cta-card .btn-main", "transition"),
     (".cta-card .btn-main:hover", "transform"), (".cta-card .btn-main:hover", "background"),
     (".cta-card .btn-main:hover", "box-shadow"),
     (".article-hero.inverse h1", "font-weight"),
+    (".subnav .cta", "padding"), (".subnav .cta", "min-height"),
+    (".subnav .cta", "line-height"), (".subnav .cta", "transition"),
+    (".subnav .cta:hover", "transform"), (".subnav .cta:hover", "box-shadow"),
+    (".subnav .cta:hover", "border-color"),
     (".prose h2", "font-weight"), (".related h2", "font-weight"),
     (".faq-head h2", "font-weight"), (".cta-card h2", "font-weight"),
 }
