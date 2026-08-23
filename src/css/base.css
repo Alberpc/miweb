@@ -1,0 +1,95 @@
+/* ============================================================
+   base.css — primitivas de maquetacion comunes
+   ============================================================
+   Contenedor, ritmo de seccion, cabecera de seccion, FAQ y el
+   reveal al hacer scroll. Estaban duplicadas dentro del <style>
+   del diagnostico y de no-perder-clientes.
+
+   Todo con tokens: cambiar aqui el ancho del contenedor o el aire
+   entre secciones lo cambia en todo el sitio.
+   ============================================================ */
+
+.container {
+    width: 100%;
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--space-5);
+}
+
+.section {
+    padding: var(--space-11) 0;
+    position: relative;
+    scroll-margin-top: var(--space-10);
+}
+
+/* ---- Cabecera de seccion: etiqueta + titular + entradilla ---- */
+.s-head {
+    max-width: 720px;
+    margin-bottom: var(--space-8);
+}
+.s-label {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.25em;
+    color: var(--cobalt-600);
+    display: block;
+    margin-bottom: var(--space-3);
+    font-weight: 600;
+}
+.s-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.7rem, 3.6vw, 2.4rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: var(--space-4);
+    color: var(--ink);
+}
+.s-sub {
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+    font-weight: 300;
+    max-width: 62ch;
+}
+
+/* ---- FAQ ---- */
+.faqs {
+    max-width: 780px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+.faq {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    transition: border-color var(--motion-base) var(--ease-standard);
+}
+
+/* ---- Aparecer al hacer scroll ---- */
+.reveal {
+    /* 24px: es el valor que ya usaban los 7 posts y el pie. Las dos
+       landings iban a 36px; se unifica al que mas paginas comparten. */
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.8s ease,
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.revealed {
+    opacity: 1;
+    transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .reveal { transition: none; opacity: 1; transform: none; }
+}
+
+/* ---- Enlace discreto ---- */
+.link-soft {
+    color: var(--on-night-soft);
+    font-size: 0.95rem;
+    text-decoration: underline;
+    transition: color var(--motion-base) var(--ease-standard);
+}

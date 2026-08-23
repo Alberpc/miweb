@@ -38,8 +38,6 @@
 .footer-social-icons a { color: var(--on-night-soft); display: flex; transition: color 0.3s ease; }
 .footer-social-icons a:hover { color: var(--cobalt-300); }
 
-.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
-.reveal.revealed { opacity: 1; transform: none; }
 
 @media (max-width: 900px) {
     .article-layout { grid-template-columns: 1fr; gap: 0; }

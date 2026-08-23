@@ -26,7 +26,6 @@ cssPagina: |
         html { scroll-behavior: smooth; background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 16px; -webkit-font-smoothing: antialiased; }
         body { overflow-x: hidden; line-height: 1.6; }
 
-        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
         /* ===== NAV =====
            Pastilla clara flotando. Sobre el hero oscuro contrasta sola; al
@@ -87,7 +86,6 @@ cssPagina: |
         .hero-ctas { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; flex-wrap: wrap; }
         .hero-ctas-centered { align-items: center; }
         /* El boton viene de botones.css, comun a todo el sitio. */
-        .link-soft { font-size: 0.95rem; text-decoration: underline; transition: color 0.3s ease; }
         .hero.inverse .link-soft { color: var(--on-night-soft); }
         .hero.inverse .link-soft:hover { color: var(--on-night); }
         .hero.inverse .hero-microcopy { font-size: 0.85rem; color: var(--on-night-mid); font-weight: 400; margin: 0; }
@@ -102,17 +100,12 @@ cssPagina: |
         }
 
         /* ===== SECCIONES ===== */
-        .section { padding: 110px 0; position: relative; scroll-margin-top: 96px; background-color: var(--bg); }
         .section:nth-of-type(even) { background-color: var(--bg-alt); }
         .section + .section::before {
             content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
             width: min(760px, 82%); height: 1px;
             background: linear-gradient(90deg, transparent 0%, rgba(26,29,35,0.07) 30%, rgba(26,29,35,0.13) 50%, rgba(26,29,35,0.07) 70%, transparent 100%);
         }
-        .s-label { font-family: monospace; font-size: 0.8rem; letter-spacing: 0.25em; color: var(--cobalt-600); display: block; margin-bottom: 12px; font-weight: 600; }
-        .s-title { font-family: var(--font-display); font-size: clamp(1.7rem, 3.6vw, 2.4rem); font-weight: 400; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 16px; color: var(--ink); }
-        .s-sub { font-size: 1.05rem; color: var(--ink-soft); font-weight: 300; max-width: 62ch; }
-        .s-head { max-width: 720px; margin-bottom: 64px; }
         .s-head.center { margin-left: auto; margin-right: auto; text-align: center; }
 
         /* Bloque 2 — PRUEBA: capturas + logos */
@@ -345,8 +338,6 @@ cssPagina: |
         @media (max-width: 640px) { .quien-col { padding: 24px 20px; } }
 
         /* FAQ */
-        .faqs { max-width: 780px; margin: 0 auto; display: flex; flex-direction: column; gap: 18px; }
-        .faq { background: var(--bg); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; transition: border-color 0.3s ease; }
         .faq:hover { border-color: var(--cobalt-border); }
         .faq button {
             width: 100%; background: none; border: none; cursor: pointer; text-align: left;
@@ -404,8 +395,6 @@ cssPagina: |
         /* Footer mini */
 
         /* Reveal */
-        .reveal { opacity: 0; transform: translateY(36px); transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1); }
-        .reveal.revealed { opacity: 1; transform: translateY(0); }
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 900px) {
@@ -415,7 +404,6 @@ cssPagina: |
             .diferenciador-grid { grid-template-columns: 1fr; gap: 36px; }
             .diferenciador-visual { order: -1; }
             .diferenciador-photo { max-width: 340px; margin: 0 auto; display: block; aspect-ratio: 1/1; }
-            .section { padding: 84px 0; }
             .subnav .back { display: none; }
             .beneficios-grid { gap: 32px; }
             .pasos-grid { gap: 36px; }
@@ -423,10 +411,8 @@ cssPagina: |
 
         /* ===== MÓVIL (<=640px) — la mayoría del tráfico llega por aquí ===== */
         @media (max-width: 640px) {
-            .container { padding: 0 20px; }
             /* scroll-margin: la nav flotante ocupa 54px + 12px de separación
                superior; se deja holgura para que el título no quede pegado. */
-            .section { padding: 64px 0; scroll-margin-top: 86px; }
 
             /* Nav: más estrecha y pegada arriba, para no comerse el hero */
             .subnav { top: 12px; width: calc(100% - 24px); height: 54px; padding: 0 8px 0 18px; }
@@ -441,9 +427,6 @@ cssPagina: |
             .hero-ctas { width: 100%; }
             .hero.inverse .btn-main { width: 100%; text-align: center; padding: 17px 24px; }
 
-            .s-title { font-size: clamp(1.5rem, 6.4vw, 1.9rem); }
-            .s-head { margin-bottom: 40px; }
-            .s-sub { font-size: 1rem; }
 
             /* Mockups: en móvil se ven a una columna, así que se les da
                más alto para que el texto de dentro siga siendo legible */
@@ -502,7 +485,6 @@ cssPagina: |
 
         @media (prefers-reduced-motion: reduce) {
             html { scroll-behavior: auto; }
-            .reveal { opacity: 1; transform: none; transition: none; }
         }
 
         /* ===== SECCION DEL FOOTER CLASICO =====

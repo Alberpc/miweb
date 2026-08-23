@@ -367,6 +367,15 @@ def es_querido(cambio, esperados):
     # 23-ago: el CSS del pie se centraliza en css/pie.css. Las landings
     # tenian su propia version (grid 1.2fr/1.8fr, logo 24px, otro padding)
     # y ahora adoptan la comun, que es el objetivo de unificarlo.
+    # 23-ago: las primitivas de maquetacion (.container, .section, la
+    # cabecera de seccion, la FAQ, el reveal) pasan a css/base.css con los
+    # tokens del sistema. Estaban duplicadas dentro de las dos landings.
+    if sel in (".container", ".section", ".s-head", ".s-label", ".s-title",
+               ".s-sub", ".faqs", ".faq", ".link-soft",
+               # el reveal iba a 24px en los 7 posts y a 36 en las 2
+               # landings: se unifica al de la mayoria
+               ".reveal", ".reveal.revealed"):
+        return True
     if sel.startswith(".footer") or sel.startswith(".subfooter"):
         return True
     if sel.startswith(".deal"):

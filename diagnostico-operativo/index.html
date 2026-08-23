@@ -212,6 +212,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/design-system/tokens.css?v=1">
+    <link rel="stylesheet" href="/css/base.css?v=1">
     <link rel="stylesheet" href="/css/nav.css?v=1">
     <link rel="stylesheet" href="/css/botones.css?v=1">
     <link rel="stylesheet" href="/css/pie.css?v=1">
@@ -221,7 +222,6 @@
 html { scroll-behavior: smooth; background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 16px; -webkit-font-smoothing: antialiased; }
 body { overflow-x: hidden; line-height: 1.6; }
 
-.container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
 /* ===== NAV ===== */
 .subnav {
@@ -272,7 +272,6 @@ body { overflow-x: hidden; line-height: 1.6; }
 .hero h1 .hl { background: linear-gradient(120deg, var(--on-night) 6%, var(--cobalt-300) 94%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; display: inline-block; padding-bottom: 0.14em; margin-bottom: -0.14em; }
 .hero p.sub { font-size: 1.12rem; color: var(--on-night-body); font-weight: 300; max-width: 50ch; margin-bottom: 38px; }
 .hero-ctas { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
-.link-soft { color: var(--on-night-soft); font-size: 0.95rem; text-decoration: underline; transition: color 0.3s ease; }
 .link-soft:hover { color: var(--on-night); }
 
 /* Radar / escáner del DAI360 (visual de marca hecho en CSS) */
@@ -323,7 +322,6 @@ body { overflow-x: hidden; line-height: 1.6; }
 @keyframes blip { 0%, 100% { opacity: 0.25; } 12% { opacity: 1; } 45% { opacity: 0.5; } }
 
 /* ===== SECCIONES ===== */
-.section { padding: 110px 0; position: relative; scroll-margin-top: 96px; }
 /* Alternado de tonos entre secciones (como la home) */
 .section:nth-of-type(even) { background-color: var(--bg-alt); }
 .section + .section::before {
@@ -331,10 +329,6 @@ body { overflow-x: hidden; line-height: 1.6; }
     width: min(760px, 82%); height: 1px;
     background: linear-gradient(90deg, transparent 0%, var(--line) 30%, var(--line-strong) 50%, var(--line) 70%, transparent 100%);
 }
-.s-label { font-family: monospace; font-size: 0.8rem; letter-spacing: 0.25em; color: var(--cobalt-600); display: block; margin-bottom: 12px; font-weight: 600; }
-.s-title { font-family: var(--font-display); font-size: clamp(1.7rem, 3.6vw, 2.4rem); font-weight: 400; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 16px; color: var(--ink); }
-.s-sub { font-size: 1.05rem; color: var(--ink-soft); font-weight: 300; max-width: 62ch; }
-.s-head { max-width: 720px; margin-bottom: 64px; }
 .s-head.center { margin-left: auto; margin-right: auto; text-align: center; }
 
 /* Síntomas */
@@ -491,8 +485,6 @@ body { overflow-x: hidden; line-height: 1.6; }
 .quien-col.no li::before { content: '×'; position: absolute; left: 0; color: var(--ink-decor); font-weight: 700; font-size: 1.1rem; line-height: 1.3; }
 
 /* FAQ */
-.faqs { max-width: 780px; margin: 0 auto; display: flex; flex-direction: column; gap: 18px; }
-.faq { background: var(--bg); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; transition: border-color 0.3s ease; }
 .faq:hover { border-color: var(--cobalt-border); }
 .faq button {
     width: 100%; background: none; border: none; cursor: pointer; text-align: left;
@@ -517,8 +509,6 @@ body { overflow-x: hidden; line-height: 1.6; }
 /* Footer mini */
 
 /* Reveal */
-.reveal { opacity: 0; transform: translateY(36px); transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1); }
-.reveal.revealed { opacity: 1; transform: translateY(0); }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 900px) {
@@ -528,7 +518,6 @@ body { overflow-x: hidden; line-height: 1.6; }
     .sintomas, .areas, .metodo-grid { grid-template-columns: 1fr; }
     .quien { grid-template-columns: 1fr; }
     .metodo-grid { gap: 52px; }
-    .section { padding: 84px 0; }
     .deal { padding: 44px 26px; }
     .subnav .back { display: none; }
 }
@@ -537,7 +526,6 @@ body { overflow-x: hidden; line-height: 1.6; }
     html { scroll-behavior: auto; }
     .radar .sweep, .radar .blip { animation: none; }
     .md-dot { display: none; }
-    .reveal { opacity: 1; transform: none; transition: none; }
 }
 
 /* ===== SECCION DEL FOOTER CLASICO (DE LA HOME) ===== */
