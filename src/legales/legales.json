@@ -1,0 +1,8 @@
+{
+  "_comentario": "Lo comun a las 3 paginas legales. Antes cada una repetia estas 5 lineas en su frontmatter; ahora una pagina legal nueva solo declara su titulo y su permalink.",
+  "layout": "legal.njk",
+  "robots": "noindex, follow",
+  "navCtaHref": "/diagnostico-operativo/",
+  "navCtaTexto": "Diagnóstico operativo &rarr;",
+  "navCtaCorto": "Diagnóstico &rarr;"
+}

@@ -5,5 +5,9 @@
   "dominio": "https://albercabrera.com",
   "gtm": "GTM-KQT7RNTB",
   "email": "alberto@albercabrera.com",
-  "cssVersion": 1
+  "cssVersion": 1,
+  "navCta": {
+    "href": "/#contacto",
+    "texto": "Cuéntame tu caso &rarr;"
+  }
 }

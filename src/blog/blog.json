@@ -1,4 +1,7 @@
 {
+  "_comentario": "Lo comun a todos los posts. Un post nuevo solo declara su contenido y los datos de su tarjeta; el layout, la URL y la etiqueta de coleccion salen de aqui.",
+  "layout": "landing.njk",
+  "paginaActual": "blog",
   "permalink": "/{{ slug }}/index.html",
   "tags": "posts"
 }
