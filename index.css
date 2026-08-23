@@ -13,36 +13,11 @@
 }
 
 /* RESET GENERAL */
-*, *::before, *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
+/* El reset, html/body y .container estan en css/base.css, que carga
+   este layout tambien. Aqui solo queda lo propio de la home. */
 html {
-    scroll-behavior: smooth;
-    background-color: var(--bg);
-    color: var(--ink);
-    font-family: var(--font-body);
-    font-size: 16px;
+    /* Unico anyadido de la home sobre el reset comun. */
     scrollbar-width: thin;
-    -webkit-font-smoothing: antialiased;
-    /* OJO: el overflow-x va en body, NO aqui. En html rompe position:fixed en
-       moviles WebKit (las burbujas flotantes salian cortadas contra el borde). */
-}
-
-body {
-    line-height: 1.6;
-    overflow-x: hidden; /* Corta el desborde horizontal sin romper position:fixed */
-    /* Eliminadas propiedades de overflow para evitar doble scrollbar en navegadores Windows */
-}
-
-/* CONTENEDORES */
-.container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 24px;
 }
 
 .section {

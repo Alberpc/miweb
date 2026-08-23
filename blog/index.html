@@ -145,12 +145,8 @@
     <link rel="stylesheet" href="/css/botones.css?v=1">
     <link rel="stylesheet" href="/css/pie.css?v=1">
     <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* Reset, html/body y .container los pone css/base.css. */
 
-html { scroll-behavior: smooth; background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 16px; -webkit-font-smoothing: antialiased; }
-body { overflow-x: hidden; line-height: 1.6; }
-
-.container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
 /* ===== HERO OSCURO DEL BLOG =====
    Requiere class="inverse" en el <header class="blog-hero">. */
@@ -189,8 +185,6 @@ body { overflow-x: hidden; line-height: 1.6; }
 /* ===== FOOTER OSCURO =====
    Requiere class="inverse" en el <footer class="footer-section">. */
 
-.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
-.reveal.revealed { opacity: 1; transform: none; }
 
 @media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr; gap: 40px; } }
 @media (max-width: 560px) { .footer-links-grid { grid-template-columns: 1fr 1fr; gap: 24px; } }

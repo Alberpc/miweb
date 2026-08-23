@@ -9,6 +9,40 @@
    entre secciones lo cambia en todo el sitio.
    ============================================================ */
 
+/* ---- Reset y raiz ----
+   Estaba repetido en index.css, legal.css, landing.css y dentro del
+   cssPagina de dos paginas: cuatro copias del mismo reset. Vive aqui
+   porque base.css lo cargan LOS TRES layouts, asi que toda pagina
+   arranca igual. Las variaciones reales de cada pagina (line-height
+   del cuerpo, el flex de las legales) siguen en su hoja, despues. */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    /* Las dos: unas paginas venian con el atajo `background` y otras con
+       `background-color`. Se declaran ambas para no quitarle a ninguna la
+       propiedad que ya tenia. Pintan lo mismo. */
+    background: var(--bg);
+    background-color: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    background-color: var(--bg);
+    line-height: 1.6;
+    /* OJO: el overflow-x va en body, NO en html. En html rompe
+       position:fixed en moviles WebKit (las burbujas flotantes salian
+       cortadas contra el borde). */
+    overflow-x: hidden;
+}
+
 .container {
     width: 100%;
     max-width: var(--container-max);

@@ -9,24 +9,15 @@
     --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-html {
-    background-color: var(--bg);
-    color: var(--ink);
-    font-family: var(--font-body);
-    font-size: 16px;
-    -webkit-font-smoothing: antialiased;
-    scroll-behavior: smooth;
-}
-
+/* Reset, html y las bases de body estan en css/base.css. Aqui solo
+   lo que de verdad diferencia a una pagina legal: texto mas aireado y
+   el cuerpo en columna para que el pie quede abajo con poco contenido. */
 body {
     line-height: 1.7;
     min-height: 100vh;
     min-height: 100dvh;
     display: flex;
     flex-direction: column;
-    background-color: var(--bg);
 }
 
 /* NAV simple (pill), clara y flotante — igual que en el resto del sitio */
