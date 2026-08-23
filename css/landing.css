@@ -86,7 +86,7 @@ body { overflow-x: hidden; line-height: 1.6; }
     text-transform: uppercase;
 }
 .article-hero.inverse h1 {
-    font-family: var(--font-heading); font-size: clamp(2.05rem, 4.6vw, 3.35rem);
+    font-family: var(--font-display); font-size: clamp(2.05rem, 4.6vw, 3.35rem);
     font-weight: 300; line-height: 1.16; letter-spacing: -0.02em; margin-bottom: 26px;
     max-width: 22ch; color: var(--on-night);
 }
@@ -137,13 +137,13 @@ body { overflow-x: hidden; line-height: 1.6; }
     font-size: 1.16rem; line-height: 1.55; color: var(--ink); font-weight: 400;
 }
 .prose h2 {
-    font-family: var(--font-heading); font-size: clamp(1.5rem, 3vw, 1.95rem);
-    font-weight: 700; letter-spacing: -0.02em; line-height: 1.22;
+    font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 1.95rem);
+    font-weight: 400; letter-spacing: -0.02em; line-height: 1.22;
     margin: 58px 0 20px; scroll-margin-top: 100px; color: var(--ink);
 }
 .prose h2:first-of-type { margin-top: 0; }
 .prose h3 {
-    font-family: var(--font-heading); font-size: 1.22rem; font-weight: 600;
+    font-family: var(--font-display); font-size: 1.22rem; font-weight: 600;
     letter-spacing: -0.01em; margin: 38px 0 14px; color: var(--ink);
 }
 .prose p { font-size: 1.07rem; line-height: 1.75; color: var(--ink-soft); font-weight: 300; margin-bottom: 22px; }
@@ -181,7 +181,7 @@ body { overflow-x: hidden; line-height: 1.6; }
 /* ===== SIGUE LEYENDO ===== */
 .related { padding: 20px 0 40px; background-color: var(--bg); }
 .related-inner { max-width: 964px; margin: 0 auto; }
-.related h2 { font-family: var(--font-heading); font-size: 1.4rem; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 28px; color: var(--ink); }
+.related h2 { font-family: var(--font-display); font-size: 1.4rem; font-weight: 400; letter-spacing: -0.01em; margin-bottom: 28px; color: var(--ink); }
 .related-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
 .related-card {
     display: block; text-decoration: none; background: var(--bg-alt);
@@ -190,14 +190,14 @@ body { overflow-x: hidden; line-height: 1.6; }
 }
 .related-card:hover { border-color: var(--cobalt-border); transform: translateY(-4px); box-shadow: 0 20px 45px rgba(26,29,35,0.10), 0 0 30px -12px var(--cobalt-glow); }
 .related-card .r-cat { font-family: monospace; font-size: 0.72rem; letter-spacing: 0.2em; color: var(--cobalt-600); text-transform: uppercase; }
-.related-card h3 { font-family: var(--font-heading); font-size: 1.1rem; font-weight: 600; color: var(--ink); margin: 10px 0 0; line-height: 1.35; }
+.related-card h3 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 600; color: var(--ink); margin: 10px 0 0; line-height: 1.35; }
 @media (max-width: 640px) { .related-grid { grid-template-columns: 1fr; } }
 
 /* ===== FAQ ACORDEÓN ===== */
 .faq-section { padding: 90px 0; background-color: var(--bg-alt); }
 .faq-head { max-width: 720px; margin: 0 auto 54px; text-align: center; }
 .faq-head .s-label { font-family: monospace; font-size: 0.8rem; letter-spacing: 0.25em; color: var(--cobalt-600); display: block; margin-bottom: 12px; font-weight: 600; }
-.faq-head h2 { font-family: var(--font-heading); font-size: clamp(1.7rem, 3.4vw, 2.3rem); font-weight: 800; letter-spacing: -0.02em; color: var(--ink); }
+.faq-head h2 { font-family: var(--font-display); font-size: clamp(1.7rem, 3.4vw, 2.3rem); font-weight: 400; letter-spacing: -0.02em; color: var(--ink); }
 .faq-container { max-width: 850px; margin: 0 auto; display: flex; flex-direction: column; gap: 18px; }
 .faq-item {
     background: var(--bg); border: 1px solid var(--line); border-radius: 8px;
@@ -212,30 +212,47 @@ body { overflow-x: hidden; line-height: 1.6; }
 .faq-item.active { border-color: var(--cobalt-border); background: var(--bg); }
 .faq-item.active .faq-icon { transform: rotate(45deg); color: var(--cobalt-600); }
 
-/* ===== CTA FINAL OSCURO =====
-   Requiere class="inverse" en la <section class="cta-final">. */
-.cta-final.inverse { padding: 90px 0 110px; }
+/* ===== CTA FINAL =====
+   La seccion va CLARA a proposito. Antes llevaba .inverse y quedaban tres
+   bloques verdes seguidos (CTA + pie, pegados), que se leian como uno solo.
+   Ahora la tarjeta oscura destaca sobre fondo claro y el pie se distingue. */
+.cta-final { padding: 90px 0 110px; background-color: var(--bg); }
 .cta-card {
     max-width: 900px; margin: 0 auto; text-align: center;
-    /* La tarjeta se separa del fondo por PROFUNDIDAD, no por color: antes
-       usaba --night-800 (#274C3B), un verde bastante mas claro que la
-       seccion, y acababa compitiendo con el pie, que es del mismo verde.
-       Ahora es un velo blanco al 3% sobre el propio fondo: se lee como
-       una tarjeta elevada sin introducir un verde nuevo. El dorado queda
-       para el borde y el boton, que es donde tiene que llamar. */
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(214, 186, 130, 0.22); border-radius: 20px;
-    padding: 60px 40px;
-    box-shadow: 0 40px 90px -40px rgba(0, 0, 0, 0.55);
+    /* Tarjeta oscura sobre seccion clara: asi el CTA es UN bloque que
+       destaca, en vez de otra franja verde pegada al pie. Un solo verde
+       (--night-900, el del sistema), sin degradados ni brillos: el dorado
+       se reserva para el boton, que es lo que tiene que llamar. */
+    background: var(--night-900);
+    border-radius: 16px;
+    padding: 64px 40px;
+    box-shadow: 0 30px 70px -35px rgba(15, 31, 27, 0.45);
 }
-.cta-card h2 { font-family: var(--font-heading); font-size: clamp(1.6rem, 3.4vw, 2.3rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 16px; max-width: 22ch; margin-left: auto; margin-right: auto; color: var(--on-night); }
+.cta-card h2 { font-family: var(--font-display); font-size: clamp(1.6rem, 3.4vw, 2.3rem); font-weight: 400; letter-spacing: -0.02em; margin-bottom: 16px; max-width: 22ch; margin-left: auto; margin-right: auto; color: var(--on-night); }
 .cta-card p { font-size: 1.08rem; color: var(--on-night-body); font-weight: 300; max-width: 54ch; margin: 0 auto 32px; }
 .cta-card .btn-main {
-    display: inline-block; font-size: 1rem; font-weight: 600; color: #fff; text-decoration: none;
-    background: var(--cobalt-500); padding: 17px 40px; border-radius: 100px; border: 1px solid transparent;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    /* Mismo boton que la home (.btn-primary): el sistema Bosque Inteligente
+       fija radio de 8px, NUNCA pildora, y texto oscuro sobre el dorado.
+       Aqui era una pildora de 100px con texto blanco. */
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 0.94rem;
+    font-weight: 600;
+    color: var(--night-900);
+    background: var(--cobalt-400);
+    padding: 0 24px;
+    min-height: 52px;
+    line-height: 52px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 150ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    border: 1px solid transparent;
 }
-.cta-card .btn-main:hover { transform: translateY(-2px); background: var(--cobalt-400); box-shadow: 0 8px 30px rgba(200, 168, 94, 0.30); }
+.cta-card .btn-main:hover {
+    transform: translateY(-1px);
+    background: var(--cobalt-300);
+    box-shadow: 0 8px 30px var(--cobalt-glow);
+}
 
 /* ===== FOOTER OSCURO =====
    Requiere class="inverse" en el <footer class="footer-section">. */

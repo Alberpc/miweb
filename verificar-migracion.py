@@ -183,10 +183,27 @@ def props_por_selector(css):
 # aqui para que no se confundan con una regresion. Si un cambio no esta en
 # esta lista, sigue saltando como fallo.
 CAMBIOS_QUERIDOS = {
-    # 23-ago: el CTA usaba --night-800, un verde mas claro que su seccion,
-    # y competia con el pie, que es de ese mismo verde. Ahora se separa por
-    # profundidad (velo + sombra), no por color.
-    ".cta-card": {"background", "border", "box-shadow"},
+    # 23-ago. Los posts no heredaban el sistema Bosque Inteligente: seguian
+    # con Inter grueso en los titulares y un boton pildora. Paso 5 del spec.
+    #
+    # Titulares a Instrument Serif (--font-display), peso 400: la serif no
+    # necesita los 700/800 que llevaba Inter.
+    ".article-hero.inverse h1": {"font-family"},
+    ".prose h2":                {"font-family", "font-weight"},
+    ".prose h3":                {"font-family"},
+    ".related h2":              {"font-family", "font-weight"},
+    ".related-card h3":         {"font-family"},
+    ".faq-head h2":             {"font-family", "font-weight"},
+    ".cta-card h2":             {"font-family", "font-weight"},
+    # La seccion del CTA deja de ser .inverse: iban tres franjas verdes
+    # seguidas (CTA + pie) y se leian como un solo bloque.
+    ".cta-final.inverse":       {"padding"},
+    ".cta-card":                {"background", "border", "border-radius", "box-shadow"},
+    # El boton pasa a ser el mismo que .btn-primary de la home: radio 8px
+    # (el sistema prohibe la pildora) y texto oscuro sobre el dorado.
+    ".cta-card .btn-main":      {"font-size", "color", "background", "padding",
+                                 "border-radius", "transition"},
+    ".cta-card .btn-main:hover": {"transform", "background", "box-shadow"},
 }
 
 def es_querido(cambio):
