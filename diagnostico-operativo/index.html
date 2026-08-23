@@ -228,7 +228,7 @@ body { overflow-x: hidden; line-height: 1.6; }
     display: flex; align-items: center; justify-content: space-between; padding: 0 24px;
     background: rgba(14, 17, 22, 0.38);
     backdrop-filter: blur(18px) saturate(180%); -webkit-backdrop-filter: blur(18px) saturate(180%);
-    border: 1px solid var(--night-600); border-radius: 100px;
+    border: 1px solid var(--night-600); border-radius: var(--radius-pill);
 }
 .subnav .logo { font-family: var(--font-heading); font-weight: 800; font-size: 1.3rem; color: var(--on-night); text-decoration: none; letter-spacing: -0.05em; }
 .subnav .logo img { height: 24px; width: auto; display: block; }
@@ -238,7 +238,7 @@ body { overflow-x: hidden; line-height: 1.6; }
 .subnav .cta {
     font-size: 0.8rem; font-weight: 600; color: #fff; text-decoration: none;
     background: var(--cobalt-500);
-    padding: 9px 20px; border-radius: 100px; border: 1px solid transparent;
+    padding: 9px 20px; border-radius: var(--radius-sm); border: 1px solid transparent;
     transition: all 0.3s ease;
 }
 .subnav .cta:hover { transform: translateY(-2px); background: var(--cobalt-400); box-shadow: 0 4px 15px rgba(200, 168, 94, 0.30); }
@@ -253,7 +253,7 @@ body { overflow-x: hidden; line-height: 1.6; }
 }
 .hero::before {
     content: ''; position: absolute; inset: 0; pointer-events: none;
-    background: radial-gradient(60% 50% at 72% 45%, rgba(200, 168, 94, 0.14) 0%, transparent 65%);
+    /* sin lavado dorado de fondo: el sistema lo evita */
 }
 .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; align-items: center; position: relative; z-index: 2; }
 
@@ -263,7 +263,7 @@ body { overflow-x: hidden; line-height: 1.6; }
     background: var(--night-800); padding: 7px 16px; border-radius: 50px; margin-bottom: 26px;
 }
 .hero h1 {
-    font-family: var(--font-heading); font-size: clamp(2.2rem, 4.6vw, 3.6rem);
+    font-family: var(--font-display); font-size: clamp(2.2rem, 4.6vw, 3.6rem);
     font-weight: 300; line-height: 1.18; letter-spacing: -0.02em; margin-bottom: 22px;
     max-width: 15ch; color: var(--on-night);
 }
@@ -273,7 +273,7 @@ body { overflow-x: hidden; line-height: 1.6; }
 .btn-main {
     display: inline-block; font-size: 1rem; font-weight: 600; color: #fff; text-decoration: none;
     background: var(--cobalt-500);
-    padding: 17px 38px; border-radius: 100px; border: 1px solid transparent;
+    padding: 17px 38px; border-radius: var(--radius-sm); border: 1px solid transparent;
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .btn-main:hover {
@@ -341,7 +341,7 @@ body { overflow-x: hidden; line-height: 1.6; }
     background: linear-gradient(90deg, transparent 0%, var(--line) 30%, var(--line-strong) 50%, var(--line) 70%, transparent 100%);
 }
 .s-label { font-family: monospace; font-size: 0.8rem; letter-spacing: 0.25em; color: var(--cobalt-600); display: block; margin-bottom: 12px; font-weight: 600; }
-.s-title { font-family: var(--font-heading); font-size: clamp(1.7rem, 3.6vw, 2.4rem); font-weight: 800; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 16px; color: var(--ink); }
+.s-title { font-family: var(--font-display); font-size: clamp(1.7rem, 3.6vw, 2.4rem); font-weight: 400; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 16px; color: var(--ink); }
 .s-sub { font-size: 1.05rem; color: var(--ink-soft); font-weight: 300; max-width: 62ch; }
 .s-head { max-width: 720px; margin-bottom: 64px; }
 .s-head.center { margin-left: auto; margin-right: auto; text-align: center; }
@@ -401,7 +401,7 @@ body { overflow-x: hidden; line-height: 1.6; }
 .metodo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 44px; align-items: stretch; }
 .metodo-col { display: flex; flex-direction: column; }
 .metodo-col .m-num { font-family: monospace; font-size: 0.85rem; letter-spacing: 0.25em; color: var(--ink-decor); display: block; margin-bottom: 12px; }
-.metodo-col h3 { font-family: var(--font-heading); font-size: 1.25rem; font-weight: 800; letter-spacing: -0.01em; margin-bottom: 12px; color: var(--ink); }
+.metodo-col h3 { font-family: var(--font-display); font-size: 1.25rem; font-weight: 400; letter-spacing: -0.01em; margin-bottom: 12px; color: var(--ink); }
 .metodo-col p { font-size: 0.94rem; color: var(--ink-soft); font-weight: 300; margin-bottom: 22px; }
 .metodo-col .m-diagram { margin-top: auto; }
 .m-diagram { border-radius: 12px; background: var(--bg-alt); border: 1px solid var(--line); }
@@ -426,7 +426,7 @@ body { overflow-x: hidden; line-height: 1.6; }
 }
 .deal::before {
     content: ''; position: absolute; inset: 0; pointer-events: none;
-    background: radial-gradient(60% 90% at 50% -10%, rgba(200, 168, 94, 0.16), transparent 65%);
+    /* sin lavado dorado de fondo: el sistema lo evita */
 }
 .deal .tag {
     display: inline-block; font-family: monospace; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.25em;
@@ -434,7 +434,7 @@ body { overflow-x: hidden; line-height: 1.6; }
     background: rgba(200, 168, 94, 0.10);
     padding: 6px 16px; border-radius: 50px; margin-bottom: 24px;
 }
-.deal h2 { font-family: var(--font-heading); font-size: clamp(1.5rem, 3.2vw, 2.1rem); font-weight: 800; letter-spacing: -0.02em; line-height: 1.25; margin-bottom: 22px; color: var(--on-night); }
+.deal h2 { font-family: var(--font-display); font-size: clamp(1.5rem, 3.2vw, 2.1rem); font-weight: 400; letter-spacing: -0.02em; line-height: 1.25; margin-bottom: 22px; color: var(--on-night); }
 .deal p { font-size: 1.05rem; color: var(--on-night-body); font-weight: 300; margin: 0; }
 .deal p strong { color: var(--on-night); font-weight: 600; }
 .deal-price {
@@ -478,7 +478,7 @@ body { overflow-x: hidden; line-height: 1.6; }
 .quien { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 900px; margin: 0 auto; }
 .quien-col { background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 34px 30px; }
 .quien-col.si { border-color: var(--cobalt-border); }
-.quien-col h3 { font-family: var(--font-heading); font-size: 1.15rem; font-weight: 800; margin-bottom: 20px; color: var(--ink); }
+.quien-col h3 { font-family: var(--font-display); font-size: 1.15rem; font-weight: 400; margin-bottom: 20px; color: var(--ink); }
 .quien-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
 .quien-col li { font-size: 0.95rem; color: var(--ink-soft); font-weight: 300; padding-left: 26px; position: relative; }
 .quien-col.si li::before { content: '✓'; position: absolute; left: 0; color: var(--cobalt-600); font-weight: 700; }
@@ -505,7 +505,7 @@ body { overflow-x: hidden; line-height: 1.6; }
     width: 70%; height: 260px; pointer-events: none;
     background: radial-gradient(50% 100% at 50% 100%, var(--cobalt-tint), transparent 70%);
 }
-.cta-final h2 { font-family: var(--font-heading); font-size: clamp(1.9rem, 4.2vw, 3rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 16px; color: var(--ink); }
+.cta-final h2 { font-family: var(--font-display); font-size: clamp(1.9rem, 4.2vw, 3rem); font-weight: 400; letter-spacing: -0.02em; margin-bottom: 16px; color: var(--ink); }
 .cta-final p { color: var(--ink-soft); font-weight: 300; font-size: 1.08rem; margin-bottom: 40px; }
 
 /* Footer mini */
