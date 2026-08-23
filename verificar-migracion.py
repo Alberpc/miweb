@@ -549,6 +549,21 @@ TEXTO_NUEVO = {
         "Un panel con lo que importa: qué está entrando, qué se cierra "
         "y qué quedó pendiente. "
         "Los números del mes salen solos, sin que nadie los cuadre a mano. "
+        # 23-ago: los tres frentes se abren para que quepa lo que Alberto
+        # sabe hacer y no cabia (volver a vender a quien ya compro,
+        # preguntar a los documentos de la empresa). Se dicen en cristiano:
+        # nada de "RAG" ni "agentes personales", que el cliente no compra eso.
+        "Y al que ya te compró se le vuelve a ofrecer lo que le encaja, "
+        "en vez de dejarlo enfriar. "
+        "Tu equipo pregunta y le contesta al momento, sacando la respuesta "
+        "de vuestros propios documentos. "
+        "Y si la herramienta que te hace falta no existe, te la construyo "
+        "a medida. "
+        "Abajo van ejemplos, no un catálogo: se empieza por donde más "
+        "duela en tu caso. "
+        # sale: la version anterior de esos dos
+        "Si la herramienta que te hace falta no existe, te la construyo. "
+        "Se empieza por donde más duela en tu caso, no por los tres a la vez. "
         # Y el copy VIEJO de esa seccion, el que sale. Tienen que estar
         # los dos lados: si solo listas lo que entra, cualquier texto que
         # DESAPAREZCA pasa desapercibido, que es justo lo grave.
