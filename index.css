@@ -673,7 +673,9 @@ html {
    Para anyadir otro: copiar el SVG de lucide.dev y quitarle el
    width/height (los pone .beneficio-icono svg). */
 .beneficios-section {
-    padding: var(--space-9) 0;
+    /* Solo icono + titular: no necesita el aire de una seccion con
+       cuerpo de texto. */
+    padding: var(--space-8) 0;
     background-color: var(--bg);
     border-bottom: 1px solid var(--line);
 }
@@ -712,16 +714,10 @@ html {
     letter-spacing: -0.01em;
     line-height: 1.25;
     color: var(--ink);
-    margin-bottom: var(--space-3);
+    /* Sin parrafo debajo no hay nada que separar. */
+    margin: 0;
 }
 
-.beneficio-texto {
-    font-size: 0.93rem;
-    font-weight: 300;
-    line-height: 1.6;
-    color: var(--ink-soft);
-    max-width: 34ch;
-}
 
 /* 4 columnas no caben en tablet. En movil se quedan DOS, no una: en
    una columna son cuatro bloques a pantalla completa y hay que hacer
@@ -739,8 +735,7 @@ html {
         margin-bottom: var(--space-3);
     }
     .beneficio-icono svg { width: 20px; height: 20px; }
-    .beneficio-titulo { font-size: 1.08rem; margin-bottom: var(--space-2); }
-    .beneficio-texto { font-size: 0.88rem; max-width: none; }
+    .beneficio-titulo { font-size: 1.08rem; }
 }
 
 /* SECCIÓN EL MÉTODO (LÍNEA DE TIEMPO / TIMELINE) */

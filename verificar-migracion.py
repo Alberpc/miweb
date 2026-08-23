@@ -517,18 +517,13 @@ TEXTO_NUEVO = {
     # Los 4 titulares y sus 4 parrafos. Se listan enteros a proposito: si
     # manyana se toca el copy de la home, el verificador tiene que saltar.
     "index": (
+        # Los 4 titulares de la franja, y nada mas: la seccion es solo
+        # icono + titular. Si manyana se anyade texto ahi, tiene que
+        # saltar y declararse, no colarse.
         "Más oportunidades "
-        "Lo que entra por web, WhatsApp e Instagram cae en un sitio, "
-        "y sabes a quién toca contestar. "
         "Menos tareas manuales "
-        "Lo repetitivo lo hace el sistema: tú decides, no rellenas "
-        "formularios ni copias datos de un sitio a otro. "
         "Más control "
-        "Ves en qué punto está cada cliente y cada trabajo, "
-        "sin tener que preguntar ni perseguir a nadie. "
         "Sistemas escalables "
-        "Montado para aguantar más volumen sin contratar a nadie "
-        "ni estar tú en cada paso. "
         # el enlace del pie pasa de "albercabrera" a "albercabrera.com"
         "albercabrera albercabrera.com"),
 }
