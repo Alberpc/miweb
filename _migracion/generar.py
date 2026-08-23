@@ -23,7 +23,6 @@ CSS_EXTRA = {
 # .inverse (colores oscuros en :root, cero clases "inverse"), asi que
 # lleva su CSS aparte en vez de romperse con el comun.
 LAYOUT = {
-    "automatizar-mi-negocio": "landing-oscura.njk",
     "blog": "pagina.njk",
 }
 

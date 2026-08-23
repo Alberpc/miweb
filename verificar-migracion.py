@@ -372,6 +372,16 @@ VALOR_LIBRE = {
     (".faq-head h2", "font-weight"), (".cta-card h2", "font-weight"),
 }
 
+# Paginas que cambian de aspecto ENTERAS a proposito. Comparar propiedad
+# a propiedad no dice nada util aqui: lo que cambia es la pagina completa.
+# Se comprueba lo que si tiene que seguir igual (texto, enlaces, SEO,
+# JSON-LD) y el aspecto se revisa en el navegador.
+REDISENADAS = {
+    # 23-ago: tenia su propia paleta (fondo negro #0a0908) y su CSS aparte.
+    # Pasa al verde del sistema y al mismo landing.css que los otros 6.
+    "automatizar-mi-negocio",
+}
+
 fallos = 0
 
 TODAS = ([(s, os.path.join(ORIG, s, "index.html"),
@@ -404,7 +414,9 @@ for slug, ruta_orig, ruta_nueva in TODAS:
     if jsonld(orig) != jsonld(nuevo):
         problemas.append("JSON-LD")
     co, cn = css_efectivo(orig, ORIG), css_efectivo(nuevo, NUEVO)
-    if co != cn:
+    if slug in REDISENADAS:
+        avisos.append("redisenada entera a proposito; el CSS no se compara")
+    elif co != cn:
         # Primero por efecto: que valor gana en cada selector.
         po, pn = props_por_selector(co), props_por_selector(cn)
         cambiados = []
