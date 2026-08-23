@@ -10,10 +10,35 @@
 
 /* ===== FOOTER OSCURO =====
    Requiere class="inverse" en el <footer class="footer-section">. */
-.footer-section.inverse { padding: var(--space-10) 0 var(--space-7); border-top: 1px solid var(--night-600); }
-.footer-grid { display: grid; grid-template-columns: 1.4fr 2fr; gap: 60px; margin-bottom: 60px; }
-.footer-brand-col { max-width: 340px; }
-.footer-logo-wrap { margin-bottom: 20px; }
+.footer-section {
+    position: relative;
+    width: 100%;
+    padding: var(--space-10) 0 var(--space-8);
+    border-top: 1px solid var(--night-600);
+}
+/* La variante clara la usa automatizar-mi-negocio (footerInverse: false). */
+.footer-section.inverse { border-top: 1px solid var(--night-600); }
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1.8fr;
+    gap: var(--space-8);
+    margin-bottom: var(--space-8);
+}
+
+.footer-brand-col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    max-width: 380px;
+}
+
+.footer-logo-wrap {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    color: var(--on-night);
+}
 /* El logo del pie va sobre fondo oscuro: BLANCO. Sin filter:none hereda
    el invert(1) del nav (que existe para la pastilla clara) y sale negro
    sobre negro. La correccion vivia solo en index.css, asi que las paginas
@@ -24,19 +49,89 @@
     display: block;
     filter: none;
 }
-.footer-brand-desc { font-size: 0.92rem; color: var(--on-night-soft); font-weight: 300; line-height: 1.7; }
-.footer-links-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
-.footer-links-title { font-family: var(--font-heading); font-size: 0.82rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--on-night); margin-bottom: 18px; }
-.footer-links-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-.footer-links-list a { font-size: 0.9rem; color: var(--on-night-soft); text-decoration: none; transition: color 0.3s ease; }
+
+.footer-brand-desc {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--on-night-soft);
+    font-weight: 300;
+}
+
+.footer-links-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+}
+
+.footer-links-title {
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--on-night);
+    margin-bottom: var(--space-5);
+}
+
+.footer-links-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.footer-links-list a {
+    font-size: 0.8rem;
+    font-weight: 300;
+    color: var(--on-night-soft);
+    text-decoration: none;
+    transition: color var(--motion-base) var(--ease-standard);
+}
 .footer-links-list a:hover { color: var(--on-night); }
-.footer-bottom-bar { display: flex; align-items: center; justify-content: space-between; padding-top: 30px; border-top: 1px solid var(--night-600); flex-wrap: wrap; gap: 20px; }
-.footer-curator { font-size: 0.82rem; color: var(--on-night-mid); }
-.footer-social-wrap { display: flex; align-items: center; gap: 12px; }
-.footer-social-label { font-size: 0.8rem; color: var(--on-night-soft); }
-.footer-social-icons { display: flex; gap: 10px; }
-.footer-social-icons a { color: var(--on-night-soft); display: flex; transition: color 0.3s ease; }
-.footer-social-icons a:hover { color: var(--cobalt-300); }
+
+.footer-bottom-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--night-600);
+    flex-wrap: wrap;
+    gap: var(--space-4);
+}
+
+.footer-curator {
+    font-size: 0.75rem;
+    text-transform: lowercase;
+    letter-spacing: 0.15em;
+    color: var(--on-night-mid);
+}
+
+.footer-social-wrap {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+}
+
+.footer-social-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--on-night-mid);
+}
+
+.footer-social-icons { display: flex; gap: var(--space-4); }
+
+.footer-social-icons a {
+    color: var(--on-night-soft);
+    display: flex;
+    align-items: center;
+    transition: color var(--motion-base) var(--ease-standard),
+                transform var(--motion-base) var(--ease-standard);
+}
+.footer-social-icons a:hover {
+    color: var(--on-night);
+    transform: translateY(-2px);
+}
 
 
 @media (max-width: 900px) {

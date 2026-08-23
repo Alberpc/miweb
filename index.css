@@ -21,9 +21,9 @@ html {
 }
 
 .section {
-    padding: var(--space-11) 0;
-    position: relative;
-    scroll-margin-top: 96px; /* que el anchor no quede tapado por la navbar */
+    /* Igual que en base.css; aqui solo por el scroll-margin, que usa el
+       token en vez del 96 a pelo. */
+    scroll-margin-top: var(--space-10);
 }
 
 /* Separador difuminado entre secciones: línea que nace y muere en transparente
@@ -1156,133 +1156,8 @@ html {
     color: var(--rojo);
 }
 
-/* =============================================================
-   FOOTER PREMIUM: CRISTAL LÍQUIDO & VÍDEO VOLCÁNICO DE FONDO
-   ============================================================= */
-
-/* Contenedor principal de la sección del footer (Estilo integrado clásico) */
-.footer-section {
-    position: relative;
-    padding: 96px 0 64px 0; /* Sistema Bosque Inteligente: space-10 arriba, space-8 abajo */
-    width: 100%;
-    border-top: 1px solid var(--night-600); /* Línea de división superior de estilo Apple/Vercel */
-}
-
-
-/* Layout Grid Superior */
-.footer-grid {
-    display: grid;
-    grid-template-columns: 1.2fr 1.8fr;
-    gap: 64px; /* Sistema Bosque Inteligente: space-8 */
-    margin-bottom: 64px;
-}
-
-.footer-brand-col {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.footer-logo-wrap {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    color: var(--on-night);
-}
-
-.footer-logo-wrap svg {
-    color: var(--on-night);
-}
-
-
-.footer-brand-desc {
-    font-size: 0.9rem;
-    line-height: 1.6;
-    color: var(--on-night-soft);
-    max-width: 380px;
-    font-weight: 300;
-}
-
-/* Grid de Enlaces */
-.footer-links-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
-}
-
-.footer-links-title {
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    tracking-wider: 0.15em;
-    color: var(--on-night);
-    font-weight: 600;
-    margin-bottom: 24px;
-}
-
-.footer-links-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.footer-links-list a {
-    font-size: 0.8rem;
-    color: var(--on-night-soft);
-    text-decoration: none;
-    transition: color 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
-    font-weight: 300;
-}
-
-.footer-links-list a:hover {
-    color: var(--on-night);
-}
-
-/* Fila Inferior (Bottom Bar) */
-.footer-bottom-bar {
-    border-top: 1px solid var(--night-600);
-    padding-top: 32px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.footer-curator {
-    font-size: 0.75rem;
-    text-transform: lowercase;
-    letter-spacing: 0.15em;
-    color: var(--on-night-mid);
-}
-
-.footer-social-wrap {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-}
-
-.footer-social-label {
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: var(--on-night-mid);
-}
-
-.footer-social-icons {
-    display: flex;
-    gap: 16px;
-}
-
-.footer-social-icons a {
-    color: var(--on-night-soft);
-    transition: all 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
-    display: flex;
-    align-items: center;
-}
-
-.footer-social-icons a:hover {
-    color: var(--on-night);
-    transform: translateY(-2px);
-}
+/* El pie ya no vive aqui: es un componente en css/pie.css, con esta
+   misma version (la de la home) para las 14 paginas. */
 
 /* ANIMACIONES COMUNES */
 @keyframes fadeInUp {
@@ -1501,18 +1376,9 @@ html {
    ADICIONES: SCROLL REVEAL, WHATSAPP FLOATING Y SCROLLBAR
    ============================================================= */
 
-/* SCROLL REVEAL ANIMATIONS */
-.reveal {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 360ms cubic-bezier(0.2, 0.8, 0.2, 1), 
-                transform 360ms cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-.reveal.revealed {
-    opacity: 1;
-    transform: translateY(0);
-}
+/* El .reveal comun esta en css/base.css (24px / 800ms, el valor que ya
+   compartian los 7 posts y el pie). La home tenia el suyo propio a
+   40px / 360ms: se quita para que el sitio entero entre igual. */
 
 /* Retrasos secuenciales adicionales */
 .timeline-item:nth-child(1) { transition-delay: 0.1s; }
