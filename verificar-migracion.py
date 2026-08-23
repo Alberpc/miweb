@@ -293,6 +293,11 @@ CAMBIOS_QUERIDOS = {
     # la version de la home, que es la mas trabajada (icono en circulo,
     # filo izquierdo al abrir), y sus medidas suben al escalon de la
     # escala mas cercano: 26->24, 20->16, 54->64, 18->24.
+    # 23-ago: los dos ultimos titulares fuera del sistema. /blog/ iba en
+    # Inter 300 y las 3 legales en Inter 800: eran las unicas paginas con
+    # un H1 de otra familia. Ahora las 14 llevan Instrument Serif 400.
+    ".blog-hero.inverse h1":     {"font-family", "font-weight"},
+    ".page h1":                  {"font-family", "font-weight"},
     ".faq-section":              {"padding"},
     ".faq-head":                 {"margin"},
     ".faq-container":            {"gap"},
@@ -453,6 +458,7 @@ def es_querido(cambio, esperados):
 
 # Cambios queridos cuyo valor final no es un token (se aceptan tal cual).
 VALOR_LIBRE = {
+    (".blog-hero.inverse h1", "font-weight"), (".page h1", "font-weight"),
     # La FAQ de las landings adopta la de la home: transicion del sistema
     # (220ms) en vez de 0.4s, y los tamanos de la version buena.
     (".faq-item", "transition"),

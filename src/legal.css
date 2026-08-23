@@ -88,9 +88,12 @@ body {
 }
 
 .page h1 {
-    font-family: var(--font-heading);
+    /* Instrument Serif con peso 400, como los titulares del resto del
+       sitio. Iba en Inter 800: era la unica pagina con un H1 de otra
+       familia y otro peso. La serif no necesita el 800. */
+    font-family: var(--font-display);
     font-size: clamp(2rem, 5vw, 2.8rem);
-    font-weight: 800;
+    font-weight: 400;
     letter-spacing: -0.02em;
     line-height: 1.15;
     margin-bottom: 12px;
