@@ -193,7 +193,21 @@
    blog y posts se quedaban SIN hamburguesa al unificar el componente.
    Vive aqui porque es del nav, no de la home. */
 @media (max-width: 768px) {
-    .nav-menu,
+    /* En movil manda la hamburguesa: fuera el menu y el boton de la
+       pastilla. Al extraer esto de index.css se colo un `display: flex`
+       en .nav-menu (en vez de none) y se perdio .nav-btn, asi que los
+       enlaces de escritorio salian apretados y cortados por la derecha
+       en las 14 paginas. No se veia como desborde porque body lleva
+       overflow-x: hidden, que tapa el sintoma. */
+    /* Van con .navbar delante a proposito. botones.css se carga DESPUES
+       que este archivo y da `display: inline-block` a .nav-btn; con la
+       misma especificidad gana el ultimo archivo, asi que la regla base
+       de botones.css se comia este `none`. Con el padre delante este
+       selector pesa mas y no depende del orden de carga. */
+    .navbar .nav-menu,
+    .navbar .nav-btn {
+        display: none;
+    }
     .nav-burger {
         display: flex;
     }
