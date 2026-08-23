@@ -179,12 +179,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/design-system/tokens.css?v=1">
-    <link rel="stylesheet" href="/css/base.css?v=1">
-    <link rel="stylesheet" href="/css/nav.css?v=1">
-    <link rel="stylesheet" href="/css/botones.css?v=1">
-    <link rel="stylesheet" href="/css/faq.css?v=1">
-    <link rel="stylesheet" href="/css/pie.css?v=1">
+    <link rel="stylesheet" href="/design-system/tokens.css?v=2">
+    <link rel="stylesheet" href="/css/base.css?v=2">
+    <link rel="stylesheet" href="/css/nav.css?v=2">
+    <link rel="stylesheet" href="/css/botones.css?v=2">
+    <link rel="stylesheet" href="/css/faq.css?v=2">
+    <link rel="stylesheet" href="/css/pie.css?v=2">
     <style>
 /* Reset, html/body y .container los pone css/base.css. */
 
@@ -1192,12 +1192,9 @@
     </footer>
 
 
+    <script src="/assets/js/base.js" defer></script>
     <script>
-// Reveal al hacer scroll
-const obs = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); obs.unobserve(e.target); } });
-}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+// El reveal y el menu movil los hace base.js.
 
 // FAQ acordeón
 document.querySelectorAll('.faq button').forEach(btn => {

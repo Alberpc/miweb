@@ -514,6 +514,27 @@ REDISENADAS = {
 # Un dict con la misma clave dos veces se queda con la ultima en silencio,
 # y la primera desaparece. Ha pasado 3 veces al ir declarando cambios, y
 # el sintoma es raro: un cambio ya declarado vuelve a saltar como fallo.
+def js_cambios(viejo, nuevo):
+    """Que sentencias se pierden y cuales se anyaden entre dos JS.
+
+    Comparar los dos textos enteros solo dice "distinto", que no sirve
+    para decidir: perder un manejador es grave y anyadir el menu movil
+    que faltaba es justo lo que se buscaba.
+    """
+    import difflib
+    def trozos(js):
+        return [s.strip() for s in re.split(r"(?<=[;}])\s+(?=[a-zA-Z(/])", js)
+                if s.strip()]
+    a, b = trozos(viejo), trozos(nuevo)
+    quitado, anyadido = [], []
+    for tag, i1, i2, j1, j2 in difflib.SequenceMatcher(None, a, b).get_opcodes():
+        if tag == "equal":
+            continue
+        quitado.extend(a[i1:i2])
+        anyadido.extend(b[j1:j2])
+    return quitado, anyadido
+
+
 def _sin_claves_repetidas(ruta):
     import re
     vistas, repes = set(), []
@@ -632,8 +653,18 @@ for slug, ruta_orig, ruta_nueva in TODAS:
             avisos.append("CSS: %d reglas nuevas, ningun valor cambia" % len(vivas))
         elif anyadidas:
             avisos.append("CSS: +%d reglas inertes (su selector no esta en la pagina)" % len(anyadidas))
-    if js_efectivo(orig, ORIG) != js_efectivo(nuevo, NUEVO):
-        problemas.append("JS efectivo")
+    jo, jn = js_efectivo(orig, ORIG), js_efectivo(nuevo, NUEVO)
+    if jo != jn:
+        # Antes esto era un si/no: cualquier diferencia era un fallo y no
+        # decia cual. Ahora se compara sentencia a sentencia, porque lo
+        # grave es PERDER codigo; anyadir el menu movil que faltaba no lo es.
+        quitado, anyadido = js_cambios(jo, jn)
+        if quitado:
+            problemas.append("JS: se pierde codigo (%d) -> %s" % (
+                len(quitado), quitado[0][:70]))
+        elif anyadido:
+            avisos.append("JS: +%d sentencias (%s)" % (
+                len(anyadido), anyadido[0][:50]))
 
     if problemas:
         fallos += 1

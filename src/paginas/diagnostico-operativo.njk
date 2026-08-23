@@ -15,7 +15,6 @@ robots: "index, follow"
 canonical: "https://albercabrera.com/diagnostico-operativo/"
 navCtaHref: "#contacto"
 navCtaTexto: "Pedir mi diagnóstico"
-baseJs: false
 footerDai360Href: "/"
 cssPagina: |
         /* Reset, html/body y .container los pone css/base.css. */
@@ -348,11 +347,7 @@ cssPagina: |
         @media (max-width: 900px) {
         }
 jsPagina: |
-        // Reveal al hacer scroll
-        const obs = new IntersectionObserver((entries) => {
-            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); obs.unobserve(e.target); } });
-        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+        // El reveal y el menu movil los hace base.js.
 
         // FAQ acordeón
         document.querySelectorAll('.faq button').forEach(btn => {

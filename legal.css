@@ -145,8 +145,19 @@ body {
     margin: 20px 0;
 }
 
+/* En movil la tabla no cabe: 4 columnas de texto tienen un ancho minimo
+   por debajo del cual no bajan, y la PAGINA entera acababa desplazandose
+   en horizontal (476px de contenido en un viewport de 393). Ahora scrollea
+   la tabla dentro de su caja y el resto de la pagina no se mueve. */
+.page .tabla-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 20px 0;
+}
+
 .page .cookies-table {
     width: 100%;
+    min-width: 460px;
     border-collapse: collapse;
     margin: 20px 0;
     font-size: 0.92rem;
