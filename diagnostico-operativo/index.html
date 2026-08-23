@@ -275,6 +275,13 @@
 /* Radar / escáner del DAI360 (visual de marca hecho en CSS) */
 .radar-wrap { display: flex; justify-content: center; align-items: center; position: relative; }
 .radar {
+    /* isolation + z-index: el radar tiene un halo dorado de 80px y
+       un barrido que gira. La pastilla del nav lleva backdrop-filter,
+       que muestrea lo que hay detras, y en movil el halo le llegaba:
+       la pastilla se tenia de dorado segun giraba el barrido. Con su
+       propio contexto de apilado el nav ya no lo muestrea. */
+    isolation: isolate;
+    z-index: 0;
     position: relative; width: min(360px, 78vw); aspect-ratio: 1;
     border-radius: 50%;
     background: radial-gradient(circle, rgba(200, 168, 94, 0.06) 0%, rgba(15, 31, 27,0.4) 55%, transparent 72%);
