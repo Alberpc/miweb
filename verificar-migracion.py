@@ -200,7 +200,7 @@ CAMBIOS_QUERIDOS = {
     #
     # Titulares a Instrument Serif (--font-display), peso 400: la serif no
     # necesita los 700/800 que llevaba Inter.
-    ".article-hero.inverse h1": {"font-family"},
+    ".article-hero.inverse h1": {"font-family", "font-weight"},
     ".prose h2":                {"font-family", "font-weight"},
     ".prose h3":                {"font-family"},
     ".related h2":              {"font-family", "font-weight"},
@@ -296,6 +296,7 @@ VALOR_LIBRE = {
     (".cta-card .btn-main", "border-radius"), (".cta-card .btn-main", "transition"),
     (".cta-card .btn-main:hover", "transform"), (".cta-card .btn-main:hover", "background"),
     (".cta-card .btn-main:hover", "box-shadow"),
+    (".article-hero.inverse h1", "font-weight"),
     (".prose h2", "font-weight"), (".related h2", "font-weight"),
     (".faq-head h2", "font-weight"), (".cta-card h2", "font-weight"),
 }
