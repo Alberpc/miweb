@@ -45,13 +45,6 @@ cssPagina: |
         .subnav-right { display: flex; align-items: center; gap: 14px; }
         .subnav .back { font-size: 0.85rem; color: var(--ink-mid); text-decoration: none; transition: color 0.3s ease; }
         .subnav .back:hover { color: var(--ink); }
-        .subnav .cta {
-            font-size: 0.8rem; font-weight: 600; color: #fff; text-decoration: none;
-            background: var(--cobalt-600);
-            padding: 9px 20px; border-radius: var(--radius-sm); border: 1px solid transparent;
-            transition: all 0.3s ease;
-        }
-        .subnav .cta:hover { transform: translateY(-2px); background: var(--cobalt-700); border-color: transparent; box-shadow: 0 4px 15px var(--cobalt-glow); }
 
         /* ===== HERO OSCURO (centrado, sin foto: fondo de degradado cobalto) =====
            Requiere class="inverse" en el <header class="hero">. */
@@ -93,17 +86,7 @@ cssPagina: |
         .hero.inverse p.hero-quien { font-size: 0.92rem; color: var(--on-night-soft); font-weight: 400; max-width: 46ch; margin: 0 auto 38px; }
         .hero-ctas { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; flex-wrap: wrap; }
         .hero-ctas-centered { align-items: center; }
-        .hero.inverse .btn-main {
-            display: inline-block; font-size: 1rem; font-weight: 600; color: #fff; text-decoration: none;
-            background: var(--cobalt-500);
-            padding: 17px 38px; border-radius: var(--radius-sm); border: 1px solid transparent;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .hero.inverse .btn-main:hover {
-            transform: translateY(-2px);
-            background: var(--cobalt-400);
-            box-shadow: 0 8px 30px rgba(200, 168, 94, 0.30);
-        }
+        /* El boton viene de botones.css, comun a todo el sitio. */
         .link-soft { font-size: 0.95rem; text-decoration: underline; transition: color 0.3s ease; }
         .hero.inverse .link-soft { color: var(--on-night-soft); }
         .hero.inverse .link-soft:hover { color: var(--on-night); }
@@ -410,12 +393,6 @@ cssPagina: |
         .form-group.focused label, .form-group.has-value label { top: 6px; left: 18px; font-size: 0.72rem; color: var(--ink-mid); }
         .form-group.focused label { color: var(--cobalt-700); }
         .form-group input:focus { outline: none; border-color: var(--cobalt-600); background-color: var(--bg); box-shadow: 0 0 0 4px var(--cobalt-glow); }
-        .btn-submit {
-            display: block; width: 100%; font-family: var(--font-body); font-size: 1rem; font-weight: 600;
-            color: #fff; background: var(--cobalt-600); border: 1px solid transparent; padding: 18px;
-            border-radius: 999px; cursor: pointer; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .btn-submit:hover { transform: translateY(-1px); box-shadow: 0 8px 30px var(--cobalt-glow); background: var(--cobalt-700); }
         .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
         .form-note { font-family: var(--font-body); font-size: 0.82rem; color: var(--ink-mid); text-align: center; margin-top: 10px; line-height: 1.5; }
         .form-message { font-family: var(--font-body); font-size: 0.9rem; text-align: center; margin-top: 20px; min-height: 24px; }
@@ -460,7 +437,6 @@ cssPagina: |
             /* Nav: más estrecha y pegada arriba, para no comerse el hero */
             .subnav { top: 12px; width: calc(100% - 24px); height: 54px; padding: 0 8px 0 18px; }
             .subnav .logo img { height: 20px; }
-            .subnav .cta { font-size: 0.78rem; padding: 9px 16px; }
 
             /* Hero: menos aire muerto arriba y tipografía que respira */
             .hero.inverse { min-height: auto; padding: 110px 0 64px; }
@@ -523,10 +499,10 @@ cssPagina: |
             transform: translateY(110%); transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .cta-movil.visible { transform: translateY(0); }
+        /* Barra fija de movil: hereda el color de botones.css y solo
+           ajusta que ocupe todo el ancho. */
         .cta-movil a {
-            display: block; text-align: center; text-decoration: none;
-            background: var(--cobalt-600); color: #fff; font-weight: 600; font-size: 0.95rem;
-            padding: 15px; border-radius: var(--radius-sm);
+            display: block; width: 100%;
         }
         @media (max-width: 640px) { .cta-movil { display: block; } }
         @media (prefers-reduced-motion: reduce) { .cta-movil { transition: none; } }
@@ -1253,7 +1229,7 @@ schemas:
 
     <!-- CTA fija de móvil: aparece al pasar el hero, se esconde en el formulario -->
     <div class="cta-movil" id="cta-movil">
-        <a href="#cierre" data-cta="cta_movil_fijo">Pide tu llamada de 20 minutos</a>
+        <a href="#cierre" class="btn-main" data-cta="cta_movil_fijo">Pide tu llamada de 20 minutos</a>
     </div>
 
     

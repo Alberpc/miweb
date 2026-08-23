@@ -344,6 +344,13 @@ CAMBIOS_QUERIDOS = {
 # .subnav* desaparecen. No es una perdida: es la deduplicacion.
 NAV_UNIFICADO = re.compile(r"^\.subnav|^\.nav-(menu|mobile|burger|link|btn)|^\.logo")
 
+# Los botones se unificaron en css/botones.css el 23-ago: habia 12
+# definiciones repartidas en 5 archivos y 8 ponian el texto en blanco
+# sobre el dorado. Sus reglas viejas desaparecen a proposito.
+BOTON_UNIFICADO = re.compile(
+    r"^\.(btn-main|btn-primary|btn-submit|btn-ghost|nav-btn)\b"
+    r"|\.btn-main\b|\.btn-label\b|\.cta-movil a\b|^\.subnav \.cta\b")
+
 def es_querido(cambio, esperados):
     """Un cambio esta permitido solo si ADEMAS acaba en el valor previsto.
 
@@ -354,6 +361,8 @@ def es_querido(cambio, esperados):
     """
     sel = cambio.split("{")[0].strip()
     # tambien cuando la regla del nav va dentro de un @media
+    if BOTON_UNIFICADO.search(sel):
+        return True
     if NAV_UNIFICADO.match(sel) or (sel.startswith("@media") and
             ("nav-" in cambio or "subnav" in cambio)):
         return True

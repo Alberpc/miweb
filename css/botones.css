@@ -1,0 +1,80 @@
+/* ============================================================
+   botones.css — LOS botones del sitio. Un solo archivo.
+   ============================================================
+   Antes habia 12 definiciones repartidas en 5 archivos (.btn-main,
+   .btn-primary, .nav-btn, .btn-submit, .cta, .btn-label...) y 8 de
+   ellas ponian el texto en BLANCO sobre el dorado. Cada pagina con
+   CSS propio se traia su copia, asi que arreglar una no arreglaba
+   las demas.
+
+   Regla del sistema Bosque Inteligente:
+     - fondo dorado --cobalt-400, texto OSCURO --night-900
+     - radio 8px, nunca pildora
+     - al pasar el raton ACLARA (--cobalt-300), no oscurece
+   ============================================================ */
+
+.btn-main,
+.btn-primary,
+.nav-btn,
+.btn-submit,
+.subnav .cta,
+.cta-card .btn-main,
+.inline-cta .btn-inline .btn-label {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 0.94rem;
+    font-weight: 600;
+    color: var(--night-900);
+    background: var(--cobalt-400);
+    padding: 0 var(--space-5);
+    min-height: 52px;
+    line-height: 52px;
+    border-radius: var(--radius-sm);
+    border: 1px solid transparent;
+    text-decoration: none;
+    text-align: center;
+    transition: all var(--motion-fast) var(--ease-standard);
+}
+
+.btn-main:hover,
+.btn-primary:hover,
+.nav-btn:hover,
+.btn-submit:hover,
+.subnav .cta:hover,
+.cta-card .btn-main:hover,
+.inline-cta .btn-inline:hover .btn-label {
+    background: var(--cobalt-300);
+    color: var(--night-900);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 30px var(--cobalt-glow);
+}
+
+/* Variante secundaria: mismo tamano, sin relleno. */
+.btn-ghost {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 0.94rem;
+    font-weight: 600;
+    color: var(--on-night);
+    background: transparent;
+    padding: 0 var(--space-5);
+    min-height: 52px;
+    line-height: 52px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--night-600);
+    text-decoration: none;
+    transition: all var(--motion-fast) var(--ease-standard);
+}
+.btn-ghost:hover {
+    border-color: var(--cobalt-400);
+    color: var(--cobalt-300);
+}
+
+/* El nav va mas compacto que un boton de cuerpo. */
+.nav-btn,
+.subnav .cta {
+    font-size: 0.8rem;
+    padding: 0 18px;
+    min-height: 40px;
+    line-height: 40px;
+}
