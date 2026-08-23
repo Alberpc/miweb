@@ -204,6 +204,28 @@ CAMBIOS_QUERIDOS = {
     ".cta-card .btn-main":      {"font-size", "color", "background", "padding",
                                  "border-radius", "transition"},
     ".cta-card .btn-main:hover": {"transform", "background", "box-shadow"},
+    # 23-ago, escalas oficiales del sistema (_docs/negocio/...): el
+    # tokens.css del repo no traia espaciados ni radios, asi que se venian
+    # poniendo a ojo. Ahora todo sale de --space-* y --radius-*.
+    # Nueve de estos son identicos en pantalla (8/12/16/100 -> su token);
+    # el resto sube o baja al escalon mas cercano de la escala.
+    ".subnav":                   {"border-radius"},
+    ".subnav .cta":              {"border-radius"},
+    ".nav-burger span":          {"border-radius"},
+    ".nav-mobile":               {"border-radius"},
+    ".nav-mobile a":             {"border-radius"},
+    ".article-hero.inverse":     {"padding"},
+    ".article-hero.inverse .hero-cat": {"border-radius"},
+    ".hero-figure":              {"border-radius"},
+    ".article-body":             {"padding"},
+    ".prose .lead-answer":       {"border-radius"},
+    ".stat-box":                 {"border-radius"},
+    ".key-points li":            {"border-radius"},
+    ".related":                  {"padding"},
+    ".related-card":             {"border-radius"},
+    ".faq-section":              {"padding"},
+    ".faq-item":                 {"border-radius"},
+    ".footer-section.inverse":   {"padding"},
 }
 
 def es_querido(cambio):

@@ -97,6 +97,56 @@
   --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-body:    'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono:    ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  /* ════════════════════════════════════════════════════════════════
+     ESCALAS DEL SISTEMA — espaciado, radios, movimiento y sombra
+     ════════════════════════════════════════════════════════════════
+     Faltaban aqui: este archivo solo traia color y tipografia, asi que
+     los espaciados y los radios se venian poniendo a ojo. Son los del
+     documento oficial (_docs/negocio/sistema-diseno-bosque-inteligente).
+
+     Regla del sistema: "un nuevo color, radio o tamano no entra por
+     intuicion". Si un valor no esta en estas escalas, no se usa.
+     ════════════════════════════════════════════════════════════════ */
+
+  /* Espaciado. Prioriza 16/24/32/48/64/96. */
+  --space-1:  4px;    /* micro-ajustes */
+  --space-2:  8px;    /* gap pequeno / icono */
+  --space-3:  12px;   /* label / input interno */
+  --space-4:  16px;   /* elemento base */
+  --space-5:  24px;   /* grupos */
+  --space-6:  32px;   /* cards / bloques */
+  --space-7:  48px;   /* separacion de componentes */
+  --space-8:  64px;   /* secciones internas */
+  --space-9:  80px;   /* separacion de bloques */
+  --space-10: 96px;   /* secciones */
+  --space-11: 120px;  /* hero / transiciones */
+
+  /* Radios. Pill SOLO para badges: los botones van a 8px. */
+  --radius-sm:   8px;    /* inputs, botones */
+  --radius-md:   12px;   /* cards */
+  --radius-lg:   16px;   /* bloques destacados */
+  --radius-xl:   20px;   /* contenedores especiales */
+  --radius-pill: 999px;  /* badges puntuales */
+
+  /* Contenedor y grid */
+  --container-max:    1200px;
+  --container-wide:   1280px;
+  --gutter-desktop:   32px;
+  --gutter-tablet:    24px;
+  --gutter-mobile:    20px;
+  --grid-gap:         24px;
+
+  /* Movimiento */
+  --motion-fast:   150ms;
+  --motion-base:   220ms;
+  --motion-slow:   360ms;
+  --ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  /* Sombras */
+  --shadow-subtle: 0 8px 24px rgba(15, 31, 27, 0.08);
+  --shadow-soft:   0 16px 40px rgba(15, 31, 27, 0.10);
+
 }
 
 
