@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Compara cada pagina generada en _site/ contra el HTML original del repo.
+"""Compara cada pagina generada contra el HTML original del repo.
 
 No compara byte a byte el archivo entero (el CSS y el JS salen ahora en
 archivos aparte, asi que eso cambia a proposito). Compara lo que NO debe
@@ -9,6 +9,10 @@ cambiar nunca:
   - los enlaces
   - los meta/SEO y los bloques JSON-LD
   - el CSS y el JS efectivos, vengan de donde vengan
+
+El HTML de referencia es la copia congelada en _migracion/originales/,
+no la raiz del repo: desde que Eleventy compila ahi, la raiz ES el
+resultado, y compararla consigo misma no probaria nada.
 
 Uso:  python verificar-migracion.py
 Sale con codigo 1 si encuentra alguna diferencia real.
@@ -22,15 +26,19 @@ PAGINAS = [
     "blog",
 ]
 
-# Paginas sueltas en la raiz: la ruta del original y la del generado.
+# Donde escribe Eleventy. Se compila a la raiz del repo para que el deploy
+# de Hostinger (que sube la raiz) siga funcionando sin tocar su panel.
+SALIDA = "."
+
+# Paginas sueltas en la raiz (mismo nombre en el original y en lo generado).
 SUELTAS = [
-    ("aviso-legal.html", "_site/aviso-legal.html"),
-    ("cookies.html", "_site/cookies.html"),
-    ("politica-de-privacidad.html", "_site/politica-de-privacidad.html"),
-    ("servicios.html", "_site/servicios.html"),
-    ("diagnostico-operativo/index.html", "_site/diagnostico-operativo/index.html"),
-    ("no-perder-clientes/index.html", "_site/no-perder-clientes/index.html"),
-    ("index.html", "_site/index.html"),
+    "aviso-legal.html",
+    "cookies.html",
+    "politica-de-privacidad.html",
+    "servicios.html",
+    "diagnostico-operativo/index.html",
+    "no-perder-clientes/index.html",
+    "index.html",
 ]
 
 def leer(p):
@@ -171,9 +179,14 @@ def props_por_selector(css):
     return fin
 
 fallos = 0
-TODAS = ([(s, os.path.join(s, "index.html"), os.path.join("_site", s, "index.html"))
-          for s in PAGINAS]
-         + [(o.replace(".html", ""), o, n) for o, n in SUELTAS])
+# De donde sale cada lado de la comparacion.
+ORIG = os.path.join("_migracion", "originales")   # el HTML de antes, congelado
+NUEVO = SALIDA                                     # lo que genera Eleventy hoy
+
+TODAS = ([(s, os.path.join(ORIG, s, "index.html"),
+           os.path.join(NUEVO, s, "index.html")) for s in PAGINAS]
+         + [(o.replace(".html", ""), os.path.join(ORIG, o),
+             os.path.join(NUEVO, o)) for o in SUELTAS])
 
 for slug, ruta_orig, ruta_nueva in TODAS:
     orig = leer(ruta_orig)
@@ -192,7 +205,7 @@ for slug, ruta_orig, ruta_nueva in TODAS:
         problemas.append("meta/SEO %s" % dif)
     if jsonld(orig) != jsonld(nuevo):
         problemas.append("JSON-LD")
-    co, cn = css_efectivo(orig, "."), css_efectivo(nuevo, "_site")
+    co, cn = css_efectivo(orig, ORIG), css_efectivo(nuevo, NUEVO)
     if co != cn:
         # Primero por efecto: que valor gana en cada selector.
         po, pn = props_por_selector(co), props_por_selector(cn)
@@ -215,7 +228,7 @@ for slug, ruta_orig, ruta_nueva in TODAS:
             avisos.append("CSS: %d reglas nuevas, ningun valor cambia" % len(vivas))
         elif anyadidas:
             avisos.append("CSS: +%d reglas inertes (su selector no esta en la pagina)" % len(anyadidas))
-    if js_efectivo(orig, ".") != js_efectivo(nuevo, "_site"):
+    if js_efectivo(orig, ORIG) != js_efectivo(nuevo, NUEVO):
         problemas.append("JS efectivo")
 
     if problemas:
@@ -228,27 +241,33 @@ for slug, ruta_orig, ruta_nueva in TODAS:
 # --- Paginas que aparecen de la nada -------------------------------
 # Comparar solo las paginas conocidas no basta: Eleventy puede renderizar
 # un .md que solo era una nota interna y publicarlo. Paso el 23-ago con
-# los AGENTS.md/CLAUDE.md de videos/. Aqui se comprueba que _site/ no
+# los AGENTS.md/CLAUDE.md de videos/. Aqui se comprueba que la salida no
 # tiene ninguna pagina que no estuviera ya en el repo.
+# Carpetas que estan en el repo pero NO se despliegan: la fuente, la copia
+# congelada del HTML de antes, los scripts de la migracion y node_modules.
+NO_SE_SIRVE = {"src", "_migracion", "_site", "node_modules", ".git"}
+
 def rutas_publicadas(raiz):
     out = set()
-    for base, _dirs, ficheros in os.walk(raiz):
+    for base, dirs, ficheros in os.walk(raiz):
+        if os.path.abspath(raiz) == os.path.abspath("."):
+            dirs[:] = [d for d in dirs if d not in NO_SE_SIRVE]
         for f in ficheros:
-            if f.endswith(('.html', '.md')):
+            if f.endswith((".html", ".md")):
                 r = os.path.relpath(os.path.join(base, f), raiz)
-                out.add(r.replace(os.sep, '/'))
+                out.add(r.replace(os.sep, "/"))
     return out
 
 def comprobar_paginas_nuevas():
     antes = set()
-    for o, _n in SUELTAS:
+    for o in SUELTAS:
         antes.add(o)
     for s in PAGINAS:
         antes.add(s + '/index.html')
     # lo que ya venia servido tal cual desde carpetas copiadas
     for extra in ('assets', 'videos', 'design-system'):
         antes |= {extra + '/' + r for r in rutas_publicadas(os.path.join('src', extra))}
-    ahora = rutas_publicadas('_site')
+    ahora = rutas_publicadas(NUEVO)
     nuevas = sorted(ahora - antes)
     if nuevas:
         print('')
@@ -257,7 +276,7 @@ def comprobar_paginas_nuevas():
             print('   +', r)
         return 1
     print('')
-    print('Sin paginas nuevas: _site/ no publica nada que no estuviera ya.')
+    print('Sin paginas nuevas: no se publica nada que no estuviera ya.')
     return 0
 
 fallos += comprobar_paginas_nuevas()

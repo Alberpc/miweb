@@ -39,11 +39,23 @@ export default function (eleventyConfig) {
     // paginas: /videos/<x>/AGENTS/ y /videos/<x>/CLAUDE/. Ver la regla de
     // no dejar notas internas en carpetas desplegadas.
     eleventyConfig.ignores.add("src/videos/**/*");
+    // Compilando a la raiz, el HTML generado y la copia congelada del de
+    // antes conviven con la fuente. Sin esto Eleventy los tomaria por
+    // plantillas y se leeria a si mismo.
+    eleventyConfig.ignores.add("_migracion/**/*");
+    eleventyConfig.ignores.add("_site/**/*");
 
     return {
         dir: {
             input: "src",
-            output: "_site",
+            // Se compila a la RAIZ, no a _site/: el deploy de Hostinger sube
+            // la raiz del repo, asi que el HTML generado tiene que caer donde
+            // hoy estan los originales. Si se compilara a _site/, la web
+            // acabaria colgando de albercabrera.com/_site/.
+            // La copia congelada del HTML de antes vive en
+            // _migracion/originales/, que es contra lo que compara
+            // verificar-migracion.py.
+            output: ".",
             includes: "_includes",
             data: "_data",
         },
