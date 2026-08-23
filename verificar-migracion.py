@@ -259,7 +259,7 @@ CAMBIOS_QUERIDOS = {
     # poniendo a ojo. Ahora todo sale de --space-* y --radius-*.
     # Nueve de estos son identicos en pantalla (8/12/16/100 -> su token);
     # el resto sube o baja al escalon mas cercano de la escala.
-    ".subnav":                   {"border-radius"},
+    ".subnav":                   {"border-radius", "background"},
     # 23-ago: el CTA del nav en blog y posts iba en --cobalt-600 (#6E5628),
     # un dorado tan oscurecido que se leia MARRON, con texto blanco, y al
     # pasar el raton se oscurecia mas todavia. Ahora es el mismo boton que
@@ -284,6 +284,11 @@ CAMBIOS_QUERIDOS = {
     ".hero h1":                  {"font-family"},
     ".hero.inverse h1":          {"font-family"},
     ".hero.inverse":             {"padding", "background"},
+    ".hero":                     {"background"},
+    ".hero.inverse .hero-badge": {"border-radius"},
+    ".hero-badge":               {"color", "border", "background", "border-radius"},
+    ".radar":                    {"background"},
+    ".radar .core":              {"background"},
     ".hero::before":             {"background"},
     ".deal::before":             {"background"},
     ".s-title":                  {"font-family", "font-weight"},
@@ -313,10 +318,8 @@ CAMBIOS_QUERIDOS = {
     ".section":                  {"padding"},
     ".navbar":                   {"border-radius"},
     ".nav-btn":                  {"border-radius"},
-    ".nav-mobile":               {"border-radius"},
     ".nav-mobile-link":          {"border-radius"},
     ".nav-mobile-cta":           {"border-radius"},
-    ".hero-badge":               {"border-radius"},
     ".btn-primary":              {"border-radius"},
     ".btn-primary-small":        {"border-radius"},
     ".btn-submit":               {"border-radius"},
@@ -378,6 +381,9 @@ VALOR_LIBRE = {
     (".hero-figure", "background"), (".hero-figure", "box-shadow"),
     (".hero.inverse", "padding"), (".hero.inverse", "background"),
     (".hero::before", "background"), (".deal::before", "background"),
+    (".hero", "background"), (".hero-badge", "color"), (".hero-badge", "border"),
+    (".hero-badge", "background"), (".subnav", "background"),
+    (".radar", "background"), (".radar .core", "background"),
     (".s-title", "font-weight"), (".metodo-col h3", "font-weight"),
     (".quien-col h3", "font-weight"), (".paso-col h3", "font-weight"),
     (".deal h2", "font-weight"), (".cierre-text h2", "font-weight"),
@@ -400,11 +406,42 @@ VALOR_LIBRE = {
 # a propiedad no dice nada util aqui: lo que cambia es la pagina completa.
 # Se comprueba lo que si tiene que seguir igual (texto, enlaces, SEO,
 # JSON-LD) y el aspecto se revisa en el navegador.
+# Paginas que ademas CAMBIAN DE NAVEGACION a proposito: al pasar de la
+# cabecera reducida a la del resto del sitio ganan los enlaces del menu
+# (Servicios, Como Empezar, Sobre Mi, Blog), que antes no tenian.
+NAV_CAMBIADO = {"diagnostico-operativo/index", "no-perder-clientes/index"}
+
 REDISENADAS = {
     # 23-ago: tenia su propia paleta (fondo negro #0a0908) y su CSS aparte.
     # Pasa al verde del sistema y al mismo landing.css que los otros 6.
     "automatizar-mi-negocio",
 }
+
+# Un dict con la misma clave dos veces se queda con la ultima en silencio,
+# y la primera desaparece. Ha pasado 3 veces al ir declarando cambios, y
+# el sintoma es raro: un cambio ya declarado vuelve a saltar como fallo.
+def _sin_claves_repetidas(ruta):
+    import re
+    vistas, repes = set(), []
+    dentro = False
+    for linea in io.open(ruta, encoding="utf-8"):
+        if linea.startswith("CAMBIOS_QUERIDOS = {"):
+            dentro = True
+            continue
+        if dentro:
+            if linea.startswith("}"):
+                break
+            m = re.match(r'\s*"([^"]+)":', linea)
+            if m:
+                if m.group(1) in vistas:
+                    repes.append(m.group(1))
+                vistas.add(m.group(1))
+    if repes:
+        print("AVISO: claves repetidas en CAMBIOS_QUERIDOS: %s" % ", ".join(repes))
+        print("       la ultima pisa a la anterior; hay que fusionarlas.")
+    return not repes
+
+_sin_claves_repetidas(__file__)
 
 fallos = 0
 
@@ -426,10 +463,21 @@ for slug, ruta_orig, ruta_nueva in TODAS:
         # asi que el post mas nuevo subio al primer puesto. Se avisa, no falla.
         if sorted(to.split()) == sorted(tn.split()):
             avisos.append("texto reordenado, ni una palabra distinta")
+        elif slug in NAV_CAMBIADO:
+            # el unico texto que cambia es el menu del nav comun, que
+            # sustituye al "volver" de la cabecera reducida
+            avisos.append("texto: entra el menu del nav comun")
         else:
             problemas.append("texto visible")
     eo, en = enlaces(orig), enlaces(nuevo)
-    if eo != en:
+    if slug in NAV_CAMBIADO:
+        nuevos = set(en) - set(eo)
+        perdidos = set(eo) - set(en)
+        if perdidos:
+            problemas.append("enlaces PERDIDOS %s" % perdidos)
+        elif nuevos:
+            avisos.append("+%d enlaces del menu comun" % len(nuevos))
+    elif eo != en:
         problemas.append("enlaces (%s)" % (set(eo) ^ set(en)))
     mo, mn = metas(orig), metas(nuevo)
     if mo != mn:

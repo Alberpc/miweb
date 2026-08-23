@@ -240,7 +240,7 @@ body { overflow-x: hidden; line-height: 1.6; }
 .hero.inverse .hero-badge {
     display: inline-block; font-family: monospace; font-size: 0.78rem; letter-spacing: 0.3em;
     color: var(--cobalt-300); border: 1px solid rgba(214, 186, 130, 0.30);
-    background: rgba(200, 168, 94, 0.12); padding: 7px 16px; border-radius: 50px; margin-bottom: 26px;
+    background: rgba(200, 168, 94, 0.12); padding: 7px 16px; border-radius: var(--radius-pill); margin-bottom: 26px;
 }
 .hero.inverse h1 {
     font-family: var(--font-display); font-size: clamp(2.4rem, 5.4vw, 4.1rem);
@@ -738,10 +738,26 @@ body { overflow-x: hidden; line-height: 1.6; }
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
-<nav class="subnav">
-        <span class="logo"><img src="/assets/img/logo-alber-blanco.png" alt="Alber Cabrera"></span>
-        <div class="subnav-right">
-            <a href="#cierre" class="cta" data-cta="cta_nav">Pide tu llamada</a>
+<nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo"><img src="/assets/img/logo-alber-blanco.png" alt="Alber Cabrera"></a>
+            <div class="nav-menu">
+                <a href="/#soluciones" class="nav-link">Servicios</a>
+                <a href="/#caminos" class="nav-link">Cómo Empezar</a>
+                <a href="/#sobre-mi" class="nav-link">Sobre Mí</a>
+                <a href="/blog/" class="nav-link">Blog</a>
+            </div>
+            <a href="#cierre" class="nav-btn">Pide tu llamada</a>
+            <button class="nav-burger" id="nav-burger" aria-label="Abrir menú" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+        <div class="nav-mobile" id="nav-mobile">
+            <a href="/#soluciones" class="nav-mobile-link">Servicios</a>
+            <a href="/#caminos" class="nav-mobile-link">Cómo Empezar</a>
+            <a href="/#sobre-mi" class="nav-mobile-link">Sobre Mí</a>
+            <a href="/blog/" class="nav-mobile-link">Blog</a>
+            <a href="#cierre" class="nav-mobile-cta">Pide tu llamada</a>
         </div>
     </nav>
 

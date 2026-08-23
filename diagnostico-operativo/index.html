@@ -226,7 +226,7 @@ body { overflow-x: hidden; line-height: 1.6; }
     position: fixed; top: 24px; left: 50%; transform: translateX(-50%);
     z-index: 1000; width: calc(100% - 48px); max-width: 1200px; height: 62px;
     display: flex; align-items: center; justify-content: space-between; padding: 0 24px;
-    background: rgba(14, 17, 22, 0.38);
+    background: rgba(15, 31, 27, 0.38);
     backdrop-filter: blur(18px) saturate(180%); -webkit-backdrop-filter: blur(18px) saturate(180%);
     border: 1px solid var(--night-600); border-radius: var(--radius-pill);
 }
@@ -247,9 +247,13 @@ body { overflow-x: hidden; line-height: 1.6; }
 .hero {
     position: relative; min-height: 100vh;
     display: flex; align-items: center; overflow: hidden; padding: 130px 0 90px;
+    /* Velo verde, no gris azulado. La foto de fondo es un cielo
+       estrellado que tira a azul; el velo en --night-900 la
+       reconduce al verde del sistema en vez de dejar el (14,17,22)
+       de antes, que era gris con azul. */
     background:
-        linear-gradient(to bottom, rgba(14,17,22,0.25) 0%, rgba(14,17,22,0.55) 60%, var(--bg) 100%),
-        url('../assets/img/Obsidian-black_cosmic_void_stars_202607042140.jpeg') center / cover no-repeat;
+        linear-gradient(to bottom, rgba(15, 31, 27, 0.72) 0%, rgba(15, 31, 27, 0.88) 60%, var(--bg) 100%),
+        url('/assets/img/Obsidian-black_cosmic_void_stars_202607042140.jpeg') center / cover no-repeat;
 }
 .hero::before {
     content: ''; position: absolute; inset: 0; pointer-events: none;
@@ -259,8 +263,11 @@ body { overflow-x: hidden; line-height: 1.6; }
 
 .hero-badge {
     display: inline-block; font-family: monospace; font-size: 0.78rem; letter-spacing: 0.3em;
-    color: var(--on-night-mid); border: 1px solid var(--night-600);
-    background: var(--night-800); padding: 7px 16px; border-radius: 50px; margin-bottom: 26px;
+    /* Mismo badge que en los posts: dorado translucido, no un
+       bloque verde solido que compite con el fondo. */
+    color: var(--cobalt-300); border: 1px solid rgba(214, 186, 130, 0.30);
+    background: rgba(200, 168, 94, 0.12); padding: 7px 16px;
+    border-radius: var(--radius-pill); margin-bottom: 26px;
 }
 .hero h1 {
     font-family: var(--font-display); font-size: clamp(2.2rem, 4.6vw, 3.6rem);
@@ -289,7 +296,7 @@ body { overflow-x: hidden; line-height: 1.6; }
 .radar {
     position: relative; width: min(360px, 78vw); aspect-ratio: 1;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(200, 168, 94, 0.06) 0%, rgba(14,17,22,0.4) 55%, transparent 72%);
+    background: radial-gradient(circle, rgba(200, 168, 94, 0.06) 0%, rgba(15, 31, 27,0.4) 55%, transparent 72%);
     border: 1px solid var(--cobalt-border);
     box-shadow: 0 0 80px -20px var(--cobalt-glow), inset 0 0 60px -30px var(--cobalt-500);
 }
@@ -312,7 +319,7 @@ body { overflow-x: hidden; line-height: 1.6; }
 .radar .core {
     position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
     font-family: var(--font-heading); font-weight: 800; font-size: 1rem; letter-spacing: 0.05em;
-    color: var(--on-night); background: rgba(14, 17, 22, 0.85);
+    color: var(--on-night); background: rgba(15, 31, 27, 0.85);
     border: 1px solid rgba(200, 168, 94, 0.45); border-radius: 14px; padding: 12px 18px;
     box-shadow: 0 0 35px -8px var(--cobalt-500); z-index: 2; white-space: nowrap;
 }
@@ -687,11 +694,26 @@ body { overflow-x: hidden; line-height: 1.6; }
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
-<nav class="subnav">
-        <a href="/" class="logo"><img src="/assets/img/logo-alber-blanco.png" alt="Alber Cabrera"></a>
-        <div class="subnav-right">
-            <a href="/" class="back">&larr; Inicio</a>
-            <a href="/#contacto" class="cta">Pedir mi diagnóstico</a>
+<nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo"><img src="/assets/img/logo-alber-blanco.png" alt="Alber Cabrera"></a>
+            <div class="nav-menu">
+                <a href="/#soluciones" class="nav-link">Servicios</a>
+                <a href="/#caminos" class="nav-link">Cómo Empezar</a>
+                <a href="/#sobre-mi" class="nav-link">Sobre Mí</a>
+                <a href="/blog/" class="nav-link">Blog</a>
+            </div>
+            <a href="#contacto" class="nav-btn">Pedir mi diagnóstico</a>
+            <button class="nav-burger" id="nav-burger" aria-label="Abrir menú" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+        <div class="nav-mobile" id="nav-mobile">
+            <a href="/#soluciones" class="nav-mobile-link">Servicios</a>
+            <a href="/#caminos" class="nav-mobile-link">Cómo Empezar</a>
+            <a href="/#sobre-mi" class="nav-mobile-link">Sobre Mí</a>
+            <a href="/blog/" class="nav-mobile-link">Blog</a>
+            <a href="#contacto" class="nav-mobile-cta">Pedir mi diagnóstico</a>
         </div>
     </nav>
 
