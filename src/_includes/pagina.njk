@@ -3,8 +3,6 @@
     Comparte nav, pie, <head> y base.js; el CSS va inline en `cssPagina`
     porque es de una sola pagina y no hay nada que deduplicar.
 
-    `navMinima: true` cambia la cabecera por la version reducida
-    ("volver" + un boton) que usan las paginas de conversion.
     `pie` elige otro pie: servicios.html tiene el suyo, con otro copy. -#}
 {% extends "base.njk" %}
 
@@ -18,7 +16,7 @@
 
 
 {% block cabecera %}
-{%- if navMinima %}{% include "nav-minima.njk" %}{% else %}{% include "nav.njk" %}{% endif %}
+{% include "nav.njk" %}
 {% endblock %}
 
 {% block scripts %}

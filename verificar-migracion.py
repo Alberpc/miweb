@@ -364,6 +364,11 @@ def es_querido(cambio, esperados):
     # 23-ago: el bloque del precio del DAI360, rehecho entero. Apilaba
     # degradado dorado + halo exterior + brillo interior sobre --night-800
     # y salia un lavado verde-crema con el texto a medio tono.
+    # 23-ago: el CSS del pie se centraliza en css/pie.css. Las landings
+    # tenian su propia version (grid 1.2fr/1.8fr, logo 24px, otro padding)
+    # y ahora adoptan la comun, que es el objetivo de unificarlo.
+    if sel.startswith(".footer") or sel.startswith(".subfooter"):
+        return True
     if sel.startswith(".deal"):
         return True
     if BOTON_UNIFICADO.search(sel):

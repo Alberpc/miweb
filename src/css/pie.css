@@ -1,0 +1,128 @@
+/* ============================================================
+   pie.css — EL pie del sitio. Un solo archivo.
+   ============================================================
+   Estaba en landing.css y ademas copiado dentro del <style> de
+   /blog/, del diagnostico y de no-perder-clientes: 69 lineas
+   repetidas en 3 sitios. Es el mismo caso que tenia el nav.
+
+   Lo que se cambie aqui vale para las 14 paginas.
+   ============================================================ */
+
+/* ===== FOOTER OSCURO =====
+   Requiere class="inverse" en el <footer class="footer-section">. */
+.footer-section.inverse { padding: var(--space-10) 0 var(--space-7); border-top: 1px solid var(--night-600); }
+.footer-grid { display: grid; grid-template-columns: 1.4fr 2fr; gap: 60px; margin-bottom: 60px; }
+.footer-brand-col { max-width: 340px; }
+.footer-logo-wrap { margin-bottom: 20px; }
+/* El logo del pie va sobre fondo oscuro: BLANCO. Sin filter:none hereda
+   el invert(1) del nav (que existe para la pastilla clara) y sale negro
+   sobre negro. La correccion vivia solo en index.css, asi que las paginas
+   que no lo cargan salian con el logo negro. */
+.footer-logo-wrap .logo img {
+    height: 26px;
+    width: auto;
+    display: block;
+    filter: none;
+}
+.footer-brand-desc { font-size: 0.92rem; color: var(--on-night-soft); font-weight: 300; line-height: 1.7; }
+.footer-links-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+.footer-links-title { font-family: var(--font-heading); font-size: 0.82rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--on-night); margin-bottom: 18px; }
+.footer-links-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.footer-links-list a { font-size: 0.9rem; color: var(--on-night-soft); text-decoration: none; transition: color 0.3s ease; }
+.footer-links-list a:hover { color: var(--on-night); }
+.footer-bottom-bar { display: flex; align-items: center; justify-content: space-between; padding-top: 30px; border-top: 1px solid var(--night-600); flex-wrap: wrap; gap: 20px; }
+.footer-curator { font-size: 0.82rem; color: var(--on-night-mid); }
+.footer-social-wrap { display: flex; align-items: center; gap: 12px; }
+.footer-social-label { font-size: 0.8rem; color: var(--on-night-soft); }
+.footer-social-icons { display: flex; gap: 10px; }
+.footer-social-icons a { color: var(--on-night-soft); display: flex; transition: color 0.3s ease; }
+.footer-social-icons a:hover { color: var(--cobalt-300); }
+
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+.reveal.revealed { opacity: 1; transform: none; }
+
+@media (max-width: 900px) {
+    .article-layout { grid-template-columns: 1fr; gap: 0; }
+    .toc { display: none; }
+    .article-hero.inverse { padding: var(--space-10) 0 var(--space-7); }
+    .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+}
+@media (max-width: 560px) {
+    .prose .lead-answer { font-size: 1.06rem; padding: 22px 22px; }
+    .cta-card { padding: 44px 24px; }
+    .footer-links-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+}
+@media (max-width: 480px) {
+    .footer-links-grid { grid-template-columns: 1fr; gap: 24px; }
+    .footer-bottom-bar { flex-direction: column; align-items: flex-start; gap: 16px; }
+}
+
+/* ============================================================
+   Bloques que solo usa automatizar-mi-negocio
+   ============================================================
+   Vienen de landing-oscura.css, el CSS aparte que tenia esa pagina
+   con su propia paleta negra. Se traen ya al sistema: titulares en
+   Instrument Serif, radios de la escala y boton de 8px.
+   ============================================================ */
+
+/* Caja de "esto me preguntan": una pregunta real y su respuesta. */
+.asked-box {
+    background: var(--bg-alt);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: var(--space-6) var(--space-6);
+    margin: var(--space-6) 0;
+}
+.asked-box .asked-q {
+    font-size: 1.02rem; color: var(--ink); font-weight: 500;
+    margin-bottom: var(--space-3); line-height: 1.5;
+}
+.asked-box .asked-q::before { content: '"'; color: var(--cobalt-700); }
+.asked-box .asked-q::after  { content: '"'; color: var(--cobalt-700); }
+.asked-box .asked-who {
+    font-family: var(--font-mono); font-size: 0.76rem; letter-spacing: 0.1em;
+    color: var(--ink-mid); text-transform: uppercase;
+    margin-bottom: var(--space-4); display: block;
+}
+.asked-box .asked-a {
+    font-size: 0.98rem; color: var(--ink-soft); font-weight: 300;
+    line-height: 1.65; margin: 0;
+}
+
+/* CTA embebido a mitad del articulo. */
+.inline-cta {
+    background: var(--bg-alt);
+    border: 1px solid var(--cobalt-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6) var(--space-6);
+    margin: var(--space-7) 0;
+}
+.inline-cta .ic-label {
+    font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.22em;
+    color: var(--cobalt-700); text-transform: uppercase;
+    display: block; margin-bottom: var(--space-3);
+}
+.inline-cta h3 {
+    font-family: var(--font-display); font-size: 1.28rem; font-weight: 400;
+    color: var(--ink); margin: 0 0 var(--space-3); letter-spacing: -0.01em;
+}
+.inline-cta p {
+    font-size: 0.98rem; color: var(--ink-soft); font-weight: 300;
+    margin: 0 0 var(--space-5); max-width: 52ch;
+}
+.inline-cta .btn-inline { display: inline-block; text-decoration: none; }
+
+/* ---- Subpie: la linea legal fina bajo el pie ----
+   La usan las dos landings de conversion. Vivia duplicada dentro de
+   cada una; aqui es una sola. */
+.subfooter {
+    border-top: 1px solid var(--line);
+    padding: var(--space-6) var(--space-5);
+    text-align: center;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: lowercase;
+    color: var(--ink-mid);
+}
+.subfooter a { color: var(--ink-soft); text-decoration: none; }
+.subfooter a:hover { color: var(--ink); }
