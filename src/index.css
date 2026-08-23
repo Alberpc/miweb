@@ -709,14 +709,14 @@ html {
     height: 48px;
     margin-bottom: var(--space-5);
     border-radius: var(--radius-md);
-    /* El acento de la web, el mismo --cobalt-600 que la etiqueta de
-       seccion y los botones en claro. El fondo NO es --cobalt-tint: al
-       6% de opacidad la caja no se veia y el icono quedaba flotando.
-       Al 14% con el borde al 40% el icono tiene cuerpo y sigue siendo
-       dorado suave, no un bloque de color. */
-    color: var(--cobalt-600);
-    background: rgba(200, 168, 94, 0.14);
-    border: 1px solid rgba(200, 168, 94, 0.4);
+    /* Cajita VERDE con el icono DORADO dentro, los dos colores de marca.
+       Antes la cajita era dorado al 14% sobre la tarjeta arena: dos tonos
+       casi iguales, y el icono no destacaba. Sobre el verde el --cobalt-400
+       (#C8A85E) si se lee (7.48:1), que es justo para lo que el sistema lo
+       define: "foco en oscuro". Y la cajita destaca sobre la tarjeta (13:1). */
+    color: var(--cobalt-400);
+    background: var(--night-900);
+    border: 1px solid var(--night-900);
 }
 .beneficio-icono svg { width: 24px; height: 24px; }
 
