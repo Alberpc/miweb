@@ -9,5 +9,6 @@
   "navCta": {
     "href": "/#contacto",
     "texto": "Cuéntame tu caso &rarr;"
-  }
+  },
+  "themeColor": "#0F1F1B"
 }

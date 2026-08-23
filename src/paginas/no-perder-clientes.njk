@@ -9,7 +9,6 @@ ogTitle: "No pierdas clientes que ya te escriben"
 ogDescription: "Monto el sistema que ordena tus consultas, avisa a quién hay que contestar y hace el seguimiento que hoy no hace nadie. En semanas, no en meses."
 twitterTitle: "No pierdas clientes que ya te escriben"
 twitterDescription: "El sistema que ordena tus consultas y hace el seguimiento que hoy no hace nadie."
-themeColor: "#0E1116"
 ogImage: "https://albercabrera.com/assets/img/og-image.jpg"
 ogImageHeight: "630"
 ogImageAlt: "No pierdas clientes que ya te escriben"
@@ -69,7 +68,7 @@ cssPagina: |
         }
 
         .hero.inverse .hero-badge {
-            display: inline-block; font-family: monospace; font-size: 0.78rem; letter-spacing: 0.3em;
+            display: inline-block; font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.3em;
             color: var(--cobalt-300); border: 1px solid rgba(214, 186, 130, 0.30);
             background: rgba(200, 168, 94, 0.12); padding: 7px 16px; border-radius: var(--radius-pill); margin-bottom: 26px;
         }
@@ -95,7 +94,7 @@ cssPagina: |
             display: flex; align-items: center; justify-content: center; text-align: center;
             border: 1.5px dashed var(--cobalt-border); border-radius: 16px;
             background: var(--cobalt-tint);
-            color: var(--ink-mid); font-family: monospace; font-size: 0.78rem; letter-spacing: 0.05em;
+            color: var(--ink-mid); font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.05em;
             padding: 24px; line-height: 1.6;
         }
 
@@ -145,7 +144,7 @@ cssPagina: |
         /* Aviso de hoy */
         .mockup-aviso { aspect-ratio: 16/10; display: flex; flex-direction: column; }
         .mockup-aviso-body { padding: 14px; display: flex; flex-direction: column; gap: 10px; flex: 1; justify-content: center; }
-        .mockup-aviso-fecha { font-family: monospace; font-size: 0.62rem; letter-spacing: 0.1em; color: var(--ink-decor); margin-bottom: 4px; }
+        .mockup-aviso-fecha { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.1em; color: var(--ink-decor); margin-bottom: 4px; }
         .mockup-aviso-item {
             display: flex; align-items: center; gap: 8px; font-size: 0.72rem; color: var(--ink);
             background: var(--bg-alt); border-radius: 8px; padding: 8px 10px;
@@ -241,7 +240,7 @@ cssPagina: |
             background: linear-gradient(160deg, var(--cobalt-tint), var(--bg));
         }
         .servicio-eyebrow {
-            display: block; font-family: monospace; font-size: 0.68rem; font-weight: 700;
+            display: block; font-family: var(--font-mono); font-size: 0.68rem; font-weight: 700;
             letter-spacing: 0.14em; color: var(--cobalt-600); margin-bottom: 10px;
         }
         .servicio-card-lead .servicio-card-body { padding: 0; }
@@ -277,7 +276,7 @@ cssPagina: |
             border-bottom: 1px solid var(--line);
         }
         .pipe-fases span {
-            font-family: monospace; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em;
+            font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em;
             color: var(--cobalt-600); text-align: center;
         }
         /* CAPTACIÓN = Lead nuevo (col 1). NUTRICIÓN = Discovery + Llamada 2
@@ -294,7 +293,7 @@ cssPagina: |
         .pipe-autos { display: flex; flex-direction: column; gap: 6px; min-height: 30px; justify-content: flex-end; width: 100%; }
         .pipe-autos.down { justify-content: flex-start; }
         .pipe-auto {
-            font-family: monospace; font-size: 0.62rem; letter-spacing: 0.02em; color: var(--ambar);
+            font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.02em; color: var(--ambar);
             background: var(--ambar-bg); border: 1px dashed var(--ambar-border); border-radius: 8px;
             padding: 6px 8px; text-align: center; line-height: 1.35;
         }
@@ -315,7 +314,7 @@ cssPagina: |
 
         /* Bloque 7 — CÓMO TRABAJAMOS (reutiliza .metodo-grid del patrón DAI360) */
         .pasos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 44px; }
-        .paso-col .p-num { font-family: monospace; font-size: 0.85rem; letter-spacing: 0.25em; color: var(--ink-decor); display: block; margin-bottom: 12px; }
+        .paso-col .p-num { font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.25em; color: var(--ink-decor); display: block; margin-bottom: 12px; }
         .paso-col h3 { font-family: var(--font-display); font-size: 1.25rem; font-weight: 400; letter-spacing: -0.01em; margin-bottom: 12px; color: var(--ink); }
         .paso-col p { font-size: 0.94rem; color: var(--ink-soft); font-weight: 300; }
 

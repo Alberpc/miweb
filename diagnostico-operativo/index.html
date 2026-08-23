@@ -43,7 +43,7 @@
     <link rel="canonical" href="https://albercabrera.com/diagnostico-operativo/">
     <meta name="robots" content="index, follow">
     <meta name="author" content="Alberto Pérez Cabrera">
-    <meta name="theme-color" content="#0E1116">
+    <meta name="theme-color" content="#0F1F1B">
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png">
     <link rel="icon" type="image/x-icon" href="/assets/img/favicon.ico">
     <link rel="apple-touch-icon" href="/assets/img/favicon-512.png">
@@ -257,7 +257,7 @@ body { overflow-x: hidden; line-height: 1.6; }
 .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; align-items: center; position: relative; z-index: 2; }
 
 .hero-badge {
-    display: inline-block; font-family: monospace; font-size: 0.78rem; letter-spacing: 0.3em;
+    display: inline-block; font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.3em;
     /* Mismo badge que en los posts: dorado translucido, no un
        bloque verde solido que compite con el fondo. */
     color: var(--cobalt-300); border: 1px solid rgba(214, 186, 130, 0.30);
@@ -312,7 +312,7 @@ body { overflow-x: hidden; line-height: 1.6; }
     animation: blip 4.5s ease-in-out infinite;
 }
 .radar .blip b {
-    position: absolute; left: 14px; top: -4px; font-family: monospace; font-weight: 400;
+    position: absolute; left: 14px; top: -4px; font-family: var(--font-mono); font-weight: 400;
     font-size: 10px; letter-spacing: 0.08em; color: var(--cobalt-300); white-space: nowrap;
 }
 .blip.b1 { left: 24%; top: 30%; animation-delay: 0.4s; }
@@ -385,7 +385,7 @@ body { overflow-x: hidden; line-height: 1.6; }
    sin importar si el título ocupa 1 o 2 líneas */
 .metodo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 44px; align-items: stretch; }
 .metodo-col { display: flex; flex-direction: column; }
-.metodo-col .m-num { font-family: monospace; font-size: 0.85rem; letter-spacing: 0.25em; color: var(--ink-decor); display: block; margin-bottom: 12px; }
+.metodo-col .m-num { font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.25em; color: var(--ink-decor); display: block; margin-bottom: 12px; }
 .metodo-col h3 { font-family: var(--font-display); font-size: 1.25rem; font-weight: 400; letter-spacing: -0.01em; margin-bottom: 12px; color: var(--ink); }
 .metodo-col p { font-size: 0.94rem; color: var(--ink-soft); font-weight: 300; margin-bottom: 22px; }
 .metodo-col .m-diagram { margin-top: auto; }
@@ -396,7 +396,7 @@ body { overflow-x: hidden; line-height: 1.6; }
 .md-n.hub { stroke: var(--cobalt-600); filter: drop-shadow(0 0 10px var(--cobalt-glow)); }
 .md-n.ok { stroke: var(--cobalt-border); }
 .md-p { fill: var(--cobalt-500); }
-.md-t { font-family: monospace; font-size: 9.5px; letter-spacing: 0.14em; fill: var(--ink-decor); }
+.md-t { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.14em; fill: var(--ink-decor); }
 .md-t.hub-t { fill: var(--cobalt-700); font-size: 10px; }
 .md-t.dim { fill: var(--ink-decor); }
 .md-dot { fill: var(--cobalt-600); filter: drop-shadow(0 0 6px var(--cobalt-glow)); }
@@ -420,7 +420,7 @@ body { overflow-x: hidden; line-height: 1.6; }
     /* sin lavado dorado de fondo: el sistema lo evita */
 }
 .deal .tag {
-    display: inline-block; font-family: monospace; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.25em;
+    display: inline-block; font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.25em;
     color: var(--cobalt-300); border: 1px solid rgba(214, 186, 130, 0.35);
     background: rgba(200, 168, 94, 0.10);
     padding: 6px 16px; border-radius: var(--radius-pill); margin-bottom: var(--space-5);
@@ -468,7 +468,7 @@ body { overflow-x: hidden; line-height: 1.6; }
     border-color: var(--cobalt-400);
 }
 .deal-path-label {
-    display: block; font-family: monospace; font-size: 0.72rem; letter-spacing: 0.18em;
+    display: block; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.18em;
     text-transform: uppercase; color: var(--on-night-mid); margin-bottom: 12px;
 }
 .deal-path.highlight .deal-path-label { color: var(--cobalt-300); }

@@ -380,6 +380,8 @@ def es_querido(cambio, esperados):
         return True
     if sel.startswith(".deal"):
         return True
+    if "font-family" in cambio and "var(--font-mono)" in cambio:
+        return True   # monospace literal -> su token, mismo resultado
     if BOTON_UNIFICADO.search(sel):
         return True
     if NAV_UNIFICADO.match(sel) or (sel.startswith("@media") and
@@ -523,6 +525,12 @@ for slug, ruta_orig, ruta_nueva in TODAS:
         if dif:
             problemas.append("enlaces (%s)" % dif)
     mo, mn = metas(orig), metas(nuevo)
+    # 23-ago: theme-color se define una vez en site.json. Habia TRES
+    # valores distintos por el sitio (#0E1116, #070708, #0F1F1B) cuando
+    # el del sistema es #0F1F1B.
+    if mo.get("theme-color") != mn.get("theme-color") == "#0F1F1B":
+        avisos.append("theme-color unificado al del sistema")
+        mo = dict(mo); mo["theme-color"] = mn.get("theme-color")
     if mo != mn:
         dif = {k: (mo.get(k), mn.get(k)) for k in set(mo) | set(mn) if mo.get(k) != mn.get(k)}
         problemas.append("meta/SEO %s" % dif)
