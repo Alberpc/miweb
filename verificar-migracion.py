@@ -509,6 +509,30 @@ NAV_CAMBIADO = {"diagnostico-operativo/index", "no-perder-clientes/index"}
 # copy de la home (los dolores: "Clientes que se pierden", "Tiempo que se
 # va", "Control que no tienes") en vez de la lista de servicios. Cambia el
 # texto de esa columna en 13 paginas; no se pierde ningun enlace.
+# 23-ago: la home estrena una franja de beneficios entre el hero y "LA
+# REALIDAD". Es contenido NUEVO a proposito, asi que su texto no esta en
+# el original. Se listan sus titulares para que el verificador siga
+# comparando el resto del texto de la home palabra por palabra.
+TEXTO_NUEVO = {
+    # Los 4 titulares y sus 4 parrafos. Se listan enteros a proposito: si
+    # manyana se toca el copy de la home, el verificador tiene que saltar.
+    "index": (
+        "Más oportunidades "
+        "Lo que entra por web, WhatsApp e Instagram cae en un sitio, "
+        "y sabes a quién toca contestar. "
+        "Menos tareas manuales "
+        "Lo repetitivo lo hace el sistema: tú decides, no rellenas "
+        "formularios ni copias datos de un sitio a otro. "
+        "Más control "
+        "Ves en qué punto está cada cliente y cada trabajo, "
+        "sin tener que preguntar ni perseguir a nadie. "
+        "Sistemas escalables "
+        "Montado para aguantar más volumen sin contratar a nadie "
+        "ni estar tú en cada paso. "
+        # el enlace del pie pasa de "albercabrera" a "albercabrera.com"
+        "albercabrera albercabrera.com"),
+}
+
 PIE_UNIFICADO = True
 
 REDISENADAS = {
@@ -520,6 +544,33 @@ REDISENADAS = {
 # Un dict con la misma clave dos veces se queda con la ultima en silencio,
 # y la primera desaparece. Ha pasado 3 veces al ir declarando cambios, y
 # el sintoma es raro: un cambio ya declarado vuelve a saltar como fallo.
+def _solo_cambia_el_pie(viejo, nuevo, slug=None):
+    """True si lo unico que entra o sale es el copy del pie unificado.
+
+    Antes bastaba con que "Clientes que se pierden" apareciera en la
+    pagina nueva, y eso lo cumple CUALQUIER pagina desde que el pie es
+    comun: al anyadir una seccion entera a la home, el texto nuevo se
+    colaba por esta excepcion y el verificador decia "texto equivalente".
+    Ahora se mira palabra por palabra que lo que cambia sea solo el pie.
+    """
+    # Las palabras del pie VIEJO (las que salen) y del NUEVO (las que
+    # entran). Tienen que estar las dos: si solo listas las que entran,
+    # cualquier texto que desaparezca pasa desapercibido.
+    del_pie = set(
+        # salen: la columna "Servicios" tecnica del pie antiguo
+        "Automatización de procesos Agentes Autónomos "
+        "Diseño web a medida Sistemas IA con "
+        # entran: la columna de dolor, la de la home
+        "Clientes que se pierden Tiempo va Control no tienes".split())
+    import collections
+    permitidas = set(del_pie)
+    if slug in TEXTO_NUEVO:
+        permitidas |= set(TEXTO_NUEVO[slug].split())
+    a, b = collections.Counter(viejo.split()), collections.Counter(nuevo.split())
+    distintas = set((a - b).keys()) | set((b - a).keys())
+    return distintas and distintas <= permitidas
+
+
 def js_cambios(viejo, nuevo):
     """Que sentencias se pierden y cuales se anyaden entre dos JS.
 
@@ -589,7 +640,7 @@ for slug, ruta_orig, ruta_nueva in TODAS:
         # asi que el post mas nuevo subio al primer puesto. Se avisa, no falla.
         if sorted(to.split()) == sorted(tn.split()):
             avisos.append("texto reordenado, ni una palabra distinta")
-        elif PIE_UNIFICADO and "Clientes que se pierden" in tn:
+        elif PIE_UNIFICADO and _solo_cambia_el_pie(to, tn, slug):
             avisos.append("pie: copy unificado con el de la home")
         elif slug in NAV_CAMBIADO:
             # el unico texto que cambia es el menu del nav comun, que

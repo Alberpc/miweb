@@ -658,6 +658,91 @@ html {
     border-top: 1px solid var(--line);
 }
 
+/* =============================================================
+   BENEFICIOS (la franja de 4 iconos bajo el hero)
+   =============================================================
+   Va justo despues del hero oscuro y antes de "LA REALIDAD": es lo
+   que se lleva, ANTES de contarle el problema. Por eso el fondo es
+   claro, para que el corte oscuro->claro marque que empieza el
+   contenido.
+
+   Los iconos son de Lucide (lucide.dev, MIT: sin atribucion y uso
+   comercial libre). Van inline y SIEMPRE con stroke="currentColor",
+   nunca con un color escrito dentro del SVG: asi el color sale del
+   token de aqui abajo y cambiarlo es una linea, no cuatro archivos.
+   Para anyadir otro: copiar el SVG de lucide.dev y quitarle el
+   width/height (los pone .beneficio-icono svg). */
+.beneficios-section {
+    padding: var(--space-9) 0;
+    background-color: var(--bg);
+    border-bottom: 1px solid var(--line);
+}
+
+.beneficios-grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-7);
+}
+
+.beneficio-icono {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    margin-bottom: var(--space-5);
+    border-radius: var(--radius-md);
+    /* El acento de la web, el mismo --cobalt-600 que la etiqueta de
+       seccion y los botones en claro. El fondo NO es --cobalt-tint: al
+       6% de opacidad la caja no se veia y el icono quedaba flotando.
+       Al 14% con el borde al 40% el icono tiene cuerpo y sigue siendo
+       dorado suave, no un bloque de color. */
+    color: var(--cobalt-600);
+    background: rgba(200, 168, 94, 0.14);
+    border: 1px solid rgba(200, 168, 94, 0.4);
+}
+.beneficio-icono svg { width: 24px; height: 24px; }
+
+.beneficio-titulo {
+    font-family: var(--font-display);
+    /* 1.35: por debajo la serif se lee floja y no gana al icono. */
+    font-size: 1.35rem;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+    color: var(--ink);
+    margin-bottom: var(--space-3);
+}
+
+.beneficio-texto {
+    font-size: 0.93rem;
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    max-width: 34ch;
+}
+
+/* 4 columnas no caben en tablet. En movil se quedan DOS, no una: en
+   una columna son cuatro bloques a pantalla completa y hay que hacer
+   dos pantallas de scroll para pasar de aqui. En dos entra la franja
+   entera de un vistazo, que es justo lo que tiene que hacer. */
+@media (max-width: 900px) {
+    .beneficios-grid { grid-template-columns: repeat(2, 1fr); gap: var(--space-6); }
+}
+@media (max-width: 560px) {
+    .beneficios-section { padding: var(--space-8) 0; }
+    .beneficios-grid { gap: var(--space-6) var(--space-4); }
+    .beneficio-icono {
+        width: 40px;
+        height: 40px;
+        margin-bottom: var(--space-3);
+    }
+    .beneficio-icono svg { width: 20px; height: 20px; }
+    .beneficio-titulo { font-size: 1.08rem; margin-bottom: var(--space-2); }
+    .beneficio-texto { font-size: 0.88rem; max-width: none; }
+}
+
 /* SECCIÓN EL MÉTODO (LÍNEA DE TIEMPO / TIMELINE) */
 .timeline {
     position: relative;
