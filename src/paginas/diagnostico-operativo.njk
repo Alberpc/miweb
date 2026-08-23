@@ -212,10 +212,16 @@ cssPagina: |
 
         /* Anticipo destacado */
         .deal {
+            /* Tarjeta solida. Antes apilaba tres efectos (degradado dorado,
+               halo dorado exterior y brillo interior) sobre --night-800, y
+               el resultado era un lavado verde-crema donde el texto casi no
+               se leia. Un verde, un borde, una sombra. */
             position: relative; max-width: 860px; margin: 0 auto; text-align: center;
-            background: linear-gradient(160deg, rgba(200, 168, 94, 0.10), var(--night-800));
-            border: 1px solid rgba(214, 186, 130, 0.30); border-radius: 16px; padding: 60px 48px;
-            box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 60px -20px var(--cobalt-glow), inset 0 0 40px -25px var(--cobalt-500);
+            background: var(--night-900);
+            border: 1px solid rgba(214, 186, 130, 0.22);
+            border-radius: var(--radius-lg);
+            padding: var(--space-8) var(--space-7);
+            box-shadow: 0 30px 70px -35px rgba(15, 31, 27, 0.55);
             overflow: hidden;
         }
         .deal::before {
@@ -226,40 +232,49 @@ cssPagina: |
             display: inline-block; font-family: monospace; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.25em;
             color: var(--cobalt-300); border: 1px solid rgba(214, 186, 130, 0.35);
             background: rgba(200, 168, 94, 0.10);
-            padding: 6px 16px; border-radius: 50px; margin-bottom: 24px;
+            padding: 6px 16px; border-radius: var(--radius-pill); margin-bottom: var(--space-5);
         }
         .deal h2 { font-family: var(--font-display); font-size: clamp(1.5rem, 3.2vw, 2.1rem); font-weight: 400; letter-spacing: -0.02em; line-height: 1.25; margin-bottom: 22px; color: var(--on-night); }
         .deal p { font-size: 1.05rem; color: var(--on-night-body); font-weight: 300; margin: 0; }
         .deal p strong { color: var(--on-night); font-weight: 600; }
         .deal-price {
             font-family: var(--font-heading); font-weight: 500; font-size: clamp(1.1rem, 2vw, 1.35rem);
-            letter-spacing: 0.02em; color: var(--on-night-body); margin: 4px 0 40px; line-height: 1;
+            letter-spacing: 0.16em; color: var(--on-night-mid);
+            margin: var(--space-1) 0 var(--space-7); line-height: 1;
             display: flex; flex-direction: column; align-items: center; gap: 14px;
             text-transform: uppercase;
         }
         .deal-price strong {
             display: block; font-size: clamp(2.8rem, 6vw, 4rem); font-weight: 800;
-            letter-spacing: -0.03em; line-height: 0.9; color: var(--on-night);
+            letter-spacing: -0.03em; line-height: 0.9;
             text-transform: none;
-            background: linear-gradient(135deg, var(--on-night) 0%, var(--cobalt-300) 120%);
-            -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+            /* Dorado plano. El degradado recortado sobre texto se desvanecia
+               por la derecha y la cifra, que es lo que hay que leer, quedaba
+               a medio tono. */
+            color: var(--cobalt-300);
         }
         .deal-price-note {
             font-family: var(--font-body); font-size: 0.85rem; font-weight: 400;
-            letter-spacing: 0; color: var(--on-night-mid); text-transform: none;
+            letter-spacing: 0; color: var(--on-night-soft); text-transform: none;
         }
         /* Los dos escenarios del anticipo */
         .deal-paths {
             display: flex; flex-direction: column; gap: 16px;
             text-align: left; margin-top: 8px; max-width: 620px; margin-left: auto; margin-right: auto;
         }
+        /* Las dos cajas comparten base: la diferencia entre "si no
+           seguimos" y "si lo implementamos" la marca el BORDE dorado, no
+           un verde distinto en cada una. Antes una iba en --night-700 y la
+           otra en dorado translucido: parecian de dos sistemas. */
         .deal-path {
-            background: var(--night-700); border: 1px solid var(--night-600);
-            border-radius: 12px; padding: 26px 24px;
+            background: var(--night-800);
+            border: 1px solid var(--night-600);
+            border-radius: var(--radius-md);
+            padding: var(--space-5) var(--space-5);
+            text-align: left;
         }
         .deal-path.highlight {
-            border-color: rgba(214, 186, 130, 0.35);
-            background: rgba(200, 168, 94, 0.10);
+            border-color: var(--cobalt-400);
         }
         .deal-path-label {
             display: block; font-family: monospace; font-size: 0.72rem; letter-spacing: 0.18em;

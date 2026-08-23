@@ -361,6 +361,11 @@ def es_querido(cambio, esperados):
     """
     sel = cambio.split("{")[0].strip()
     # tambien cuando la regla del nav va dentro de un @media
+    # 23-ago: el bloque del precio del DAI360, rehecho entero. Apilaba
+    # degradado dorado + halo exterior + brillo interior sobre --night-800
+    # y salia un lavado verde-crema con el texto a medio tono.
+    if sel.startswith(".deal"):
+        return True
     if BOTON_UNIFICADO.search(sel):
         return True
     if NAV_UNIFICADO.match(sel) or (sel.startswith("@media") and
