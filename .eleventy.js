@@ -10,7 +10,7 @@
 
 import { writeFileSync } from "node:fs";
 import { dirname } from "node:path";
-import { htmlAMarkdown, faqAMarkdown } from "./src/_utils/html-a-markdown.js";
+import { htmlAMarkdown, faqAMarkdown, landingAMarkdown } from "./src/_utils/html-a-markdown.js";
 
 export default function (eleventyConfig) {
     // Assets que se copian tal cual, sin pasar por el motor de plantillas.
@@ -67,20 +67,30 @@ export default function (eleventyConfig) {
     eleventyConfig.on("eleventy.after", ({ results }) => {
         for (const pagina of results) {
             if (!pagina.outputPath.endsWith(".html")) continue;
-            if (!pagina.content.includes('class="prose"')) continue;
-
-            const cuerpoMatch = pagina.content.match(
-                /<article class="prose">([\s\S]*?)<\/article>/
-            );
-            if (!cuerpoMatch) continue;
 
             const tituloMatch = pagina.content.match(/<title>([^<]*)<\/title>/);
             const titulo = tituloMatch ? tituloMatch[1].replace(/ \| Alber Cabrera$/, "") : "";
-            const faq = faqAMarkdown(pagina.content);
-            const markdown = `# ${titulo}\n\n${htmlAMarkdown(cuerpoMatch[1])}\n\n${faq}\n`.replace(/\n{3,}/g, "\n\n");
 
+            let markdown = null;
+
+            if (pagina.content.includes('class="prose"')) {
+                // Posts del blog: prosa lineal dentro de <article class="prose">.
+                const cuerpoMatch = pagina.content.match(
+                    /<article class="prose">([\s\S]*?)<\/article>/
+                );
+                if (cuerpoMatch) {
+                    const faq = faqAMarkdown(pagina.content);
+                    markdown = `# ${titulo}\n\n${htmlAMarkdown(cuerpoMatch[1])}\n\n${faq}\n`;
+                }
+            } else if (/<section[^>]*class="[^"]*section/.test(pagina.content)) {
+                // Landings de venta (home, diagnostico): secciones con
+                // <h2 class="section-title">, sin prosa lineal.
+                markdown = landingAMarkdown(pagina.content);
+            }
+
+            if (!markdown) continue;
             const rutaMd = pagina.outputPath.replace(/index\.html$/, "index.md");
-            writeFileSync(rutaMd, markdown, "utf8");
+            writeFileSync(rutaMd, markdown.replace(/\n{3,}/g, "\n\n"), "utf8");
         }
     });
 
