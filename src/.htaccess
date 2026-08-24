@@ -56,3 +56,16 @@ RewriteRule ^(aviso-legal|cookies|politica-de-privacidad)$ $1.html [L]
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json image/svg+xml
 </IfModule>
+
+# --- Link header para descubrimiento por agentes de IA (RFC 8288) ---
+# No hay API/documentacion de servicio que enlazar (web de consultoria, no
+# producto con API); se apunta al sitemap, que es el recurso real que existe
+# y ayuda a un agente a descubrir el contenido del sitio.
+<IfModule mod_headers.c>
+  Header set Link "</sitemap.xml>; rel=\"sitemap\""
+</IfModule>
+
+# --- Content-Type correcto para los .md de cada post (ver .eleventy.js) ---
+# Sin esto Apache sirve .md como text/plain o fuerza descarga; un agente que
+# pida Accept: text/markdown necesita recibir text/markdown de verdad.
+AddType text/markdown;charset=UTF-8 .md

@@ -8,6 +8,10 @@
 // Las URLs NO deben cambiar: hay posts indexados en Google y enlaces con
 // ?origen=. Cada landing sigue siendo /<slug>/index.html.
 
+import { writeFileSync } from "node:fs";
+import { dirname } from "node:path";
+import { htmlAMarkdown, faqAMarkdown } from "./src/_utils/html-a-markdown.js";
+
 export default function (eleventyConfig) {
     // Assets que se copian tal cual, sin pasar por el motor de plantillas.
     // .htaccess va aqui a proposito: el deploy de Hostinger lo borra si no
@@ -53,6 +57,32 @@ export default function (eleventyConfig) {
     eleventyConfig.addCollection("postsPorFecha", (api) =>
         api.getFilteredByTag("posts")
            .sort((a, b) => new Date(b.data.fecha) - new Date(a.data.fecha)));
+
+    // Genera un .md gemelo de cada post del blog, junto a su index.html.
+    // Cubre el check "Markdown Negotiation" de la auditoria AEO: un agente
+    // que pida Accept: text/markdown recibe contenido real, no el HTML
+    // completo con nav/footer. Sale solo en cada build a partir del mismo
+    // `content` ya renderizado — nunca se edita a mano, no puede
+    // desincronizarse del post real.
+    eleventyConfig.on("eleventy.after", ({ results }) => {
+        for (const pagina of results) {
+            if (!pagina.outputPath.endsWith(".html")) continue;
+            if (!pagina.content.includes('class="prose"')) continue;
+
+            const cuerpoMatch = pagina.content.match(
+                /<article class="prose">([\s\S]*?)<\/article>/
+            );
+            if (!cuerpoMatch) continue;
+
+            const tituloMatch = pagina.content.match(/<title>([^<]*)<\/title>/);
+            const titulo = tituloMatch ? tituloMatch[1].replace(/ \| Alber Cabrera$/, "") : "";
+            const faq = faqAMarkdown(pagina.content);
+            const markdown = `# ${titulo}\n\n${htmlAMarkdown(cuerpoMatch[1])}\n\n${faq}\n`.replace(/\n{3,}/g, "\n\n");
+
+            const rutaMd = pagina.outputPath.replace(/index\.html$/, "index.md");
+            writeFileSync(rutaMd, markdown, "utf8");
+        }
+    });
 
     return {
         dir: {
