@@ -151,7 +151,7 @@
 
 
     <!-- NAVEGACIÓN -->
-<nav class="navbar">
+<nav class="navbar navbar--en-hero">
         <div class="nav-container">
             <a href="#" class="logo"><img src="/assets/img/logo-alber-blanco.png" alt="Alber Cabrera"></a>
             <div class="nav-menu">
@@ -226,106 +226,111 @@
                 </li>
             </ul>
         </div>
-    </section>
-
-    <section id="problema" class="section problema-section reveal">
-        <div class="container grid-two-cols">
-            <div class="problema-header">
-                <span class="section-label">LA REALIDAD</span>
-                <h2 class="section-title">El negocio para si tú paras.</h2>
-                <p class="section-subtitle">Y eso, hoy, tiene solución.</p>
-                <p class="problema-apunte">Si te reconoces en lo de al lado, no es falta de organización: es que el negocio se sostiene sobre trabajo manual, y eso tiene un techo.</p>
-            </div>
-            <div class="problema-body">
-                <p class="problema-text">
-                    Siempre lo mismo: horas perdidas en tareas que aburren, clientes que escriben cuando has cerrado y se van con otro, y un montón de cosas que solo salen adelante si estás tú encima.
-                </p>
-                <p class="problema-text highlight">
-                    <svg class="problema-aviso-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v5"></path><path d="M12 16h.01"></path></svg>
-                    No es que trabajes poco. Es que lo llevas todo a mano.
-                </p><ul class="sintomas">
-                    <li>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v6l4 2"></path></svg>
-                        Presupuestos y facturas hechos a mano
-                    </li>
-                    <li>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="m17 8 2 2 4-4"></path></svg>
-                        Consultas que llegan fuera de hora y se enfrían
-                    </li>
-                    <li>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7V5a1 1 0 0 1 1-1h4l2 2h8a1 1 0 0 1 1 1v2"></path><path d="M3 10h18l-1.5 9a1 1 0 0 1-1 1H5.5a1 1 0 0 1-1-1Z"></path></svg>
-                        Los datos, repartidos en cuatro sitios distintos
-                    </li>
-                    <li>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20V10"></path><path d="M18 20V4"></path><path d="M6 20v-4"></path></svg>
-                        Sin margen para crecer sin contratar
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECCIÓN 3 — LA SOLUCIÓN / QUÉ HAGO (4 bloques bajo IA) -->
-    <section id="soluciones" class="section soluciones-section reveal">
+    </section><!-- SECCIÓN 3 — QUÉ CONSTRUYO (las piezas) -->
+    <section id="soluciones" class="section soluciones-section section-bloque reveal">
         <div class="container">
             <div class="section-header">
-                <span class="section-label">QUÉ HAGO</span>
-                <h2 class="section-title">Tres frentes: captar, quitarte trabajo y saber cómo va</h2>
-                <p class="section-subtitle">Casi nadie necesita "IA". Necesita que no se le escape ningún cliente, que el trabajo repetitivo deje de comerle la mañana y poder ver cómo va el negocio. Abajo van ejemplos, no un catálogo: se empieza por donde más duela en tu caso.</p>
+                <span class="section-label">QUÉ CONSTRUYO</span>
+                <h2 class="section-title">Sistemas de IA montados sobre cómo trabajas tú</h2>
+                <p class="section-subtitle">No son productos de catálogo: son tres piezas que se combinan según lo que te haga falta. Casi siempre empieza por una.</p>
             </div>
 
-            <div class="services-grid">
+            
+            <div class="piezas-tabs" role="tablist" aria-label="Las tres piezas">
+                <button type="button" class="pieza-tab is-active" role="tab"
+                        id="tab-agentes" aria-controls="panel-agentes" aria-selected="true">
+                    <span class="pieza-tab-num" aria-hidden="true">01</span>
+                    <span class="pieza-tab-nombre">Agentes de IA</span>
+                </button>
+                <button type="button" class="pieza-tab" role="tab"
+                        id="tab-automatizaciones" aria-controls="panel-automatizaciones"
+                        aria-selected="false" tabindex="-1">
+                    <span class="pieza-tab-num" aria-hidden="true">02</span>
+                    <span class="pieza-tab-nombre">Automatizaciones</span>
+                </button>
+                <button type="button" class="pieza-tab" role="tab"
+                        id="tab-control" aria-controls="panel-control"
+                        aria-selected="false" tabindex="-1">
+                    <span class="pieza-tab-num" aria-hidden="true">03</span>
+                    <span class="pieza-tab-nombre">Sistemas de control</span>
+                </button>
+            </div>
 
-                <!-- PILAR 1 — Clientes que se pierden -->
-                <div class="service-card reveal">
-                    <div class="service-card-info">
-                        <span class="section-label">Captación y seguimiento</span>
-                        <h3 class="card-title">Que ninguna consulta se quede sin respuesta</h3>
-                        <p class="card-desc" style="margin-bottom: 18px;">Cada persona que pregunta y no recibe respuesta a tiempo ya está hablando con otro.</p>
-                        <ul class="card-bullets">
-                            <li>Se atiende al momento lo que entra por la web, WhatsApp o email, a cualquier hora.</li>
-                            <li>Cada consulta cae en el CRM ordenada, con su estado y a quién le toca.</li>
-                            <li>Al que no compró hoy se le hace seguimiento solo, sin que nadie tenga que acordarse.</li>
-                            <li>Y al que ya te compró se le vuelve a ofrecer lo que le encaja, en vez de dejarlo enfriar.</li>
+            <div class="piezas-filas">
+
+                <!-- PIEZA 1 — Agentes de IA (destacada) -->
+                <article class="pieza" id="panel-agentes" role="tabpanel"
+                         aria-labelledby="tab-agentes">
+                    <div class="pieza-texto">
+                        <div class="pieza-cabeza">
+                            <span class="pieza-num" aria-hidden="true">01</span>
+                            <span class="section-label">Agentes de IA</span>
+                        </div>
+                        <h3 class="pieza-titulo">Atienden, entienden y ejecutan</h3>
+                        <p class="pieza-desc">Un agente no es un chatbot con respuestas enlatadas. Trabaja con tus datos, entiende lo que le piden y hace la tarea entera.</p>
+                        <ul class="pieza-lista">
+                            <li>Atiende en web, WhatsApp o email con el contexto de tu negocio</li>
+                            <li>Clasifica lo que entra y lo manda a quien corresponda</li>
+                            <li>Responde con lo que pone en tus documentos, no con lo que se inventa</li>
+                            <li>Ejecuta el paso siguiente: crea la ficha, agenda, prepara el presupuesto</li>
                         </ul>
                     </div>
-                </div>
+                    <video class="pieza-video" width="800" height="480"
+                           autoplay muted loop playsinline preload="metadata" aria-label="Un cliente escribe por WhatsApp, la web o Instagram; el agente responde, crea la ficha en el CRM y confirma la cita.">
+                        <source media="(max-width: 768px)" src="/assets/video/pilar-agente-v.mp4" type="video/mp4">
+                        <source src="/assets/video/pilar-agente.mp4" type="video/mp4">
+                    </video>
+                </article>
 
-                <!-- PILAR 2 — Tiempo que se va -->
-                <div class="service-card reveal">
-                    <div class="service-card-info">
-                        <span class="section-label">Automatización de procesos</span>
-                        <h3 class="card-title">El trabajo que come el día, hecho solo</h3>
-                        <p class="card-desc" style="margin-bottom: 18px;">Hay trabajo que hay que hacer y no hace falta que lo haga una persona.</p>
-                        <ul class="card-bullets">
-                            <li>Documentos, facturas y correos se entienden y se archivan solos.</li>
-                            <li>Los informes y envíos que hoy ocupan a alguien cada mañana salen sin que nadie los haga.</li>
-                            <li>Tus herramientas se hablan entre ellas: se acabó copiar datos de un sitio a otro.</li>
-                            <li>Tu equipo pregunta y le contesta al momento, sacando la respuesta de vuestros propios documentos.</li>
+                <!-- PIEZA 2 — Automatizaciones -->
+                <article class="pieza" id="panel-automatizaciones" role="tabpanel"
+                         aria-labelledby="tab-automatizaciones" hidden>
+                    <div class="pieza-texto">
+                        <div class="pieza-cabeza">
+                            <span class="pieza-num" aria-hidden="true">02</span>
+                            <span class="section-label">Automatizaciones</span>
+                        </div>
+                        <h3 class="pieza-titulo">El trabajo que come el día, hecho solo</h3>
+                        <p class="pieza-desc">Hay trabajo que hay que hacer y no hace falta que lo haga una persona. Incluye conectar entre sí las herramientas que ya usas.</p>
+                        <ul class="pieza-lista">
+                            <li>Documentos, facturas y correos se archivan solos</li>
+                            <li>Los informes de cada mañana salen sin que nadie los haga</li>
+                            <li>Tus herramientas se hablan: se acabó copiar datos de un sitio a otro</li>
                         </ul>
                     </div>
-                </div>
+                    <video class="pieza-video" width="800" height="480"
+                           muted loop playsinline preload="metadata" aria-label="Llega una factura, se procesa sola y sale archivada en Drive con un aviso enviado por correo.">
+                        <source media="(max-width: 768px)" src="/assets/video/pilar-automatizacion-v.mp4" type="video/mp4">
+                        <source src="/assets/video/pilar-automatizacion.mp4" type="video/mp4">
+                    </video>
+                </article>
 
-                <!-- PILAR 3 — Control que no tienes -->
-                <div class="service-card reveal">
-                    <div class="service-card-info">
-                        <span class="section-label">Control operativo</span>
-                        <h3 class="card-title">Saber por dónde va todo sin preguntar a nadie</h3>
-                        <p class="card-desc" style="margin-bottom: 18px;">Decidir a ojo sale caro. Y casi siempre te enteras tarde.</p>
-                        <ul class="card-bullets">
-                            <li>Un panel con lo que importa: qué está entrando, qué se cierra y qué quedó pendiente.</li>
-                            <li>Los números del mes salen solos, sin que nadie los cuadre a mano.</li>
-                            <li>Y si la herramienta que te hace falta no existe, te la construyo a medida.</li>
+                <!-- PIEZA 3 — Sistemas de control -->
+                <article class="pieza" id="panel-control" role="tabpanel"
+                         aria-labelledby="tab-control" hidden>
+                    <div class="pieza-texto">
+                        <div class="pieza-cabeza">
+                            <span class="pieza-num" aria-hidden="true">03</span>
+                            <span class="section-label">Sistemas de control</span>
+                        </div>
+                        <h3 class="pieza-titulo">Saber cómo va sin preguntar a nadie</h3>
+                        <p class="pieza-desc">Decidir a ojo sale caro, y casi siempre te enteras tarde.</p>
+                        <ul class="pieza-lista">
+                            <li>Un panel con qué entra, qué se cierra y qué quedó pendiente</li>
+                            <li>Los números del mes, sin cuadrarlos a mano</li>
+                            <li>Y si la herramienta que necesitas no existe, se construye</li>
                         </ul>
                     </div>
-                </div>
+                    <video class="pieza-video" width="800" height="480"
+                           muted loop playsinline preload="metadata" aria-label="Un panel con llamadas, cierres, inversión y facturación del mes, con su gráfica por semanas y los últimos movimientos.">
+                        <source media="(max-width: 768px)" src="/assets/video/pilar-control-v.mp4" type="video/mp4">
+                        <source src="/assets/video/pilar-control.mp4" type="video/mp4">
+                    </video>
+                </article>
 
             </div>
         </div>
-    </section>
-
-    <!-- SECCIÓN 4 — POR DÓNDE SE EMPIEZA (cierre) -->
-    <section id="caminos" class="section caminos-section inverse reveal">
+    </section><!-- SECCIÓN 4 — POR DÓNDE SE EMPIEZA (cierre) --><section id="caminos" class="section caminos-section reveal">
         <div class="container">
             <div class="section-header centered">
                 <span class="section-label">CÓMO EMPEZAR</span>
@@ -340,10 +345,12 @@
                         <i class="camino-edge" aria-hidden="true"></i>
                         <div class="card-num">CAMINO A</div>
                         <h3 class="card-title">Ya sabes qué te hace falta</h3>
-                        <p class="card-desc" style="margin-bottom: 30px;">
+                        <p class="card-desc">
                             Si ya sabes lo que necesitas, vamos a ello: me lo cuentas y te digo qué hace falta para montarlo.
                         </p>
-                        <a href="#contacto" class="btn-primary-small">Cuéntame tu caso &rarr;</a>
+                        <div class="card-cta-row">
+                            <a href="#contacto" class="btn-primary-small">Cuéntame qué necesitas &rarr;</a>
+                        </div>
                     </div>
                     <!-- Camino B -->
                     <div class="glass-card camino-card camino-b reveal" data-tilt>
@@ -351,12 +358,11 @@
                         <i class="camino-edge" aria-hidden="true"></i>
                         <div class="card-num">CAMINO B</div>
                         <h3 class="card-title">Sabes que algo no va bien, pero no sabes el qué</h3>
-                        <p class="card-desc" style="margin-bottom: 30px;">
+                        <p class="card-desc">
                             Empezamos por averiguarlo. En el <strong>DAI360</strong> miro las cuatro áreas de tu negocio, cómo llegan tus clientes, cómo se cierran, cómo entregas y cómo lo llevas por dentro. Al terminar sabes qué te está frenando y qué merece la pena arreglar primero. El plan es tuyo, lo implemente yo o no.
-                        </p>
-                        <div class="card-cta-row">
-                            <a href="#contacto" class="btn-primary-small">Cuéntame tu caso &rarr;</a>
-                            <a href="/diagnostico-operativo/" class="btn-ghost-link">Ver cómo funciona el DAI360</a>
+                        </p><div class="card-cta-row">
+                            <a href="/diagnostico-operativo/" class="btn-primary-small">Ver el diagnóstico DAI360 &rarr;</a>
+                            <a href="#contacto" class="btn-ghost-link">O cuéntame tu caso</a>
                         </div>
                     </div>
                 </div>
@@ -367,7 +373,7 @@
     </section>
 
     <!-- SECCIÓN 5 — CÓMO TRABAJO (Metodología) -->
-    <section id="como-trabajo" class="section como-trabajo-section inverse reveal">
+    <section id="como-trabajo" class="section como-trabajo-section reveal">
         <div class="container">
             <div class="section-header">
                 <span class="section-label">METODOLOGÍA</span>
@@ -429,7 +435,7 @@
     </section>
 
     <!-- SECCIÓN 7 — FAQ -->
-    <section id="faq" class="section faq-section reveal">
+    <section id="faq" class="section faq-section section-bloque reveal">
         <div class="container">
             <div class="section-header centered">
                 <span class="section-label">PREGUNTAS FRECUENTES</span>
@@ -718,7 +724,7 @@
     </section>
 
     <!-- SECCIÓN 8 — CTA FINAL + FORMULARIO -->
-    <section id="contacto" class="section contacto-section reveal">
+    <section id="contacto" class="section contacto-section section-bloque reveal">
         <div class="container">
             <div class="section-header centered">
                 <span class="section-label">CONTACTO</span>
@@ -789,9 +795,10 @@
                     <div class="footer-links-col">
                         <h4 class="footer-links-title">Servicios</h4>
                         <ul class="footer-links-list">
-                            <li><a href="#soluciones">Clientes que se pierden</a></li>
-                            <li><a href="#soluciones">Tiempo que se va</a></li>
-                            <li><a href="#soluciones">Control que no tienes</a></li>                        </ul>
+                            <li><a href="#soluciones">Agentes de IA</a></li>
+                            <li><a href="#soluciones">Automatizaciones</a></li>
+                            <li><a href="#soluciones">Sistemas de control</a></li><li><a href="#caso-real">Casos reales</a></li>
+                        </ul>
                     </div>
                     <div class="footer-links-col">
                         <h4 class="footer-links-title">El Método</h4>

@@ -5,8 +5,10 @@
 
 /* VARIABLES GLOBALES — color y tipografía en design-system/tokens.css. Aquí solo lo que no vive allí. */
 :root {
-    /* Altura Navbar */
-    --nav-height: 80px;
+    /* Altura Navbar. 64px es la altura real de .navbar en nav.css: antes
+       eran 80 porque la barra flotaba a 24px del borde y habia que
+       contar ese aire. Ahora va pegada arriba. */
+    --nav-height: 64px;
 
     /* tokens.css no trae --glass-shadow: sombra de profundidad pura, no color de marca */
     --glass-shadow: rgba(15, 31, 27, 0.06);
@@ -46,14 +48,24 @@ html {
 }
 
 /* HERO SECTION (CABECERA) */
+/* El hero es un BLOQUE con margen, no una banda a sangre: se despega de
+   los bordes y deja ver el fondo de pagina alrededor, como decagon.ai.
+   Asi el oscuro se lee como una pieza dentro de la web y no como el
+   fondo de la web. */
 .hero-section {
-    min-height: 100vh;
-    min-height: 100dvh;
+    /* Descuenta su margen (arriba y abajo) para entrar en pantalla. */
+    min-height: calc(100vh - var(--hero-gap) * 2);
+    min-height: calc(100dvh - var(--hero-gap) * 2);
     position: relative;
     display: flex;
     align-items: center;
-    padding-top: var(--nav-height);
-    background-color: var(--night-900); /* Unificado con el color de fondo general del hero */
+    /* El hero empieza arriba del todo: la barra va DENTRO de el, encima
+       de su fondo oscuro, no en una banda aparte por encima. */
+    margin: var(--hero-gap);
+    /* Deja sitio para la barra que se le superpone. */
+    padding-top: calc(var(--nav-height) + var(--hero-gap));
+    background-color: var(--night-900);
+    border-radius: var(--radius-xl);
     overflow: hidden;
 }
 
@@ -183,9 +195,9 @@ html {
 }
 
 .section-title {
-    font-family: var(--font-display);
+    font-family: var(--font-heading); /* sans: el serif se reserva a >3rem (hero, cifras gigantes) */
     font-size: 2.5rem;
-    font-weight: 400;
+    font-weight: 600;
     letter-spacing: -0.02em;
     margin-bottom: 20px;
     line-height: 1.2;
@@ -198,40 +210,37 @@ html {
     font-weight: 300;
 }
 
+/* Sin backdrop-filter: el desenfoque de 16px sobre fondo claro creaba un
+   halo difuso alrededor de la tarjeta (el "glow" que se veia en camino B).
+   Superficie solida y elevada (mas clara que su seccion) + borde de 1px:
+   el limite lo marca el borde, no una niebla. */
 .glass-card {
-    background-color: var(--glass-bg);
-    border: 1px solid var(--glass-border);
+    background-color: var(--bg-raised);
+    border: 1px solid var(--line);
     border-radius: var(--radius-sm);
     padding: 40px 32px;
-    box-shadow: 0 20px 40px var(--glass-shadow);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    transition: all 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
-    transform-style: preserve-3d;
-    transform: perspective(1000px);
+    /* Sombra corta, no difusa: una sombra de 40px de radio hace que la
+       tarjeta flote y emborrona el borde. El borde de 1px es quien
+       marca el limite (regla de awesomic.io: hairline sobre sombra). */
+    box-shadow: 0 1px 3px var(--glass-shadow);
+    /* Transicion solo de lo que cambia en hover. Con `all` entraban
+       tambien color y sombra en cada repintado.
+       Fuera perspective/preserve-3d: eran del tilt 3D que ya no existe,
+       y el transform base anulaba el translateY del hover. */
+    transition: transform var(--motion-base) var(--ease-standard),
+                border-color var(--motion-base) var(--ease-standard),
+                box-shadow var(--motion-base) var(--ease-standard);
     position: relative;
     overflow: hidden;
 }
 
-/* Efecto Spotlight (Resplandor que sigue al ratón) */
-.glass-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: inherit;
-    background: radial-gradient(350px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), var(--cobalt-tint), transparent 80%);
-    pointer-events: none;
-    z-index: 1;
-    opacity: 0;
-    transition: opacity 360ms cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-.glass-card:hover::before {
-    opacity: 1;
-}
+/* El resplandor que seguia al raton dentro de la tarjeta esta ELIMINADO.
+   Estaba pensado para la seccion oscura: sobre fondo claro un foco que se
+   mueve por dentro se lee como una mancha sucia, no como un efecto. El
+   hover ya lo marcan el borde y la elevacion, que es lo que hacen las
+   referencias (awesomic, steep, getharvest: ninguna tiene spotlight).
+   El JS que escribe --mouse-x/--mouse-y sigue en index.js pero ya no
+   pinta nada; se puede quitar cuando se toque ese archivo. */
 
 /* Asegurar que el contenido de la tarjeta esté por encima del resplandor */
 .glass-card > * {
@@ -241,12 +250,12 @@ html {
 
 .glass-card:hover {
     border-color: var(--line-strong);
-    box-shadow: 0 30px 60px var(--glass-shadow);
+    box-shadow: 0 4px 12px var(--glass-shadow);
     transform: translateY(-5px);
 }
 
 .card-num {
-    font-family: var(--font-display);
+    font-family: var(--font-heading); /* sans: el serif se reserva a >3rem (hero, cifras gigantes) */
     font-size: 1.2rem;
     font-weight: 400;
     color: var(--ink);
@@ -362,7 +371,10 @@ html {
 /* La destacada ya contrasta por color (verde oscuro sobre arena): no
    necesita halo dorado, que era lo que hacía el borrón alrededor. */
 .caso-step-highlight {
-    background: linear-gradient(155deg, var(--night-800), var(--night-900));
+    /* Verde medio plano, no degradado hasta --night-900: sobre el fondo
+       arena el extremo oscuro daba el mismo salto duro que la caja del
+       problema. Plano contrasta igual y no hace agujero. */
+    background: var(--night-800);
     border-color: transparent;
     box-shadow: none;
     position: relative;
@@ -374,7 +386,7 @@ html {
     position: absolute;
     top: 0; left: 0; right: 0;
     height: 2px;
-    background: linear-gradient(90deg, var(--cobalt-300), var(--cobalt-400), var(--cobalt-300));
+    background: var(--cobalt-400);
 }
 
 .caso-step-icon {
@@ -540,106 +552,230 @@ html {
     }
 }
 
-/* ---- GRID DE SERVICIOS EN HOME ---- */
-.services-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
-    margin-top: 48px; /* Sistema Bosque Inteligente: space-7 */
+/* =============================================================
+   QUÉ CONSTRUYO — filas alternas
+   =============================================================
+   En columnas no funcionaba: el vídeo es horizontal (800x480) y en una
+   columna de 476px el flujo salía diminuto, además de dejar las tres
+   tarjetas a alturas distintas porque los textos no miden lo mismo.
+
+   Ahora cada pieza ocupa el ancho completo y se parte en dos: texto y
+   vídeo. El vídeo gana ~560px reales y el texto respira. Las filas pares
+   invierten el orden para que la vista no caiga siempre en el mismo lado. */
+.piezas-filas {
+    /* Un unico ancho de video para las tres filas. Todo lo demas (el texto)
+       se adapta a lo que sobra: asi las tres piezas se leen como la misma
+       pieza repetida, que es lo que son. */
+    --pieza-video-w: 560px;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    /* Sin margen: el panel arranca justo donde acaba el rail, para que
+       pestañas y contenido se lean como un unico bloque. */
+    margin-top: 0;
     width: 100%;
 }
 
-/* Las tres tarjetas de pilar llevan filo dorado permanente arriba, igual
-   que .timeline-item: es el acento de marca lo que las separa del fondo
-   arena, no solo el borde gris. */
-.service-card {
+/* Esquinas superiores rectas y sin filo dorado: ese remate ya lo pone la
+   pestaña activa. Con radio arriba quedaba una muesca entre ambos. */
+.pieza[role="tabpanel"] {
+    background: var(--bg-raised);
+    border-top: 1px solid var(--line);
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+}
+
+/* =============================================================
+   PESTAÑAS DE LAS PIEZAS
+   =============================================================
+   Las tres piezas son alternativas, no pasos: se comparan antes de
+   leerse. La pestaña activa se marca con el filo dorado inferior —
+   es un estado activo, que es donde el sistema permite el acento. */
+/* Cada pestaña es una CAJA, no una palabra suelta: con solo un filo
+   inferior no se leian como control pulsable. La inactiva lleva su
+   superficie hundida y la activa sube al color de la tarjeta, de modo
+   que pestaña y panel se ven como una sola pieza continua. */
+.piezas-tabs {
+    display: flex;
+    gap: var(--space-1);
+    margin-top: var(--space-6);
+    padding: var(--space-1) var(--space-1) 0;
+    background: var(--bg-input);
+    border: 1px solid var(--line);
+    border-bottom: none;
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+    overflow-x: auto;              /* en movil se desliza, no se apila */
+    scrollbar-width: none;
+}
+.piezas-tabs::-webkit-scrollbar { display: none; }
+
+.pieza-tab {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-2);
+    flex-shrink: 0;
+    padding: var(--space-3) var(--space-5);
+    background: transparent;
+    border: 1px solid transparent;
+    border-bottom: none;
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--ink-mid);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color var(--motion-base) var(--ease-standard),
+                color var(--motion-base) var(--ease-standard);
+}
+
+.pieza-tab:hover {
+    color: var(--ink);
+    background: color-mix(in srgb, var(--bg-raised) 55%, transparent);
+}
+
+/* La activa toma el color del panel y pierde el borde inferior: parece
+   que la pestaña y la tarjeta de abajo son la misma superficie. */
+.pieza-tab.is-active {
+    color: var(--ink);
+    font-weight: 600;
+    background: var(--bg-raised);
+    border-color: var(--line);
+    box-shadow: 0 -2px 0 0 var(--cobalt-600) inset;
+}
+
+.pieza-tab-num {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--ink-decor);
+    font-variant-numeric: tabular-nums;
+}
+.pieza-tab.is-active .pieza-tab-num { color: var(--cobalt-600); }
+
+/* Al abrirse un panel: sin desplazamiento, solo aparecer. Un panel que
+   entra deslizando mueve el vídeo y se nota como salto. */
+@media (prefers-reduced-motion: no-preference) {
+    .pieza[role="tabpanel"] { animation: piezaFade 260ms var(--ease-standard); }
+}
+@keyframes piezaFade {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Filo dorado arriba, igual que .timeline-item: es el acento de marca
+   lo que separa la pieza del fondo arena, no solo el borde gris. */
+.pieza {
+    display: grid;
+    /* Columnas fijas en px, no en fr: con fr el ancho del video dependia
+       de la columna que le tocara, y en las filas pares (donde va a la
+       izquierda) salia 222px mas estrecho que en las impares. Ahora las
+       tres piezas dan EXACTAMENTE el mismo tamano de video. */
+    grid-template-columns: 1fr var(--pieza-video-w);
+    align-items: center;
+    gap: var(--space-7);
     background: var(--bg);
     border: 1px solid var(--line);
-    border-top: 3px solid var(--cobalt-400);
-    border-radius: var(--radius-md); /* Sistema Bosque Inteligente: radius-md, cards */
-    padding: 32px 30px 36px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    transition: all 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
-    position: relative;
+    /* Borde superior neutro en reposo: el dorado entra solo en hover
+       (estado activo), no como decoración permanente de cada tarjeta. */
+    border-top: 3px solid var(--line-strong);
+    border-radius: var(--radius-md);
+    padding: var(--space-6) var(--space-7);
     overflow: hidden;
     box-shadow: 0 4px 16px var(--glass-shadow);
+    transition: border-color var(--motion-base) var(--ease-standard),
+                box-shadow var(--motion-base) var(--ease-standard);
 }
 
-.service-card:hover {
+/* Sin translateY en hover: la pieza ocupa el ancho entero y desplazar un
+   bloque de este tamaño se nota como un salto, no como un matiz. */
+.pieza:hover {
     border-color: var(--line-strong);
     border-top-color: var(--cobalt-500);
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(15, 31, 27, 0.12);
+    box-shadow: var(--shadow-subtle);
 }
 
-.service-card-info {
+/* El zigzag (video a la izquierda en las filas pares) desaparece con las
+   pestañas: solo hay un panel visible, asi que alternar el lado hacia
+   saltar el video de sitio al cambiar de pestaña. Todas las piezas
+   mantienen ahora la misma composicion: texto izquierda, video derecha. */
+
+/* [hidden] tiene que ganar a `.pieza { display: grid }`: un display
+   explicito anula el display:none que el navegador da a [hidden], y los
+   tres paneles se veian a la vez. */
+.pieza[hidden] { display: none; }
+
+/* Con pestañas, la cabeza del panel repite lo que ya dice la pestaña
+   activa ("01 · Agentes de IA"): se oculta. El marcado se queda en la
+   plantilla para no perderlo si algun dia se vuelve a filas apiladas. */
+.pieza[role="tabpanel"] .pieza-cabeza { display: none; }
+
+/* El número y la etiqueta comparten línea: la etiqueta sola quedaba
+   flotando y el número solo no dice de qué va la pieza. */
+.pieza-cabeza {
     display: flex;
-    flex-direction: column;
-    gap: 12px;
+    align-items: baseline;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
 }
 
-/* La etiqueta es lo que dice de qué va el pilar: se le da rango con un
-   filo dorado delante en vez de dejarla como texto suelto. Mantiene
-   --cobalt-550 porque es el único dorado que cumple AA sobre --bg-alt
-   (5.50); los tonos más claros lo suspenden en texto pequeño. */
-.service-card .section-label {
+/* Marca de agua tipográfica, como .timeline-number pero contenida:
+   aquí acompaña a la etiqueta en vez de ser el protagonista. */
+.pieza-num {
+    font-family: var(--font-heading); /* sans: el serif se reserva a >3rem (hero, cifras gigantes) */
+    font-size: 1.6rem;
+    line-height: 1;
+    color: var(--cobalt-400);
+    flex-shrink: 0;
+}
+
+/* --cobalt-550 es el único dorado que cumple AA sobre --bg-alt (5.50);
+   los tonos más claros lo suspenden en texto pequeño. */
+.pieza .section-label {
     font-size: 0.72rem;
     letter-spacing: 0.18em;
     color: var(--cobalt-550);
     margin-bottom: 0;
     text-transform: uppercase;
     font-weight: 700;
-    display: flex;
-    align-items: center;
-    gap: 10px;
 }
 
-.service-card .section-label::before {
-    content: "";
-    width: 22px;
-    height: 2px;
-    background: var(--cobalt-500);
-    flex-shrink: 0;
-}
-
-.service-card .card-title {
-    font-family: var(--font-display);
-    font-size: 1.45rem;
-    font-weight: 400;
+.pieza-titulo {
+    font-family: var(--font-heading); /* sans: el serif se reserva a >3rem (hero, cifras gigantes) */
+    font-size: 1.65rem;
+    font-weight: 600;
     color: var(--ink);
-    margin-top: 4px;
     line-height: 1.2;
+    margin: 0 0 var(--space-3);
 }
 
-.service-card .card-desc {
-    font-size: 0.88rem;
+.pieza-desc {
+    font-size: 0.95rem;
     color: var(--ink-soft);
-    line-height: 1.5;
-    margin-bottom: 0;
+    line-height: 1.6;
+    margin: 0;
+    max-width: 42ch;
 }
 
-/* Los bullets salían con el punto gris del navegador, que es lo que más
-   abarataba la tarjeta. Marcador dorado propio y texto con más aire. */
-.service-card .card-bullets {
+.pieza-lista {
     list-style: none;
-    padding: 0;
-    margin: 0;
+    padding: var(--space-4) 0 0;
+    margin: var(--space-4) 0 0;
+    border-top: 1px solid var(--line);
     display: flex;
     flex-direction: column;
-    gap: 11px;
+    gap: var(--space-3);
 }
 
-.service-card .card-bullets li {
+.pieza-lista li {
     position: relative;
-    padding-left: 20px;
+    padding-left: var(--space-5);
     font-size: 0.93rem;
     line-height: 1.55;
     color: var(--ink-soft);
 }
 
-.service-card .card-bullets li::before {
+.pieza-lista li::before {
     content: "";
     position: absolute;
     left: 0;
@@ -650,12 +786,93 @@ html {
     background: var(--cobalt-500);
 }
 
-/* Separador entre la entradilla y la lista: ordena la lectura sin
-   necesidad de meter más texto ni bordes duros. */
-.service-card .card-bullets {
-    margin-top: 4px;
-    padding-top: 18px;
-    border-top: 1px solid var(--line);
+/* El vídeo va enmarcado, no a sangre: aquí es una pieza de igual rango que
+   el texto, no el remate del bloque. El fondo --night-900 pide un borde
+   propio para no leerse como un agujero en la tarjeta clara.
+
+   aspect-ratio + los width/height del HTML reservan el hueco ANTES de que
+   el archivo cargue: sin eso la fila da un salto al terminar la descarga. */
+.pieza-video {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 800 / 480;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    /* --night-800, no --night-900: es el color que se ve mientras carga y
+       en las bandas si el video no llena el marco exacto. El verde casi
+       negro daba un rectangulo duro sobre la tarjeta clara.
+       Nota: los videos estan renderizados con fondo #0f1f1b POR DENTRO
+       (src/videos/*/index.html), asi que esto suaviza el marco pero no
+       aclara la animacion: eso pide volver a renderizar los seis. */
+    background: var(--night-800);
+    box-shadow: var(--shadow-subtle);
+}
+
+/* =============================================================
+   DÓNDE ACTÚAN — tres áreas sin tarjeta
+   =============================================================
+   Deliberadamente SIN caja: el bento de arriba ya gasta el recurso
+   "tarjeta", y repetirlo haría que la sección se leyera como más de
+   lo mismo. Aquí agrupa una línea superior y el espacio. */
+/* Fondo claro, no arena: "QUÉ CONSTRUYO" justo encima ya es --bg-alt y
+   dos secciones arena seguidas se leerían como un solo bloque. */
+.donde-section {
+    background-color: var(--bg);
+}
+
+.areas-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-7);
+    margin-top: var(--space-7);
+}
+
+.area {
+    border-top: 2px solid var(--line-strong);
+    padding-top: var(--space-5);
+}
+
+.area-titulo {
+    font-family: var(--font-heading); /* sans: el serif se reserva a >3rem (hero, cifras gigantes) */
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0 0 var(--space-4);
+}
+
+.area-problema,
+.area-resultado {
+    font-size: 0.93rem;
+    line-height: 1.6;
+    margin: 0 0 var(--space-3);
+}
+
+.area-problema {
+    color: var(--ink-mid);
+}
+
+.area-resultado {
+    color: var(--ink-soft);
+    margin-bottom: 0;
+}
+
+/* "Hoy" y "Después" en versalita mono: separan los dos estados sin
+   gastar un icono ni un color de fondo. El verde solo aparece en el
+   segundo, que es el único sitio donde significa algo. */
+.area-etq {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--ink-mid);
+    margin-bottom: var(--space-1);
+}
+
+.area-etq-ok {
+    color: var(--verde);
 }
 
 /* =============================================================
@@ -696,7 +913,11 @@ html {
     align-items: center;
     text-align: center;
     padding: var(--space-6) var(--space-5);
-    background: var(--bg-alt);
+    /* La tarjeta va MAS CLARA que el fondo de su seccion, no mas oscura:
+       asi se eleva hacia la luz en vez de hundirse. Es lo que hacen
+       awesomic (paper #f4f4f5 -> snow #fff), steep y getharvest. Sobre
+       --bg (#F3F5F2) el arena --bg-alt hundia la tarjeta. */
+    background: var(--bg-raised);
     border: 1px solid var(--line);
     border-radius: var(--radius-lg);
 }
@@ -709,14 +930,14 @@ html {
     height: 48px;
     margin-bottom: var(--space-5);
     border-radius: var(--radius-md);
-    /* Cajita VERDE con el icono DORADO dentro, los dos colores de marca.
-       Antes la cajita era dorado al 14% sobre la tarjeta arena: dos tonos
-       casi iguales, y el icono no destacaba. Sobre el verde el --cobalt-400
-       (#C8A85E) si se lee (7.48:1), que es justo para lo que el sistema lo
-       define: "foco en oscuro". Y la cajita destaca sobre la tarjeta (13:1). */
-    color: var(--cobalt-400);
-    background: var(--night-900);
-    border: 1px solid var(--night-900);
+    /* Icono dorado sobre superficie dorada tenue, no cuadrado verde casi
+       negro: sobre la tarjeta blanca ese bloque oscuro daba el mismo salto
+       duro que la caja del problema. Ahora la tarjeta es blanca (antes
+       arena), asi que el tinte dorado ya separa la cajita sin oscurecerla.
+       --cobalt-600 (#6E5628) sobre el tinte cumple AA de sobra. */
+    color: var(--cobalt-600);
+    background: var(--cobalt-tint);
+    border: 1px solid var(--cobalt-border);
 }
 .beneficio-icono svg { width: 24px; height: 24px; }
 
@@ -729,10 +950,10 @@ html {
 }
 
 .beneficio-titulo {
-    font-family: var(--font-display);
+    font-family: var(--font-heading); /* sans: el serif se reserva a >3rem (hero, cifras gigantes) */
     /* 1.35: por debajo la serif se lee floja y no gana al icono. */
     font-size: 1.35rem;
-    font-weight: 400;
+    font-weight: 600;
     letter-spacing: -0.01em;
     line-height: 1.25;
     color: var(--ink);
@@ -773,12 +994,18 @@ html {
 }
 
 /* La tarjeta es .timeline-item entero: superficie propia con contraste
-   real contra el fondo oscuro de la sección, no un contenedor plano
-   que se confunde con el fondo. Borde superior de acento en hover. */
+   real contra el fondo de la sección, no un contenedor plano que se
+   confunde con él. Borde superior de acento en hover.
+
+   Usa tokens de superficie (--bg, --line), no los --night-*: así la
+   pieza sirve igual en sección clara y dentro de un bloque .inverse,
+   que es lo que hace el sistema. */
 .timeline-item {
-    background-color: var(--night-800);
-    border: 1px solid var(--night-600);
-    border-top: 3px solid var(--cobalt-400);
+    background-color: var(--bg);
+    border: 1px solid var(--line);
+    /* Neutro en reposo, dorado en hover: doce bordes dorados a la vez
+       leían como adorno, no como jerarquía. */
+    border-top: 3px solid var(--line-strong);
     border-radius: var(--radius-md); /* Sistema Bosque Inteligente: radius-md, cards */
     padding: 8px 32px 32px;
     overflow: hidden;
@@ -799,7 +1026,9 @@ html {
     font-style: italic;
     font-size: 5rem;
     line-height: 1;
-    color: var(--cobalt-400);
+    /* --cobalt-600 es el dorado que cumple AA sobre fondo claro;
+       --cobalt-400 solo se lee bien sobre oscuro. */
+    color: var(--cobalt-600);
     opacity: 0.5;
     margin: 0 0 -12px -4px;
     transition: opacity 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -814,16 +1043,16 @@ html {
 }
 
 .timeline-title {
-    font-family: var(--font-display);
+    font-family: var(--font-heading); /* sans: el serif se reserva a >3rem (hero, cifras gigantes) */
     font-size: 1.35rem;
-    font-weight: 400;
+    font-weight: 600;
     margin-bottom: 14px;
-    color: var(--on-night);
+    color: var(--ink);
 }
 
 .timeline-desc {
     font-size: 0.95rem;
-    color: var(--on-night-body);
+    color: var(--ink-soft);
     font-weight: 300;
     margin-bottom: 0;
 }
@@ -943,7 +1172,10 @@ html {
 
 /* Eliminada capa de división overlay para evitar bordes cortados */
 
-/* Brillo nebuloso cobalto animado detrás de la foto gigante */
+/* Brillo nebuloso neutro animado detrás de la foto gigante.
+   Era dorado: sumaba una mancha de acento a pantalla completa que
+   restaba fuerza al CTA. En neutro cumple lo mismo (separar la foto
+   del fondo) sin gastar el color de marca. */
 .portrait-glow {
     position: absolute;
     top: 45%;
@@ -951,7 +1183,7 @@ html {
     transform: translate(-50%, -50%);
     width: 500px;
     height: 500px;
-    background: radial-gradient(circle, var(--cobalt-glow), transparent 70%);
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.10), transparent 70%);
     pointer-events: none;
     z-index: -1;
     filter: blur(35px);
@@ -1046,7 +1278,9 @@ html {
     background: transparent; /* Transparente por defecto para dejar ver el haz de luz siempre */
 }
 
-/* El haz de luz cobalto giratorio súper lento y sutil (estilo minimalista) activo por defecto */
+/* El haz de luz giratorio súper lento y sutil, activo por defecto.
+   Neutro, no dorado: el formulario ya tiene su CTA en dorado y el haz
+   competía con él desde el propio borde del contenedor. */
 .glass-form-container::before {
     content: '';
     position: absolute;
@@ -1058,7 +1292,7 @@ html {
         from 0deg,
         transparent 0deg,
         transparent 160deg,
-        var(--cobalt-border) 270deg,
+        var(--line-strong) 270deg,
         transparent 360deg
     );
     animation: rotateBorderBeam 12s linear infinite; /* Animación ultra lenta (12 segundos) */
@@ -1383,9 +1617,20 @@ html {
     .hero-title {
         font-size: 3.6rem; /* Instrument Serif más estrecho que Inter: recalibrado junto al clamp de arriba */
     }
-    .services-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 24px;
+    /* 560px fijos no caben aquí: el vídeo baja a 440 y el texto se queda
+       con el resto. Sigue siendo el MISMO ancho en las tres filas. */
+    .piezas-filas {
+        --pieza-video-w: 440px;
+    }
+    .pieza {
+        gap: var(--space-6);
+        padding: var(--space-6);
+    }
+    .pieza-titulo {
+        font-size: 1.5rem;
+    }
+    .areas-grid {
+        gap: var(--space-6);
     }
     .grid-two-cols {
         grid-template-columns: 1fr;
@@ -1400,13 +1645,59 @@ html {
 }
 
 @media (max-width: 768px) {
-    .services-grid {
-        grid-template-columns: 1fr;
+    /* Una sola columna. El vídeo va SIEMPRE primero, también en las filas
+       pares: al apilar, el zigzag deja de tener sentido y lo que importa es
+       que la imagen entre antes que el texto.
+
+       El vídeo se sale del padding a ancho completo: a 360px de pantalla,
+       restarle 44px de márgenes dejaba su texto interno por debajo de lo
+       legible. */
+    .piezas-filas {
         gap: 20px;
     }
-    .service-card {
-        min-height: auto;
+    .pieza {
+        grid-template-columns: 1fr;
+        gap: var(--space-5);
         padding: 28px 22px;
+    }
+    .pieza-texto,
+    .pieza:nth-child(even) .pieza-texto { order: 2; }
+    .pieza-video,
+    .pieza:nth-child(even) .pieza-video { order: 1; }
+    .pieza-titulo {
+        font-size: 1.35rem;
+    }
+    /* En móvil el texto se aprieta: la sección entera se iba a 3,6 pantallas
+       de scroll. La entradilla es lo primero que sobra cuando ya hay un
+       vídeo que enseña lo mismo, y la lista pierde la 4ª viñeta en la
+       pieza que la tiene. */
+    .pieza-desc {
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+    .pieza-lista {
+        padding-top: var(--space-3);
+        margin-top: var(--space-3);
+        gap: var(--space-2);
+    }
+    .pieza-lista li {
+        font-size: 0.88rem;
+        line-height: 1.45;
+    }
+    /* El <source> de móvil sirve la versión 4:3 (600x450). En 3:4 el vídeo
+       solo ocupaba 467px de alto — media pantalla — y la sección entera se
+       iba a 3,6 pantallas de scroll. */
+    .pieza-video {
+        width: calc(100% + 44px);
+        margin: 0 -22px;
+        aspect-ratio: 600 / 450;
+        border-left: none;
+        border-right: none;
+        border-radius: 0;
+    }
+    .areas-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-6);
     }
     .hero-title {
         font-size: 2.8rem; /* Instrument Serif más estrecho que Inter: recalibrado junto al clamp de arriba */
@@ -1488,6 +1779,23 @@ html {
 .timeline-item:nth-child(1) { transition-delay: 0.1s; }
 .timeline-item:nth-child(2) { transition-delay: 0.2s; }
 .timeline-item:nth-child(3) { transition-delay: 0.3s; }
+
+/* Las dos tarjetas, misma altura: son alternativas comparables, y con
+   align-items:center (el de .grid-two-cols, que "Sobre mí" sí necesita)
+   quedaban descolgadas una respecto a otra porque B tiene el doble de
+   texto. Aquí se estiran y los CTA se alinean abajo. */
+.caminos-section .grid-two-cols {
+    align-items: stretch;
+}
+.caminos-section .camino-card {
+    display: flex;
+    flex-direction: column;
+}
+/* Empuja la fila de botones al fondo de la tarjeta. */
+.caminos-section .card-cta-row {
+    margin-top: auto;
+    padding-top: var(--space-6);
+}
 
 .caminos-section .grid-two-cols > div:nth-child(1) { transition-delay: 0.1s; }
 .caminos-section .grid-two-cols > div:nth-child(2) { transition-delay: 0.25s; }
@@ -1636,9 +1944,15 @@ html {
 /* =============================================================
    HIGHLIGHT CAMINO B (DAI360) - ACCENTUACIÓN DE LA ESTRUCTURA
    ============================================================= */
+/* La B se distingue por el badge, el filo superior y un peso de sombra
+   mayor — no por un borde dorado translucido en las cuatro caras: sobre
+   fondo claro --cobalt-border hacia un halo difuso. Sin !important, que
+   ademas impedia que el hover cambiara el borde. */
 .caminos-section .grid-two-cols > div:last-child {
-    border-color: var(--cobalt-border) !important;
-    box-shadow: 0 4px 16px var(--glass-shadow);
+    border-color: var(--line-strong);
+    /* Sombra algo mas marcada que la de A: es la opcion recomendada, y
+       elevarla un punto la senala sin gritar. */
+    box-shadow: 0 4px 14px -4px var(--glass-shadow);
     position: relative;
 }
 
@@ -1655,11 +1969,10 @@ html {
     font-size: 0.65rem;
     font-weight: 700;
     letter-spacing: 0.25em;
-    background: linear-gradient(135deg, var(--cobalt-500) 0%, var(--cobalt-700) 100%);
+    background: var(--cobalt-600);
     color: #ffffff;
     padding: 4px 14px;
     border-radius: var(--radius-pill);
-    box-shadow: 0 4px 15px var(--cobalt-glow);
     z-index: 5;
     opacity: 1;
     pointer-events: none;
@@ -1709,8 +2022,9 @@ html {
 }
 
 .camino-b .camino-edge {
+    /* El dorado se queda: marca cuál de los dos caminos se recomienda.
+       Fuera el resplandor, que era adorno sobre el adorno. */
     background: linear-gradient(90deg, transparent, var(--cobalt-600), transparent);
-    box-shadow: 0 0 14px var(--cobalt-glow);
 }
 
 /* Conector "o" entre las dos tarjetas (una u otra) */
@@ -1724,7 +2038,7 @@ html {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: var(--font-display);
+    font-family: var(--font-heading); /* sans: el serif se reserva a >3rem (hero, cifras gigantes) */
     font-weight: 400;
     font-style: italic;
     font-size: 1rem;
@@ -1732,7 +2046,7 @@ html {
     background: var(--bg);
     border: 1px solid var(--line);
     border-radius: 50%;
-    box-shadow: 0 0 0 8px var(--bg-alt), 0 0 30px var(--cobalt-tint);
+    box-shadow: 0 0 0 8px var(--bg-alt);
     z-index: 6;
     pointer-events: none;
 }
@@ -1751,12 +2065,15 @@ html {
     flex-direction: column;
     gap: var(--space-5);
     padding: var(--space-7);
-    background: var(--night-900);
-    /* Sin borde: --night-600 es verde CLARO (#5E7F6D) y sobre el fondo
-       marfil le hacia un halo que apagaba la caja entera a gris. La
-       sombra la despega del fondo mejor que una linea. */
+    /* --night-800 (#274C3B), no --night-900 (#0F1F1B): sobre el marfil
+       claro el verde casi negro daba un salto de contraste muy duro,
+       la caja se leia como un agujero en la pagina. El verde medio
+       sigue separando el bloque sin el golpe.
+       Sin borde: --night-600 es verde CLARO (#5E7F6D) y sobre el fondo
+       marfil le hacia un halo que apagaba la caja entera a gris. */
+    background: var(--night-800);
     border-radius: var(--radius-xl);
-    box-shadow: 0 24px 60px -24px rgba(15, 31, 27, 0.45);
+    box-shadow: 0 12px 32px -16px rgba(15, 31, 27, 0.32);
 }
 
 .problema-text {
@@ -1788,7 +2105,9 @@ html {
     flex-shrink: 0;
     width: 20px;
     height: 20px;
-    color: var(--cobalt-400);
+    /* --cobalt-300 sobre --night-800: 5.13. El 400 se queda en 4.22,
+       suficiente para un icono (1.4.11 pide 3) pero justo. */
+    color: var(--cobalt-300);
 }
 
 /* Los cuatro sintomas, en dos columnas dentro de la caja. */
@@ -1813,7 +2132,7 @@ html {
     width: 17px;
     height: 17px;
     margin-top: 1px;
-    color: var(--cobalt-400);
+    color: var(--cobalt-300);
 }
 
 @media (max-width: 700px) {
@@ -1854,6 +2173,23 @@ html {
     max-width: 42ch;
 }
 
+/* =============================================================
+   SECCIONES EN BLOQUE
+   =============================================================
+   Mismo tratamiento que el hero: la seccion con fondo propio se
+   despega de los bordes y se redondea, de modo que se lee como una
+   pieza dentro de la pagina y no como una banda a sangre. Es el
+   patron de decagon.ai. Las secciones sin fondo propio siguen a
+   sangre: si TODAS fueran bloques, el recurso dejaria de destacar. */
+.section-bloque {
+    margin-left: var(--hero-gap);
+    margin-right: var(--hero-gap);
+    border-radius: var(--radius-xl);
+    /* El contenido interno mantiene su ancho: el bloque se estrecha por
+       fuera, no empuja el texto hacia dentro. */
+    overflow: hidden;
+}
+
 .soluciones-section {
     background: var(--bg-alt);
 }
@@ -1871,13 +2207,28 @@ html {
     line-height: 1.7;
 }
 
+/* Mismo rango tipográfico que "QUÉ CONSTRUYO": son secciones hermanas
+   (las piezas y dónde se aplican), así que comparten escala. */
+.donde-section .section-title {
+    font-size: 2.7rem;
+    letter-spacing: -0.025em;
+    max-width: 22ch;
+}
+
+.donde-section .section-subtitle {
+    max-width: 62ch;
+    line-height: 1.7;
+}
+
 .caminos-section:not(.inverse) {
     background-color: var(--bg);
 }
 
 .contacto-section {
     background-color: var(--bg-alt) !important;
-    padding-bottom: 120px !important; /* Espaciado estándar restaurado para separar del footer */
+    padding-bottom: var(--space-11) !important; /* separa del footer */
+    /* Sin margen inferior propio: el pie ya trae el suyo (pie.css) y
+       sumados daban el doble de hueco que entre el resto de bloques. */
 }
 
 /* FONDOS ALTERNOS DE SECCIONES (ESTILO APPLE/VERCEL) */

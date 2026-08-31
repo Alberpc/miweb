@@ -12,6 +12,33 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // 1.2 BARRA TRANSPARENTE SOBRE EL HERO
+    //     Solo con la pagina arriba del todo la barra va sin fondo y con
+    //     el texto en blanco sobre el hero. En cuanto se baja UN POCO
+    //     aparece el cristal, sin esperar a que termine el hero.
+    //     Se vigila un centinela de 1px puesto al principio de la pagina
+    //     en vez de escuchar el scroll: el navegador avisa solo al cruzar
+    //     el umbral, no en cada pixel.
+    const navbar = document.querySelector('.navbar--en-hero');
+
+    if (navbar) {
+        navbar.classList.add('navbar--sobre-hero');
+
+        const centinela = document.createElement('div');
+        centinela.setAttribute('aria-hidden', 'true');
+        centinela.style.cssText = 'position:absolute;top:0;left:0;width:1px;height:1px;pointer-events:none;';
+        document.body.prepend(centinela);
+
+        const arribaObserver = new IntersectionObserver(
+            ([entry]) => {
+                navbar.classList.toggle('navbar--sobre-hero', entry.isIntersecting);
+            },
+            { threshold: 0 }
+        );
+
+        arribaObserver.observe(centinela);
+    }
+
     // 1.5 MENÚ HAMBURGUESA (MÓVIL)
     const burger = document.getElementById('nav-burger');
     const mobilePanel = document.getElementById('nav-mobile');
@@ -63,24 +90,65 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    // 3. HOVER SUTIL EN TARJETAS (sin tilt 3D: solo elevación + spotlight suave)
-    const tiltCards = document.querySelectorAll('[data-tilt]');
+    // 3. El hover de las tarjetas ya no necesita JS: era el resplandor que
+    //    seguia al raton, retirado del CSS porque sobre fondo claro se leia
+    //    como una mancha. La elevacion la hace ahora .glass-card:hover, que
+    //    ademas respeta prefers-reduced-motion. [data-tilt] se queda en el
+    //    HTML sin efecto; se puede limpiar al tocar la plantilla.
 
-    tiltCards.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            // Solo el resplandor sigue al ratón; sin rotación 3D
-            card.style.setProperty('--mouse-x', `${x}px`);
-            card.style.setProperty('--mouse-y', `${y}px`);
-            card.style.transform = 'translateY(-6px)';
-        });
 
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = 'translateY(0)';
+    // 3.2 PESTAÑAS DE "QUE CONSTRUYO"
+    //     Solo se reproduce el video del panel visible: los tres a la vez
+    //     gastaban CPU y bateria sin que nadie mirase dos de ellos.
+    const tabs = document.querySelectorAll('.pieza-tab');
+
+    if (tabs.length > 0) {
+        const abrirPieza = (tab) => {
+            tabs.forEach(otra => {
+                const panel = document.getElementById(otra.getAttribute('aria-controls'));
+                const activa = (otra === tab);
+
+                otra.classList.toggle('is-active', activa);
+                otra.setAttribute('aria-selected', activa ? 'true' : 'false');
+                // Solo la pestaña activa entra en el orden de tabulacion:
+                // dentro de un tablist las flechas mueven, no el tabulador.
+                otra.tabIndex = activa ? 0 : -1;
+
+                if (!panel) return;
+                panel.hidden = !activa;
+
+                const video = panel.querySelector('video');
+                if (!video) return;
+                if (activa) {
+                    // play() devuelve promesa: si el navegador la rechaza
+                    // (politica de autoplay) no debe romper el resto.
+                    const p = video.play();
+                    if (p) p.catch(() => {});
+                } else {
+                    video.pause();
+                }
+            });
+        };
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => abrirPieza(tab));
+
+            tab.addEventListener('keydown', (e) => {
+                const i = Array.from(tabs).indexOf(tab);
+                let destino = null;
+
+                if (e.key === 'ArrowRight') destino = tabs[(i + 1) % tabs.length];
+                else if (e.key === 'ArrowLeft') destino = tabs[(i - 1 + tabs.length) % tabs.length];
+                else if (e.key === 'Home') destino = tabs[0];
+                else if (e.key === 'End') destino = tabs[tabs.length - 1];
+                else return;
+
+                e.preventDefault();
+                abrirPieza(destino);
+                destino.focus();
+            });
         });
-    });
+    }
 
     // 3.5 KPI COUNT UP FOR SYSTEMS CARD
     const kpis = document.querySelectorAll('.kpi-count');
@@ -481,5 +549,41 @@ document.addEventListener('DOMContentLoaded', () => {
                 goToSlide(parseInt(dot.dataset.slide, 10));
             });
         });
+    }
+
+    // VIDEOS DE LOS PILARES
+    // Dos cosas que el atributo autoplay no resuelve solo:
+    // 1) Tres bucles a la vez son mucho movimiento para quien lo tiene
+    //    desactivado en el sistema. El video se queda en su primer fotograma,
+    //    pero sigue ahi: es contenido, no decoracion.
+    // 2) Reproducir los tres a la vez desde el principio gasta CPU aunque
+    //    esten fuera de pantalla, asi que solo corre el que se esta viendo.
+    const pilarVideos = document.querySelectorAll('.pieza-video');
+
+    if (pilarVideos.length) {
+        const sinMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        if (sinMovimiento) {
+            pilarVideos.forEach((v) => {
+                v.removeAttribute('autoplay');
+                v.removeAttribute('loop');
+                v.pause();
+            });
+        } else if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        // play() devuelve una promesa que el navegador puede
+                        // rechazar (politicas de autoplay): sin catch salta un
+                        // error no capturado en consola.
+                        entry.target.play().catch(() => {});
+                    } else {
+                        entry.target.pause();
+                    }
+                });
+            }, { threshold: 0.25 });
+
+            pilarVideos.forEach((v) => observer.observe(v));
+        }
     }
 });

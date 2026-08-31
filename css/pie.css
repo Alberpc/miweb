@@ -10,14 +10,19 @@
 
 /* ===== FOOTER OSCURO =====
    Requiere class="inverse" en el <footer class="footer-section">. */
+/* Bloque con margen y esquinas redondeadas, igual que el hero y las
+   secciones .section-bloque: el pie es la ultima pieza de la pagina, no
+   una banda pegada al borde. Sin borde superior: ya lo separa el aire. */
 .footer-section {
     position: relative;
-    width: 100%;
+    width: auto;
+    margin: var(--hero-gap);
     padding: var(--space-10) 0 var(--space-8);
-    border-top: 1px solid var(--night-600);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
 }
 /* La variante clara la usa automatizar-mi-negocio (footerInverse: false). */
-.footer-section.inverse { border-top: 1px solid var(--night-600); }
+.footer-section.inverse { border-top: none; }
 
 .footer-grid {
     display: grid;

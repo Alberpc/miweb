@@ -45,6 +45,12 @@
   /* ── CUERPO CLARO ─────────────────────────────────────────────── */
   --bg:           #F3F5F2;  /* Marfil — fondo de página                    */
   --bg-alt:       #E6E1D7;  /* Arena — secciones alternas/cálidas          */
+
+  /* Superficie ELEVADA. Va siempre más clara que el fondo de su sección:
+     una tarjeta sube hacia la luz, no se hunde. Es la relación que usan
+     awesomic (#f4f4f5 → #fff), steep (#fafafb → #fff) y getharvest
+     (#fff8f1 → #fff). Sobre --bg-alt la superficie elevada es --bg. */
+  --bg-raised:    #FFFFFF;  /* 255, 255, 255 — tarjetas sobre --bg         */
   --bg-input:     #EEF1EC;  /* 238, 241, 236 — inputs, superficies hundidas*/
   --bg-sunken:    #E5E9E1;  /* 229, 233, 225 — pista de scrollbar          */
 
@@ -129,6 +135,10 @@
   --radius-xl:   20px;   /* contenedores especiales */
   --radius-pill: 999px;  /* badges puntuales */
 
+  /* Aire alrededor del hero: lo separa de los bordes de la ventana para
+     que se lea como un bloque dentro de la pagina, no como el fondo. */
+  --hero-gap:         16px;
+
   /* Contenedor y grid */
   --container-max:    1200px;
   --container-wide:   1280px;
@@ -165,6 +175,7 @@
 .inverse {
   --bg:           var(--night-900);
   --bg-alt:       var(--night-900);
+  --bg-raised:    var(--night-800);  /* sobre oscuro, elevarse es aclarar igual */
   --bg-input:     var(--night-800);
   --glass-bg:     var(--night-800);
   --glass-border: var(--night-600);
@@ -210,8 +221,18 @@
   );
 }
 
-html { scrollbar-color: var(--cobalt-600) var(--bg-sunken); }
+/* Scrollbar y selección van en NEUTRO, no en dorado.
+   El acento se reserva a CTAs, estados activos, enlaces y foco. Un
+   scrollbar dorado acompaña al lector por toda la página y gasta el
+   único color de marca en un elemento que no es una acción. */
+html { scrollbar-color: var(--line-strong) var(--bg-sunken); }
 ::-webkit-scrollbar-track       { background: var(--bg-sunken); }
-::-webkit-scrollbar-thumb       { background: var(--cobalt-400); border: 2px solid var(--bg-sunken); border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: var(--cobalt-600); }
-::selection { background: rgba(200, 168, 94, 0.16); color: var(--ink); }
+::-webkit-scrollbar-thumb       { background: var(--line-strong); border: 2px solid var(--bg-sunken); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--ink-decor); }
+::selection { background: rgba(27, 33, 29, 0.12); color: var(--ink); }
+
+/* En movil el hero casi llena la pantalla: menos margen para no comerse
+   ancho util de texto. */
+@media (max-width: 700px) {
+  :root { --hero-gap: 10px; }
+}
