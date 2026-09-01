@@ -3,6 +3,13 @@ No sabes por dónde empezar.
 
 Analizo dónde pierdes tiempo, clientes y dinero, y utilizo IA y automatización para eliminar esos cuellos de botella.
 
+&iquest;No sabes por d&oacute;nde empezar? [Empieza por el diagn&oacute;stico](/diagnostico-operativo/)
+
+- Mafhesa
+- Top Boutique
+- Bioresina
+- Geko
+
 - Más oportunidades
 
 Ninguna consulta se queda sin contestar.
@@ -19,93 +26,158 @@ Sabes en qué punto está cada cliente.
 
 Más volumen sin contratar a nadie.
 
-## El negocio para si tú paras.
+## Sistemas de IA montados sobre cómo trabajas tú
 
-_Y eso, hoy, tiene solución._
+_No son productos de catálogo: son tres piezas que se combinan según lo que te haga falta. Casi siempre empieza por una._
 
-Si te reconoces en lo de al lado, no es falta de organización: es que el negocio se sostiene sobre trabajo manual, y eso tiene un techo.
+01
 
-Siempre lo mismo: horas perdidas en tareas que aburren, clientes que escriben cuando has cerrado y se van con otro, y un montón de cosas que solo salen adelante si estás tú encima.
+Agentes de IA
 
-No es que trabajes poco. Es que lo llevas todo a mano.
+02
 
-- Presupuestos y facturas hechos a mano
+Automatizaciones
 
-- Consultas que llegan fuera de hora y se enfrían
+03
 
-- Los datos, repartidos en cuatro sitios distintos
+Sistemas de control
 
-- Sin margen para crecer sin contratar
+01
 
-## Tres frentes: captar, quitarte trabajo y saber cómo va
+Agentes de IA
 
-_Casi nadie necesita "IA". Necesita que no se le escape ningún cliente, que el trabajo repetitivo deje de comerle la mañana y poder ver cómo va el negocio. Abajo van ejemplos, no un catálogo: se empieza por donde más duela en tu caso._
+### Atienden, entienden y ejecutan
 
-Captación y seguimiento
+Un agente no es un chatbot con respuestas enlatadas. Trabaja con tus datos, entiende lo que le piden y hace la tarea entera.
 
-### Que ninguna consulta se quede sin respuesta
+- Atiende en web, WhatsApp o email con el contexto de tu negocio
 
-Cada persona que pregunta y no recibe respuesta a tiempo ya está hablando con otro.
+- Clasifica lo que entra y lo manda a quien corresponda
 
-- Se atiende al momento lo que entra por la web, WhatsApp o email, a cualquier hora.
+- Responde con lo que pone en tus documentos, no con lo que se inventa
 
-- Cada consulta cae en el CRM ordenada, con su estado y a quién le toca.
+- Ejecuta el paso siguiente: crea la ficha, agenda, prepara el presupuesto
 
-- Al que no compró hoy se le hace seguimiento solo, sin que nadie tenga que acordarse.
+02
 
-- Y al que ya te compró se le vuelve a ofrecer lo que le encaja, en vez de dejarlo enfriar.
-
-Automatización de procesos
+Automatizaciones
 
 ### El trabajo que come el día, hecho solo
 
-Hay trabajo que hay que hacer y no hace falta que lo haga una persona.
+Hay trabajo que hay que hacer y no hace falta que lo haga una persona. Incluye conectar entre sí las herramientas que ya usas.
 
-- Documentos, facturas y correos se entienden y se archivan solos.
+- Documentos, facturas y correos se archivan solos
 
-- Los informes y envíos que hoy ocupan a alguien cada mañana salen sin que nadie los haga.
+- Los informes de cada mañana salen sin que nadie los haga
 
-- Tus herramientas se hablan entre ellas: se acabó copiar datos de un sitio a otro.
+- Tus herramientas se hablan: se acabó copiar datos de un sitio a otro
 
-- Tu equipo pregunta y le contesta al momento, sacando la respuesta de vuestros propios documentos.
+03
 
-Control operativo
+Sistemas de control
 
-### Saber por dónde va todo sin preguntar a nadie
+### Saber cómo va sin preguntar a nadie
 
-Decidir a ojo sale caro. Y casi siempre te enteras tarde.
+Decidir a ojo sale caro, y casi siempre te enteras tarde.
 
-- Un panel con lo que importa: qué está entrando, qué se cierra y qué quedó pendiente.
+- Un panel con qué entra, qué se cierra y qué quedó pendiente
 
-- Los números del mes salen solos, sin que nadie los cuadre a mano.
+- Los números del mes, sin cuadrarlos a mano
 
-- Y si la herramienta que te hace falta no existe, te la construyo a medida.
+- Y si la herramienta que necesitas no existe, se construye
 
-## Por dónde se empieza
+## Esto es lo que pasa cuando lo aplicamos
 
-_Si puedo ayudarte, te lo digo claro. Si no, también._
+_Negocios reales, con sus propios cuellos de botella, resueltos con IA y automatización._
 
-### Ya sabes qué te hace falta
+**EMPRESA:** Bioresina
+**PROBLEMA:** 2 horas al día en tareas manuales — 30 emails al día con PDF adjunto, preparados y enviados uno a uno a mano.
+**SOLUCIÓN:** Automatización con Make — Envío de emails con PDF automatizado de principio a fin, con 2 seguimientos también automáticos.
+**RESULTADOS:** 2 horas al día recuperadas — El equipo ya no pierde el día preparando y enviando correos uno a uno.
 
-Si ya sabes lo que necesitas, vamos a ello: me lo cuentas y te digo qué hace falta para montarlo.
+> Antes, el equipo se pasaba el día preparando y enviando correos uno a uno con su PDF adjunto. Ahora todo eso sale solo, seguimientos incluidos, y hemos recuperado dos horas al día para dedicarlas a otra cosa.
+>
+> — Equipo de Bioresina
 
-### Sabes que algo no va bien, pero no sabes el qué
+**44h** recuperadas cada mes
+**13+** semanas laborales liberadas al año
 
-Empezamos por averiguarlo. En el **DAI360** miro las cuatro áreas de tu negocio, cómo llegan tus clientes, cómo se cierran, cómo entregas y cómo lo llevas por dentro. Al terminar sabes qué te está frenando y qué merece la pena arreglar primero. El plan es tuyo, lo implemente yo o no.
+---
 
-## Primero entiendo tu negocio. Luego lo pongo a funcionar.
+**EMPRESA:** Geko Marketing
+**PROBLEMA:** Leads dispersos, sin visibilidad — No sabían de dónde venía cada lead ni quién había comprado y quién no.
+**SOLUCIÓN:** CRM a medida, conectado a su web — Todos los leads centralizados en un único sistema, con su origen y estado siempre visibles.
+**RESULTADOS:** Todo organizado, en un solo sitio — Sabe dónde está cada lead, de dónde vino y quién le ha comprado y quién no.
 
-### Entiendo tu negocio
+**0** leads que se quedan sin seguimiento
+**100%** de leads con origen y estado siempre visible
+**1 vistazo** para saber quién ha comprado y quién no
 
-Miro cómo funciona de verdad y dónde está el problema real, no solo lo que se ve por encima.
+## Un sistema no se entrega y ya está.
 
-### Diseño la solución a tu medida
+_Montar la automatización es la parte fácil. Lo difícil es que siga funcionando cuando tu negocio cambia._
 
-Algo hecho para ti, no lo mismo que le monto a todo el mundo.
+1. 01
 
-### Implemento y garantizo
+_Entiendo_ cómo trabajas
 
-Lo pongo en marcha, te dejo todo documentado y no me voy hasta que funciona perfecto. Si algo falla, lo arreglo yo: esa es mi garantía.
+Antes de proponerte nada, miro cómo trabajas de verdad: por dónde entran los clientes, qué se hace a mano y dónde se atasca. La mayoría de lo que frena un negocio no está donde parece.
+
+1. Entra una @consulta por WhatsApp
+
+2. 2. Alguien la lee cuando puede
+
+3. 3. Si @fuera_de_horario
+
+a. La consulta espera a mañana
+
+4. 4. Se pasa la cita a mano a la agenda
+
+3 de cada 4 consultas mueren en el paso 3
+
+02
+
+_Construyo_ solo lo que hace falta
+
+Monto solo lo que resuelve el atasco que encontramos. No un paquete cerrado: el agente, la automatización o el panel que tu caso pide, conectado a las herramientas que ya usas.
+
+03
+
+_Lo pongo_ a funcionar de verdad
+
+Lo pongo a funcionar con tus datos reales, no con un ejemplo. Tu equipo aprende a usarlo y te queda documentado, para que no dependas de mí para lo del día a día.
+
+Reviso
+
+Cada mes miro que siga respondiendo como debe
+
+Ajusto
+
+Lo afino con lo que se aprende de su uso real
+
+Sostengo
+
+Cuando tu negocio cambia, el sistema cambia con él
+
+### _Tu negocio cambia._
+
+Tu sistema tiene que cambiar con él.
+
+Aquí es donde la mayoría desaparece. Un sistema con IA se desajusta solo: cambian tus precios, tu forma de atender, las herramientas que usas. Nadie te avisa — simplemente empieza a responder peor.
+
+Yo reviso que siga haciendo lo que tiene que hacer y lo voy afinando con lo que se aprende de su uso real. No es soporte por si se rompe: es que el sistema siga al día contigo.
+
+La fase que casi nadie te cuenta.
+
+Antes de que lo preguntes
+
+### Cumple la ley europea de IA
+
+El Reglamento Europeo de IA obliga desde agosto de 2026. Tu agente dice que es una IA, deja salida a un humano y no hace nada de lo que el reglamento prohíbe. Sale cumpliendo, sin coste extra.
+
+### El agente aguanta ataques
+
+Hay gente que intenta manipular estos sistemas para que se salten sus normas o suelten información. Todos mis agentes llevan filtros a la entrada y a la salida, y los pruebo con esos ataques antes de entregar.
 
 ## Sé lo que es un trabajo que te consume.
 
@@ -114,6 +186,26 @@ Soy Alberto Pérez Cabrera. Ayudo a negocios pequeños y medianos a aplicar IA d
 Antes de esto me dediqué a otra cosa muy distinta, de las que te dejan sin horas y sin cabeza al final del día. Por eso hago lo que hago: me mueve ayudar a la gente a recuperar su tiempo.
 
 Me cuentan que acaban la jornada agotados, con sus hijos delante pero pendientes del móvil por cosas que una herramienta podría hacer sola. Mi trabajo es que la IA se ocupe de eso, para que tu negocio trabaje para ti y no al revés. Tú me cuentas qué te agobia, y yo me encargo.
+
+## Antes de montar nada, hay que saber qu&eacute; montar
+
+_La mayor&iacute;a de negocios no necesita m&aacute;s herramientas. Necesita saber cu&aacute;l de todas le est&aacute; costando dinero ahora mismo._
+
+### Diagn&oacute;stico operativo DAI360
+
+Miro las cuatro &aacute;reas de tu negocio: c&oacute;mo llegan tus clientes, c&oacute;mo se cierran, c&oacute;mo entregas y c&oacute;mo lo llevas por dentro. Al terminar sabes qu&eacute; te est&aacute; frenando y qu&eacute; merece la pena arreglar primero.
+
+- Mapa de tus procesos reales, &aacute;rea por &aacute;rea
+
+- Cuellos de botella localizados y medidos
+
+- Roadmap por fases, empezando por los quick wins
+
+- El plan es tuyo, lo implemente yo o no
+
+Desde 1.500 &euro;. Si luego implementamos las mejoras, se descuenta del proyecto.
+
+&iquest;Ya sabes lo que necesitas? [Cu&eacute;ntamelo directamente](#contacto)
 
 ## Preguntas que me suelen hacer.
 
@@ -147,41 +239,7 @@ Mi trabajo no es entregarte código y marcharme. Te entrego el sistema funcionan
 
 ¿Qué pasa con la seguridad de mis datos?
 
-Toda la automatización cumple con las normativas de seguridad. Las integraciones de Inteligencia Artificial se configuran mediante APIs de pago seguras para que la información de tu negocio y de tus clientes sea totalmente privada y nunca se use para entrenar modelos de IA públicos.
-
-## Esto es lo que pasa cuando lo aplicamos
-
-_Negocios reales, con sus propios cuellos de botella, resueltos con IA y automatización._
-
-**EMPRESA:** Bioresina
-**PROBLEMA:** 2 horas al día en tareas manuales — 30 emails al día con PDF adjunto, preparados y enviados uno a uno a mano.
-**SOLUCIÓN:** Automatización con Make — Envío de emails con PDF automatizado de principio a fin, con 2 seguimientos también automáticos.
-**RESULTADOS:** 2 horas al día recuperadas — El equipo ya no pierde el día preparando y enviando correos uno a uno.
-
-> Antes, el equipo se pasaba el día preparando y enviando correos uno a uno con su PDF adjunto. Ahora todo eso sale solo, seguimientos incluidos, y hemos recuperado dos horas al día para dedicarlas a otra cosa.
->
-> — Equipo de Bioresina
-
-**44h** recuperadas cada mes
-**13+** semanas laborales liberadas al año
-
----
-
-**EMPRESA:** Geko Marketing
-**PROBLEMA:** Leads dispersos, sin visibilidad — No sabían de dónde venía cada lead ni quién había comprado y quién no.
-**SOLUCIÓN:** CRM a medida, conectado a su web — Todos los leads centralizados en un único sistema, con su origen y estado siempre visibles.
-**RESULTADOS:** Todo organizado, en un solo sitio — Sabe dónde está cada lead, de dónde vino y quién le ha comprado y quién no.
-
-**0** leads que se quedan sin seguimiento
-**100%** de leads con origen y estado siempre visible
-**1 vistazo** para saber quién ha comprado y quién no
-
-Empresas con las que he trabajado
-
-- Mafhesa
-- Top Boutique
-- Bioresina
-- Geko
+Uso las APIs comerciales de OpenAI y Anthropic, no las versiones gratuitas. Por contrato, esos proveedores no entrenan sus modelos con lo que envías: tu información y la de tus clientes no acaba dentro de un modelo público. Sí guardan las conversaciones un máximo de 30 días para detectar usos abusivos, y después se borran; existe la opción de contratar retención cero si tu caso lo necesita. Además, cada agente lleva filtros de entrada y salida para que no se le pueda sonsacar información con mensajes manipulados.
 
 ## ¿Hablamos de tu negocio?
 

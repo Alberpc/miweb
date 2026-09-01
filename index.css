@@ -1786,25 +1786,6 @@ html {
 .timeline-item:nth-child(2) { transition-delay: 0.2s; }
 .timeline-item:nth-child(3) { transition-delay: 0.3s; }
 
-/* Las dos tarjetas, misma altura: son alternativas comparables, y con
-   align-items:center (el de .grid-two-cols, que "Sobre mí" sí necesita)
-   quedaban descolgadas una respecto a otra porque B tiene el doble de
-   texto. Aquí se estiran y los CTA se alinean abajo. */
-.caminos-section .grid-two-cols {
-    align-items: stretch;
-}
-.caminos-section .camino-card {
-    display: flex;
-    flex-direction: column;
-}
-/* Empuja la fila de botones al fondo de la tarjeta. */
-.caminos-section .card-cta-row {
-    margin-top: auto;
-    padding-top: var(--space-6);
-}
-
-.caminos-section .grid-two-cols > div:nth-child(1) { transition-delay: 0.1s; }
-.caminos-section .grid-two-cols > div:nth-child(2) { transition-delay: 0.25s; }
 
 /* BOTÓN DE WHATSAPP FLOTANTE */
 .whatsapp-float {
@@ -1954,113 +1935,222 @@ html {
    mayor — no por un borde dorado translucido en las cuatro caras: sobre
    fondo claro --cobalt-border hacia un halo difuso. Sin !important, que
    ademas impedia que el hover cambiara el borde. */
-.caminos-section .grid-two-cols > div:last-child {
-    border-color: var(--line-strong);
-    /* Sombra algo mas marcada que la de A: es la opcion recomendada, y
-       elevarla un punto la senala sin gritar. */
-    box-shadow: 0 4px 14px -4px var(--glass-shadow);
+/* =============================================================
+   POR DONDE SE EMPIEZA — el diagnostico como puerta de entrada
+   -------------------------------------------------------------
+   [1-sep-2026] Antes eran dos tarjetas ("camino A" / "camino B")
+   separadas por un "o". Se retiro la disyuntiva: el camino A
+   llevaba al mismo formulario que la seccion de contacto y
+   repetia su misma frase de cierre, asi que elegir no elegia
+   nada — solo pedia una decision antes de tiempo. El patron de
+   referencia es kajabi.com, que resuelve el "no se si esto es
+   para mi" como una salida bajo el hero, no como una eleccion.
+   El CSS de .camino-card, .camino-letra, .camino-edge y
+   .caminos-vs esta en git (commit anterior a esta seccion).
+   ============================================================= */
+/* La seccion vuelve a fondo claro. La version anterior metia la pieza
+   sobre una franja de carbon para reutilizar el halo de "como trabajo",
+   pero ese sistema trae una sombra negra muy abierta pensada para vivir
+   sobre el fondo oscuro de su seccion: sobre la tarjeta se leia como un
+   cerco gris sucio. El chasis del portatil ya da todo el contraste que
+   la pieza necesita. */
+.dai-cuerpo {
+    display: grid;
+    /* Equilibrio: el informe tiene que LEERSE (es el argumento de la
+       seccion) pero sin comerse el texto. A 0.62/1 y 1240 de ancho el
+       portatil salia gigante; a 0.8/1 y 1120 se lee la tabla y las dos
+       columnas pesan parecido. */
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+    /* Hueco generoso entre texto y pieza: a 48px el portatil parecia
+       pegado a la ultima linea del parrafo. */
+    gap: var(--space-9, 80px);
+    align-items: center;
+    max-width: 1120px;
+    /* Aire propio arriba y abajo: la seccion es la rampa al cierre y
+       apretarla contra el titular y contra el atajo la hace parecer un
+       bloque mas, no el remate. */
+    margin: var(--space-9, 80px) auto 0;
+}
+
+.dai-nombre {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 16px;
+}
+
+/* El CTA sigue la regla del sistema para fondo claro (botones.css):
+   relleno --cobalt-600 y texto blanco, 5.68. El .btn-primary-small
+   global usa --cobalt-400, que es el tono para oscuro y sobre blanco se
+   ve lavado. */
+.dai-texto .btn-primary-small {
+    background: var(--cobalt-600);
+    color: #FFFFFF;
+}
+
+.dai-texto .btn-primary-small:hover {
+    background: #9C3800;
+    box-shadow: 0 6px 18px -6px rgba(180, 65, 0, 0.45);
+}
+
+.dai-desc {
+    color: var(--ink-soft);
+    line-height: 1.7;
+    margin-bottom: 26px;
+}
+
+/* Las lineas de "que te llevas". Marca de acento a la izquierda en vez
+   de vineta o icono: la auditoria marco los iconos genericos como lo
+   que ninguna referencia usa. */
+.dai-lista {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 26px;
+    display: grid;
+    gap: 12px;
+}
+
+.dai-lista li {
+    position: relative;
+    padding-left: 26px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+}
+
+/* Check de trazo fino, no una vinyeta: la lista dice QUE TE LLEVAS, y un
+   tick lo cuenta solo. Va en SVG de fondo (currentColor no funciona en
+   background-image, asi que el color va cocido en el data-uri; si cambia
+   --cobalt-600, cambiar aqui el %23B44100). La raya de 8x1px anterior
+   cumplia contraste (5.68) pero se perdia al lado de cuatro lineas. */
+.dai-lista li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.35em;
+    width: 15px;
+    height: 15px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23B44100' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m4 12.5 5 5L20 6.5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+/* El precio se dice aqui, no solo en el FAQ: es la objecion real y
+   esconderla obliga a buscarla. */
+.dai-precio {
+    font-size: 0.92rem;
+    color: var(--ink-mid);
+    border-top: 1px solid var(--line);
+    padding-top: 20px;
+    margin-bottom: 26px;
+}
+
+/* La salida para quien ya lo tiene claro: una linea, nunca una tarjeta.
+   Si vuelve a pesar lo mismo que el diagnostico, vuelve a ser la
+   disyuntiva que se quito. */
+.dai-atajo {
+    text-align: center;
+    margin-top: 56px;
+    font-size: 0.92rem;
+    color: var(--ink-mid);
+}
+
+.dai-atajo a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line-strong);
+    padding-bottom: 1px;
+    transition: border-color 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.dai-atajo a:hover { border-color: var(--ink); }
+
+/* ── LA PIEZA: EL INFORME EN PANTALLA ─────────────────────────────
+   Es una imagen, no un chasis dibujado: el portatil en CSS que habia
+   aqui tenia la pantalla mas alta que ancha porque el informe crecia
+   hacia abajo, y ningun portatil real tiene esa proporcion.
+   La imagen ya trae su sombra y el fondo transparente. */
+.dai-viz {
+    margin: 0;
     position: relative;
 }
 
-/* Badge en ::after (el ::before lo usa el spotlight de .glass-card — antes chocaban
-   y al hacer hover el badge se estiraba a toda la tarjeta en azul) */
-.caminos-section .grid-two-cols > div:last-child::after {
-    content: 'CAMINO RECOMENDADO';
-    position: absolute;
-    width: auto;
+.dai-viz img {
+    display: block;
+    width: 100%;
     height: auto;
-    top: 20px;
-    right: 20px;
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 0.25em;
-    background: var(--cobalt-600);
-    color: #ffffff;
-    padding: 4px 14px;
-    border-radius: var(--radius-pill);
-    z-index: 5;
-    opacity: 1;
-    pointer-events: none;
+    /* Se sale un poco de su columna hacia la derecha, lo justo para que
+       la tabla se lea. El contenedor no recorta (la seccion no tiene
+       overflow hidden), asi que la sombra respira. */
+    max-width: 110%;
+}
+
+@media (max-width: 900px) {
+    .dai-cuerpo {
+        grid-template-columns: 1fr;
+        gap: var(--space-7, 48px);
+    }
+    .dai-viz { order: 2; }
+}
+
+@media (max-width: 900px) {
+    /* Apilado ya no hay columna de la que salirse. */
+    .dai-viz img { max-width: 100%; }
 }
 
 /* =============================================================
-   LOS DOS CAMINOS — tratamiento especial
+   TIRA DE LOGOS — prueba social temprana
+   -------------------------------------------------------------
+   Sube bajo el hero siguiendo a basecamp.com, que abre con
+   testimonios antes de las funcionalidades. Pero basecamp son 84
+   millones de cuentas y aqui son 4 logos: con titular propio y
+   tamano de seccion se leerian como "solo tengo cuatro". Va
+   estrecha, en gris y sin titular — respaldo, no catalogo.
    ============================================================= */
-.caminos-wrap { position: relative; }
-
-.camino-card {
-    padding: 52px 40px 44px;
-    overflow: hidden; /* contiene la letra gigante */
+.clientes-tira {
+    padding: 40px 0 8px;
+    position: relative;
 }
 
-/* Letra gigante fantasma de fondo */
-.camino-letra {
-    position: absolute;
-    right: -14px;
-    bottom: -58px;
-    font-family: var(--font-display);
-    font-weight: 400;
-    font-size: 13rem;
-    line-height: 1;
-    letter-spacing: -0.01em;
-    color: var(--ink-decor);
-    opacity: 0.06;
-    pointer-events: none;
-    user-select: none;
-    z-index: 1;
-    transition: color 360ms cubic-bezier(0.2, 0.8, 0.2, 1), opacity 360ms cubic-bezier(0.2, 0.8, 0.2, 1), transform 360ms cubic-bezier(0.2, 0.8, 0.2, 1);
+.clientes-tira .logo-cliente {
+    height: 34px;
+    opacity: 0.42;
 }
 
-.camino-b .camino-letra { color: var(--cobalt-600); opacity: 0.05; }
-.camino-card:hover .camino-letra { transform: translateY(-8px); }
-.camino-card:hover.camino-b .camino-letra { opacity: 0.09; }
+.clientes-tira .logo-cliente:hover { opacity: 0.7; }
 
-/* Línea de acento en el borde superior de cada tarjeta */
-.camino-edge {
-    position: absolute;
-    top: 0;
-    left: 10%;
-    right: 10%;
-    height: 1.5px;
-    background: linear-gradient(90deg, transparent, var(--line-strong), transparent);
-    z-index: 3;
+.clientes-tira .logos-track {
+    gap: 56px;
+    flex-wrap: wrap;
 }
 
-.camino-b .camino-edge {
-    /* El dorado se queda: marca cuál de los dos caminos se recomienda.
-       Fuera el resplandor, que era adorno sobre el adorno. */
-    background: linear-gradient(90deg, transparent, var(--cobalt-600), transparent);
+@media (max-width: 768px) {
+    .clientes-tira { padding: 32px 0 4px; }
+    .clientes-tira .logos-track {
+        display: flex;
+        gap: 32px;
+    }
+    .clientes-tira .logo-cliente { height: 26px; }
 }
 
-/* Conector "o" entre las dos tarjetas (una u otra) */
-.caminos-vs {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 46px;
-    height: 46px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--font-heading); /* sans: el serif se reserva a >3rem (hero, cifras gigantes) */
-    font-weight: 400;
-    font-style: italic;
-    font-size: 1rem;
-    color: var(--ink-mid);
-    background: var(--bg);
-    border: 1px solid var(--line);
-    border-radius: 50%;
-    box-shadow: 0 0 0 8px var(--bg-alt);
-    z-index: 6;
-    pointer-events: none;
+/* Salida del hero al diagnostico. El titular ya plantea la duda ("No
+   sabes por donde empezar"), asi que la respuesta va debajo, discreta:
+   quien lo tiene claro usa el boton y sigue bajando. */
+.hero-salida {
+    margin-top: 20px;
+    font-size: 0.92rem;
+    color: var(--on-night-mid, rgba(255, 255, 255, 0.72));
 }
 
-@media (max-width: 1024px) {
-    .caminos-vs { display: none; } /* en columna no tiene sentido el conector */
-    .camino-letra { font-size: 9rem; bottom: -40px; }
+.hero-salida a {
+    color: var(--cobalt-400);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
+
+.hero-salida a:hover { border-bottom-color: var(--cobalt-400); }
 
 /* Ajustes adicionales del Problema */
 /* La columna derecha es UNA caja oscura: el bloque del problema se lee
@@ -2226,7 +2316,7 @@ html {
     line-height: 1.7;
 }
 
-.caminos-section:not(.inverse) {
+.dai-section:not(.inverse) {
     background-color: var(--bg);
 }
 
@@ -2385,67 +2475,176 @@ html {
     z-index: 2;
 }
 
+/* [1-sep-2026] SE QUITA EL RESPLANDOR DE FONDO DE LA SECCION.
+   Habia dos radial-gradients de acento tinyendo el carbon de toda la
+   seccion. El halo naranja tiene que salir SOLO de las piezas de UI
+   (.fase-pieza::before) — es lo que las hace parecer pantallas
+   encendidas. Repartido tambien por el fondo, la luz deja de venir de
+   ningun sitio concreto y el carbon se ve sucio en vez de negro.
+   Es el mismo criterio de decagon: el morado sale de las tarjetas, no
+   del fondo de la pagina.
+   La regla se queda vacia (sin ::after) a proposito: el fondo de la
+   seccion es --night-900 limpio. */
+
 .fases {
     list-style: none;
     margin: var(--space-8) auto 0;
     padding: 0;
-    max-width: 780px;
+    /* Ensanchado de 780 a 1040: ahora cada fase lleva su pieza visual a
+       la derecha, y a 780 las dos columnas se estrangulaban. */
+    max-width: 1040px;
     position: relative;
 }
 
-/* El riel: una linea de 1px que recorre las cuatro fases. Se dibuja
-   con ::before del <ol> y no con borde de cada <li>, para que sea
-   continuo y pueda arrancar y morir desvanecido. */
+/* El riel va en EL MEDIO, entre el texto y la tarjeta — como en
+   decagon. Antes colgaba a la izquierda de todo, que es de donde
+   venia la version en lista.
+   --riel es la posicion de esa linea y la comparten el carril de la
+   rejilla, el ::before, el ::after y el nodo de cada fase, para que no
+   se puedan desalinear entre si. */
+.fases {
+    --riel: 50%;
+}
+/* La linea apagada: mas oscura que los bordes normales, para que el
+   naranja que la recorre destaque de verdad. Con --night-600 (que es
+   color de borde) el contraste entre apagado y encendido era corto. */
 .fases::before {
     content: '';
     position: absolute;
-    left: 5px;
-    top: 8px;
-    bottom: 8px;
-    width: 1px;
+    left: var(--riel);
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    margin-left: -1px;
+    border-radius: 2px;
     background: linear-gradient(to bottom,
         transparent 0%,
-        var(--night-600) 8%,
-        var(--night-600) 92%,
+        #24262C 4%,
+        #24262C 96%,
         transparent 100%);
+}
+
+/* EL RELLENO NARANJA. Sigue al scroll de forma continua: --riel-avance
+   (0 a 1) lo escribe index.js en cada frame segun donde este la
+   seccion en pantalla.
+
+   Sin transition a proposito. La animacion la marca el dedo en el
+   scroll, no un temporizador: cualquier transition aqui haria que la
+   linea llegase tarde y se sintiera pastosa. Antes esto iba a saltos
+   de fase con :has(), que es lo que se veia poco dinamico.
+
+   scaleY sobre transform, no height: se compone en GPU y no dispara
+   layout en cada frame de scroll. */
+.fases::after {
+    content: '';
+    position: absolute;
+    left: var(--riel);
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    margin-left: -1px;
+    border-radius: 2px;
+    transform-origin: top center;
+    transform: scaleY(var(--riel-avance, 0));
+    background: linear-gradient(to bottom,
+        var(--cobalt-600) 0%,
+        var(--cobalt-400) 55%,
+        #FFB48C 100%);
+    /* El resplandor de la linea encendida: tenue, porque recorre toda
+       la seccion y a mas intensidad ensuciaria el carbon. */
+    box-shadow: 0 0 12px rgba(234, 130, 88, 0.55);
+    will-change: transform;
 }
 
 .fase {
     position: relative;
+    /* Texto | carril del riel | tarjeta. El carril central es una
+       columna de verdad y no un margen: asi la linea cae siempre en su
+       centro pase lo que pase con el ancho, y ni el texto ni la
+       tarjeta se le pueden montar encima. */
     display: grid;
-    grid-template-columns: 42px 1fr;
-    gap: 0 var(--space-5);
-    padding: 0 0 var(--space-8) var(--space-6);
-    align-items: start;
+    grid-template-columns: minmax(0, 1fr) 56px minmax(0, 1fr);
+    gap: 0;
+    /* Mucho mas aire entre fases: iban pegadas y con la tarjeta al lado
+       se amontonaban. space-11 (120px) es lo que separa bloques en el
+       resto de la pagina. */
+    padding: 0 0 var(--space-11);
+    /* [1-sep-2026] Centrado, no arriba. Con align-items:start el texto
+       arrancaba pegado al borde superior mientras la pieza de al lado
+       ocupaba mas alto: los dos lados de la linea no se miraban y la
+       fase se veia descolgada — el desequilibrio que se buscaba
+       corregir. Centrados, texto y pieza se equilibran contra el riel,
+       que es como lo tiene decagon. */
+    align-items: center;
 }
 .fase:last-child { padding-bottom: 0; }
 
-/* El nodo sobre el riel. Relleno oscuro para que la linea no se vea
-   por debajo, y borde de acento: es el unico sitio donde el terracota
-   aparece en esta seccion. */
+/* El texto va pegado al riel por la derecha, la tarjeta por la
+   izquierda: las dos miran a la linea, que es lo que la hace leerse
+   como eje y no como un borde suelto. */
+.fase-cuerpo {
+    grid-column: 1;
+    padding-right: var(--space-6);
+}
+.fase-viz {
+    grid-column: 3;
+    padding-left: var(--space-6);
+}
+
+/* [1-sep-2026] SE QUITA LA ALTERNANCIA. Las fases pares cruzaban el
+   eje (tarjeta izquierda / texto derecha) buscando que no se leyera
+   como una tabla. El efecto real era el contrario: el ojo perdia el
+   punto de entrada en cada fase y la seccion se sentia inquieta.
+
+   Decagon mantiene SIEMPRE el mismo lado — texto izquierda, pieza
+   derecha — y lo que rompe la monotonia no es cruzar columnas, sino
+   que cada pieza sea un objeto distinto. Eso es lo que se hace ahora
+   mas abajo, en las cuatro .pieza--*. */
+
+/* El nodo, centrado sobre el riel del medio. Se ancla al mismo --riel
+   que la linea, asi que no hay forma de que queden descuadrados.
+   [1-sep-2026] Y ahora tambien a media altura de la fase, no a la del
+   titulo: con las dos columnas centradas, el punto tiene que caer en
+   el eje de simetria de la fase o se ve suelto. --marca-y lo sigue
+   midiendo index.js sobre el elemento real. */
 .fase-marca {
     position: absolute;
-    left: 0;
-    top: 7px;
+    left: var(--riel);
+    top: var(--marca-y, 50%);
     width: 11px;
     height: 11px;
+    margin: -5.5px 0 0 -5.5px;
     border-radius: 50%;
     background: var(--night-900);
     border: 1px solid var(--night-600);
-    transition: border-color var(--motion-base) var(--ease-standard),
+    transition: background-color var(--motion-base) var(--ease-standard),
+                border-color var(--motion-base) var(--ease-standard),
+                transform var(--motion-base) var(--ease-standard),
                 box-shadow var(--motion-base) var(--ease-standard);
 }
-.fase.revealed .fase-marca {
+/* El punto se enciende cuando LA LINEA lo alcanza, no cuando la fase
+   entra en pantalla. La clase la pone index.js comparando el avance
+   del riel con la posicion del nodo — asi el naranja del punto y el de
+   la linea son el mismo suceso y no dos animaciones sueltas.
+   Aqui si hay transition: el encendido es un cambio de estado puntual,
+   no un seguimiento del scroll. */
+.fase.riel-alcanzado .fase-marca {
+    background: var(--cobalt-400);
     border-color: var(--cobalt-400);
-    box-shadow: 0 0 0 3px rgba(234, 130, 88, 0.12);
+    transform: scale(1.15);
+    box-shadow: 0 0 0 5px rgba(234, 130, 88, 0.16),
+                0 0 18px 2px rgba(234, 130, 88, 0.5);
 }
 
+/* El numero ya no tiene columna propia: se pone encima del titular,
+   pequenyo, como cabecera de la fase. */
 .fase-n {
+    display: block;
     font-family: var(--font-mono);
-    font-size: 0.78rem;
+    font-size: 0.72rem;
     color: var(--on-night-mid);
-    letter-spacing: 0.06em;
-    padding-top: 3px;
+    letter-spacing: 0.14em;
+    margin-bottom: var(--space-2);
     font-variant-numeric: tabular-nums;
 }
 
@@ -2457,6 +2656,14 @@ html {
     color: var(--on-night);
     margin: 0 0 var(--space-2);
     line-height: 1.2;
+}
+/* La palabra que nombra la fase, en acento. Es el patron de decagon
+   ("Crea tu agente"): el color hace de etiqueta, asi que no hace falta
+   una etiqueta aparte encima. Sin cursiva — el <em> esta por semantica,
+   no por estilo. */
+.fase-t em {
+    font-style: normal;
+    color: var(--cobalt-400);
 }
 
 .fase-p {
@@ -2481,6 +2688,1145 @@ html {
     line-height: 1.5;
 }
 
+/* ── LA PIEZA VISUAL DE CADA FASE ──────────────────────────────────
+   [1-sep-2026] Reescritas. Antes las cuatro compartian un chasis de
+   ventana (.viz-panel: barra gris con puntos + lienzo + fila de tres
+   indicadores). El contenido cambiaba, pero el continente no: se leian
+   como cuatro capturas de la misma pantalla y la seccion se quedaba
+   plana.
+
+   Ahora cada fase es un OBJETO DISTINTO flotando sobre el carbon, que
+   es lo que hace decagon: un bloque de reglas, un diagrama, una
+   captura y unas tarjetas de metrica. Sin ventana alrededor — el
+   chasis era justo lo que las igualaba.
+
+   Lo comun no es la forma, es la LUZ: cada pieza lleva su propio halo
+   terracota detras (.fase-pieza::before). Antes ese resplandor vivia en la
+   seccion entera y por eso ninguna pieza tenia sombra de acento
+   propia.
+
+   Contraste: sobre carbon el acento va en --cobalt-400 (#EA8258, 6.93
+   sobre #121316) y el texto en --on-night-soft. El --cobalt-600 es de
+   fondo claro y aqui se hundiria. */
+.fase-viz {
+    margin: 0;
+    /* relative: es el ancla del halo, que vive en su ::before y tiene
+       que quedar por debajo de la pieza. */
+    position: relative;
+    display: flex;
+    justify-content: center;
+    /* Centrada en su celda: es lo que equilibra la pieza con el bloque
+       de texto de enfrente, que tambien va centrado. */
+    align-items: center;
+}
+
+/* EL VIDRIO, definido una vez y compartido por las tres piezas.
+   [1-sep-2026] Antes cada pieza tenia su fondo y no se parecian entre
+   si; ahora las tres son el mismo cristal, como en decagon, y lo que
+   cambia es lo que hay dentro. Si se toca el tono, se toca aqui. */
+/* [1-sep-2026] En la SECCION, no en .fases. Estaban en la lista de
+   fases, y las piezas del bloque de cierre — que viven fuera de ella —
+   heredaban el gris claro de fondo oscuro: texto casi invisible sobre
+   el plata. En la seccion las heredan las dos zonas. */
+.como-trabajo-section {
+    /* EL CRISTAL: blanco arriba cayendo a color abajo, como en decagon
+       (blanco -> lila). Alli no es un blanco con un toque de acento: es
+       una MEZCLA DE DOS COLORES de verdad, y por eso el panel tiene
+       cuerpo en vez de parecer papel tenyido.
+
+       Los dos colores salen de la aurora del hero, que arranca en
+       terracota (222,104,48) y pasa por magenta (172,58,112): asi el
+       cristal es de la misma familia que el fondo del hero y la pagina
+       se lee como una sola cosa. La mezcla cae en diagonal, del blanco
+       de arriba a la izquierda al magenta de abajo a la derecha. */
+    /* EL CRISTAL: un panel OPACO y practicamente blanco.
+       [1-sep-2026] Aqui habia una elipse rosa fuerte anclada a la
+       esquina de abajo a la derecha, buscando la mezcla de dos colores
+       de decagon. El efecto real era otro: esa mancha DENTRO del panel
+       se leia exactamente como el glow metiendose en la UI — se
+       comprobo apagando el halo, y la esquina seguia rosa.
+       En decagon el panel es casi blanco y TODO el color viene del
+       resplandor de detras. Asi que el cristal se queda liso: solo un
+       blanco que se entibia un pelin hacia abajo, y el acento lo pone
+       el halo, que es donde tiene que estar.
+       Sin alpha, ademas: cualquier transparencia dejaria pasar el halo
+       y volveria a verse por dentro. */
+    --cristal: linear-gradient(155deg,
+        rgb(252, 252, 253) 0%,
+        rgb(249, 246, 244) 64%,
+        rgb(245, 238, 234) 100%);
+    --cristal-brillo: linear-gradient(118deg,
+        rgba(255, 255, 255, 0.55) 0%,
+        rgba(255, 255, 255, 0.06) 34%,
+        transparent 58%);
+    /* Sombra de contacto negra + una segunda TENYIDA de acento por
+       debajo: es lo que hace que la tarjeta se asiente sobre su halo en
+       vez de flotar recortada encima. */
+    --cristal-sombra: 0 18px 40px -14px rgba(0, 0, 0, 0.8),
+                      0 2px 8px -2px rgba(0, 0, 0, 0.4),
+                      0 26px 50px -20px rgba(234, 130, 88, 0.55);
+    /* Sobre el vidrio claro el texto va oscuro. El --cobalt-600 da mas
+       de 5 sobre este fondo; el 400 se queda en 2.4 y no cumple. */
+    --cristal-txt: #2B2E35;
+    --cristal-txt-suave: #5A5F68;
+}
+
+/* El chasis comun que queda: solo tamanyo y entrada. Ni fondo ni
+   borde — cada pieza pone los suyos, o no pone ninguno. El halo ya no
+   vive aqui: se subio a .fase-viz para poder quedar por detras. */
+.fase-pieza {
+    position: relative;
+    /* Por encima del halo del padre, que va en z-index 0. */
+    z-index: 1;
+    width: min(100%, 380px);
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity var(--motion-slow) var(--ease-standard),
+                transform var(--motion-slow) var(--ease-standard);
+}
+.fase.revealed .fase-pieza {
+    opacity: 1;
+    transform: none;
+}
+
+/* EL HALO DE ACENTO, POR PIEZA. Es lo que hace que cada objeto
+   parezca encendido desde detras en vez de pegado sobre el fondo.
+   Va detras (z-index 0 contra el 1 del contenido) y desbordado
+   (inset negativo) para que la luz salga por fuera del objeto. */
+/* [1-sep-2026] EL HALO VIVE EN EL PADRE (.fase-viz), no en la pieza.
+   Estaba en .fase-pieza::before, que es EL MISMO ELEMENTO que pinta el
+   cristal — y un pseudo-elemento no puede colocarse por detras del
+   fondo de su propio padre, por mucho z-index negativo que se le
+   ponga. Por eso el resplandor se veia DENTRO de la tarjeta, tinyendo
+   el vidrio, en vez de salir por detras.
+   Puesto en el <figure> que la envuelve si queda un nivel por debajo,
+   y la luz sale por detras del cristal como en decagon. */
+.fase-viz::before {
+    content: '';
+    position: absolute;
+    z-index: 0;
+    pointer-events: none;
+    /* Elipse, no rectangulo con degradado dentro: sin el border-radius
+       y el blur, el ::before se veia como una CAJA GRIS detras de las
+       piezas sin fondo propio (la 02 y la 04). El degradado radial por
+       si solo no basta — su caja sigue teniendo esquinas y el ojo las
+       lee. El blur las disuelve y deja luz de verdad. */
+    border-radius: 50%;
+    /* [1-sep-2026] EL HALO SALE POR FUERA, NO TINYE LA TARJETA.
+       Antes iba centrado justo detras de la pieza y del mismo tamanyo:
+       casi todo el resplandor quedaba TAPADO por la propia tarjeta y lo
+       poco que asomaba se leia como un tinte suyo. En decagon el halo
+       es una luz proyectada que se ve alrededor y sobre todo POR DEBAJO
+       del panel, como una sombra de color.
+
+       Por eso ahora: desbordado por abajo (-26%) mas que por arriba
+       (-8%), asi que la luz CAE hacia abajo como en la referencia.
+       La mezcla es la misma que el vidrio — terracota abriendo a
+       magenta — para que la luz parezca venir de la pieza y no de una
+       lampara puesta detras.
+
+       El figure es mas ancho que la pieza (la pieza va centrada dentro
+       de el), asi que los laterales se meten hacia dentro en vez de
+       salirse: es lo que mantiene el halo centrado sobre el cristal y
+       no sobre la celda entera. */
+    /* Halo mas fuerte desde que el cristal es blanco liso: TODO el
+       color de la pieza sale de aqui, asi que tiene que verse. */
+    inset: -10% 2% -30%;
+    filter: blur(52px);
+    background:
+        radial-gradient(48% 46% at 40% 44%,
+            rgba(234, 130, 88, 0.78) 0%,
+            rgba(234, 130, 88, 0.30) 48%,
+            transparent 76%),
+        radial-gradient(46% 44% at 68% 76%,
+            rgba(172, 58, 112, 0.60) 0%,
+            rgba(172, 58, 112, 0.22) 50%,
+            transparent 78%);
+    /* Se enciende cuando la pieza entra, no antes: si sale ya puesto,
+       la fase se anuncia sola antes de que llegue el riel. */
+    opacity: 0;
+    transition: opacity var(--motion-slow) var(--ease-standard) 120ms;
+}
+.fase.revealed .fase-viz::before { opacity: 1; }
+
+/* ── FASE 01 · EL BLOQUE DE REGLAS ─────────────────────────────────
+   El diagnostico escrito, como el panel de AOPs de decagon: una lista
+   numerada en monoespaciado donde el paso que falla se lee dentro del
+   propio texto. Un diagnostico es algo que se LEE, no un dibujo.
+
+   Fondo casi negro sobre carbon (--night-800 sobre --night-900): la
+   separacion la hace el borde y el halo, no el contraste de fondos. */
+/* [1-sep-2026] Pasa al CRISTAL CLARO del abanico. Antes era una caja
+   oscura sobre fondo oscuro y, al lado del abanico blanco, las tres
+   piezas no parecian del mismo sistema. Ahora las tres comparten el
+   mismo vidrio — blanco arriba a la izquierda cayendo al terracota
+   abajo a la derecha — y es el halo el que las enciende, igual que en
+   decagon. */
+.fase-pieza--reglas {
+    position: relative;
+    z-index: 1;
+    background: var(--cristal);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
+    box-shadow: var(--cristal-sombra);
+    overflow: hidden;
+}
+/* El brillo diagonal del vidrio, el mismo de las laminas del abanico. */
+.fase-pieza--reglas::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: var(--cristal-brillo);
+}
+.fase-pieza--reglas > * { position: relative; z-index: 1; }
+.reglas {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    line-height: 1.85;
+    /* Sobre el cristal claro: gris carbon, no el gris de fondo oscuro. */
+    color: var(--cristal-txt);
+}
+.reglas > li + li { margin-top: var(--space-2); }
+.reglas ul {
+    list-style: none;
+    margin: 0;
+    padding-left: var(--space-5);
+}
+.reglas-n {
+    color: var(--cristal-txt-suave);
+    margin-right: 0.4em;
+}
+/* Los tokens: lo que en decagon van en color son las VARIABLES del
+   sistema (@user_flagged_for_fraud). Aqui igual — lo que nombra algo
+   del negocio va en acento, el resto es texto corrido. */
+.reglas .tk {
+    font-weight: 600;
+    /* --cobalt-600 y no el 400: sobre el vidrio claro el 400 se queda
+       en 2.4 y no se lee. El 600 pasa de 5. */
+    color: var(--cobalt-600);
+}
+/* Lo que falla. Sobre el vidrio claro toca el rojo OSCURO (#B3261E,
+   5.9): el #FF8A8A que iba antes era para fondo oscuro y aqui se
+   quedaria en 2.1. */
+.reglas .tk-mal {
+    font-weight: 600;
+    color: #B3261E;
+}
+/* El paso roto: se marca con una barra a la izquierda, no con un
+   fondo — un fondo rojo dentro de un bloque de codigo se lee como
+   error de sintaxis, no como cuello de botella. */
+.reglas li.es-fallo {
+    position: relative;
+    padding-left: var(--space-3);
+    margin-left: calc(var(--space-3) * -1);
+    border-left: 2px solid #B3261E;
+}
+.reglas-pie {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin: var(--space-4) 0 0;
+    padding-top: var(--space-3);
+    border-top: 1px solid rgba(43, 46, 53, 0.18);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.03em;
+    color: #B3261E;
+}
+.reglas-pie .pin {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #B3261E;
+    flex: none;
+}
+/* Late despacio: es el hallazgo del diagnostico, lo unico que se
+   mueve en esta pieza. */
+.fase.revealed .reglas-pie .pin {
+    animation: pieza-latido 2.6s var(--ease-standard) 0.8s infinite;
+}
+@keyframes pieza-latido {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(179, 38, 30, 0.45); }
+    50%      { box-shadow: 0 0 0 6px rgba(179, 38, 30, 0); }
+}
+
+/* ── FASE 02 · EL FLUJO ────────────────────────────────────────────
+   La unica fase que pide diagrama de verdad, porque lo que cuenta es
+   que algo SE CONECTA con algo. Va desnudo sobre el carbon: sin caja,
+   sin ventana. Que respire es lo que lo diferencia de la fase 01, que
+   si es una caja cerrada. */
+/* [1-sep-2026] El flujo tambien pasa al cristal. Iba desnudo sobre el
+   carbon y, entre dos piezas de vidrio blanco, era la unica que no
+   parecia del mismo sistema. */
+.fase-pieza--flujo {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 430px);
+    background: var(--cristal);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5) var(--space-4);
+    box-shadow: var(--cristal-sombra);
+    overflow: hidden;
+}
+.fase-pieza--flujo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: var(--cristal-brillo);
+}
+.flujo {
+    width: 100%;
+    height: auto;
+    display: block;
+    position: relative;
+    z-index: 1;
+}
+/* [1-sep-2026] Colores invertidos: el flujo ya no va sobre carbon,
+   va sobre el cristal claro. Los nodos son cajas blancas con borde
+   gris, como una UI de verdad sobre fondo claro. */
+.flujo .nodo {
+    fill: rgba(255, 255, 255, 0.9);
+    stroke: rgba(43, 46, 53, 0.22);
+    stroke-width: 1;
+}
+/* El nodo nuevo — lo que se monta — es el unico en acento: el ojo
+   tiene que saber en un vistazo cual es el sujeto de la fase. */
+.flujo .nodo--acento {
+    fill: rgba(234, 130, 88, 0.16);
+    stroke: var(--cobalt-600);
+    stroke-width: 1.4;
+}
+.flujo .nodo-i {
+    fill: none;
+    stroke: var(--cristal-txt-suave);
+    stroke-width: 1.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+.flujo .nodo-i--acento { stroke: var(--cobalt-600); }
+.flujo .nodo-t {
+    font-family: var(--font-body);
+    font-size: 8.5px;
+    font-weight: 500;
+    fill: var(--cristal-txt);
+}
+.flujo .nodo-t--acento {
+    fill: var(--cobalt-600);
+    font-weight: 600;
+    text-anchor: middle;
+}
+.flujo .nodo-s {
+    font-family: var(--font-mono);
+    font-size: 6.4px;
+    fill: var(--cristal-txt-suave);
+    text-anchor: middle;
+}
+.flujo .hilo {
+    fill: none;
+    stroke: rgba(43, 46, 53, 0.3);
+    stroke-width: 1.2;
+}
+/* Los hilos a las herramientas van punteados: son conexiones a cosas
+   que ya existian, no parte del camino principal. */
+.flujo .hilo--suave {
+    stroke-dasharray: 2 3;
+    opacity: 0.75;
+}
+.flujo .punta { fill: rgba(43, 46, 53, 0.4); }
+.flujo .chip {
+    fill: rgba(255, 255, 255, 0.66);
+    stroke: rgba(43, 46, 53, 0.2);
+    stroke-width: 1;
+}
+.flujo .chip-t {
+    font-family: var(--font-mono);
+    font-size: 6.6px;
+    fill: var(--cristal-txt);
+}
+
+/* ── LOS ICONOS DE LAS HERRAMIENTAS ────────────────────────────────
+   Antes los chips eran texto gris a secas y no se distinguian entre
+   si. Ahora cada uno lleva la marca que el cliente reconoce, EN SU
+   COLOR: es lo unico de la pieza que no va en terracota, a proposito
+   — que se lean como logos ajenos y no como decoracion de la web es
+   justo lo que hace creible que el agente se conecta a lo que ya usa.
+
+   Dibujados a mano y no cargados de una CDN: son 4 formas simples, y
+   asi no dependen de red ni meten una peticion por icono. */
+.flujo .marca-h {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+.flujo .marca-f {
+    fill: currentColor;
+    stroke: none;
+}
+
+/* WhatsApp verde: la burbuja rellena y el auricular calado encima. */
+.flujo .marca--wa { color: #25D366; }
+.flujo .marca--wa .marca-h {
+    stroke: none;
+    /* El auricular calado en blanco: sobre el verde de WhatsApp es lo
+       que hace el logo reconocible. Antes iba en el carbon del fondo
+       oscuro, que sobre cristal claro se veria como un borron. */
+    fill: #FFFFFF;
+}
+
+/* Calendario del nodo Agenda: neutro claro, porque ese nodo es parte
+   del flujo, no una herramienta externa de marca. */
+.flujo .marca--cal { color: var(--cristal-txt-suave); }
+.flujo .marca-dia {
+    fill: var(--cobalt-600);
+    stroke: none;
+}
+
+/* CRM: no hay logo universal, asi que se dibuja el objeto (una ficha
+   de contacto). Va en el acento de la marca, no en un color ajeno. */
+.flujo .marca--crm { color: var(--cobalt-600); }
+
+/* Google Calendar: azul de Google. */
+.flujo .marca--gcal { color: #4285F4; }
+.flujo .marca-31 {
+    font-family: var(--font-body);
+    font-size: 4.6px;
+    font-weight: 700;
+    fill: #4285F4;
+    stroke: none;
+    text-anchor: middle;
+}
+
+/* Gmail: rojo de Google, con la M del pliegue del sobre. */
+.flujo .marca--gmail { color: #EA4335; }
+.flujo .marca-m {
+    fill: none;
+    stroke: #EA4335;
+    stroke-width: 1.3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* ── EL ICONO DEL AGENTE ───────────────────────────────────────────
+   Cabeza de bot con antena: es como se dibuja un agente de IA en
+   todas partes. Antes era un circulo con un tic, que se leia como
+   "hecho", no como "agente". */
+.flujo .bot-cara,
+.flujo .bot-antena {
+    fill: none;
+    stroke: var(--cobalt-600);
+    stroke-width: 1.3;
+    stroke-linecap: round;
+}
+.flujo .bot-ojo,
+.flujo .bot-punto {
+    fill: var(--cobalt-600);
+    stroke: none;
+}
+/* El nodo nuevo se dibuja al entrar: lo que la fase cuenta es que
+   algo SE MONTA, asi que se monta delante. */
+.flujo .es-nuevo {
+    opacity: 0;
+    transform: scale(0.94);
+    transform-origin: center;
+    transform-box: fill-box;
+}
+.fase.revealed .flujo .es-nuevo {
+    animation: pieza-montar 620ms var(--ease-standard) 380ms forwards;
+}
+@keyframes pieza-montar {
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* ── FASE 03 · EL ABANICO DE PANELES ───────────────────────────────
+   [1-sep-2026] Replica del "Escala tu agente" de decagon con el acento
+   terracota: cinco laminas de cristal escalonadas en perspectiva, cada
+   una con su grafica.
+
+   Antes esta fase era un hueco de imagen — la unica sin pieza dibujada
+   entre dos que si la tenian, y se leia como un sitio a medio hacer.
+
+   Como se construye la profundidad, que es lo unico delicado:
+   · El contenedor abre la perspectiva (perspective + preserve-3d).
+   · Cada lamina es el MISMO rectangulo, girado en Y y desplazado en Z.
+     Girar todas igual y separarlas en Z es lo que da el abanico; si se
+     giraran distinto se leerian como cinco cosas sueltas.
+   · La opacidad baja hacia el fondo: es lo que hace que la pila tenga
+     aire y no parezca un acordeon plano.
+
+   Sobre carbon el cristal va con fondo claro translucido, igual que en
+   la referencia — las laminas TIENEN que ser claras o el abanico
+   desaparece contra el fondo. */
+.fase-pieza--abanico {
+    position: relative;
+    z-index: 1;
+    /* Perspectiva mas cercana que antes (1400 -> 1050) y centrada en la
+       propia pieza. En la referencia las laminas se ven CASI DE FRENTE:
+       la profundidad la hace el escalonado, no un giro fuerte. Con el
+       origen desplazado al 60% el abanico se iba a la derecha y por eso
+       no parecia centrado. */
+    perspective: 1050px;
+    perspective-origin: 50% 50%;
+}
+.abanico {
+    position: relative;
+    /* 16:10, la proporcion del bloque entero. Da el alto sin fijarlo a
+       pixeles, asi el abanico escala con el ancho de la columna. */
+    aspect-ratio: 16 / 10;
+    transform-style: preserve-3d;
+}
+
+/* La lamina: un panel de cristal claro. Todas comparten forma y solo
+   cambian de sitio en Z, que es lo que las hace leerse como la misma
+   cosa repetida hacia el fondo. */
+.abanico .lam {
+    position: absolute;
+    /* Laminas mas grandes y mas altas que antes (46%/88% -> 54%/94%):
+       en la referencia ocupan casi todo el alto de la pieza y es lo que
+       las hace leerse como paneles y no como fichas. */
+    top: 3%;
+    left: 50%;
+    width: 54%;
+    height: 94%;
+    border-radius: 10px;
+    overflow: hidden;
+    /* El cristal: blanco arriba a la izquierda cayendo al terracota
+       abajo a la derecha, como el morado de la referencia. Mas blanco
+       que antes en la parte alta (0.94 -> 0.97) y el acento mas
+       presente al fondo, que es lo que le da el tinte de color. */
+    background: var(--cristal);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    /* Sombra propia por lamina: es lo que separa una de otra en la pila
+       y evita que se lean como un bloque macizo. */
+    box-shadow: 0 18px 40px -14px rgba(0, 0, 0, 0.8),
+                0 2px 8px -2px rgba(0, 0, 0, 0.4);
+    /* Giro suave (-26 -> -17): en la referencia las laminas estan casi
+       de frente y la profundidad la hace el escalonado. A -26 se veian
+       de canto y las graficas se estrechaban. */
+    transform: translate(-50%, 0) rotateY(-17deg) rotateX(-1deg);
+    transform-origin: center center;
+    /* Entra desde el fondo: el abanico se despliega al revelarse, en
+       vez de aparecer ya montado. */
+    opacity: 0;
+    transition: opacity 620ms var(--ease-standard),
+                transform 620ms var(--ease-standard);
+}
+
+/* El escalonado. Cada lamina se va al fondo (translateZ negativo) y
+   hacia la derecha, que es como se abre el abanico de la referencia.
+   Los valores son una progresion, no numeros a ojo: -78px de Z y +58px
+   de X por lamina. */
+.abanico .lam--1 { z-index: 5; }
+.abanico .lam--2 { z-index: 4; }
+.abanico .lam--3 { z-index: 3; }
+.abanico .lam--4 { z-index: 2; }
+.abanico .lam--5 { z-index: 1; }
+
+/* [1-sep-2026] Las laminas van TODAS OPACAS. Dos motivos, los dos
+   comprobados en pantalla:
+   · Sobre el carbon, bajar la opacidad de un panel claro no lo aleja:
+     lo ENNEGRECE. El abanico se degradaba a marron hacia el fondo en
+     vez de mantenerse blanco como en la referencia.
+   · Y cualquier alpha deja pasar el halo de detras, que es lo que hacia
+     que el resplandor se viera POR DENTRO de las laminas.
+   La profundidad la hacen el escalonado y la sombra de cada lamina. */
+.abanico .lam--2 { opacity: 0; }
+.abanico .lam--3 { opacity: 0; }
+.abanico .lam--4 { opacity: 0; }
+.abanico .lam--5 { opacity: 0; }
+
+/* El escalonado. Simetrico respecto al centro: la lamina del medio (la
+   3) se queda en el eje y las otras se reparten a los lados — es lo que
+   hace que el abanico se vea CENTRADO en su hueco. Antes iban todas
+   corridas hacia la derecha desde el eje y por eso parecia descolocado.
+
+   Cada paso son 46px en X, 26px en Z y 6px en Y: la subida en Y es lo
+   que hace que la pila ascienda hacia el fondo, como en la referencia. */
+.fase.revealed .abanico .lam--1 {
+    opacity: 1;
+    transform: translate(-50%, 0) translate3d(-92px, 12px, 52px) rotateY(-17deg) rotateX(-1deg);
+    transition-delay: 60ms;
+}
+.fase.revealed .abanico .lam--2 {
+    opacity: 1;
+    transform: translate(-50%, 0) translate3d(-46px, 6px, 26px) rotateY(-17deg) rotateX(-1deg);
+    transition-delay: 140ms;
+}
+.fase.revealed .abanico .lam--3 {
+    opacity: 1;
+    transform: translate(-50%, 0) translate3d(0, 0, 0) rotateY(-17deg) rotateX(-1deg);
+    transition-delay: 220ms;
+}
+.fase.revealed .abanico .lam--4 {
+    opacity: 1;
+    transform: translate(-50%, 0) translate3d(46px, -6px, -26px) rotateY(-17deg) rotateX(-1deg);
+    transition-delay: 300ms;
+}
+.fase.revealed .abanico .lam--5 {
+    opacity: 1;
+    transform: translate(-50%, 0) translate3d(92px, -12px, -52px) rotateY(-17deg) rotateX(-1deg);
+    transition-delay: 380ms;
+}
+
+/* El brillo del cristal: la banda diagonal que recorre la lamina por
+   arriba. Sin esto son rectangulos de color; con esto son vidrio. */
+.abanico .lam::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(118deg,
+        rgba(255, 255, 255, 0.55) 0%,
+        rgba(255, 255, 255, 0.06) 34%,
+        transparent 58%);
+}
+
+.abanico .lam-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* Los graficos de dentro. Van en el terracota oscuro (--cobalt-600),
+   no en el 400: sobre el cristal claro el 400 se queda en 2.4 y no se
+   lee — el 600 sobre este fondo pasa de 5. */
+.abanico .lam-barra {
+    fill: var(--cobalt-600);
+    opacity: 0.72;
+}
+.abanico .lam-linea {
+    fill: var(--cobalt-600);
+    opacity: 0.34;
+}
+.abanico .lam-area {
+    fill: var(--cobalt-600);
+    opacity: 0.24;
+}
+.abanico .lam-curva {
+    fill: none;
+    stroke: var(--cobalt-600);
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    /* El viewBox va sin preserveAspectRatio, asi que el trazo se
+       deformaria con la caja: vector-effect lo mantiene constante. */
+    vector-effect: non-scaling-stroke;
+}
+.abanico .lam-punto { fill: var(--cobalt-600); }
+.abanico .lam-rejilla {
+    fill: none;
+    stroke: var(--cobalt-600);
+    stroke-width: 1;
+    opacity: 0.22;
+    vector-effect: non-scaling-stroke;
+}
+.abanico .lam-arco {
+    fill: none;
+    stroke: var(--cobalt-600);
+    stroke-width: 1.6;
+    opacity: 0.5;
+    vector-effect: non-scaling-stroke;
+}
+
+/* El marcador de sitio. Proporcion 16:10 para que al meter la captura
+   la seccion no de un salto de altura. */
+.hueco-vacio {
+    aspect-ratio: 16 / 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    padding: var(--space-5);
+    text-align: center;
+    background:
+        repeating-linear-gradient(45deg,
+            rgba(255, 255, 255, 0.018) 0 8px,
+            transparent 8px 16px);
+    border: 1px dashed var(--night-600);
+    border-radius: calc(var(--radius-lg) - 1px);
+}
+.hueco-icono {
+    width: 30px;
+    height: 24px;
+    border: 1.5px solid var(--cobalt-400);
+    border-radius: 4px;
+    position: relative;
+    opacity: 0.8;
+}
+/* Dos formas dentro del marco: el clasico "aqui va una imagen" sin
+   tener que cargar un icono. */
+.hueco-icono::before {
+    content: '';
+    position: absolute;
+    left: 4px;
+    bottom: 3px;
+    width: 0;
+    height: 0;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 9px solid var(--cobalt-400);
+}
+.hueco-icono::after {
+    content: '';
+    position: absolute;
+    right: 5px;
+    top: 4px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--cobalt-400);
+}
+.hueco-t {
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    letter-spacing: 0.04em;
+    color: var(--on-night-soft);
+}
+.hueco-s {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--on-night-mid);
+    word-break: break-all;
+}
+
+
+/* ── DONDE MUERE LA LINEA ──────────────────────────────────────────
+   [1-sep-2026] La bola estaba suelta en el hueco entre la ultima fase
+   y el bloque gris: la linea moria en el aire y no entregaba nada.
+   Ahora baja hasta el bloque y la bola va MONTADA sobre su borde
+   superior, que es donde decagon termina su linea temporal.
+
+   Dos piezas: el tramo que baja (.riel-bajada) y la bola, que vive
+   dentro de .cierre para quedarse pegada a su borde pase lo que pase
+   con el alto del bloque. */
+/* El tramo final del riel: un item mas de la lista, sin contenido.
+   Solo aporta ALTO, y sobre ese alto corren la linea de fondo y el
+   relleno naranja como sobre cualquier otra fase — por eso el naranja
+   llega hasta la bola sin el corte gris que habia antes.
+   space-10 (96px) es lo que separa la ultima fase del bloque gris. */
+.fase-cola {
+    height: var(--space-10);
+    padding: 0;
+    list-style: none;
+}
+
+.riel-bola {
+    position: absolute;
+    /* Sobre el borde de arriba del bloque, centrada en el eje del
+       riel. El -50% de Y la deja montada a caballo del borde: mitad
+       fuera, mitad dentro. */
+    top: 0;
+    left: var(--riel, 50%);
+    z-index: 2;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--cobalt-400);
+    /* El aro del color del fondo de la seccion la recorta contra el
+       borde del bloque y la hace flotar, igual que en decagon. */
+    box-shadow: 0 0 0 6px var(--night-900),
+                0 0 28px 4px rgba(234, 130, 88, 0.55);
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.7);
+    transition: opacity var(--motion-slow) var(--ease-standard),
+                transform var(--motion-slow) var(--ease-standard);
+}
+.cierre.revealed .riel-bola {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+.riel-bola svg {
+    width: 17px;
+    height: 17px;
+    fill: var(--night-900);
+}
+
+/* ── EL BLOQUE DE CIERRE ───────────────────────────────────────────
+   [1-sep-2026] Lo que antes era la fase 04 colgando del riel. No es un
+   paso mas: es lo que pasa DESPUES, y como paso numerado se leia igual
+   de importante que los otros tres.
+
+   Ahora es el bloque final a todo ancho, en gris oscuro sobre el
+   carbon de la seccion — imagenes a la izquierda, texto a la derecha,
+   que es como cierra decagon. El cambio de fondo es lo que le dice al
+   ojo "esto ya no es la lista de pasos". */
+.cierre {
+    /* Sin margen arriba: ese hueco lo ocupa ahora .riel-bajada, que es
+       el tramo de linea que baja hasta aqui. */
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: var(--space-8);
+    align-items: center;
+    /* --night-800 sobre el --night-900 de la seccion: la separacion la
+       hace el cambio de plano, no un borde marcado. */
+    background: var(--night-800);
+    border: 1px solid var(--night-700);
+    border-radius: var(--radius-xl);
+    padding: var(--space-8);
+}
+
+/* ── LAS TRES TARJETAS DEL CIERRE ──────────────────────────────────
+   [1-sep-2026] Tercera version de esta zona. Las dos anteriores eran
+   INTERFAZ dibujada (burbujas de chat, listas de conversaciones) sobre
+   fondo plano, y fallaban por lo mismo: una UI dibujada no emociona ni
+   demuestra nada, solo son frases dentro de una caja.
+
+   El patron que si funciona: imagen organica abstracta de fondo y UN
+   DATO GRANDE encima. La imagen pone el tono, el numero pone el
+   mensaje. Al ser abstracta no envejece ni compromete a un sector.
+
+   Tres reglas para que no se lean como tres piezas sueltas:
+   · Una sola familia de color, que la ponen las propias imagenes.
+   · Una INVIERTE (fondo oscuro) para romper el ritmo.
+   · La flecha de la esquina, igual en las tres. */
+.cierre-visual {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: var(--space-4);
+    align-items: stretch;
+}
+.tarjeta {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 200px;
+    padding: var(--space-5);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    /* El fondo sobre el que se funden las imagenes: negro con un tinte
+       calido, no negro puro — asi el borde difuminado de la foto no
+       muere contra un vacio, y la tarjeta conserva temperatura aunque
+       la imagen sea oscura. */
+    /* [1-sep-2026] El tinte calido baja de 0.16 a 0.05 y se va a la
+       parte de abajo. Estaba en la mitad SUPERIOR, que es justo donde
+       cae la forma con contain: alrededor del petalo y del coral se
+       veia un halo grisaceo que delataba la caja de la tarjeta, en vez
+       de negro limpio como en la del planeta.
+       Abajo no molesta: ahi ya hay velo oscuro para el texto. */
+    background:
+        radial-gradient(120% 80% at 50% 108%,
+            rgba(234, 130, 88, 0.05) 0%,
+            transparent 72%),
+        #08090B;
+    box-shadow: 0 20px 44px -18px rgba(0, 0, 0, 0.8);
+}
+/* La alta ocupa las dos filas de la izquierda: es la que rompe la
+   rejilla y hace que las tres se lean como un montaje. */
+.tarjeta--alta {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+}
+/* Aqui si va COVER: la tarjeta es vertical y el video tambien, asi que
+   encajan sin recortar casi nada. Con contain aparecian dos bandas
+   oscuras a los lados, porque el video no llegaba a los bordes. */
+.tarjeta--alta .tarjeta-fondo img,
+.tarjeta--alta .tarjeta-fondo video {
+    /* CONTAIN aqui tambien, no cover.
+       [1-sep-2026] Con cover el video se recortaba para llenar la
+       tarjeta y el planeta salia ampliado y cortado por los lados: en
+       el archivo se ve entero, en la web no. Con contain se ve la
+       esfera COMPLETA, que es como se genero.
+       El scale 1.06 solo compensa el aire que deja contain, sin llegar
+       a recortar. */
+    /* COVER aqui, no contain. El video ya viene reencuadrado con
+       ffmpeg — la flor cabe entera y no toca ningun borde (comprobado:
+       0 de brillo en los cuatro lados), asi que puede llenar la tarjeta
+       sin recortar nada.
+       Con contain quedaban bandas negras arriba y abajo, que es el
+       borde que se veia. */
+    object-fit: cover;
+    object-position: 50% 42%;
+    transform: none;
+    /* Con cover el video llena la tarjeta, asi que aqui la mascara
+       puede ser amplia: no hay borde recto que esconder, solo hay que
+       fundir contra los bordes de la propia tarjeta. */
+    -webkit-mask-image: radial-gradient(110% 96% at 50% 40%,
+        #000 0%, #000 52%, rgba(0, 0, 0, 0.5) 78%, transparent 100%);
+    mask-image: radial-gradient(110% 96% at 50% 40%,
+        #000 0%, #000 52%, rgba(0, 0, 0, 0.5) 78%, transparent 100%);
+}
+
+/* El fondo: imagen o video a sangre, detras del contenido. */
+.tarjeta-fondo {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+.tarjeta-fondo img,
+.tarjeta-fondo video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    /* CONTAIN por defecto. Con cover, un motivo que ocupa todo el
+       cuadro — como el petalo — se comia el encuadre entero: se veia un
+       trozo en vez de la forma, y el texto caia sobre una zona clara
+       (2.03 de contraste, medido). Con contain se ve la pieza COMPLETA
+       y queda fondo oscuro alrededor, que es donde el texto se lee.
+       La tarjeta alta lo sobrescribe mas abajo. */
+    object-fit: contain;
+    /* Arriba y algo mas pequenyo que la tarjeta: la forma vive en la
+       mitad de arriba y la de abajo queda para el texto, que asi se
+       lee sobre fondo oscuro y no sobre la imagen. */
+    /* Por defecto: la forma centrada en la mitad de arriba, con aire
+       alrededor. Cada tarjeta lo afina abajo segun lo que contiene —
+       una flor flota, un coral se apoya. */
+    object-position: 50% 26%;
+    transform: scale(0.86);
+    transform-origin: 50% 26%;
+    /* FUNDIDO A NEGRO POR LOS CUATRO LADOS.
+       Tres imagenes generadas por separado nunca traen exactamente el
+       mismo fondo — una sale negra, otra gris oscuro — y ese borde
+       nitido donde acaba cada foto es lo que delata que son piezas
+       sueltas. Con la mascara, la imagen se disuelve en el fondo de la
+       tarjeta y el borde deja de existir: las tres se leen como una
+       serie aunque no lo sean del todo.
+       Ademas iguala pequenyas diferencias de encuadre, porque lo que
+       se ve de cada foto es su centro. */
+    /* La mascara se ancla al centro de la FORMA (que con contain vive
+       arriba, no en el medio del cuadro) y cierra antes: asi el fundido
+       cae dentro del propio video y su borde recto nunca llega a verse.
+       Con el radio anterior (78%) el degradado terminaba fuera del
+       cuadro y el recorte del video quedaba a la vista. */
+    /* La mascara sigue a la forma, que ahora vive arriba del cuadro. */
+    -webkit-mask-image: radial-gradient(66% 62% at 50% 32%,
+        #000 0%, #000 34%, rgba(0, 0, 0, 0.45) 68%, transparent 94%);
+    mask-image: radial-gradient(66% 62% at 50% 32%,
+        #000 0%, #000 34%, rgba(0, 0, 0, 0.45) 68%, transparent 94%);
+    /* Correccion de tono comun: unifica el brillo y la saturacion de
+       las tres, para que una que venga mas viva no cante al lado de
+       otra mas apagada. */
+    filter: saturate(0.94) brightness(0.96);
+}
+/* El velo que garantiza que el dato se lea SIEMPRE, sea cual sea la
+   imagen que acabe entrando. Sin esto, el contraste del texto depende
+   de la suerte que tenga el fondo generado. */
+.tarjeta::after {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    pointer-events: none;
+    /* El velo que garantiza que el texto se lea sea cual sea la imagen.
+       Ahora tira a negro y no a marron, porque el fondo de la tarjeta ya
+       es oscuro: un velo marron sobre negro se veia como una mancha. */
+    /* Sube hasta el 62%: con la forma ya recogida arriba, el velo tiene
+       que cubrir toda la mitad baja para garantizar el contraste del
+       texto pase lo que pase con la imagen que entre. */
+    background: linear-gradient(to top,
+        rgba(9, 10, 12, 0.94) 0%,
+        rgba(9, 10, 12, 0.82) 30%,
+        rgba(9, 10, 12, 0.4) 50%,
+        transparent 78%);
+}
+.tarjeta-cuerpo {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* EL DATO. Es el mensaje de la tarjeta, asi que va grande y sin
+   competencia: blanco puro sobre el velo oscuro. */
+.dato {
+    font-family: var(--font-display);
+    /* [1-sep-2026] Bajado de 2.9 a 2.15 de maximo. Los datos eran
+       cifras cortas (24/7, 0) y ahora son palabras (Sostengo): al
+       tamanyo de antes, en la columna estrecha de la derecha partian
+       en dos lineas. */
+    font-size: clamp(1.6rem, 2.6vw, 2.15rem);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.035em;
+    color: #FFFFFF;
+    font-variant-numeric: tabular-nums;
+}
+.dato-k {
+    font-size: 0.84rem;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.92);
+    max-width: 26ch;
+}
+/* La alta puede permitirse el dato mas grande: tiene el doble de alto
+   y con el mismo tamanyo se le quedaba mucho aire muerto arriba. */
+.tarjeta--alta .dato { font-size: clamp(2rem, 3.2vw, 2.7rem); }
+
+/* La invertida. Con las tres tarjetas ya oscuras (antes eran claras),
+   lo que la distingue no puede ser el fondo: es el DATO EN ACENTO, que
+   es un contraste mas limpio y no obliga a que su imagen sea distinta
+   de las otras dos. */
+.tarjeta--invertida .dato { color: var(--cobalt-400); }
+
+/* ── EL ENCUADRE, TARJETA A TARJETA ────────────────────────────────
+   [1-sep-2026] Cada forma pide su sitio y no se pueden tratar igual:
+   una flor flota y necesita aire por los cuatro lados; un coral crece
+   desde su base y tiene que apoyarse. Con un solo encuadre comun, o
+   el petalo se pegaba arriba o el coral quedaba colgando. */
+
+/* El petalo: centrado y algo mas pequenyo, para que respire. */
+/* El planeta (donde antes iba el petalo). El video ya viene con su
+   margen, asi que cover sin escalar. */
+.tarjeta--petalo .tarjeta-fondo video,
+.tarjeta--petalo .tarjeta-fondo img {
+    object-fit: cover;
+    object-position: 50% 46%;
+    transform: none;
+}
+/* El coral: apoyado en el borde de abajo de su cuadro y mas grande,
+   porque crece hacia arriba desde la base. */
+.tarjeta--coral .tarjeta-fondo video,
+.tarjeta--coral .tarjeta-fondo img {
+    object-position: 50% 0%;
+    transform: scale(0.96);
+    transform-origin: 50% 0%;
+}
+
+/* La flecha de la esquina: el gesto que dice "esto lleva a algo".
+   Decorativa — no es un enlace, asi que no se marca como tal. */
+.tarjeta-flecha {
+    position: absolute;
+    z-index: 2;
+    top: var(--space-4);
+    right: var(--space-4);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(4px);
+}
+.tarjeta-flecha svg {
+    width: 14px;
+    height: 14px;
+    fill: none;
+    stroke: #3C1606;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+.tarjeta--invertida .tarjeta-flecha {
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+}
+.tarjeta--invertida .tarjeta-flecha svg { stroke: #FFFFFF; }
+
+/* El marcador de sitio, mientras no hay archivo. Va tenue: debajo ya
+   hay un degradado de reserva, asi que solo tiene que recordar la
+   ruta, no llenar el hueco. */
+.tarjeta .hueco-vacio {
+    height: 100%;
+    aspect-ratio: auto;
+    border: none;
+    background: none;
+    justify-content: flex-start;
+    padding-top: var(--space-5);
+    opacity: 0.5;
+}
+.tarjeta .hueco-s { color: rgba(255, 255, 255, 0.85); }
+.tarjeta .hueco-icono { border-color: rgba(255, 255, 255, 0.85); }
+.tarjeta .hueco-icono::before { border-bottom-color: rgba(255, 255, 255, 0.85); }
+.tarjeta .hueco-icono::after { background: rgba(255, 255, 255, 0.85); }
+
+@media (max-width: 900px) {
+    /* En una columna, la alta deja de ocupar dos filas. */
+    .cierre-visual { grid-template-columns: 1fr; }
+    .tarjeta--alta {
+        grid-column: 1;
+        grid-row: auto;
+    }
+    .tarjeta { min-height: 180px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    /* Los videos de fondo se quedan en su primer fotograma: el pause
+       lo hace el propio navegador al respetar la preferencia. */
+    .tarjeta-fondo video { animation: none; }
+}
+
+
+.cierre-t {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 2.4vw, 1.95rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.22;
+    color: var(--on-night);
+    margin: 0 0 var(--space-4);
+}
+/* La primera linea en acento y en su propio renglon: es el patron de
+   decagon ("Tu negocio evoluciona." arriba, la consecuencia debajo).
+   La tension entre las dos frases es el argumento entero. */
+.cierre-t em {
+    display: block;
+    font-style: normal;
+    color: var(--cobalt-400);
+}
+.cierre-p {
+    font-size: 0.98rem;
+    line-height: 1.68;
+    color: var(--on-night-soft);
+    margin: 0 0 var(--space-4);
+    max-width: 54ch;
+}
+.cierre-nota {
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    letter-spacing: 0.04em;
+    color: var(--cobalt-400);
+    margin: var(--space-5) 0 0;
+    padding-left: var(--space-3);
+    border-left: 2px solid var(--cobalt-400);
+    line-height: 1.5;
+}
+.cierre-cta {
+    margin-top: var(--space-6);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+}
+
+/* Por debajo de 900 el bloque se apila: imagenes arriba, texto
+   debajo. Enfrentados a este ancho, ninguna de las dos columnas
+   respira. */
+@media (max-width: 900px) {
+    .cierre {
+        grid-template-columns: 1fr;
+        gap: var(--space-7);
+        padding: var(--space-6);
+    }
+    /* En una columna el riel se va al borde izquierdo; la bola lo
+       sigue sola porque las dos se anclan a --riel. */
+}
+@media (max-width: 700px) {
+    .cierre { padding: var(--space-5); }
+    .cierre-visual { gap: var(--space-3); }
+    .riel-bola {
+        width: 30px;
+        height: 30px;
+    }
+    .riel-bola svg { width: 14px; height: 14px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .cierre.revealed .riel-bola,
+    .riel-bola {
+        transition: none;
+        transform: translate(-50%, -50%);
+    }
+}
 /* Entrada escalonada por fase: 80ms de diferencia hace que el ojo
    recorra el riel de arriba abajo. Sobre la transicion de .reveal,
    asi que respeta prefers-reduced-motion sin regla extra. */
@@ -2489,16 +3835,72 @@ html {
 .fases .fase:nth-child(3) { transition-delay: 160ms; }
 .fases .fase:nth-child(4) { transition-delay: 240ms; }
 
-@media (max-width: 700px) {
+/* Por debajo de 900 no caben dos columnas a los lados del riel: el
+   riel se va al borde izquierdo y texto y tarjeta se apilan a su
+   derecha. Basta con mover --riel, porque linea, relleno y nodo estan
+   todos anclados a esa misma variable. */
+@media (max-width: 900px) {
+    .fases {
+        --riel: 5px;
+    }
     .fase {
-        grid-template-columns: 34px 1fr;
-        gap: 0 var(--space-4);
-        padding-left: var(--space-5);
-        padding-bottom: var(--space-7);
+        grid-template-columns: 1fr;
+        padding-left: var(--space-7);
+        padding-bottom: var(--space-9);
+        align-items: start;
+    }
+    .fase-cuerpo {
+        grid-column: 1;
+        padding-right: 0;
+    }
+    .fase-viz {
+        grid-column: 1;
+        padding-left: 0;
+        margin-top: var(--space-5);
+        max-width: 420px;
+    }
+    /* Vuelve arriba: centrado vertical solo tiene sentido con las dos
+       columnas enfrentadas.
+       [1-sep-2026] El top ya no se fija aqui — lo escribe index.js en
+       --marca-y, que por debajo de 900 mide el TITULO en vez del bloque
+       entero. Ponerlo tambien en el CSS no serviria de nada: la
+       variable va inline en el <li> y gana siempre. */
+    .fase { align-items: start; }
+    /* La pieza deja de estar centrada en su celda: en una columna se
+       apoya contra el mismo borde que el texto. */
+    .fase-viz { align-items: flex-start; }
+    .fase-pieza { width: 100%; }
+}
+
+@media (max-width: 700px) {
+    /* Sigue en una columna (lo fija el bloque de 900): aqui solo se
+       aprieta la sangria y se baja el cuerpo de texto. */
+    .fase {
+        padding-left: var(--space-6);
+        padding-bottom: var(--space-8);
     }
     .fase-t { font-size: 1.18rem; }
     .fase-p { font-size: 0.94rem; }
+
+    /* La pieza se alinea a la izquierda con el texto en vez de
+       centrarse: en una sola columna, centrada quedaba descolgada. */
+    .fase-viz { justify-content: flex-start; }
 }
 @media (prefers-reduced-motion: reduce) {
     .fases .fase { transition-delay: 0ms; }
+    /* Se mantiene el resultado y se quita el movimiento: el riel no
+       crece y ninguna pieza late ni se traza. Todo sale ya en su
+       estado final, que es lo que cada pieza cuenta. */
+    .fases::after { transition: none; }
+    .fase.revealed .reglas-pie .pin { animation: none; }
+    .flujo .es-nuevo {
+        opacity: 1;
+        transform: none;
+    }
+    .fase.revealed .flujo .es-nuevo { animation: none; }
+    .fase-pieza {
+        transition: opacity var(--motion-base) var(--ease-standard);
+    }
+    .fase.revealed .fase-pieza { transform: none; }
+    .fase-pieza::before { transition: none; }
 }

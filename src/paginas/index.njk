@@ -96,8 +96,22 @@ trasPie: |
             <div class="hero-cta-wrapper">
                 <a href="#contacto" class="btn-primary">Revisar mi negocio &rarr;</a>
             </div>
+            <p class="hero-salida">
+                &iquest;No sabes por d&oacute;nde empezar? <a href="/diagnostico-operativo/">Empieza por el diagn&oacute;stico</a>
+            </p>
         </div>
     </header>
+
+    <!-- TIRA DE LOGOS - prueba social temprana, deliberadamente discreta -->
+    <section id="clientes" class="clientes-tira reveal">
+        <div class="logos-track">
+            <img src="assets/img/mafhesa.png" alt="Mafhesa" class="logo-cliente">
+            <img src="assets/img/topboutique.png" alt="Top Boutique" class="logo-cliente">
+            <img src="assets/img/bioresina.svg" alt="Bioresina" class="logo-cliente">
+            <img src="assets/img/geko.svg" alt="Geko" class="logo-cliente">
+        </div>
+    </section>
+
 
     <!-- SECCIÓN 2 — EL PROBLEMA -->
     <!-- SECCION 2 - BENEFICIOS: que se lleva, antes de contarle el problema -->
@@ -269,186 +283,6 @@ trasPie: |
         cliente con nombre. El marcado esta en el historial de git y en
         scratchpad/seccion-donde-actuan.txt; su CSS (.donde-section,
         .areas-grid, .area*) sigue en index.css por si vuelve. -#}
-
-    <!-- SECCIÓN 4 — POR DÓNDE SE EMPIEZA (cierre) -->
-    {#- Fondo claro: la home tenía tres bloques oscuros y el scroll se leía
-        como páginas pegadas. El oscuro se reserva al hero (ancla de marca),
-        como en steep.app (una sola sección oscura) o getharvest (ninguna). -#}
-    <section id="caminos" class="section caminos-section reveal">
-        <div class="container">
-            <div class="section-header centered">
-                <span class="section-label">CÓMO EMPEZAR</span>
-                <h2 class="section-title">Por dónde se empieza</h2>
-            </div>
-
-            <div class="caminos-wrap">
-                <div class="grid-two-cols gap-40">
-                    <!-- Camino A -->
-                    <div class="glass-card camino-card reveal" data-tilt>
-                        <span class="camino-letra" aria-hidden="true">A</span>
-                        <i class="camino-edge" aria-hidden="true"></i>
-                        <div class="card-num">CAMINO A</div>
-                        <h3 class="card-title">Ya sabes qué te hace falta</h3>
-                        <p class="card-desc">
-                            Si ya sabes lo que necesitas, vamos a ello: me lo cuentas y te digo qué hace falta para montarlo.
-                        </p>
-                        <div class="card-cta-row">
-                            <a href="#contacto" class="btn-primary-small">Cuéntame qué necesitas &rarr;</a>
-                        </div>
-                    </div>
-                    <!-- Camino B -->
-                    <div class="glass-card camino-card camino-b reveal" data-tilt>
-                        <span class="camino-letra" aria-hidden="true">B</span>
-                        <i class="camino-edge" aria-hidden="true"></i>
-                        <div class="card-num">CAMINO B</div>
-                        <h3 class="card-title">Sabes que algo no va bien, pero no sabes el qué</h3>
-                        <p class="card-desc">
-                            Empezamos por averiguarlo. En el <strong>DAI360</strong> miro las cuatro áreas de tu negocio, cómo llegan tus clientes, cómo se cierran, cómo entregas y cómo lo llevas por dentro. Al terminar sabes qué te está frenando y qué merece la pena arreglar primero. El plan es tuyo, lo implemente yo o no.
-                        </p>
-                        {#- El CTA de B lleva al DAI360, no al formulario: si los
-                            dos caminos acaban en el mismo sitio, elegir no sirve
-                            de nada. Contacto queda como salida secundaria. -#}
-                        <div class="card-cta-row">
-                            <a href="/diagnostico-operativo/" class="btn-primary-small">Ver el diagnóstico DAI360 &rarr;</a>
-                            <a href="#contacto" class="btn-ghost-link">O cuéntame tu caso</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="caminos-vs" aria-hidden="true">o</div>
-            </div>
-            <p class="section-subtitle" style="text-align:center; margin-top: 32px;">Si puedo ayudarte, te lo digo claro. Si no, también.</p>
-        </div>
-    </section>
-
-    {# SECCIÓN 4B — LAS TRES GARANTÍAS
-       No es una sección de venta: es el bloque que quita miedos. Va
-       después de "caminos" porque ahí es donde aparece la duda callada
-       ("¿esto es legal? ¿es seguro? ¿y mis datos?").
-
-       Diseño deliberadamente APARTE y sin competir: fondo propio, sin
-       titular de sección grande y sin CTA. Da confianza por presencia,
-       no por volumen.
-
-       Fuentes: _docs/metodo/cumplimiento-reglamento-ia.md (art. 50, en
-       vigor 2-ago-2026) y _skills/ciberseg-workflows-ia (patrón
-       sándwich, guardrails entrada/salida). Nada de esto es promesa de
-       marketing: es lo que ya se aplica. #}
-    <section id="garantias" class="section garantias-section section-bloque reveal">
-        <div class="container">
-            <p class="garantias-intro">Antes de que lo preguntes</p>
-
-            <div class="garantias-grid">
-                <article class="garantia reveal">
-                    <span class="garantia-icono" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 3 4 6v5.5c0 4.5 3.2 8.3 8 9.5 4.8-1.2 8-5 8-9.5V6l-8-3Z"/>
-                            <path d="m9 12 2 2 4-4"/>
-                        </svg>
-                    </span>
-                    <h3 class="garantia-t">Cumple la ley europea de IA</h3>
-                    <p class="garantia-p">El Reglamento Europeo de IA obliga desde agosto de 2026. Tu agente dice que es una IA, deja salida a un humano y no hace nada de lo que el reglamento prohíbe. Sale cumpliendo, sin coste extra.</p>
-                </article>
-
-                <article class="garantia reveal">
-                    <span class="garantia-icono" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="4" y="10.5" width="16" height="10" rx="2"/>
-                            <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/>
-                            <path d="M12 14.5v2"/>
-                        </svg>
-                    </span>
-                    <h3 class="garantia-t">El agente aguanta ataques</h3>
-                    <p class="garantia-p">Hay gente que intenta manipular estos sistemas para que se salten sus normas o suelten información. Todos mis agentes llevan filtros a la entrada y a la salida, y los pruebo con esos ataques antes de entregar.</p>
-                </article>
-
-            </div>
-        </div>
-    </section>
-
-    {# SECCIÓN 5 — CÓMO TRABAJO
-       [31-ago-2026] Reescrita. Antes eran tres pasos genéricos
-       ("entiendo tu negocio / diseño la solución / implemento y
-       garantizo") que cabían en la web de cualquier consultor de
-       cualquier sector: copy intercambiable.
-
-       Ahora son las cuatro fases reales de un sistema de automatización.
-       La cuarta es la que importa: casi nadie cuenta que un sistema con
-       IA hay que sostenerlo, y es lo que separa a quien monta algo y
-       desaparece de quien se queda. Sin cifras ni plazos a propósito. #}
-    <section id="como-trabajo" class="section como-trabajo-section inverse reveal">
-        <canvas class="aurora-canvas" data-alto="2.2" aria-hidden="true"></canvas>
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label">CÓMO TRABAJO</span>
-                <h2 class="section-title">Un sistema no se entrega y ya está.</h2>
-                <p class="section-subtitle">Montar la automatización es la parte fácil. Lo difícil es que siga funcionando cuando tu negocio cambia.</p>
-            </div>
-
-            <ol class="fases">
-                <li class="fase reveal">
-                    <span class="fase-marca" aria-hidden="true"></span>
-                    <span class="fase-n">01</span>
-                    <div class="fase-cuerpo">
-                        <h3 class="fase-t">Entender</h3>
-                        <p class="fase-p">Antes de proponerte nada, miro cómo trabajas de verdad: por dónde entran los clientes, qué se hace a mano y dónde se atasca. La mayoría de lo que frena un negocio no está donde parece.</p>
-                    </div>
-                </li>
-
-                <li class="fase reveal">
-                    <span class="fase-marca" aria-hidden="true"></span>
-                    <span class="fase-n">02</span>
-                    <div class="fase-cuerpo">
-                        <h3 class="fase-t">Construir</h3>
-                        <p class="fase-p">Monto solo lo que resuelve el atasco que encontramos. No un paquete cerrado: el agente, la automatización o el panel que tu caso pide, conectado a las herramientas que ya usas.</p>
-                    </div>
-                </li>
-
-                <li class="fase reveal">
-                    <span class="fase-marca" aria-hidden="true"></span>
-                    <span class="fase-n">03</span>
-                    <div class="fase-cuerpo">
-                        <h3 class="fase-t">Implementar</h3>
-                        <p class="fase-p">Lo pongo a funcionar con tus datos reales, no con un ejemplo. Tu equipo aprende a usarlo y te queda documentado, para que no dependas de mí para lo del día a día.</p>
-                    </div>
-                </li>
-
-                <li class="fase reveal fase--destacada">
-                    <span class="fase-marca" aria-hidden="true"></span>
-                    <span class="fase-n">04</span>
-                    <div class="fase-cuerpo">
-                        <h3 class="fase-t">Sostener y mejorar</h3>
-                        <p class="fase-p">Aquí es donde la mayoría desaparece. Un sistema con IA se desajusta: cambian tus precios, tu forma de atender, las herramientas. Reviso que siga respondiendo como debe y lo voy afinando con lo que se aprende de su uso real.</p>
-                        <p class="fase-nota">La fase que casi nadie te cuenta.</p>
-                    </div>
-                </li>
-            </ol>
-        </div>
-    </section>
-
-    <section id="sobre-mi" class="section sobremi-section reveal">
-        <div class="sobremi-bg-text">ALBER</div>
-        <div class="container grid-two-cols">
-            <div class="sobremi-visual inverse reveal">
-                <div class="sobremi-portrait-container">
-                    <img src="assets/img/sobremi.png?v=20" alt="Alberto Pérez Cabrera" class="sobremi-portrait" loading="lazy">
-                    <div class="portrait-glow"></div>
-                </div>
-            </div>
-            <div class="sobremi-text reveal">
-                <span class="section-label">SOBRE MÍ</span>
-                <h2 class="section-title">Sé lo que es un trabajo que te consume.</h2>
-                <p class="sobremi-p">
-                    Soy Alberto Pérez Cabrera. Ayudo a negocios pequeños y medianos a aplicar IA donde de verdad les cambia el día, no donde queda bien.
-                </p>
-                <p class="sobremi-p">
-                    Antes de esto me dediqué a otra cosa muy distinta, de las que te dejan sin horas y sin cabeza al final del día. Por eso hago lo que hago: me mueve ayudar a la gente a recuperar su tiempo.
-                </p>
-                <p class="sobremi-p">
-                    Me cuentan que acaban la jornada agotados, con sus hijos delante pero pendientes del móvil por cosas que una herramienta podría hacer sola. Mi trabajo es que la IA se ocupe de eso, para que tu negocio trabaje para ti y no al revés. Tú me cuentas qué te agobia, y yo me encargo.
-                </p>
-            </div>
-        </div>
-    </section>
 
     <!-- SECCIÓN 7A — CASOS REALES (carrusel) -->
     <section id="caso-real" class="section caso-section reveal">
@@ -631,20 +465,524 @@ trasPie: |
         </div>
     </section>
 
-    <!-- SECCIÓN 7B — PRUEBA SOCIAL (logos de clientes) -->
-    <section id="clientes" class="section clientes-section reveal">
+    {# SECCIÓN 5 — CÓMO TRABAJO
+       [31-ago-2026] Reescrita. Antes eran tres pasos genéricos
+       ("entiendo tu negocio / diseño la solución / implemento y
+       garantizo") que cabían en la web de cualquier consultor de
+       cualquier sector: copy intercambiable.
+
+       Ahora son las cuatro fases reales de un sistema de automatización.
+       La cuarta es la que importa: casi nadie cuenta que un sistema con
+       IA hay que sostenerlo, y es lo que separa a quien monta algo y
+       desaparece de quien se queda. Sin cifras ni plazos a propósito. #}
+    {# [1-sep-2026] Sin aurora-canvas. Pintaba manchas de acento
+       animadas por el fondo de la seccion, y el halo naranja tiene que
+       salir SOLO de las piezas de UI — es lo que las hace parecer
+       pantallas encendidas. Con la aurora detras, la luz no venia de
+       ninguna pieza concreta y el carbon se veia sucio. El hero si la
+       conserva: alli el fondo ES el protagonista. #}
+    <section id="como-trabajo" class="section como-trabajo-section inverse reveal">
         <div class="container">
-            <p class="clientes-title">Empresas con las que he trabajado</p>
+            <div class="section-header">
+                <span class="section-label">CÓMO TRABAJO</span>
+                <h2 class="section-title">Un sistema no se entrega y ya está.</h2>
+                <p class="section-subtitle">Montar la automatización es la parte fácil. Lo difícil es que siga funcionando cuando tu negocio cambia.</p>
+            </div>
+
+            <ol class="fases">
+
+                {# ── FASE 01 · EL DIAGNOSTICO ───────────────────────────────
+                   Pieza: bloque de reglas en monoespaciado, como el panel de
+                   AOPs de decagon. Es lo que mejor cuenta un diagnostico:
+                   texto leido, con lo que falla marcado dentro del propio
+                   texto. Flota suelto sobre el carbon, sin chasis de ventana. #}
+                <li class="fase reveal">
+                    <span class="fase-marca" aria-hidden="true"></span>
+                    <div class="fase-cuerpo">
+                        <span class="fase-n">01</span>
+                        {# Titular tipo decagon: frase corta con la palabra
+                           clave en acento, no una etiqueta suelta. El <em>
+                           no es enfasis tipografico, es la palabra que nombra
+                           la fase — por eso lleva el color. #}
+                        <h3 class="fase-t"><em>Entiendo</em> cómo trabajas</h3>
+                        <p class="fase-p">Antes de proponerte nada, miro cómo trabajas de verdad: por dónde entran los clientes, qué se hace a mano y dónde se atasca. La mayoría de lo que frena un negocio no está donde parece.</p>
+                    </div>
+
+                    <figure class="fase-viz" aria-hidden="true">
+                        <div class="fase-pieza fase-pieza--reglas">
+                            <ol class="reglas">
+                                <li><span class="reglas-n">1.</span> Entra una <b class="tk">@consulta</b> por WhatsApp</li>
+                                <li><span class="reglas-n">2.</span> Alguien la lee <b class="tk">cuando puede</b></li>
+                                <li class="es-fallo">
+                                    <span class="reglas-n">3.</span> Si <b class="tk">@fuera_de_horario</b>
+                                    <ul>
+                                        <li>a. La consulta <b class="tk-mal">espera a mañana</b></li>
+                                    </ul>
+                                </li>
+                                <li><span class="reglas-n">4.</span> Se pasa la cita <b class="tk">a mano</b> a la agenda</li>
+                            </ol>
+                            <p class="reglas-pie"><span class="pin"></span> 3 de cada 4 consultas mueren en el paso 3</p>
+                        </div>
+                    </figure>
+                </li>
+
+                {# ── FASE 02 · LO QUE SE MONTA ──────────────────────────────
+                   Pieza: el flujo ya arreglado. Es la unica fase que pide un
+                   diagrama de verdad (algo se conecta con algo), asi que aqui
+                   si va SVG — pero desnudo sobre el carbon, sin ventana ni
+                   fila de indicadores. #}
+                <li class="fase reveal">
+                    <span class="fase-marca" aria-hidden="true"></span>
+                    <div class="fase-cuerpo">
+                        <span class="fase-n">02</span>
+                        <h3 class="fase-t"><em>Construyo</em> solo lo que hace falta</h3>
+                        <p class="fase-p">Monto solo lo que resuelve el atasco que encontramos. No un paquete cerrado: el agente, la automatización o el panel que tu caso pide, conectado a las herramientas que ya usas.</p>
+                    </div>
+
+                    <figure class="fase-viz" aria-hidden="true">
+                        <div class="fase-pieza fase-pieza--flujo">
+                            {# viewBox 320x140, con 6 de margen a cada lado. El
+                               anterior era 300 de ancho y el ultimo chip acababa
+                               en x=314: se salia del lienzo y se veia cortado.
+                               Ahora nada pasa de x=314 dentro de un lienzo de 320. #}
+                            <svg class="flujo" viewBox="0 0 320 140" role="img">
+
+                                {# ── FILA DE ARRIBA: entra la consulta, la coge el agente ── #}
+                                <rect class="nodo" x="6" y="16" width="80" height="34" rx="8"/>
+                                {# WhatsApp: burbuja con cola y auricular. Es por donde
+                                   entra la consulta en casi todos estos negocios. #}
+                                <g class="marca marca--wa">
+                                    <path class="marca-f" d="M 21 26 a 7.5 7.5 0 1 0 -6.6 11.1 l 4.2 1.1 l -1.1 -3.9 a 7.5 7.5 0 0 0 3.5 -8.3 z"/>
+                                    <path class="marca-h" d="M 16.4 29.6 c 0.9 2.2 2.4 3.5 4.4 4.1 l 1 -1.3 l 1.6 0.6 l -0.3 1.7 c -2.9 0.4 -5.9 -1.9 -7 -4.6 l 1.4 -0.9 z"/>
+                                </g>
+                                <text class="nodo-t" x="34" y="37">Consulta</text>
+
+                                <path class="hilo" d="M 86 33 H 104"/>
+                                <polygon class="punta" points="104,30 110,33 104,36"/>
+
+                                {# ── EL AGENTE: lo que se monta, en acento ──
+                                   Icono de agente de IA: cabeza con antena y dos ojos,
+                                   que es como se dibuja un bot en todas partes. Antes
+                                   era un circulo con un tic, que no decia "agente". #}
+                                <g class="es-nuevo">
+                                    <rect class="nodo nodo--acento" x="110" y="8" width="100" height="50" rx="10"/>
+                                    <g class="bot">
+                                        <path class="bot-antena" d="M 160 13 V 17"/>
+                                        <circle class="bot-punto" cx="160" cy="12" r="1.6"/>
+                                        <rect class="bot-cara" x="152" y="17" width="16" height="12" rx="4"/>
+                                        <circle class="bot-ojo" cx="156.6" cy="23" r="1.5"/>
+                                        <circle class="bot-ojo" cx="163.4" cy="23" r="1.5"/>
+                                    </g>
+                                    <text class="nodo-t nodo-t--acento" x="160" y="41">Agente</text>
+                                    <text class="nodo-s" x="160" y="51">responde al momento</text>
+                                </g>
+
+                                <path class="hilo" d="M 210 33 H 228"/>
+                                <polygon class="punta" points="228,30 234,33 228,36"/>
+
+                                <rect class="nodo" x="234" y="16" width="80" height="34" rx="8"/>
+                                {# Calendario: cuadricula con las dos anillas arriba y
+                                   el dia marcado en acento. #}
+                                <g class="marca marca--cal">
+                                    <rect class="marca-h" x="243" y="26" width="13" height="12" rx="2"/>
+                                    <path class="marca-h" d="M 243 30 h 13 M 246.5 24.5 v 3 M 252.5 24.5 v 3"/>
+                                    <rect class="marca-dia" x="245.5" y="32" width="3" height="3" rx="0.6"/>
+                                </g>
+                                <text class="nodo-t" x="262" y="37">Agenda</text>
+
+                                {# ── LO QUE EL AGENTE ENGANCHA POR DEBAJO ──
+                                   Las herramientas que el cliente YA usa. Salen del
+                                   agente, no del camino principal, por eso el hilo va
+                                   punteado. #}
+                                <path class="hilo hilo--suave" d="M 160 58 V 78 H 48 V 96"/>
+                                <path class="hilo hilo--suave" d="M 160 58 V 96"/>
+                                <path class="hilo hilo--suave" d="M 160 58 V 78 H 272 V 96"/>
+
+                                {# CRM: tres fichas de contacto apiladas. No hay logo
+                                   universal de CRM, asi que se dibuja el objeto. #}
+                                <rect class="chip" x="6" y="96" width="84" height="28" rx="14"/>
+                                <g class="marca marca--crm">
+                                    <circle class="marca-h" cx="20" cy="107" r="2.6"/>
+                                    <path class="marca-h" d="M 16 114 a 4 4 0 0 1 8 0"/>
+                                </g>
+                                <text class="chip-t" x="30" y="113">tu CRM</text>
+
+                                {# Google Calendar: el marco cuadrado con la esquina
+                                   doblada y el 31, que es como se reconoce. #}
+                                <rect class="chip" x="118" y="96" width="84" height="28" rx="14"/>
+                                <g class="marca marca--gcal">
+                                    <path class="marca-h" d="M 128 102 h 9 l 4 4 v 9 h -13 z"/>
+                                    <path class="marca-h" d="M 137 102 v 4 h 4"/>
+                                    <text class="marca-31" x="134" y="112">31</text>
+                                </g>
+                                <text class="chip-t" x="147" y="113">tu calendario</text>
+
+                                {# Gmail: el sobre con la M del pliegue, en su rojo. #}
+                                <rect class="chip" x="230" y="96" width="84" height="28" rx="14"/>
+                                <g class="marca marca--gmail">
+                                    <rect class="marca-h" x="240" y="103" width="14" height="10" rx="1.6"/>
+                                    <path class="marca-m" d="M 240 104 l 7 5.4 l 7 -5.4"/>
+                                </g>
+                                <text class="chip-t" x="259" y="113">tu correo</text>
+                            </svg>
+                        </div>
+                    </figure>
+                </li>
+
+                {# ── FASE 03 · LA PUESTA EN MARCHA ──────────────────────────
+                   [1-sep-2026] Aqui habia un hueco de imagen, y era la unica
+                   fase SIN pieza dibujada: entre la 01 y la 02, que si la
+                   tienen, se leia como un sitio a medio hacer. La captura se
+                   va al bloque de cierre, donde hay sitio de verdad para
+                   ensenyar imagenes.
+
+                   Pieza: el ABANICO DE PANELES en perspectiva, replicando el
+                   "Escala tu agente" de decagon con el acento terracota. Son
+                   cinco laminas de cristal escalonadas en 3D, cada una con su
+                   grafica: barras, area, rejilla.
+
+                   Encaja con lo que cuenta la fase mejor que un panel unico
+                   plano — no es UNA pantalla, es el sistema entero puesto a
+                   funcionar y dando datos desde el primer dia. #}
+                <li class="fase reveal">
+                    <span class="fase-marca" aria-hidden="true"></span>
+                    <div class="fase-cuerpo">
+                        <span class="fase-n">03</span>
+                        <h3 class="fase-t"><em>Lo pongo</em> a funcionar de verdad</h3>
+                        <p class="fase-p">Lo pongo a funcionar con tus datos reales, no con un ejemplo. Tu equipo aprende a usarlo y te queda documentado, para que no dependas de mí para lo del día a día.</p>
+                    </div>
+
+                    <figure class="fase-viz" aria-hidden="true">
+                        <div class="fase-pieza fase-pieza--abanico">
+                            <div class="abanico">
+
+                                {# Lamina 1 · BARRAS. La de delante, la mas
+                                   opaca y la que mas se lee. #}
+                                <div class="lam lam--1">
+                                    <svg class="lam-svg" viewBox="0 0 100 120" preserveAspectRatio="none">
+                                        <rect class="lam-barra" x="10" y="74" width="9" height="36" rx="2"/>
+                                        <rect class="lam-barra" x="23" y="40" width="9" height="70" rx="2"/>
+                                        <rect class="lam-barra" x="36" y="56" width="9" height="54" rx="2"/>
+                                        <rect class="lam-barra" x="49" y="26" width="9" height="84" rx="2"/>
+                                        <rect class="lam-barra" x="62" y="46" width="9" height="64" rx="2"/>
+                                        <rect class="lam-barra" x="75" y="66" width="9" height="44" rx="2"/>
+                                    </svg>
+                                </div>
+
+                                {# Lamina 2 · lisa, solo un renglon de cabecera:
+                                   entre dos graficas, una lamina casi vacia da
+                                   el respiro que hace que se lean como pila. #}
+                                <div class="lam lam--2">
+                                    <svg class="lam-svg" viewBox="0 0 100 120" preserveAspectRatio="none">
+                                        <rect class="lam-linea" x="12" y="16" width="34" height="4" rx="2"/>
+                                        <rect class="lam-linea" x="12" y="26" width="20" height="4" rx="2"/>
+                                    </svg>
+                                </div>
+
+                                {# Lamina 3 · AREA. La curva rellena con su
+                                   linea encima y el punto del maximo. #}
+                                <div class="lam lam--3">
+                                    <svg class="lam-svg" viewBox="0 0 100 120" preserveAspectRatio="none">
+                                        <path class="lam-area" d="M 8 110 L 8 84 L 26 66 L 44 30 L 62 52 L 80 40 L 92 58 L 92 110 Z"/>
+                                        <path class="lam-curva" d="M 8 84 L 26 66 L 44 30 L 62 52 L 80 40 L 92 58"/>
+                                        <circle class="lam-punto" cx="44" cy="30" r="3.4"/>
+                                    </svg>
+                                </div>
+
+                                {# Lamina 4 · REJILLA. La de atras casi no se
+                                   ve; es la que da profundidad al abanico. #}
+                                <div class="lam lam--4">
+                                    <svg class="lam-svg" viewBox="0 0 100 120" preserveAspectRatio="none">
+                                        <path class="lam-rejilla" d="M 0 24 H 100 M 0 48 H 100 M 0 72 H 100 M 0 96 H 100"/>
+                                        <path class="lam-rejilla" d="M 20 0 V 120 M 40 0 V 120 M 60 0 V 120 M 80 0 V 120"/>
+                                        <path class="lam-arco" d="M 6 112 C 30 108 40 34 50 34 C 60 34 70 108 94 112"/>
+                                    </svg>
+                                </div>
+
+                                {# Lamina 5 · la ultima, solo unas barras
+                                   pequenyas asomando por el borde. #}
+                                <div class="lam lam--5">
+                                    <svg class="lam-svg" viewBox="0 0 100 120" preserveAspectRatio="none">
+                                        <rect class="lam-barra" x="16" y="80" width="10" height="30" rx="2"/>
+                                        <rect class="lam-barra" x="32" y="62" width="10" height="48" rx="2"/>
+                                        <rect class="lam-barra" x="48" y="88" width="10" height="22" rx="2"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </figure>
+                </li>
+
+                {# ── EL TRAMO FINAL ────────────────────────────────────────
+                   [1-sep-2026] Va DENTRO de la lista, no como un div aparte
+                   debajo. Fuera, la linea de fondo y el relleno naranja (que
+                   se dibujan sobre el alto del <ol>) no lo cubrian: la linea
+                   llegaba encendida, se apagaba a gris en este tramo y volvia
+                   a encenderse en la bola. Metido en la lista, el naranja
+                   corre sin costura hasta el final. #}
+                <li class="fase-cola" aria-hidden="true"></li>
+            </ol>
         </div>
-        <div class="logos-marquee">
-            <div class="logos-track">
-                <img src="assets/img/mafhesa.png" alt="Mafhesa" class="logo-cliente">
-                <img src="assets/img/topboutique.png" alt="Top Boutique" class="logo-cliente">
-                <img src="assets/img/bioresina.svg" alt="Bioresina" class="logo-cliente">
-                <img src="assets/img/geko.svg" alt="Geko" class="logo-cliente">
+
+        {# ── EL BLOQUE DE CIERRE ────────────────────────────────────────────
+           [1-sep-2026] Antes esto era la fase 04, un paso mas colgando del
+           riel. Pero no ES un paso: es la conclusion de los tres anteriores —
+           lo que pasa DESPUES de que el sistema este entregado. Como paso
+           numerado se leia igual de importante que los otros tres, y es lo
+           que separa el servicio del de cualquier otro.
+
+           Asi que se saca del riel y se convierte en el bloque final, gris
+           oscuro y a todo ancho, con las imagenes a la izquierda y el texto a
+           la derecha. Es el patron exacto con el que decagon cierra su
+           seccion. #}
+        <div class="container">
+            <div class="cierre reveal">
+                {# ── DONDE MUERE LA LINEA ───────────────────────────────
+                   La bola va montada sobre el borde superior del bloque
+                   gris, no suelta en el hueco de antes: es lo que hace que
+                   la linea temporal TERMINE aqui y entregue este bloque,
+                   igual que en decagon. Dentro de .cierre y no fuera, para
+                   que siga pegada al borde pase lo que pase con el alto. #}
+                <span class="riel-bola" aria-hidden="true">
+                    {# El destello de cuatro puntas de decagon, no una
+                       estrella de cinco: la de cinco se lee como
+                       "valoracion" o "favorito". Esta es la marca de que
+                       algo esta vivo — dos husos cruzados de lados
+                       concavos, que es lo que le da el filo. #}
+                    <svg viewBox="0 0 16 16"><path d="M 8 1.4 C 8.6 5 9.9 6.6 14.6 8 C 9.9 9.4 8.6 11 8 14.6 C 7.4 11 6.1 9.4 1.4 8 C 6.1 6.6 7.4 5 8 1.4 Z"/></svg>
+                </span>
+
+                <div class="cierre-visual">
+                    {# ── LAS TRES TARJETAS ──────────────────────────────────
+                       [1-sep-2026] Tercera version de esta zona, y la que
+                       funciona. Las dos anteriores fallaban por lo mismo: eran
+                       INTERFAZ (burbujas de chat, listas de conversaciones)
+                       sobre fondo plano. Una UI dibujada no emociona ni
+                       demuestra; solo son frases dentro de una caja.
+
+                       El patron bueno: una imagen organica abstracta de fondo
+                       y UN DATO GRANDE encima. La imagen pone el tono, el
+                       numero pone el mensaje. Y al ser abstracta no envejece
+                       ni promete un sector concreto.
+
+                       Tres reglas que hacen que el conjunto no parezca tres
+                       piezas sueltas:
+                       · Una sola familia de color (terracota / coral / lila).
+                       · Una de las tres INVIERTE (fondo oscuro) para romper
+                         el ritmo — si no, se leen como una tira.
+                       · La flecha en la esquina, igual en las tres.
+
+                       LAS IMAGENES: descomenta el <img> de cada tarjeta, deja
+                       el archivo en assets/img/ y borra su .hueco-vacio.
+                       Los textos de .dato y .dato-k son editables: estan
+                       puestos como marcador para ver la maqueta. #}
+
+                    {# 1 · La alta de la izquierda. #}
+                    <div class="tarjeta tarjeta--alta">
+                        <div class="tarjeta-fondo">
+                            {# preload="auto" y sin loop: este video no se reproduce en
+                               bucle, lo va abriendo el scroll (ver index.js). Para
+                               poder saltar a un fotograma concreto hacen falta los
+                               DATOS, no solo los metadatos: con preload="metadata" el
+                               readyState se queda en 1 y el navegador ignora
+                               cualquier currentTime que se le pida. #}
+                            <video muted playsinline preload="auto" width="720" height="1000" aria-hidden="true">
+                                <source src="/assets/video/cierre-1.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="tarjeta-cuerpo">
+                            {# [1-sep-2026] Verbos, no cifras. Antes ponia 24/7, < 1 min
+                               y 0 sin contestar: datos de RENDIMIENTO del sistema recien
+                               montado, mientras el parrafo de al lado habla de que un
+                               sistema con IA se desajusta y hay que sostenerlo. Se
+                               contradecian — "0 consultas sin contestar" es justo lo que
+                               deja de ser verdad si nadie lo mantiene.
+                               Los verbos van en primera persona: es lo unico de la
+                               seccion donde Alberto habla como quien se queda. #}
+                            <span class="dato">Reviso</span>
+                            <span class="dato-k">Cada mes miro que siga respondiendo como debe</span>
+                        </div>
+                        <span class="tarjeta-flecha" aria-hidden="true">
+                            <svg viewBox="0 0 16 16"><path d="M 5 11 L 11 5 M 6 5 h 5 v 5"/></svg>
+                        </span>
+                    </div>
+
+                    {# 2 · La de arriba a la derecha. #}
+                    <div class="tarjeta tarjeta--petalo">
+                        <div class="tarjeta-fondo">
+                            <video autoplay muted loop playsinline preload="metadata" width="1280" height="720" aria-hidden="true">
+                                <source src="/assets/video/cierre-2.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="tarjeta-cuerpo">
+                            <span class="dato">Ajusto</span>
+                            <span class="dato-k">Lo afino con lo que se aprende de su uso real</span>
+                        </div>
+                        <span class="tarjeta-flecha" aria-hidden="true">
+                            <svg viewBox="0 0 16 16"><path d="M 5 11 L 11 5 M 6 5 h 5 v 5"/></svg>
+                        </span>
+                    </div>
+
+                    {# 3 · La invertida. Fondo oscuro para romper el ritmo:
+                       tres tarjetas claras seguidas se leen como una tira. #}
+                    <div class="tarjeta tarjeta--invertida tarjeta--coral">
+                        <div class="tarjeta-fondo">
+                            <video autoplay muted loop playsinline preload="metadata" width="1280" height="720" aria-hidden="true">
+                                <source src="/assets/video/cierre-3.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="tarjeta-cuerpo">
+                            <span class="dato">Sostengo</span>
+                            <span class="dato-k">Cuando tu negocio cambia, el sistema cambia con él</span>
+                        </div>
+                        <span class="tarjeta-flecha" aria-hidden="true">
+                            <svg viewBox="0 0 16 16"><path d="M 5 11 L 11 5 M 6 5 h 5 v 5"/></svg>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="cierre-texto">
+                    {# Dos lineas, la primera en acento: es como titula decagon
+                       ("Tu negocio evoluciona. / Tu agente de IA tambien
+                       deberia hacerlo."). La tension entre las dos frases es
+                       el argumento entero. #}
+                    <h3 class="cierre-t">
+                        <em>Tu negocio cambia.</em>
+                        Tu sistema tiene que cambiar con él.
+                    </h3>
+                    <p class="cierre-p">Aquí es donde la mayoría desaparece. Un sistema con IA se desajusta solo: cambian tus precios, tu forma de atender, las herramientas que usas. Nadie te avisa — simplemente empieza a responder peor.</p>
+                    <p class="cierre-p">Yo reviso que siga haciendo lo que tiene que hacer y lo voy afinando con lo que se aprende de su uso real. No es soporte por si se rompe: es que el sistema siga al día contigo.</p>
+
+                    <p class="cierre-nota">La fase que casi nadie te cuenta.</p>
+
+                    <a href="/diagnostico-operativo/" class="btn-primary-small cierre-cta">Cómo empezamos <span aria-hidden="true">→</span></a>
+                </div>
             </div>
         </div>
     </section>
+
+    {# SECCIÓN 4B — LAS TRES GARANTÍAS
+       No es una sección de venta: es el bloque que quita miedos. Va
+       después de "caminos" porque ahí es donde aparece la duda callada
+       ("¿esto es legal? ¿es seguro? ¿y mis datos?").
+
+       Diseño deliberadamente APARTE y sin competir: fondo propio, sin
+       titular de sección grande y sin CTA. Da confianza por presencia,
+       no por volumen.
+
+       Fuentes: _docs/metodo/cumplimiento-reglamento-ia.md (art. 50, en
+       vigor 2-ago-2026) y _skills/ciberseg-workflows-ia (patrón
+       sándwich, guardrails entrada/salida). Nada de esto es promesa de
+       marketing: es lo que ya se aplica. #}
+    <section id="garantias" class="section garantias-section section-bloque reveal">
+        <div class="container">
+            <p class="garantias-intro">Antes de que lo preguntes</p>
+
+            <div class="garantias-grid">
+                <article class="garantia reveal">
+                    <span class="garantia-icono" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 3 4 6v5.5c0 4.5 3.2 8.3 8 9.5 4.8-1.2 8-5 8-9.5V6l-8-3Z"/>
+                            <path d="m9 12 2 2 4-4"/>
+                        </svg>
+                    </span>
+                    <h3 class="garantia-t">Cumple la ley europea de IA</h3>
+                    <p class="garantia-p">El Reglamento Europeo de IA obliga desde agosto de 2026. Tu agente dice que es una IA, deja salida a un humano y no hace nada de lo que el reglamento prohíbe. Sale cumpliendo, sin coste extra.</p>
+                </article>
+
+                <article class="garantia reveal">
+                    <span class="garantia-icono" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="4" y="10.5" width="16" height="10" rx="2"/>
+                            <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/>
+                            <path d="M12 14.5v2"/>
+                        </svg>
+                    </span>
+                    <h3 class="garantia-t">El agente aguanta ataques</h3>
+                    <p class="garantia-p">Hay gente que intenta manipular estos sistemas para que se salten sus normas o suelten información. Todos mis agentes llevan filtros a la entrada y a la salida, y los pruebo con esos ataques antes de entregar.</p>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="sobre-mi" class="section sobremi-section reveal">
+        <div class="sobremi-bg-text">ALBER</div>
+        <div class="container grid-two-cols">
+            <div class="sobremi-visual inverse reveal">
+                <div class="sobremi-portrait-container">
+                    <img src="assets/img/sobremi.png?v=20" alt="Alberto Pérez Cabrera" class="sobremi-portrait" loading="lazy">
+                    <div class="portrait-glow"></div>
+                </div>
+            </div>
+            <div class="sobremi-text reveal">
+                <span class="section-label">SOBRE MÍ</span>
+                <h2 class="section-title">Sé lo que es un trabajo que te consume.</h2>
+                <p class="sobremi-p">
+                    Soy Alberto Pérez Cabrera. Ayudo a negocios pequeños y medianos a aplicar IA donde de verdad les cambia el día, no donde queda bien.
+                </p>
+                <p class="sobremi-p">
+                    Antes de esto me dediqué a otra cosa muy distinta, de las que te dejan sin horas y sin cabeza al final del día. Por eso hago lo que hago: me mueve ayudar a la gente a recuperar su tiempo.
+                </p>
+                <p class="sobremi-p">
+                    Me cuentan que acaban la jornada agotados, con sus hijos delante pero pendientes del móvil por cosas que una herramienta podría hacer sola. Mi trabajo es que la IA se ocupe de eso, para que tu negocio trabaje para ti y no al revés. Tú me cuentas qué te agobia, y yo me encargo.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCION 9 - POR DONDE SE EMPIEZA (el DAI360 como puerta de entrada) -->
+    <section id="caminos" class="section dai-section reveal">
+        <div class="container">
+            <div class="section-header centered">
+                <span class="section-label">C&Oacute;MO EMPEZAR</span>
+                <h2 class="section-title">Antes de montar nada, hay que saber qu&eacute; montar</h2>
+                <p class="section-subtitle">La mayor&iacute;a de negocios no necesita m&aacute;s herramientas. Necesita saber cu&aacute;l de todas le est&aacute; costando dinero ahora mismo.</p>
+            </div>
+
+            <div class="dai-cuerpo">
+                <div class="dai-texto">
+                    <h3 class="dai-nombre">Diagn&oacute;stico operativo DAI360</h3>
+                    <p class="dai-desc">
+                        Miro las cuatro &aacute;reas de tu negocio: c&oacute;mo llegan tus clientes, c&oacute;mo se cierran, c&oacute;mo entregas y c&oacute;mo lo llevas por dentro. Al terminar sabes qu&eacute; te est&aacute; frenando y qu&eacute; merece la pena arreglar primero.
+                    </p>
+                    <ul class="dai-lista">
+                        <li>Mapa de tus procesos reales, &aacute;rea por &aacute;rea</li>
+                        <li>Cuellos de botella localizados y medidos</li>
+                        <li>Roadmap por fases, empezando por los quick wins</li>
+                        <li>El plan es tuyo, lo implemente yo o no</li>
+                    </ul>
+                    <p class="dai-precio">Desde 1.500&nbsp;&euro;. Si luego implementamos las mejoras, se descuenta del proyecto.</p>
+                    <div class="card-cta-row">
+                        <a href="/diagnostico-operativo/" class="btn-primary-small">Ver el diagn&oacute;stico DAI360 &rarr;</a>
+                    </div>
+                </div>
+
+                {#- EL ENTREGABLE. El informe del DAI360 sobre un portatil,
+                    en imagen: el chasis dibujado en CSS que habia aqui salia
+                    con la pantalla mas alta que ancha, que no es la
+                    proporcion de ningun portatil real. La imagen viene
+                    recortada con fondo transparente, asi que se apoya sobre
+                    el fondo de la seccion en vez de traer el suyo. -#}
+                <figure class="dai-viz">
+                    {#- WebP con PNG de respaldo: 60 KB contra 426. La
+                        transparencia se conserva en los dos. -#}
+                    <picture>
+                        <source srcset="assets/img/portatil-dai360.webp" type="image/webp">
+                        <img src="assets/img/portatil-dai360.png"
+                             alt="Informe del diagnóstico DAI360 en pantalla: auditoría por área con el flujo de trabajo y su cuello de botella marcado, tabla de oportunidades valoradas por impacto, dificultad y urgencia, y roadmap técnico en tres fases."
+                             width="1626" height="1044" loading="lazy" decoding="async">
+                    </picture>
+                </figure>
+            </div>
+
+            {#- La salida para quien ya lo tiene claro es una linea, no una
+                tarjeta gemela: si compite en peso con el diagnostico vuelve
+                a ser la disyuntiva que habiamos quitado. -#}
+            <p class="dai-atajo">&iquest;Ya sabes lo que necesitas? <a href="#contacto">Cu&eacute;ntamelo directamente</a></p>
+        </div>
+    </section>
+
 
     <!-- SECCIÓN 7 — FAQ -->
     <section id="faq" class="section faq-section section-bloque reveal">
