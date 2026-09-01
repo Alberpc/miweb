@@ -5,22 +5,12 @@
     <meta name="viewport" content="width=800, height=480" />
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body {
+        margin: 0; width: 800px; height: 480px; overflow: hidden;
+        background: #0f1f1b; /* --night-900 */
       }
-      html,
-      body {
-        margin: 0;
-        width: 800px;
-        height: 480px;
-        overflow: hidden;
-        background: #070708;
-      }
-      body {
-        font-family: "Inter", sans-serif;
-      }
+      body { font-family: "Inter", sans-serif; }
     </style>
   </head>
   <body>
@@ -28,262 +18,280 @@
       id="root"
       data-composition-id="main"
       data-start="0"
-      data-duration="4.05"
+      data-duration="4.6"
       data-width="800"
       data-height="480"
-      style="position: relative; width: 800px; height: 480px; background: #070708; overflow: hidden;"
+      style="position: relative; width: 800px; height: 480px; background: #0f1f1b; overflow: hidden;"
     >
       <div
         id="scene"
         class="clip"
         data-start="0"
-        data-duration="4.05"
+        data-duration="4.6"
         data-track-index="0"
         style="position: absolute; inset: 0;"
       >
         <div class="bg-field"></div>
 
-        <!-- CHAT PANEL (left) -->
-        <div id="chat-panel">
-          <div class="panel-sheen" id="chat-sheen"></div>
-          <div class="chat-header">
-            <span class="chat-dot"></span>
-            <span class="chat-label">WhatsApp</span>
-          </div>
-          <div class="chat-body">
-            <div class="bubble bubble-in" id="bubble-in">¿Tenéis cita para mañana?</div>
-            <div class="typing-row" id="typing-row">
-              <span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span>
-            </div>
-            <div class="bubble bubble-out" id="bubble-out">¡Sí! Te agendo a las 11:00h.</div>
-          </div>
-        </div>
-
-        <!-- ARROW / CONNECTOR between panels -->
-        <svg id="connector-svg" width="800" height="480" viewBox="0 0 800 480" style="position: absolute; inset: 0; z-index: 1; pointer-events: none;">
+        <!-- Tres activadores entran por la izquierda, el agente atiende en el
+             centro, y la salida es doble: ficha en el CRM y respuesta al
+             cliente. El agente es el protagonista, no la herramienta. -->
+        <svg id="rail-svg" width="800" height="480" viewBox="0 0 800 480" style="position: absolute; inset: 0; z-index: 1;">
           <defs>
-            <linearGradient id="connGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#5275ff" />
-              <stop offset="100%" stop-color="#aebbff" />
+            <linearGradient id="gIn" gradientUnits="userSpaceOnUse" x1="160" y1="0" x2="330" y2="0">
+              <stop offset="0%" stop-color="#C8A85E" stop-opacity="0.34" />
+              <stop offset="100%" stop-color="#C8A85E" stop-opacity="0.5" />
+            </linearGradient>
+            <linearGradient id="gOut" gradientUnits="userSpaceOnUse" x1="470" y1="0" x2="620" y2="0">
+              <stop offset="0%" stop-color="#C8A85E" stop-opacity="0.5" />
+              <stop offset="100%" stop-color="#C8A85E" stop-opacity="0.12" />
             </linearGradient>
           </defs>
-          <path id="connector-path" d="M 372 300 Q 430 300 460 240" fill="none" stroke="url(#connGrad)" stroke-width="2.5" stroke-linecap="round" />
+          <!-- entradas: los tres canales convergen en el agente -->
+          <path id="in-1" d="M 172 116 H 240 V 240" fill="none" stroke="url(#gIn)" stroke-width="2" stroke-linejoin="round" />
+          <path id="in-2" d="M 172 240 H 240" fill="none" stroke="url(#gIn)" stroke-width="2" />
+          <path id="in-3" d="M 172 364 H 240 V 240" fill="none" stroke="url(#gIn)" stroke-width="2" stroke-linejoin="round" />
+          <path id="in-join" d="M 240 240 H 322" fill="none" stroke="url(#gIn)" stroke-width="2" />
+          <circle id="in-node" cx="240" cy="240" r="4" fill="#C8A85E" opacity="0" />
+
+          <!-- salidas -->
+          <path id="out-1" d="M 478 226 H 546 V 152 H 604" fill="none" stroke="url(#gOut)" stroke-width="2" stroke-linejoin="round" />
+          <path id="out-2" d="M 478 254 H 546 V 326 H 604" fill="none" stroke="url(#gOut)" stroke-width="2" stroke-linejoin="round" />
         </svg>
 
-        <!-- Traveling card: the appointment, flying from chat to calendar -->
-        <div id="fly-card">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#dbe1ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18">
-            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
-          </svg>
-          <span>11:00</span>
+        <!-- ACTIVADORES: por donde entra un cliente -->
+        <div id="trg-1" class="trg">
+          <div class="trg-box">
+            <svg viewBox="0 0 24 24" width="26" height="26" fill="#25D366" aria-label="WhatsApp">
+              <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436.002 9.858-4.417 9.86-9.86.001-2.638-1.024-5.117-2.884-6.979C16.578 1.904 14.1 1.84 12.01 1.84c-5.439 0-9.862 4.419-9.865 9.866-.001 1.8.49 3.554 1.42 5.11L2.551 21.39l4.096-1.076zM17.486 14.4c-.269-.137-1.593-.787-1.839-.877-.246-.09-.425-.137-.604.137-.179.273-.694.877-.85 1.057-.156.18-.313.202-.582.066-.268-.137-1.136-.419-2.162-1.335-.797-.711-1.336-1.59-1.493-1.864-.157-.273-.017-.42.12-.556.124-.121.269-.313.403-.47.135-.157.179-.269.269-.45.09-.18.045-.338-.021-.472-.069-.137-.604-1.46-.828-2.002-.218-.524-.458-.453-.627-.453-.162 0-.348-.02-.534-.02-.187 0-.49.07-.748.35-.258.28-1.008.986-1.008 2.404 0 1.417 1.031 2.787 1.176 2.977.145.19 2.03 3.1 4.916 4.344.686.296 1.222.473 1.639.605.69.219 1.319.189 1.815.115.553-.083 1.593-.652 1.818-1.284.224-.633.224-1.176.157-1.285-.067-.109-.246-.145-.515-.282z"/>
+            </svg>
+          </div>
+          <span class="trg-label">WhatsApp</span>
         </div>
 
-        <!-- CALENDAR PANEL (right) -->
-        <div id="cal-panel">
-          <div class="panel-sheen" id="cal-sheen"></div>
-          <div class="cal-header">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#aebbff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
-              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+        <div id="trg-2" class="trg">
+          <div class="trg-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#D6BA82" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" width="26" height="26" aria-label="Tu web">
+              <rect x="2.5" y="4" width="19" height="16" rx="2.5"/>
+              <path d="M2.5 8.5h19"/>
+              <circle cx="5.6" cy="6.2" r="0.7" fill="#D6BA82" stroke="none"/>
+              <circle cx="8" cy="6.2" r="0.7" fill="#D6BA82" stroke="none"/>
             </svg>
-            <span class="cal-label">Agenda</span>
           </div>
-          <div class="cal-grid">
-            <div class="cal-cell"></div>
-            <div class="cal-cell"></div>
-            <div class="cal-cell cal-slot" id="cal-slot">
-              <span id="cal-check">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#0a0c14" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" width="13" height="13">
-                  <polyline points="20 6 9 17 4 12"/>
-                </svg>
+          <span class="trg-label">Tu web</span>
+        </div>
+
+        <div id="trg-3" class="trg">
+          <div class="trg-box">
+            <svg viewBox="0 0 24 24" width="26" height="26" aria-label="Instagram">
+              <defs>
+                <linearGradient id="igGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#FEDA75"/><stop offset="25%" stop-color="#FA7E1E"/>
+                  <stop offset="50%" stop-color="#D62976"/><stop offset="75%" stop-color="#962FBF"/>
+                  <stop offset="100%" stop-color="#4F5BD5"/>
+                </linearGradient>
+              </defs>
+              <rect x="2.5" y="2.5" width="19" height="19" rx="5.4" fill="none" stroke="url(#igGrad)" stroke-width="2"/>
+              <circle cx="12" cy="12" r="4.2" fill="none" stroke="url(#igGrad)" stroke-width="2"/>
+              <circle cx="17.4" cy="6.6" r="1.3" fill="#D62976"/>
+            </svg>
+          </div>
+          <span class="trg-label">Instagram</span>
+        </div>
+
+        <!-- EL AGENTE: atiende y decide. Es el protagonista del pilar. -->
+        <div id="agente">
+          <div id="agente-ring"></div>
+          <div id="agente-box">
+            <div class="ag-avatar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#0f1f1b" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" width="19" height="19" aria-label="Agente de IA">
+                <rect x="4" y="7.5" width="16" height="12" rx="3.5"/>
+                <path d="M12 7.5V4M9 2.6h6"/>
+                <circle cx="9" cy="13" r="1.3" fill="#0f1f1b" stroke="none"/>
+                <circle cx="15" cy="13" r="1.3" fill="#0f1f1b" stroke="none"/>
+                <path d="M1.6 12v3M22.4 12v3"/>
+              </svg>
+              <span class="ag-live"></span>
+            </div>
+            <div class="ag-dots">
+              <span class="ag-dot"></span><span class="ag-dot"></span><span class="ag-dot"></span>
+            </div>
+            <div class="ag-bubble" id="ag-bubble">Te agendo el martes a las 11:00</div>
+          </div>
+          <span class="ag-label">El agente atiende y resuelve</span>
+        </div>
+
+        <!-- SALIDA 1: la ficha queda en el CRM -->
+        <div id="out-crm" class="dest">
+          <div class="crm-card">
+            <div class="crm-row">
+              <span class="crm-avatar">MR</span>
+              <span class="crm-lines">
+                <span class="crm-line"></span>
+                <span class="crm-line short"></span>
               </span>
             </div>
-            <div class="cal-cell"></div>
-            <div class="cal-cell"></div>
-            <div class="cal-cell"></div>
+            <div class="crm-tag">Cita · martes 11:00</div>
           </div>
+          <span class="dest-label">Ficha creada en tu CRM</span>
+        </div>
+
+        <!-- SALIDA 2: el cliente recibe respuesta -->
+        <div id="out-reply" class="dest">
+          <div class="reply-box">
+            <span class="reply-bubble">Confirmado</span>
+            <span class="reply-check">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#C8A85E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" width="13" height="13">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+            </span>
+          </div>
+          <span class="dest-label">Cliente respondido</span>
         </div>
       </div>
     </div>
 
     <style>
       .bg-field {
-        position: absolute;
-        inset: 0;
-        z-index: 0;
-        background: radial-gradient(ellipse 500px 320px at 50% 50%, rgba(59, 94, 255, 0.08), transparent 70%);
+        position: absolute; inset: 0; z-index: 0;
+        background: radial-gradient(ellipse 540px 330px at 46% 50%, rgba(200, 168, 94, 0.09), transparent 70%);
       }
 
-      #chat-panel,
-      #cal-panel {
-        position: absolute;
-        top: 50%;
-        border-radius: 26px;
-        background: linear-gradient(165deg, rgba(32, 36, 58, 0.55), rgba(16, 18, 30, 0.48));
-        backdrop-filter: blur(14px);
-        -webkit-backdrop-filter: blur(14px);
-        border: 1.5px solid rgba(174, 187, 255, 0.20);
-        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
-        overflow: hidden;
-        z-index: 2;
+      .trg {
+        position: absolute; left: 138px;
+        display: flex; flex-direction: column; align-items: center;
+        z-index: 4; opacity: 0;
       }
-      .panel-sheen {
-        position: absolute;
-        top: 0;
-        left: -40%;
-        width: 40%;
-        height: 100%;
-        background: linear-gradient(105deg, transparent, rgba(255, 255, 255, 0.08), transparent);
-        opacity: 0;
-        will-change: transform, opacity;
+      #trg-1 { top: 116px; }
+      #trg-2 { top: 240px; }
+      #trg-3 { top: 364px; }
+      .trg-box {
+        width: 60px; height: 60px; border-radius: 17px;
+        background: linear-gradient(160deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02));
+        border: 1px solid rgba(200, 168, 94, 0.22);
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.42);
+        display: flex; align-items: center; justify-content: center;
+      }
+      .trg-label {
+        margin-top: 9px; font-size: 15px; font-weight: 500;
+        color: rgba(199, 205, 197, 0.92); white-space: nowrap;
       }
 
-      #chat-panel {
-        left: 250px;
-        width: 300px;
-        height: 340px;
-        transform-origin: center;
-        opacity: 0;
+      #agente {
+        position: absolute; left: 400px; top: 240px;
+        display: flex; flex-direction: column; align-items: center;
+        z-index: 3; opacity: 0;
       }
-      .chat-header {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        padding: 18px 20px 0;
+      /* El avatar sale por arriba de la caja, como una ficha de contacto:
+         asi se ve QUIEN atiende y no solo que algo pasa. */
+      .ag-avatar {
+        position: absolute; top: -19px; left: 50%;
+        margin-left: -19px;
+        width: 38px; height: 38px; border-radius: 50%;
+        background: linear-gradient(160deg, #D6BA82, #C8A85E);
+        border: 2.5px solid #0f1f1b;
+        display: flex; align-items: center; justify-content: center;
       }
-      .chat-dot {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: #5edc8f;
-        box-shadow: 0 0 6px 1px rgba(94, 220, 143, 0.6);
-      }
-      .chat-label {
-        font-size: 13px;
-        font-weight: 500;
-        color: rgba(210, 216, 255, 0.65);
-      }
-      .chat-body {
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-      }
-      .bubble {
-        max-width: 82%;
-        padding: 11px 15px;
-        border-radius: 16px;
-        font-size: 14px;
-        line-height: 1.35;
-        opacity: 0;
-        transform: scale(0);
-        transform-origin: bottom left;
-      }
-      .bubble-in {
-        align-self: flex-start;
-        background: rgba(255, 255, 255, 0.06);
-        color: rgba(225, 228, 255, 0.85);
-        border: 1px solid rgba(255, 255, 255, 0.06);
-        border-bottom-left-radius: 4px;
-        transform-origin: bottom left;
-      }
-      .bubble-out {
-        align-self: flex-end;
-        background: linear-gradient(135deg, #3f5fe0, #2946c4);
-        color: #ffffff;
-        font-weight: 600;
-        border-bottom-right-radius: 4px;
-        transform-origin: bottom right;
-      }
-      .typing-row {
-        align-self: flex-start;
-        display: flex;
-        gap: 4px;
-        padding: 12px 16px;
-        border-radius: 16px;
-        border-bottom-left-radius: 4px;
-        background: rgba(255, 255, 255, 0.06);
-        border: 1px solid rgba(255, 255, 255, 0.06);
-        opacity: 0;
-        width: fit-content;
-      }
-      .typing-dot {
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: rgba(210, 216, 255, 0.6);
+      .ag-live {
+        position: absolute; right: 0; bottom: 1px;
+        width: 10px; height: 10px; border-radius: 50%;
+        background: #3DDC84;
+        border: 2px solid #0f1f1b;
       }
 
-      #connector-path {
-        stroke-dasharray: 120;
-        stroke-dashoffset: 120;
-      }
-
-      #fly-card {
-        position: absolute;
-        left: 400px;
-        top: 270px;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        padding: 8px 14px;
-        border-radius: 14px;
-        background: linear-gradient(135deg, rgba(82, 117, 255, 0.9), rgba(59, 94, 255, 0.9));
-        box-shadow: 0 8px 20px rgba(59, 94, 255, 0.4);
-        color: #f4f6ff;
-        font-size: 13px;
-        font-weight: 600;
-        z-index: 4;
-        opacity: 0;
-        transform-origin: center;
-      }
-
-      #cal-panel {
-        left: 550px;
-        width: 220px;
-        height: 260px;
-        transform-origin: center;
-        opacity: 0;
-      }
-      .cal-header {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        padding: 18px 20px 0;
-      }
-      .cal-label {
-        font-size: 13px;
-        font-weight: 500;
-        color: rgba(210, 216, 255, 0.65);
-      }
-      .cal-grid {
-        margin: 18px 20px 0;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 8px;
-      }
-      .cal-cell {
-        aspect-ratio: 1;
-        border-radius: 8px;
-        background: rgba(255, 255, 255, 0.035);
-        border: 1px solid rgba(255, 255, 255, 0.05);
-      }
-      .cal-slot {
+      #agente-box {
         position: relative;
-        background: rgba(82, 117, 255, 0.12);
-        border: 1px solid rgba(174, 187, 255, 0.3);
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        width: 184px; height: 118px; border-radius: 22px;
+        background: linear-gradient(165deg, rgba(39, 76, 59, 0.88), rgba(15, 31, 27, 0.72));
+        border: 1.5px solid rgba(200, 168, 94, 0.45);
+        box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        display: flex; align-items: center; justify-content: center;
+        padding: 12px;
       }
-      #cal-check {
-        width: 22px;
-        height: 22px;
-        border-radius: 50%;
-        background: #aebbff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+      #agente-ring {
+        position: absolute; top: -8px; left: 50%;
+        margin-left: -100px;
+        width: 200px; height: 134px; border-radius: 26px;
+        border: 1.5px solid rgba(200, 168, 94, 0.75);
         opacity: 0;
+      }
+      /* Los tres puntos: el agente "pensando" antes de contestar. */
+      .ag-dots { display: flex; gap: 7px; }
+      .ag-dot {
+        width: 9px; height: 9px; border-radius: 50%;
+        background: #D6BA82;
+      }
+      .ag-bubble {
+        position: absolute;
+        top: 52%;
+        font-size: 15.5px; font-weight: 500; line-height: 1.35;
+        color: #F3F5F2; text-align: center;
+        padding: 0 14px;
+        opacity: 0;
+      }
+      .ag-label {
+        margin-top: 13px; font-size: 16px; font-weight: 600;
+        color: rgba(214, 186, 130, 0.95); white-space: nowrap;
+      }
+
+      .dest {
+        position: absolute; left: 664px;
+        display: flex; flex-direction: column; align-items: center;
+        z-index: 4; opacity: 0;
+      }
+      #out-crm { top: 152px; }
+      #out-reply { top: 326px; }
+
+      /* La ficha del CRM: generica a proposito, para que valga sea cual sea
+         el CRM del cliente. */
+      .crm-card {
+        width: 132px; border-radius: 12px;
+        background: linear-gradient(165deg, #f3f5f2, #e6e1d7);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+        padding: 11px 12px;
+        display: flex; flex-direction: column; gap: 9px;
+      }
+      .crm-row { display: flex; align-items: center; gap: 9px; }
+      .crm-avatar {
+        width: 26px; height: 26px; border-radius: 50%;
+        background: #274C3B; color: #F3F5F2;
+        font-size: 12px; font-weight: 700;
+        display: flex; align-items: center; justify-content: center;
+        flex-shrink: 0;
+      }
+      .crm-lines { display: flex; flex-direction: column; gap: 5px; flex: 1; }
+      .crm-line { height: 5px; border-radius: 3px; background: rgba(27, 33, 29, 0.30); }
+      .crm-line.short { width: 58%; }
+      .crm-tag {
+        font-size: 12.5px; font-weight: 700;
+        color: #57451E;
+        background: rgba(200, 168, 94, 0.22);
+        border-radius: 5px; padding: 4px 7px;
+        text-align: center;
+      }
+
+      .reply-box {
+        position: relative;
+        display: flex; align-items: center; justify-content: center;
+      }
+      .reply-bubble {
+        font-size: 15px; font-weight: 600; color: #0f1f1b;
+        background: #25D366;
+        border-radius: 12px 12px 12px 3px;
+        padding: 9px 14px;
+        box-shadow: 0 10px 22px rgba(0, 0, 0, 0.4);
+      }
+      .reply-check {
+        position: absolute; right: -9px; bottom: -9px;
+        width: 22px; height: 22px; border-radius: 50%;
+        background: #0f1f1b; border: 1.5px solid rgba(200, 168, 94, 0.55);
+        display: flex; align-items: center; justify-content: center;
+        opacity: 0;
+      }
+
+      .dest-label {
+        margin-top: 11px; font-size: 15px; font-weight: 500;
+        color: rgba(199, 205, 197, 0.92); white-space: nowrap;
       }
     </style>
 
@@ -292,81 +300,65 @@
         window.__timelines = window.__timelines || {};
         const tl = gsap.timeline({ paused: true });
 
-        const connectorPath = document.getElementById("connector-path");
-        const connLen = connectorPath.getTotalLength();
-        gsap.set(connectorPath, { strokeDasharray: connLen, strokeDashoffset: connLen });
-        gsap.set("#chat-panel", { xPercent: -50, yPercent: -50, scale: 0 });
-        gsap.set("#cal-panel", { xPercent: -50, yPercent: -50, scale: 0 });
-        gsap.set("#fly-card", { xPercent: -50, yPercent: -50, scale: 0, x: 0, y: 0 });
-        gsap.set("#cal-check", { scale: 0 });
+        const trgs = ["#trg-1", "#trg-2", "#trg-3"];
+        const ins = ["#in-1", "#in-2", "#in-3"];
+        const inJoin = "#in-join";
+        const outs = ["#out-1", "#out-2"];
 
-        // ---- Panels arrive ----
-        tl.to("#chat-panel", { xPercent: -50, yPercent: -50, scale: 1, opacity: 1, duration: 0.5, ease: "power3.out" }, 0);
-        tl.to("#cal-panel", { xPercent: -50, yPercent: -50, scale: 1, opacity: 1, duration: 0.5, ease: "power3.out" }, 0.12);
-        tl.fromTo("#chat-sheen", { x: 0, opacity: 0 }, { x: 420, opacity: 1, duration: 0.5, ease: "power2.inOut" }, 0.15);
-        tl.to("#chat-sheen", { opacity: 0, duration: 0.2 }, 0.65);
-        tl.fromTo("#cal-sheen", { x: 0, opacity: 0 }, { x: 310, opacity: 1, duration: 0.5, ease: "power2.inOut" }, 0.27);
-        tl.to("#cal-sheen", { opacity: 0, duration: 0.2 }, 0.77);
+        gsap.set(trgs, { xPercent: -50, yPercent: -50, opacity: 0, scale: 0.85 });
+        gsap.set("#agente", { xPercent: -50, yPercent: -50, opacity: 0, scale: 0.85 });
+        gsap.set(["#out-crm", "#out-reply"], { xPercent: -50, yPercent: -50, opacity: 0, scale: 0.9 });
+        // Cada tramo con SU longitud: un dasharray fijo deja los cortos sin
+        // dibujar (el trazo cabe entero en el hueco).
+        const allPaths = [...ins, inJoin, ...outs];
+        const pathLen = {};
+        allPaths.forEach((sel) => {
+          const el = document.querySelector(sel);
+          const L = Math.ceil(el.getTotalLength());
+          pathLen[sel] = L;
+          gsap.set(el, { strokeDasharray: L, strokeDashoffset: L });
+        });
+        gsap.set(".ag-bubble", { opacity: 0 });
+        gsap.set(".reply-check", { opacity: 0, scale: 0.4 });
 
-        tl.addLabel("panelsSettled", 0.55);
+        // 1. Los tres canales por los que entra un cliente.
+        tl.to(trgs, { xPercent: -50, yPercent: -50, opacity: 1, scale: 1, duration: 0.42, stagger: 0.12, ease: "back.out(1.6)" }, 0);
 
-        // ---- Incoming message bubble pops in ----
-        tl.fromTo("#bubble-in", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4, ease: "power3.out" }, "panelsSettled+=0.1");
+        // 2. Se conectan al agente, que aparece atendiendo.
+        tl.to(ins, { strokeDashoffset: 0, duration: 0.5, stagger: 0.07, ease: "power2.out" }, 0.45);
+        tl.to("#in-node", { opacity: 1, duration: 0.25 }, 0.72);
+        tl.to("#in-join", { strokeDashoffset: 0, duration: 0.35, ease: "power2.out" }, 0.78);
+        tl.to("#agente", { xPercent: -50, yPercent: -50, opacity: 1, scale: 1, duration: 0.45, ease: "back.out(1.7)" }, 0.6);
 
-        // ---- Typing indicator: brief, then answer lands instantly (no long wait) ----
-        tl.to("#typing-row", { opacity: 1, duration: 0.15 }, "panelsSettled+=0.55");
-        const dots = document.querySelectorAll(".typing-dot");
-        const dotPhase = { p: 0 };
-        tl.to(
-          dotPhase,
-          {
-            p: Math.PI * 2 * 1.4,
-            duration: 0.55,
-            ease: "none",
-            onUpdate: () => {
-              dots.forEach((d, i) => {
-                const s = 1 + Math.max(0, Math.sin(dotPhase.p - i * 0.6)) * 0.5;
-                d.style.transform = `scale(${s})`;
-              });
-            },
-          },
-          "panelsSettled+=0.55"
-        );
-        tl.to("#typing-row", { opacity: 0, duration: 0.15 }, "panelsSettled+=1.05");
-        tl.fromTo("#bubble-out", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4, ease: "power3.out" }, "panelsSettled+=1.1");
+        // 3. Piensa: los puntos laten mientras procesa la consulta.
+        tl.to(".ag-dot", { opacity: 0.35, duration: 0.28, stagger: { each: 0.12, repeat: 3, yoyo: true }, ease: "power1.inOut" }, 1.15);
 
-        tl.addLabel("answered", "panelsSettled+=1.55");
+        // 4. Resuelve: los puntos dan paso a la respuesta concreta.
+        tl.to(".ag-dots", { opacity: 0, duration: 0.2 }, 2.1);
+        tl.to(".ag-bubble", { opacity: 1, duration: 0.3, ease: "power2.out" }, 2.2);
+        tl.to("#agente-ring", { opacity: 0.85, scale: 1.06, duration: 0.34, ease: "power2.out" }, 2.15);
+        tl.to("#agente-ring", { opacity: 0, duration: 0.3 }, 2.5);
+        tl.set("#agente-ring", { scale: 1 }, 2.82);
 
-        // ---- Connector draws + the appointment card flies from chat to the calendar slot ----
-        tl.to(connectorPath, { strokeDashoffset: 0, duration: 0.4, ease: "power2.out" }, "answered");
-        tl.fromTo(
-          "#fly-card",
-          { xPercent: -50, yPercent: -50, x: 0, y: 0, scale: 0, opacity: 0 },
-          { xPercent: -50, yPercent: -50, scale: 1, opacity: 1, duration: 0.3, ease: "power3.out" },
-          "answered+=0.1"
-        );
-        tl.to("#fly-card", { xPercent: -50, yPercent: -50, x: 200, y: -52, duration: 0.45, ease: "power2.inOut", overwrite: "auto" }, "answered+=0.4");
-        tl.to("#fly-card", { scale: 0, opacity: 0, duration: 0.2, ease: "power1.in" }, "answered+=0.8");
+        // 5. Y el trabajo sale por los dos lados: CRM y cliente.
+        tl.to(outs, { strokeDashoffset: 0, duration: 0.45, stagger: 0.08, ease: "power2.out" }, 2.45);
+        tl.to("#out-crm", { xPercent: -50, yPercent: -50, opacity: 1, scale: 1, duration: 0.4, ease: "power3.out" }, 2.7);
+        tl.to("#out-reply", { xPercent: -50, yPercent: -50, opacity: 1, scale: 1, duration: 0.4, ease: "power3.out" }, 2.85);
+        tl.to(".reply-check", { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2.2)" }, 3.2);
 
-        // ---- Calendar slot receives it: highlight + check pop ----
-        tl.to("#cal-slot", { boxShadow: "0 0 0 2px rgba(174,187,255,0.55), 0 0 18px 2px rgba(82,117,255,0.5)", duration: 0.25 }, "answered+=0.78");
-        tl.fromTo("#cal-check", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35, ease: "power3.out" }, "answered+=0.85");
+        tl.addLabel("hold", 3.8);
 
-        tl.addLabel("hold", "answered+=1.3");
-
-        // ---- Fade everything out for a seamless loop back to the empty frame ----
-        tl.to(
-          ["#chat-panel", "#cal-panel", "#fly-card", connectorPath],
-          { opacity: 0, duration: 0.4, ease: "power1.in" },
-          "hold"
-        );
-        tl.set("#chat-panel", { xPercent: -50, yPercent: -50, scale: 0 }, "hold+=0.4");
-        tl.set("#cal-panel", { xPercent: -50, yPercent: -50, scale: 0 }, "hold+=0.4");
-        tl.set("#fly-card", { xPercent: -50, yPercent: -50, x: 0, y: 0, scale: 0 }, "hold+=0.4");
-        tl.set(["#bubble-in", "#bubble-out", "#typing-row"], { opacity: 0, scale: 0 }, "hold+=0.4");
-        tl.set(connectorPath, { strokeDashoffset: connLen }, "hold+=0.4");
-        tl.set("#cal-check", { opacity: 0, scale: 0 }, "hold+=0.4");
-        tl.set("#cal-slot", { boxShadow: "none" }, "hold+=0.4");
+        // 6. Fundido para el bucle.
+        tl.to([...trgs, "#agente", "#out-crm", "#out-reply"], { opacity: 0, duration: 0.4, ease: "power1.in" }, "hold");
+        tl.to([...ins, inJoin, ...outs, "#in-node"], { opacity: 0, duration: 0.4 }, "hold");
+        allPaths.forEach((sel) => {
+          tl.set(sel, { strokeDashoffset: pathLen[sel], opacity: 1 }, "hold+=0.4");
+        });
+        tl.set("#in-node", { opacity: 0 }, "hold+=0.4");
+        tl.set(".ag-dots", { opacity: 1 }, "hold+=0.4");
+        tl.set(".ag-dot", { opacity: 1 }, "hold+=0.4");
+        tl.set(".ag-bubble", { opacity: 0 }, "hold+=0.4");
+        tl.set(".reply-check", { opacity: 0, scale: 0.4 }, "hold+=0.4");
 
         tl.addLabel("loopEnd", "hold+=0.6");
 

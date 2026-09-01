@@ -5,22 +5,12 @@
     <meta name="viewport" content="width=800, height=480" />
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body {
+        margin: 0; width: 800px; height: 480px; overflow: hidden;
+        background: #0f1f1b; /* --night-900 */
       }
-      html,
-      body {
-        margin: 0;
-        width: 800px;
-        height: 480px;
-        overflow: hidden;
-        background: #070708;
-      }
-      body {
-        font-family: "Inter", sans-serif;
-      }
+      body { font-family: "Inter", sans-serif; }
     </style>
   </head>
   <body>
@@ -28,193 +18,196 @@
       id="root"
       data-composition-id="main"
       data-start="0"
-      data-duration="3.45"
+      data-duration="4.2"
       data-width="800"
       data-height="480"
-      style="position: relative; width: 800px; height: 480px; background: #070708; overflow: hidden;"
+      style="position: relative; width: 800px; height: 480px; background: #0f1f1b; overflow: hidden;"
     >
       <div
         id="scene"
         class="clip"
         data-start="0"
-        data-duration="3.45"
+        data-duration="4.2"
         data-track-index="0"
         style="position: absolute; inset: 0;"
       >
         <div class="bg-field"></div>
 
-        <!-- Horizontal process rail + the checkpoint ring, full-width composition -->
-        <svg id="rail-svg" width="800" height="480" viewBox="0 0 800 480" style="position: absolute; inset: 0; z-index: 1; pointer-events: none;">
+        <!-- El flujo: entra un documento por la izquierda, pasa por el nodo de
+             automatizacion y sale a DOS destinos. El protagonista es la
+             factura, no la herramienta que la procesa. -->
+        <svg id="rail-svg" width="800" height="480" viewBox="0 0 800 480" style="position: absolute; inset: 0; z-index: 1;">
           <defs>
             <linearGradient id="railGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#3b5eff" stop-opacity="0.12" />
-              <stop offset="35%" stop-color="#5275ff" stop-opacity="0.5" />
-              <stop offset="65%" stop-color="#5275ff" stop-opacity="0.5" />
-              <stop offset="100%" stop-color="#3b5eff" stop-opacity="0.12" />
+              <stop offset="0%" stop-color="#C8A85E" stop-opacity="0.10" />
+              <stop offset="50%" stop-color="#C8A85E" stop-opacity="0.45" />
+              <stop offset="100%" stop-color="#C8A85E" stop-opacity="0.10" />
             </linearGradient>
           </defs>
-          <line x1="100" y1="240" x2="700" y2="240" stroke="url(#railGrad)" stroke-width="2" />
+          <!-- tramo de entrada -->
+          <line id="rail-in" x1="150" y1="240" x2="360" y2="240" stroke="url(#railGrad)" stroke-width="2" />
+          <!-- bifurcacion de salida: arriba a Drive, abajo al correo -->
+          <path id="rail-up" d="M 440 240 H 512 V 150 H 566" fill="none" stroke="url(#railGrad)" stroke-width="2" stroke-linejoin="round" />
+          <path id="rail-down" d="M 440 240 H 512 V 322 H 566" fill="none" stroke="url(#railGrad)" stroke-width="2" stroke-linejoin="round" />
         </svg>
 
-        <!-- Checkpoint ring (glass), centered -->
-        <div id="checkpoint">
-          <div id="checkpoint-pulse-ring"></div>
-          <svg viewBox="0 0 24 24" fill="none" stroke="#7d97ff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="26" height="26" style="opacity: 0.55;">
-            <path d="M20 6L9 17l-5-5"/>
-          </svg>
+        <!-- ORIGEN: el papeleo que hoy se hace a mano -->
+        <div id="origen" class="stage-node">
+          <div class="doc-sheet">
+            <div class="doc-line doc-line-title"></div>
+            <div class="doc-line"></div>
+            <div class="doc-line short"></div>
+            <div class="doc-amount">1.240,00 €</div>
+          </div>
+          <span class="node-label">Factura que llega</span>
         </div>
 
-        <!-- 3 documents, staggered, entering left and traveling right through the checkpoint -->
-        <div id="doc-1" class="doc-item">
-          <svg class="doc-icon-raw" viewBox="0 0 24 24" fill="none" stroke="#c3ccff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="26" height="26">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
-          </svg>
-          <svg class="doc-icon-done" viewBox="0 0 24 24" fill="none" stroke="#7d97ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="26" height="26">
-            <polyline points="20 6 9 17 4 12"/>
-          </svg>
-        </div>
-        <div id="doc-2" class="doc-item">
-          <svg class="doc-icon-raw" viewBox="0 0 24 24" fill="none" stroke="#c3ccff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="26" height="26">
-            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
-          </svg>
-          <svg class="doc-icon-done" viewBox="0 0 24 24" fill="none" stroke="#7d97ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="26" height="26">
-            <polyline points="20 6 9 17 4 12"/>
-          </svg>
-        </div>
-        <div id="doc-3" class="doc-item">
-          <svg class="doc-icon-raw" viewBox="0 0 24 24" fill="none" stroke="#c3ccff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="26" height="26">
-            <rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 10h20"/>
-          </svg>
-          <svg class="doc-icon-done" viewBox="0 0 24 24" fill="none" stroke="#7d97ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="26" height="26">
-            <polyline points="20 6 9 17 4 12"/>
-          </svg>
+        <!-- EL DOCUMENTO QUE VIAJA -->
+        <div id="viajero" class="doc-sheet doc-travel">
+          <div class="doc-line doc-line-title"></div>
+          <div class="doc-line"></div>
+          <div class="doc-line short"></div>
+          <div class="doc-amount">1.240,00 €</div>
         </div>
 
-        <!-- Archived stack panel (glass), growing on the right -->
-        <div id="stack-panel">
-          <div class="panel-sheen" id="stack-sheen"></div>
-          <div class="stack-header">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#aebbff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18">
-              <path d="M21 8v13H3V8"/><path d="M1 3h22v5H1z"/><path d="M10 12h4"/>
+        <!-- PROCESO: sin marca, es el trabajo hecho solo -->
+        <div id="proceso">
+          <div id="proceso-ring"></div>
+          <div id="proceso-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#D6BA82" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" width="32" height="32" aria-label="Automatizacion">
+              <circle cx="9.2" cy="9.2" r="2.5"/>
+              <path d="M9.2 3.4v1.6M9.2 13.4v1.6M3.4 9.2h1.6M13.4 9.2h1.6M5.1 5.1l1.15 1.15M12.15 12.15l1.15 1.15M13.3 5.1l-1.15 1.15M6.25 12.15L5.1 13.3"/>
+              <circle cx="16.4" cy="16.4" r="1.9"/>
+              <path d="M16.4 12.1v1.2M16.4 19.5v1.2M12.1 16.4h1.2M19.5 16.4h1.2M13.6 13.6l.85.85M18.35 18.35l.85.85M19.2 13.6l-.85.85M14.45 18.35l-.85.85"/>
             </svg>
-            <span class="stack-label">Archivado</span>
           </div>
-          <div class="stack-rows">
-            <div class="stack-row" id="stack-row-1"></div>
-            <div class="stack-row" id="stack-row-2"></div>
-            <div class="stack-row" id="stack-row-3"></div>
+          <span class="node-label" id="proceso-label">Se procesa sola</span>
+        </div>
+
+        <!-- DESTINO 1: archivada en Drive -->
+        <div id="destino-drive" class="stage-node destino">
+          <div class="destino-box">
+            <svg viewBox="0 0 87.3 78" width="26" height="26" aria-label="Google Drive">
+              <path fill="#0066da" d="M6.6 66.85l3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8H0c0 1.55.4 3.1 1.2 4.5z"/>
+              <path fill="#00ac47" d="M43.65 25L29.9 1.2c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44A9.06 9.06 0 000 53h27.5z"/>
+              <path fill="#ea4335" d="M73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75L86.1 57.5c.8-1.4 1.2-2.95 1.2-4.5H59.798l5.852 11.5z"/>
+              <path fill="#00832d" d="M43.65 25L57.4 1.2C56.05.4 54.5 0 52.9 0H34.4c-1.6 0-3.15.45-4.5 1.2z"/>
+              <path fill="#2684fc" d="M59.8 53H27.5L13.75 76.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z"/>
+              <path fill="#ffba00" d="M73.4 26.5l-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3L43.65 25l16.15 28h27.45c0-1.55-.4-3.1-1.2-4.5z"/>
+            </svg>
+            <span class="destino-check">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#C8A85E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+            </span>
           </div>
+          <span class="node-label">Archivada</span>
+        </div>
+
+        <!-- DESTINO 2: aviso por correo -->
+        <div id="destino-mail" class="stage-node destino">
+          <div class="destino-box">
+            <svg viewBox="0 0 512 512" width="26" height="26" aria-label="Gmail">
+              <path fill="#EA4335" d="M42.7 458.7h74.7V277.3L10.7 197v218.3c0 23.9 19.4 43.4 32 43.4z"/>
+              <path fill="#34A853" d="M394.7 458.7h74.7c17.7 0 32-14.3 32-32V197L394.7 277.3v181.4z"/>
+              <path fill="#FBBC04" d="M394.7 85.3v192L501.3 197v-79c0-44.4-50.7-69.7-85.3-43L394.7 85.3z"/>
+              <path fill="#4285F4" d="M117.3 277.3v-192L256 189.3l138.7-104v192L256 381.3 117.3 277.3z"/>
+              <path fill="#C5221F" d="M10.7 118v79l106.6 80.3v-192L96 85.3C61.4 58.6 10.7 83.9 10.7 118z"/>
+            </svg>
+            <span class="destino-check">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#C8A85E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+            </span>
+          </div>
+          <span class="node-label">Aviso enviado</span>
         </div>
       </div>
     </div>
 
     <style>
       .bg-field {
-        position: absolute;
-        inset: 0;
-        z-index: 0;
-        background: radial-gradient(ellipse 520px 320px at 50% 50%, rgba(59, 94, 255, 0.08), transparent 70%);
+        position: absolute; inset: 0; z-index: 0;
+        background: radial-gradient(ellipse 520px 320px at 50% 50%, rgba(200, 168, 94, 0.09), transparent 70%);
       }
 
-      #checkpoint {
+      .stage-node {
         position: absolute;
-        left: 400px;
-        top: 240px;
-        width: 84px;
-        height: 84px;
-        border-radius: 50%;
-        background: linear-gradient(165deg, rgba(32, 36, 58, 0.6), rgba(16, 18, 30, 0.5));
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        border: 1.5px solid rgba(174, 187, 255, 0.30);
-        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
-        z-index: 3;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        display: flex; flex-direction: column; align-items: center;
+        z-index: 4; opacity: 0;
       }
-      #checkpoint-pulse-ring {
-        position: absolute;
-        inset: -6px;
-        border-radius: 50%;
-        border: 1.5px solid rgba(82, 117, 255, 0.7);
-        opacity: 0;
-      }
+      #origen { left: 76px; top: 240px; }
+      #destino-drive { left: 640px; top: 150px; }
+      #destino-mail  { left: 640px; top: 322px; }
 
-      .doc-item {
-        position: absolute;
-        left: 130px;
-        top: 240px;
-        width: 54px;
-        height: 54px;
-        border-radius: 14px;
-        background: linear-gradient(160deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.015));
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        border: 1px solid rgba(174, 187, 255, 0.18);
-        box-shadow: 0 10px 22px rgba(0, 0, 0, 0.4);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 4;
-        opacity: 0;
-      }
-      .doc-icon-raw,
-      .doc-icon-done {
-        position: absolute;
-      }
-      .doc-icon-done {
-        opacity: 0;
-      }
-
-      #stack-panel {
-        position: absolute;
-        left: 650px;
-        top: 240px;
-        width: 220px;
-        height: 220px;
-        border-radius: 24px;
-        background: linear-gradient(165deg, rgba(32, 36, 58, 0.55), rgba(16, 18, 30, 0.48));
-        backdrop-filter: blur(14px);
-        -webkit-backdrop-filter: blur(14px);
-        border: 1.5px solid rgba(174, 187, 255, 0.20);
-        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
-        overflow: hidden;
-        z-index: 2;
-        opacity: 0;
-      }
-      .panel-sheen {
-        position: absolute;
-        top: 0;
-        left: -40%;
-        width: 40%;
-        height: 100%;
-        background: linear-gradient(105deg, transparent, rgba(255, 255, 255, 0.08), transparent);
-        opacity: 0;
-        will-change: transform, opacity;
-      }
-      .stack-header {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        padding: 18px 20px 0;
-      }
-      .stack-label {
-        font-size: 13px;
-        font-weight: 500;
-        color: rgba(210, 216, 255, 0.75);
-      }
-      .stack-rows {
-        margin: 20px 20px 0;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-      }
-      .stack-row {
-        height: 22px;
+      /* La hoja: se lee como un documento real, no como un icono. Eso es lo
+         que hace que se entienda sin leer la etiqueta. */
+      .doc-sheet {
+        width: 88px; height: 108px;
         border-radius: 8px;
-        background: linear-gradient(160deg, rgba(82, 117, 255, 0.16), rgba(59, 94, 255, 0.08));
-        border: 1px solid rgba(174, 187, 255, 0.16);
+        background: linear-gradient(165deg, #f3f5f2, #e6e1d7);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+        padding: 14px 12px;
+        display: flex; flex-direction: column; gap: 7px;
+        position: relative;
+      }
+      .doc-line { height: 5px; border-radius: 3px; background: rgba(27, 33, 29, 0.22); }
+      .doc-line-title { height: 7px; width: 70%; background: rgba(27, 33, 29, 0.45); }
+      .doc-line.short { width: 55%; }
+      .doc-amount {
+        margin-top: auto;
+        font-size: 15px; font-weight: 700;
+        color: #1b211d;
+        font-variant-numeric: tabular-nums;
+      }
+      .doc-travel {
+        position: absolute; left: 76px; top: 240px;
+        transform-origin: center;
+        z-index: 5; opacity: 0;
+      }
+
+      .node-label {
+        margin-top: 12px;
+        font-size: 16px; font-weight: 500;
+        color: rgba(199, 205, 197, 0.92);
+        white-space: nowrap;
+      }
+
+      #proceso {
+        position: absolute; left: 400px; top: 240px;
+        display: flex; flex-direction: column; align-items: center;
+        z-index: 3; opacity: 0;
+      }
+      #proceso-box {
+        width: 78px; height: 78px; border-radius: 20px;
+        background: linear-gradient(165deg, rgba(39, 76, 59, 0.85), rgba(15, 31, 27, 0.7));
+        border: 1.5px solid rgba(200, 168, 94, 0.42);
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        display: flex; align-items: center; justify-content: center;
+      }
+      #proceso-ring {
+        position: absolute; top: 0; left: 50%;
+        margin-left: -45px; margin-top: -6px;
+        width: 90px; height: 90px; border-radius: 50%;
+        border: 1.5px solid rgba(200, 168, 94, 0.8);
+        opacity: 0;
+      }
+      #proceso-label { color: rgba(214, 186, 130, 0.95); font-weight: 600; }
+
+      .destino-box {
+        width: 66px; height: 66px; border-radius: 18px;
+        background: linear-gradient(165deg, rgba(39, 76, 59, 0.7), rgba(15, 31, 27, 0.55));
+        border: 1px solid rgba(200, 168, 94, 0.26);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+        display: flex; align-items: center; justify-content: center;
+        position: relative;
+      }
+      .destino-check {
+        position: absolute; right: -6px; bottom: -6px;
+        width: 24px; height: 24px; border-radius: 50%;
+        background: #0f1f1b;
+        border: 1.5px solid rgba(200, 168, 94, 0.55);
+        display: flex; align-items: center; justify-content: center;
         opacity: 0;
       }
     </style>
@@ -224,67 +217,44 @@
         window.__timelines = window.__timelines || {};
         const tl = gsap.timeline({ paused: true });
 
-        gsap.set("#checkpoint", { xPercent: -50, yPercent: -50, scale: 0, opacity: 0 });
-        gsap.set("#stack-panel", { xPercent: -50, yPercent: -50, scale: 0, opacity: 0 });
-        gsap.set(["#doc-1", "#doc-2", "#doc-3"], { xPercent: -50, yPercent: -50, x: 0, y: 0, scale: 0 });
-        gsap.set(".doc-icon-done", { opacity: 0 });
-        gsap.set(".stack-row", { scaleX: 0.6, opacity: 0, transformOrigin: "left center" });
+        gsap.set("#origen", { yPercent: -50, opacity: 0, scale: 0.92 });
+        gsap.set("#proceso", { xPercent: -50, yPercent: -50, opacity: 0, scale: 0.8 });
+        gsap.set(["#destino-drive", "#destino-mail"], { yPercent: -50, opacity: 0, scale: 0.9 });
+        gsap.set("#viajero", { xPercent: -50, yPercent: -50, scale: 0.55, opacity: 0 });
+        gsap.set(".destino-check", { opacity: 0, scale: 0.4 });
+        gsap.set(["#rail-in", "#rail-up", "#rail-down"], { strokeDasharray: 240, strokeDashoffset: 240 });
 
-        const DOC_X = 130; // doc spawn x
-        const CHECK_X = 400; // checkpoint center x
-        const STACK_X = 650; // stack panel center x
+        // 1. Aparece el papeleo: el problema del cliente, primero.
+        tl.to("#origen", { yPercent: -50, opacity: 1, scale: 1, duration: 0.45, ease: "power3.out" }, 0);
 
-        // ---- Checkpoint + stack panel arrive first, establishing the pipeline ----
-        tl.to("#checkpoint", { xPercent: -50, yPercent: -50, scale: 1, opacity: 1, duration: 0.45, ease: "power3.out" }, 0);
-        tl.to("#stack-panel", { xPercent: -50, yPercent: -50, scale: 1, opacity: 1, duration: 0.45, ease: "power3.out" }, 0.12);
-        tl.fromTo("#stack-sheen", { x: 0, opacity: 0 }, { x: 300, opacity: 1, duration: 0.5, ease: "power2.inOut" }, 0.3);
-        tl.to("#stack-sheen", { opacity: 0, duration: 0.2 }, 0.8);
+        // 2. Se dibuja el camino y aparece el nodo de proceso.
+        tl.to("#rail-in", { strokeDashoffset: 0, duration: 0.4, ease: "power2.out" }, 0.35);
+        tl.to("#proceso", { xPercent: -50, yPercent: -50, opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.7)" }, 0.5);
+        tl.to(["#rail-up", "#rail-down"], { strokeDashoffset: 0, duration: 0.45, ease: "power2.out" }, 0.8);
+        tl.to(["#destino-drive", "#destino-mail"], { yPercent: -50, opacity: 1, scale: 1, duration: 0.4, ease: "power3.out", stagger: 0.1 }, 0.95);
 
-        // ---- Each document: spawn on the left, travel right through the checkpoint, land in the stack ----
-        const docs = ["#doc-1", "#doc-2", "#doc-3"];
-        const DOC_STAGGER = 0.42;
-        const START_AT = 0.4;
+        // 3. El documento viaja hasta el proceso.
+        tl.to("#viajero", { opacity: 1, duration: 0.2 }, 1.35);
+        tl.to("#viajero", { xPercent: -50, yPercent: -50, x: 324, duration: 0.6, ease: "power1.inOut" }, 1.4);
 
-        docs.forEach((sel, i) => {
-          const t0 = START_AT + i * DOC_STAGGER;
+        // 4. Se procesa: pulso, y el documento se encoge dentro del nodo.
+        tl.to("#proceso-ring", { opacity: 0.85, scale: 1.3, duration: 0.32, ease: "power2.out" }, 2.0);
+        tl.to("#proceso-ring", { opacity: 0, duration: 0.28 }, 2.28);
+        tl.set("#proceso-ring", { scale: 1 }, 2.56);
+        tl.to("#viajero", { xPercent: -50, yPercent: -50, scale: 0.2, opacity: 0, duration: 0.28, ease: "power2.in" }, 2.05);
 
-          // spawn (pop in at rail start)
-          tl.fromTo(sel, { xPercent: -50, yPercent: -50, x: 0, y: 0, scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: "power3.out" }, t0);
+        // 5. Sale a los dos destinos: el trabajo terminado, por duplicado.
+        tl.to("#destino-drive .destino-check", { opacity: 1, scale: 1, duration: 0.32, ease: "back.out(2.2)" }, 2.5);
+        tl.to("#destino-mail .destino-check",  { opacity: 1, scale: 1, duration: 0.32, ease: "back.out(2.2)" }, 2.66);
 
-          // travel to checkpoint
-          tl.to(sel, { xPercent: -50, yPercent: -50, x: CHECK_X - DOC_X, y: 0, duration: 0.55, ease: "power1.in" }, t0 + 0.15);
+        tl.addLabel("hold", 3.4);
 
-          // at checkpoint: pulse the ring, raw icon -> done icon (the "processed" moment)
-          const arriveAt = t0 + 0.15 + 0.55;
-          tl.to("#checkpoint-pulse-ring", { opacity: 0.8, scale: 1.35, duration: 0.3, ease: "power2.out" }, arriveAt);
-          tl.to("#checkpoint-pulse-ring", { opacity: 0, duration: 0.25 }, arriveAt + 0.28);
-          tl.set("#checkpoint-pulse-ring", { scale: 1 }, arriveAt + 0.53);
-          tl.to(`${sel} .doc-icon-raw`, { opacity: 0, duration: 0.18 }, arriveAt + 0.05);
-          tl.to(`${sel} .doc-icon-done`, { opacity: 1, duration: 0.18 }, arriveAt + 0.05);
-
-          // continue right into the stack panel, settle
-          tl.to(sel, { xPercent: -50, yPercent: -50, x: STACK_X - DOC_X, y: 0, duration: 0.4, ease: "power2.in" }, arriveAt + 0.15);
-          tl.to(sel, { scale: 0, opacity: 0, duration: 0.15, ease: "power1.in" }, arriveAt + 0.5);
-
-          // the archived stack panel gains a row as the document lands
-          tl.to(`#stack-row-${i + 1}`, { scaleX: 1, opacity: 1, duration: 0.3, ease: "power3.out" }, arriveAt + 0.5);
-        });
-
-        const lastArriveAt = START_AT + (docs.length - 1) * DOC_STAGGER + 0.15 + 0.55;
-        tl.addLabel("hold", lastArriveAt + 0.75);
-
-        // ---- Fade everything back out for a seamless loop ----
-        tl.to(
-          ["#checkpoint", "#stack-panel", ...docs],
-          { opacity: 0, duration: 0.4, ease: "power1.in" },
-          "hold"
-        );
-        tl.set("#checkpoint", { xPercent: -50, yPercent: -50, scale: 0 }, "hold+=0.4");
-        tl.set("#stack-panel", { xPercent: -50, yPercent: -50, scale: 0 }, "hold+=0.4");
-        tl.set(docs, { xPercent: -50, yPercent: -50, x: 0, y: 0, scale: 0 }, "hold+=0.4");
-        tl.set(".doc-icon-raw", { opacity: 1 }, "hold+=0.4");
-        tl.set(".doc-icon-done", { opacity: 0 }, "hold+=0.4");
-        tl.set(".stack-row", { scaleX: 0.6, opacity: 0 }, "hold+=0.4");
+        // 6. Fundido para el bucle.
+        tl.to(["#origen", "#proceso", "#destino-drive", "#destino-mail"], { opacity: 0, duration: 0.4, ease: "power1.in" }, "hold");
+        tl.to(["#rail-in", "#rail-up", "#rail-down"], { opacity: 0, duration: 0.4 }, "hold");
+        tl.set("#viajero", { xPercent: -50, yPercent: -50, x: 0, scale: 0.55, opacity: 0 }, "hold+=0.4");
+        tl.set(".destino-check", { opacity: 0, scale: 0.4 }, "hold+=0.4");
+        tl.set(["#rail-in", "#rail-up", "#rail-down"], { strokeDashoffset: 240, opacity: 1 }, "hold+=0.4");
 
         tl.addLabel("loopEnd", "hold+=0.6");
 

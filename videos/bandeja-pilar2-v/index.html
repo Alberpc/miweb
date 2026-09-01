@@ -2,12 +2,12 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=800, height=480" />
+    <meta name="viewport" content="width=600, height=450" />
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
       html, body {
-        margin: 0; width: 800px; height: 480px; overflow: hidden;
+        margin: 0; width: 600px; height: 450px; overflow: hidden;
         background: #0f1f1b; /* --night-900 */
       }
       body { font-family: "Inter", sans-serif; }
@@ -19,9 +19,9 @@
       data-composition-id="main"
       data-start="0"
       data-duration="4.2"
-      data-width="800"
-      data-height="480"
-      style="position: relative; width: 800px; height: 480px; background: #0f1f1b; overflow: hidden;"
+      data-width="600"
+      data-height="450"
+      style="position: relative; width: 600px; height: 450px; background: #0f1f1b; overflow: hidden;"
     >
       <div
         id="scene"
@@ -33,25 +33,25 @@
       >
         <div class="bg-field"></div>
 
-        <!-- El flujo: entra un documento por la izquierda, pasa por el nodo de
-             automatizacion y sale a DOS destinos. El protagonista es la
-             factura, no la herramienta que la procesa. -->
-        <svg id="rail-svg" width="800" height="480" viewBox="0 0 800 480" style="position: absolute; inset: 0; z-index: 1;">
+        <!-- Version vertical para movil: el mismo flujo pero de arriba abajo.
+             Al no competir por el ancho, la tipografia puede ser mucho mayor
+             y se lee en una pantalla de 350px. -->
+        <svg id="rail-svg" width="600" height="450" viewBox="0 0 600 450" style="position: absolute; inset: 0; z-index: 1;">
           <defs>
-            <linearGradient id="railGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#C8A85E" stop-opacity="0.10" />
-              <stop offset="50%" stop-color="#C8A85E" stop-opacity="0.45" />
-              <stop offset="100%" stop-color="#C8A85E" stop-opacity="0.10" />
+            <linearGradient id="railGrad" gradientUnits="userSpaceOnUse" x1="0" y1="180" x2="0" y2="640">
+              <stop offset="0%" stop-color="#C8A85E" stop-opacity="0.30" />
+              <stop offset="50%" stop-color="#C8A85E" stop-opacity="0.5" />
+              <stop offset="100%" stop-color="#C8A85E" stop-opacity="0.30" />
             </linearGradient>
           </defs>
-          <!-- tramo de entrada -->
-          <line id="rail-in" x1="150" y1="240" x2="360" y2="240" stroke="url(#railGrad)" stroke-width="2" />
-          <!-- bifurcacion de salida: arriba a Drive, abajo al correo -->
-          <path id="rail-up" d="M 440 240 H 512 V 150 H 566" fill="none" stroke="url(#railGrad)" stroke-width="2" stroke-linejoin="round" />
-          <path id="rail-down" d="M 440 240 H 512 V 322 H 566" fill="none" stroke="url(#railGrad)" stroke-width="2" stroke-linejoin="round" />
+          <!-- entrada vertical -->
+          <path id="rail-in" d="M 300 165 V 186" fill="none" stroke="url(#railGrad)" stroke-width="2.5" />
+          <!-- bifurcacion: izquierda a Drive, derecha al correo -->
+          <path id="rail-left"  d="M 300 278 V 310 H 165 V 330" fill="none" stroke="url(#railGrad)" stroke-width="2.5" stroke-linejoin="round" />
+          <path id="rail-right" d="M 300 278 V 310 H 435 V 330" fill="none" stroke="url(#railGrad)" stroke-width="2.5" stroke-linejoin="round" />
         </svg>
 
-        <!-- ORIGEN: el papeleo que hoy se hace a mano -->
+        <!-- ORIGEN -->
         <div id="origen" class="stage-node">
           <div class="doc-sheet">
             <div class="doc-line doc-line-title"></div>
@@ -62,7 +62,6 @@
           <span class="node-label">Factura que llega</span>
         </div>
 
-        <!-- EL DOCUMENTO QUE VIAJA -->
         <div id="viajero" class="doc-sheet doc-travel">
           <div class="doc-line doc-line-title"></div>
           <div class="doc-line"></div>
@@ -70,11 +69,11 @@
           <div class="doc-amount">1.240,00 €</div>
         </div>
 
-        <!-- PROCESO: sin marca, es el trabajo hecho solo -->
+        <!-- PROCESO -->
         <div id="proceso">
           <div id="proceso-ring"></div>
           <div id="proceso-box">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#D6BA82" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" width="32" height="32" aria-label="Automatizacion">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#D6BA82" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" width="34" height="34" aria-label="Automatizacion">
               <circle cx="9.2" cy="9.2" r="2.5"/>
               <path d="M9.2 3.4v1.6M9.2 13.4v1.6M3.4 9.2h1.6M13.4 9.2h1.6M5.1 5.1l1.15 1.15M12.15 12.15l1.15 1.15M13.3 5.1l-1.15 1.15M6.25 12.15L5.1 13.3"/>
               <circle cx="16.4" cy="16.4" r="1.9"/>
@@ -84,10 +83,10 @@
           <span class="node-label" id="proceso-label">Se procesa sola</span>
         </div>
 
-        <!-- DESTINO 1: archivada en Drive -->
+        <!-- DESTINO 1 -->
         <div id="destino-drive" class="stage-node destino">
           <div class="destino-box">
-            <svg viewBox="0 0 87.3 78" width="26" height="26" aria-label="Google Drive">
+            <svg viewBox="0 0 87.3 78" width="30" height="30" aria-label="Google Drive">
               <path fill="#0066da" d="M6.6 66.85l3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8H0c0 1.55.4 3.1 1.2 4.5z"/>
               <path fill="#00ac47" d="M43.65 25L29.9 1.2c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44A9.06 9.06 0 000 53h27.5z"/>
               <path fill="#ea4335" d="M73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75L86.1 57.5c.8-1.4 1.2-2.95 1.2-4.5H59.798l5.852 11.5z"/>
@@ -96,7 +95,7 @@
               <path fill="#ffba00" d="M73.4 26.5l-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3L43.65 25l16.15 28h27.45c0-1.55-.4-3.1-1.2-4.5z"/>
             </svg>
             <span class="destino-check">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#C8A85E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#C8A85E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" width="15" height="15">
                 <polyline points="20 6 9 17 4 12"/>
               </svg>
             </span>
@@ -104,10 +103,10 @@
           <span class="node-label">Archivada</span>
         </div>
 
-        <!-- DESTINO 2: aviso por correo -->
+        <!-- DESTINO 2 -->
         <div id="destino-mail" class="stage-node destino">
           <div class="destino-box">
-            <svg viewBox="0 0 512 512" width="26" height="26" aria-label="Gmail">
+            <svg viewBox="0 0 512 512" width="30" height="30" aria-label="Gmail">
               <path fill="#EA4335" d="M42.7 458.7h74.7V277.3L10.7 197v218.3c0 23.9 19.4 43.4 32 43.4z"/>
               <path fill="#34A853" d="M394.7 458.7h74.7c17.7 0 32-14.3 32-32V197L394.7 277.3v181.4z"/>
               <path fill="#FBBC04" d="M394.7 85.3v192L501.3 197v-79c0-44.4-50.7-69.7-85.3-43L394.7 85.3z"/>
@@ -115,7 +114,7 @@
               <path fill="#C5221F" d="M10.7 118v79l106.6 80.3v-192L96 85.3C61.4 58.6 10.7 83.9 10.7 118z"/>
             </svg>
             <span class="destino-check">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#C8A85E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#C8A85E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" width="15" height="15">
                 <polyline points="20 6 9 17 4 12"/>
               </svg>
             </span>
@@ -128,7 +127,7 @@
     <style>
       .bg-field {
         position: absolute; inset: 0; z-index: 0;
-        background: radial-gradient(ellipse 520px 320px at 50% 50%, rgba(200, 168, 94, 0.09), transparent 70%);
+        background: radial-gradient(ellipse 420px 520px at 50% 50%, rgba(200, 168, 94, 0.09), transparent 70%);
       }
 
       .stage-node {
@@ -136,22 +135,20 @@
         display: flex; flex-direction: column; align-items: center;
         z-index: 4; opacity: 0;
       }
-      #origen { left: 76px; top: 240px; }
-      #destino-drive { left: 640px; top: 150px; }
-      #destino-mail  { left: 640px; top: 322px; }
+      #origen { left: 300px; top: 92px; }
+      #destino-drive { left: 165px; top: 370px; }
+      #destino-mail  { left: 435px; top: 370px; }
 
-      /* La hoja: se lee como un documento real, no como un icono. Eso es lo
-         que hace que se entienda sin leer la etiqueta. */
       .doc-sheet {
-        width: 88px; height: 108px;
-        border-radius: 8px;
+        width: 96px; height: 118px;
+        border-radius: 10px;
         background: linear-gradient(165deg, #f3f5f2, #e6e1d7);
-        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
-        padding: 14px 12px;
+        box-shadow: 0 14px 32px rgba(0, 0, 0, 0.45);
+        padding: 13px 12px;
         display: flex; flex-direction: column; gap: 7px;
         position: relative;
       }
-      .doc-line { height: 5px; border-radius: 3px; background: rgba(27, 33, 29, 0.22); }
+      .doc-line { height: 5px; border-radius: 4px; background: rgba(27, 33, 29, 0.22); }
       .doc-line-title { height: 7px; width: 70%; background: rgba(27, 33, 29, 0.45); }
       .doc-line.short { width: 55%; }
       .doc-amount {
@@ -161,52 +158,54 @@
         font-variant-numeric: tabular-nums;
       }
       .doc-travel {
-        position: absolute; left: 76px; top: 240px;
+        position: absolute; left: 300px; top: 92px;
         transform-origin: center;
         z-index: 5; opacity: 0;
       }
 
+      /* Tipografia grande: es una pieza pensada para verse a ~350px de ancho,
+         asi que todo tiene que aguantar la reduccion. */
       .node-label {
-        margin-top: 12px;
-        font-size: 16px; font-weight: 500;
-        color: rgba(199, 205, 197, 0.92);
+        margin-top: 11px;
+        font-size: 17px; font-weight: 500;
+        color: rgba(199, 205, 197, 0.94);
         white-space: nowrap;
       }
 
       #proceso {
-        position: absolute; left: 400px; top: 240px;
+        position: absolute; left: 300px; top: 232px;
         display: flex; flex-direction: column; align-items: center;
         z-index: 3; opacity: 0;
       }
       #proceso-box {
-        width: 78px; height: 78px; border-radius: 20px;
+        width: 84px; height: 84px; border-radius: 22px;
         background: linear-gradient(165deg, rgba(39, 76, 59, 0.85), rgba(15, 31, 27, 0.7));
-        border: 1.5px solid rgba(200, 168, 94, 0.42);
-        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        border: 2px solid rgba(200, 168, 94, 0.42);
+        box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
         display: flex; align-items: center; justify-content: center;
       }
       #proceso-ring {
         position: absolute; top: 0; left: 50%;
-        margin-left: -45px; margin-top: -6px;
-        width: 90px; height: 90px; border-radius: 50%;
-        border: 1.5px solid rgba(200, 168, 94, 0.8);
+        margin-left: -48px; margin-top: -6px;
+        width: 96px; height: 96px; border-radius: 50%;
+        border: 2px solid rgba(200, 168, 94, 0.8);
         opacity: 0;
       }
-      #proceso-label { color: rgba(214, 186, 130, 0.95); font-weight: 600; }
+      #proceso-label { color: rgba(214, 186, 130, 0.96); font-weight: 600; font-size: 18px; }
 
       .destino-box {
-        width: 66px; height: 66px; border-radius: 18px;
+        width: 72px; height: 72px; border-radius: 19px;
         background: linear-gradient(165deg, rgba(39, 76, 59, 0.7), rgba(15, 31, 27, 0.55));
-        border: 1px solid rgba(200, 168, 94, 0.26);
-        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+        border: 1.5px solid rgba(200, 168, 94, 0.26);
+        box-shadow: 0 14px 32px rgba(0, 0, 0, 0.4);
         display: flex; align-items: center; justify-content: center;
         position: relative;
       }
       .destino-check {
-        position: absolute; right: -6px; bottom: -6px;
-        width: 24px; height: 24px; border-radius: 50%;
+        position: absolute; right: -7px; bottom: -7px;
+        width: 26px; height: 26px; border-radius: 50%;
         background: #0f1f1b;
-        border: 1.5px solid rgba(200, 168, 94, 0.55);
+        border: 2px solid rgba(200, 168, 94, 0.55);
         display: flex; align-items: center; justify-content: center;
         opacity: 0;
       }
@@ -217,33 +216,41 @@
         window.__timelines = window.__timelines || {};
         const tl = gsap.timeline({ paused: true });
 
-        gsap.set("#origen", { yPercent: -50, opacity: 0, scale: 0.92 });
+        gsap.set("#origen", { xPercent: -50, yPercent: -50, opacity: 0, scale: 0.92 });
         gsap.set("#proceso", { xPercent: -50, yPercent: -50, opacity: 0, scale: 0.8 });
-        gsap.set(["#destino-drive", "#destino-mail"], { yPercent: -50, opacity: 0, scale: 0.9 });
-        gsap.set("#viajero", { xPercent: -50, yPercent: -50, scale: 0.55, opacity: 0 });
+        gsap.set(["#destino-drive", "#destino-mail"], { xPercent: -50, yPercent: -50, opacity: 0, scale: 0.9 });
+        gsap.set("#viajero", { xPercent: -50, yPercent: -50, scale: 0.60, opacity: 0 });
         gsap.set(".destino-check", { opacity: 0, scale: 0.4 });
-        gsap.set(["#rail-in", "#rail-up", "#rail-down"], { strokeDasharray: 240, strokeDashoffset: 240 });
 
-        // 1. Aparece el papeleo: el problema del cliente, primero.
-        tl.to("#origen", { yPercent: -50, opacity: 1, scale: 1, duration: 0.45, ease: "power3.out" }, 0);
+        const rails = ["#rail-in", "#rail-left", "#rail-right"];
+        const railLen = {};
+        rails.forEach((sel) => {
+          const el = document.querySelector(sel);
+          const L = Math.ceil(el.getTotalLength());
+          railLen[sel] = L;
+          gsap.set(el, { strokeDasharray: L, strokeDashoffset: L });
+        });
 
-        // 2. Se dibuja el camino y aparece el nodo de proceso.
+        // 1. El papeleo: el problema del cliente, primero.
+        tl.to("#origen", { xPercent: -50, yPercent: -50, opacity: 1, scale: 1, duration: 0.45, ease: "power3.out" }, 0);
+
+        // 2. Camino y nodo de proceso.
         tl.to("#rail-in", { strokeDashoffset: 0, duration: 0.4, ease: "power2.out" }, 0.35);
         tl.to("#proceso", { xPercent: -50, yPercent: -50, opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.7)" }, 0.5);
-        tl.to(["#rail-up", "#rail-down"], { strokeDashoffset: 0, duration: 0.45, ease: "power2.out" }, 0.8);
-        tl.to(["#destino-drive", "#destino-mail"], { yPercent: -50, opacity: 1, scale: 1, duration: 0.4, ease: "power3.out", stagger: 0.1 }, 0.95);
+        tl.to(["#rail-left", "#rail-right"], { strokeDashoffset: 0, duration: 0.5, ease: "power2.out" }, 0.8);
+        tl.to(["#destino-drive", "#destino-mail"], { xPercent: -50, yPercent: -50, opacity: 1, scale: 1, duration: 0.4, ease: "power3.out", stagger: 0.1 }, 1.0);
 
-        // 3. El documento viaja hasta el proceso.
+        // 3. El documento baja hasta el proceso.
         tl.to("#viajero", { opacity: 1, duration: 0.2 }, 1.35);
-        tl.to("#viajero", { xPercent: -50, yPercent: -50, x: 324, duration: 0.6, ease: "power1.inOut" }, 1.4);
+        tl.to("#viajero", { xPercent: -50, yPercent: -50, y: 140, duration: 0.6, ease: "power1.inOut" }, 1.4);
 
-        // 4. Se procesa: pulso, y el documento se encoge dentro del nodo.
+        // 4. Se procesa.
         tl.to("#proceso-ring", { opacity: 0.85, scale: 1.3, duration: 0.32, ease: "power2.out" }, 2.0);
         tl.to("#proceso-ring", { opacity: 0, duration: 0.28 }, 2.28);
         tl.set("#proceso-ring", { scale: 1 }, 2.56);
         tl.to("#viajero", { xPercent: -50, yPercent: -50, scale: 0.2, opacity: 0, duration: 0.28, ease: "power2.in" }, 2.05);
 
-        // 5. Sale a los dos destinos: el trabajo terminado, por duplicado.
+        // 5. Sale a los dos destinos.
         tl.to("#destino-drive .destino-check", { opacity: 1, scale: 1, duration: 0.32, ease: "back.out(2.2)" }, 2.5);
         tl.to("#destino-mail .destino-check",  { opacity: 1, scale: 1, duration: 0.32, ease: "back.out(2.2)" }, 2.66);
 
@@ -251,10 +258,12 @@
 
         // 6. Fundido para el bucle.
         tl.to(["#origen", "#proceso", "#destino-drive", "#destino-mail"], { opacity: 0, duration: 0.4, ease: "power1.in" }, "hold");
-        tl.to(["#rail-in", "#rail-up", "#rail-down"], { opacity: 0, duration: 0.4 }, "hold");
-        tl.set("#viajero", { xPercent: -50, yPercent: -50, x: 0, scale: 0.55, opacity: 0 }, "hold+=0.4");
+        tl.to(rails, { opacity: 0, duration: 0.4 }, "hold");
+        tl.set("#viajero", { xPercent: -50, yPercent: -50, y: 0, scale: 0.60, opacity: 0 }, "hold+=0.4");
         tl.set(".destino-check", { opacity: 0, scale: 0.4 }, "hold+=0.4");
-        tl.set(["#rail-in", "#rail-up", "#rail-down"], { strokeDashoffset: 240, opacity: 1 }, "hold+=0.4");
+        rails.forEach((sel) => {
+          tl.set(sel, { strokeDashoffset: railLen[sel], opacity: 1 }, "hold+=0.4");
+        });
 
         tl.addLabel("loopEnd", "hold+=0.6");
 
