@@ -12,3 +12,11 @@ SEO-*.md
 # Eleventy
 node_modules/
 _site/
+
+# Material de trabajo de los videos: renders intermedios, capturas de
+# comparacion y copias .bak. Pesan y no se sirven — el video bueno vive
+# en assets/video/. Se colaban enteros en cada commit.
+**/renders/
+**/snapshots/
+*.bak
+*.bak2
