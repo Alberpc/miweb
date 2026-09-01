@@ -7,10 +7,22 @@
    CSS propio se traia su copia, asi que arreglar una no arreglaba
    las demas.
 
-   Regla del sistema Bosque Inteligente:
-     - fondo dorado --cobalt-400, texto OSCURO --night-900
+   [31-ago-2026] El boton pasa a TERRACOTA SOLIDO sobre claro y a NEGRO
+   CON HALO sobre oscuro. Motivo medido: el mismo boton aparece en los
+   dos contextos y ningun tono de terracota sirve para ambos.
+     · #B44100 con texto blanco -> 5.68 en claro, pero 3.27 sobre el
+       hero: suspende.
+     · #EA8258 -> 6.93 sobre el hero, pero pide texto oscuro y entonces
+       lee a boton de oferta.
+   La salida es la de decagon: sobre oscuro el relleno es el propio
+   carbon y el color va en un halo degradado alrededor. Asi el texto
+   es blanco sobre negro (18.58) y el boton sigue perteneciendo a la
+   escena porque el halo recoge los colores de la aurora.
+
+   Regla del sistema:
+     - sobre claro: fondo --cobalt-600, texto BLANCO, 5.68
+     - sobre oscuro (.inverse): fondo carbon, texto blanco, halo
      - radio 8px, nunca pildora
-     - al pasar el raton ACLARA (--cobalt-300), no oscurece
    ============================================================ */
 
 .btn-main,
@@ -24,8 +36,8 @@
     font-family: var(--font-body);
     font-size: 0.94rem;
     font-weight: 600;
-    color: var(--night-900);
-    background: var(--cobalt-400);
+    color: #FFFFFF;
+    background: var(--cobalt-600);
     padding: 0 var(--space-5);
     min-height: 52px;
     line-height: 52px;
@@ -43,11 +55,64 @@
 .subnav .cta:hover,
 .cta-card .btn-main:hover,
 .inline-cta .btn-inline:hover .btn-label {
-    background: var(--cobalt-300);
-    color: var(--night-900);
+    background: var(--cobalt-700);
+    color: #FFFFFF;
     transform: translateY(-1px);
     box-shadow: 0 8px 30px var(--cobalt-glow);
 }
+
+/* ── El boton sobre fondo oscuro: negro con halo multicolor ──────
+   El halo se pinta con un pseudo-elemento detras y desenfocado, no
+   con un border-image: asi el degradado desborda el contorno y se
+   lee como luz, que es lo que hace que el boton se integre en la
+   aurora en vez de quedar pegado encima. */
+/* El degradado va en el FONDO del boton y el negro se pinta encima
+   recortado al padding-box. Resultado: solo asoma 1px de degradado
+   por el contorno, que es el borde de luz de decagon.
+
+   La primera version usaba un pseudo-elemento desbordado por detras
+   y se veia el degradado ENTERO, no un borde: el fondo negro solo
+   tapaba la zona interior y los 2px de fuera quedaban a la vista. */
+.inverse .btn-main,
+.inverse .btn-primary,
+.inverse .btn-submit,
+.inverse .cta-card .btn-main {
+    position: relative;
+    color: #FFFFFF;                    /* 18.58 sobre el carbon */
+    border: 1px solid transparent;
+    background:
+        linear-gradient(var(--night-900), var(--night-900)) padding-box,
+        linear-gradient(100deg,
+            var(--cobalt-500) 0%,
+            #A63A70 34%,
+            #8642C4 62%,
+            #3A50BE 84%,
+            #008A7E 100%) border-box;
+    transition: background var(--motion-fast) var(--ease-standard),
+                transform var(--motion-fast) var(--ease-standard),
+                box-shadow var(--motion-fast) var(--ease-standard);
+}
+
+/* Al pasar el raton el interior aclara un punto y el borde se enciende
+   con un halo tenue. Hay que repetir las DOS capas del background: un
+   `background: color` suelto borraria la del borde degradado. */
+.inverse .btn-main:hover,
+.inverse .btn-primary:hover,
+.inverse .btn-submit:hover,
+.inverse .cta-card .btn-main:hover {
+    background:
+        linear-gradient(var(--night-800), var(--night-800)) padding-box,
+        linear-gradient(100deg,
+            var(--cobalt-500) 0%,
+            #A63A70 34%,
+            #8642C4 62%,
+            #3A50BE 84%,
+            #008A7E 100%) border-box;
+    color: #FFFFFF;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 22px rgba(218, 98, 45, 0.20);
+}
+
 
 /* Variante secundaria: mismo tamano, sin relleno. */
 .btn-ghost {

@@ -3,8 +3,15 @@
    Fuente de verdad. Ningún otro archivo del proyecto debe contener
    un valor de color literal.
 
-   Dirección: cuerpo claro · hero y footer oscuros · dorado cálido como
-   único color de marca. Sin acento secundario.
+   Dirección: cuerpo claro NEUTRO · hero y footer oscuros con aurora ·
+   terracota como único color de acción. Sin acento secundario.
+
+   [31-ago-2026] Se retiró el verde y el dorado. Motivo: el verde teñía
+   los neutros (fondo, bordes, tinta, scrollbar), y eso es el 80% de la
+   superficie de la página — por eso la web "tenía un color" y no se
+   sentía minimalista por mucho que se cambiara el acento. Las cuatro
+   referencias (steep, decagon, default.com, grammarly) usan neutros SIN
+   tinte y reservan el color a piezas pequeñas.
 
    Todos los ratios cumplen WCAG 2.1 AA y están comentados al lado.
    Formato: ratio sobre --bg / sobre --bg-alt.
@@ -12,64 +19,90 @@
 
 :root {
 
-  /* ── DORADO · único color de marca ────────────────────────────────
-     Ocho tonos porque el dorado hace ocho trabajos distintos. El tono
-     depende del fondo: sobre claro se usa 600/700, sobre oscuro 300/500. */
-  --cobalt-100:   #F2E8D3;  /* 242, 232, 211 — chips, bordes suaves        */
-  --cobalt-200:   #E4D0A6;  /* 228, 208, 166 — enlaces visitados en oscuro */
-  --cobalt-300:   #D6BA82;  /* 214, 186, 130 — TEXTO sobre oscuro · 9.09   */
-  --cobalt-400:   #C8A85E;  /* 200, 168,  94 — foco en oscuro, decorativo  */
-  --cobalt-500:   #B8944A;  /* 184, 148,  74 — botón sobre oscuro · 5.98   */
-  --cobalt-550:   #7C5E25;  /* 124,  94,  37 — eyebrow en claro · 5.50/4.62*/
-  --cobalt-600:   #6E5628;  /* 110,  86,  40 — botón en claro · 6.94/6.42  */
-  --cobalt-700:   #57451E;  /*  87,  69,  30 — enlaces en claro · 9.23/8.54*/
-  --cobalt-800:   #463819;  /*  70,  56,  25 — activo, borde destacado     */
+  /* ── TERRACOTA · único color de acción ────────────────────────────
+     Escala generada en OKLCH (matiz 42, croma 0.165) para que los pasos
+     se vean parejos: en HSL un "50% de luz" naranja pesa mucho más que
+     un azul y la escala se rompe al extenderla.
 
-  --cobalt-glow:   rgba(200, 168, 94, 0.14);
-  --cobalt-border: rgba(200, 168, 94, 0.26);
-  --cobalt-tint:   rgba(200, 168, 94, 0.06);
+     Los nombres siguen siendo --cobalt-* a propósito: 59 usos en
+     index.css apuntan a ellos. Renombrarlos sería tocar 59 sitios para
+     no cambiar nada. El token es el contrato, no su nombre.
+
+     REGLA DE USO — el paso depende del fondo:
+       sobre claro  → 600 (5.68) o 700 (6.72). El 500 NO: da 3.64.
+       sobre oscuro → 400 (6.93). El 600 NO: sobre negro cae a 3.27.
+     Es el mismo aviso que da el sistema de Pipe, que usa esta paleta:
+     "evita blanco sobre el naranja, contraste insuficiente". */
+  --cobalt-100:   #FFF2ED;  /* 255, 242, 237 — chips, fondos teñidos       */
+  --cobalt-200:   #FFE3D7;  /* 255, 227, 215 — fondo de chip, borde suave  */
+  --cobalt-300:   #F7AB8E;  /* 247, 171, 142 — decorativo sobre oscuro     */
+  --cobalt-400:   #EA8258;  /* 234, 130,  88 — TEXTO sobre oscuro · 6.93   */
+  --cobalt-500:   #DA622D;  /* 218,  98,  45 — SOLO relleno, nunca texto   */
+  --cobalt-550:   #C44A08;  /* 196,  74,   8 — eyebrow en claro · 4.85/4.53*/
+  --cobalt-600:   #B44100;  /* 180,  65,   0 — botón en claro · 5.68/5.31  */
+  --cobalt-700:   #9E3D0C;  /* 158,  61,  12 — enlaces en claro · 6.72/6.27*/
+  --cobalt-800:   #7E310D;  /* 126,  49,  13 — activo, texto en chip· 9.00 */
+
+  --cobalt-glow:   rgba(218, 98, 45, 0.14);
+  --cobalt-border: rgba(218, 98, 45, 0.26);
+  --cobalt-tint:   rgba(218, 98, 45, 0.06);
+
+  /* ── CHIPS DE LOS TRES PILARES ────────────────────────────────────
+     Pares fondo-pálido / texto-oscuro, como los de steep y tailark.
+     NO son colores de marca: solo etiquetan categoría. Nunca se usan
+     en botones, enlaces ni bordes de sección. */
+     Ratio = tinta sobre SU fondo, no sobre --bg. */
+  --chip-1-bg: #FFE3D7;  --chip-1-ink: #7E310D;  /* agentes · 7.38 */
+  --chip-2-bg: #F0E3FF;  --chip-2-ink: #5E3288;  /* bandeja · 7.49 */
+  --chip-3-bg: #D8F0EC;  --chip-3-ink: #005A52;  /* panel   · 6.81 */
 
   /* ── SUPERFICIES OSCURAS · hero, footer, bloques inversos ─────────
-     Verde bosque muy oscuro, no negro puro. Sobre negro absoluto el
-     dorado vibra y se lee como un elemento pegado encima, no integrado. */
-  --night-900:    #0F1F1B;  /*  15,  31,  27 — fondo de hero y footer      */
-  --night-800:    #274C3B;  /*  39,  76,  59 — tarjetas sobre oscuro       */
-  --night-700:    #345F49;  /*  52,  95,  73 — hover de tarjeta oscura     */
-  --night-600:    #5E7F6D;  /*  94, 127, 109 — bordes y divisores oscuros  */
+     Carbón neutro, sin tinte. El hero y el pie llevan encima la aurora
+     (degradado terracota→magenta→violeta→azul→teal pintado en canvas),
+     así que el color lo pone esa capa: la base debe ser neutra o la
+     aurora sale sucia. */
+  --night-900:    #121316;  /*  18,  19,  22 — fondo de hero y footer      */
+  --night-800:    #1F2126;  /*  31,  33,  38 — tarjetas sobre oscuro       */
+  --night-700:    #2B2E35;  /*  43,  46,  53 — hover de tarjeta oscura     */
+  --night-600:    #3C3E44;  /*  60,  62,  68 — bordes y divisores oscuros  */
 
-  --on-night:      #F3F5F2; /* 243, 245, 242 — titular invertido  · 15.55  */
-  --on-night-body: #E6E1D7; /* 230, 225, 215 — párrafos           · 13.08  */
-  --on-night-soft: #C7CDC5; /* 199, 205, 197 — secundario         · 10.52  */
-  --on-night-mid:  #9EA89F; /* 158, 168, 159 — microcopy, legales ·  6.94  */
+  --on-night:      #FFFFFF; /* 255, 255, 255 — titular invertido  · 18.58  */
+  --on-night-body: #D2D2D7; /* 210, 210, 215 — párrafos           · 12.33  */
+  --on-night-soft: #B4B6BD; /* 180, 182, 189 — secundario         ·  9.17  */
+  --on-night-mid:  #9A9AA3; /* 154, 154, 163 — microcopy, legales ·  6.66  */
 
   /* ── CUERPO CLARO ─────────────────────────────────────────────── */
-  --bg:           #F3F5F2;  /* Marfil — fondo de página                    */
-  --bg-alt:       #E6E1D7;  /* Arena — secciones alternas/cálidas          */
+  --bg:           #FFFFFF;  /* Blanco — fondo de página                    */
+  --bg-alt:       #F7F7F8;  /* Gris neutro — secciones alternas            */
 
-  /* Superficie ELEVADA. Va siempre más clara que el fondo de su sección:
-     una tarjeta sube hacia la luz, no se hunde. Es la relación que usan
-     awesomic (#f4f4f5 → #fff), steep (#fafafb → #fff) y getharvest
-     (#fff8f1 → #fff). Sobre --bg-alt la superficie elevada es --bg. */
-  --bg-raised:    #FFFFFF;  /* 255, 255, 255 — tarjetas sobre --bg         */
-  --bg-input:     #EEF1EC;  /* 238, 241, 236 — inputs, superficies hundidas*/
-  --bg-sunken:    #E5E9E1;  /* 229, 233, 225 — pista de scrollbar          */
+  /* Superficie ELEVADA. Con --bg en blanco puro ya no se puede subir
+     más hacia la luz, así que la tarjeta se distingue por BORDE y no
+     por tono: --bg-raised es el gris de sección y la tarjeta lleva
+     --line. Es lo que hace openai developers (#fff página, #f9f9f9
+     tarjeta): invierte la relación en vez de inventar un blanco más
+     blanco. Sobre --bg-alt la superficie elevada vuelve a ser --bg. */
+  --bg-raised:    #F7F7F8;  /* 247, 247, 248 — tarjetas sobre --bg         */
+  --bg-input:     #F1F1F3;  /* 241, 241, 243 — inputs, superficies hundidas*/
+  --bg-sunken:    #EAEAEE;  /* 234, 234, 238 — pista de scrollbar          */
 
-  /* ── TINTA · sesgo verde bosque, no gris azulado ────────────────────
-     No existe tono más claro que --ink-mid para texto: sobre --bg-alt
-     cualquier gris por encima de #556059 suspende AA. --ink-decor NO
-     es un token de texto. */
-  --ink:          #1B211D;  /*  27,  33,  29 — titulares  · 14.94 / 12.57  */
-  --ink-soft:     #3B443E;  /*  59,  68,  62 — párrafos   ·  9.20 /  7.74  */
-  --ink-mid:      #556059;  /*  85,  96,  89 — microcopy  ·  5.98 /  5.03  */
-  --ink-decor:    #A6AEA8;  /* 166, 174, 168 — SOLO bordes, puntos, iconos */
-  --ink-faint:    var(--ink-mid);  /* alias de compatibilidad · 5.98/5.03  */
+  /* ── TINTA · gris neutro, sin sesgo ─────────────────────────────────
+     Antes tenía sesgo verde bosque. Ese tinte estaba en el texto, los
+     bordes y el fondo a la vez — el 80% de la superficie — y era la
+     causa real de que la web "tuviera un color". Ahora los neutros son
+     neutros y el color vive solo en el acento y los chips.
+     --ink-decor NO es un token de texto: 2.79 no llega a AA. */
+  --ink:          #121316;  /*  18,  19,  22 — titulares  · 18.58 / 17.35  */
+  --ink-soft:     #3C3E44;  /*  60,  62,  68 — párrafos   · 10.69 /  9.98  */
+  --ink-mid:      #55585F;  /*  85,  88,  95 — microcopy  ·  7.12 /  6.65  */
+  --ink-decor:    #9A9AA3;  /* 154, 154, 163 — SOLO bordes, puntos, iconos */
+  --ink-faint:    var(--ink-mid);  /* alias de compatibilidad · 7.12/6.65  */
 
-  --line:         #DEE3DD;  /* 222, 227, 221 — bordes de tarjeta           */
-  --line-strong:  #C6CDC5;  /* 198, 205, 197 — bordes de input, hover      */
+  --line:         #E7E7EA;  /* 231, 231, 234 — bordes de tarjeta           */
+  --line-strong:  #D2D2D7;  /* 210, 210, 215 — bordes de input, hover      */
 
   /* ── CRISTAL ──────────────────────────────────────────────────── */
   --glass-bg:     rgba(255, 255, 255, 0.72);
-  --glass-border: rgba(27, 33, 29, 0.09);
+  --glass-border: rgba(18, 19, 22, 0.09);
 
   /* ── SEMÁNTICOS · sobre claro ─────────────────────────────────── */
   --rojo:         #B91C1C;  /* 185,  28,  28 · 6.47 / 5.62                 */
@@ -91,17 +124,23 @@
   --ambar-night:  #F5A524;  /* 245, 165,  36 ·  9.27                       */
 
   /* ── TIPOGRAFÍA ────────────────────────────────────────────────
-     Instrument Serif (400, con itálica) da la voz editorial de los
-     titulares; Inter sostiene cuerpo e interfaz; mono del sistema
-     para los eyebrows en versalita.
+     [31-ago-2026] Fuera Inter e Instrument Serif.
 
-     --font-heading sigue en Inter a propósito: las páginas que aún
-     no cargan Instrument Serif lo heredan sin romperse. La home
-     opta por --font-display regla a regla. Al propagar el cambio a
-     otra página, se editan sus reglas, NUNCA este token. */
-  --font-display: 'Instrument Serif', Georgia, 'Times New Roman', serif;
-  --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-body:    'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+     Motivo: ninguna de las webs de referencia usa Inter. Lo que se ve
+     listado como "Inter" en las fichas de estilo es el SUSTITUTO que se
+     anota cuando la fuente real es de pago — Pipe usa Suisse Int'l,
+     dotconnect usa Aeonik Pro, Grammarly usa Matter, Lovable usa Camera
+     Plain. Copiar el sustituto es copiar el relleno, no la elección.
+
+     Bricolage Grotesque es una grotesca con carácter propio (la g, la a
+     y la y tienen forma reconocible) sin irse a lo experimental: da voz
+     donde Inter no da ninguna. Geist sostiene cuerpo e interfaz.
+
+     Bricolage es de eje óptico variable: se le pasa opsz junto al peso,
+     por eso el enlace de Google Fonts lleva 12..96. */
+  --font-display: 'Bricolage Grotesque', 'Geist', system-ui, sans-serif;
+  --font-heading: 'Bricolage Grotesque', 'Geist', system-ui, sans-serif;
+  --font-body:    'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono:    ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
 
   /* ════════════════════════════════════════════════════════════════

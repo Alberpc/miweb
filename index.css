@@ -72,7 +72,9 @@ html {
 /* Masa de fibras 3D de fondo: hélices animadas vía JS (index.js).
    El propio dibujo se desvanece hacia el borde inferior para que ninguna
    fibra llegue viva al corte con la sección clara que va debajo. */
-.hero-mesh {
+/* La aurora del hero y la del pie. El contenido de ambos va en
+   z-index 2, asi que el lienzo se queda detras sin taparlo. */
+.aurora-canvas {
     position: absolute;
     top: 0;
     left: 0;
@@ -80,6 +82,7 @@ html {
     height: 100%;
     z-index: 0;
     pointer-events: none;
+    display: block;
 }
 
 .hero-content {
@@ -135,7 +138,10 @@ html {
     /* "No sabes por dónde empezar." con degradado azul de marca (claro arriba
        → cobalto abajo), único punto de color del hero para que el ojo vaya
        al remate de la segunda frase. */
-    background: linear-gradient(100deg, var(--cobalt-300) 0%, var(--cobalt-400) 30%, var(--cobalt-500) 65%, var(--cobalt-600) 100%);
+    /* Solo tonos 200-400: son los que aguantan SOBRE la aurora. El 500 y
+       el 600 son para fondo claro — sobre el rosa del degradado el 600
+       cae a 1.17 y la frase desaparece. Medido, no estimado. */
+    background: linear-gradient(100deg, var(--cobalt-200) 0%, var(--cobalt-300) 38%, var(--cobalt-400) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -2247,4 +2253,252 @@ html {
     .reveal { opacity: 1; transform: none; transition: none; }
     .hero-content, .navbar { animation-duration: 0.01s; animation-delay: 0s; }
     .glass-form-container::before { animation: none; }
+}
+
+
+/* ══════════════════════════════════════════════════════════════════
+   LAS TRES GARANTIAS — legal, seguridad y datos
+   ══════════════════════════════════════════════════════════════════
+   Este bloque NO compite con las secciones de venta, a proposito:
+   sin titular grande, sin CTA y con un texto de entrada minusculo en
+   vez de section-label. Cumplir la ley es un requisito, no una
+   propuesta de valor: darle el mismo peso visual que a "que
+   construyo" seria desproporcionado.
+
+   Da confianza por PRESENCIA, no por volumen. Es el criterio de
+   vanta, que vive de vender cumplimiento: aire y bordes finos, nada
+   de sellos, escudos ni candados grandes.
+   ══════════════════════════════════════════════════════════════════ */
+.garantias-section {
+    background-color: var(--bg-alt);
+    padding-top: var(--space-9);
+    padding-bottom: var(--space-9);
+}
+
+.garantias-intro {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+    margin: 0 0 var(--space-6);
+    text-align: center;
+}
+
+/* Dos columnas, no tres: la garantia de datos se saco de aqui y vive
+   en el FAQ, porque el matiz que la hace cierta (los proveedores SI
+   retienen 30 dias) no cabe en tres lineas sin prometer de mas. */
+.garantias-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6);
+    max-width: 880px;
+    margin: 0 auto;
+}
+
+/* Sin tarjeta: solo un separador vertical entre columnas. Encerrar
+   cada garantia en su caja las convertiria en tres productos, y esto
+   no se vende, se afirma. */
+.garantia {
+    padding: 0 var(--space-4);
+    border-left: 1px solid var(--line);
+}
+.garantia:first-child {
+    padding-left: 0;
+    border-left: none;
+}
+
+.garantia-icono {
+    display: block;
+    width: 26px;
+    height: 26px;
+    color: var(--ink-mid);
+    margin-bottom: var(--space-4);
+}
+.garantia-icono svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.garantia-t {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0 0 var(--space-2);
+    letter-spacing: -0.015em;
+    line-height: 1.35;
+}
+
+.garantia-p {
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    margin: 0;
+}
+
+/* Entrada escalonada: 90ms entre columnas para que se lean en orden
+   en vez de llegar en bloque. Va sobre la transicion que ya define
+   .reveal, asi que hereda su respeto por prefers-reduced-motion. */
+.garantias-grid .garantia:nth-child(1) { transition-delay: 0ms; }
+.garantias-grid .garantia:nth-child(2) { transition-delay: 90ms; }
+
+@media (max-width: 860px) {
+    .garantias-grid { grid-template-columns: 1fr; gap: var(--space-6); }
+    .garantia {
+        padding: 0 0 0 var(--space-4);
+        border-left: 1px solid var(--line);
+    }
+    .garantia:first-child { padding-left: var(--space-4); border-left: 1px solid var(--line); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .garantias-grid .garantia { transition-delay: 0ms; }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   CÓMO TRABAJO — las cuatro fases, en oscuro
+   ══════════════════════════════════════════════════════════════════
+   Tercera banda oscura de la pagina, y va a proposito: rompe los
+   cuatro bloques claros seguidos que dejaban la mitad inferior sin
+   ritmo. Lleva la misma aurora que el hero y el pie, mas estirada
+   (data-alto 2.2) para que solo suba una insinuacion de color.
+
+   El riel vertical con nodos viene de decagon (Build -> Optimize ->
+   Scale) y de agentql: "composiciones a dos columnas, texto a un lado,
+   y tarjetas flotando sobre gradientes radiales".
+
+   .inverse reasigna los tokens, asi que aqui NO hay ni un color
+   literal: --bg, --ink y --line ya apuntan solos a sus equivalentes
+   oscuros.
+   ══════════════════════════════════════════════════════════════════ */
+.como-trabajo-section {
+    position: relative;
+    overflow: hidden;
+    margin-left: var(--hero-gap);
+    margin-right: var(--hero-gap);
+    border-radius: var(--radius-xl);
+    background-color: var(--night-900);
+}
+.como-trabajo-section > .container {
+    position: relative;
+    z-index: 2;
+}
+
+.fases {
+    list-style: none;
+    margin: var(--space-8) auto 0;
+    padding: 0;
+    max-width: 780px;
+    position: relative;
+}
+
+/* El riel: una linea de 1px que recorre las cuatro fases. Se dibuja
+   con ::before del <ol> y no con borde de cada <li>, para que sea
+   continuo y pueda arrancar y morir desvanecido. */
+.fases::before {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 8px;
+    bottom: 8px;
+    width: 1px;
+    background: linear-gradient(to bottom,
+        transparent 0%,
+        var(--night-600) 8%,
+        var(--night-600) 92%,
+        transparent 100%);
+}
+
+.fase {
+    position: relative;
+    display: grid;
+    grid-template-columns: 42px 1fr;
+    gap: 0 var(--space-5);
+    padding: 0 0 var(--space-8) var(--space-6);
+    align-items: start;
+}
+.fase:last-child { padding-bottom: 0; }
+
+/* El nodo sobre el riel. Relleno oscuro para que la linea no se vea
+   por debajo, y borde de acento: es el unico sitio donde el terracota
+   aparece en esta seccion. */
+.fase-marca {
+    position: absolute;
+    left: 0;
+    top: 7px;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--night-900);
+    border: 1px solid var(--night-600);
+    transition: border-color var(--motion-base) var(--ease-standard),
+                box-shadow var(--motion-base) var(--ease-standard);
+}
+.fase.revealed .fase-marca {
+    border-color: var(--cobalt-400);
+    box-shadow: 0 0 0 3px rgba(234, 130, 88, 0.12);
+}
+
+.fase-n {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--on-night-mid);
+    letter-spacing: 0.06em;
+    padding-top: 3px;
+    font-variant-numeric: tabular-nums;
+}
+
+.fase-t {
+    font-family: var(--font-display);
+    font-size: 1.32rem;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    color: var(--on-night);
+    margin: 0 0 var(--space-2);
+    line-height: 1.2;
+}
+
+.fase-p {
+    font-size: 0.98rem;
+    line-height: 1.68;
+    color: var(--on-night-soft);
+    margin: 0;
+    max-width: 62ch;
+}
+
+/* La cuarta fase es el argumento de la seccion, asi que lleva la
+   unica nota destacada. Sin caja ni fondo: solo el acento y una
+   linea, para no convertirla en un banner. */
+.fase-nota {
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    letter-spacing: 0.04em;
+    color: var(--cobalt-400);
+    margin: var(--space-3) 0 0;
+    padding-left: var(--space-3);
+    border-left: 2px solid var(--cobalt-400);
+    line-height: 1.5;
+}
+
+/* Entrada escalonada por fase: 80ms de diferencia hace que el ojo
+   recorra el riel de arriba abajo. Sobre la transicion de .reveal,
+   asi que respeta prefers-reduced-motion sin regla extra. */
+.fases .fase:nth-child(1) { transition-delay: 0ms; }
+.fases .fase:nth-child(2) { transition-delay: 80ms; }
+.fases .fase:nth-child(3) { transition-delay: 160ms; }
+.fases .fase:nth-child(4) { transition-delay: 240ms; }
+
+@media (max-width: 700px) {
+    .fase {
+        grid-template-columns: 34px 1fr;
+        gap: 0 var(--space-4);
+        padding-left: var(--space-5);
+        padding-bottom: var(--space-7);
+    }
+    .fase-t { font-size: 1.18rem; }
+    .fase-p { font-size: 0.94rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .fases .fase { transition-delay: 0ms; }
 }

@@ -18,6 +18,9 @@
       footerAgentesAut: false -> oculta "Agentes Autonomos" (no-perder-clientes)
     El logo pasa de ruta relativa a absoluta, igual que en nav.njk. -#}
     <footer class="footer-section{% if footerInverse != false %} inverse{% endif %} reveal">
+        {# La aurora solo en el pie oscuro: sobre el claro de
+           automatizar-mi-negocio pintaria un rectangulo negro. #}
+        {% if footerInverse != false %}<canvas class="aurora-canvas" data-alto="1.5" aria-hidden="true"></canvas>{% endif %}
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-brand-col">

@@ -56,9 +56,9 @@
    ESTADO ARRIBA DEL TODO — barra transparente sobre el hero
    =============================================================
    Mientras el hero llena la pantalla la barra desaparece: sin fondo,
-   sin borde y con el texto en blanco, porque debajo esta el verde
-   oscuro. Al bajar, el JS quita .navbar--sobre-hero y vuelve el
-   cristal claro de la regla base, con su transicion. */
+   sin borde y con el texto en blanco, porque debajo esta el carbon
+   con la aurora. Al bajar, el JS quita .navbar--sobre-hero y vuelve
+   el cristal claro de la regla base, con su transicion. */
 .navbar--sobre-hero {
     background-color: transparent;
     backdrop-filter: none;
@@ -75,6 +75,39 @@
 
 /* El icono hamburguesa tambien va en blanco sobre el hero. */
 .navbar--sobre-hero .nav-burger span { background: var(--on-night); }
+
+/* El boton del header, mientras la barra esta sobre el hero, es el
+   MISMO negro con borde degradado que el CTA del hero. El navbar vive
+   fuera de .hero-section, asi que no hereda .inverse y hay que
+   repetirlo aqui.
+   Sin esto se veian dos botones distintos en la misma pantalla: el del
+   header en terracota solido y el del hero en negro. Al bajar el
+   scroll la barra pasa a cristal claro y el boton vuelve al terracota
+   de la regla base, que es lo correcto sobre fondo blanco. */
+.navbar--sobre-hero .nav-btn {
+    color: #FFFFFF;
+    border: 1px solid transparent;
+    background:
+        linear-gradient(var(--night-900), var(--night-900)) padding-box,
+        linear-gradient(100deg,
+            var(--cobalt-500) 0%,
+            #A63A70 34%,
+            #8642C4 62%,
+            #3A50BE 84%,
+            #008A7E 100%) border-box;
+}
+
+.navbar--sobre-hero .nav-btn:hover {
+    color: #FFFFFF;
+    background:
+        linear-gradient(var(--night-800), var(--night-800)) padding-box,
+        linear-gradient(100deg,
+            var(--cobalt-500) 0%,
+            #A63A70 34%,
+            #8642C4 62%,
+            #3A50BE 84%,
+            #008A7E 100%) border-box;
+}
 
 /* Con el menu movil abierto la barra recupera su fondo aunque siga
    sobre el hero: si no, el panel desplegado flota sobre el vídeo sin
