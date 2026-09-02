@@ -1,9 +1,11 @@
 {
-  "indexCss": 102,
+  "indexCss": 104,
   "legalCss": 104,
-  "indexJs": 18,
-  "homeCss": 57,
-  "homeJs": 20,
-  "chatCss": 4,
-  "chatJs": 3
+  "indexJs": 21,
+  "homeCss": 59,
+  "homeJs": 23,
+  "chatCss": 5,
+  "chatJs": 3,
+  "cookieCss": 1,
+  "cookieJs": 1
 }

@@ -175,9 +175,13 @@ Antes de que lo preguntes
 
 El Reglamento Europeo de IA obliga desde agosto de 2026. Tu agente dice que es una IA, deja salida a un humano y no hace nada de lo que el reglamento prohíbe. Sale cumpliendo, sin coste extra.
 
-### El agente aguanta ataques
+### Agentes seguros
 
 Hay gente que intenta manipular estos sistemas para que se salten sus normas o suelten información. Todos mis agentes llevan filtros a la entrada y a la salida, y los pruebo con esos ataques antes de entregar.
+
+### Tus accesos, bajo llave
+
+Las claves de tus herramientas no viven en un archivo suelto ni en un chat: van en un gestor cifrado donde ni el propio proveedor puede leerlas. Al terminar el proyecto, los accesos quedan a tu nombre.
 
 ## Sé lo que es un trabajo que te consume.
 
@@ -185,7 +189,9 @@ Soy Alberto Pérez Cabrera. Ayudo a negocios pequeños y medianos a aplicar IA d
 
 Antes de esto me dediqué a otra cosa muy distinta, de las que te dejan sin horas y sin cabeza al final del día. Por eso hago lo que hago: me mueve ayudar a la gente a recuperar su tiempo.
 
-Me cuentan que acaban la jornada agotados, con sus hijos delante pero pendientes del móvil por cosas que una herramienta podría hacer sola. Mi trabajo es que la IA se ocupe de eso, para que tu negocio trabaje para ti y no al revés. Tú me cuentas qué te agobia, y yo me encargo.
+Me cuentan que acaban la jornada agotados, con sus hijos delante pero pendientes del móvil por cosas que una herramienta podría hacer sola. Mi trabajo es que la IA se ocupe de eso, para que tu negocio trabaje para ti y no al revés.
+
+> Tú me cuentas qué te agobia, y yo me encargo.
 
 ## Antes de montar nada, hay que saber qu&eacute; montar
 
@@ -241,6 +247,14 @@ Mi trabajo no es entregarte código y marcharme. Te entrego el sistema funcionan
 
 Uso las APIs comerciales de OpenAI y Anthropic, no las versiones gratuitas. Por contrato, esos proveedores no entrenan sus modelos con lo que envías: tu información y la de tus clientes no acaba dentro de un modelo público. Sí guardan las conversaciones un máximo de 30 días para detectar usos abusivos, y después se borran; existe la opción de contratar retención cero si tu caso lo necesita. Además, cada agente lleva filtros de entrada y salida para que no se le pueda sonsacar información con mensajes manipulados.
 
-## ¿Hablamos de tu negocio?
+## &iquest;Hablamos de tu negocio?
 
-_Cuéntame qué te está frenando. Si puedo ayudarte, te lo digo claro. Si no, también._
+_Cu&eacute;ntame qu&eacute; te est&aacute; frenando. Si puedo ayudarte, te lo digo claro. Si no, tambi&eacute;n._
+
+Son 20 minutos por videollamada, para ver si puedo ayudarte. **Gratis y sin compromiso.**
+
+O si lo prefieres, directamente:
+
+WhatsApp
+
+Email

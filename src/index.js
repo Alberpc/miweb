@@ -265,11 +265,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 const video = panel.querySelector('video');
                 if (!video) return;
                 if (activa) {
+                    // Marca para el bucle encadenado: si el video estaba
+                    // en su respiro entre pasadas, al volver sabe que
+                    // sigue a la vista y tiene que arrancar.
+                    video.dataset.visible = '1';
                     // play() devuelve promesa: si el navegador la rechaza
                     // (politica de autoplay) no debe romper el resto.
                     const p = video.play();
                     if (p) p.catch(() => {});
                 } else {
+                    video.dataset.visible = '0';
                     video.pause();
                 }
             });
@@ -607,15 +612,64 @@ document.addEventListener('DOMContentLoaded', () => {
                 v.pause();
             });
         } else if ('IntersectionObserver' in window) {
+            // EL BUCLE, a mano en vez de con el `loop` nativo.
+            // La animacion de dentro se apaga sola antes de que acabe el
+            // archivo (fundido de salida ~0.4s antes del final), asi que
+            // el ULTIMO fotograma y el PRIMERO son identicos: papel liso.
+            // Con `loop` el navegador corta de uno a otro de golpe y ese
+            // salto de tiempo se nota igual aunque los dos extremos sean
+            // iguales.
+            // Aqui no se funde nada — tocar la opacidad seria peor, porque
+            // el <video> se volveria transparente y se veria el panel gris
+            // de la seccion. Lo que se hace es quedarse quieto en ese
+            // ultimo fotograma blanco y rebobinar parado: el corte es de
+            // un blanco a otro blanco identico, invisible por definicion,
+            // y el respiro hace que se lea como un ciclo y no como un
+            // bucle nervioso.
+            // Minimo a proposito: la animacion YA deja ~0.4s de papel en
+            // blanco al final del archivo, asi que este respiro se SUMA a
+            // esos. A 500ms el hueco total pasaba de un segundo y se leia
+            // como un paron. Con 120 el ciclo encadena casi seguido y
+            // sigue sin el tiron del reinicio instantaneo.
+            const REPOSO = 120;   // ms parado en el fotograma final
+
+            const encadenar = (v) => {
+                if (v.dataset.reiniciando === '1') return;
+                v.dataset.reiniciando = '1';
+
+                // Se queda como esta (ultimo fotograma, blanco) el respiro
+                // entero; solo despues rebobina y arranca.
+                window.setTimeout(() => {
+                    v.currentTime = 0;
+                    // Solo sigue si el video continua a la vista: si el
+                    // usuario se ha ido, lo despierta el observer.
+                    if (v.dataset.visible === '1') {
+                        v.play().catch(() => {});
+                    }
+                    v.dataset.reiniciando = '0';
+                }, REPOSO);
+            };
+
+            pilarVideos.forEach((v) => {
+                // El `loop` del HTML estorba: reiniciaria al instante y no
+                // dejaria el respiro.
+                v.loop = false;
+                v.addEventListener('ended', () => encadenar(v));
+            });
+
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry) => {
+                    const v = entry.target;
+                    v.dataset.visible = entry.isIntersecting ? '1' : '0';
                     if (entry.isIntersecting) {
                         // play() devuelve una promesa que el navegador puede
                         // rechazar (politicas de autoplay): sin catch salta un
                         // error no capturado en consola.
-                        entry.target.play().catch(() => {});
+                        if (v.dataset.reiniciando !== '1') {
+                            v.play().catch(() => {});
+                        }
                     } else {
-                        entry.target.pause();
+                        v.pause();
                     }
                 });
             }, { threshold: 0.25 });
@@ -729,4 +783,21 @@ document.addEventListener('DOMContentLoaded', () => {
             obsFlor.observe(flor);
         }
     }
+});
+
+
+// ── EL EMAIL, ARMADO EN CLIENTE ──────────────────────────────────────
+// La direccion no viaja escrita en el HTML: los recolectores de spam
+// rastrean `mailto:` y texto con arroba en el marcado. Aqui se junta a
+// partir de los dos data-* y se convierte en enlace de verdad.
+// Sin JS el enlace apunta al formulario, que hace el mismo trabajo.
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('a[data-mail][data-dom]').forEach((a) => {
+        const destino = a.dataset.mail + String.fromCharCode(64) + a.dataset.dom;
+        a.href = 'mailto:' + destino;
+        a.setAttribute('aria-label', 'Escribir un correo');
+        // El texto visible sigue diciendo "Email": la direccion se ve al
+        // pasar el raton y al abrir el cliente de correo.
+        a.title = destino;
+    });
 });
