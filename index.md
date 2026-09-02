@@ -74,28 +74,22 @@ Decidir a ojo sale caro, y casi siempre te enteras tarde.
 
 _Negocios reales, con sus propios cuellos de botella, resueltos con IA y automatización._
 
-**EMPRESA:** Bioresina
-**PROBLEMA:** 2 horas al día en tareas manuales — 30 emails al día con PDF adjunto, preparados y enviados uno a uno a mano.
-**SOLUCIÓN:** Automatización con Make — Envío de emails con PDF automatizado de principio a fin, con 2 seguimientos también automáticos.
-**RESULTADOS:** 2 horas al día recuperadas — El equipo ya no pierde el día preparando y enviando correos uno a uno.
-
-> Antes, el equipo se pasaba el día preparando y enviando correos uno a uno con su PDF adjunto. Ahora todo eso sale solo, seguimientos incluidos, y hemos recuperado dos horas al día para dedicarlas a otra cosa.
->
-> — Equipo de Bioresina
+**PROBLEMA:** 2 horas al d&iacute;a en tareas manuales — 30 emails al d&iacute;a con PDF adjunto, preparados y enviados uno a uno a mano.
+**SOLUCI&Oacute;N:** Automatizaci&oacute;n con Make — Env&iacute;o de emails con PDF automatizado de principio a fin, con 2 seguimientos tambi&eacute;n autom&aacute;ticos.
+**RESULTADO:** 2 horas al d&iacute;a recuperadas — El equipo ya no pierde el d&iacute;a preparando y enviando correos uno a uno.
 
 **44h** recuperadas cada mes
-**13+** semanas laborales liberadas al año
+**13+** semanas laborales liberadas al a&ntilde;o
 
 ---
 
-**EMPRESA:** Geko Marketing
-**PROBLEMA:** Leads dispersos, sin visibilidad — No sabían de dónde venía cada lead ni quién había comprado y quién no.
-**SOLUCIÓN:** CRM a medida, conectado a su web — Todos los leads centralizados en un único sistema, con su origen y estado siempre visibles.
-**RESULTADOS:** Todo organizado, en un solo sitio — Sabe dónde está cada lead, de dónde vino y quién le ha comprado y quién no.
+**PROBLEMA:** Leads dispersos, sin visibilidad — No sab&iacute;an de d&oacute;nde ven&iacute;a cada lead ni qui&eacute;n hab&iacute;a comprado y qui&eacute;n no.
+**SOLUCI&Oacute;N:** CRM a medida, conectado a su web — Todos los leads centralizados en un &uacute;nico sistema, con su origen y estado siempre visibles.
+**RESULTADO:** Todo organizado, en un solo sitio — Sabe d&oacute;nde est&aacute; cada lead, de d&oacute;nde vino y qui&eacute;n le ha comprado y qui&eacute;n no.
 
 **0** leads que se quedan sin seguimiento
 **100%** de leads con origen y estado siempre visible
-**1 vistazo** para saber quién ha comprado y quién no
+**1 vistazo** para saber qui&eacute;n ha comprado y qui&eacute;n no
 
 ## Un sistema no se entrega y ya está.
 
