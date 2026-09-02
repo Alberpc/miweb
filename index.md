@@ -87,10 +87,6 @@ _Negocios reales, con sus propios cuellos de botella, resueltos con IA y automat
 **SOLUCI&Oacute;N:** CRM a medida, conectado a su web — Todos los leads centralizados en un &uacute;nico sistema, con su origen y estado siempre visibles.
 **RESULTADO:** Todo organizado, en un solo sitio — Sabe d&oacute;nde est&aacute; cada lead, de d&oacute;nde vino y qui&eacute;n le ha comprado y qui&eacute;n no.
 
-**0** leads que se quedan sin seguimiento
-**100%** de leads con origen y estado siempre visible
-**1 vistazo** para saber qui&eacute;n ha comprado y qui&eacute;n no
-
 ## Un sistema no se entrega y ya está.
 
 _Montar la automatización es la parte fácil. Lo difícil es que siga funcionando cuando tu negocio cambia._

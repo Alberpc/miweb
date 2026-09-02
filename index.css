@@ -579,6 +579,38 @@ html {
     max-width: 26ch;
 }
 
+/* HECHOS, para los casos sin cifra real. Ver el comentario del HTML: si
+   no hay dato de "antes", una cifra no es una resta y se nota. Mismo
+   ritmo vertical que la lista de metricas para que las dos versiones
+   del bloque pesen igual, pero el ancla es el nombre del hecho en vez
+   de un numero grande. */
+.caso-hechos {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    margin-top: var(--space-6);
+}
+
+.caso-hecho {
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 300;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    max-width: 30ch;
+    padding-left: var(--space-4);
+    border-left: 2px solid var(--cobalt-600);
+}
+
+.caso-hecho strong {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 2px;
+}
+
 
 @media (max-width: 900px) {
     .caso-steps {
