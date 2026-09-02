@@ -1637,19 +1637,17 @@ html {
 /* Fondo claro: brightness(0) deja los logos en negro puro, sin invert.
    No todos los PNG/SVG traen color de marca propio (ej. Mafhesa es blanco
    puro sin brightness(0)), así que el filtro se queda fijo siempre: no se
-   puede prometer color real en hover para los 4 por igual. */
+   puede prometer color real en hover para los 4 por igual.
+   [2-sep-2026] El alto y la opacidad ya NO se ponen aqui: vivian tambien
+   en `.clientes-tira .logo-cliente` mas abajo, que ganaba por
+   especificidad, asi que estos valores no se aplicaban nunca y hacian
+   creer que los logos median 80px cuando median 34. Todo junto ahi. */
 .logo-cliente {
-    height: 80px;
     width: auto;
     flex-shrink: 0;
     object-fit: contain;
     filter: brightness(0);
-    opacity: 0.75;
     transition: opacity 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-.logo-cliente:hover {
-    opacity: 1;
 }
 
 /* En móvil una sola fila no cabe: rejilla 2x2 con celdas iguales, así
@@ -1664,14 +1662,7 @@ html {
         padding: 0 20px;
     }
     .logo-cliente {
-        height: 46px;
         max-width: 100%;
-    }
-}
-
-@media (max-width: 380px) {
-    .logo-cliente {
-        height: 38px;
     }
 }
 
@@ -2170,12 +2161,27 @@ html {
     position: relative;
 }
 
+/* [2-sep-2026] 0.62, no 0.42. A 0.42 los logos quedaban en #949494:
+   contraste 3.03 sobre blanco, por debajo del minimo de 4.5 — y son
+   nombres de empresas reales, no textura. A 0.62 son #616161 = 6.19: se
+   leen sin gritar, que era la intencion original de la tira. */
 .clientes-tira .logo-cliente {
-    height: 34px;
-    opacity: 0.42;
+    height: 44px;
+    opacity: 0.62;
 }
 
-.clientes-tira .logo-cliente:hover { opacity: 0.7; }
+/* Igualado por AREA, no por altura. Los cuatro tienen proporciones muy
+   distintas (ratio de 0.83 a 1.61), asi que la misma altura daba anchos
+   de 28 a 55px — el doble — y se veian descompensados. Estas alturas
+   los dejan ocupando un area parecida, que es como se percibe el tamanyo.
+   Si se anyaden logos nuevos hay que afinarlos igual: mirar el ratio y
+   compensar, no dar la misma altura a todos. */
+.clientes-tira .logo-cliente[alt="Bioresina"] { height: 52px; }   /* ratio 0.83, el mas vertical */
+.clientes-tira .logo-cliente[alt="Top Boutique"] { height: 46px; } /* ratio 1.09 */
+.clientes-tira .logo-cliente[alt="Mafhesa"] { height: 40px; }      /* ratio 1.61, el mas ancho */
+.clientes-tira .logo-cliente[alt="Geko"] { height: 41px; }         /* ratio 1.54 */
+
+.clientes-tira .logo-cliente:hover { opacity: 0.85; }
 
 .clientes-tira .logos-track {
     gap: 56px;
@@ -2188,7 +2194,11 @@ html {
         display: flex;
         gap: 32px;
     }
-    .clientes-tira .logo-cliente { height: 26px; }
+    .clientes-tira .logo-cliente { height: 32px; }
+    .clientes-tira .logo-cliente[alt="Bioresina"] { height: 38px; }
+    .clientes-tira .logo-cliente[alt="Top Boutique"] { height: 34px; }
+    .clientes-tira .logo-cliente[alt="Mafhesa"] { height: 29px; }
+    .clientes-tira .logo-cliente[alt="Geko"] { height: 30px; }
 }
 
 /* Salida del hero al diagnostico. El titular ya plantea la duda ("No
