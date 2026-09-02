@@ -3,23 +3,28 @@
    Prefijo .acc- (alber cookie consent) para no pisar index.css ni el chat.
    ========================================================================== */
 
-/* Paleta alineada con el sistema Bosque Inteligente (design-system/tokens.css).
-   Antes usaba el azul cobalto #3b5eff de la etapa anterior de la web.
+/* [1-sep-2026] Paleta pasada de Bosque Inteligente (verde + dorado) a la
+   actual: carbon + terracota. Era lo ultimo de la etapa anterior que
+   quedaba a la vista en la home.
    Los valores van literales, no con var(--cobalt-*), porque este banner
-   se carga en páginas donde tokens.css puede no estar presente.
+   se carga en páginas donde tokens.css puede no estar presente — pero
+   son copia exacta de los tokens, no tonos inventados.
 
+   La tarjeta es OSCURA, asi que aqui manda la regla de contraste sobre
+   oscuro: el acento de TEXTO es la 400 (#EA8258, 6.01 sobre la tarjeta),
+   no la 600, que sobre oscuro se cae.
    --acc-accent es FONDO con texto blanco encima (botón primario, switch):
-   por eso es --cobalt-600 (#6E5628), 6.94 de contraste con blanco.
-   --acc-accent-soft es TEXTO sobre fondo oscuro: --cobalt-300 (9.09). */
+   ahi si va la 600 (#B44100), que da 5.68 con blanco. La 500 se queda en
+   3.64 y no llega, por eso no se usa. */
 .acc-root {
-    --acc-bg: #131F1B;
-    --acc-bg-deep: #0F1F1B;
-    --acc-text: #F3F5F2;
-    --acc-text-soft: #9EA89F;
-    --acc-accent: #6E5628;
-    --acc-accent-soft: #D6BA82;
-    --acc-border: rgba(214, 186, 130, 0.14);
-    --acc-font: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --acc-bg: #1F2126;        /* --night-800, la tarjeta */
+    --acc-bg-deep: #121316;   /* --night-900 */
+    --acc-text: #FFFFFF;      /* 16.11 sobre la tarjeta */
+    --acc-text-soft: #C4C4CB; /* cuerpo · 8.98 */
+    --acc-accent: #B44100;    /* --cobalt-600, relleno con texto blanco */
+    --acc-accent-soft: #EA8258; /* --cobalt-400, TEXTO sobre oscuro */
+    --acc-border: rgba(234, 130, 88, 0.18);
+    --acc-font: 'Geist', system-ui, 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 .acc-banner {
@@ -98,8 +103,8 @@
 }
 
 .acc-btn--primary:hover {
-    background: #D6BA82;
-    border-color: #D6BA82;
+    background: #DA622D;
+    border-color: #DA622D;
 }
 
 .acc-btn:focus-visible {
