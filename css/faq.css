@@ -9,8 +9,21 @@
    los tokens del sistema. Lo que se cambie aqui vale para las 14.
    ============================================================ */
 
-/* La seccion, cuando la FAQ va en su propio bloque (landings). */
-.faq-section { padding: var(--space-10) 0; background-color: var(--bg-alt); }
+/* [1-sep-2026] REDISENADO. Antes eran ocho tarjetas blancas separadas
+   sobre fondo gris, y al abrir una se tenia de rosa con un filo
+   terracota a la izquierda y el '+' giraba a una 'x' en circulo
+   relleno. Tres problemas: el gris apagaba las tarjetas, el rosa palido
+   no esta en la paleta, y la 'x' cambia el simbolo en vez de girarlo.
+
+   Referencia: family.co (verificada en refero) — fondo blanco, sin
+   tarjetas, divisores finos entre preguntas, el signo a la IZQUIERDA en
+   el color de acento, y al abrir NO cambia el fondo: solo aparece la
+   respuesta. Con ocho preguntas se lee mucho mejor que ocho cajas.
+   ============================================================ */
+
+/* Fondo BLANCO, no --bg-alt: las filas ya no son tarjetas que necesiten
+   despegarse de un gris; ahora el papel es el fondo de la seccion. */
+.faq-section { padding: var(--space-10) 0; background-color: var(--bg); }
 .faq-head { max-width: 720px; margin: 0 auto var(--space-8); text-align: center; }
 .faq-head .s-label {
     font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.25em;
@@ -22,40 +35,44 @@
     font-weight: 400; letter-spacing: -0.02em; color: var(--ink);
 }
 
+/* Mas estrecho que antes (850): una lista de texto corrido se lee mejor
+   en columna corta, y ademas centra la seccion en la pagina. */
 .faq-container {
-    max-width: 850px;
+    max-width: 760px;
     margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-5);
+    display: block;
 }
 
+/* La fila: ni fondo, ni borde, ni sombra, NI DIVISOR. En family.co las
+   lineas ayudan porque son quince preguntas; con ocho, nueve divisores
+   son ruido y la lista se lee mejor sin ellos. Lo que separa las filas
+   es el aire, y la abierta se distingue sola: la pregunta pasa al
+   acento y el signo gira. */
 .faq-item {
-    /* Las dos: unas paginas traian el atajo y otras la longhand. */
-    background: var(--bg);
-    background-color: var(--bg);
-    border: 1px solid var(--line);
-    /* Filo izquierdo transparente: al pasar por encima y al abrir se
-       tinta, y la fila no se mueve porque el ancho ya esta reservado. */
-    border-left: 3px solid transparent;
-    border-radius: var(--radius-sm);
-    box-shadow: 0 4px 16px var(--glass-shadow);
-    transition: all var(--motion-base) var(--ease-standard);
+    background: none;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
     overflow: hidden;
 }
-.faq-item:hover {
-    border-color: var(--line-strong);
-    border-left-color: var(--cobalt-border);
-}
 
+/* El hover se marca en la pregunta, no en la caja: no hay caja. */
+.faq-item:hover .faq-question { color: var(--cobalt-600); }
+
+/* El signo a la IZQUIERDA, con la pregunta a su derecha: asi las ocho
+   preguntas arrancan en la misma vertical y la lista se escanea de un
+   vistazo. Antes el icono iba suelto al final de cada fila. */
 .faq-trigger {
     width: 100%;
     background: none;
     border: none;
-    padding: var(--space-5) var(--space-6);
+    /* Aire vertical algo mayor: sin divisor, es lo unico que separa
+       una pregunta de la siguiente. */
+    padding: 14px var(--space-2) 14px 0;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    align-items: flex-start;
     gap: var(--space-4);
     cursor: pointer;
     text-align: left;
@@ -64,28 +81,35 @@
 
 .faq-question {
     font-family: var(--font-body);
-    font-size: 1.1rem;
-    font-weight: 600;
+    font-size: 1.05rem;
+    font-weight: 500;
     color: var(--ink);
     margin: 0;
-    /* aire para que no se pegue al icono */
-    padding-right: var(--space-4);
+    padding-right: 0;
+    line-height: 1.5;
+    transition: color var(--motion-base) var(--ease-standard);
 }
 
+/* El signo, sin circulo ni relleno: es el mismo '+' que gira 45 grados
+   hasta ser una cruz. Antes cambiaba ademas de forma (a un circulo
+   relleno con una x dentro), y se leia como otro control distinto. */
 .faq-icon {
     flex-shrink: 0;
-    width: 36px;
-    height: 36px;
+    width: 20px;
+    height: 20px;
+    margin-top: 1px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.3rem;
-    font-weight: 400;
+    /* Grande y de trazo fino: a 1.25rem se perdia al lado de la
+       pregunta, y en negrita competiria con ella. */
+    font-size: 1.5rem;
+    font-weight: 200;
     color: var(--cobalt-600);
-    background: var(--cobalt-tint);
-    border: 1px solid var(--cobalt-border);
-    border-radius: 50%;
-    transition: all var(--motion-base) var(--ease-standard);
+    background: none;
+    border: 0;
+    border-radius: 0;
+    transition: transform var(--motion-base) var(--ease-standard);
     line-height: 1;
 }
 
@@ -98,25 +122,32 @@
     padding: 0;
 }
 
+/* La respuesta arranca alineada con la pregunta, no con el signo: los
+   20px del icono mas el gap. */
 .faq-answer {
-    font-size: 0.95rem;
+    font-size: 0.98rem;
     color: var(--ink-soft);
-    font-weight: 300;
-    line-height: 1.6;
+    font-weight: 400;
+    line-height: 1.7;
     margin: 0;
-    padding: var(--space-2) var(--space-6) var(--space-6);
+    padding: 0 var(--space-6) var(--space-6) calc(20px + var(--space-4));
+    max-width: 68ch;
 }
 
-.faq-item.active {
-    background: var(--cobalt-tint);
-    background-color: var(--cobalt-tint);
-    border-color: var(--cobalt-border);
-    border-left-color: var(--cobalt-600);
-    background-color: var(--cobalt-tint);
-}
+/* Abierto: NO cambia el fondo. Solo gira el signo y la pregunta se
+   queda en el acento, para que se vea cual esta desplegada. */
+.faq-item.active .faq-question { color: var(--cobalt-600); }
+
 .faq-item.active .faq-icon {
-    transform: rotate(45deg);   /* el '+' se convierte en 'x' */
-    color: var(--night-900);
-    background: var(--cobalt-400);
-    border-color: var(--cobalt-400);
+    transform: rotate(45deg);
+    color: var(--cobalt-600);
+}
+
+@media (max-width: 560px) {
+    .faq-question { font-size: 0.98rem; }
+    .faq-answer {
+        padding-right: 0;
+        padding-left: calc(20px + var(--space-3));
+    }
+    .faq-trigger { gap: var(--space-3); }
 }

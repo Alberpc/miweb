@@ -47,6 +47,33 @@ html {
     pointer-events: none;
 }
 
+/* [1-sep-2026] RETICULA TECNICA: probada y RETIRADA.
+   Era el paso 01 de la auditoria — una rejilla de 32px muy tenue de
+   fondo, como trunk.io y langbase. Se monto y se quito el mismo dia por
+   tres motivos:
+   1. La auditoria la pedia cuando CUATRO secciones no tenian nada que
+      mirar. Eso ya no pasa: hay portatil con informe, videos, sellos con
+      halo y la aurora del cierre.
+   2. Compite con los halos: el halo es una forma organica difusa y la
+      rejilla es geometrica y regular; juntos se estorban.
+   3. La skill de refero la marca como patron de slop de IA, y anyadida
+      sin problema que resolver es exactamente decoracion.
+   Trunk y langbase pueden usarla porque su producto ES infraestructura;
+   aqui lo que se vende es quitarle complicacion tecnica al negocio.
+   El CSS esta en git por si algun dia se quiere recuperar. */
+
+/* "Sobre mi" no lleva separador NI se lo dibuja la seccion siguiente.
+   Dos motivos, los dos por la foto:
+   - Arriba: la linea mide 760px centrados (x=340 a 1100) y la foto llega
+     a x=756, asi que el degradado moria justo sobre su borde derecho.
+   - Abajo: la seccion va con `padding-bottom: 0` a proposito, para que
+     la silueta descanse en la base (ver .sobremi-section). Eso deja el
+     borde de la foto pegado al limite, y la linea de la seccion de
+     abajo cruzaba justo por ahi.
+   En ambos casos el aire entre bloques ya separa de sobra. */
+.sobremi-section::before,
+.sobremi-section + .section::before { display: none; }
+
 /* HERO SECTION (CABECERA) */
 /* El hero es un BLOQUE con margen, no una banda a sangre: se despega de
    los bordes y deja ver el fondo de pagina alrededor, como decagon.ai.
@@ -89,7 +116,7 @@ html {
     position: relative;
     z-index: 2;
     width: 100%;
-    max-width: 1200px; /* Alineado con .container y .navbar */
+    max-width: var(--container-max); /* el mismo que .container y .navbar */
     margin: 0 auto;
     text-align: left;
     padding: 0 24px; /* Alineado con .container y .navbar */
@@ -781,15 +808,20 @@ html {
     color: var(--ink-soft);
 }
 
+/* Check, no punto: es la misma lista de "que te llevas" que la del
+   DAI360, y ahi ya se resolvio asi. El hex va cocido en el data-uri
+   porque currentColor no funciona en background-image; si cambia
+   --cobalt-600, cambiarlo aqui (%23B44100). */
 .pieza-lista li::before {
     content: "";
     position: absolute;
     left: 0;
-    top: 0.58em;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--cobalt-500);
+    top: 0.3em;
+    width: 14px;
+    height: 14px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23B44100' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m4 12.5 5 5L20 6.5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 
 /* El vídeo va enmarcado, no a sangre: aquí es una pieza de igual rango que
@@ -805,13 +837,14 @@ html {
     aspect-ratio: 800 / 480;
     border: 1px solid var(--line);
     border-radius: var(--radius-sm);
-    /* --night-800, no --night-900: es el color que se ve mientras carga y
-       en las bandas si el video no llena el marco exacto. El verde casi
-       negro daba un rectangulo duro sobre la tarjeta clara.
-       Nota: los videos estan renderizados con fondo #0f1f1b POR DENTRO
-       (src/videos/*/index.html), asi que esto suaviza el marco pero no
-       aclara la animacion: eso pide volver a renderizar los seis. */
-    background: var(--night-800);
+    /* [1-sep-2026] BLANCO, igual que el fondo con el que estan renderizados
+       los seis videos por dentro (src/videos/*/index.html). Antes iba en
+       --night-800 porque los videos eran verde casi negro y ese gris
+       oscuro disimulaba el corte; ahora seria justo al reves — un
+       rectangulo oscuro parpadeando antes de que cargue la animacion. Es
+       el color que se ve mientras carga y en las bandas si el video no
+       llena el marco exacto. */
+    background: var(--bg);
     box-shadow: var(--shadow-subtle);
 }
 
@@ -992,7 +1025,7 @@ html {
 /* SECCIÓN EL MÉTODO (LÍNEA DE TIEMPO / TIMELINE) */
 .timeline {
     position: relative;
-    max-width: 1100px;
+    max-width: var(--container-tight);
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -1104,7 +1137,7 @@ html {
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
-    max-width: 1200px; /* Restauramos la alineación con la cuadrícula de la web */
+    max-width: var(--container-max); /* la cuadricula de la web */
     text-align: center; /* Centrado matemático perfecto */
     font-family: var(--font-body); /* Usamos Inter para evitar la A geométrica de Syne */
     font-size: clamp(8rem, 29vw, 365px); /* Restauramos el tamaño máximo para que encaje de forma impecable */
@@ -1270,6 +1303,30 @@ html {
     color: var(--ink-soft);
     font-weight: 300;
     margin-bottom: 24px;
+}
+
+/* La frase que resume la propuesta. Filo de acento a la izquierda y
+   tipografia de display: se lee como una declaracion, no como un
+   parrafo mas. Sin comillas decorativas ni cursiva — es lo que hace
+   cualquier plantilla, y aqui la frase se sostiene sola. */
+.sobremi-cita {
+    margin: 32px 0 0;
+    padding: 4px 0 4px 22px;
+    border-left: 2px solid var(--cobalt-600);
+    font-family: var(--font-display);
+    font-size: 1.32rem;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    max-width: 26ch;
+}
+
+@media (max-width: 560px) {
+    .sobremi-cita {
+        font-size: 1.15rem;
+        padding-left: 16px;
+    }
 }
 
 /* SECCIÓN FORMULARIO DE RESERVA (DISEÑO PREMIUM CON BORDER BEAM MINIMALISTA) */
@@ -1572,7 +1629,7 @@ html {
     justify-content: center;
     flex-wrap: wrap;
     gap: 70px;
-    max-width: 1000px;
+    max-width: var(--container-tight);
     margin: 0 auto;
     padding: 0 24px;
 }
@@ -1965,7 +2022,7 @@ html {
        pegado a la ultima linea del parrafo. */
     gap: var(--space-9, 80px);
     align-items: center;
-    max-width: 1120px;
+    max-width: var(--container-narrow);
     /* Aire propio arriba y abajo: la seccion es la rampa al cierre y
        apretarla contra el titular y contra el atajo la hace parecer un
        bloque mas, no el remate. */
@@ -2286,8 +2343,40 @@ html {
     overflow: hidden;
 }
 
+/* [1-sep-2026] La seccion pasa a BLANCO y el peso gris se lo lleva el
+   panel de las piezas. Antes los dos eran #F7F7F8: contraste 1.00 — el
+   mismo color — y el panel solo se distinguia por un borde de 1px y una
+   sombra. Ahora la caja se ve como caja y la seccion respira.
+   Ojo: el par blanco/#F7F7F8 da solo 1.071, asi que no bastaba con
+   aclarar la seccion; el gris del panel tambien tenia que bajar. */
 .soluciones-section {
-    background: var(--bg-alt);
+    background: var(--bg);
+}
+
+/* EL PANEL, en el gris hundido: es el que ahora sostiene el bloque.
+   #ECECEF contra el blanco da 1.179 (65% mas de separacion que antes) y
+   el texto se queda en 9.07 sobre el, de sobra para AA. */
+.soluciones-section .pieza {
+    background: #ECECEF;
+    border-color: #E2E2E6;
+}
+
+/* Las pestanyas, medio tono por encima del panel: asi la activa (que va
+   en blanco) se lee como la hoja que sale hacia delante. */
+.soluciones-section .piezas-tabs {
+    background: #E4E4E8;
+    border-color: #E2E2E6;
+}
+
+.soluciones-section .pieza-tab.is-active {
+    background: #ECECEF;
+}
+
+/* El .section-header generico deja un hueco pensado para secciones
+   centradas; aqui, con el titular a la izquierda y las pestanyas
+   debajo, sobraba casi el doble. */
+.soluciones-section .section-header {
+    margin-bottom: var(--space-7, 48px);
 }
 
 /* El titular gana rango por tamaño y ancho de línea, no por grosor:
@@ -2320,17 +2409,194 @@ html {
     background-color: var(--bg);
 }
 
+/* ── EL CIERRE: CONTACTO + PIE COMO UN SOLO BLOQUE ────────────────
+   Patron de decagon.ai: el ultimo CTA y el pie son ambos oscuros y se
+   leen como una pieza. Alli la aurora vive en el CTA y el pie se queda
+   en carbon liso — aqui igual (ver footer.njk, `pieSinAurora`).
+
+   No lleva `.section-bloque`: va a sangre y sin redondear por abajo,
+   porque el pie continua justo debajo. Si se despegara de los bordes
+   como el resto de bloques, dejaria de leerse unido. */
 .contacto-section {
-    background-color: var(--bg-alt) !important;
-    padding-bottom: var(--space-11) !important; /* separa del footer */
-    /* Sin margen inferior propio: el pie ya trae el suyo (pie.css) y
-       sumados daban el doble de hueco que entre el resto de bloques. */
+    background-color: var(--night-900);
+    position: relative;
+    overflow: hidden;
+    /* Se come el hueco que el pie trae por arriba: los dos tienen que
+       quedar pegados, sin costura. */
+    margin-bottom: calc(var(--hero-gap) * -1);
+    padding-bottom: var(--space-10);
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    margin-left: var(--hero-gap);
+    margin-right: var(--hero-gap);
+}
+
+/* El contenido por encima del canvas de la aurora. */
+.contacto-section > .container {
+    position: relative;
+    z-index: 2;
+}
+
+.contacto-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+    gap: var(--space-9, 80px);
+    align-items: center;
+    max-width: var(--container-narrow);
+    margin: 0 auto;
+}
+
+/* La columna de texto: alineada a la izquierda, no centrada — el
+   .section-header centrado de antes dejaba media pantalla vacia. */
+.contacto-texto .section-title {
+    margin-bottom: 16px;
+}
+
+.contacto-texto .section-subtitle {
+    max-width: 42ch;
+}
+
+.contacto-nota {
+    margin-top: var(--space-6);
+    padding-top: var(--space-5);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    font-size: 0.95rem;
+    color: var(--on-night-soft);
+    max-width: 40ch;
+}
+
+.contacto-nota strong {
+    color: var(--on-night);
+    font-weight: 600;
+}
+
+/* Las vias directas, para quien no quiere rellenar cinco campos. */
+.contacto-vias {
+    margin-top: var(--space-6);
+}
+
+.contacto-vias-t {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--on-night-mid);
+    margin-bottom: 14px;
+}
+
+.contacto-via {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding: 9px 16px;
+    border-radius: var(--radius-pill);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--on-night-body);
+    font-size: 0.88rem;
+    text-decoration: none;
+    transition: border-color 220ms var(--ease-standard),
+                background 220ms var(--ease-standard),
+                color 220ms var(--ease-standard);
+}
+
+.contacto-via svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+}
+
+.contacto-via:hover {
+    border-color: var(--cobalt-400);
+    background: rgba(234, 130, 88, 0.10);
+    color: var(--on-night);
+}
+
+/* El panel del formulario se queda CLARO sobre el fondo oscuro: cinco
+   campos directamente sobre la aurora no se leerian. El `.glass-form`
+   usa var(--bg), que dentro de .inverse se redefine a carbon, asi que
+   hay que fijarlo a mano. */
+.contacto-section .glass-form-container {
+    max-width: none;
+    margin: 0;
+}
+
+.contacto-section .glass-form {
+    background-color: #FFFFFF;
+    padding: 40px;
+}
+
+/* Dentro del panel blanco vuelve a mandar la tinta oscura: los tokens
+   de .inverse dejarian el texto blanco sobre blanco. */
+.contacto-section .glass-form .form-group label { color: #55585F; }
+/* "(opcional)" en gris mas suave: es una aclaracion, no parte del
+   nombre del campo. La etiqueta entera se cortaba en la columna
+   estrecha del panel. */
+.form-opt { color: #6B7079; }  /* 4.65 sobre el campo; el #8B9098 se quedaba en 3.00 */
+.contacto-section .glass-form input,
+.contacto-section .glass-form textarea {
+    color: #121316;
+    background-color: #F7F7F8;
+}
+.contacto-section .glass-form .form-check span { color: #3C3E44; }
+.contacto-section .glass-form .form-check a { color: #B44100; }
+
+/* El boton: sobre panel claro va el --cobalt-600 solido con texto
+   blanco (5.68), que es la regla del sistema para fondo claro. Estaba
+   en --cobalt-400, que es el tono para oscuro, y se veia lavado.
+
+   Y a la altura del resto del formulario: el `.btn-submit` global suma
+   `padding: 16px` MAS `min-height: 52px`, asi que salia de 86px de alto
+   contra los 53 de los campos — un 62% mas, y se comia el panel. */
+.contacto-section .btn-submit {
+    background: var(--cobalt-600);
+    color: #FFFFFF;
+    min-height: 0;
+    padding: 15px 20px;
+    font-size: 0.95rem;
+    /* El `line-height: 52px` del boton global es lo que de verdad le daba
+       la altura (52 + los dos paddings = 82). Quitar solo el min-height no
+       bastaba. */
+    line-height: 1.4;
+}
+
+.contacto-section .btn-submit:hover {
+    background: #9C3800;
+}
+
+/* Aire interno del panel: los campos iban con el mismo hueco entre
+   columnas que entre filas y el bloque se leia apelmazado.
+
+   `minmax(0, 1fr)` y no `1fr`: por defecto un elemento de rejilla lleva
+   `min-width: auto` y no encoge por debajo de su contenido, asi que el
+   placeholder largo ("Telefono o WhatsApp (opcional)") empujaba las dos
+   columnas a 248px cada una — 514 con el hueco, dentro de una fila de
+   480. El campo derecho se salia 34px y quedaba a 6px del borde mientras
+   el resto respetaba los 40 del panel. */
+.contacto-section .glass-form .form-row {
+    gap: 18px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+.contacto-section .glass-form .form-group { margin-bottom: 18px; }
+.contacto-section .glass-form .form-check-wrap { margin-bottom: 22px; }
+
+@media (max-width: 900px) {
+    .contacto-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-7, 48px);
+    }
+    .contacto-section .glass-form { padding: 28px 22px; }
+    /* El texto del boton parte en dos lineas y la flecha cae sola. */
+    .contacto-section .btn-submit {
+        font-size: 0.94rem;
+        padding: 16px 12px;
+        text-wrap: balance;
+    }
 }
 
 /* FONDOS ALTERNOS DE SECCIONES (ESTILO APPLE/VERCEL) */
-.faq-section {
-    background-color: var(--bg-alt);
-}
+/* [1-sep-2026] El gris del FAQ, fuera. Se carga DESPUES de faq.css y le
+   pisaba el fondo blanco: las ocho filas quedaban apagadas sobre el
+   --bg-alt. El fondo lo decide faq.css, que es de quien es la seccion. */
 
 /* =============================================================
    FONDO ESTÁTICO DE ESTRELLAS (CRISP & DETALLADO)
@@ -2359,8 +2625,12 @@ html {
    vanta, que vive de vender cumplimiento: aire y bordes finos, nada
    de sellos, escudos ni candados grandes.
    ══════════════════════════════════════════════════════════════════ */
+/* Fondo BLANCO, no --bg-alt. La seccion viene justo despues del bloque
+   de carbon de "como trabajo", y el gris entre el negro y el blanco de
+   la siguiente se leia como un escalon sucio en vez de un contraste
+   buscado. En blanco el corte es limpio. */
 .garantias-section {
-    background-color: var(--bg-alt);
+    background-color: var(--bg);
     padding-top: var(--space-9);
     padding-bottom: var(--space-9);
 }
@@ -2380,39 +2650,100 @@ html {
    retienen 30 dias) no cabe en tres lineas sin prometer de mas. */
 .garantias-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: var(--space-6);
-    max-width: 880px;
+    /* Sin max-width propio: ocupa el .container como el resto de
+       secciones. Estaba en 1080 (y antes en 880, de cuando eran dos
+       columnas), asi que arrancaba 60px mas adentro que soluciones o
+       beneficios y al bajar por la pagina se leia como un escalon.
+       Centrada si estaba — el problema era el ancho, no la posicion. */
     margin: 0 auto;
 }
 
 /* Sin tarjeta: solo un separador vertical entre columnas. Encerrar
    cada garantia en su caja las convertiria en tres productos, y esto
    no se vende, se afirma. */
+/* El separador se dibuja como borde de la segunda columna, asi que cae
+   en su borde izquierdo — NO en el centro del grid. Con la primera
+   columna sin padding-left pero con padding-right, la linea quedaba a
+   x=456 cuando el centro real es 440: 16px desviada a la derecha.
+   Ahora el hueco se reparte simetrico (el gap hace el aire) y la linea
+   se centra con un margin negativo de medio gap. */
 .garantia {
-    padding: 0 var(--space-4);
+    padding: 0;
     border-left: 1px solid var(--line);
+    padding-left: var(--space-6);
+    margin-left: calc(var(--space-4) * -1);
 }
 .garantia:first-child {
     padding-left: 0;
+    padding-right: var(--space-6);
+    margin-left: 0;
     border-left: none;
 }
 
+/* EL SELLO. Los iconos eran de 26px en gris de microcopy: se leian como
+   vinyetas. Ahora son piezas de 56px en el acento, con un halo detras
+   — el mismo recurso de "como trabajo", pero aqui en pequenyo y sobre
+   claro, para que se lean como sellos de garantia.
+   Y no son escudo y candado: esos valen para cualquier cosa, que es lo
+   que la auditoria marcaba. Uno es un sello con el anillo de estrellas
+   de la UE; el otro, el filtro dejando pasar lo bueno y parando el
+   ataque. */
 .garantia-icono {
-    display: block;
-    width: 26px;
-    height: 26px;
-    color: var(--ink-mid);
-    margin-bottom: var(--space-4);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    color: var(--cobalt-600);
+    /* El halo se desborda un 18% por debajo, asi que con los 24px de
+       antes el resplandor llegaba a tocar el titular. */
+    margin-bottom: var(--space-6);
 }
+
+/* El halo: elipse difuminada por detras del trazo, no un circulo
+   relleno detras del icono. Sutil — el acento ya lo pone el trazo. */
+.garantia-icono::before {
+    content: '';
+    position: absolute;
+    z-index: 0;
+    inset: -18%;
+    border-radius: 50%;
+    filter: blur(14px);
+    background: radial-gradient(circle at 50% 55%,
+        rgba(234, 130, 88, 0.42) 0%,
+        rgba(234, 130, 88, 0.16) 52%,
+        transparent 76%);
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity var(--motion-slow) var(--ease-standard),
+                transform var(--motion-slow) var(--ease-standard);
+}
+
+/* Se enciende al entrar la tarjeta, no antes: si sale ya puesto, la
+   seccion se anuncia sola. */
+.garantia.revealed .garantia-icono::before,
+.reveal.revealed .garantia-icono::before {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.garantia-icono svg { position: relative; z-index: 1; }
 .garantia-icono svg {
-    width: 100%;
-    height: 100%;
+    width: 46px;
+    height: 46px;
     display: block;
 }
 
 .garantia-t {
     font-family: var(--font-heading);
+    /* 16px era tamanyo de parrafo: el titular es el gancho de la
+       garantia y tiene que pesar mas que el texto que lo explica.
+       1.08 y no 1.15: a tres columnas el mas largo se partia en dos. */
+    font-size: 1.08rem;
+    margin-bottom: var(--space-3);
     font-size: 1rem;
     font-weight: 600;
     color: var(--ink);
@@ -2434,13 +2765,28 @@ html {
 .garantias-grid .garantia:nth-child(1) { transition-delay: 0ms; }
 .garantias-grid .garantia:nth-child(2) { transition-delay: 90ms; }
 
+/* A 1024 pasan a dos columnas y la tercera cae debajo; a 860, todas
+   apiladas. Con tres, 860 llegaba tarde: a esa anchura ya venian
+   estranguladas. */
+@media (max-width: 1024px) {
+    .garantias-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
 @media (max-width: 860px) {
     .garantias-grid { grid-template-columns: 1fr; gap: var(--space-6); }
+    /* Apilado, el filo izquierdo pasa a ser el marcador de cada bloque y
+       las dos van iguales. Hay que anular el margin negativo que centra
+       la linea en dos columnas: aqui dejaba la segunda 16px corrida. */
     .garantia {
         padding: 0 0 0 var(--space-4);
+        margin-left: 0;
         border-left: 1px solid var(--line);
     }
-    .garantia:first-child { padding-left: var(--space-4); border-left: 1px solid var(--line); }
+    .garantia:first-child {
+        padding-left: var(--space-4);
+        padding-right: 0;
+        margin-left: 0;
+        border-left: 1px solid var(--line);
+    }
 }
 @media (prefers-reduced-motion: reduce) {
     .garantias-grid .garantia { transition-delay: 0ms; }
@@ -2492,7 +2838,7 @@ html {
     padding: 0;
     /* Ensanchado de 780 a 1040: ahora cada fase lleva su pieza visual a
        la derecha, y a 780 las dos columnas se estrangulaban. */
-    max-width: 1040px;
+    max-width: var(--container-tight);
     position: relative;
 }
 

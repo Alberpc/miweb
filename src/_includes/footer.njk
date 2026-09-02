@@ -20,7 +20,12 @@
     <footer class="footer-section{% if footerInverse != false %} inverse{% endif %} reveal">
         {# La aurora solo en el pie oscuro: sobre el claro de
            automatizar-mi-negocio pintaria un rectangulo negro. #}
-        {% if footerInverse != false %}<canvas class="aurora-canvas" data-alto="1.5" aria-hidden="true"></canvas>{% endif %}
+        {#- `pieSinAurora: true` en las paginas cuyo bloque anterior ya trae
+            aurora (la home: su contacto la lleva). Dos seguidas se restan
+            fuerza, y en decagon.ai el color vive en el CTA mientras el pie
+            se queda en carbon liso. El resto de paginas la conservan: son
+            su unico punto de color. -#}
+        {% if footerInverse != false and pieSinAurora != true %}<canvas class="aurora-canvas" data-alto="1.5" aria-hidden="true"></canvas>{% endif %}
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-brand-col">

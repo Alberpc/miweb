@@ -15,7 +15,12 @@
    una banda pegada al borde. Sin borde superior: ya lo separa el aire. */
 .footer-section {
     position: relative;
-    width: auto;
+    /* `width: auto` sobre un elemento de bloque NO descuenta los margenes
+       laterales: el pie salia 2x--hero-gap mas ancho que la ventana y
+       provocaba scroll horizontal. Se veia solo en las paginas cortas
+       (aviso-legal), donde no hay barra vertical que absorba el sobrante.
+       Viene de antes del cierre unido. */
+    width: calc(100% - var(--hero-gap) * 2);
     margin: var(--hero-gap);
     padding: var(--space-10) 0 var(--space-8);
     border-radius: var(--radius-xl);
@@ -23,6 +28,16 @@
 }
 /* La variante clara la usa automatizar-mi-negocio (footerInverse: false). */
 .footer-section.inverse { border-top: none; }
+
+/* CIERRE UNIDO. Cuando la pagina termina con el bloque de contacto
+   oscuro, el pie se pega a el — sin hueco y con las esquinas de arriba
+   rectas — para que los dos se lean como una sola pieza (decagon.ai).
+   Solo aplica donde ese bloque existe: en el resto de paginas el pie
+   sigue siendo un bloque despegado. */
+body:has(.contacto-section.inverse) .footer-section {
+    margin-top: 0;
+    border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+}
 
 /* El pie oscuro lleva la aurora en un canvas de fondo (z-index 0).
    Sin esto su contenido queda por debajo y no se ve. */

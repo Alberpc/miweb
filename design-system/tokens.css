@@ -178,9 +178,19 @@
      que se lea como un bloque dentro de la pagina, no como el fondo. */
   --hero-gap:         16px;
 
-  /* Contenedor y grid */
+  /* Contenedor y grid.
+     Escala de anchos en pasos de 80px. Antes solo existian los dos
+     primeros y las secciones se inventaban el suyo a mano (1120, 1100,
+     1040, 1000): al no venir de ningun sitio no se sabia si 1100 y 1120
+     eran una decision o un descuido.
+       wide   — el maximo absoluto, para piezas a sangre
+       max    — el de .container y la navbar: la cuadricula de la web
+       narrow — bloques de dos columnas que a 1200 quedan estirados
+       tight  — bloques de lectura y secuencias (fases, timeline) */
   --container-max:    1200px;
   --container-wide:   1280px;
+  --container-narrow: 1120px;
+  --container-tight:  1040px;
   --gutter-desktop:   32px;
   --gutter-tablet:    24px;
   --gutter-mobile:    20px;

@@ -189,12 +189,13 @@ body {
    FOOTER OSCURO (clase .inverse en el <footer>, definida en tokens.css)
    ============================================================= */
 
-.footer-section.inverse {
-    position: relative;
-    padding: 80px 0 40px 0;
-    width: 100%;
-    border-top: 1px solid var(--night-600);
-}
+/* [1-sep-2026] Vaciada. Duplicaba el estilo del pie que ya vive en
+   pie.css, pero con `width: 100%` — y como .footer-section.inverse gana
+   en especificidad, pisaba el ancho de pie.css y el pie salia 32px mas
+   ancho que la ventana (los dos --hero-gap de su margen). Se notaba solo
+   en las paginas legales, que son las unicas que cargan este archivo, y
+   ademas solo en las cortas: sin barra de scroll vertical no hay nada que
+   absorba el sobrante. El pie lo estiliza pie.css y punto. */
 
 .footer-grid {
     display: grid;
