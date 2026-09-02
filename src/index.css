@@ -419,6 +419,14 @@ html {
     background: var(--night-900);
     position: relative;
     overflow: hidden;
+    /* El texto se centra en la caja. Como la caja se estira a la altura
+       de la fila pero su contenido no siempre la llena (en Geko la
+       solucion es el texto mas corto de los tres, en Bioresina el mas
+       largo), el aire sobrante se repartia todo abajo y el bloque negro
+       se veia distinto en cada slide. */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .caso-step-highlight::before {
