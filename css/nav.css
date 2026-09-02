@@ -89,24 +89,32 @@
     border: 1px solid transparent;
     background:
         linear-gradient(var(--night-900), var(--night-900)) padding-box,
+        /* [2-sep-2026] Sin el teal del final. Son los mismos colores de
+           la aurora del hero, pero alli el verde va al 97% del ancho y
+           con opacidad 0.23 (se difumina), y aqui iba al 100% de 205px
+           sin difuminar: el mismo color a otra escala cantaba en la
+           esquina. Cierra en azul y sigue recogiendo la escena. */
         linear-gradient(100deg,
             var(--cobalt-500) 0%,
-            #A63A70 34%,
-            #8642C4 62%,
-            #3A50BE 84%,
-            #008A7E 100%) border-box;
+            #A63A70 40%,
+            #8642C4 73%,
+            #3A50BE 100%) border-box;
 }
 
 .navbar--sobre-hero .nav-btn:hover {
     color: #FFFFFF;
     background:
         linear-gradient(var(--night-800), var(--night-800)) padding-box,
+        /* [2-sep-2026] Sin el teal del final. Son los mismos colores de
+           la aurora del hero, pero alli el verde va al 97% del ancho y
+           con opacidad 0.23 (se difumina), y aqui iba al 100% de 205px
+           sin difuminar: el mismo color a otra escala cantaba en la
+           esquina. Cierra en azul y sigue recogiendo la escena. */
         linear-gradient(100deg,
             var(--cobalt-500) 0%,
-            #A63A70 34%,
-            #8642C4 62%,
-            #3A50BE 84%,
-            #008A7E 100%) border-box;
+            #A63A70 40%,
+            #8642C4 73%,
+            #3A50BE 100%) border-box;
 }
 
 /* Con el menu movil abierto la barra recupera su fondo aunque siga
