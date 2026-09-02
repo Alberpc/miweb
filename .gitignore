@@ -20,3 +20,7 @@ _site/
 **/snapshots/
 *.bak
 *.bak2
+
+# Los mp4 intermedios del render de HyperFrames: el bueno se copia a
+# assets/video/ con su nombre publicado, asi que este es un duplicado.
+**/out.mp4

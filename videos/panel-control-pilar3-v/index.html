@@ -8,9 +8,9 @@
       * { margin: 0; padding: 0; box-sizing: border-box; }
       html, body {
         margin: 0; width: 600px; height: 450px; overflow: hidden;
-        background: #0f1f1b; /* --night-900 */
+        background: #FFFFFF; /* papel */
       }
-      body { font-family: "Inter", sans-serif; }
+      body { font-family: "Geist", system-ui, sans-serif; }
     </style>
   </head>
   <body>
@@ -21,7 +21,7 @@
       data-duration="4.2"
       data-width="600"
       data-height="450"
-      style="position: relative; width: 600px; height: 450px; background: #0f1f1b; overflow: hidden;"
+      style="position: relative; width: 600px; height: 450px; background: #FFFFFF; overflow: hidden;"
     >
       <div
         id="scene"
@@ -92,16 +92,20 @@
     <style>
       .bg-field {
         position: absolute; inset: 0; z-index: 0;
-        background: radial-gradient(ellipse 620px 380px at 50% 46%, rgba(200, 168, 94, 0.08), transparent 72%);
+        /* [1-sep-2026] Sin resplandor: sobre papel el halo terracota al 9%
+           daba un beige (#F8EEE8) que se separaba del blanco 1.142 — mas
+           que el propio video del panel gris. En la escena verde oscura si
+           aportaba profundidad; aqui solo ensuciaba. La profundidad la dan
+           ya las sombras de las tarjetas. */
       }
 
       #panel {
         position: absolute; left: 300px; top: 225px;
         width: 552px; height: 400px;
         border-radius: 20px;
-        background: linear-gradient(168deg, rgba(39, 76, 59, 0.62), rgba(15, 31, 27, 0.86));
-        border: 1px solid rgba(200, 168, 94, 0.26);
-        box-shadow: 0 28px 64px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.07);
+        background: linear-gradient(168deg, #FFFFFF, #F2F2F4);
+        border: 1px solid #E3E3E7;
+        box-shadow: 0 18px 44px -14px rgba(18, 19, 22, 0.26), inset 0 1px 0 #FFFFFF;
         padding: 20px 22px;
         display: flex; flex-direction: column; gap: 14px;
         opacity: 0;
@@ -110,20 +114,20 @@
       .panel-head {
         display: flex; align-items: center; justify-content: space-between;
         padding-bottom: 14px;
-        border-bottom: 1px solid rgba(200, 168, 94, 0.16);
+        border-bottom: 1px solid #E6E6EA;
       }
       .panel-title {
-        font-size: 20px; font-weight: 600; color: #F3F5F2;
+        font-size: 20px; font-weight: 600; color: #121316;
         letter-spacing: 0.01em;
       }
       .panel-live {
         display: flex; align-items: center; gap: 7px;
         font-size: 16px; font-weight: 600; letter-spacing: 0.09em;
-        text-transform: uppercase; color: #C7CDC5;
+        text-transform: uppercase; color: #55585F;
       }
       .live-dot {
         width: 10px; height: 10px; border-radius: 50%;
-        background: #3DDC84;
+        background: #12A150;
       }
 
       /* Sin cajas: los KPIs se separan con una linea vertical, que es como se
@@ -138,37 +142,38 @@
       .kpi {
         display: flex; flex-direction: column; gap: 6px;
         padding-left: 18px;
-        border-left: 2px solid rgba(200, 168, 94, 0.22);
+        border-left: 1px solid #E6E6EA;
         opacity: 0;
       }
       .kpi-cap {
         font-size: 16px; font-weight: 600; letter-spacing: 0.1em;
-        text-transform: uppercase; color: #C7CDC5;
+        text-transform: uppercase; color: #55585F;
       }
       .kpi-num {
         font-size: 34px; font-weight: 700; line-height: 1;
-        color: #F3F5F2; font-variant-numeric: tabular-nums;
+        color: #121316; font-variant-numeric: tabular-nums;
+        white-space: nowrap;
       }
       .kpi-delta {
         font-size: 18px; font-weight: 600;
         font-variant-numeric: tabular-nums;
       }
-      .kpi-delta.up { color: #3DDC84; }
-      .kpi-delta.down { color: #F5A524; }
+      .kpi-delta.up { color: #12A150; }
+      .kpi-delta.down { color: #B45309; }
 
       .chart { flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 10px; }
       .chart-head {
         display: flex; align-items: center; justify-content: space-between;
       }
-      .chart-title { font-size: 19px; font-weight: 600; color: #C7CDC5; }
+      .chart-title { font-size: 19px; font-weight: 600; color: #55585F; }
       .chart-legend {
         display: flex; align-items: center; gap: 6px;
-        font-size: 17px; color: #C7CDC5;
+        font-size: 17px; color: #55585F;
         font-variant-numeric: tabular-nums;
       }
       .lg-swatch {
         width: 14px; height: 14px; border-radius: 3px;
-        background: #C8A85E;
+        background: #B44100;
       }
       .chart-body { position: relative; flex: 1; }
       .grid-lines {
@@ -177,7 +182,7 @@
       }
       .grid-lines span {
         display: block; height: 1px;
-        background: rgba(200, 168, 94, 0.10);
+        background: #ECECEF;
       }
       .bars {
         position: absolute; inset: 0;
@@ -193,10 +198,10 @@
       .bar {
         width: 100%; height: 0;
         border-radius: 4px 4px 0 0;
-        background: linear-gradient(180deg, #C8A85E, rgba(200, 168, 94, 0.45));
+        background: linear-gradient(180deg, #B44100, rgba(180, 65, 0, 0.45));
       }
       .bar-lab {
-        font-size: 16px; color: #C7CDC5;
+        font-size: 16px; color: #55585F;
         font-variant-numeric: tabular-nums;
       }
 
@@ -204,19 +209,19 @@
       .row {
         display: flex; align-items: center; gap: 12px;
         padding: 13px 0;
-        border-top: 1px solid rgba(200, 168, 94, 0.12);
+        border-top: 1px solid #E6E6EA;
         opacity: 0;
       }
       .row-dot {
         width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
       }
-      .row-dot.ok { background: #3DDC84; }
-      .row-dot.pend { background: #F5A524; }
+      .row-dot.ok { background: #12A150; }
+      .row-dot.pend { background: #B45309; }
       .row-txt {
-        flex: 1; font-size: 18px; color: #E6E1D7;
+        flex: 1; font-size: 18px; color: #3F4147;
       }
       .row-amt {
-        font-size: 18px; font-weight: 700; color: #D6BA82;
+        font-size: 18px; font-weight: 700; color: #B44100;
         font-variant-numeric: tabular-nums;
       }
     </style>
