@@ -10,22 +10,6 @@ Analizo dónde pierdes tiempo, clientes y dinero, y utilizo IA y automatización
 - Bioresina
 - Geko
 
-- Más oportunidades
-
-Ninguna consulta se queda sin contestar.
-
-- Menos tareas manuales
-
-Lo repetitivo lo hace el sistema, no tú.
-
-- Más control
-
-Sabes en qué punto está cada cliente.
-
-- Sistemas escalables
-
-Más volumen sin contratar a nadie.
-
 ## Sistemas de IA montados sobre cómo trabajas tú
 
 _No son productos de catálogo: son tres piezas que se combinan según lo que te haga falta. Casi siempre empieza por una._

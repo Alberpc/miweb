@@ -116,42 +116,37 @@ trasPie: |
 
     <!-- SECCIÓN 2 — EL PROBLEMA -->
     <!-- SECCION 2 - BENEFICIOS: que se lleva, antes de contarle el problema -->
-    <section id="beneficios" class="section beneficios-section reveal">
-        <div class="container">
-            <ul class="beneficios-grid">
-                <li class="beneficio">
-                    {#- Iconos de Lucide (lucide.dev, MIT). Siempre currentColor:
-                        el color lo pone el CSS, nunca el SVG. -#}
-                    <span class="beneficio-icono" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-                    </span>
-                    <h3 class="beneficio-titulo">Más oportunidades</h3>
-                    <p class="beneficio-texto">Ninguna consulta se queda sin contestar.</p>
-                </li>
-                <li class="beneficio">
-                    <span class="beneficio-icono" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v6l4 2"></path></svg>
-                    </span>
-                    <h3 class="beneficio-titulo">Menos tareas manuales</h3>
-                    <p class="beneficio-texto">Lo repetitivo lo hace el sistema, no tú.</p>
-                </li>
-                <li class="beneficio">
-                    <span class="beneficio-icono" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="M18 17V9"></path><path d="M13 17V5"></path><path d="M8 17v-3"></path></svg>
-                    </span>
-                    <h3 class="beneficio-titulo">Más control</h3>
-                    <p class="beneficio-texto">Sabes en qué punto está cada cliente.</p>
-                </li>
-                <li class="beneficio">
-                    <span class="beneficio-icono" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m22 7-8.5 8.5-5-5L2 17"></path><path d="M16 7h6v6"></path></svg>
-                    </span>
-                    <h3 class="beneficio-titulo">Sistemas escalables</h3>
-                    <p class="beneficio-texto">Más volumen sin contratar a nadie.</p>
-                </li>
-            </ul>
-        </div>
-    </section>
+    {#- SECCION "BENEFICIOS" retirada (2-sep-2026).
+        Era una tira de cuatro tarjetas (Mas oportunidades / Menos tareas
+        manuales / Mas control / Sistemas escalables) entre los logos y
+        "Que construyo". Tres motivos:
+
+        1. Era la UNICA seccion con contenido sin etiqueta ni titulo. Las
+           demas llevan la suya (QUE CONSTRUYO, CASOS REALES, COMO
+           TRABAJO...), asi que esta aparecia flotando sin decir que era.
+
+        2. Decia lo mismo que la seccion siguiente, pero en abstracto:
+           "Lo repetitivo lo hace el sistema, no tu" vs "Documentos,
+           facturas y correos se archivan solos". El lector se comia la
+           version vaga antes de la concreta.
+
+        3. El copy valdria para cualquier consultora de IA. No distinguia.
+
+        Comprobado en referencias (leidas, no de memoria): decagon y
+        basecamp NO tienen tira de beneficios — del heroe van a producto o
+        a prueba. steep y slite SI, pero con titulo de seccion encima y
+        diciendo capacidades concretas, no adjetivos.
+        El razonamiento de fondo: los beneficios abstractos sustituian al
+        producto cuando no se podia enseñar. Esta web SI lo enseña (tres
+        videos de la cosa funcionando), asi que no hacen falta.
+
+        Si se quiere recuperar algo aqui, la via buena son CIFRAS (las 44h
+        al mes y 13+ semanas al año de Bioresina), como hace decagon: eso
+        es prueba, no promesa.
+
+        El marcado esta en git y en scratchpad/seccion-beneficios.txt; su
+        CSS (.beneficios-*, .beneficio-*) sigue en index.css por si vuelve. -#}
+
 
     {#- SECCION 2 "LA REALIDAD" retirada (30-ago-2026).
         Dos motivos: el copy hablaba solo al dueño que trabaja solo ("si
