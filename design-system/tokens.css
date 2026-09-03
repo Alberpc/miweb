@@ -189,8 +189,15 @@
        tight  — bloques de lectura y secuencias (fases, timeline) */
   --container-max:    1200px;
   --container-wide:   1280px;
-  --container-narrow: 1120px;
-  --container-tight:  1040px;
+  /* [2-sep-2026] narrow y tight se miden sobre el ANCHO DE CONTENIDO, no
+     sobre el de la caja: .container son 1200 con 24px de padding a cada
+     lado, o sea 1152 utiles. Antes narrow era 1120 y quedaba 32px mas
+     estrecho que todo lo demas sin que fuera una decision — salia de
+     comparar un ancho sin padding con uno que si lo tiene.
+     Ahora bajan de 80 en 80 desde esos 1152, que es el salto que ya
+     habia entre max y wide. */
+  --container-narrow: 1072px;
+  --container-tight:   992px;
   --gutter-desktop:   32px;
   --gutter-tablet:    24px;
   --gutter-mobile:    20px;

@@ -142,7 +142,7 @@ html {
     background-color: var(--cobalt-tint);
     padding: 6px 16px;
     border-radius: var(--radius-pill);
-    margin-bottom: 24px;
+    margin-bottom: var(--space-5);
 }
 
 .hero-title {
@@ -151,7 +151,7 @@ html {
     font-weight: 400;
     line-height: 1.15;
     letter-spacing: -0.01em;
-    margin-bottom: 24px;
+    margin-bottom: var(--space-5);
 }
 
 /* El H1 tiene <br> forzado entre las 2 frases: le damos ancho de sobra
@@ -195,7 +195,7 @@ html {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 16px;
+    gap: var(--space-4);
 }
 
 /* Botón con brillo de cromo líquido metálico */
@@ -204,7 +204,7 @@ html {
 /* SECCIONES: CABECERAS Y TEXTOS COMUNES */
 .section-header {
     max-width: 700px;
-    margin-bottom: 80px;
+    margin-bottom: var(--space-9);
 }
 
 .section-header.centered {
@@ -219,7 +219,7 @@ html {
     letter-spacing: 0.25em;
     color: var(--cobalt-550);
     display: block;
-    margin-bottom: 12px;
+    margin-bottom: var(--space-3);
     font-weight: 600;
 }
 
@@ -292,21 +292,7 @@ html {
     font-size: 1.2rem;
     font-weight: 400;
     color: var(--ink);
-    margin-bottom: 32px;
-}
-
-.card-title {
-    font-family: var(--font-body);
-    font-size: 1.3rem;
-    font-weight: 600;
-    margin-bottom: 16px;
-    color: var(--ink);
-}
-
-.card-desc {
-    font-size: 0.95rem;
-    color: var(--ink-soft);
-    font-weight: 300;
+    margin-bottom: var(--space-6);
 }
 
 @keyframes pulseNebula {
@@ -318,7 +304,7 @@ html {
 .caso-section .section-header.centered { max-width: 640px; }
 
 .caso-carousel {
-    margin-top: 48px; /* Sistema Bosque Inteligente: space-7 */
+    margin-top: var(--space-7); /* Sistema Bosque Inteligente: space-7 */
     overflow: hidden;
 }
 
@@ -360,11 +346,6 @@ html {
     background: var(--cobalt-600);
     width: 22px;
     border-radius: var(--radius-sm);
-}
-
-.caso-quote-pending {
-    color: var(--ink-mid);
-    font-style: italic;
 }
 
 /* LOS PASOS. Tres, no cuatro: "empresa" no era una fase sino la etiqueta
@@ -490,7 +471,7 @@ html {
     font-size: 1.15rem;
     font-weight: 500;
     line-height: 1.35;
-    margin-bottom: 12px;
+    margin-bottom: var(--space-3);
     color: var(--ink);
 }
 
@@ -623,7 +604,7 @@ html {
 @media (max-width: 900px) {
     .caso-steps {
         grid-template-columns: 1fr;
-        gap: 16px;
+        gap: var(--space-4);
     }
     .caso-step-arrow {
         transform: rotate(90deg);
@@ -1023,45 +1004,6 @@ html {
     border-radius: var(--radius-lg);
 }
 
-.beneficio-icono {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 48px;
-    height: 48px;
-    margin-bottom: var(--space-5);
-    border-radius: var(--radius-md);
-    /* Icono dorado sobre superficie dorada tenue, no cuadrado verde casi
-       negro: sobre la tarjeta blanca ese bloque oscuro daba el mismo salto
-       duro que la caja del problema. Ahora la tarjeta es blanca (antes
-       arena), asi que el tinte dorado ya separa la cajita sin oscurecerla.
-       --cobalt-600 (#6E5628) sobre el tinte cumple AA de sobra. */
-    color: var(--cobalt-600);
-    background: var(--cobalt-tint);
-    border: 1px solid var(--cobalt-border);
-}
-.beneficio-icono svg { width: 24px; height: 24px; }
-
-.beneficio-texto {
-    font-size: 0.9rem;
-    font-weight: 300;
-    line-height: 1.55;
-    color: var(--ink-soft);
-    margin-top: var(--space-2);
-}
-
-.beneficio-titulo {
-    font-family: var(--font-heading); /* sans: el serif se reserva a >3rem (hero, cifras gigantes) */
-    /* 1.35: por debajo la serif se lee floja y no gana al icono. */
-    font-size: 1.35rem;
-    font-weight: 600;
-    letter-spacing: -0.01em;
-    line-height: 1.25;
-    color: var(--ink);
-    /* Sin parrafo debajo no hay nada que separar. */
-    margin: 0;
-}
-
 
 /* 4 columnas no caben en tablet. En movil se quedan DOS, no una: en
    una columna son cuatro bloques a pantalla completa y hay que hacer
@@ -1071,17 +1013,8 @@ html {
     .beneficios-grid { grid-template-columns: repeat(2, 1fr); gap: var(--space-6); }
 }
 @media (max-width: 560px) {
-    .beneficios-section { padding: var(--space-8) 0; }
     .beneficios-grid { gap: var(--space-6) var(--space-4); }
-    .beneficio-icono {
-        width: 40px;
-        height: 40px;
-        margin-bottom: var(--space-3);
-    }
-    .beneficio-icono svg { width: 20px; height: 20px; }
     .beneficio { padding: var(--space-5) var(--space-4); }
-    .beneficio-titulo { font-size: 1.02rem; }
-    .beneficio-texto { font-size: 0.85rem; }
 }
 
 /* SECCIÓN EL MÉTODO (LÍNEA DE TIEMPO / TIMELINE) */
@@ -1091,7 +1024,7 @@ html {
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
+    gap: var(--space-6);
 }
 
 /* La tarjeta es .timeline-item entero: superficie propia con contraste
@@ -1175,7 +1108,7 @@ html {
 .grid-two-cols {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 80px;
+    gap: var(--space-9);
     align-items: center;
 }
 
@@ -1410,7 +1343,7 @@ html {
     font-size: 1.05rem;
     color: var(--ink-soft);
     font-weight: 300;
-    margin-bottom: 24px;
+    margin-bottom: var(--space-5);
 }
 
 /* La frase que resume la propuesta. Filo de acento a la izquierda y
@@ -1494,12 +1427,12 @@ html {
 .form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 24px;
+    gap: var(--space-5);
 }
 
 .form-group {
     position: relative;
-    margin-bottom: 24px;
+    margin-bottom: var(--space-5);
     display: flex;
     flex-direction: column;
 }
@@ -1716,20 +1649,6 @@ html {
     padding-bottom: 72px;
 }
 
-.clientes-title {
-    font-family: var(--font-body);
-    font-size: 0.72rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--ink-mid);
-    text-align: center;
-    margin-bottom: 28px;
-}
-
-.logos-marquee {
-    width: 100%;
-}
-
 /* Fila fija centrada: con 4 logos una marquesina deja un hueco visible al girar */
 .logos-track {
     display: flex;
@@ -1796,7 +1715,7 @@ html {
     }
     .grid-two-cols {
         grid-template-columns: 1fr;
-        gap: 48px;
+        gap: var(--space-7);
     }
     .sobremi-visual {
         order: 2;
@@ -1892,7 +1811,7 @@ html {
     }
     .footer-links-grid {
         grid-template-columns: 1fr 1fr;
-        gap: 24px;
+        gap: var(--space-5);
     }
     .footer-bottom-bar {
         flex-direction: column;
@@ -1907,7 +1826,7 @@ html {
 @media (max-width: 480px) {
     .footer-links-grid {
         grid-template-columns: 1fr;
-        gap: 24px;
+        gap: var(--space-5);
     }
     .hero-subtitle {
         color: rgba(246, 245, 242, 0.82); /* --text-primary atenuado: legible sin ser blanco puro */
@@ -2066,26 +1985,6 @@ html {
     flex-wrap: wrap;
 }
 
-.btn-ghost-link {
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: var(--ink-mid);
-    text-decoration: none;
-    border-bottom: 1px solid var(--line-strong);
-    padding-bottom: 2px;
-    transition: all 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-.btn-ghost-link:hover {
-    color: var(--ink);
-    border-color: var(--ink-mid);
-}
-
-/* Ajuste de espacio para dos columnas */
-.gap-40 {
-    gap: 40px !important;
-}
-
 /* La FAQ es un componente: css/faq.css. Estaba aqui y otra vez en
    landing.css con valores distintos. */
 
@@ -2139,7 +2038,7 @@ html {
     font-weight: 600;
     letter-spacing: -0.01em;
     color: var(--ink);
-    margin-bottom: 16px;
+    margin-bottom: var(--space-4);
 }
 
 /* El CTA sigue la regla del sistema para fondo claro (botones.css):
@@ -2170,7 +2069,7 @@ html {
     padding: 0;
     margin: 0 0 26px;
     display: grid;
-    gap: 12px;
+    gap: var(--space-3);
 }
 
 .dai-lista li {
@@ -2305,7 +2204,7 @@ html {
     .clientes-tira { padding: 32px 0 4px; }
     .clientes-tira .logos-track {
         display: flex;
-        gap: 32px;
+        gap: var(--space-6);
     }
     .clientes-tira .logo-cliente { height: 32px; }
     .clientes-tira .logo-cliente[alt="Bioresina"] { height: 38px; }
@@ -2332,33 +2231,6 @@ html {
 
 .hero-salida a:hover { border-bottom-color: var(--cobalt-400); }
 
-/* Ajustes adicionales del Problema */
-/* La columna derecha es UNA caja oscura: el bloque del problema se lee
-   como una pieza, no como parrafos sueltos sobre el fondo claro. La
-   seccion sigue clara; lo oscuro es solo la caja. */
-.problema-body {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-5);
-    padding: var(--space-7);
-    /* --night-800 (#274C3B), no --night-900 (#0F1F1B): sobre el marfil
-       claro el verde casi negro daba un salto de contraste muy duro,
-       la caja se leia como un agujero en la pagina. El verde medio
-       sigue separando el bloque sin el golpe.
-       Sin borde: --night-600 es verde CLARO (#5E7F6D) y sobre el fondo
-       marfil le hacia un halo que apagaba la caja entera a gris. */
-    background: var(--night-800);
-    border-radius: var(--radius-xl);
-    box-shadow: 0 12px 32px -16px rgba(15, 31, 27, 0.32);
-}
-
-.problema-text {
-    font-size: 1.05rem;
-    color: var(--on-night-body);
-    font-weight: 300;
-    line-height: 1.65;
-}
-
 /* El aviso: la frase que resume, con filo dorado a la izquierda. */
 .problema-text.highlight {
     display: flex;
@@ -2376,14 +2248,6 @@ html {
     border: 1px solid var(--cobalt-border);
     border-left: 3px solid var(--cobalt-400);
     border-radius: var(--radius-sm);
-}
-.problema-aviso-icono {
-    flex-shrink: 0;
-    width: 20px;
-    height: 20px;
-    /* --cobalt-300 sobre --night-800: 5.13. El 400 se queda en 4.22,
-       suficiente para un icono (1.4.11 pide 3) pero justo. */
-    color: var(--cobalt-300);
 }
 
 /* Los cuatro sintomas, en dos columnas dentro de la caja. */
@@ -2412,42 +2276,13 @@ html {
 }
 
 @media (max-width: 700px) {
-    .problema-body { padding: var(--space-6) var(--space-5); }
     .sintomas { grid-template-columns: 1fr; gap: var(--space-3); }
-}
-
-/* =============================================================
-   FONDOS ALTERNOS DE SECCIÓN (ritmo claro/gris entre bloques)
-   ============================================================= */
-.problema-section {
-    background: var(--bg);
 }
 
 /* La caja de la derecha pesa el triple que el titular de la izquierda
    (431px contra 127px), asi que a 1fr/1fr y centrado vertical la seccion
    se iba de peso a un lado y la izquierda quedaba flotando en el hueco.
    Se le da menos ancho a la caja y las dos columnas arrancan arriba. */
-.problema-section .grid-two-cols {
-    grid-template-columns: 0.85fr 1fr;
-    gap: var(--space-8);
-    align-items: start;
-}
-.problema-header {
-    /* pegado al borde de arriba de la caja */
-    padding-top: var(--space-2);
-}
-/* Sin esto la columna izquierda son tres lineas frente a una caja de
-   431px, y la seccion se va de peso a la derecha. */
-.problema-apunte {
-    margin-top: var(--space-6);
-    padding-top: var(--space-5);
-    border-top: 1px solid var(--line);
-    font-size: 0.95rem;
-    font-weight: 300;
-    line-height: 1.65;
-    color: var(--ink-mid);
-    max-width: 42ch;
-}
 
 /* =============================================================
    SECCIONES EN BLOQUE
@@ -2571,7 +2406,7 @@ html {
 /* La columna de texto: alineada a la izquierda, no centrada — el
    .section-header centrado de antes dejaba media pantalla vacia. */
 .contacto-texto .section-title {
-    margin-bottom: 16px;
+    margin-bottom: var(--space-4);
 }
 
 .contacto-texto .section-subtitle {
@@ -3141,20 +2976,6 @@ html {
     color: var(--on-night-soft);
     margin: 0;
     max-width: 62ch;
-}
-
-/* La cuarta fase es el argumento de la seccion, asi que lleva la
-   unica nota destacada. Sin caja ni fondo: solo el acento y una
-   linea, para no convertirla en un banner. */
-.fase-nota {
-    font-family: var(--font-mono);
-    font-size: 0.76rem;
-    letter-spacing: 0.04em;
-    color: var(--cobalt-400);
-    margin: var(--space-3) 0 0;
-    padding-left: var(--space-3);
-    border-left: 2px solid var(--cobalt-400);
-    line-height: 1.5;
 }
 
 /* ── LA PIEZA VISUAL DE CADA FASE ──────────────────────────────────
@@ -3822,49 +3643,6 @@ html {
             transparent 8px 16px);
     border: 1px dashed var(--night-600);
     border-radius: calc(var(--radius-lg) - 1px);
-}
-.hueco-icono {
-    width: 30px;
-    height: 24px;
-    border: 1.5px solid var(--cobalt-400);
-    border-radius: 4px;
-    position: relative;
-    opacity: 0.8;
-}
-/* Dos formas dentro del marco: el clasico "aqui va una imagen" sin
-   tener que cargar un icono. */
-.hueco-icono::before {
-    content: '';
-    position: absolute;
-    left: 4px;
-    bottom: 3px;
-    width: 0;
-    height: 0;
-    border-left: 7px solid transparent;
-    border-right: 7px solid transparent;
-    border-bottom: 9px solid var(--cobalt-400);
-}
-.hueco-icono::after {
-    content: '';
-    position: absolute;
-    right: 5px;
-    top: 4px;
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: var(--cobalt-400);
-}
-.hueco-t {
-    font-family: var(--font-mono);
-    font-size: 0.76rem;
-    letter-spacing: 0.04em;
-    color: var(--on-night-soft);
-}
-.hueco-s {
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    color: var(--on-night-mid);
-    word-break: break-all;
 }
 
 

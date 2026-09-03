@@ -921,7 +921,14 @@ trasPie: |
         <div class="container grid-two-cols">
             <div class="sobremi-visual inverse reveal">
                 <div class="sobremi-portrait-container">
-                    <img src="assets/img/sobremi.png?v=20" alt="Alberto Pérez Cabrera" class="sobremi-portrait" loading="lazy">
+                    {#- webp primero: 57 KB contra los 400 del PNG, con la
+                        misma transparencia. El PNG queda de respaldo. -#}
+                    <picture>
+                        <source srcset="assets/img/sobremi.webp" type="image/webp">
+                        <img src="assets/img/sobremi.png?v=20" alt="Alberto Pérez Cabrera"
+                             class="sobremi-portrait" width="823" height="744"
+                             loading="lazy" decoding="async">
+                    </picture>
                     <div class="portrait-glow"></div>
                 </div>
             </div>
