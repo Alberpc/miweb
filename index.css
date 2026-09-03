@@ -232,7 +232,7 @@ html {
     font-size: 2.5rem;
     font-weight: 600;
     letter-spacing: -0.02em;
-    margin-bottom: 20px;
+    margin-bottom: var(--space-4);
     line-height: 1.2;
     color: var(--ink);
 }
@@ -327,8 +327,8 @@ html {
 .caso-dots {
     display: flex;
     justify-content: center;
-    gap: 10px;
-    margin-top: 28px;
+    gap: var(--space-2);
+    margin-top: var(--space-5);
 }
 
 .caso-dot {
@@ -1080,7 +1080,7 @@ html {
     font-family: var(--font-heading); /* sans: el serif se reserva a >3rem (hero, cifras gigantes) */
     font-size: 1.35rem;
     font-weight: 600;
-    margin-bottom: 14px;
+    margin-bottom: var(--space-3);
     color: var(--ink);
 }
 
@@ -1095,7 +1095,7 @@ html {
     .timeline {
         grid-template-columns: 1fr;
         max-width: 600px;
-        gap: 20px;
+        gap: var(--space-4);
     }
 
     .timeline-number {
@@ -1304,7 +1304,7 @@ html {
     }
     .sobremi-visual {
         align-items: center;
-        margin-bottom: 30px;
+        margin-bottom: var(--space-6);
     }
     .sobremi-portrait-container {
         max-width: 500px; /* Foto de perfil horizontal centrada en móvil */
@@ -1510,48 +1510,24 @@ html {
     box-shadow: 0 0 20px var(--cobalt-glow);
 }
 
-/* Botón de envío de formulario en cobalto */
-.btn-submit {
-    display: block;
-    width: 100%;
-    font-family: var(--font-body);
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--night-900);
-    background: var(--cobalt-400);
-    border: 1px solid transparent;
-    padding: 16px;
-    min-height: 52px;
-    border-radius: var(--radius-sm); /* Sistema Bosque Inteligente: radio fijo, nunca píldora */
-    cursor: pointer;
-    transition: all 150ms cubic-bezier(0.2, 0.8, 0.2, 1);
-    box-shadow: 0 8px 20px var(--cobalt-glow);
-}
-
-.btn-submit:hover {
-    transform: translateY(-1px);
-    background: var(--cobalt-300);
-    box-shadow: 0 8px 30px var(--cobalt-glow);
-}
-
 .form-note {
     font-family: var(--font-body);
     font-size: 0.82rem;
     color: var(--ink-mid);
     text-align: center;
-    margin-top: 10px;
+    margin-top: var(--space-2);
     line-height: 1.5;
 }
 
 .form-check-wrap {
-    margin-bottom: 20px;
+    margin-bottom: var(--space-4);
 }
 
 .form-check {
     position: static;
     display: flex;
     align-items: flex-start;
-    gap: 10px;
+    gap: var(--space-2);
     cursor: pointer;
     pointer-events: auto;
     font-family: var(--font-body);
@@ -1586,7 +1562,7 @@ html {
     font-family: var(--font-body);
     font-size: 0.9rem;
     text-align: center;
-    margin-top: 20px;
+    margin-top: var(--space-4);
     min-height: 24px;
 }
 
@@ -1734,7 +1710,7 @@ html {
        restarle 44px de márgenes dejaba su texto interno por debajo de lo
        legible. */
     .piezas-filas {
-        gap: 20px;
+        gap: var(--space-4);
     }
     .pieza {
         grid-template-columns: 1fr;
@@ -1815,7 +1791,7 @@ html {
     }
     .footer-bottom-bar {
         flex-direction: column;
-        gap: 20px;
+        gap: var(--space-4);
         align-items: flex-start;
     }
     /* OJO: la version movil de .whatsapp-float NO va aqui. La regla de
@@ -1981,7 +1957,7 @@ html {
 .card-cta-row {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: var(--space-4);
     flex-wrap: wrap;
 }
 
@@ -2058,7 +2034,7 @@ html {
 .dai-desc {
     color: var(--ink-soft);
     line-height: 1.7;
-    margin-bottom: 26px;
+    margin-bottom: var(--space-5);
 }
 
 /* Las lineas de "que te llevas". Marca de acento a la izquierda en vez
@@ -2102,8 +2078,8 @@ html {
     font-size: 0.92rem;
     color: var(--ink-mid);
     border-top: 1px solid var(--line);
-    padding-top: 20px;
-    margin-bottom: 26px;
+    padding-top: var(--space-4);
+    margin-bottom: var(--space-5);
 }
 
 /* La salida para quien ya lo tiene claro: una linea, nunca una tarjeta.
@@ -2217,7 +2193,7 @@ html {
    sabes por donde empezar"), asi que la respuesta va debajo, discreta:
    quien lo tiene claro usa el boton y sigue bajando. */
 .hero-salida {
-    margin-top: 20px;
+    margin-top: var(--space-4);
     font-size: 0.92rem;
     color: var(--on-night-mid, rgba(255, 255, 255, 0.72));
 }
@@ -2436,15 +2412,15 @@ html {
     display: block;
     font-size: 0.85rem;
     color: var(--on-night-mid);
-    margin-bottom: 14px;
+    margin-bottom: var(--space-3);
 }
 
 .contacto-via {
     display: inline-flex;
     align-items: center;
-    gap: 9px;
+    gap: var(--space-2);
     margin-right: 10px;
-    margin-bottom: 10px;
+    margin-bottom: var(--space-2);
     padding: 9px 16px;
     border-radius: var(--radius-pill);
     border: 1px solid rgba(255, 255, 255, 0.18);
@@ -2531,11 +2507,11 @@ html {
    480. El campo derecho se salia 34px y quedaba a 6px del borde mientras
    el resto respetaba los 40 del panel. */
 .contacto-section .glass-form .form-row {
-    gap: 18px;
+    gap: var(--space-4);
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
 }
-.contacto-section .glass-form .form-group { margin-bottom: 18px; }
-.contacto-section .glass-form .form-check-wrap { margin-bottom: 22px; }
+.contacto-section .glass-form .form-group { margin-bottom: var(--space-4); }
+.contacto-section .glass-form .form-check-wrap { margin-bottom: var(--space-5); }
 
 @media (max-width: 900px) {
     .contacto-grid {
@@ -3884,7 +3860,7 @@ html {
     z-index: 2;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: var(--space-1);
 }
 
 /* EL DATO. Es el mensaje de la tarjeta, asi que va grande y sin
