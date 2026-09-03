@@ -1,6 +1,26 @@
-# Diagnóstico operativo para tu negocio
+# Sabes que algo no va bien. No sabes exactamente dónde.
 
-Sabes que algo no va bien —tiempo que se pierde, clientes que se escapan— pero no sabes exactamente dónde. El DAI360 lo encuentra, te lo enseña con claridad y te dice qué merece la pena arreglar primero.
+El DAI360 lo encuentra, te lo enseña con claridad y te dice qué merece la pena arreglar primero.
+
+Informe DAI360
+
+Marketing
+
+Revisar
+
+Ventas
+
+Urgente
+
+Entrega
+
+En orden
+
+Administración
+
+Revisar
+
+Así se ve el estado de tu negocio al terminar. Ejemplo ilustrativo.
 
 ## El negocio funciona, pero cuesta más de lo que debería.
 
@@ -34,39 +54,39 @@ Facturación, cobros, datos y herramientas: qué programas usáis, cuáles no se
 
 ## No es un informe para el cajón. Es un plan.
 
-Al terminar el diagnóstico recibes cosas concretas que puedes usar desde el primer día, con o sin mí.
+Al terminar el diagnóstico recibes cosas concretas que puedes usar desde el primer día, con o sin mí. Tu parte son unas 2 horas: un cuestionario y una charla. El resto lo hago yo, en una o dos semanas, no en meses.
+
+01
 
 ### Auditoría de las 4 áreas
 
 El estado real de marketing, ventas, entrega y administración: qué funciona, qué cojea y cuánto te está costando. Claro y con ejemplos de tu día a día.
 
+Marketing
+
+Ventas
+
+Entrega
+
+Admin.
+
+02
+
 ### El mapa de tus procesos
 
 Dibujo cómo fluye el trabajo en tu negocio, paso a paso (un diagrama BPM: el "plano" de tu empresa). Ahí los cuellos de botella saltan a la vista — hasta para ti.
+
+03
 
 ### Oportunidades detectadas
 
 Cruzo cada cuello de botella con su solución concreta, clasificada por impacto, dificultad y urgencia. Sabes qué te duele, cuánto y qué lo arregla.
 
+04
+
 ### Roadmap por quick wins
 
 El plan de acción por fases: primero las victorias rápidas (lo que más devuelve con menos esfuerzo), después las piezas grandes. Te lo entrego y te lo explico en una sesión contigo.
-
-## Así funciona por dentro.
-
-Tu parte son unas 2 horas: un cuestionario y una charla. El resto lo hago yo, en una o dos semanas, no en meses.
-
-### Auditoría operativa
-
-Mapeo las 4 áreas de tu negocio — marketing, ventas, entrega y administración — y dibujo tus procesos hasta encontrar los cuellos de botella reales.
-
-### Detección de oportunidades
-
-Cruzo cada ineficiencia con su solución concreta. Clasificadas por impacto, dificultad y urgencia — para saber qué merece la pena y qué no.
-
-### Roadmap de implementación
-
-Plan secuencial por fases. Quick wins primero, las piezas grandes después. Priorizado por retorno real, no por moda.
 
 ## Si luego lo arreglamos juntos, el diagnóstico te sale gratis.
 

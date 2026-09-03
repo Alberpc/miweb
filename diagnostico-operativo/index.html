@@ -257,23 +257,42 @@
         <canvas class="aurora-canvas" data-alto="1" aria-hidden="true"></canvas>
         <div class="container hero-grid">
             <div>
-                <span class="hero-badge">DIAGNÓSTICO DAI360</span>
-                <h1>Diagnóstico operativo para <span class="hl">tu negocio</span></h1>
-                <p class="sub">Sabes que algo no va bien —tiempo que se pierde, clientes que se escapan— pero no sabes exactamente dónde. El DAI360 lo encuentra, te lo enseña con claridad y te dice qué merece la pena arreglar primero.</p>
+                <span class="hero-badge">ANTES DE GASTAR EN NADA</span>
+                <h1>Sabes que algo no va bien. <span class="hl">No sabes exactamente dónde.</span></h1>
+                <p class="sub">El DAI360 lo encuentra, te lo enseña con claridad y te dice qué merece la pena arreglar primero.</p>
                 <div class="hero-ctas">
-                    <a href="/#contacto" class="btn-main">Quiero mi diagnóstico &rarr;</a>
+                    <a href="/#contacto" class="btn-main">Pedir mi diagnóstico &rarr;</a>
                     <a href="#que-es" class="link-soft">Ver cómo funciona &darr;</a>
                 </div>
-            </div>
-            <div class="radar-wrap">
-                <div class="radar" aria-hidden="true">
-                    <span class="cross-h"></span><span class="cross-v"></span>
-                    <span class="sweep"></span>
-                    <span class="blip b1"><b>marketing</b></span>
-                    <span class="blip b2"><b>ventas</b></span>
-                    <span class="blip b3"><b>entrega</b></span>
-                    <span class="blip b4"><b>admin.</b></span>
-                    <span class="core">DAI360</span>
+            </div><div class="panel-wrap">
+                <div class="panel-diagnostico" aria-hidden="true">
+                    <div class="panel-toolbar">
+                        <span class="panel-dot"></span><span class="panel-dot"></span><span class="panel-dot"></span>
+                        <span class="panel-title">Informe DAI360</span>
+                    </div>
+                    <div class="panel-filas">
+                        <div class="panel-fila">
+                            <span class="panel-area">Marketing</span>
+                            <span class="panel-barra"><span class="panel-barra-fill ambar" style="--w:52%"></span></span>
+                            <span class="panel-badge ambar">Revisar</span>
+                        </div>
+                        <div class="panel-fila">
+                            <span class="panel-area">Ventas</span>
+                            <span class="panel-barra"><span class="panel-barra-fill rojo" style="--w:28%"></span></span>
+                            <span class="panel-badge rojo">Urgente</span>
+                        </div>
+                        <div class="panel-fila">
+                            <span class="panel-area">Entrega</span>
+                            <span class="panel-barra"><span class="panel-barra-fill verde" style="--w:81%"></span></span>
+                            <span class="panel-badge verde">En orden</span>
+                        </div>
+                        <div class="panel-fila">
+                            <span class="panel-area">Administración</span>
+                            <span class="panel-barra"><span class="panel-barra-fill ambar" style="--w:60%"></span></span>
+                            <span class="panel-badge ambar">Revisar</span>
+                        </div>
+                    </div>
+                    <p class="panel-nota">Así se ve el estado de tu negocio al terminar. Ejemplo ilustrativo.</p>
                 </div>
             </div>
         </div>
@@ -326,144 +345,128 @@
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- QUÉ RECIBES -->
-    <section class="section">
+    </section><section class="section" id="que-te-llevas">
         <div class="container">
             <div class="s-head reveal">
                 <span class="s-label">QUÉ TE LLEVAS</span>
                 <h2 class="s-title">No es un informe para el cajón. Es un plan.</h2>
-                <p class="s-sub">Al terminar el diagnóstico recibes cosas concretas que puedes usar desde el primer día, con o sin mí.</p>
+                <p class="s-sub">Al terminar el diagnóstico recibes cosas concretas que puedes usar desde el primer día, con o sin mí. Tu parte son unas 2 horas: un cuestionario y una charla. El resto lo hago yo, en una o dos semanas, no en meses.</p>
             </div>
-            <div class="entregas-timeline">
-                <div class="tl-item reveal">
-                    <div class="tl-marker"><span class="tl-num">01</span></div>
-                    <div class="tl-body">
+            <div class="entregas">
+
+                <!-- 01 Auditoría de las 4 áreas — el mismo panel del hero, en miniatura -->
+                <div class="entrega reveal">
+                    <div class="entrega-texto">
+                        <span class="entrega-num">01</span>
                         <h3>Auditoría de las 4 áreas</h3>
                         <p>El estado real de marketing, ventas, entrega y administración: qué funciona, qué cojea y cuánto te está costando. Claro y con ejemplos de tu día a día.</p>
                     </div>
+                    <div class="entrega-viz">
+                        <div class="mini-panel" aria-hidden="true">
+                            <div class="mini-fila"><span>Marketing</span><span class="mini-barra"><span class="mini-fill ambar" style="--w:52%"></span></span></div>
+                            <div class="mini-fila"><span>Ventas</span><span class="mini-barra"><span class="mini-fill rojo" style="--w:28%"></span></span></div>
+                            <div class="mini-fila"><span>Entrega</span><span class="mini-barra"><span class="mini-fill verde" style="--w:81%"></span></span></div>
+                            <div class="mini-fila"><span>Admin.</span><span class="mini-barra"><span class="mini-fill ambar" style="--w:60%"></span></span></div>
+                        </div>
+                    </div>
                 </div>
-                <div class="tl-item reveal">
-                    <div class="tl-marker"><span class="tl-num">02</span></div>
-                    <div class="tl-body">
+
+                <!-- 02 El mapa de tus procesos — diagrama BPM con el cuello de botella marcado -->
+                <div class="entrega reveal">
+                    <div class="entrega-texto">
+                        <span class="entrega-num">02</span>
                         <h3>El mapa de tus procesos</h3>
                         <p>Dibujo cómo fluye el trabajo en tu negocio, paso a paso (un diagrama BPM: el "plano" de tu empresa). Ahí los cuellos de botella saltan a la vista — hasta para ti.</p>
                     </div>
+                    <div class="entrega-viz">
+                        <div class="m-diagram">
+                            <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                                <line class="md-w" x1="46" y1="125" x2="140" y2="125"/>
+                                <line class="md-w" x1="140" y1="125" x2="234" y2="125"/>
+                                <line class="md-w" x1="234" y1="125" x2="328" y2="125"/>
+                                <line class="md-w" x1="140" y1="125" x2="140" y2="185"/>
+                                <circle class="md-n" cx="46" cy="125" r="14"/>
+                                <circle class="md-n bad" cx="140" cy="125" r="16"/>
+                                <circle class="md-n" cx="234" cy="125" r="14"/>
+                                <circle class="md-n hub" cx="328" cy="125" r="14"/>
+                                <text class="md-t" x="46" y="98" text-anchor="middle">CONSULTA</text>
+                                <text class="md-t bad-t" x="140" y="90" text-anchor="middle">REVISIÓN</text>
+                                <text class="md-t" x="234" y="98" text-anchor="middle">PRESUPUESTO</text>
+                                <text class="md-t hub-t" x="328" y="98" text-anchor="middle">CIERRE</text>
+                                <text class="md-t dim" x="140" y="210" text-anchor="middle">CUELLO DE BOTELLA</text>
+                                <text class="md-t dim" x="140" y="222" text-anchor="middle">3 DÍAS DE MEDIA</text>
+                                <circle class="md-dot" r="3.5"><animateMotion dur="4.2s" repeatCount="indefinite" path="M46,125 L140,125 L234,125 L328,125"/></circle>
+                            </svg>
+                        </div>
+                    </div>
                 </div>
-                <div class="tl-item reveal">
-                    <div class="tl-marker"><span class="tl-num">03</span></div>
-                    <div class="tl-body">
+
+                <!-- 03 Oportunidades detectadas — problema→solución -->
+                <div class="entrega reveal">
+                    <div class="entrega-texto">
+                        <span class="entrega-num">03</span>
                         <h3>Oportunidades detectadas</h3>
                         <p>Cruzo cada cuello de botella con su solución concreta, clasificada por impacto, dificultad y urgencia. Sabes qué te duele, cuánto y qué lo arregla.</p>
                     </div>
+                    <div class="entrega-viz">
+                        <div class="m-diagram">
+                            <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                                <line class="md-w" x1="72" y1="55" x2="200" y2="125"/>
+                                <line class="md-w" x1="72" y1="125" x2="200" y2="125"/>
+                                <line class="md-w" x1="72" y1="195" x2="200" y2="125"/>
+                                <line class="md-w" x1="200" y1="125" x2="328" y2="55"/>
+                                <line class="md-w" x1="200" y1="125" x2="328" y2="125"/>
+                                <line class="md-w" x1="200" y1="125" x2="328" y2="195"/>
+                                <circle class="md-n" cx="60" cy="55" r="12"/>
+                                <circle class="md-n" cx="60" cy="125" r="12"/>
+                                <circle class="md-n" cx="60" cy="195" r="12"/>
+                                <circle class="md-n hub" cx="200" cy="125" r="17"/>
+                                <circle class="md-n ok" cx="340" cy="55" r="12"/>
+                                <circle class="md-n ok" cx="340" cy="125" r="12"/>
+                                <circle class="md-n ok" cx="340" cy="195" r="12"/>
+                                <text class="md-t" x="60" y="32" text-anchor="middle">PROBLEMA A</text>
+                                <text class="md-t" x="60" y="102" text-anchor="middle">PROBLEMA B</text>
+                                <text class="md-t" x="60" y="172" text-anchor="middle">PROBLEMA C</text>
+                                <text class="md-t hub-t" x="200" y="160" text-anchor="middle">DAI360</text>
+                                <text class="md-t" x="340" y="32" text-anchor="middle">SOLUCIÓN 1</text>
+                                <text class="md-t" x="340" y="102" text-anchor="middle">SOLUCIÓN 2</text>
+                                <text class="md-t" x="340" y="172" text-anchor="middle">SOLUCIÓN 3</text>
+                                <circle class="md-dot" r="3.5"><animateMotion dur="3.4s" repeatCount="indefinite" path="M72,125 L200,125 L328,55"/></circle>
+                            </svg>
+                        </div>
+                    </div>
                 </div>
-                <div class="tl-item reveal">
-                    <div class="tl-marker"><span class="tl-num">04</span></div>
-                    <div class="tl-body">
+
+                <!-- 04 Roadmap por quick wins — linea de fases -->
+                <div class="entrega reveal">
+                    <div class="entrega-texto">
+                        <span class="entrega-num">04</span>
                         <h3>Roadmap por quick wins</h3>
                         <p>El plan de acción por fases: primero las victorias rápidas (lo que más devuelve con menos esfuerzo), después las piezas grandes. Te lo entrego y te lo explico en una sesión contigo.</p>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- EL MÉTODO (diagramas animados) -->
-    <section class="section">
-        <div class="container">
-            <div class="s-head reveal">
-                <span class="s-label">EL MÉTODO</span>
-                <h2 class="s-title">Así funciona por dentro.</h2>
-                <p class="s-sub">Tu parte son unas 2 horas: un cuestionario y una charla. El resto lo hago yo, en una o dos semanas, no en meses.</p>
-            </div>
-            <div class="metodo-grid">
-
-                <!-- 01 Auditoría operativa -->
-                <div class="metodo-col reveal">
-                    <span class="m-num">01</span>
-                    <h3>Auditoría operativa</h3>
-                    <p>Mapeo las 4 áreas de tu negocio — marketing, ventas, entrega y administración — y dibujo tus procesos hasta encontrar los cuellos de botella reales.</p>
-                    <div class="m-diagram">
-                        <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-                            <line class="md-w" x1="200" y1="58" x2="62" y2="185"/>
-                            <line class="md-w" x1="200" y1="58" x2="154" y2="185"/>
-                            <line class="md-w" x1="200" y1="58" x2="246" y2="185"/>
-                            <line class="md-w" x1="200" y1="58" x2="338" y2="185"/>
-                            <circle class="md-n hub" cx="200" cy="44" r="16"/>
-                            <text class="md-t" x="200" y="82" text-anchor="middle">NEGOCIO</text>
-                            <circle class="md-n" cx="62" cy="196" r="13"/>
-                            <circle class="md-n" cx="154" cy="196" r="13"/>
-                            <circle class="md-n" cx="246" cy="196" r="13"/>
-                            <circle class="md-n" cx="338" cy="196" r="13"/>
-                            <text class="md-t" x="62" y="228" text-anchor="middle">MARKETING</text>
-                            <text class="md-t" x="154" y="228" text-anchor="middle">VENTAS</text>
-                            <text class="md-t" x="246" y="228" text-anchor="middle">ENTREGA</text>
-                            <text class="md-t" x="338" y="228" text-anchor="middle">ADMIN.</text>
-                            <circle class="md-dot" r="3.5"><animateMotion dur="3.6s" repeatCount="indefinite" path="M200,58 L62,185"/></circle>
-                            <circle class="md-dot" r="3.5"><animateMotion dur="3.6s" begin="1.8s" repeatCount="indefinite" path="M200,58 L338,185"/></circle>
-                        </svg>
-                    </div>
-                </div>
-
-                <!-- 02 Detección de oportunidades -->
-                <div class="metodo-col reveal">
-                    <span class="m-num">02</span>
-                    <h3>Detección de oportunidades</h3>
-                    <p>Cruzo cada ineficiencia con su solución concreta. Clasificadas por impacto, dificultad y urgencia — para saber qué merece la pena y qué no.</p>
-                    <div class="m-diagram">
-                        <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-                            <line class="md-w" x1="72" y1="55" x2="200" y2="125"/>
-                            <line class="md-w" x1="72" y1="125" x2="200" y2="125"/>
-                            <line class="md-w" x1="72" y1="195" x2="200" y2="125"/>
-                            <line class="md-w" x1="200" y1="125" x2="328" y2="55"/>
-                            <line class="md-w" x1="200" y1="125" x2="328" y2="125"/>
-                            <line class="md-w" x1="200" y1="125" x2="328" y2="195"/>
-                            <circle class="md-n" cx="60" cy="55" r="12"/>
-                            <circle class="md-n" cx="60" cy="125" r="12"/>
-                            <circle class="md-n" cx="60" cy="195" r="12"/>
-                            <circle class="md-n hub" cx="200" cy="125" r="17"/>
-                            <circle class="md-n ok" cx="340" cy="55" r="12"/>
-                            <circle class="md-n ok" cx="340" cy="125" r="12"/>
-                            <circle class="md-n ok" cx="340" cy="195" r="12"/>
-                            <text class="md-t" x="60" y="32" text-anchor="middle">PROBLEMA A</text>
-                            <text class="md-t" x="60" y="102" text-anchor="middle">PROBLEMA B</text>
-                            <text class="md-t" x="60" y="172" text-anchor="middle">PROBLEMA C</text>
-                            <text class="md-t hub-t" x="200" y="160" text-anchor="middle">DAI360</text>
-                            <text class="md-t" x="340" y="32" text-anchor="middle">SOLUCIÓN 1</text>
-                            <text class="md-t" x="340" y="102" text-anchor="middle">SOLUCIÓN 2</text>
-                            <text class="md-t" x="340" y="172" text-anchor="middle">SOLUCIÓN 3</text>
-                            <circle class="md-dot" r="3.5"><animateMotion dur="3.4s" repeatCount="indefinite" path="M72,125 L200,125 L328,55"/></circle>
-                        </svg>
-                    </div>
-                </div>
-
-                <!-- 03 Roadmap -->
-                <div class="metodo-col reveal">
-                    <span class="m-num">03</span>
-                    <h3>Roadmap de implementación</h3>
-                    <p>Plan secuencial por fases. Quick wins primero, las piezas grandes después. Priorizado por retorno real, no por moda.</p>
-                    <div class="m-diagram">
-                        <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-                            <line class="md-w" x1="40" y1="135" x2="360" y2="135"/>
-                            <line class="md-w" x1="60" y1="135" x2="60" y2="88"/>
-                            <line class="md-w" x1="160" y1="135" x2="160" y2="88"/>
-                            <line class="md-w" x1="260" y1="135" x2="260" y2="88"/>
-                            <line class="md-w" x1="342" y1="135" x2="342" y2="88"/>
-                            <circle class="md-n hub" cx="60" cy="135" r="14"/>
-                            <circle class="md-n" cx="160" cy="135" r="12"/>
-                            <circle class="md-n" cx="260" cy="135" r="12"/>
-                            <circle class="md-n" cx="342" cy="135" r="12"/>
-                            <text class="md-t" x="60" y="62" text-anchor="middle">QUICK WINS</text>
-                            <text class="md-t" x="160" y="62" text-anchor="middle">FASE 1</text>
-                            <text class="md-t" x="260" y="62" text-anchor="middle">FASE 2</text>
-                            <text class="md-t" x="342" y="62" text-anchor="middle">ESCALADO</text>
-                            <text class="md-t dim" x="60" y="175" text-anchor="middle">0-2 SEMANAS</text>
-                            <text class="md-t dim" x="160" y="175" text-anchor="middle">1-2 MESES</text>
-                            <text class="md-t dim" x="260" y="175" text-anchor="middle">3-4 MESES</text>
-                            <text class="md-t dim" x="342" y="175" text-anchor="middle">CONTINUO</text>
-                            <circle class="md-dot" r="3.5"><animateMotion dur="5s" repeatCount="indefinite" path="M40,135 L360,135"/></circle>
-                        </svg>
+                    <div class="entrega-viz">
+                        <div class="m-diagram">
+                            <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                                <line class="md-w" x1="40" y1="135" x2="360" y2="135"/>
+                                <line class="md-w" x1="60" y1="135" x2="60" y2="88"/>
+                                <line class="md-w" x1="160" y1="135" x2="160" y2="88"/>
+                                <line class="md-w" x1="260" y1="135" x2="260" y2="88"/>
+                                <line class="md-w" x1="342" y1="135" x2="342" y2="88"/>
+                                <circle class="md-n hub" cx="60" cy="135" r="14"/>
+                                <circle class="md-n" cx="160" cy="135" r="12"/>
+                                <circle class="md-n" cx="260" cy="135" r="12"/>
+                                <circle class="md-n" cx="342" cy="135" r="12"/>
+                                <text class="md-t" x="60" y="62" text-anchor="middle">QUICK WINS</text>
+                                <text class="md-t" x="160" y="62" text-anchor="middle">FASE 1</text>
+                                <text class="md-t" x="260" y="62" text-anchor="middle">FASE 2</text>
+                                <text class="md-t" x="342" y="62" text-anchor="middle">ESCALADO</text>
+                                <text class="md-t dim" x="60" y="175" text-anchor="middle">0-2 SEMANAS</text>
+                                <text class="md-t dim" x="160" y="175" text-anchor="middle">1-2 MESES</text>
+                                <text class="md-t dim" x="260" y="175" text-anchor="middle">3-4 MESES</text>
+                                <text class="md-t dim" x="342" y="175" text-anchor="middle">CONTINUO</text>
+                                <circle class="md-dot" r="3.5"><animateMotion dur="5s" repeatCount="indefinite" path="M40,135 L360,135"/></circle>
+                            </svg>
+                        </div>
                     </div>
                 </div>
 

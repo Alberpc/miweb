@@ -51,68 +51,58 @@
     border-radius: var(--radius-pill); margin-bottom: 26px;
 }
 .hero h1 {
-    font-family: var(--font-display); font-size: clamp(2.2rem, 4.6vw, 3.6rem);
-    font-weight: 300; line-height: 1.18; letter-spacing: -0.02em; margin-bottom: 22px;
-    max-width: 15ch; color: var(--on-night);
+    font-family: var(--font-display); font-size: clamp(2.1rem, 4.2vw, 3.2rem);
+    font-weight: 300; line-height: 1.22; letter-spacing: -0.02em; margin-bottom: 22px;
+    max-width: 21ch; text-wrap: balance; color: var(--on-night);
 }
 .hero h1 .hl { background: linear-gradient(120deg, var(--on-night) 6%, var(--cobalt-300) 94%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; display: inline-block; padding-bottom: 0.14em; margin-bottom: -0.14em; }
 .hero p.sub { font-size: 1.12rem; color: var(--on-night-body); font-weight: 300; max-width: 50ch; margin-bottom: 38px; }
 .hero-ctas { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
 .link-soft:hover { color: var(--on-night); }
 
-/* Radar / escáner del DAI360 (visual de marca hecho en CSS) */
-.radar-wrap { display: flex; justify-content: center; align-items: center; position: relative; }
-.radar {
-    /* isolation + z-index: el radar tiene un halo dorado de 80px y
-       un barrido que gira. La pastilla del nav lleva backdrop-filter,
-       que muestrea lo que hay detras, y en movil el halo le llegaba:
-       la pastilla se tenia de dorado segun giraba el barrido. Con su
-       propio contexto de apilado el nav ya no lo muestrea. */
-    isolation: isolate;
-    z-index: 0;
-    position: relative; width: min(360px, 78vw); aspect-ratio: 1;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(200, 168, 94, 0.06) 0%, rgba(15, 31, 27,0.4) 55%, transparent 72%);
-    border: 1px solid var(--cobalt-border);
-    box-shadow: 0 0 80px -20px var(--cobalt-glow), inset 0 0 60px -30px var(--cobalt-500);
+/* Panel del hero: el informe real, no una animacion de marca.
+   Mismo espiritu que .mockup-panel de no-perder-clientes.css (una
+   "ventana" de producto con toolbar de 3 puntos), pero en version
+   oscura porque este hero es --night-900, no --bg. */
+.panel-wrap { display: flex; justify-content: center; align-items: center; }
+.panel-diagnostico {
+    width: 100%; max-width: 420px;
+    background: rgba(15, 31, 27, 0.55);
+    border: 1px solid var(--night-600);
+    border-radius: var(--radius-lg);
+    backdrop-filter: blur(14px) saturate(160%); -webkit-backdrop-filter: blur(14px) saturate(160%);
+    box-shadow: 0 30px 70px -30px rgba(0,0,0,0.5);
+    overflow: hidden;
 }
-.radar::before, .radar::after {
-    content: ''; position: absolute; border-radius: 50%; border: 1px solid rgba(200, 168, 94, 0.16);
+.panel-toolbar {
+    display: flex; align-items: center; gap: 6px; padding: 12px 16px;
+    border-bottom: 1px solid var(--night-600);
 }
-.radar::before { inset: 18%; }
-.radar::after { inset: 36%; }
-.radar .cross-h, .radar .cross-v { position: absolute; background: rgba(200, 168, 94, 0.12); }
-.radar .cross-h { left: 4%; right: 4%; top: 50%; height: 1px; }
-.radar .cross-v { top: 4%; bottom: 4%; left: 50%; width: 1px; }
-.radar .sweep {
-    position: absolute; inset: 0; border-radius: 50%;
-    background: conic-gradient(from 0deg, rgba(200, 168, 94, 0.4) 0deg, rgba(200, 168, 94, 0.08) 55deg, transparent 95deg);
-    animation: sweep 4.5s linear infinite;
-    -webkit-mask: radial-gradient(circle, black 0 70.5%, transparent 71%);
-    mask: radial-gradient(circle, black 0 70.5%, transparent 71%);
+.panel-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--night-600); }
+.panel-title { margin-left: 8px; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.08em; color: var(--on-night-mid); }
+.panel-filas { padding: 18px 18px 6px; display: flex; flex-direction: column; gap: 14px; }
+.panel-fila { display: grid; grid-template-columns: 100px 1fr auto; align-items: center; gap: 12px; }
+.panel-area { font-family: var(--font-body); font-size: 0.82rem; color: var(--on-night-body); }
+.panel-barra { position: relative; height: 5px; border-radius: 3px; background: var(--night-700); overflow: hidden; }
+.panel-barra-fill {
+    position: absolute; inset: 0; width: var(--w); border-radius: 3px;
+    animation: llenar 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
-@keyframes sweep { to { transform: rotate(360deg); } }
-.radar .core {
-    position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
-    font-family: var(--font-heading); font-weight: 800; font-size: 1rem; letter-spacing: 0.05em;
-    color: var(--on-night); background: rgba(15, 31, 27, 0.85);
-    border: 1px solid rgba(200, 168, 94, 0.45); border-radius: 14px; padding: 12px 18px;
-    box-shadow: 0 0 35px -8px var(--cobalt-500); z-index: 2; white-space: nowrap;
+.panel-barra-fill.verde { background: var(--verde); }
+.panel-barra-fill.ambar { background: var(--ambar); }
+.panel-barra-fill.rojo { background: var(--rojo); }
+@keyframes llenar { from { transform: scaleX(0); transform-origin: left; } to { transform: scaleX(1); transform-origin: left; } }
+/* --*-bg no se reasigna dentro de .inverse (solo --rojo/--verde/--ambar
+   sin sufijo), asi que el fondo del badge se construye con opacidad
+   sobre el propio color en vez de depender del token -bg de modo claro. */
+.panel-badge { font-size: 0.7rem; font-weight: 700; padding: 3px 9px; border-radius: 20px; text-align: center; white-space: nowrap; }
+.panel-badge.verde { background: color-mix(in srgb, var(--verde) 16%, transparent); color: var(--verde); }
+.panel-badge.ambar { background: color-mix(in srgb, var(--ambar) 16%, transparent); color: var(--ambar); }
+.panel-badge.rojo { background: color-mix(in srgb, var(--rojo) 16%, transparent); color: var(--rojo); }
+.panel-nota {
+    font-family: var(--font-body); font-size: 0.72rem; font-weight: 300; font-style: italic;
+    color: var(--on-night-mid); padding: 14px 18px 16px; border-top: 1px solid var(--night-600); margin-top: 10px;
 }
-.radar .blip {
-    position: absolute; width: 9px; height: 9px; border-radius: 50%;
-    background: var(--cobalt-500); box-shadow: 0 0 12px var(--cobalt-500);
-    animation: blip 4.5s ease-in-out infinite;
-}
-.radar .blip b {
-    position: absolute; left: 14px; top: -4px; font-family: var(--font-mono); font-weight: 400;
-    font-size: 10px; letter-spacing: 0.08em; color: var(--cobalt-300); white-space: nowrap;
-}
-.blip.b1 { left: 24%; top: 30%; animation-delay: 0.4s; }
-.blip.b2 { left: 68%; top: 22%; animation-delay: 1.6s; }
-.blip.b3 { left: 30%; top: 68%; animation-delay: 2.7s; }
-.blip.b4 { left: 72%; top: 62%; animation-delay: 3.5s; }
-@keyframes blip { 0%, 100% { opacity: 0.25; } 12% { opacity: 1; } 45% { opacity: 0.5; } }
 
 /* ===== SECCIONES ===== */
 /* Alternado de tonos entre secciones (como la home) */
@@ -148,49 +138,55 @@
 .area h3 { font-family: var(--font-body); font-size: 1.08rem; font-weight: 600; margin-bottom: 10px; color: var(--ink); }
 .area p { font-size: 0.92rem; color: var(--ink-soft); font-weight: 300; }
 
-/* Entregables */
-/* Timeline vertical premium de "Qué te llevas" */
-.entregas-timeline { max-width: 720px; margin: 0 auto; position: relative; }
-.tl-item { position: relative; display: grid; grid-template-columns: 56px 1fr; gap: 26px; padding-bottom: 40px; }
-.tl-item:last-child { padding-bottom: 0; }
-/* Línea vertical que conecta los marcadores */
-.tl-item::before {
-    content: ''; position: absolute; left: 27px; top: 52px; bottom: -4px; width: 2px;
-    background: linear-gradient(to bottom, var(--cobalt-border), var(--line));
+/* Entregables ("Qué te llevas") — fusion de la antigua ".entregas-timeline"
+   (texto) y ".metodo-grid" (diagramas), que contaban lo mismo en dos
+   sistemas visuales distintos, uno detras del otro (3-sep-2026). Ahora
+   cada entrega es una fila con su texto a un lado y SU pieza visual al
+   otro, alternando lado como en "Como trabajo" de la home — sin la
+   maquinaria de riel con scroll-tracking de la home, que es mucho mas
+   codigo del que esta pagina necesita para 4 filas. */
+.entregas { display: flex; flex-direction: column; gap: 64px; max-width: 980px; margin: 0 auto; }
+.entrega {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
 }
-.tl-item:last-child::before { display: none; }
-.tl-marker {
-    width: 56px; height: 56px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    background: var(--bg); border: 1px solid var(--cobalt-border);
-    box-shadow: 0 0 0 4px var(--cobalt-tint), inset 0 0 20px -12px var(--cobalt-500);
-    position: relative; z-index: 2; flex: none;
+/* Alterna lado: impares con texto a la izquierda, pares con la pieza
+   a la izquierda — mismo ritmo que .fase-viz en la home. */
+.entrega:nth-child(even) .entrega-texto { order: 2; }
+.entrega-num {
+    font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.25em;
+    color: var(--cobalt-600); display: block; margin-bottom: 12px; font-weight: 600;
 }
-.tl-num { font-family: var(--font-heading); font-weight: 800; font-size: 1.15rem; color: var(--cobalt-700); }
-.tl-body { padding-top: 12px; }
-.tl-body h3 { font-size: 1.15rem; font-weight: 600; margin-bottom: 8px; letter-spacing: -0.01em; color: var(--ink); }
-.tl-body p { font-size: 0.98rem; color: var(--ink-soft); font-weight: 300; line-height: 1.6; }
+.entrega-texto h3 { font-family: var(--font-display); font-size: 1.35rem; font-weight: 400; letter-spacing: -0.01em; margin-bottom: 12px; color: var(--ink); }
+.entrega-texto p { font-size: 0.98rem; color: var(--ink-soft); font-weight: 300; line-height: 1.6; }
 
-/* El método — 3 columnas con diagramas animados */
-/* Grid con las 3 columnas alineadas por abajo: cada .metodo-col es
-   un flex-column con align-items:stretch, y el diagrama lleva
-   margin-top:auto para anclarse siempre al mismo borde inferior,
-   sin importar si el título ocupa 1 o 2 líneas */
-.metodo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 44px; align-items: stretch; }
-.metodo-col { display: flex; flex-direction: column; }
-.metodo-col .m-num { font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.25em; color: var(--ink-decor); display: block; margin-bottom: 12px; }
-.metodo-col h3 { font-family: var(--font-display); font-size: 1.25rem; font-weight: 400; letter-spacing: -0.01em; margin-bottom: 12px; color: var(--ink); }
-.metodo-col p { font-size: 0.94rem; color: var(--ink-soft); font-weight: 300; margin-bottom: 22px; }
-.metodo-col .m-diagram { margin-top: auto; }
+/* Panel en miniatura de la entrega 01 — mismo componente que el del
+   hero (panel-*), pero en superficie clara porque esta seccion no es
+   .inverse. */
+.mini-panel {
+    background: var(--bg-alt); border: 1px solid var(--line); border-radius: 12px;
+    padding: 20px 22px; display: flex; flex-direction: column; gap: 14px;
+}
+.mini-fila { display: grid; grid-template-columns: 76px 1fr; align-items: center; gap: 12px; }
+.mini-fila span:first-child { font-size: 0.8rem; color: var(--ink-mid); }
+.mini-barra { position: relative; height: 5px; border-radius: 3px; background: var(--line); overflow: hidden; }
+.mini-fill { position: absolute; inset: 0; width: var(--w); border-radius: 3px; }
+.mini-fill.verde { background: var(--verde); }
+.mini-fill.ambar { background: var(--ambar); }
+.mini-fill.rojo { background: var(--rojo); }
+
+/* Diagramas BPM/SVG animados — el mismo componente que ya existia en
+   "El método", reutilizado aqui en vez de duplicado en otra seccion. */
 .m-diagram { border-radius: 12px; background: var(--bg-alt); border: 1px solid var(--line); }
 .m-diagram svg { width: 100%; height: auto; display: block; }
 .md-w { stroke: var(--line); stroke-width: 1; }
 .md-n { fill: var(--bg-alt); stroke: var(--line-strong); stroke-width: 1; }
 .md-n.hub { stroke: var(--cobalt-600); filter: drop-shadow(0 0 10px var(--cobalt-glow)); }
 .md-n.ok { stroke: var(--cobalt-border); }
+.md-n.bad { stroke: var(--rojo); filter: drop-shadow(0 0 8px color-mix(in srgb, var(--rojo) 35%, transparent)); }
 .md-p { fill: var(--cobalt-500); }
 .md-t { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.14em; fill: var(--ink-decor); }
 .md-t.hub-t { fill: var(--cobalt-700); font-size: 10px; }
+.md-t.bad-t { fill: var(--rojo); font-size: 10px; }
 .md-t.dim { fill: var(--ink-decor); }
 .md-dot { fill: var(--cobalt-600); filter: drop-shadow(0 0 6px var(--cobalt-glow)); }
 
@@ -312,18 +308,20 @@
 /* ===== RESPONSIVE ===== */
 @media (max-width: 900px) {
     .hero-grid { grid-template-columns: 1fr; gap: 48px; }
-    .radar-wrap { order: -1; }
-    .radar { width: min(280px, 70vw); }
-    .sintomas, .areas, .metodo-grid { grid-template-columns: 1fr; }
+    .panel-wrap { order: -1; }
+    .panel-diagnostico { max-width: 440px; }
+    .sintomas, .areas { grid-template-columns: 1fr; }
+    .entregas { gap: 40px; }
+    .entrega { grid-template-columns: 1fr; gap: 24px; }
+    .entrega:nth-child(even) .entrega-texto { order: 0; }
     .quien { grid-template-columns: 1fr; }
-    .metodo-grid { gap: 52px; }
     .deal { padding: 44px 26px; }
     .subnav .back { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    .radar .sweep, .radar .blip { animation: none; }
+    .panel-barra-fill { animation: none; }
     .md-dot { display: none; }
 }
 
