@@ -45,8 +45,12 @@
     z-index: 1000;
     width: 60px;
     height: 60px;
-    background-color: #F7AB8E; /* --cobalt-300, igual que el de WhatsApp */
-    border: 1px solid #B44100; /* --cobalt-600 */
+    /* [2-sep-2026] --cobalt-600, el mismo naranja que el boton de la
+       barra. Antes iba en el 300 (claro) y convivian dos terracotas
+       distintos en pantalla, con 3.02 de diferencia de luminosidad.
+       Como el relleno se oscurece, el icono pasa a blanco. */
+    background-color: #B44100; /* --cobalt-600 */
+    border: 1px solid #B44100;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -61,7 +65,7 @@
 
 .acw-bubble:hover {
     transform: scale(1.1) translateY(-3px);
-    background-color: #FFE3D7; /* --cobalt-200 */
+    background-color: #DA622D; /* --cobalt-500: aclara al pasar el raton */
     box-shadow: 0 15px 40px rgba(18, 19, 22, 0.28);
 }
 
@@ -79,7 +83,7 @@
 .acw-bubble-icon {
     width: 28px;
     height: 28px;
-    stroke: var(--acw-bg-deep);
+    stroke: #FFFFFF; /* 5.68 sobre el --cobalt-600 del fondo */
     fill: none;
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     display: block;
