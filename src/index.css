@@ -1298,7 +1298,12 @@ html {
 
 @media (min-width: 992px) {
     .sobremi-section .container.grid-two-cols {
-        grid-template-columns: 1.1fr 0.9fr;
+        /* [2-sep-2026] Iguales. Antes 1.1fr/0.9fr daba mas ancho a la
+           FOTO que al texto (612 contra 500, un 22% mas) y en una
+           seccion "sobre mi" el contenido es el texto. Invertirlo del
+           todo tampoco: a 0.9/1.1 el parrafo llegaba a 80 caracteres
+           por linea, por encima del maximo comodo de 75. */
+        grid-template-columns: 1fr 1fr;
         gap: 40px;
         align-items: flex-end; /* Alinea los contenidos de ambas columnas abajo */
         height: 100%;
