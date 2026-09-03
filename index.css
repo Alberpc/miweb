@@ -1236,14 +1236,14 @@ html {
 /* Contenedor del retrato de perfil (horizontal), grande e integrado en negro sin marco */
 .sobremi-portrait-container {
     position: relative;
-    /* [2-sep-2026] 86%, no el 100% de la columna. A ancho completo la
-       foto medía 612px y la caja negra pesaba mas que el texto de al
-       lado; a 526 la cara queda en una proporcion natural y el bloque
-       acompaña en vez de competir. */
-    width: 86%;
-    margin-inline: auto;
+    /* [2-sep-2026] Ancho completo y ALTURA de la columna. Antes la caja
+       tenia el aspect-ratio del archivo (823/744) y salia mas baja que
+       la columna de texto: 475px contra 708, y como la columna alinea
+       al fondo, los 233 de sobra se acumulaban todos arriba.
+       Ahora la foto llena su lado y las dos mitades pesan igual. */
+    width: 100%;
     max-width: none;
-    aspect-ratio: 823 / 744; /* Relación de aspecto del retrato recortado sin márgenes transparentes */
+    aspect-ratio: 823 / 744;  /* proporcion del archivo, cuando va apilada */
     border-radius: 0;
     border: none;
     box-shadow: none;
@@ -1309,6 +1309,42 @@ html {
         justify-content: flex-start; /* Desplazar la silueta de Alberto hacia el borde izquierdo */
         padding-left: 0;
         z-index: 3; /* Forzamos un z-index superior en la silueta para corregir el bug de renderizado de Chrome */
+    }
+    /* [2-sep-2026] Solo aqui: la foto se estira a la altura de la columna
+       de texto. Antes conservaba la proporcion del archivo y salia mas
+       baja que su columna (475px contra 708) y, como el grid alinea al
+       fondo, los 233 de sobra se amontonaban arriba.
+       Fuera de este punto de corte la seccion se apila y no hay columna
+       vecina a la que igualarse: alli la foto mantiene su proporcion,
+       porque forzarla dejaba la cara a bocajarro (en tablet salia de
+       421x641 y el recorte se comia el aire del retrato). */
+    /* Entre 992 y 1200 la foto no llena la columna (conserva su
+       proporcion, ver abajo), y como .sobremi-visual alinea al FONDO el
+       sobrante se amontonaba todo arriba y la cara caia muy abajo. En
+       ese tramo se centra: el aire se reparte a los dos lados. */
+    .sobremi-visual { align-items: center; }
+
+    @media (min-width: 1200px) {
+        /* Ya llena la columna, asi que vuelve a apoyarse en la base. */
+        .sobremi-visual { align-items: flex-end; }
+    }
+
+    /* El estirado se aplica desde 1200, no desde 992. Entre esos dos
+       anchos las columnas son estrechas (a 1024 la foto mide 421) y
+       llevarla a la altura de la columna la dejaba en 641 de alto, con
+       la cara a bocajarro. Ahi conserva su proporcion; el hueco que
+       queda es preferible al recorte. */
+    @media (min-width: 1200px) {
+        .sobremi-portrait-container {
+            height: 100%;
+            aspect-ratio: auto;
+        }
+        .sobremi-portrait {
+            height: 100%;
+            object-fit: cover;
+            /* Anclado arriba: si algo se recorta, que sean los hombros. */
+            object-position: center top;
+        }
     }
     .sobremi-text {
         padding-bottom: 120px; /* Compensa la altura empujando el texto hacia arriba */
