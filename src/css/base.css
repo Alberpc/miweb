@@ -127,3 +127,22 @@ body {
     text-decoration: underline;
     transition: color var(--motion-base) var(--ease-standard);
 }
+
+/* ---- Aurora del hero y del pie ----
+   Movida de index.css (3-sep-2026): el canvas que pinta assets/js/aurora.js
+   necesita esta regla para cubrir toda la seccion (position:absolute,
+   inset 0); sin ella el lienzo sale del tamaño intrinseco del <canvas>
+   (300x150 por defecto) en vez de ocupar el fondo entero. Vive aqui
+   porque ya no es solo de la home: diagnostico-operativo tambien la usa
+   en su cierre. El contenido de la seccion va en z-index 2 para quedar
+   por encima. */
+.aurora-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    display: block;
+}

@@ -217,345 +217,7 @@
     <link rel="stylesheet" href="/css/botones.css?v=5">
     <link rel="stylesheet" href="/css/faq.css?v=5">
     <link rel="stylesheet" href="/css/pie.css?v=5">
-    <style>
-/* Reset, html/body y .container los pone css/base.css. */
-
-
-/* ===== NAV ===== */
-.subnav {
-    position: fixed; top: 24px; left: 50%; transform: translateX(-50%);
-    z-index: 1000; width: calc(100% - 48px); max-width: 1200px; height: 62px;
-    display: flex; align-items: center; justify-content: space-between; padding: 0 24px;
-    background: rgba(15, 31, 27, 0.38);
-    backdrop-filter: blur(18px) saturate(180%); -webkit-backdrop-filter: blur(18px) saturate(180%);
-    border: 1px solid var(--night-600); border-radius: var(--radius-pill);
-}
-.subnav .logo { font-family: var(--font-heading); font-weight: 800; font-size: 1.3rem; color: var(--on-night); text-decoration: none; letter-spacing: -0.05em; }
-.subnav .logo img { height: 24px; width: auto; display: block; }
-.subnav-right { display: flex; align-items: center; gap: 14px; }
-.subnav .back { font-size: 0.85rem; color: var(--on-night-soft); text-decoration: none; transition: color 0.3s ease; }
-.subnav .back:hover { color: var(--on-night); }
-
-/* ===== HERO ===== */
-.hero {
-    position: relative; min-height: 100vh;
-    display: flex; align-items: center; overflow: hidden; padding: 130px 0 90px;
-    /* Velo verde, no gris azulado. La foto de fondo es un cielo
-       estrellado que tira a azul; el velo en --night-900 la
-       reconduce al verde del sistema en vez de dejar el (14,17,22)
-       de antes, que era gris con azul. */
-    background:
-        linear-gradient(to bottom, rgba(15, 31, 27, 0.72) 0%, rgba(15, 31, 27, 0.88) 60%, var(--bg) 100%),
-        url('/assets/img/Obsidian-black_cosmic_void_stars_202607042140.jpeg') center / cover no-repeat;
-}
-.hero::before {
-    content: ''; position: absolute; inset: 0; pointer-events: none;
-    /* sin lavado dorado de fondo: el sistema lo evita */
-}
-.hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; align-items: center; position: relative; z-index: 2; }
-
-.hero-badge {
-    display: inline-block; font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.3em;
-    /* Mismo badge que en los posts: dorado translucido, no un
-       bloque verde solido que compite con el fondo. */
-    color: var(--cobalt-300); border: 1px solid rgba(214, 186, 130, 0.30);
-    background: rgba(200, 168, 94, 0.12); padding: 7px 16px;
-    border-radius: var(--radius-pill); margin-bottom: 26px;
-}
-.hero h1 {
-    font-family: var(--font-display); font-size: clamp(2.2rem, 4.6vw, 3.6rem);
-    font-weight: 300; line-height: 1.18; letter-spacing: -0.02em; margin-bottom: 22px;
-    max-width: 15ch; color: var(--on-night);
-}
-.hero h1 .hl { background: linear-gradient(120deg, var(--on-night) 6%, var(--cobalt-300) 94%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; display: inline-block; padding-bottom: 0.14em; margin-bottom: -0.14em; }
-.hero p.sub { font-size: 1.12rem; color: var(--on-night-body); font-weight: 300; max-width: 50ch; margin-bottom: 38px; }
-.hero-ctas { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
-.link-soft:hover { color: var(--on-night); }
-
-/* Radar / escáner del DAI360 (visual de marca hecho en CSS) */
-.radar-wrap { display: flex; justify-content: center; align-items: center; position: relative; }
-.radar {
-    /* isolation + z-index: el radar tiene un halo dorado de 80px y
-       un barrido que gira. La pastilla del nav lleva backdrop-filter,
-       que muestrea lo que hay detras, y en movil el halo le llegaba:
-       la pastilla se tenia de dorado segun giraba el barrido. Con su
-       propio contexto de apilado el nav ya no lo muestrea. */
-    isolation: isolate;
-    z-index: 0;
-    position: relative; width: min(360px, 78vw); aspect-ratio: 1;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(200, 168, 94, 0.06) 0%, rgba(15, 31, 27,0.4) 55%, transparent 72%);
-    border: 1px solid var(--cobalt-border);
-    box-shadow: 0 0 80px -20px var(--cobalt-glow), inset 0 0 60px -30px var(--cobalt-500);
-}
-.radar::before, .radar::after {
-    content: ''; position: absolute; border-radius: 50%; border: 1px solid rgba(200, 168, 94, 0.16);
-}
-.radar::before { inset: 18%; }
-.radar::after { inset: 36%; }
-.radar .cross-h, .radar .cross-v { position: absolute; background: rgba(200, 168, 94, 0.12); }
-.radar .cross-h { left: 4%; right: 4%; top: 50%; height: 1px; }
-.radar .cross-v { top: 4%; bottom: 4%; left: 50%; width: 1px; }
-.radar .sweep {
-    position: absolute; inset: 0; border-radius: 50%;
-    background: conic-gradient(from 0deg, rgba(200, 168, 94, 0.4) 0deg, rgba(200, 168, 94, 0.08) 55deg, transparent 95deg);
-    animation: sweep 4.5s linear infinite;
-    -webkit-mask: radial-gradient(circle, black 0 70.5%, transparent 71%);
-    mask: radial-gradient(circle, black 0 70.5%, transparent 71%);
-}
-@keyframes sweep { to { transform: rotate(360deg); } }
-.radar .core {
-    position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
-    font-family: var(--font-heading); font-weight: 800; font-size: 1rem; letter-spacing: 0.05em;
-    color: var(--on-night); background: rgba(15, 31, 27, 0.85);
-    border: 1px solid rgba(200, 168, 94, 0.45); border-radius: 14px; padding: 12px 18px;
-    box-shadow: 0 0 35px -8px var(--cobalt-500); z-index: 2; white-space: nowrap;
-}
-.radar .blip {
-    position: absolute; width: 9px; height: 9px; border-radius: 50%;
-    background: var(--cobalt-500); box-shadow: 0 0 12px var(--cobalt-500);
-    animation: blip 4.5s ease-in-out infinite;
-}
-.radar .blip b {
-    position: absolute; left: 14px; top: -4px; font-family: var(--font-mono); font-weight: 400;
-    font-size: 10px; letter-spacing: 0.08em; color: var(--cobalt-300); white-space: nowrap;
-}
-.blip.b1 { left: 24%; top: 30%; animation-delay: 0.4s; }
-.blip.b2 { left: 68%; top: 22%; animation-delay: 1.6s; }
-.blip.b3 { left: 30%; top: 68%; animation-delay: 2.7s; }
-.blip.b4 { left: 72%; top: 62%; animation-delay: 3.5s; }
-@keyframes blip { 0%, 100% { opacity: 0.25; } 12% { opacity: 1; } 45% { opacity: 0.5; } }
-
-/* ===== SECCIONES ===== */
-/* Alternado de tonos entre secciones (como la home) */
-.section:nth-of-type(even) { background-color: var(--bg-alt); }
-.section + .section::before {
-    content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-    width: min(760px, 82%); height: 1px;
-    background: linear-gradient(90deg, transparent 0%, var(--line) 30%, var(--line-strong) 50%, var(--line) 70%, transparent 100%);
-}
-.s-head.center { margin-left: auto; margin-right: auto; text-align: center; }
-
-/* Síntomas */
-.sintomas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-.sintoma {
-    background: var(--bg); border: 1px solid var(--line); border-radius: 10px;
-    padding: 30px 28px; font-size: 1.02rem; color: var(--ink-soft); font-weight: 300;
-    border-left: 2px solid var(--cobalt-500);
-}
-.sintoma strong { color: var(--ink); font-weight: 600; display: block; margin-bottom: 8px; font-size: 1.05rem; }
-
-/* Áreas que analiza */
-.areas { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
-.area {
-    background: var(--bg); border: 1px solid var(--line); border-radius: 10px;
-    padding: 30px 26px; transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.area:hover { border-color: var(--cobalt-border); transform: translateY(-4px); box-shadow: 0 20px 45px rgba(26,29,35,0.10), 0 0 30px -12px var(--cobalt-glow); }
-.area .ic {
-    width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center;
-    background: var(--cobalt-tint); border: 1px solid var(--cobalt-border); margin-bottom: 18px;
-}
-.area .ic svg { width: 21px; height: 21px; stroke: var(--cobalt-600); }
-.area h3 { font-family: var(--font-body); font-size: 1.08rem; font-weight: 600; margin-bottom: 10px; color: var(--ink); }
-.area p { font-size: 0.92rem; color: var(--ink-soft); font-weight: 300; }
-
-/* Entregables */
-/* Timeline vertical premium de "Qué te llevas" */
-.entregas-timeline { max-width: 720px; margin: 0 auto; position: relative; }
-.tl-item { position: relative; display: grid; grid-template-columns: 56px 1fr; gap: 26px; padding-bottom: 40px; }
-.tl-item:last-child { padding-bottom: 0; }
-/* Línea vertical que conecta los marcadores */
-.tl-item::before {
-    content: ''; position: absolute; left: 27px; top: 52px; bottom: -4px; width: 2px;
-    background: linear-gradient(to bottom, var(--cobalt-border), var(--line));
-}
-.tl-item:last-child::before { display: none; }
-.tl-marker {
-    width: 56px; height: 56px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    background: var(--bg); border: 1px solid var(--cobalt-border);
-    box-shadow: 0 0 0 4px var(--cobalt-tint), inset 0 0 20px -12px var(--cobalt-500);
-    position: relative; z-index: 2; flex: none;
-}
-.tl-num { font-family: var(--font-heading); font-weight: 800; font-size: 1.15rem; color: var(--cobalt-700); }
-.tl-body { padding-top: 12px; }
-.tl-body h3 { font-size: 1.15rem; font-weight: 600; margin-bottom: 8px; letter-spacing: -0.01em; color: var(--ink); }
-.tl-body p { font-size: 0.98rem; color: var(--ink-soft); font-weight: 300; line-height: 1.6; }
-
-/* El método — 3 columnas con diagramas animados */
-/* Grid con las 3 columnas alineadas por abajo: cada .metodo-col es
-   un flex-column con align-items:stretch, y el diagrama lleva
-   margin-top:auto para anclarse siempre al mismo borde inferior,
-   sin importar si el título ocupa 1 o 2 líneas */
-.metodo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 44px; align-items: stretch; }
-.metodo-col { display: flex; flex-direction: column; }
-.metodo-col .m-num { font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.25em; color: var(--ink-decor); display: block; margin-bottom: 12px; }
-.metodo-col h3 { font-family: var(--font-display); font-size: 1.25rem; font-weight: 400; letter-spacing: -0.01em; margin-bottom: 12px; color: var(--ink); }
-.metodo-col p { font-size: 0.94rem; color: var(--ink-soft); font-weight: 300; margin-bottom: 22px; }
-.metodo-col .m-diagram { margin-top: auto; }
-.m-diagram { border-radius: 12px; background: var(--bg-alt); border: 1px solid var(--line); }
-.m-diagram svg { width: 100%; height: auto; display: block; }
-.md-w { stroke: var(--line); stroke-width: 1; }
-.md-n { fill: var(--bg-alt); stroke: var(--line-strong); stroke-width: 1; }
-.md-n.hub { stroke: var(--cobalt-600); filter: drop-shadow(0 0 10px var(--cobalt-glow)); }
-.md-n.ok { stroke: var(--cobalt-border); }
-.md-p { fill: var(--cobalt-500); }
-.md-t { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.14em; fill: var(--ink-decor); }
-.md-t.hub-t { fill: var(--cobalt-700); font-size: 10px; }
-.md-t.dim { fill: var(--ink-decor); }
-.md-dot { fill: var(--cobalt-600); filter: drop-shadow(0 0 6px var(--cobalt-glow)); }
-
-/* Anticipo destacado */
-.deal {
-    /* Tarjeta solida. Antes apilaba tres efectos (degradado dorado,
-       halo dorado exterior y brillo interior) sobre --night-800, y
-       el resultado era un lavado verde-crema donde el texto casi no
-       se leia. Un verde, un borde, una sombra. */
-    position: relative; max-width: 860px; margin: 0 auto; text-align: center;
-    background: var(--night-900);
-    border: 1px solid rgba(214, 186, 130, 0.22);
-    border-radius: var(--radius-lg);
-    padding: var(--space-8) var(--space-7);
-    box-shadow: 0 30px 70px -35px rgba(15, 31, 27, 0.55);
-    overflow: hidden;
-}
-.deal::before {
-    content: ''; position: absolute; inset: 0; pointer-events: none;
-    /* sin lavado dorado de fondo: el sistema lo evita */
-}
-.deal .tag {
-    display: inline-block; font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.25em;
-    color: var(--cobalt-300); border: 1px solid rgba(214, 186, 130, 0.35);
-    background: rgba(200, 168, 94, 0.10);
-    padding: 6px 16px; border-radius: var(--radius-pill); margin-bottom: var(--space-5);
-}
-.deal h2 { font-family: var(--font-display); font-size: clamp(1.5rem, 3.2vw, 2.1rem); font-weight: 400; letter-spacing: -0.02em; line-height: 1.25; margin-bottom: 22px; color: var(--on-night); }
-.deal p { font-size: 1.05rem; color: var(--on-night-body); font-weight: 300; margin: 0; }
-.deal p strong { color: var(--on-night); font-weight: 600; }
-.deal-price {
-    font-family: var(--font-heading); font-weight: 500; font-size: clamp(1.1rem, 2vw, 1.35rem);
-    letter-spacing: 0.16em; color: var(--on-night-mid);
-    margin: var(--space-1) 0 var(--space-7); line-height: 1;
-    display: flex; flex-direction: column; align-items: center; gap: 14px;
-    text-transform: uppercase;
-}
-.deal-price strong {
-    display: block; font-size: clamp(2.8rem, 6vw, 4rem); font-weight: 800;
-    letter-spacing: -0.03em; line-height: 0.9;
-    text-transform: none;
-    /* Dorado plano. El degradado recortado sobre texto se desvanecia
-       por la derecha y la cifra, que es lo que hay que leer, quedaba
-       a medio tono. */
-    color: var(--cobalt-300);
-}
-.deal-price-note {
-    font-family: var(--font-body); font-size: 0.85rem; font-weight: 400;
-    letter-spacing: 0; color: var(--on-night-soft); text-transform: none;
-}
-/* Los dos escenarios del anticipo */
-.deal-paths {
-    display: flex; flex-direction: column; gap: 16px;
-    text-align: left; margin-top: 8px; max-width: 620px; margin-left: auto; margin-right: auto;
-}
-/* Las dos cajas comparten base: la diferencia entre "si no
-   seguimos" y "si lo implementamos" la marca el BORDE dorado, no
-   un verde distinto en cada una. Antes una iba en --night-700 y la
-   otra en dorado translucido: parecian de dos sistemas. */
-.deal-path {
-    background: var(--night-800);
-    border: 1px solid var(--night-600);
-    border-radius: var(--radius-md);
-    padding: var(--space-5) var(--space-5);
-    text-align: left;
-}
-.deal-path.highlight {
-    border-color: var(--cobalt-400);
-}
-.deal-path-label {
-    display: block; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.18em;
-    text-transform: uppercase; color: var(--on-night-mid); margin-bottom: 12px;
-}
-.deal-path.highlight .deal-path-label { color: var(--cobalt-300); }
-.deal-path p { font-size: 0.98rem; line-height: 1.55; color: var(--on-night-body); }
-
-/* Para quién sí/no */
-.quien { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 900px; margin: 0 auto; }
-.quien-col { background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 34px 30px; }
-.quien-col.si { border-color: var(--cobalt-border); }
-.quien-col h3 { font-family: var(--font-display); font-size: 1.15rem; font-weight: 400; margin-bottom: 20px; color: var(--ink); }
-.quien-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-.quien-col li { font-size: 0.95rem; color: var(--ink-soft); font-weight: 300; padding-left: 26px; position: relative; }
-.quien-col.si li::before { content: '✓'; position: absolute; left: 0; color: var(--cobalt-600); font-weight: 700; }
-.quien-col.no li::before { content: '×'; position: absolute; left: 0; color: var(--ink-decor); font-weight: 700; font-size: 1.1rem; line-height: 1.3; }
-
-/* FAQ */
-.faq:hover { border-color: var(--cobalt-border); }
-.faq button {
-    width: 100%; background: none; border: none; cursor: pointer; text-align: left;
-    display: flex; justify-content: space-between; align-items: center; gap: 16px;
-    padding: 24px 28px; color: var(--ink); font-family: var(--font-body); font-size: 1.05rem; font-weight: 600;
-}
-.faq .ico { font-size: 1.4rem; font-weight: 300; color: var(--ink-mid); transition: transform 0.35s cubic-bezier(0.16,1,0.3,1); line-height: 1; }
-.faq.open .ico { transform: rotate(45deg); color: var(--cobalt-600); }
-.faq .body { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.16,1,0.3,1); }
-.faq .body p { padding: 0 28px 24px; font-size: 0.95rem; color: var(--ink-soft); font-weight: 300; }
-
-/* CTA final */
-.cta-final { text-align: center; padding: 130px 0 150px; position: relative; }
-.cta-final::after {
-    content: ''; position: absolute; left: 50%; bottom: 0; transform: translateX(-50%);
-    width: 70%; height: 260px; pointer-events: none;
-    background: radial-gradient(50% 100% at 50% 100%, var(--cobalt-tint), transparent 70%);
-}
-.cta-final h2 { font-family: var(--font-display); font-size: clamp(1.9rem, 4.2vw, 3rem); font-weight: 400; letter-spacing: -0.02em; margin-bottom: 16px; color: var(--ink); }
-.cta-final p { color: var(--ink-soft); font-weight: 300; font-size: 1.08rem; margin-bottom: 40px; }
-
-/* Footer mini */
-
-/* Reveal */
-
-/* ===== RESPONSIVE ===== */
-@media (max-width: 900px) {
-    .hero-grid { grid-template-columns: 1fr; gap: 48px; }
-    .radar-wrap { order: -1; }
-    .radar { width: min(280px, 70vw); }
-    .sintomas, .areas, .metodo-grid { grid-template-columns: 1fr; }
-    .quien { grid-template-columns: 1fr; }
-    .metodo-grid { gap: 52px; }
-    .deal { padding: 44px 26px; }
-    .subnav .back { display: none; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    .radar .sweep, .radar .blip { animation: none; }
-    .md-dot { display: none; }
-}
-
-/* ===== SECCION DEL FOOTER CLASICO (DE LA HOME) ===== */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-@media (max-width: 900px) {
-}
-
-    </style>
+    <link rel="stylesheet" href="/css/diagnostico-operativo.css?v=5">
 
     <link rel="stylesheet" href="/assets/cookies/cookie-banner.css?v=1">
 </head>
@@ -566,7 +228,7 @@
     <!-- End Google Tag Manager (noscript) -->
 
 
-<nav class="navbar">
+<nav class="navbar navbar--en-hero">
         <div class="nav-container">
             <a href="/" class="logo"><img src="/assets/img/logo-alber-blanco.png" alt="Alber Cabrera"></a>
             <div class="nav-menu">
@@ -592,6 +254,7 @@
 
     <!-- HERO -->
     <header class="hero inverse">
+        <canvas class="aurora-canvas" data-alto="1" aria-hidden="true"></canvas>
         <div class="container hero-grid">
             <div>
                 <span class="hero-badge">DIAGNÓSTICO DAI360</span>
@@ -910,8 +573,8 @@
         </div>
     </section>
 
-    <!-- CTA FINAL -->
-    <section class="cta-final" id="cta">
+    <!-- CTA FINAL --><section class="cta-final inverse" id="cta">
+        <canvas class="aurora-canvas" data-alto="1" aria-hidden="true"></canvas>
         <div class="container">
             <div class="reveal">
                 <h2>¿Vemos dónde está perdiendo tu negocio?</h2>
@@ -924,7 +587,7 @@
     
 
 <footer class="footer-section inverse reveal">
-        <canvas class="aurora-canvas" data-alto="1.5" aria-hidden="true"></canvas>
+        
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-brand-col">
@@ -982,21 +645,8 @@
 
 
     <script src="/assets/js/base.js" defer></script>
-    <script>
-// El reveal y el menu movil los hace base.js.
-
-// FAQ acordeón
-document.querySelectorAll('.faq button').forEach(btn => {
-    btn.addEventListener('click', () => {
-        const item = btn.parentElement;
-        const body = item.querySelector('.body');
-        const wasOpen = item.classList.contains('open');
-        document.querySelectorAll('.faq').forEach(f => { f.classList.remove('open'); f.querySelector('.body').style.maxHeight = null; });
-        if (!wasOpen) { item.classList.add('open'); body.style.maxHeight = body.scrollHeight + 'px'; }
-    });
-});
-
-    </script>
+    <script src="/assets/js/aurora.js?v=1"></script>
+    <script src="/assets/js/faq.js?v=1"></script>
 
     <script src="/assets/cookies/cookie-banner.js?v=1" defer></script>
 </body>

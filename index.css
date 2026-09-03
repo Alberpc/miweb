@@ -96,21 +96,9 @@ html {
     overflow: hidden;
 }
 
-/* Masa de fibras 3D de fondo: hélices animadas vía JS (index.js).
-   El propio dibujo se desvanece hacia el borde inferior para que ninguna
-   fibra llegue viva al corte con la sección clara que va debajo. */
-/* La aurora del hero y la del pie. El contenido de ambos va en
-   z-index 2, asi que el lienzo se queda detras sin taparlo. */
-.aurora-canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    pointer-events: none;
-    display: block;
-}
+/* La regla de .aurora-canvas vive ahora en css/base.css: la cargan los
+   tres layouts, y desde el 3-sep-2026 diagnostico-operativo tambien
+   pinta su propia aurora en el cierre. */
 
 .hero-content {
     position: relative;

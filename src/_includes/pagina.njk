@@ -1,12 +1,22 @@
 {#- pagina.njk — layout de las paginas con CSS propio: el indice del
     blog y las de conversion (servicios, diagnostico, no-perder-clientes).
-    Comparte nav, pie, <head> y base.js; el CSS va inline en `cssPagina`
-    porque es de una sola pagina y no hay nada que deduplicar.
+    Comparte nav, pie, <head> y base.js.
+
+    El CSS de cada pagina va en su propio archivo (`cssArchivo`, un
+    nombre dentro de src/css/) y se enlaza con <link>, igual que hace
+    index.css con la home: son cientos de lineas de una sola pagina, no
+    hay nada que deduplicar entre ellas, pero servirlas como archivo
+    cacheable es mejor que reinyectarlas inline en cada visita.
+    `cssPagina` se mantiene por si algun dia hace falta un puñado de
+    reglas sueltas que no merezcan archivo propio.
 
     `pie` elige otro pie: servicios.html tiene el suyo, con otro copy. -#}
 {% extends "base.njk" %}
 
 {% block estilos %}
+{%- if cssArchivo %}
+    <link rel="stylesheet" href="/css/{{ cssArchivo }}.css?v={{ site.cssVersion }}">
+{%- endif %}
 {%- if cssPagina %}
     <style>
 {{ cssPagina | safe }}
@@ -20,6 +30,12 @@
 {% endblock %}
 
 {% block scripts %}
+{%- if usaAurora %}
+    <script src="/assets/js/aurora.js?v={{ v.auroraJs }}"></script>
+{%- endif %}
+{%- if usaFaq %}
+    <script src="/assets/js/faq.js?v={{ v.faqJs }}"></script>
+{%- endif %}
 {%- if jsPagina %}
     <script>
 {{ jsPagina | safe }}

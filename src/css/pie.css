@@ -33,8 +33,10 @@
    oscuro, el pie se pega a el — sin hueco y con las esquinas de arriba
    rectas — para que los dos se lean como una sola pieza (decagon.ai).
    Solo aplica donde ese bloque existe: en el resto de paginas el pie
-   sigue siendo un bloque despegado. */
-body:has(.contacto-section.inverse) .footer-section {
+   sigue siendo un bloque despegado. .cta-final.inverse es el mismo
+   patron en diagnostico-operativo, con su propio nombre de seccion. */
+body:has(.contacto-section.inverse) .footer-section,
+body:has(.cta-final.inverse) .footer-section {
     margin-top: 0;
     border-radius: 0 0 var(--radius-xl) var(--radius-xl);
 }

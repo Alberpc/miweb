@@ -1,9 +1,40 @@
 /* ============================================================
    base.js — comportamiento que necesita CUALQUIER pagina
    ============================================================
-   Menu movil y reveal al hacer scroll. Estaba copiado inline en las
-   7 landings y tambien, palabra por palabra, en /blog/.
+   Menu movil, reveal al hacer scroll y la barra transparente sobre
+   el hero. Estaba copiado inline en las 7 landings y tambien, palabra
+   por palabra, en /blog/.
    ============================================================ */
+
+// Barra transparente sobre el hero (paginas con heroEnBloque: true)
+//   Solo con la pagina arriba del todo la barra va sin fondo y con el
+//   texto en blanco sobre el hero. En cuanto se baja UN POCO aparece
+//   el cristal, sin esperar a que termine el hero.
+//   Se vigila un centinela de 1px puesto al principio de la pagina en
+//   vez de escuchar el scroll: el navegador avisa solo al cruzar el
+//   umbral, no en cada pixel.
+//   Movido de index.js (3-sep-2026): .navbar--en-hero ya no es
+//   exclusivo de la home.
+const navbar = document.querySelector('.navbar--en-hero');
+
+if (navbar) {
+    navbar.classList.add('navbar--sobre-hero');
+
+    const centinela = document.createElement('div');
+    centinela.setAttribute('aria-hidden', 'true');
+    centinela.style.cssText = 'position:absolute;top:0;left:0;width:1px;height:1px;pointer-events:none;';
+    document.body.prepend(centinela);
+
+    const arribaObserver = new IntersectionObserver(
+        ([entry]) => {
+            navbar.classList.toggle('navbar--sobre-hero', entry.isIntersecting);
+        },
+        { threshold: 0 }
+    );
+
+    arribaObserver.observe(centinela);
+}
+
 // Menú móvil (burger)
 const burger = document.getElementById('nav-burger');
 const mobile = document.getElementById('nav-mobile');
@@ -16,6 +47,13 @@ if (burger && mobile) {
     mobile.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
         burger.classList.remove('open'); mobile.classList.remove('open'); burger.setAttribute('aria-expanded', 'false');
     }));
+    // Cerrar al tocar fuera del menú. Solo la home lo tenia (dentro de
+    // index.js); se sube aqui para que las 14 paginas se comporten igual.
+    document.addEventListener('click', (e) => {
+        if (mobile.classList.contains('open') && !e.target.closest('.navbar')) {
+            burger.classList.remove('open'); mobile.classList.remove('open'); burger.setAttribute('aria-expanded', 'false');
+        }
+    });
 }
 
 // Reveal al hacer scroll

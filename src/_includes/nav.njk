@@ -11,6 +11,15 @@
       navLocal: true   -> enlaces al ancla de la MISMA pagina
                           (#soluciones en vez de /#soluciones). Solo
                           la home, que es donde viven esas secciones.
+      heroEnBloque: true -> la barra se mete DENTRO del hero
+                          (--en-hero) y arranca transparente sobre el
+                          fondo oscuro (ver base.js). Para cualquier
+                          pagina cuyo hero sea un bloque con margen y
+                          fondo oscuro, no solo la home — son cosas
+                          distintas: una pagina puede tener hero en
+                          bloque sin que sus anclas sean locales
+                          (diagnostico-operativo enlaza a /#soluciones
+                          de la home, no a un #soluciones propio).
       navCtaHref/Texto -> el boton. La home lleva al diagnostico;
                           blog y posts, a contacto.
       navCtaCorto      -> version corta del texto para pantallas
@@ -19,11 +28,11 @@
       navBlogHref      -> destino de "Blog" (en /blog/ apunta a "/").
     ============================================================ -#}
 {%- set raiz = "" if navLocal else "/" -%}
-    {#- navLocal solo es true en la home, la unica pagina con hero en
-        bloque: alli la barra se mete DENTRO del hero (--en-hero). En
-        blog, landings y legales no hay hero, asi que se queda pegada
-        al borde como una barra normal. -#}
-    <nav class="navbar{% if navLocal %} navbar--en-hero{% endif %}">
+    {#- heroEnBloque: la home y cualquier otra pagina con hero en
+        bloque (fondo oscuro + margen, no a sangre). En blog, landings
+        sin hero y legales no hay hero, asi que la barra se queda
+        pegada al borde como una barra normal. -#}
+    <nav class="navbar{% if heroEnBloque %} navbar--en-hero{% endif %}">
         <div class="nav-container">
             <a href="{{ "#" if navLocal else "/" }}" class="logo"><img src="/assets/img/logo-alber-blanco.png" alt="{{ site.nombre }}"></a>
             <div class="nav-menu">
