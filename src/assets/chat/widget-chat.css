@@ -18,10 +18,19 @@
    --acw-accent-soft es TEXTO y bordes sobre el panel OSCURO: la 400
    (#EA8258), 6.01 sobre el panel — sobre oscuro la 600 se cae a 3.27. */
 .acw-root {
-    --acw-bg: #1F2126;        /* --night-800, el panel */
+    /* [2-sep-2026] El panel va en --night-900, el mismo fondo del hero y
+       del pie. Antes usaba el 800, que en el sistema es el color de las
+       TARJETAS sobre oscuro: al pintar con el el fondo, las burbujas se
+       quedaban sin un tono por encima al que subir. */
+    --acw-bg: #121316;        /* --night-900, el panel */
+    --acw-surface: #1F2126;   /* --night-800, las burbujas encima */
+    --acw-line: #3C3E44;      /* --night-600, bordes sobre oscuro */
     --acw-bg-deep: #121316;   /* --night-900 */
     --acw-text: #FFFFFF;      /* 16.11 sobre el panel */
     --acw-text-soft: #C4C4CB; /* cuerpo · 8.98 */
+    --acw-text-mid: #9A9AA3;  /* --on-night-mid, microcopy y placeholders.
+                                 Antes eran #666/#777 sueltos: 3.29 y 4.22,
+                                 los dos por debajo del minimo de 4.5. */
     --acw-accent: #B44100;    /* --cobalt-600, relleno con texto blanco */
     --acw-accent-soft: #EA8258; /* --cobalt-400, texto y bordes sobre oscuro */
     --acw-border: rgba(234, 130, 88, 0.16);
@@ -78,11 +87,13 @@
     outline-offset: 3px;
 }
 
-/* Icono oscuro sobre el dorado sólido: 9.09 de contraste, legible en
-   cualquier fondo por el que pase la burbuja. */
+/* [2-sep-2026] 30px, igual que el de WhatsApp — antes media 28 y se
+   veia mas pequenyo. Y como este icono va en TRAZO y el de WhatsApp es
+   macizo, a igual tamanyo el macizo pesa mas: el trazo se engorda a 2
+   (ver el stroke-width del svg en widget-chat.js). */
 .acw-bubble-icon {
-    width: 28px;
-    height: 28px;
+    width: 30px;
+    height: 30px;
     stroke: #FFFFFF; /* 5.68 sobre el --cobalt-600 del fondo */
     fill: none;
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -224,10 +235,14 @@
     overflow-wrap: anywhere;
 }
 
+/* La burbuja se ELEVA sobre el panel, no se hunde: sube al --night-800
+   y la define un borde. Dos oscuros no se separan por luminancia (900
+   contra 800 da 1.15), asi que el que hace el trabajo es el borde —
+   mismo recurso que las tarjetas sobre oscuro del resto de la web. */
 .acw-msg--bot {
     align-self: flex-start;
-    background: #111111;
-    border: 1px solid var(--acw-border);
+    background: var(--acw-surface);
+    border: 1px solid var(--acw-line);
     color: var(--acw-text-soft);
 }
 
@@ -246,7 +261,7 @@
     margin: -4px 0 0 0;
     font-size: 11px;
     line-height: 1.5;
-    color: #777777;
+    color: var(--acw-text-mid);
 }
 
 .acw-aviso a {
@@ -265,7 +280,7 @@
     display: none;
     gap: 4px;
     padding: 13px 14px;
-    background: #111111;
+    background: var(--acw-surface);
     border: 1px solid var(--acw-border);
     border-radius: 4px;
 }
@@ -315,7 +330,7 @@
 
 .acw-input {
     flex: 1 1 auto;
-    background: #111111;
+    background: var(--acw-surface);
     border: 1px solid var(--acw-border);
     border-radius: 4px;
     color: var(--acw-text);
@@ -329,7 +344,7 @@
 }
 
 .acw-input::placeholder {
-    color: #666666;
+    color: var(--acw-text-mid);
 }
 
 .acw-input:focus {
@@ -405,7 +420,7 @@
 }
 
 .acw-field {
-    background: #111111;
+    background: var(--acw-surface);
     border: 1px solid var(--acw-border);
     border-radius: 4px;
     color: var(--acw-text);
@@ -417,7 +432,7 @@
 }
 
 .acw-field::placeholder {
-    color: #666666;
+    color: var(--acw-text-mid);
 }
 
 .acw-field:focus {

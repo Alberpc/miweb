@@ -166,7 +166,7 @@
 
     /* Robot, no bocadillo: el bocadillo se confunde con el boton de WhatsApp
        que hay justo debajo, y ademas deja claro de un vistazo que es una IA. */
-    var ICONO_CHAT = '<svg class="acw-bubble-icon" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="8" width="16" height="12" rx="3"/><path d="M12 8V4.5"/><circle cx="12" cy="3" r="1.4"/><path d="M2 13v3M22 13v3"/><circle cx="9" cy="13.5" r="1.3" fill="#0F1F1B" stroke="none"/><circle cx="15" cy="13.5" r="1.3" fill="#0F1F1B" stroke="none"/><path d="M9.5 17h5"/></svg>';
+    var ICONO_CHAT = '<svg class="acw-bubble-icon" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="8" width="16" height="12" rx="3"/><path d="M12 8V4.5"/><circle cx="12" cy="3" r="1.4"/><path d="M2 13v3M22 13v3"/><circle cx="9" cy="13.5" r="1.3" fill="#B44100" stroke="none"/><circle cx="15" cy="13.5" r="1.3" fill="#B44100" stroke="none"/><path d="M9.5 17h5"/></svg>';
     var ICONO_CERRAR = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>';
     var ICONO_ENVIAR = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>';
 
