@@ -58,6 +58,31 @@ export default function (eleventyConfig) {
         api.getFilteredByTag("posts")
            .sort((a, b) => new Date(b.data.fecha) - new Date(a.data.fecha)));
 
+    // Las categorias del blog, en el orden en que aparecen los posts y
+    // con cuantos tiene cada una. Se calcula aqui y no en la plantilla
+    // porque Nunjucks no deja acumular en un array dentro de un bucle
+    // ({% set %} no sale del ambito del for). Crear un post con una
+    // categoria nueva la anade al menu sin tocar nada.
+    eleventyConfig.addCollection("categoriasBlog", (api) => {
+        const cuenta = new Map();
+        api.getFilteredByTag("posts").forEach((post) => {
+            const cat = post.data.categoria;
+            if (cat) cuenta.set(cat, (cuenta.get(cat) || 0) + 1);
+        });
+        return Array.from(cuenta, ([nombre, n]) => ({ nombre, n }));
+    });
+
+    // Convierte "Automatizacion con IA" en "automatizacion-con-ia" para
+    // usarlo como valor de data-* y como id del filtro. Los acentos se
+    // normalizan (NFD + quitar diacriticos) o "IA y visibilidad" y
+    // "IA y visibilidád" darian slugs distintos.
+    eleventyConfig.addFilter("slug", (texto) =>
+        String(texto)
+            .normalize("NFD").replace(/[̀-ͯ]/g, "")
+            .toLowerCase().trim()
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/^-+|-+$/g, ""));
+
     // Genera un .md gemelo de cada post del blog, junto a su index.html.
     // Cubre el check "Markdown Negotiation" de la auditoria AEO: un agente
     // que pida Accept: text/markdown recibe contenido real, no el HTML

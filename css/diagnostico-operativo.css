@@ -29,84 +29,532 @@
    de cielo estrellado con velo verde; se quita para que la pagina abra
    con el mismo lenguaje que el resto del sitio, en vez de un fondo
    propio que no aparece en ningun otro sitio. */
+/* ===== HERO CLARO + EL INFORME COMO DOCUMENTO =====
+   [3-sep-2026 v5] Se retira el hero oscuro con aurora y las 3 piezas
+   sueltas. Motivo: el entregable del DAI360 es un DOCUMENTO, y un
+   documento se lee sobre papel — en negro parecia una app, y tres
+   tarjetas separadas rompian la idea de "un informe".
+
+   Ahora: fondo claro, titulo arriba y debajo UNA sola pantalla con
+   los 3 apartados del informe en vertical. El unico efecto es el halo
+   terracota que sale por detras del panel, como una sombra de color.
+   Sin animaciones ni scroll-tracking. */
+/* [3-sep-2026 v5.2] DEGRADADO EN TODO EL BLOQUE, NO UN HALO DETRAS.
+   Se retira el halo multicolor que iba tras el panel. Motivo: sobre
+   blanco, cinco manchas saturadas concentradas se leen como una
+   MANCHA, no como luz — y ademas dejaban un canto visible por donde
+   se cortaban.
+
+   Un degradado que cubre TODA la superficie de forma uniforme se lee
+   como material (papel tintado), que es lo que se buscaba. Es la
+   variante clara que ya se valido para el hero del sitio, asi que
+   esta landing deja de tener un efecto propio que no aparece en
+   ningun otro sitio.
+
+   Los tonos son los mismos de la aurora, pero a opacidad de tinte:
+   rosado calido arriba-izquierda, violeta en el centro-abajo y frio
+   azulado abajo-derecha, sobre blanco. Nada supera 0.16: por encima
+   deja de ser superficie y vuelve a ser mancha. */
 .hero {
-    min-height: calc(100vh - var(--hero-gap) * 2);
-    min-height: calc(100dvh - var(--hero-gap) * 2);
     position: relative;
-    display: flex; align-items: center; overflow: hidden;
+    overflow: hidden;
     margin: var(--hero-gap);
-    padding: calc(130px - var(--hero-gap)) 0 90px;
-    background-color: var(--night-900);
     border-radius: var(--radius-xl);
+    /* [3-sep-2026 v5.3] La barra va DENTRO del hero, como en la home:
+       el bloque empieza arriba del todo y la barra se le superpone,
+       en vez de quedar en una banda blanca por encima. El padding-top
+       deja su sitio (nav + el aire de siempre) y ademas baja el
+       contenido, que es lo que hace que el titular no arranque pegado
+       al borde. */
+    padding: calc(64px + var(--hero-gap) + var(--space-10)) 0 var(--space-9);
+    background-color: var(--bg);
+    background-image:
+        linear-gradient(142deg,
+            rgba(234, 130,  88, 0.16)  0%,
+            rgba(234, 130,  88, 0.05) 22%,
+            rgba(255, 255, 255, 0)    44%),
+        linear-gradient(300deg,
+            rgba( 58,  80, 190, 0.13)  0%,
+            rgba(134,  66, 196, 0.07) 26%,
+            rgba(255, 255, 255, 0)    54%),
+        radial-gradient(70% 55% at 50% 108%,
+            rgba(172,  58, 112, 0.10)  0%,
+            rgba(172,  58, 112, 0.03) 45%,
+            transparent 72%);
 }
 .hero > .container { position: relative; z-index: 2; }
-.hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; align-items: center; position: relative; z-index: 2; }
 
-.hero-badge {
-    display: inline-block; font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.3em;
-    /* Mismo badge que en los posts: dorado translucido, no un
-       bloque verde solido que compite con el fondo. */
-    color: var(--cobalt-300); border: 1px solid rgba(214, 186, 130, 0.30);
-    background: rgba(200, 168, 94, 0.12); padding: 7px 16px;
-    border-radius: var(--radius-pill); margin-bottom: 26px;
+
+/* LA BARRA SOBRE EL HERO CLARO.
+   .navbar--sobre-hero (nav.css) vuelve la barra transparente Y pinta
+   logo y enlaces en BLANCO, porque en la home se superpone a un hero
+   --night-900. Aqui el hero es claro: se conserva la integracion
+   (sin fondo ni borde, que es lo que la funde con el bloque) pero se
+   devuelve la tinta oscura, o no se leeria nada. */
+.navbar--sobre-hero .nav-link       { color: var(--ink-soft); }
+.navbar--sobre-hero .nav-link:hover { color: var(--ink); }
+.navbar--sobre-hero .logo           { color: var(--ink); }
+.navbar--sobre-hero .logo img       { filter: invert(1) brightness(0.12); }
+.navbar--sobre-hero .nav-burger span { background: var(--ink); }
+
+/* El titulo va centrado y el informe cuelga de el. */
+.hero-texto {
+    max-width: 720px; margin: 0 auto var(--space-8);
+    text-align: center;
 }
 .hero h1 {
-    font-family: var(--font-display); font-size: clamp(2.1rem, 4.2vw, 3.2rem);
-    font-weight: 300; line-height: 1.22; letter-spacing: -0.02em; margin-bottom: 22px;
-    max-width: 21ch; text-wrap: balance; color: var(--on-night);
+    /* Peso 500: un servicio de 1.500 EUR abriendo con display light
+       se lee timorato. Sobre claro la tinta es --ink, no --on-night. */
+    font-family: var(--font-display); font-size: clamp(2.3rem, 4.8vw, 3.8rem);
+    font-weight: 500; line-height: 1.05; letter-spacing: -0.03em;
+    margin: 0 auto 20px; max-width: 19ch; text-wrap: balance;
+    color: var(--ink);
 }
-.hero h1 .hl { background: linear-gradient(120deg, var(--on-night) 6%, var(--cobalt-300) 94%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; display: inline-block; padding-bottom: 0.14em; margin-bottom: -0.14em; }
-.hero p.sub { font-size: 1.12rem; color: var(--on-night-body); font-weight: 300; max-width: 50ch; margin-bottom: 38px; }
-.hero-ctas { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
-.link-soft:hover { color: var(--on-night); }
+/* Sobre fondo claro el degradado tiene que ir a los tonos OSCUROS del
+   terracota: el 300 sobre blanco da 2.1 y no se leeria. */
+.hero h1 .hl {
+    background: linear-gradient(120deg, var(--cobalt-700) 6%, var(--cobalt-600) 94%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block; padding-bottom: 0.14em; margin-bottom: -0.14em;
+}
+.hero p.sub {
+    font-size: 1.1rem; color: var(--ink-soft); font-weight: 300;
+    max-width: 56ch; margin: 0 auto 32px;
+}
+.hero-ctas { display: flex; align-items: center; justify-content: center; gap: 22px; flex-wrap: wrap; }
+/* .link-soft esta pensado para fondo oscuro: sobre claro se reasigna. */
+.hero .link-soft { color: var(--ink-mid); }
+.hero .link-soft:hover { color: var(--ink); }
 
-/* Panel del hero: el informe real, no una animacion de marca.
-   Mismo espiritu que .mockup-panel de no-perder-clientes.css (una
-   "ventana" de producto con toolbar de 3 puntos), pero en version
-   oscura porque este hero es --night-900, no --bg. */
-.panel-wrap { display: flex; justify-content: center; align-items: center; }
-.panel-diagnostico {
-    width: 100%; max-width: 420px;
-    background: rgba(15, 31, 27, 0.55);
-    border: 1px solid var(--night-600);
+/* El envoltorio del informe. Ya no lleva halo: el color lo pone
+   ahora el degradado del hero entero. */
+.informe-wrap {
+    position: relative;
+    max-width: 1000px; margin: 0 auto;
+}
+
+/* EL PANEL DEL INFORME. Una sola pantalla con sus 3 apartados. */
+.informe {
+    position: relative; z-index: 1;
+    background: var(--bg);
+    border: 1px solid var(--line);
     border-radius: var(--radius-lg);
-    backdrop-filter: blur(14px) saturate(160%); -webkit-backdrop-filter: blur(14px) saturate(160%);
-    box-shadow: 0 30px 70px -30px rgba(0,0,0,0.5);
-    overflow: hidden;
-}
-.panel-toolbar {
-    display: flex; align-items: center; gap: 6px; padding: 12px 16px;
-    border-bottom: 1px solid var(--night-600);
-}
-.panel-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--night-600); }
-.panel-title { margin-left: 8px; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.08em; color: var(--on-night-mid); }
-.panel-filas { padding: 18px 18px 6px; display: flex; flex-direction: column; gap: 14px; }
-.panel-fila { display: grid; grid-template-columns: 100px 1fr auto; align-items: center; gap: 12px; }
-.panel-area { font-family: var(--font-body); font-size: 0.82rem; color: var(--on-night-body); }
-.panel-barra { position: relative; height: 5px; border-radius: 3px; background: var(--night-700); overflow: hidden; }
-.panel-barra-fill {
-    position: absolute; inset: 0; width: var(--w); border-radius: 3px;
-    animation: llenar 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-.panel-barra-fill.verde { background: var(--verde); }
-.panel-barra-fill.ambar { background: var(--ambar); }
-.panel-barra-fill.rojo { background: var(--rojo); }
-@keyframes llenar { from { transform: scaleX(0); transform-origin: left; } to { transform: scaleX(1); transform-origin: left; } }
-/* --*-bg no se reasigna dentro de .inverse (solo --rojo/--verde/--ambar
-   sin sufijo), asi que el fondo del badge se construye con opacidad
-   sobre el propio color en vez de depender del token -bg de modo claro. */
-.panel-badge { font-size: 0.7rem; font-weight: 700; padding: 3px 9px; border-radius: 20px; text-align: center; white-space: nowrap; }
-.panel-badge.verde { background: color-mix(in srgb, var(--verde) 16%, transparent); color: var(--verde); }
-.panel-badge.ambar { background: color-mix(in srgb, var(--ambar) 16%, transparent); color: var(--ambar); }
-.panel-badge.rojo { background: color-mix(in srgb, var(--rojo) 16%, transparent); color: var(--rojo); }
-.panel-nota {
-    font-family: var(--font-body); font-size: 0.72rem; font-weight: 300; font-style: italic;
-    color: var(--on-night-mid); padding: 14px 18px 16px; border-top: 1px solid var(--night-600); margin-top: 10px;
+    padding: var(--space-6) var(--space-6) var(--space-5);
+    /* Sombra NEUTRA. Con el fondo ya teñido, una sombra de color
+       ensuciaria el degradado; el documento se despega por
+       profundidad, no por color. */
+    box-shadow:
+        0 1px 2px rgba(18, 19, 22, 0.05),
+        0 12px 28px -8px rgba(18, 19, 22, 0.12),
+        0 32px 64px -24px rgba(18, 19, 22, 0.20);
+    text-align: left;
 }
 
-/* ===== SECCIONES ===== */
-/* Alternado de tonos entre secciones (como la home) */
-.section:nth-of-type(even) { background-color: var(--bg-alt); }
+.informe-cab { padding-bottom: var(--space-4); border-bottom: 1px solid var(--line); }
+.informe-cab h2 {
+    font-family: var(--font-display); font-size: 1.5rem; font-weight: 700;
+    letter-spacing: -0.02em; color: var(--ink); margin: 0 0 8px;
+}
+.informe-lead {
+    font-size: 0.85rem; color: var(--cobalt-700); margin: 0 0 var(--space-4);
+    padding-left: 12px; border-left: 2px solid var(--cobalt-500);
+    max-width: 72ch;
+}
+.informe-meta {
+    display: flex; flex-wrap: wrap; gap: var(--space-5);
+    font-size: 0.76rem; color: var(--ink-mid);
+}
+
+.informe-bloque { padding-top: var(--space-5); }
+.informe-bloque + .informe-bloque { border-top: 1px solid var(--line); margin-top: var(--space-5); }
+.informe-bloque h3 {
+    font-family: var(--font-display); font-size: 1.12rem; font-weight: 600;
+    letter-spacing: -0.01em; color: var(--ink); margin: 0 0 6px;
+}
+/* El ordinal en terracota, como en el documento real. */
+.informe-bloque h3 em { font-style: normal; color: var(--cobalt-600); }
+.informe-sub {
+    font-size: 0.8rem; color: var(--ink-mid); margin: 0 0 var(--space-4);
+    max-width: 74ch;
+}
+
+/* ── EL FLUJO BPMN ────────────────────────────────────────────────
+   Notacion de verdad: rectangulos redondeados para las TAREAS, rombo
+   para la DECISION, circulos finos para inicio y fin, y flechas con
+   punta. Antes eran circulos unidos por lineas, que no es BPMN ni se
+   parece a un flujo de proceso. */
+.bpmn-scroll { overflow-x: auto; }
+.bpmn { width: 100%; min-width: 620px; height: auto; display: block; }
+
+.bp-task { fill: var(--bg-raised); stroke: var(--line-strong); stroke-width: 1; }
+.bp-task.bad { fill: var(--rojo-bg); stroke: var(--rojo); }
+.bp-gw { fill: var(--cobalt-100); stroke: var(--cobalt-500); stroke-width: 1; }
+.bp-ini { fill: var(--bg); stroke: var(--ink-decor); stroke-width: 1.5; }
+.bp-fin { fill: var(--bg); stroke: var(--cobalt-600); stroke-width: 2.5; }
+.bp-fl { stroke: var(--ink-decor); stroke-width: 1.2; fill: none; }
+
+.bp-t { font-family: var(--font-body); font-size: 10.5px; fill: var(--ink); font-weight: 500; }
+.bp-t.sm { font-size: 9px; fill: var(--ink-mid); font-weight: 400; }
+.bp-t.bad-t { fill: var(--rojo); font-weight: 600; }
+.bp-lb { font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.14em; fill: var(--ink-mid); }
+.bp-warn { font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.16em; fill: var(--rojo); font-weight: 600; }
+
+/* ── LAS TABLAS DEL INFORME ───────────────────────────────────── */
+.tabla-scroll { overflow-x: auto; }
+.informe-tabla {
+    width: 100%; min-width: 560px; border-collapse: collapse; font-size: 0.8rem;
+}
+.informe-tabla th {
+    text-align: left; font-family: var(--font-mono);
+    font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase;
+    font-weight: 500; color: var(--ink-mid);
+    padding: 0 12px 9px 0; border-bottom: 1px solid var(--line-strong);
+    white-space: nowrap;
+}
+.informe-tabla td {
+    padding: 9px 12px 9px 0; border-bottom: 1px solid var(--line);
+    color: var(--ink-soft); vertical-align: middle;
+}
+.informe-tabla tr:last-child td { border-bottom: 0; }
+.informe-tabla td:first-child { color: var(--ink); font-weight: 500; }
+
+/* Chips de valoracion (impacto, dificultad, urgencia, prioridad).
+   [3-sep-2026 v5.2] Se redefinen aqui: vivian en el bloque del
+   dashboard, que se retiro entero — las tablas los seguian usando y
+   se quedaron sin estilo.
+
+   Pares fondo-palido / tinta-oscura, y la tinta es el token
+   semantico completo (no un color-mix aclarado) para que el contraste
+   sobre su propio fondo pase AA. */
+.chip {
+    display: inline-block; font-size: 0.68rem; font-weight: 600;
+    padding: 3px 9px; border-radius: 5px; white-space: nowrap;
+}
+.chip--alto  { background: var(--rojo-bg);  color: var(--rojo); }
+.chip--medio { background: var(--ambar-bg); color: var(--ambar); }
+.chip--bajo  { background: var(--verde-bg); color: var(--verde); }
+
+/* Etiquetas de area. Son PARES fondo-palido / tinta-oscura, como los
+   chips de los tres pilares en tokens.css: etiquetan categoria y
+   nunca se usan como color de accion. */
+.et {
+    display: inline-block; font-size: 0.68rem; font-weight: 600;
+    padding: 3px 8px; border-radius: 5px; white-space: nowrap;
+}
+.et--ventas   { background: var(--chip-1-bg); color: var(--chip-1-ink); }
+.et--ops      { background: var(--chip-2-bg); color: var(--chip-2-ink); }
+.et--delivery { background: var(--chip-3-bg); color: var(--chip-3-ink); }
+.et--admin    { background: var(--bg-input);  color: var(--ink-soft); }
+
+
+
+/* ── LA BOLA QUE ENTREGA EL PRECIO ─────────────────────────────────
+   La linea temporal no muere en el aire: termina en un destello
+   montado sobre el borde del bloque del precio, igual que .riel-bola
+   en la home. Es lo que hace que el precio se lea como el DESTINO del
+   recorrido y no como una seccion suelta mas abajo. */
+.deal { position: relative; }
+.entregas-bola {
+    position: absolute;
+    /* [3-sep-2026] Usa --riel, no un 50% fijo: en movil el eje se va al
+       borde izquierdo y con el 50% la bola se quedaba centrada,
+       desalineada de su propia linea. */
+    top: 0; left: var(--riel, 50%); z-index: 3;
+    width: 38px; height: 38px; border-radius: 50%;
+    display: grid; place-items: center;
+    background: var(--cobalt-400);
+    /* El aro del color del fondo de la seccion la recorta contra el
+       borde del bloque y la hace flotar. */
+    box-shadow: 0 0 0 6px var(--bg),
+                0 0 28px 4px rgba(234, 130, 88, 0.55);
+    transform: translate(-50%, -50%);
+}
+.entregas-bola svg { width: 17px; height: 17px; fill: var(--night-900); }
+
+/* EL PUENTE: del ultimo nodo hasta la bola del precio.
+   [3-sep-2026 v8.1] El riel vive dentro de .entregas y moria al acabar
+   la ultima entrega: la linea se cortaba y la bola del precio flotaba
+   sin nada que la uniera. Este tramo cruza el hueco entre las dos
+   secciones.
+
+   El naranja se pinta con el MISMO --riel-avance que el resto (lo
+   escribe riel-entregas.js): asi el frente sigue avanzando en vez de
+   aparecer de golpe. */
+.entregas-puente {
+    position: relative;
+    /* Se centra en el mismo eje que el riel: el riel va al 50% de
+       .entregas, que tiene el mismo ancho maximo. */
+    max-width: var(--container-tight);
+    margin: 0 auto;
+    height: calc(var(--space-11) + var(--space-8));
+    /* Sube para solapar el padding inferior de la seccion y llegar
+       hasta el borde del bloque del precio. */
+    margin-bottom: calc((var(--space-11) + var(--space-8)) * -1);
+    pointer-events: none;
+}
+.entregas-puente::before,
+.entregas-puente::after {
+    content: ''; position: absolute; left: var(--riel, 50%); top: 0; bottom: 0;
+    width: 2px; margin-left: -1px; border-radius: 2px;
+}
+/* La linea apagada, siempre visible: sin ella el hueco se ve vacio. */
+.entregas-puente::before { background: var(--line-strong); }
+/* El frente naranja, atado al scroll igual que el riel de arriba. */
+.entregas-puente::after {
+    transform-origin: top center;
+    transform: scaleY(var(--puente-avance, 0));
+    background: linear-gradient(to bottom, var(--cobalt-400), var(--cobalt-500));
+    box-shadow: 0 0 12px var(--cobalt-glow);
+}
+
+/* ══ LAS 4 PIEZAS DE "QUE TE LLEVAS" ═══════════════════════════════
+   [3-sep-2026 v8] Reescritas enteras.
+
+   El intento anterior fallo por el ENVOLTORIO, no por el contenido:
+   las cuatro compartian chasis de cristal, halo, ratio 400x250 y
+   ancho 520px. Por dentro eran dibujos distintos; a dos metros, cuatro
+   rectangulos identicos.
+
+   Ahora cada pieza varia en cuatro ejes a la vez:
+
+     eje          01          02           03          04
+     ─────────────────────────────────────────────────────────
+     silueta      cuadrado    vertical     rejilla     franja
+     marco        no          si (papel)   no          no
+     materia      color       linea        texto       barra
+     densidad     4 celdas    5 pasos      4 filas     4 tramos
+
+   Y un solo caso las recorre: una asesoria de 9 personas, con el
+   mismo cuello de botella en la 01, la 02, la 03 y la 04. Antes eran
+   cuatro graficos sin relacion entre si.
+
+   El ROJO aparece solo dos veces en toda la seccion (el area peor y
+   el paso atascado). Por eso significa algo. */
+
+/* ── 01 · CUADRANTE ────────────────────────────────────────────────
+   Silueta: CUADRADO macizo, sin marco. La forma ES el numero: cuatro
+   celdas para cuatro areas. Figura-fondo invertido — el color va en
+   la masa, no en una barra. */
+.pieza-cuadrante {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 2px; background: var(--line);
+    border-radius: var(--radius-md); overflow: hidden;
+    /* [3-sep-2026 v8.1] Sin aspect-ratio 1/1. Forzar el cuadrado con 4
+       celdas de texto dentro lo hacia MUCHO mas alto que las otras
+       tres piezas y rompia el ritmo de la seccion. La silueta la da
+       ahora ser una rejilla 2x2 compacta, no un cuadrado exacto. */
+}
+.cd-celda {
+    position: relative;
+    padding: var(--space-3) var(--space-4);
+    display: flex; flex-direction: column; gap: 4px;
+    background: var(--bg);
+}
+.cd-area {
+    font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--ink);
+}
+.cd-nota { font-size: 0.7rem; line-height: 1.35; color: var(--ink-mid); }
+/* El tinte va en la celda entera: es la masa la que da el estado. */
+.cd--mal   { background: var(--rojo-bg); }
+.cd--medio { background: var(--ambar-bg); }
+.cd--bien  { background: var(--verde-bg); }
+.cd--mal   .cd-area { color: var(--rojo); }
+.cd--medio .cd-area { color: var(--ambar); }
+.cd--bien  .cd-area { color: var(--verde); }
+/* El punto rojo: el unico sitio donde el ojo aterriza primero. */
+.cd-punto {
+    position: absolute; top: 12px; right: 12px;
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--rojo);
+    box-shadow: 0 0 0 4px rgba(185, 28, 28, 0.12);
+}
+
+/* ── 02 · EL PLANO ─────────────────────────────────────────────────
+   Silueta: PAPEL vertical. La UNICA con superficie propia — y es
+   papel, no cristal: el entregable es un documento. Tres piezas sin
+   marco y una con marco es un ritmo; cuatro con marco es una lista. */
+.pieza-papel {
+    background: #FCFCFB;
+    border: 1px solid var(--line-strong);
+    border-radius: 3px;
+    padding: var(--space-5) var(--space-5) var(--space-4);
+    box-shadow: 0 1px 0 var(--line), 0 10px 24px -16px rgba(18, 19, 22, 0.22);
+}
+.pp-sello {
+    display: block; font-family: var(--font-mono); font-size: 0.6rem;
+    /* --ink-decor da 2.67 sobre el papel: por debajo de AA. Es texto
+       real (dice que la pieza es un ejemplo), no una linea decorativa,
+       asi que sube a --ink-mid. */
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-mid);
+    padding-bottom: var(--space-3); margin-bottom: var(--space-4);
+    border-bottom: 1px solid var(--line);
+}
+.pp-flujo { list-style: none; margin: 0; padding: 0; position: relative; }
+/* La linea que une los pasos: un proceso es una secuencia. */
+.pp-flujo::before {
+    content: ''; position: absolute; left: 4px; top: 10px; bottom: 10px;
+    width: 1px; background: var(--line-strong);
+}
+.pp-flujo li {
+    position: relative; padding: 9px 0 9px var(--space-5);
+    display: flex; align-items: baseline; gap: var(--space-3);
+    font-size: 0.8rem; color: var(--ink-soft);
+}
+.pp-flujo li::before {
+    content: ''; position: absolute; left: 0; top: 15px;
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--bg); border: 1px solid var(--line-strong);
+}
+.pp-paso { flex: 1; }
+.pp-t {
+    font-family: var(--font-mono); font-size: 0.7rem; color: var(--ink-mid);
+    white-space: nowrap;
+}
+/* El paso atascado: el segundo y ultimo rojo de la seccion. */
+.pp-atasco { color: var(--ink); font-weight: 500; }
+.pp-atasco::before { background: var(--rojo); border-color: var(--rojo); }
+.pp-atasco .pp-t { color: var(--rojo); font-weight: 700; }
+.pp-aviso {
+    position: absolute; left: var(--space-5); bottom: -2px;
+    font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--rojo);
+}
+.pp-atasco { padding-bottom: var(--space-5); }
+.pp-pie {
+    margin: var(--space-4) 0 0; padding-top: var(--space-3);
+    border-top: 1px solid var(--line);
+    font-size: 0.76rem; color: var(--ink-mid);
+}
+.pp-pie strong { color: var(--ink); }
+
+/* ── 03 · LA TABLA DESNUDA ─────────────────────────────────────────
+   Silueta: REJILLA de texto, sin marco. Es la pieza con mas "tinta" y
+   la unica que se lee como una LISTA de cosas — el resto son
+   diagramas. Aqui no hay dibujo: el contenido es el dibujo. */
+.pieza-tabla { display: flex; flex-direction: column; }
+.pt-fila {
+    display: grid;
+    grid-template-columns: 1.15fr 1.15fr 30px 30px;
+    gap: var(--space-3); align-items: center;
+    padding: 11px 0; border-bottom: 1px solid var(--line);
+    font-size: 0.78rem; color: var(--ink-soft);
+}
+.pt-cab {
+    padding-top: 0; border-bottom-color: var(--line-strong);
+    font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--ink-mid);
+}
+.pt-sol { color: var(--ink); font-weight: 500; }
+/* La flecha: el cruce problema→solucion es el metodo entero. */
+.pt-fila:not(.pt-cab) .pt-sol::before {
+    content: '→ '; color: var(--cobalt-600); font-weight: 400;
+}
+.pt-ind { text-align: center; }
+/* Los indicadores: barras de 3 niveles, no numeros. Se comparan de un
+   vistazo sin leer. */
+.pt-ind i {
+    display: inline-block; width: 22px; height: 4px; border-radius: 2px;
+    background: var(--line-strong);
+}
+.pt-n3 { background: var(--cobalt-500) !important; }
+.pt-n2 { background: var(--cobalt-300) !important; }
+.pt-n1 { background: var(--line-strong) !important; }
+.pt-pie {
+    margin: var(--space-4) 0 0; font-size: 0.74rem;
+    color: var(--ink-mid); font-style: italic;
+}
+
+/* ── 04 · LA REGLA DE TIEMPO ───────────────────────────────────────
+   Silueta: FRANJA apaisada y baja, la mas ancha de las cuatro. Es la
+   unica con un eje temporal real. Lleva el UNICO halo de la seccion
+   (antes lo tenian las cuatro y por eso se veian iguales): aqui cierra
+   el recorrido. */
+.pieza-regla {
+    position: relative;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1px; background: var(--line);
+    border-top: 2px solid var(--cobalt-500);
+}
+.pieza-regla::before {
+    content: ''; position: absolute; z-index: -1;
+    inset: -30% -12% -40%;
+    filter: blur(52px);
+    background: radial-gradient(50% 50% at 22% 40%,
+        rgba(234, 130, 88, 0.30) 0%, rgba(234, 130, 88, 0.10) 50%, transparent 78%);
+}
+.pr-tramo {
+    background: var(--bg);
+    padding: var(--space-4) var(--space-3) var(--space-4);
+    display: flex; flex-direction: column; gap: 8px;
+}
+.pr-cuando {
+    font-family: var(--font-mono); font-size: 0.72rem; font-weight: 600;
+    letter-spacing: 0.06em; color: var(--ink-mid);
+}
+.pr-que { font-size: 0.76rem; line-height: 1.35; color: var(--ink-soft); }
+/* El primer tramo manda: es el argumento de los quick wins. */
+.pr--ya { background: var(--cobalt-tint); }
+.pr--ya .pr-cuando { color: var(--cobalt-700); }
+.pr--ya .pr-que { color: var(--ink); font-weight: 500; }
+/* --ink-decor es para lineas, no para texto (2.67 sobre blanco). El
+   tramo "Despues" se atenua con --ink-mid, que si pasa AA. */
+.pr--dim .pr-cuando, .pr--dim .pr-que { color: var(--ink-mid); }
+
+
+/* ── PROFUNDIDAD 3D DE LAS PIEZAS ──────────────────────────────────
+   [3-sep-2026 v8.1] Las piezas se inclinan ligeramente en el eje Y,
+   como las laminas del abanico de "Como trabajo" en la home
+   (index.css:3412). Mismo mecanismo, no un efecto nuevo:
+     · el contenedor abre la perspectiva,
+     · la pieza gira en Y y se separa en Z,
+     · la sombra propia es lo que la despega del papel.
+
+   El giro es SUAVE (-7deg, no -17 como en la home): alli las laminas
+   son decorativas y aqui hay que LEER tablas y notas. Pasado ese
+   angulo el texto se estrecha y pierde legibilidad, que es justo lo
+   que no puede pasar en un entregable.
+
+   La 02 (papel) no gira: es el documento, y un documento se mira de
+   frente. Que sea la unica plana refuerza que sea la unica con marco. */
+.entrega-viz {
+    perspective: 1200px;
+    perspective-origin: 50% 50%;
+}
+.pieza-cuadrante,
+.pieza-tabla,
+.pieza-regla {
+    transform: rotateY(-7deg) rotateX(1.5deg);
+    transform-origin: left center;
+    transition: transform var(--motion-slow) var(--ease-standard);
+}
+/* Al entrar en pantalla se enderezan un poco: la pieza "se presenta".
+   Es un matiz, no una animacion — no se repite ni llama la atencion. */
+.entrega.riel-alcanzado .pieza-cuadrante,
+.entrega.riel-alcanzado .pieza-tabla,
+.entrega.riel-alcanzado .pieza-regla {
+    transform: rotateY(-3.5deg) rotateX(0.5deg);
+}
+/* La sombra que las despega. Sin esto el giro se lee como un error de
+   maquetacion, no como profundidad. */
+.pieza-cuadrante { box-shadow: 22px 22px 48px -24px rgba(18, 19, 22, 0.30); }
+.pieza-tabla     { filter: drop-shadow(18px 18px 34px rgba(18, 19, 22, 0.14)); }
+.pieza-regla     { box-shadow: 20px 20px 46px -22px rgba(18, 19, 22, 0.26); }
+
+@media (prefers-reduced-motion: reduce) {
+    .pieza-cuadrante, .pieza-tabla, .pieza-regla,
+    .entrega.riel-alcanzado .pieza-cuadrante,
+    .entrega.riel-alcanzado .pieza-tabla,
+    .entrega.riel-alcanzado .pieza-regla {
+        transform: none; transition: none;
+    }
+}
+
+/* ===== SECCIONES =====
+   Sin alternado de gris entre secciones: todo --bg blanco, y el hero
+   y el cierre en --night-900. Dos superficies, no tres — el gris
+   intermedio no aporta nada que no haga ya el separador de linea. */
 .section + .section::before {
     content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
     width: min(760px, 82%); height: 1px;
@@ -144,14 +592,117 @@
    cada entrega es una fila con su texto a un lado y SU pieza visual al
    otro, alternando lado como en "Como trabajo" de la home — sin la
    maquinaria de riel con scroll-tracking de la home, que es mucho mas
-   codigo del que esta pagina necesita para 4 filas. */
-.entregas { display: flex; flex-direction: column; gap: 64px; max-width: 980px; margin: 0 auto; }
-.entrega {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+   codigo del que esta pagina necesita para 4 filas.
+
+   [3-sep-2026 v2] Las piezas eran fondo gris plano (.mini-panel,
+   .m-diagram con background: var(--bg-alt)): la seccion se sentia
+   generica al lado de "Como trabajo" en la home, que hace exactamente
+   esto pero con cristal y halo. Se porta ese mismo sistema aqui:
+   --cristal/--cristal-brillo/--cristal-sombra locales a la seccion
+   (igual que .como-trabajo-section los define para si misma) y el
+   halo radial detras de cada pieza, en vez de una caja gris. */
+#que-te-llevas {
+    --cristal: linear-gradient(155deg, rgb(252, 252, 253) 0%, rgb(249, 246, 244) 64%, rgb(245, 238, 234) 100%);
+    --cristal-brillo: linear-gradient(118deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.06) 34%, transparent 58%);
+    --cristal-sombra: 0 18px 40px -14px rgba(26,29,35,0.14), 0 2px 8px -2px rgba(26,29,35,0.08), 0 26px 50px -20px rgba(234, 130, 88, 0.30);
 }
-/* Alterna lado: impares con texto a la izquierda, pares con la pieza
-   a la izquierda — mismo ritmo que .fase-viz en la home. */
-.entrega:nth-child(even) .entrega-texto { order: 2; }
+/* [3-sep-2026 v7] LINEA DEL TIEMPO CON EL RIEL AL CENTRO.
+   Antes el riel iba pegado a la izquierda y todo el contenido a un
+   lado. Ahora la linea baja por el MEDIO y las entregas se alternan a
+   izquierda y derecha, como el bloque "Sostengo" de la home: la linea
+   deja de ser un adorno lateral y pasa a ser el eje de la seccion.
+
+   Y termina en una bola con destello (.entregas-bola) montada sobre el
+   borde del bloque del precio: la linea no se corta en el aire, ENTREGA
+   el precio. Mismo componente que .riel-bola en la home. */
+/* El eje lo define la SECCION, no .entregas: el puente y la bola del
+   precio viven fuera de .entregas y no heredarian la variable. */
+#que-te-llevas, .section--precio { --riel: 50%; }
+
+.entregas {
+    position: relative;
+    max-width: var(--container-tight);
+    margin: 0 auto;
+}
+/* La linea apagada, por el eje central. */
+.entregas::before {
+    content: ''; position: absolute; left: var(--riel); top: 4px; bottom: 0;
+    width: 2px; margin-left: -1px; border-radius: 2px;
+    background: linear-gradient(to bottom,
+        transparent 0%, var(--line-strong) 4%, var(--line-strong) 100%);
+}
+/* EL RELLENO. --riel-avance (0 a 1) lo escribe riel-entregas.js en
+   cada frame. scaleY sobre transform (se compone en GPU) y SIN
+   transition: la animacion la marca el dedo en el scroll; con
+   transition llegaria tarde y se sentiria pastosa. */
+.entregas::after {
+    content: ''; position: absolute; left: var(--riel); top: 4px; bottom: 0;
+    width: 2px; margin-left: -1px; border-radius: 2px;
+    transform-origin: top center;
+    transform: scaleY(var(--riel-avance, 0));
+    background: linear-gradient(to bottom,
+        var(--cobalt-600) 0%, var(--cobalt-500) 55%, var(--cobalt-400) 100%);
+    box-shadow: 0 0 12px var(--cobalt-glow);
+    will-change: transform;
+}
+
+/* Cada entrega: texto a un lado, pieza al otro, con el riel en medio.
+   El gap deja el pasillo por donde baja la linea. */
+.entrega {
+    position: relative;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: var(--space-9);
+    align-items: center;
+    padding-bottom: var(--space-10);
+}
+.entrega:last-child { padding-bottom: var(--space-10); }
+
+/* [3-sep-2026 v7.1] SIN ALTERNAR. Antes las pares invertian columnas y
+   el contenido bailaba a los dos lados del eje; el ojo tenia que
+   recolocarse en cada entrega y la lectura se hacia zigzag. Ahora
+   TODAS van igual: texto a la izquierda, pieza a la derecha, y el
+   riel baja recto por el pasillo hasta el precio. */
+.entrega .entrega-viz { justify-content: flex-start; }
+
+/* El nodo, sobre el eje. --marca-y lo mide riel-entregas.js sobre el
+   titular, asi sigue cuadrando aunque ocupe dos lineas. */
+.entrega-marca {
+    position: absolute;
+    left: var(--riel);
+    top: var(--marca-y, 50%);
+    width: 13px; height: 13px; margin: -6.5px 0 0 -6.5px;
+    border-radius: 50%; z-index: 2;
+    background: var(--bg);
+    border: 2px solid var(--line-strong);
+    transition: background-color var(--motion-base) var(--ease-standard),
+                border-color var(--motion-base) var(--ease-standard),
+                transform var(--motion-base) var(--ease-standard),
+                box-shadow var(--motion-base) var(--ease-standard);
+}
+/* Se enciende cuando LA LINEA lo alcanza, no cuando la fila entra en
+   pantalla: el naranja del punto y el de la linea son el mismo suceso. */
+.entrega.riel-alcanzado .entrega-marca {
+    background: var(--cobalt-500);
+    border-color: var(--cobalt-500);
+    transform: scale(1.2);
+    box-shadow: 0 0 0 5px var(--cobalt-glow), 0 0 18px 3px var(--cobalt-border);
+}
+
+/* LA PRIMERA LINEA DEL TITULAR EN NARANJA — el patron de "Sostengo"
+   en la home: el titular se parte en dos y la primera mitad va en el
+   acento. Da color al bloque sin meter un color nuevo. */
+.entrega-texto h3 .h3-acento {
+    display: block;
+    color: var(--cobalt-600);
+}
+/* Dos frases, no un titulo que se parte: interlineado mas cerrado y
+   sin el balance automatico, que aqui reordenaria las palabras entre
+   las dos lineas y romperia la division a proposito. */
+.entrega-texto h3 {
+    line-height: 1.2;
+    text-wrap: initial;
+}
+
 .entrega-num {
     font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.25em;
     color: var(--cobalt-600); display: block; margin-bottom: 12px; font-weight: 600;
@@ -159,36 +710,37 @@
 .entrega-texto h3 { font-family: var(--font-display); font-size: 1.35rem; font-weight: 400; letter-spacing: -0.01em; margin-bottom: 12px; color: var(--ink); }
 .entrega-texto p { font-size: 0.98rem; color: var(--ink-soft); font-weight: 300; line-height: 1.6; }
 
-/* Panel en miniatura de la entrega 01 — mismo componente que el del
-   hero (panel-*), pero en superficie clara porque esta seccion no es
-   .inverse. */
-.mini-panel {
-    background: var(--bg-alt); border: 1px solid var(--line); border-radius: 12px;
-    padding: 20px 22px; display: flex; flex-direction: column; gap: 14px;
+/* [3-sep-2026 v8] EL CHASIS YA NO ES COMPARTIDO.
+   Las 4 piezas heredaban el mismo cristal (borde, radio, sombra) y el
+   mismo halo detras: por dentro eran dibujos distintos, pero a dos
+   metros eran cuatro rectangulos identicos. El fallo no estaba en el
+   contenido, estaba en el envoltorio.
+
+   Ahora solo la 02 conserva superficie propia (papel, ver
+   .pieza-papel). Las otras tres van directas sobre el blanco de la
+   pagina. Tres sin marco + una con marco es un RITMO; cuatro con
+   marco es una lista. */
+.entrega-pieza {
+    position: relative; z-index: 1; width: 100%;
 }
-.mini-fila { display: grid; grid-template-columns: 76px 1fr; align-items: center; gap: 12px; }
-.mini-fila span:first-child { font-size: 0.8rem; color: var(--ink-mid); }
-.mini-barra { position: relative; height: 5px; border-radius: 3px; background: var(--line); overflow: hidden; }
+.entrega-pieza::after {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background: var(--cristal-brillo);
+}
+.entrega-pieza > * { position: relative; z-index: 1; }
+
+/* Pieza 01 — panel de barras (auditoria de areas) */
+.mini-fila { display: grid; grid-template-columns: 84px 1fr; align-items: center; gap: 14px; }
+.mini-fila span:first-child { font-size: 0.82rem; color: var(--ink-soft); }
 .mini-fill { position: absolute; inset: 0; width: var(--w); border-radius: 3px; }
 .mini-fill.verde { background: var(--verde); }
 .mini-fill.ambar { background: var(--ambar); }
 .mini-fill.rojo { background: var(--rojo); }
 
-/* Diagramas BPM/SVG animados — el mismo componente que ya existia en
-   "El método", reutilizado aqui en vez de duplicado en otra seccion. */
-.m-diagram { border-radius: 12px; background: var(--bg-alt); border: 1px solid var(--line); }
-.m-diagram svg { width: 100%; height: auto; display: block; }
-.md-w { stroke: var(--line); stroke-width: 1; }
-.md-n { fill: var(--bg-alt); stroke: var(--line-strong); stroke-width: 1; }
-.md-n.hub { stroke: var(--cobalt-600); filter: drop-shadow(0 0 10px var(--cobalt-glow)); }
-.md-n.ok { stroke: var(--cobalt-border); }
-.md-n.bad { stroke: var(--rojo); filter: drop-shadow(0 0 8px color-mix(in srgb, var(--rojo) 35%, transparent)); }
+/* Piezas 02-04 — los diagramas BPM/SVG, ahora dentro del cristal en
+   vez de sobre --bg-alt. Reutilizados de "El método", sin duplicarlos
+   en otra seccion. */
 .md-p { fill: var(--cobalt-500); }
-.md-t { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.14em; fill: var(--ink-decor); }
-.md-t.hub-t { fill: var(--cobalt-700); font-size: 10px; }
-.md-t.bad-t { fill: var(--rojo); font-size: 10px; }
-.md-t.dim { fill: var(--ink-decor); }
-.md-dot { fill: var(--cobalt-600); filter: drop-shadow(0 0 6px var(--cobalt-glow)); }
 
 /* Anticipo destacado */
 .deal {
@@ -198,7 +750,7 @@
        se leia. Un verde, un borde, una sombra. */
     position: relative; max-width: 860px; margin: 0 auto; text-align: center;
     background: var(--night-900);
-    border: 1px solid rgba(214, 186, 130, 0.22);
+    border: 1px solid var(--cobalt-border);
     border-radius: var(--radius-lg);
     padding: var(--space-8) var(--space-7);
     box-shadow: 0 30px 70px -35px rgba(15, 31, 27, 0.55);
@@ -208,18 +760,18 @@
     content: ''; position: absolute; inset: 0; pointer-events: none;
     /* sin lavado dorado de fondo: el sistema lo evita */
 }
-.deal .tag {
-    display: inline-block; font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.25em;
-    color: var(--cobalt-300); border: 1px solid rgba(214, 186, 130, 0.35);
-    background: rgba(200, 168, 94, 0.10);
-    padding: 6px 16px; border-radius: var(--radius-pill); margin-bottom: var(--space-5);
-}
-.deal h2 { font-family: var(--font-display); font-size: clamp(1.5rem, 3.2vw, 2.1rem); font-weight: 400; letter-spacing: -0.02em; line-height: 1.25; margin-bottom: 22px; color: var(--on-night); }
+/* [3-sep-2026 v8.2] Se retira la etiqueta que abria el bloque: era la
+   web hablando de si misma ("la parte que mas gusta"), no un
+   argumento. El h2 pasa a abrir, y recupera el aire que le daba. */
+.deal h2 { padding-top: var(--space-3); font-family: var(--font-display); font-size: clamp(1.5rem, 3.2vw, 2.1rem); font-weight: 400; letter-spacing: -0.02em; line-height: 1.25; margin-bottom: 22px; color: var(--on-night); }
 .deal p { font-size: 1.05rem; color: var(--on-night-body); font-weight: 300; margin: 0; }
 .deal p strong { color: var(--on-night); font-weight: 600; }
+/* [3-sep-2026 v6] El "Desde" pasa de --on-night-mid (gris apagado) a
+   --on-night-soft: era la palabra que introducia la cifra y se leia
+   como letra pequenya. */
 .deal-price {
-    font-family: var(--font-heading); font-weight: 500; font-size: clamp(1.1rem, 2vw, 1.35rem);
-    letter-spacing: 0.16em; color: var(--on-night-mid);
+    font-family: var(--font-heading); font-weight: 500; font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+    letter-spacing: 0.16em; color: var(--on-night-soft);
     margin: var(--space-1) 0 var(--space-7); line-height: 1;
     display: flex; flex-direction: column; align-items: center; gap: 14px;
     text-transform: uppercase;
@@ -228,19 +780,32 @@
     display: block; font-size: clamp(2.8rem, 6vw, 4rem); font-weight: 800;
     letter-spacing: -0.03em; line-height: 0.9;
     text-transform: none;
-    /* Dorado plano. El degradado recortado sobre texto se desvanecia
-       por la derecha y la cifra, que es lo que hay que leer, quedaba
-       a medio tono. */
-    color: var(--cobalt-300);
+    /* [3-sep-2026 v6] LA CIFRA EN EL ACENTO. Iba en --cobalt-300, que
+       sobre carbon es un salmon palido: el numero mas importante de la
+       pagina se leia apagado. El 400 es el tono de terracota pensado
+       para fondo oscuro (6.93 sobre --night-900, ver tokens.css) —
+       vivo y legible. Mas grande, y con un resplandor tenue para que
+       la cifra sea el punto de luz del bloque. */
+    color: var(--cobalt-400);
+    font-size: clamp(3.2rem, 7vw, 4.6rem);
+    text-shadow: 0 0 42px rgba(234, 130, 88, 0.28);
 }
 .deal-price-note {
-    font-family: var(--font-body); font-size: 0.85rem; font-weight: 400;
+    /* [3-sep-2026 v6] La nota ya no es una coletilla de 5 palabras:
+       ahora explica la condicion real del precio (sube en negocios
+       grandes, y se sabe antes de decidir). Necesita ancho y una
+       linea de lectura decente. */
+    font-family: var(--font-body); font-size: 0.88rem; font-weight: 400;
     letter-spacing: 0; color: var(--on-night-soft); text-transform: none;
+    line-height: 1.55; max-width: 46ch; text-wrap: pretty;
 }
 /* Los dos escenarios del anticipo */
+/* Dos columnas, no una encima de otra: son dos escenarios que se
+   COMPARAN, y comparar en vertical obliga a recordar el de arriba. */
 .deal-paths {
-    display: flex; flex-direction: column; gap: 16px;
-    text-align: left; margin-top: 8px; max-width: 620px; margin-left: auto; margin-right: auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    text-align: left; margin-top: var(--space-6);
+    max-width: 720px; margin-left: auto; margin-right: auto;
 }
 /* Las dos cajas comparten base: la diferencia entre "si no
    seguimos" y "si lo implementamos" la marca el BORDE dorado, no
@@ -253,8 +818,27 @@
     padding: var(--space-5) var(--space-5);
     text-align: left;
 }
+/* La via buena se distingue por BORDE + fondo teñido, no solo por el
+   borde: antes las dos cajas eran casi identicas y la jugada (que el
+   diagnostico acaba saliendo gratis) no saltaba a la vista. */
 .deal-path.highlight {
     border-color: var(--cobalt-400);
+    background: linear-gradient(160deg,
+        rgba(234, 130, 88, 0.10) 0%,
+        rgba(234, 130, 88, 0.03) 60%,
+        transparent 100%), var(--night-800);
+}
+
+/* El remate de cada via: su RESULTADO, en grande y antes del parrafo.
+   Es lo que se lee de un vistazo; el parrafo solo lo justifica. */
+.deal-path-remate {
+    display: block; font-family: var(--font-display);
+    font-size: 1.32rem; font-weight: 600; letter-spacing: -0.01em;
+    line-height: 1.15; color: var(--on-night); margin-bottom: 10px;
+}
+.deal-path.highlight .deal-path-remate { color: var(--cobalt-400); }
+.deal-path p em {
+    font-style: normal; color: var(--on-night); font-weight: 600;
 }
 .deal-path-label {
     display: block; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.18em;
@@ -307,22 +891,79 @@
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 900px) {
-    .hero-grid { grid-template-columns: 1fr; gap: 48px; }
-    .panel-wrap { order: -1; }
-    .panel-diagnostico { max-width: 440px; }
+    /* El informe se estrecha y sus tablas/diagrama pasan a scroll
+       horizontal propio (.tabla-scroll / .bpmn-scroll): a 360px de
+       ancho, encogerlos los haria ilegibles. */
+    .hero { padding: calc(110px - var(--hero-gap)) 0 var(--space-8); }
+    .hero-texto { margin-bottom: var(--space-6); }
+    .informe { padding: var(--space-5) var(--space-4); }
+    .informe-meta { gap: var(--space-3); }
     .sintomas, .areas { grid-template-columns: 1fr; }
-    .entregas { gap: 40px; }
-    .entrega { grid-template-columns: 1fr; gap: 24px; }
-    .entrega:nth-child(even) .entrega-texto { order: 0; }
+    /* En movil el riel no puede ir al centro: con una sola columna
+       partiria el contenido por la mitad. Vuelve al borde izquierdo y
+       todo cuelga de el. */
+    /* [4-sep-2026] EL RIEL EN MOVIL. Iba a 14px del borde de .entregas,
+       que ya vive dentro del .container (24px de padding): la linea
+       quedaba fuera del bloque de texto y se leia como un adorno
+       suelto al margen.
+       Ahora el eje se pone en 0 y es .entregas quien se despega hacia
+       la izquierda con un margen negativo: la linea cae justo en el
+       borde del contenido y el texto arranca a su derecha. */
+    /* [4-sep-2026 v3] MEDIDO con Chrome a 360px: con el eje en 0 la
+       linea caia en left:0 (pegada al canto de la pantalla, invisible
+       contra el borde) mientras los nodos se pintaban en left:24 — la
+       linea y sus puntos iban por sitios distintos.
+       El eje pasa a 12px: la linea entra en la pantalla y los nodos
+       caen encima de ella, que es lo unico que hace que se lea como
+       una linea del tiempo y no como dos adornos sueltos. */
+    #que-te-llevas, .section--precio { --riel: 12px; }
+    /* OJO: un margin-left negativo SIN compensar el ancho hace que el
+       elemento sobresalga por la derecha y provoca scroll horizontal
+       en toda la pagina. El width lo devuelve a su sitio. */
+    /* Sin margen negativo: el eje ya cae dentro del contenido, asi que
+       .entregas no necesita salirse del container (y salirse era lo
+       que provocaba el scroll horizontal). */
+    .entregas { padding-left: var(--space-7); }
+    /* MEDIDO: el nodo se posiciona contra .entrega (position:relative)
+       y la linea contra .entregas, asi que el padding-left de .entrega
+       los separaba 52px. El nodo se compensa ese padding para caer
+       justo sobre la linea. */
+    /* El centro de la linea cae en riel+1 (su ancho es 2px con
+       margin-left:-1). El nodo se centra con margin-left:-6.5, asi que
+       su left debe apuntar al mismo centro. Medido: cuadra en
+       riel - padding + 8. */
+    .entrega-marca { left: calc(var(--riel) - var(--space-7) + 8px); }
+    .entregas-puente { max-width: none; }
+    .entrega {
+        grid-template-columns: 1fr; gap: var(--space-5);
+        padding-bottom: var(--space-8);
+        /* [4-sep-2026] El nodo mide 13px y se centra en el eje, asi
+           que invade 6.5px hacia el texto. Con space-2 (8px) seguia
+           rozando la primera letra. space-5 (24px) le da aire real. */
+        padding-left: var(--space-5);
+    }
+    /* Las piezas sueltan su ancho fijo y ocupan la columna. La regla
+       de tiempo pasa a 2x2: cuatro tramos en fila a 360px serian
+       ilegibles. */
+    .entrega-viz { max-width: none; }
+    .pieza-regla { grid-template-columns: 1fr 1fr; }
+    .pt-fila { grid-template-columns: 1fr 1fr 26px 26px; font-size: 0.74rem; }
+    .pieza-cuadrante { aspect-ratio: auto; }
+    .entrega-marca { top: var(--marca-y, 14px); }
+    /* La bola se centra en el eje con un translate(-50%), asi que con
+       el eje en el borde quedaria cortada por la mitad (se veia en la
+       captura). Se corre a la derecha su propio radio. */
+    .entregas-bola { margin-left: 0; }
     .quien { grid-template-columns: 1fr; }
     .deal { padding: 44px 26px; }
+    /* Las dos vias se apilan: a un ancho de movil, en columnas se
+       estrangulan. */
+    .deal-paths { grid-template-columns: 1fr; }
     .subnav .back { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    .panel-barra-fill { animation: none; }
-    .md-dot { display: none; }
 }
 
 /* ===== SECCION DEL FOOTER CLASICO (DE LA HOME) ===== */

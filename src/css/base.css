@@ -39,7 +39,20 @@ body {
     line-height: 1.6;
     /* OJO: el overflow-x va en body, NO en html. En html rompe
        position:fixed en moviles WebKit (las burbujas flotantes salian
-       cortadas contra el borde). */
+       cortadas contra el borde).
+
+       [3-sep-2026] clip en vez de hidden. Recorta igual, pero NO crea
+       contenedor de scroll — y hidden si lo creaba, lo que anulaba
+       cualquier position:sticky de la pagina (el hero de
+       diagnostico-operativo depende de uno). overflow-clip-margin deja
+       el corte exactamente en el borde.
+       Si algun navegador viejo no soporta clip, la linea anterior le
+       sirve de reserva. */
+    /* [3-sep-2026] Vuelve a hidden. Se habia cambiado a clip para no
+       romper un position:sticky del hero de diagnostico-operativo,
+       pero ese sticky ya no existe — y clip NO contiene igual el
+       desbordamiento en moviles: aparecia scroll horizontal en varias
+       paginas. hidden si lo contiene. */
     overflow-x: hidden;
 }
 
@@ -145,4 +158,44 @@ body {
     z-index: 0;
     pointer-events: none;
     display: block;
+}
+
+/* ===== SEGURIDAD EN MOVIL =====
+   [3-sep-2026] Reglas que evitan los fallos tipicos de un movil real,
+   no visibles al redimensionar el navegador en un escritorio. */
+
+/* 1 · Palabras largas (URLs, nombres tecnicos) no rompen el layout.
+   Sin esto, una palabra mas ancha que la pantalla fuerza scroll
+   horizontal en TODA la pagina. */
+h1, h2, h3, h4, p, li, td, th, figcaption, blockquote {
+    overflow-wrap: break-word;
+}
+
+/* 2 · Media y tablas nunca desbordan su contenedor. */
+img, svg, video, canvas, iframe { max-width: 100%; }
+
+/* 3 · iOS Safari hace zoom automatico al enfocar un campo con
+   font-size < 16px, y al volver deja la pagina desplazada. Es el
+   fallo mas comun en formularios moviles. */
+@media (max-width: 900px) {
+    input, select, textarea { font-size: 16px; }
+}
+
+/* 4 · Respeta el area segura de los moviles con notch (iPhone X+):
+   sin esto, el contenido a sangre queda bajo el redondeo o la barra
+   de gestos en horizontal. */
+@supports (padding: max(0px)) {
+    .container {
+        padding-left: max(var(--space-5), env(safe-area-inset-left));
+        padding-right: max(var(--space-5), env(safe-area-inset-right));
+    }
+}
+
+/* 5 · Objetivos tactiles: minimo 44x44 (WCAG 2.5.5). Se aplica a los
+   controles reales, no a los enlaces dentro de un parrafo — ahi el
+   criterio no aplica y estirarlos romperia el interlineado. */
+@media (pointer: coarse) {
+    button, [role="button"], .btn-main, .btn-primary, .nav-btn {
+        min-height: 44px;
+    }
 }

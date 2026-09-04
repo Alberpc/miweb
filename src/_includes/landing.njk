@@ -15,5 +15,12 @@
 {% endblock %}
 
 {% block scripts %}
+    {#- [3-sep-2026] La aurora del cierre. Los posts pasan a usar el
+        mismo CTA que el resto del sitio (bloque --night-900 con la
+        aurora multicolor encima) y este layout no la cargaba: el
+        canvas quedaba pintado de negro liso. -#}
+    {%- if usaAurora %}
+    <script src="/assets/js/aurora.js?v={{ v.auroraJs }}"></script>
+    {%- endif %}
     <script src="/assets/js/landing.js" defer></script>
 {% endblock %}

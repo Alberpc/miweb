@@ -170,3 +170,43 @@
 .cta-card p a { color: var(--cobalt-300); text-decoration: underline; text-underline-offset: 3px; }
 .cta-card p a:hover { color: var(--cobalt-400); }
 
+/* ═══ MOVIL ═══════════════════════════════════════════════════════
+   [4-sep-2026] Esta hoja tenia UN solo @media en todo el archivo (el
+   de .related-grid): las paginas de post practicamente no estaban
+   adaptadas. El fallo mas grave era .article-layout, con dos columnas
+   fijas de 240px + 700px y 64px de hueco — 1004px minimos en una
+   pantalla de 360. */
+@media (max-width: 900px) {
+    /* Una sola columna. El indice (TOC) pasa a ser una tira arriba, no
+       una barra lateral pegada: en movil no hay sitio para el lateral
+       y sticky ahi solo estorba. */
+    .article-layout {
+        grid-template-columns: minmax(0, 1fr);
+        gap: var(--space-6);
+    }
+    .toc {
+        position: static;
+        order: -1;
+        padding-bottom: var(--space-5);
+        border-bottom: 1px solid var(--line);
+    }
+    .toc ul {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 6px 14px;
+        border-left: none;
+        padding-left: 0;
+    }
+    .toc a { border-left: none; padding: 6px 0; }
+    .toc a.active { border-left: none; }
+}
+
+@media (max-width: 640px) {
+    .article-hero.inverse { padding: var(--space-9) 0 var(--space-6); }
+    .article-body { padding: var(--space-6) 0 var(--space-8); }
+    /* El cuerpo del articulo: interlineado algo mayor y tipografia que
+       no baje de 16px — es texto largo y se lee entero en el movil. */
+    .article-content p, .article-content li { font-size: 1rem; line-height: 1.72; }
+    .cta-final { padding: var(--space-8) 0 var(--space-9); }
+    .cta-card { padding: var(--space-7) var(--space-5); }
+}

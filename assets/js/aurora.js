@@ -42,6 +42,31 @@ document.addEventListener('DOMContentLoaded', () => {
             { x: 0.76, y: 1.22, r: 0.52, c: [ 58,  80, 190], a: 0.25 },  // azul
             { x: 0.97, y: 1.12, r: 0.54, c: [  0, 138, 126], a: 0.23 }   // teal
         ];
+        /* [3-sep-2026] REPARTO ALTO — para heros donde el halo tiene que
+           VERSE, no solo asomar por el borde inferior.
+
+           El reparto de arriba deja las manchas fuera de cuadro
+           (y > 1) a proposito: en la home el hero es texto sobre
+           carbon y la luz solo entra por abajo. Pero en
+           diagnostico-operativo el hero es alto y lleva un panel
+           claro a la derecha: con las manchas al ras del suelo, los
+           dos tercios superiores quedaban negro liso y la pieza
+           flotaba sobre nada.
+
+           Aqui las manchas SUBEN a media altura y se concentran
+           detras del panel (x 0.55-0.95), asi que el panel se lee
+           como encendido — la luz sale de detras de el, que es lo que
+           hace decagon con sus tarjetas. Opacidades mas bajas que el
+           reparto normal porque ahora caen sobre zona de lectura.
+           Se activa con data-reparto="alto" en el <canvas>. */
+        const PARADAS_ALTO = [
+            { x: 0.72, y: 0.30, r: 0.62, c: [222, 104,  48], a: 0.30 },  // terracota tras el panel
+            { x: 0.95, y: 0.58, r: 0.50, c: [172,  58, 112], a: 0.20 },  // magenta, borde derecho
+            { x: 0.45, y: 0.92, r: 0.60, c: [134,  66, 196], a: 0.20 },  // violeta, suelo centro
+            { x: 0.08, y: 1.05, r: 0.58, c: [ 58,  80, 190], a: 0.16 },  // azul, esquina izquierda
+            { x: 0.62, y: 1.10, r: 0.52, c: [  0, 138, 126], a: 0.14 }   // teal, suelo derecha
+        ];
+
         const menosMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)');
 
         const auroras = Array.from(auroraLienzos).map((lienzo) => {
@@ -49,6 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // El pie es mucho mas bajo que el hero: sin este factor las
             // manchas quedarian fuera de cuadro y solo se veria negro.
             const alto = parseFloat(lienzo.dataset.alto) || 1;
+            const paradas = lienzo.dataset.reparto === 'alto' ? PARADAS_ALTO : PARADAS;
             let w = 0, h = 0, raf = null;
 
             function medir() {
@@ -67,8 +93,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const d = Math.max(w, h);
                 ctx.globalCompositeOperation = 'lighter';
-                for (let i = 0; i < PARADAS.length; i++) {
-                    const p = PARADAS[i];
+                for (let i = 0; i < paradas.length; i++) {
+                    const p = paradas[i];
                     let dx = 0, dy = 0;
                     if (t) {
                         // Cada mancha con su propia fase: si compartieran

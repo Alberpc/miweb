@@ -14,119 +14,18 @@ ogImage: "https://albercabrera.com/assets/img/og-image.jpg"
 footerBlogHref: "/"
 navBlogHref: "/"
 ogImageSize: false
-cssPagina: |
-        /* Reset, html/body y .container los pone css/base.css. */
-
-
-        /* ===== HERO OSCURO DEL BLOG =====
-           Requiere class="inverse" en el <header class="blog-hero">. */
-        .blog-hero.inverse { position: relative; padding: 160px 0 40px; text-align: center; }
-        .blog-hero-inner { position: relative; z-index: 2; }
-        .blog-hero.inverse h1 { font-family: var(--font-display); font-size: clamp(2.1rem, 4.6vw, 3.1rem); font-weight: 400; letter-spacing: -0.02em; color: var(--on-night); }
-
-        /* ===== GRID DE POSTS (cuerpo claro) ===== */
-        .posts { padding: 40px 0 90px; background-color: var(--bg-alt); }
-        .posts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
-
-        .post-card {
-            display: flex; flex-direction: column; text-decoration: none;
-            background: var(--bg); border: 1px solid var(--line); border-radius: 14px;
-            overflow: hidden; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .post-card:hover { border-color: var(--cobalt-border); transform: translateY(-6px); box-shadow: 0 30px 60px rgba(26,29,35,0.14), 0 0 40px -14px var(--cobalt-glow); }
-        .post-thumb { aspect-ratio: 16 / 9; overflow: hidden; background: linear-gradient(135deg, var(--cobalt-tint), var(--bg-alt)); }
-        .post-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
-        .post-card:hover .post-thumb img { transform: scale(1.05); }
-        .post-info { padding: 24px 26px 28px; display: flex; flex-direction: column; flex: 1; }
-        .post-cat { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.2em; color: var(--cobalt-600); text-transform: uppercase; margin-bottom: 12px; }
-        .post-card h2 { font-family: var(--font-heading); font-size: 1.24rem; font-weight: 600; color: var(--ink); line-height: 1.3; letter-spacing: -0.01em; margin-bottom: 12px; }
-        .post-card p { font-size: 0.95rem; color: var(--ink-soft); font-weight: 300; line-height: 1.6; margin-bottom: 20px; flex: 1; }
-        .post-meta { display: flex; align-items: center; gap: 12px; font-size: 0.8rem; color: var(--ink-mid); }
-        .post-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--ink-decor); }
-        .post-more { margin-top: 18px; font-size: 0.88rem; font-weight: 600; color: var(--ink); }
-        .post-card:hover .post-more { color: var(--cobalt-600); }
-
-        /* Estado vacío (por si algún día no hay posts) */
-        .posts-empty { text-align: center; color: var(--ink-mid); font-weight: 300; padding: 40px 0; }
-
-        @media (max-width: 900px) { .posts-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 600px) { .posts-grid { grid-template-columns: 1fr; } .blog-hero.inverse { padding: 130px 0 30px; } }
-
-        /* ===== FOOTER OSCURO =====
-           Requiere class="inverse" en el <footer class="footer-section">. */
-
-
-        @media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr; gap: 40px; } }
-        @media (max-width: 560px) { .footer-links-grid { grid-template-columns: 1fr 1fr; gap: 24px; } }
-        @media (max-width: 480px) {
-        }
-schemas:
-  - |
-        {
-          "@context": "https://schema.org",
-          "@type": "Blog",
-          "name": "Blog de Alberto Pérez Cabrera",
-          "url": "https://albercabrera.com/blog/",
-          "description": "Ideas sobre procesos, automatización con IA y crecimiento para negocios de servicios.",
-          "inLanguage": "es-ES",
-          "author": { "@type": "Person", "name": "Alberto Pérez Cabrera", "url": "https://albercabrera.com/" },
-          "blogPost": [
-            {
-              "@type": "BlogPosting",
-              "headline": "Automatizar una inmobiliaria con IA sin perder leads",
-              "url": "https://albercabrera.com/automatizar-inmobiliaria/",
-              "datePublished": "2026-07-18",
-              "author": { "@type": "Person", "name": "Alberto Pérez Cabrera" }
-            },
-            {
-              "@type": "BlogPosting",
-              "headline": "Automatizar una asesoría o gestoría con IA",
-              "url": "https://albercabrera.com/automatizar-asesoria/",
-              "datePublished": "2026-07-18",
-              "author": { "@type": "Person", "name": "Alberto Pérez Cabrera" }
-            },
-            {
-              "@type": "BlogPosting",
-              "headline": "Por qué tu negocio depende de ti y no crece (y cómo salir de esa trampa)",
-              "url": "https://albercabrera.com/negocio-depende-de-ti/",
-              "datePublished": "2026-07-11",
-              "author": { "@type": "Person", "name": "Alberto Pérez Cabrera" }
-            },
-            {
-              "@type": "BlogPosting",
-              "headline": "Sistematizar un negocio local sin herramientas complejas",
-              "url": "https://albercabrera.com/sistematizar-negocio-local/",
-              "datePublished": "2026-04-05",
-              "author": { "@type": "Person", "name": "Alberto Pérez Cabrera" }
-            },
-            {
-              "@type": "BlogPosting",
-              "headline": "Sistematizar cursos y alumnos en un centro de formación",
-              "url": "https://albercabrera.com/sistematizar-centro-formacion/",
-              "datePublished": "2026-04-10",
-              "author": { "@type": "Person", "name": "Alberto Pérez Cabrera" }
-            },
-            {
-              "@type": "BlogPosting",
-              "headline": "Automatizar el seguimiento de leads en clínicas",
-              "url": "https://albercabrera.com/automatizar-leads-clinicas/",
-              "datePublished": "2026-06-03",
-              "author": { "@type": "Person", "name": "Alberto Pérez Cabrera" }
-            }
-          ]
-        }
-  - |
-        {
-          "@context": "https://schema.org",
-          "@type": "BreadcrumbList",
-          "itemListElement": [
-            { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://albercabrera.com/" },
-            { "@type": "ListItem", "position": 2, "name": "Blog" }
-          ]
-        }
+usaAurora: true
+usaBlogFiltro: true
+heroEnBloque: true
+cssArchivo: "blog"
 ---
     <!-- HERO -->
+    {#- [3-sep-2026] El hero pasa a BLOQUE, con margen y las 4 esquinas
+        redondeadas, igual que la home y diagnostico-operativo. Antes
+        iba a sangre y era la unica pagina del sitio que abria asi.
+        Lleva la aurora como los demas bloques oscuros. -#}
     <header class="blog-hero inverse">
+        <canvas class="aurora-canvas" data-alto="1" aria-hidden="true"></canvas>
         <div class="container blog-hero-inner">
             <h1>Blog</h1>
         </div>
@@ -135,13 +34,37 @@ schemas:
     <!-- POSTS -->
     <section class="posts">
         <div class="container">
+
+            {#- MENU DE CATEGORIAS. Las categorias no van escritas a
+                mano: salen de la coleccion `categoriasBlog`, que las
+                calcula de los propios posts (ver .eleventy.js). Crear
+                un post con una categoria nueva la anade al menu sin
+                tocar esta plantilla.
+
+                El filtrado lo hace blog-filtro.js en la misma vista:
+                son 8 posts, no hace falta paginar ni una URL por
+                categoria. Sin JS, salen todas las tarjetas. -#}
+            {#- Sin .reveal: un control de navegacion no puede depender de JS
+                para verse. Con .reveal arranca en opacity:0 y si el
+                observer tarda o falla, el menu no aparece. -#}
+            <nav class="blog-filtros" aria-label="Filtrar por categoría">
+                <button type="button" class="blog-filtro" data-filtro="todos" aria-pressed="true">
+                    Todos<span class="blog-filtro-n">{{ collections.postsPorFecha | length }}</span>
+                </button>
+                {%- for cat in collections.categoriasBlog %}
+                <button type="button" class="blog-filtro" data-filtro="{{ cat.nombre | slug }}" aria-pressed="false">
+                    {{ cat.nombre }}<span class="blog-filtro-n">{{ cat.n }}</span>
+                </button>
+                {%- endfor %}
+            </nav>
+
             <div class="posts-grid">
 {#- Las tarjetas salen de la coleccion "posts" (src/blog/*.njk), ordenadas
     de mas nueva a mas antigua. Antes estaban escritas a mano aqui, con un
     comentario que decia "duplica este bloque por cada post nuevo": ahora
     basta con crear el .njk del post y su tarjeta aparece sola. -#}
 {%- for post in collections.postsPorFecha %}
-                <a href="{{ post.url }}" class="post-card reveal">
+                <a href="{{ post.url }}" class="post-card reveal" data-categoria="{{ post.data.categoria | slug }}">
                     <div class="post-thumb">
                         <img src="{{ post.data.imagen }}" alt="{{ post.data.imagenAlt }}"{% if post.data.imagenLazy %} loading="lazy" decoding="async"{% endif %}>
                     </div>
@@ -159,5 +82,7 @@ schemas:
                 </a>
 {%- endfor %}
             </div>
+
+            <p class="posts-empty" data-posts-vacio hidden>No hay artículos en esta categoría todavía.</p>
         </div>
     </section>

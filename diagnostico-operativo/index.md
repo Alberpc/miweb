@@ -1,26 +1,92 @@
-# Sabes que algo no va bien. No sabes exactamente dónde.
+# Sabes que algo no va bien. No sabes dónde.
 
-El DAI360 lo encuentra, te lo enseña con claridad y te dice qué merece la pena arreglar primero.
+Audito las cuatro áreas de tu negocio y te enseño, con claridad, qué merece la pena arreglar primero.
 
-Informe DAI360
+## DAI 360
 
-Marketing
+Diagnóstico completo de tus procesos para escalar sin fricción. Este informe te guía paso a paso para optimizar, integrar y ejecutar.
 
-Revisar
+Nombre del negocio
+
+Fecha
+
+Auditoría de Alberto Pérez Cabrera
+
+### _1º_ Auditoría de Área
+
+Auditoría de los 4 ejes operativos: marketing, ventas, operaciones y delivery. Mapa visual de flujos actuales.
+
+### _2º_ Detección de Oportunidades
+
+Cruzar las ineficiencias detectadas con las soluciones posibles, clasificadas por impacto, dificultad y urgencia.
+
+Solución propuestaÁreaProblema detectadoImpactoDificultadUrgencia
+
+Sistema de ventas blindado
 
 Ventas
 
-Urgente
+Gestión 100% manual por WhatsApp
 
-Entrega
+Alto
 
-En orden
+Media
+
+Crítica
+
+Gestión de capacidad y fechas
+
+Operaciones
+
+Saturación en fechas clave, sin antelación
+
+Alto
+
+Baja
+
+Alta
+
+Cerebro operativo (CRM)
 
 Administración
 
-Revisar
+Información fragmentada y sin trazabilidad
 
-Así se ve el estado de tu negocio al terminar. Ejemplo ilustrativo.
+Alto
+
+Media
+
+Media
+
+### _3º_ Roadmap Técnico
+
+El plan de integraciones y mejoras, priorizado por impacto y facilidad. Empieza por lo que antes devuelve.
+
+FasePrioridadQué incluyeCuándo
+
+Fase 0 · Quick wins
+
+Primero
+
+Agente IA que responde WhatsApp 24/7 y cualifica
+
+0-2 sem.
+
+Fase 1
+
+Después
+
+Presupuestos automáticos + recordatorios de seguimiento
+
+1-2 meses
+
+Fase 2
+
+Cuando toque
+
+CRM central sincronizado con agenda y facturación
+
+3-4 meses
 
 ## El negocio funciona, pero cuesta más de lo que debería.
 
@@ -58,47 +124,123 @@ Al terminar el diagnóstico recibes cosas concretas que puedes usar desde el pri
 
 01
 
-### Auditoría de las 4 áreas
+### Sabes qué falla.Las 4 áreas, con nota.
 
 El estado real de marketing, ventas, entrega y administración: qué funciona, qué cojea y cuánto te está costando. Claro y con ejemplos de tu día a día.
 
+Ventas
+
+4 de cada 10 presupuestossin seguimiento
+
 Marketing
 
-Ventas
+Llegan contactos,nadie los ordena
 
 Entrega
 
-Admin.
+Depende de unasola persona
+
+Administración
+
+Funciona, perotodo a mano
 
 02
 
-### El mapa de tus procesos
+### Ves dónde se atasca.Tus procesos, dibujados.
 
 Dibujo cómo fluye el trabajo en tu negocio, paso a paso (un diagrama BPM: el "plano" de tu empresa). Ahí los cuellos de botella saltan a la vista — hasta para ti.
 
+Extracto del informe
+
+1. Entra la consulta
+
+2 h
+
+2. Se pasa a la hoja de cálculo
+
+1 h
+
+3. Revisión manual del socio
+
+3 días
+
+Aquí se para todo
+
+4. Sale el presupuesto
+
+30 min
+
+5. Seguimiento
+
+—
+
+De 3 h de trabajo a **4 días** de espera.
+
 03
 
-### Oportunidades detectadas
+### Sabes qué arreglar.Ordenado por lo que devuelve.
 
 Cruzo cada cuello de botella con su solución concreta, clasificada por impacto, dificultad y urgencia. Sabes qué te duele, cuánto y qué lo arregla.
 
+Lo que pasa
+
+Lo que lo arregla
+
+IMP
+
+ESF
+
+Presupuestos sin seguir
+
+Recordatorio automático
+
+Revisión manual de 3 días
+
+Plantilla + validación
+
+Datos en 4 sitios
+
+Un solo panel
+
+…y 9 más, ordenadas por lo que antes devuelve.
+
 04
 
-### Roadmap por quick wins
+### Y por dónde empezar.El plan, por fases.
 
 El plan de acción por fases: primero las victorias rápidas (lo que más devuelve con menos esfuerzo), después las piezas grandes. Te lo entrego y te lo explico en una sesión contigo.
 
-## Si luego lo arreglamos juntos, el diagnóstico te sale gratis.
+0-2 sem.
 
-Desde **1.500€** precio cerrado, sin sorpresas ni letra pequeña
+Recordatoriosautomáticos
+
+1-2 meses
+
+Presupuestosen plantilla
+
+3-4 meses
+
+Panelúnico
+
+Después
+
+Ajustecontinuo
+
+## Si luego lo arreglamos juntos, recuperas hasta el último euro.
+
+**1.500€** Precio cerrado, que te confirmo antes de empezar. Si tu negocio es grande lo hablamos, pero lo sabrás antes de decidir, nunca después.
 
 ### Si no seguimos
 
-Te quedas un plan de acción que vale su precio: sabes exactamente qué falla, por qué y en qué orden arreglarlo. Es tuyo, lo ejecutas con quien quieras.
+El plan es tuyo
+
+Sabes exactamente qué falla, por qué y en qué orden arreglarlo. Lo ejecutas con quien quieras, o cuando quieras.
 
 ### Si lo implementamos juntos
 
-Lo que pagaste por el diagnóstico **se descuenta íntegro** del proyecto. Es decir: el diagnóstico acaba saliéndote **gratis**.
+Recuperas los 1.500€
+
+Lo que pagaste por el diagnóstico _se descuenta íntegro_ de la implementación.
 
 ## Para quién es (y para quién no).
 
@@ -128,7 +270,7 @@ Un diagnóstico operativo es un análisis completo de tu negocio **antes de toca
 
 ### ¿Cuánto cuesta el diagnóstico DAI360?
 
-Parte de **1.500€**, con precio cerrado que te confirmo antes de empezar según el tamaño de tu negocio: no es lo mismo revisar un despacho de 3 personas que una empresa de 30. Lo sabes antes de decidir, no después. Y si tras el diagnóstico decides que yo implemente las mejoras, lo que pagaste **se descuenta íntegro** del proyecto. O te llevas un plan que vale su precio, o te acaba saliendo gratis.
+Parte de **1.500€**, con precio cerrado que te confirmo antes de empezar según el tamaño de tu negocio: no es lo mismo revisar un despacho de 3 personas que una empresa de 30. Lo sabes antes de decidir, no después. Y si tras el diagnóstico decides que yo implemente las mejoras, lo que pagaste **se descuenta íntegro** del proyecto. O te llevas un plan que vale su precio, o recuperas lo que pagaste.
 
 ### ¿Cuánto tiempo me va a quitar a mí y a mi equipo?
 

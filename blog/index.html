@@ -63,136 +63,19 @@
     <meta name="twitter:description" content="Procesos, automatización con IA y crecimiento para negocios de servicios.">
     <meta name="twitter:image" content="https://albercabrera.com/assets/img/og-image.jpg">
 
-    <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Blog",
-  "name": "Blog de Alberto Pérez Cabrera",
-  "url": "https://albercabrera.com/blog/",
-  "description": "Ideas sobre procesos, automatización con IA y crecimiento para negocios de servicios.",
-  "inLanguage": "es-ES",
-  "author": { "@type": "Person", "name": "Alberto Pérez Cabrera", "url": "https://albercabrera.com/" },
-  "blogPost": [
-    {
-      "@type": "BlogPosting",
-      "headline": "Automatizar una inmobiliaria con IA sin perder leads",
-      "url": "https://albercabrera.com/automatizar-inmobiliaria/",
-      "datePublished": "2026-07-18",
-      "author": { "@type": "Person", "name": "Alberto Pérez Cabrera" }
-    },
-    {
-      "@type": "BlogPosting",
-      "headline": "Automatizar una asesoría o gestoría con IA",
-      "url": "https://albercabrera.com/automatizar-asesoria/",
-      "datePublished": "2026-07-18",
-      "author": { "@type": "Person", "name": "Alberto Pérez Cabrera" }
-    },
-    {
-      "@type": "BlogPosting",
-      "headline": "Por qué tu negocio depende de ti y no crece (y cómo salir de esa trampa)",
-      "url": "https://albercabrera.com/negocio-depende-de-ti/",
-      "datePublished": "2026-07-11",
-      "author": { "@type": "Person", "name": "Alberto Pérez Cabrera" }
-    },
-    {
-      "@type": "BlogPosting",
-      "headline": "Sistematizar un negocio local sin herramientas complejas",
-      "url": "https://albercabrera.com/sistematizar-negocio-local/",
-      "datePublished": "2026-04-05",
-      "author": { "@type": "Person", "name": "Alberto Pérez Cabrera" }
-    },
-    {
-      "@type": "BlogPosting",
-      "headline": "Sistematizar cursos y alumnos en un centro de formación",
-      "url": "https://albercabrera.com/sistematizar-centro-formacion/",
-      "datePublished": "2026-04-10",
-      "author": { "@type": "Person", "name": "Alberto Pérez Cabrera" }
-    },
-    {
-      "@type": "BlogPosting",
-      "headline": "Automatizar el seguimiento de leads en clínicas",
-      "url": "https://albercabrera.com/automatizar-leads-clinicas/",
-      "datePublished": "2026-06-03",
-      "author": { "@type": "Person", "name": "Alberto Pérez Cabrera" }
-    }
-  ]
-}
-
-    </script>
-
-    <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://albercabrera.com/" },
-    { "@type": "ListItem", "position": 2, "name": "Blog" }
-  ]
-}
-
-    </script>
-
-
     <!-- Fuentes del sistema Bosque Inteligente: Instrument Serif para los
          titulares e Inter para el cuerpo, las mismas que la home. Los posts
          solo cargaban Inter, y por eso sus titulares no heredaban la serif. -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/design-system/tokens.css?v=5">
-    <link rel="stylesheet" href="/css/base.css?v=5">
-    <link rel="stylesheet" href="/css/nav.css?v=5">
-    <link rel="stylesheet" href="/css/botones.css?v=5">
-    <link rel="stylesheet" href="/css/faq.css?v=5">
-    <link rel="stylesheet" href="/css/pie.css?v=5">
-    <style>
-/* Reset, html/body y .container los pone css/base.css. */
-
-
-/* ===== HERO OSCURO DEL BLOG =====
-   Requiere class="inverse" en el <header class="blog-hero">. */
-.blog-hero.inverse { position: relative; padding: 160px 0 40px; text-align: center; }
-.blog-hero-inner { position: relative; z-index: 2; }
-.blog-hero.inverse h1 { font-family: var(--font-display); font-size: clamp(2.1rem, 4.6vw, 3.1rem); font-weight: 400; letter-spacing: -0.02em; color: var(--on-night); }
-
-/* ===== GRID DE POSTS (cuerpo claro) ===== */
-.posts { padding: 40px 0 90px; background-color: var(--bg-alt); }
-.posts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
-
-.post-card {
-    display: flex; flex-direction: column; text-decoration: none;
-    background: var(--bg); border: 1px solid var(--line); border-radius: 14px;
-    overflow: hidden; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.post-card:hover { border-color: var(--cobalt-border); transform: translateY(-6px); box-shadow: 0 30px 60px rgba(26,29,35,0.14), 0 0 40px -14px var(--cobalt-glow); }
-.post-thumb { aspect-ratio: 16 / 9; overflow: hidden; background: linear-gradient(135deg, var(--cobalt-tint), var(--bg-alt)); }
-.post-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
-.post-card:hover .post-thumb img { transform: scale(1.05); }
-.post-info { padding: 24px 26px 28px; display: flex; flex-direction: column; flex: 1; }
-.post-cat { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.2em; color: var(--cobalt-600); text-transform: uppercase; margin-bottom: 12px; }
-.post-card h2 { font-family: var(--font-heading); font-size: 1.24rem; font-weight: 600; color: var(--ink); line-height: 1.3; letter-spacing: -0.01em; margin-bottom: 12px; }
-.post-card p { font-size: 0.95rem; color: var(--ink-soft); font-weight: 300; line-height: 1.6; margin-bottom: 20px; flex: 1; }
-.post-meta { display: flex; align-items: center; gap: 12px; font-size: 0.8rem; color: var(--ink-mid); }
-.post-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--ink-decor); }
-.post-more { margin-top: 18px; font-size: 0.88rem; font-weight: 600; color: var(--ink); }
-.post-card:hover .post-more { color: var(--cobalt-600); }
-
-/* Estado vacío (por si algún día no hay posts) */
-.posts-empty { text-align: center; color: var(--ink-mid); font-weight: 300; padding: 40px 0; }
-
-@media (max-width: 900px) { .posts-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 600px) { .posts-grid { grid-template-columns: 1fr; } .blog-hero.inverse { padding: 130px 0 30px; } }
-
-/* ===== FOOTER OSCURO =====
-   Requiere class="inverse" en el <footer class="footer-section">. */
-
-
-@media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr; gap: 40px; } }
-@media (max-width: 560px) { .footer-links-grid { grid-template-columns: 1fr 1fr; gap: 24px; } }
-@media (max-width: 480px) {
-}
-
-    </style>
+    <link rel="stylesheet" href="/design-system/tokens.css?v=38">
+    <link rel="stylesheet" href="/css/base.css?v=38">
+    <link rel="stylesheet" href="/css/nav.css?v=38">
+    <link rel="stylesheet" href="/css/botones.css?v=38">
+    <link rel="stylesheet" href="/css/faq.css?v=38">
+    <link rel="stylesheet" href="/css/pie.css?v=38">
+    <link rel="stylesheet" href="/css/blog.css?v=38">
 
     <link rel="stylesheet" href="/assets/cookies/cookie-banner.css?v=1">
 </head>
@@ -203,7 +86,7 @@
     <!-- End Google Tag Manager (noscript) -->
 
 
-<nav class="navbar">
+<nav class="navbar navbar--en-hero">
         <div class="nav-container">
             <a href="/" class="logo"><img src="/assets/img/logo-alber-blanco.png" alt="Alber Cabrera"></a>
             <div class="nav-menu">
@@ -227,8 +110,8 @@
     </nav>
 
 
-    <!-- HERO -->
-    <header class="blog-hero inverse">
+    <!-- HERO --><header class="blog-hero inverse">
+        <canvas class="aurora-canvas" data-alto="1" aria-hidden="true"></canvas>
         <div class="container blog-hero-inner">
             <h1>Blog</h1>
         </div>
@@ -236,9 +119,23 @@
 
     <!-- POSTS -->
     <section class="posts">
-        <div class="container">
+        <div class="container"><nav class="blog-filtros" aria-label="Filtrar por categoría">
+                <button type="button" class="blog-filtro" data-filtro="todos" aria-pressed="true">
+                    Todos<span class="blog-filtro-n">8</span>
+                </button>
+                <button type="button" class="blog-filtro" data-filtro="automatizacion-con-ia" aria-pressed="false">
+                    Automatización con IA<span class="blog-filtro-n">5</span>
+                </button>
+                <button type="button" class="blog-filtro" data-filtro="negocio-y-procesos" aria-pressed="false">
+                    Negocio y procesos<span class="blog-filtro-n">2</span>
+                </button>
+                <button type="button" class="blog-filtro" data-filtro="ia-y-visibilidad" aria-pressed="false">
+                    IA y visibilidad<span class="blog-filtro-n">1</span>
+                </button>
+            </nav>
+
             <div class="posts-grid">
-                <a href="/aeo-seo-ia-visibilidad/" class="post-card reveal">
+                <a href="/aeo-seo-ia-visibilidad/" class="post-card reveal" data-categoria="ia-y-visibilidad">
                     <div class="post-thumb">
                         <img src="/assets/img/aeo-ia-rastreando-web.jpg" alt="Persona señalando en la pantalla un resumen generado por IA de una página web">
                     </div>
@@ -254,12 +151,12 @@
                         <span class="post-more">Leer artículo &rarr;</span>
                     </div>
                 </a>
-                <a href="/automatizar-mi-negocio/" class="post-card reveal">
+                <a href="/automatizar-mi-negocio/" class="post-card reveal" data-categoria="automatizacion-con-ia">
                     <div class="post-thumb">
                         <img src="/assets/img/cover-automatizar-negocio.jpg" alt="Dueño de un negocio revisando papeles y hablando por el móvil fuera de su horario" loading="lazy" decoding="async">
                     </div>
                     <div class="post-info">
-                        <span class="post-cat">Automatización y procesos</span>
+                        <span class="post-cat">Automatización con IA</span>
                         <h2>Cómo automatizar mi negocio: por dónde empezar</h2>
                         <p>Antes de contratar ninguna herramienta: cómo calcular qué tarea te está costando más horas al mes, qué no conviene automatizar y en qué orden hacerlo.</p>
                         <div class="post-meta">
@@ -270,7 +167,7 @@
                         <span class="post-more">Leer artículo &rarr;</span>
                     </div>
                 </a>
-                <a href="/automatizar-asesoria/" class="post-card reveal">
+                <a href="/automatizar-asesoria/" class="post-card reveal" data-categoria="automatizacion-con-ia">
                     <div class="post-thumb">
                         <img src="/assets/img/asesoria-escritorio-negro.jpg" alt="Escritorio de asesoría sobre fondo negro con portátil, calculadora y café, vista cenital">
                     </div>
@@ -286,7 +183,7 @@
                         <span class="post-more">Leer artículo &rarr;</span>
                     </div>
                 </a>
-                <a href="/automatizar-inmobiliaria/" class="post-card reveal">
+                <a href="/automatizar-inmobiliaria/" class="post-card reveal" data-categoria="automatizacion-con-ia">
                     <div class="post-thumb">
                         <img src="/assets/img/inmobiliaria-casa-iluminada.jpg" alt="Casa iluminada sobre un teclado, representando la automatización de una inmobiliaria con IA">
                     </div>
@@ -302,7 +199,7 @@
                         <span class="post-more">Leer artículo &rarr;</span>
                     </div>
                 </a>
-                <a href="/negocio-depende-de-ti/" class="post-card reveal">
+                <a href="/negocio-depende-de-ti/" class="post-card reveal" data-categoria="negocio-y-procesos">
                     <div class="post-thumb">
                         <img src="/assets/img/photo-tired-redhead-businessman-touching-his-head-looking-digital-tablet-scaled.jpg" alt="Dueño de un negocio agotado frente a una tablet">
                     </div>
@@ -318,7 +215,7 @@
                         <span class="post-more">Leer artículo &rarr;</span>
                     </div>
                 </a>
-                <a href="/automatizar-leads-clinicas/" class="post-card reveal">
+                <a href="/automatizar-leads-clinicas/" class="post-card reveal" data-categoria="automatizacion-con-ia">
                     <div class="post-thumb">
                         <img src="/assets/img/clinic-room-neurological-diagnosis.jpg" alt="Sala de consulta de una clínica donde se gestiona el seguimiento de pacientes">
                     </div>
@@ -334,7 +231,7 @@
                         <span class="post-more">Leer artículo &rarr;</span>
                     </div>
                 </a>
-                <a href="/sistematizar-centro-formacion/" class="post-card reveal">
+                <a href="/sistematizar-centro-formacion/" class="post-card reveal" data-categoria="automatizacion-con-ia">
                     <div class="post-thumb">
                         <img src="/assets/img/vitaly-gariev-Ad2TAPEhliE-unsplash.jpg" alt="Responsable de un centro de formación organizando la gestión de cursos y alumnos">
                     </div>
@@ -350,7 +247,7 @@
                         <span class="post-more">Leer artículo &rarr;</span>
                     </div>
                 </a>
-                <a href="/sistematizar-negocio-local/" class="post-card reveal">
+                <a href="/sistematizar-negocio-local/" class="post-card reveal" data-categoria="negocio-y-procesos">
                     <div class="post-thumb">
                         <img src="/assets/img/cover-image.jpg" alt="Dueño de negocio local organizando y documentando procesos de trabajo">
                     </div>
@@ -367,6 +264,8 @@
                     </div>
                 </a>
             </div>
+
+            <p class="posts-empty" data-posts-vacio hidden>No hay artículos en esta categoría todavía.</p>
         </div>
     </section>
 
@@ -429,6 +328,8 @@
 
 
     <script src="/assets/js/base.js" defer></script>
+    <script src="/assets/js/aurora.js?v=2"></script>
+    <script src="/assets/js/blog-filtro.js?v=1"></script>
 
     <script src="/assets/cookies/cookie-banner.js?v=1" defer></script>
 </body>

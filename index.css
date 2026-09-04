@@ -1745,7 +1745,12 @@ html {
         gap: var(--space-6);
     }
     .hero-title {
-        font-size: 2.8rem; /* Instrument Serif más estrecho que Inter: recalibrado junto al clamp de arriba */
+        /* [4-sep-2026] Era 2.8rem fijo (45px): en una pantalla de 360px
+           las palabras largas ("ayudarte.", "empezar.") llegaban al
+           borde y el bloque se veia sin aire. Con vw escala con la
+           pantalla en vez de imponerse. */
+        font-size: clamp(1.85rem, 8.2vw, 2.6rem);
+        line-height: 1.12;
     }
     .hero-subtitle {
         font-size: 1rem;
@@ -2753,6 +2758,13 @@ html {
    del fondo de la pagina.
    La regla se queda vacia (sin ::after) a proposito: el fondo de la
    seccion es --night-900 limpio. */
+
+/* [3-sep-2026] --riel se define en la SECCION, no en .fases.
+   .riel-bola vive dentro de .cierre, que es hermano de .fases: no
+   heredaba la variable y caia a su valor de reserva (50%), asi que en
+   movil la bola quedaba centrada mientras la linea se iba al borde
+   izquierdo. Definida aqui, las dos piezas comparten el mismo eje. */
+.como-trabajo-section { --riel: 50%; }
 
 .fases {
     list-style: none;
@@ -4028,6 +4040,10 @@ html {
     .riel-bola {
         width: 30px;
         height: 30px;
+        /* Con el eje a 5px y 30px de ancho, la mitad de la bola se
+           saldria del bloque (el translate la centra en el eje). Se
+           desplaza a la derecha lo justo para quedar entera dentro. */
+        margin-left: 10px;
     }
     .riel-bola svg { width: 14px; height: 14px; }
 }
@@ -4050,10 +4066,72 @@ html {
    riel se va al borde izquierdo y texto y tarjeta se apilan a su
    derecha. Basta con mover --riel, porque linea, relleno y nodo estan
    todos anclados a esa misma variable. */
+/* [3-sep-2026] LAS PESTANYAS EN MOVIL.
+   Iban con overflow-x: auto, asi que a este ancho la tercera quedaba
+   fuera de vista y habia que deslizar a ciegas para descubrirla — no
+   habia ninguna senyal de que hubiera mas.
+   Son solo 3: caben si se compactan. Se quita el scroll y se reparten
+   el ancho a partes iguales, con el numero encima del texto para que
+   la etiqueta no tenga que abreviarse. */
+@media (max-width: 700px) {
+    .piezas-tabs {
+        overflow-x: visible;
+        gap: 2px;
+    }
+    .pieza-tab {
+        flex: 1 1 0;
+        min-width: 0;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2px;
+        padding: var(--space-3) var(--space-2);
+        font-size: 0.76rem;
+        line-height: 1.15;
+        /* [4-sep-2026] El texto TIENE que poder partirse en dos lineas:
+           "Sistemas de control" no cabe en un tercio de pantalla y se
+           salia por encima de la pestanya de al lado (se veia
+           "Automatizacione8istemas de contr..."). Con esto cada
+           etiqueta ocupa las lineas que necesite y ninguna invade a su
+           vecina. */
+        white-space: normal;
+        overflow-wrap: break-word;
+        hyphens: auto;
+        text-align: left;
+    }
+    /* Las tres igualan altura para que el borde inferior activo quede
+       a la misma linea aunque una ocupe dos lineas y otra una. */
+    .piezas-tabs { align-items: stretch; }
+}
+
 @media (max-width: 900px) {
+    /* El eje se mueve en la SECCION: asi lo siguen la linea, los nodos
+       Y la bola del cierre a la vez. Antes solo lo movia .fases y la
+       bola se quedaba en el centro. */
+    .como-trabajo-section { --riel: 5px; }
     .fases {
         --riel: 5px;
     }
+    /* [3-sep-2026] EL ABANICO EN MOVIL. No tenia reglas propias: las
+       laminas se separan hasta -92px en X y con el giro 3D la pila
+       sobresalia del bloque y rozaba el borde de la pantalla.
+       Aqui se aprieta el escalonado y se reduce el giro — la
+       profundidad se mantiene, pero cabe. */
+    /* [4-sep-2026] El abanico seguia tocando el borde derecho. El
+       problema no es solo el escalonado: con rotateY las laminas
+       sobresalen de su caja, asi que ademas de apretarlas hay que
+       recortar lo que se salga. */
+    .fase-pieza--abanico {
+        perspective: 760px;
+        overflow: hidden;
+        padding-right: 2px;
+    }
+    .abanico { aspect-ratio: 16 / 11; }
+    .abanico .lam { width: 58%; }
+    /* Las transformaciones reales viven en .fase.revealed, asi que hay
+       que igualar esa especificidad o no se aplican. */
+    .fase.revealed .abanico .lam--1 { transform: translate(-50%, 0) translate3d(-44px, 8px, 26px) rotateY(-11deg) rotateX(-1deg); }
+    .fase.revealed .abanico .lam--2 { transform: translate(-50%, 0) translate3d(-22px, 4px, 13px) rotateY(-11deg) rotateX(-1deg); }
+    .fase.revealed .abanico .lam--3 { transform: translate(-50%, 0) translate3d(0, 0, 0) rotateY(-11deg) rotateX(-1deg); }
     .fase {
         grid-template-columns: 1fr;
         padding-left: var(--space-7);

@@ -103,7 +103,9 @@ body:has(.cta-final.inverse) .footer-section {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: var(--space-3);
+    /* Menos gap porque cada enlace ya aporta su propio padding
+       tactil: el espacio visible entre ellos es el mismo. */
+    gap: var(--space-2);
 }
 
 .footer-links-list a {
@@ -112,6 +114,14 @@ body:has(.cta-final.inverse) .footer-section {
     color: var(--on-night-soft);
     text-decoration: none;
     transition: color var(--motion-base) var(--ease-standard);
+    /* [3-sep-2026] Area tactil. El enlace solo ocupaba el alto de su
+       texto (~18px) y se pulsa con el pulgar: WCAG 2.5.5 y las guias
+       de Apple y Android piden 44px. El padding vertical se compensa
+       con un margen negativo para que la lista no se estire — el area
+       crece, el diseno no cambia. */
+    display: inline-block;
+    padding: 7px 0;
+    margin: -7px 0;
 }
 .footer-links-list a:hover { color: var(--on-night); }
 

@@ -230,9 +230,14 @@ lectura: "6 min"
     </section>
 
     <!-- CTA FINAL -->
-    <section class="cta-final">
+    {#- Mismo cierre que el resto del sitio: bloque --night-900
+        con la aurora multicolor encima, para que el pie se
+        enganche sin costura (ver pie.css). Antes los posts
+        usaban una .cta-card clara, la unica del sitio. -#}
+    <section class="cta-final inverse">
+        <canvas class="aurora-canvas" data-alto="1" aria-hidden="true"></canvas>
         <div class="container">
-            <div class="cta-card reveal">
+            <div class="reveal">
                 <h2>¿Cuánto tarda tu clínica en responder a un lead nuevo?</h2>
                 <p>Cuéntame cómo gestionas hoy las consultas que llegan por web, WhatsApp o teléfono, y te ayudo a ver qué automatizar primero para no perder más pacientes por tardanza.</p>
                 <a href="/#contacto" class="btn-main">Cuéntame tu caso &rarr;</a>

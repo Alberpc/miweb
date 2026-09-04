@@ -2,11 +2,11 @@
 layout: pagina.njk
 permalink: "/diagnostico-operativo/index.html"
 title: "Diagnóstico operativo para negocios | DAI360 — Alber Cabrera"
-description: "Diagnóstico operativo DAI360: analizo las 4 áreas de tu negocio y te doy un plan de qué arreglar primero. Desde 1.500€, descontable si lo implementamos."
+description: "Diagnóstico operativo DAI360: analizo las 4 áreas de tu negocio y te doy un plan de qué arreglar primero. 1.500€, que se descuentan íntegros si luego lo implementamos."
 slug: "diagnostico-operativo"
 ogType: "website"
 ogTitle: "Diagnóstico operativo para negocios | DAI360"
-ogDescription: "Encuentro dónde tu negocio pierde tiempo y dinero y te digo qué arreglar primero. Y si luego lo arreglamos juntos, el diagnóstico te sale gratis."
+ogDescription: "Encuentro dónde tu negocio pierde tiempo y dinero y te digo qué arreglar primero. Y si luego lo arreglamos juntos, recuperas hasta el último euro."
 twitterTitle: "Diagnóstico operativo para negocios | DAI360"
 twitterDescription: "Dónde pierdes tiempo y dinero, y qué arreglar primero. Claro y sin humo."
 ogImage: "https://albercabrera.com/assets/img/og-image.jpg"
@@ -14,10 +14,11 @@ ogImageSize: false
 robots: "index, follow"
 canonical: "https://albercabrera.com/diagnostico-operativo/"
 navCtaHref: "#contacto"
-navCtaTexto: "Pedir mi diagnóstico"
+navCtaTexto: "Cuéntame tu caso"
 footerDai360Href: "/"
 pieSinAurora: true
 usaAurora: true
+usaRielEntregas: true
 usaFaq: true
 heroEnBloque: true
 cssArchivo: "diagnostico-operativo"
@@ -85,7 +86,7 @@ schemas:
           "name": "¿Cuánto cuesta el diagnóstico DAI360?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Parte de 1.500 euros, con precio cerrado que te confirmo antes de empezar según el tamaño de tu negocio: no es lo mismo revisar un despacho de tres personas que una empresa de treinta. Lo sabes antes de decidir, no después. Y si tras el diagnóstico decides que yo implemente las mejoras, lo que pagaste se descuenta íntegro del proyecto. O te llevas un plan que vale su precio, o te acaba saliendo gratis."
+            "text": "Parte de 1.500 euros, con precio cerrado que te confirmo antes de empezar según el tamaño de tu negocio: no es lo mismo revisar un despacho de tres personas que una empresa de treinta. Lo sabes antes de decidir, no después. Y si tras el diagnóstico decides que yo implemente las mejoras, lo que pagaste se descuenta íntegro del proyecto. O te llevas un plan que vale su precio, o recuperas lo que pagaste."
           }
         },
         {
@@ -156,55 +157,184 @@ schemas:
     }
 ---
     <!-- HERO -->
-    <header class="hero inverse">
-        <canvas class="aurora-canvas" data-alto="1" aria-hidden="true"></canvas>
-        <div class="container hero-grid">
-            <div>
-                <span class="hero-badge">ANTES DE GASTAR EN NADA</span>
-                <h1>Sabes que algo no va bien. <span class="hl">No sabes exactamente dónde.</span></h1>
-                <p class="sub">El DAI360 lo encuentra, te lo enseña con claridad y te dice qué merece la pena arreglar primero.</p>
+    {#- [3-sep-2026 v5] HERO CLARO + EL INFORME COMO UN DOCUMENTO.
+
+        Se retira el hero oscuro y las 3 piezas sueltas de antes. Lo
+        que se ensena ahora es UNA sola pantalla: el informe DAI360 tal
+        como se entrega, con sus 3 apartados en vertical (auditoria de
+        area con el flujo BPMN, deteccion de oportunidades y roadmap
+        tecnico) — el mismo documento que el cliente recibe.
+
+        Fondo BLANCO, no negro: el entregable es un documento y un
+        documento se lee sobre papel. El halo terracota sale de detras
+        del panel como una sombra de color, y es lo unico que pone
+        atmosfera. Sin animaciones. -#}
+    <header class="hero">
+        <div class="container">
+            <div class="hero-texto">
+                <h1>Sabes que algo no va bien. <span class="hl">No sabes dónde.</span></h1>
+                <p class="sub">Audito las cuatro áreas de tu negocio y te enseño, con claridad, qué merece la pena arreglar primero.</p>
                 <div class="hero-ctas">
-                    <a href="/#contacto" class="btn-main">Pedir mi diagnóstico &rarr;</a>
-                    <a href="#que-es" class="link-soft">Ver cómo funciona &darr;</a>
+                    <a href="/#contacto" class="btn-main">Cuéntame tu caso &rarr;</a>
                 </div>
             </div>
-            {#- Antes iba aqui el radar (SVG con barrido girando en bucle,
-                sin relacion con ningun entregable real). Se sustituye por
-                el panel que de verdad recibe el cliente: el estado de las
-                4 areas con semaforo, tal cual sale en el informe. Prueba
-                de producto en vez de decoracion de marca — mismo criterio
-                que los mockups de no-perder-clientes.njk, adaptado al
-                hero oscuro de esta pagina. -#}
-            <div class="panel-wrap">
-                <div class="panel-diagnostico" aria-hidden="true">
-                    <div class="panel-toolbar">
-                        <span class="panel-dot"></span><span class="panel-dot"></span><span class="panel-dot"></span>
-                        <span class="panel-title">Informe DAI360</span>
-                    </div>
-                    <div class="panel-filas">
-                        <div class="panel-fila">
-                            <span class="panel-area">Marketing</span>
-                            <span class="panel-barra"><span class="panel-barra-fill ambar" style="--w:52%"></span></span>
-                            <span class="panel-badge ambar">Revisar</span>
+
+            {#- EL INFORME: una sola pantalla, no tres tarjetas.
+                aria-hidden porque es la ilustracion del entregable; lo
+                que cuenta esta escrito en texto en "Que te llevas". -#}
+            <div class="informe-wrap">
+                <article class="informe" aria-hidden="true">
+
+                    <header class="informe-cab">
+                        <h2>DAI 360</h2>
+                        <p class="informe-lead">Diagnóstico completo de tus procesos para escalar sin fricción. Este informe te guía paso a paso para optimizar, integrar y ejecutar.</p>
+                        <div class="informe-meta">
+                            <span>Nombre del negocio</span>
+                            <span>Fecha</span>
+                            <span>Auditoría de Alberto Pérez Cabrera</span>
                         </div>
-                        <div class="panel-fila">
-                            <span class="panel-area">Ventas</span>
-                            <span class="panel-barra"><span class="panel-barra-fill rojo" style="--w:28%"></span></span>
-                            <span class="panel-badge rojo">Urgente</span>
+                    </header>
+
+                    <!-- 1º AUDITORIA — el flujo BPMN -->
+                    <section class="informe-bloque">
+                        <h3><em>1º</em> Auditoría de Área</h3>
+                        <p class="informe-sub">Auditoría de los 4 ejes operativos: marketing, ventas, operaciones y delivery. Mapa visual de flujos actuales.</p>
+
+                        <div class="bpmn-scroll">
+                        <svg class="bpmn" viewBox="0 0 730 210" preserveAspectRatio="xMidYMid meet">
+                            <defs>
+                                <marker id="fl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                    <path d="M0 0 L10 5 L0 10 z" fill="#9A9AA3"/>
+                                </marker>
+                            </defs>
+
+                            <path class="bp-fl" d="M40 76 H68" marker-end="url(#fl)"/>
+                            <path class="bp-fl" d="M176 76 H236" marker-end="url(#fl)"/>
+                            <path class="bp-fl" d="M270 50 V34 H348" marker-end="url(#fl)"/>
+                            <path class="bp-fl" d="M270 102 V140 H348" marker-end="url(#fl)"/>
+                            <path class="bp-fl" d="M462 46 H494 V76 H526" marker-end="url(#fl)"/>
+                            <path class="bp-fl" d="M462 140 H494 V76 H526" marker-end="url(#fl)"/>
+                            <path class="bp-fl" d="M634 76 H668" marker-end="url(#fl)"/>
+
+                            <circle class="bp-ini" cx="26" cy="76" r="13"/>
+                            <text class="bp-lb" x="26" y="106" text-anchor="middle">ENTRA</text>
+
+                            <rect class="bp-task" x="68" y="52" width="108" height="48" rx="7"/>
+                            <text class="bp-t" x="122" y="72" text-anchor="middle">Llega consulta</text>
+                            <text class="bp-t sm" x="122" y="88" text-anchor="middle">WhatsApp / web</text>
+
+                            <path class="bp-gw" d="M236 76 L270 48 L304 76 L270 104 Z"/>
+                            <text class="bp-t" x="270" y="80" text-anchor="middle">¿Ficha?</text>
+
+                            <rect class="bp-task bad" x="348" y="22" width="114" height="48" rx="7"/>
+                            <text class="bp-t" x="405" y="42" text-anchor="middle">Revisión manual</text>
+                            <text class="bp-t sm bad-t" x="405" y="58" text-anchor="middle">3 días de media</text>
+
+                            <rect class="bp-task" x="348" y="116" width="114" height="48" rx="7"/>
+                            <text class="bp-t" x="405" y="136" text-anchor="middle">Presupuesto</text>
+                            <text class="bp-t sm" x="405" y="152" text-anchor="middle">desde plantilla</text>
+
+                            <rect class="bp-task" x="526" y="52" width="108" height="48" rx="7"/>
+                            <text class="bp-t" x="580" y="72" text-anchor="middle">Seguimiento</text>
+                            <text class="bp-t sm" x="580" y="88" text-anchor="middle">manual</text>
+
+                            <circle class="bp-fin" cx="681" cy="76" r="13"/>
+                            <text class="bp-lb" x="681" y="106" text-anchor="middle">CIERRE</text>
+
+                            <text class="bp-lb" x="312" y="30" text-anchor="middle">NO</text>
+                            <text class="bp-lb" x="312" y="158" text-anchor="middle">SÍ</text>
+
+                            <text class="bp-warn" x="405" y="192" text-anchor="middle">◆ CUELLO DE BOTELLA DETECTADO</text>
+                        </svg>
                         </div>
-                        <div class="panel-fila">
-                            <span class="panel-area">Entrega</span>
-                            <span class="panel-barra"><span class="panel-barra-fill verde" style="--w:81%"></span></span>
-                            <span class="panel-badge verde">En orden</span>
+                    </section>
+
+                    <!-- 2º OPORTUNIDADES -->
+                    <section class="informe-bloque">
+                        <h3><em>2º</em> Detección de Oportunidades</h3>
+                        <p class="informe-sub">Cruzar las ineficiencias detectadas con las soluciones posibles, clasificadas por impacto, dificultad y urgencia.</p>
+
+                        <div class="tabla-scroll">
+                        <table class="informe-tabla">
+                            <thead>
+                                <tr><th>Solución propuesta</th><th>Área</th><th>Problema detectado</th><th>Impacto</th><th>Dificultad</th><th>Urgencia</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Sistema de ventas blindado</td>
+                                    <td><span class="et et--ventas">Ventas</span></td>
+                                    <td>Gestión 100% manual por WhatsApp</td>
+                                    <td><span class="chip chip--alto">Alto</span></td>
+                                    <td><span class="chip chip--medio">Media</span></td>
+                                    <td><span class="chip chip--alto">Crítica</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Gestión de capacidad y fechas</td>
+                                    <td><span class="et et--ops">Operaciones</span></td>
+                                    <td>Saturación en fechas clave, sin antelación</td>
+                                    <td><span class="chip chip--alto">Alto</span></td>
+                                    <td><span class="chip chip--bajo">Baja</span></td>
+                                    <td><span class="chip chip--alto">Alta</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Cerebro operativo (CRM)</td>
+                                    <td><span class="et et--admin">Administración</span></td>
+                                    <td>Información fragmentada y sin trazabilidad</td>
+                                    <td><span class="chip chip--alto">Alto</span></td>
+                                    <td><span class="chip chip--medio">Media</span></td>
+                                    <td><span class="chip chip--medio">Media</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
                         </div>
-                        <div class="panel-fila">
-                            <span class="panel-area">Administración</span>
-                            <span class="panel-barra"><span class="panel-barra-fill ambar" style="--w:60%"></span></span>
-                            <span class="panel-badge ambar">Revisar</span>
+                    </section>
+
+                    <!-- 3º ROADMAP -->
+                    <section class="informe-bloque">
+                        <h3><em>3º</em> Roadmap Técnico</h3>
+                        <p class="informe-sub">El plan de integraciones y mejoras, priorizado por impacto y facilidad. Empieza por lo que antes devuelve.</p>
+
+                        <div class="tabla-scroll">
+                        <table class="informe-tabla">
+                            {#- [3-sep-2026 v5.2] La columna "Estado"
+                                (Listo / En progreso / Pendiente) se
+                                sustituye por PRIORIDAD. Un roadmap se
+                                entrega ANTES de implementar nada: no
+                                puede haber una fase "Listo" ni "En
+                                progreso" porque todavia no ha
+                                empezado. Aquello era el tablero de
+                                seguimiento del proyecto, no el plan.
+                                Prioridad es lo que de verdad ordena un
+                                roadmap, y es el argumento de la
+                                pagina: que arreglar primero. -#}
+                            <thead>
+                                <tr><th>Fase</th><th>Prioridad</th><th>Qué incluye</th><th>Cuándo</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Fase 0 · Quick wins</td>
+                                    <td><span class="chip chip--alto">Primero</span></td>
+                                    <td>Agente IA que responde WhatsApp 24/7 y cualifica</td>
+                                    <td>0-2 sem.</td>
+                                </tr>
+                                <tr>
+                                    <td>Fase 1</td>
+                                    <td><span class="chip chip--medio">Después</span></td>
+                                    <td>Presupuestos automáticos + recordatorios de seguimiento</td>
+                                    <td>1-2 meses</td>
+                                </tr>
+                                <tr>
+                                    <td>Fase 2</td>
+                                    <td><span class="chip chip--bajo">Cuando toque</span></td>
+                                    <td>CRM central sincronizado con agenda y facturación</td>
+                                    <td>3-4 meses</td>
+                                </tr>
+                            </tbody>
+                        </table>
                         </div>
-                    </div>
-                    <p class="panel-nota">Así se ve el estado de tu negocio al terminar. Ejemplo ilustrativo.</p>
-                </div>
+                    </section>
+
+                </article>
             </div>
         </div>
     </header>
@@ -275,143 +405,205 @@ schemas:
                 <h2 class="s-title">No es un informe para el cajón. Es un plan.</h2>
                 <p class="s-sub">Al terminar el diagnóstico recibes cosas concretas que puedes usar desde el primer día, con o sin mí. Tu parte son unas 2 horas: un cuestionario y una charla. El resto lo hago yo, en una o dos semanas, no en meses.</p>
             </div>
-            <div class="entregas">
+            {#- [3-sep-2026 v6] LINEA DEL TIEMPO, no filas alternando lado.
 
-                <!-- 01 Auditoría de las 4 áreas — el mismo panel del hero, en miniatura -->
-                <div class="entrega reveal">
+                    Antes las 4 entregas alternaban lado (texto izquierda /
+                    pieza derecha y al reves), y cada diagrama llevaba un
+                    punto naranja dando vueltas en bucle infinito
+                    (animateMotion repeatCount="indefinite"): movimiento
+                    decorativo que no significaba nada, el mismo tic que ya
+                    se quito del hero.
+
+                    Ahora es el mismo riel que "Como trabajo" en la home:
+                    todo a un lado, una linea vertical que se va llenando de
+                    naranja segun bajas y un nodo por entrega que se enciende
+                    cuando la linea lo alcanza. El movimiento lo marca el
+                    scroll — el dedo del lector — y no un temporizador.
+                    Reutiliza --riel-avance de index.js, no codigo nuevo. -#}
+                <div class="entregas" data-riel>
+
+                <!-- 01 Auditoría de las 4 áreas — el panel del hero, en miniatura -->
+                <div class="entrega reveal"><span class="entrega-marca" aria-hidden="true"></span>
                     <div class="entrega-texto">
                         <span class="entrega-num">01</span>
-                        <h3>Auditoría de las 4 áreas</h3>
+                        <h3><span class="h3-acento">Sabes qué falla.</span>Las 4 áreas, con nota.</h3>
                         <p>El estado real de marketing, ventas, entrega y administración: qué funciona, qué cojea y cuánto te está costando. Claro y con ejemplos de tu día a día.</p>
                     </div>
-                    <div class="entrega-viz">
-                        <div class="mini-panel" aria-hidden="true">
-                            <div class="mini-fila"><span>Marketing</span><span class="mini-barra"><span class="mini-fill ambar" style="--w:52%"></span></span></div>
-                            <div class="mini-fila"><span>Ventas</span><span class="mini-barra"><span class="mini-fill rojo" style="--w:28%"></span></span></div>
-                            <div class="mini-fila"><span>Entrega</span><span class="mini-barra"><span class="mini-fill verde" style="--w:81%"></span></span></div>
-                            <div class="mini-fila"><span>Admin.</span><span class="mini-barra"><span class="mini-fill ambar" style="--w:60%"></span></span></div>
+                    <div class="entrega-viz" style="--pieza-ancho: 330px">
+                        <div class="entrega-pieza pieza-cuadrante">
+                            <div class="cd-celda cd--mal">
+                                <span class="cd-area">Ventas</span>
+                                <span class="cd-nota">4 de cada 10 presupuestos<br>sin seguimiento</span>
+                                <span class="cd-punto" aria-hidden="true"></span>
+                            </div>
+                            <div class="cd-celda cd--medio">
+                                <span class="cd-area">Marketing</span>
+                                <span class="cd-nota">Llegan contactos,<br>nadie los ordena</span>
+                            </div>
+                            <div class="cd-celda cd--medio">
+                                <span class="cd-area">Entrega</span>
+                                <span class="cd-nota">Depende de una<br>sola persona</span>
+                            </div>
+                            <div class="cd-celda cd--bien">
+                                <span class="cd-area">Administración</span>
+                                <span class="cd-nota">Funciona, pero<br>todo a mano</span>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- 02 El mapa de tus procesos — diagrama BPM con el cuello de botella marcado -->
-                <div class="entrega reveal">
+                <div class="entrega reveal"><span class="entrega-marca" aria-hidden="true"></span>
                     <div class="entrega-texto">
                         <span class="entrega-num">02</span>
-                        <h3>El mapa de tus procesos</h3>
+                        <h3><span class="h3-acento">Ves dónde se atasca.</span>Tus procesos, dibujados.</h3>
                         <p>Dibujo cómo fluye el trabajo en tu negocio, paso a paso (un diagrama BPM: el "plano" de tu empresa). Ahí los cuellos de botella saltan a la vista — hasta para ti.</p>
                     </div>
-                    <div class="entrega-viz">
-                        <div class="m-diagram">
-                            <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-                                <line class="md-w" x1="46" y1="125" x2="140" y2="125"/>
-                                <line class="md-w" x1="140" y1="125" x2="234" y2="125"/>
-                                <line class="md-w" x1="234" y1="125" x2="328" y2="125"/>
-                                <line class="md-w" x1="140" y1="125" x2="140" y2="185"/>
-                                <circle class="md-n" cx="46" cy="125" r="14"/>
-                                <circle class="md-n bad" cx="140" cy="125" r="16"/>
-                                <circle class="md-n" cx="234" cy="125" r="14"/>
-                                <circle class="md-n hub" cx="328" cy="125" r="14"/>
-                                <text class="md-t" x="46" y="98" text-anchor="middle">CONSULTA</text>
-                                <text class="md-t bad-t" x="140" y="90" text-anchor="middle">REVISIÓN</text>
-                                <text class="md-t" x="234" y="98" text-anchor="middle">PRESUPUESTO</text>
-                                <text class="md-t hub-t" x="328" y="98" text-anchor="middle">CIERRE</text>
-                                <text class="md-t dim" x="140" y="210" text-anchor="middle">CUELLO DE BOTELLA</text>
-                                <text class="md-t dim" x="140" y="222" text-anchor="middle">3 DÍAS DE MEDIA</text>
-                                <circle class="md-dot" r="3.5"><animateMotion dur="4.2s" repeatCount="indefinite" path="M46,125 L140,125 L234,125 L328,125"/></circle>
-                            </svg>
+                    <div class="entrega-viz" style="--pieza-ancho: 400px">
+                        <div class="entrega-pieza pieza-papel">
+                            <span class="pp-sello">Extracto del informe</span>
+                            <ol class="pp-flujo">
+                                <li>
+                                    <span class="pp-paso">Entra la consulta</span>
+                                    <span class="pp-t">2 h</span>
+                                </li>
+                                <li>
+                                    <span class="pp-paso">Se pasa a la hoja de cálculo</span>
+                                    <span class="pp-t">1 h</span>
+                                </li>
+                                <li class="pp-atasco">
+                                    <span class="pp-paso">Revisión manual del socio</span>
+                                    <span class="pp-t">3 días</span>
+                                    <span class="pp-aviso">Aquí se para todo</span>
+                                </li>
+                                <li>
+                                    <span class="pp-paso">Sale el presupuesto</span>
+                                    <span class="pp-t">30 min</span>
+                                </li>
+                                <li>
+                                    <span class="pp-paso">Seguimiento</span>
+                                    <span class="pp-t">—</span>
+                                </li>
+                            </ol>
+                            <p class="pp-pie">De 3 h de trabajo a <strong>4 días</strong> de espera.</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- 03 Oportunidades detectadas — problema→solución -->
-                <div class="entrega reveal">
+                <div class="entrega reveal"><span class="entrega-marca" aria-hidden="true"></span>
                     <div class="entrega-texto">
                         <span class="entrega-num">03</span>
-                        <h3>Oportunidades detectadas</h3>
+                        <h3><span class="h3-acento">Sabes qué arreglar.</span>Ordenado por lo que devuelve.</h3>
                         <p>Cruzo cada cuello de botella con su solución concreta, clasificada por impacto, dificultad y urgencia. Sabes qué te duele, cuánto y qué lo arregla.</p>
                     </div>
-                    <div class="entrega-viz">
-                        <div class="m-diagram">
-                            <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-                                <line class="md-w" x1="72" y1="55" x2="200" y2="125"/>
-                                <line class="md-w" x1="72" y1="125" x2="200" y2="125"/>
-                                <line class="md-w" x1="72" y1="195" x2="200" y2="125"/>
-                                <line class="md-w" x1="200" y1="125" x2="328" y2="55"/>
-                                <line class="md-w" x1="200" y1="125" x2="328" y2="125"/>
-                                <line class="md-w" x1="200" y1="125" x2="328" y2="195"/>
-                                <circle class="md-n" cx="60" cy="55" r="12"/>
-                                <circle class="md-n" cx="60" cy="125" r="12"/>
-                                <circle class="md-n" cx="60" cy="195" r="12"/>
-                                <circle class="md-n hub" cx="200" cy="125" r="17"/>
-                                <circle class="md-n ok" cx="340" cy="55" r="12"/>
-                                <circle class="md-n ok" cx="340" cy="125" r="12"/>
-                                <circle class="md-n ok" cx="340" cy="195" r="12"/>
-                                <text class="md-t" x="60" y="32" text-anchor="middle">PROBLEMA A</text>
-                                <text class="md-t" x="60" y="102" text-anchor="middle">PROBLEMA B</text>
-                                <text class="md-t" x="60" y="172" text-anchor="middle">PROBLEMA C</text>
-                                <text class="md-t hub-t" x="200" y="160" text-anchor="middle">DAI360</text>
-                                <text class="md-t" x="340" y="32" text-anchor="middle">SOLUCIÓN 1</text>
-                                <text class="md-t" x="340" y="102" text-anchor="middle">SOLUCIÓN 2</text>
-                                <text class="md-t" x="340" y="172" text-anchor="middle">SOLUCIÓN 3</text>
-                                <circle class="md-dot" r="3.5"><animateMotion dur="3.4s" repeatCount="indefinite" path="M72,125 L200,125 L328,55"/></circle>
-                            </svg>
+                    <div class="entrega-viz" style="--pieza-ancho: 500px">
+                        <div class="entrega-pieza pieza-tabla">
+                            <div class="pt-fila pt-cab">
+                                <span>Lo que pasa</span>
+                                <span>Lo que lo arregla</span>
+                                <span class="pt-ind">IMP</span>
+                                <span class="pt-ind">ESF</span>
+                            </div>
+                            <div class="pt-fila">
+                                <span>Presupuestos sin seguir</span>
+                                <span class="pt-sol">Recordatorio automático</span>
+                                <span class="pt-ind"><i class="pt-n3"></i></span>
+                                <span class="pt-ind"><i class="pt-n1"></i></span>
+                            </div>
+                            <div class="pt-fila">
+                                <span>Revisión manual de 3 días</span>
+                                <span class="pt-sol">Plantilla + validación</span>
+                                <span class="pt-ind"><i class="pt-n3"></i></span>
+                                <span class="pt-ind"><i class="pt-n2"></i></span>
+                            </div>
+                            <div class="pt-fila">
+                                <span>Datos en 4 sitios</span>
+                                <span class="pt-sol">Un solo panel</span>
+                                <span class="pt-ind"><i class="pt-n2"></i></span>
+                                <span class="pt-ind"><i class="pt-n2"></i></span>
+                            </div>
+                            <p class="pt-pie">…y 9 más, ordenadas por lo que antes devuelve.</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- 04 Roadmap por quick wins — linea de fases -->
-                <div class="entrega reveal">
+                <div class="entrega reveal"><span class="entrega-marca" aria-hidden="true"></span>
                     <div class="entrega-texto">
                         <span class="entrega-num">04</span>
-                        <h3>Roadmap por quick wins</h3>
+                        <h3><span class="h3-acento">Y por dónde empezar.</span>El plan, por fases.</h3>
                         <p>El plan de acción por fases: primero las victorias rápidas (lo que más devuelve con menos esfuerzo), después las piezas grandes. Te lo entrego y te lo explico en una sesión contigo.</p>
                     </div>
-                    <div class="entrega-viz">
-                        <div class="m-diagram">
-                            <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-                                <line class="md-w" x1="40" y1="135" x2="360" y2="135"/>
-                                <line class="md-w" x1="60" y1="135" x2="60" y2="88"/>
-                                <line class="md-w" x1="160" y1="135" x2="160" y2="88"/>
-                                <line class="md-w" x1="260" y1="135" x2="260" y2="88"/>
-                                <line class="md-w" x1="342" y1="135" x2="342" y2="88"/>
-                                <circle class="md-n hub" cx="60" cy="135" r="14"/>
-                                <circle class="md-n" cx="160" cy="135" r="12"/>
-                                <circle class="md-n" cx="260" cy="135" r="12"/>
-                                <circle class="md-n" cx="342" cy="135" r="12"/>
-                                <text class="md-t" x="60" y="62" text-anchor="middle">QUICK WINS</text>
-                                <text class="md-t" x="160" y="62" text-anchor="middle">FASE 1</text>
-                                <text class="md-t" x="260" y="62" text-anchor="middle">FASE 2</text>
-                                <text class="md-t" x="342" y="62" text-anchor="middle">ESCALADO</text>
-                                <text class="md-t dim" x="60" y="175" text-anchor="middle">0-2 SEMANAS</text>
-                                <text class="md-t dim" x="160" y="175" text-anchor="middle">1-2 MESES</text>
-                                <text class="md-t dim" x="260" y="175" text-anchor="middle">3-4 MESES</text>
-                                <text class="md-t dim" x="342" y="175" text-anchor="middle">CONTINUO</text>
-                                <circle class="md-dot" r="3.5"><animateMotion dur="5s" repeatCount="indefinite" path="M40,135 L360,135"/></circle>
-                            </svg>
+                    <div class="entrega-viz" style="--pieza-ancho: 560px">
+                        <div class="entrega-pieza pieza-regla">
+                            <div class="pr-tramo pr--ya">
+                                <span class="pr-cuando">0-2 sem.</span>
+                                <span class="pr-que">Recordatorios<br>automáticos</span>
+                            </div>
+                            <div class="pr-tramo">
+                                <span class="pr-cuando">1-2 meses</span>
+                                <span class="pr-que">Presupuestos<br>en plantilla</span>
+                            </div>
+                            <div class="pr-tramo">
+                                <span class="pr-cuando">3-4 meses</span>
+                                <span class="pr-que">Panel<br>único</span>
+                            </div>
+                            <div class="pr-tramo pr--dim">
+                                <span class="pr-cuando">Después</span>
+                                <span class="pr-que">Ajuste<br>continuo</span>
+                            </div>
                         </div>
                     </div>
                 </div>
 
             </div>
+
+            {#- [3-sep-2026 v8.1] EL PUENTE. La linea del riel vive dentro
+                de .entregas, asi que moria al acabar la ultima entrega
+                y el precio quedaba descolgado — la bola flotaba sin
+                nada que la uniera. Este tramo cruza el hueco entre las
+                dos secciones para que el naranja llegue de verdad
+                hasta el precio. Se pinta con el mismo --riel-avance
+                que el resto (lo escribe riel-entregas.js). -#}
+            <div class="entregas-puente" aria-hidden="true"></div>
         </div>
     </section>
 
     <!-- LA JUGADA DEL ANTICIPO -->
-    <section class="section">
+    <section class="section section--precio">
         <div class="container">
+            {#- [3-sep-2026 v7] El bloque del precio cuelga del riel: la
+                linea temporal de "Que te llevas" baja hasta aqui y
+                termina en un destello montado sobre su borde. Asi el
+                precio se lee como el DESTINO del recorrido y no como
+                una seccion suelta. Mismo componente que .riel-bola en
+                la home. -#}
             <div class="deal reveal">
-                <span class="tag">LA PARTE QUE MÁS GUSTA</span>
-                <h2>Si luego lo arreglamos juntos, el diagnóstico te sale gratis.</h2>
-                <p class="deal-price">Desde <strong>1.500€</strong><span class="deal-price-note">precio cerrado, sin sorpresas ni letra pequeña</span></p>
+                <span class="entregas-bola" aria-hidden="true">
+                    {#- El destello de cuatro puntas, no una estrella de
+                        cinco: la de cinco se lee como "valoracion". -#}
+                    <svg viewBox="0 0 16 16"><path d="M 8 1.4 C 8.6 5 9.9 6.6 14.6 8 C 9.9 9.4 8.6 11 8 14.6 C 7.4 11 6.1 9.4 1.4 8 C 6.1 6.6 7.4 5 8 1.4 Z"/></svg>
+                </span>
+                <h2>Si luego lo arreglamos juntos, recuperas hasta el último euro.</h2>
+                <p class="deal-price"><strong>1.500€</strong><span class="deal-price-note">Precio cerrado, que te confirmo antes de empezar. Si tu negocio es grande lo hablamos, pero lo sabrás antes de decidir, nunca después.</span></p>
+                {#- [3-sep-2026 v6] Las dos vias, con su remate arriba.
+                    Antes eran dos cajas identicas salvo el color del
+                    borde y sin nada que resumiera cada una: habia que
+                    leerse los dos parrafos enteros para pillar la
+                    jugada. Ahora cada via abre con SU resultado en
+                    grande (te lo quedas / 0 EUR) y el parrafo solo lo
+                    explica. -#}
                 <div class="deal-paths">
                     <div class="deal-path">
                         <span class="deal-path-label">Si no seguimos</span>
-                        <p>Te quedas un plan de acción que vale su precio: sabes exactamente qué falla, por qué y en qué orden arreglarlo. Es tuyo, lo ejecutas con quien quieras.</p>
+                        <strong class="deal-path-remate">El plan es tuyo</strong>
+                        <p>Sabes exactamente qué falla, por qué y en qué orden arreglarlo. Lo ejecutas con quien quieras, o cuando quieras.</p>
                     </div>
                     <div class="deal-path highlight">
                         <span class="deal-path-label">Si lo implementamos juntos</span>
-                        <p>Lo que pagaste por el diagnóstico <strong>se descuenta íntegro</strong> del proyecto. Es decir: el diagnóstico acaba saliéndote <strong>gratis</strong>.</p>
+                        <strong class="deal-path-remate">Recuperas los 1.500€</strong>
+                        <p>Lo que pagaste por el diagnóstico <em>se descuenta íntegro</em> de la implementación.</p>
                     </div>
                 </div>
             </div>
@@ -461,7 +653,7 @@ schemas:
                 </div>
                 <div class="faq reveal">
                     <button type="button">¿Cuánto cuesta el diagnóstico DAI360?<span class="ico">+</span></button>
-                    <div class="body"><p>Parte de <strong>1.500€</strong>, con precio cerrado que te confirmo antes de empezar según el tamaño de tu negocio: no es lo mismo revisar un despacho de 3 personas que una empresa de 30. Lo sabes antes de decidir, no después. Y si tras el diagnóstico decides que yo implemente las mejoras, lo que pagaste <strong>se descuenta íntegro</strong> del proyecto. O te llevas un plan que vale su precio, o te acaba saliendo gratis.</p></div>
+                    <div class="body"><p>Parte de <strong>1.500€</strong>, con precio cerrado que te confirmo antes de empezar según el tamaño de tu negocio: no es lo mismo revisar un despacho de 3 personas que una empresa de 30. Lo sabes antes de decidir, no después. Y si tras el diagnóstico decides que yo implemente las mejoras, lo que pagaste <strong>se descuenta íntegro</strong> del proyecto. O te llevas un plan que vale su precio, o recuperas lo que pagaste.</p></div>
                 </div>
                 <div class="faq reveal">
                     <button type="button">¿Cuánto tiempo me va a quitar a mí y a mi equipo?<span class="ico">+</span></button>

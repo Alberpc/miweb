@@ -289,9 +289,14 @@ lectura: "8 min"
     </section>
 
     <!-- CTA FINAL -->
-    <section class="cta-final">
+    {#- Mismo cierre que el resto del sitio: bloque --night-900
+        con la aurora multicolor encima, para que el pie se
+        enganche sin costura (ver pie.css). Antes los posts
+        usaban una .cta-card clara, la unica del sitio. -#}
+    <section class="cta-final inverse">
+        <canvas class="aurora-canvas" data-alto="1" aria-hidden="true"></canvas>
         <div class="container">
-            <div class="cta-card reveal">
+            <div class="reveal">
                 <h2>¿Por dónde empezarías a preparar tu web para la IA?</h2>
                 <p>Primero comprueba tu puntuación real y gratis en <a href="https://isitagentready.com" target="_blank" rel="noopener">isitagentready.com</a>. Si no tienes claro qué hacer con lo que te salga, cuéntame cómo es tu web hoy y te ayudo a ver qué cambiaría antes.</p>
                 <p class="btn-final-sub">20 minutos · Te digo por dónde empezar aunque no trabajes conmigo</p>

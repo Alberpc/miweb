@@ -2,12 +2,14 @@
   "indexCss": 113,
   "legalCss": 104,
   "indexJs": 21,
-  "homeCss": 68,
+  "homeCss": 71,
   "homeJs": 23,
   "chatCss": 7,
   "chatJs": 4,
   "cookieCss": 1,
   "cookieJs": 1,
-  "auroraJs": 1,
-  "faqJs": 1
+  "auroraJs": 2,
+  "faqJs": 1,
+  "blogFiltroJs": 1,
+  "rielEntregasJs": 3
 }

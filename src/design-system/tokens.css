@@ -50,7 +50,7 @@
   /* ── CHIPS DE LOS TRES PILARES ────────────────────────────────────
      Pares fondo-pálido / texto-oscuro, como los de steep y tailark.
      NO son colores de marca: solo etiquetan categoría. Nunca se usan
-     en botones, enlaces ni bordes de sección. */
+     en botones, enlaces ni bordes de sección.
      Ratio = tinta sobre SU fondo, no sobre --bg. */
   --chip-1-bg: #FFE3D7;  --chip-1-ink: #7E310D;  /* agentes · 7.38 */
   --chip-2-bg: #F0E3FF;  --chip-2-ink: #5E3288;  /* bandeja · 7.49 */

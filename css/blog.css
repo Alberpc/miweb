@@ -1,0 +1,181 @@
+/* blog.css -- estilos exclusivos de /blog/.
+   [3-sep-2026] Sacado del cssPagina inline: era la ultima pagina que
+   lo llevaba dentro del frontmatter, mientras el resto del sitio ya
+   usaba archivo cacheable. Mismo criterio que index.css con la home y
+   diagnostico-operativo.css con la landing.
+
+   base.css/nav.css/botones.css/pie.css cubren lo comun; aqui solo lo
+   propio del blog. */
+
+
+/* ===== HERO EN BLOQUE =====
+   Mismo tratamiento que .hero-section de la home y el hero de
+   diagnostico-operativo: bloque despegado de los bordes (margin +
+   radio en las 4 esquinas), no una banda a sangre. Antes el hero del
+   blog iba a sangre y era la unica pagina del sitio que abria asi. */
+.blog-hero {
+    position: relative;
+    overflow: hidden;
+    margin: var(--hero-gap);
+    border-radius: var(--radius-xl);
+    /* La barra va DENTRO del bloque (heroEnBloque), asi que el
+       padding-top le deja su sitio. */
+    padding: calc(64px + var(--hero-gap) + var(--space-9)) 0 var(--space-9);
+    background-color: var(--night-900);
+    text-align: center;
+}
+.blog-hero-inner { position: relative; z-index: 2; }
+.blog-hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    font-weight: 500; letter-spacing: -0.03em; line-height: 1.05;
+    color: var(--on-night); margin-bottom: var(--space-4);
+}
+.blog-hero .sub {
+    font-size: 1.08rem; color: var(--on-night-body); font-weight: 300;
+    max-width: 54ch; margin: 0 auto;
+}
+
+/* ===== MENU DE CATEGORIAS =====
+   Filtra las tarjetas sin recargar (blog-filtro.js). Los botones son
+   <button> reales y no enlaces: no navegan a ningun sitio, cambian el
+   estado de esta misma vista. */
+.blog-filtros {
+    display: flex; flex-wrap: wrap; justify-content: center;
+    gap: 10px;
+    padding: var(--space-8) 0 0;
+}
+.blog-filtro {
+    font-family: var(--font-mono); font-size: 0.72rem; font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink-mid);
+    background: var(--bg);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-pill);
+    /* 12px de padding vertical -> ~44px de alto total, el minimo de
+       WCAG 2.5.5 para un objetivo tactil. Con 9px se quedaba en 34. */
+    padding: 12px 18px; cursor: pointer;
+    min-height: 44px;
+    transition: color var(--motion-base) var(--ease-standard),
+                border-color var(--motion-base) var(--ease-standard),
+                background-color var(--motion-base) var(--ease-standard);
+}
+.blog-filtro:hover { color: var(--ink); border-color: var(--ink-decor); }
+/* El activo lleva el color de accion: es el unico terracota de la
+   zona, asi que no compite con nada. */
+.blog-filtro[aria-pressed="true"] {
+    color: var(--cobalt-700);
+    border-color: var(--cobalt-400);
+    background: var(--cobalt-tint);
+}
+.blog-filtro-n {
+    font-size: 0.68rem; opacity: 0.7; margin-left: 6px;
+}
+
+/* ===== GRID DE POSTS ===== */
+.posts { padding: var(--space-8) 0 var(--space-11); }
+.posts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+
+/* Una tarjeta filtrada se oculta del todo: display:none la saca del
+   grid, asi las demas se recolocan sin dejar huecos. */
+.post-card[hidden] { display: none; }
+
+.post-card {
+    display: flex; flex-direction: column; text-decoration: none;
+    background: var(--bg); border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: transform var(--motion-slow) var(--ease-standard),
+                border-color var(--motion-slow) var(--ease-standard),
+                box-shadow var(--motion-slow) var(--ease-standard);
+}
+.post-card:hover {
+    border-color: var(--cobalt-border); transform: translateY(-6px);
+    box-shadow: 0 30px 60px rgba(26, 29, 35, 0.14), 0 0 40px -14px var(--cobalt-glow);
+}
+.post-thumb {
+    aspect-ratio: 16 / 9; overflow: hidden;
+    background: linear-gradient(135deg, var(--cobalt-tint), var(--bg-alt));
+}
+.post-thumb img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    transition: transform 0.6s var(--ease-standard);
+}
+.post-card:hover .post-thumb img { transform: scale(1.05); }
+.post-info { padding: 24px 26px 28px; display: flex; flex-direction: column; flex: 1; }
+.post-cat {
+    font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.2em;
+    color: var(--cobalt-600); text-transform: uppercase; margin-bottom: 12px;
+}
+.post-card h2 {
+    font-family: var(--font-heading); font-size: 1.24rem; font-weight: 600;
+    color: var(--ink); line-height: 1.3; letter-spacing: -0.01em; margin-bottom: 12px;
+}
+.post-card p {
+    font-size: 0.95rem; color: var(--ink-soft); font-weight: 300;
+    line-height: 1.6; margin-bottom: 20px; flex: 1;
+}
+.post-meta { display: flex; align-items: center; gap: 12px; font-size: 0.8rem; color: var(--ink-mid); }
+.post-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--ink-decor); }
+.post-more { margin-top: 18px; font-size: 0.88rem; font-weight: 600; color: var(--ink); }
+.post-card:hover .post-more { color: var(--cobalt-600); }
+
+/* Estado vacio: sale si un filtro no tiene resultados. */
+.posts-empty {
+    text-align: center; color: var(--ink-mid); font-weight: 300;
+    padding: var(--space-9) 0;
+}
+
+@media (max-width: 900px) {
+    .posts-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+    .posts-grid { grid-template-columns: 1fr; }
+    /* [4-sep-2026 v2] El hero solo lleva la palabra "Blog". Se ajusta
+       a su contenido y se le da un ritmo normal con lo que viene
+       debajo, en vez del hueco de media pantalla de antes. */
+    .blog-hero { padding: calc(64px + var(--hero-gap) + var(--space-5)) 0 var(--space-6); }
+    .blog-hero h1 { margin-bottom: 0; }
+    .posts { padding-top: var(--space-6); }
+    /* [3-sep-2026] En movil los filtros se salian del ancho y quedaban
+       fuera de vista. Ahora es una tira con scroll horizontal PROPIO
+       (no el de la pagina): se deslizan con el dedo, como en cualquier
+       app, y se ve que hay mas a la derecha porque el ultimo asoma. */
+    .blog-filtros {
+        /* [4-sep-2026 v3] Medido con Chrome a 360px: el ultimo filtro
+           caia en 459..603, o sea 243px FUERA de la pantalla. Con una
+           tira horizontal eso obliga a descubrirla deslizando a ciegas.
+
+           Los filtros pasan a REJILLA de dos columnas: los cuatro
+           caben a la vez, se ven todos y ninguno se sale. Se pierde el
+           gesto de deslizar, pero se gana que el menu exista. */
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin: 0;
+        width: 100%;
+        /* [4-sep-2026 v3] Medido con Chrome: el hueco entre el ultimo
+           filtro y la primera tarjeta era de 0px — el menu quedaba
+           pegado a los posts. El padding-bottom lo separa. */
+        padding: 0 0 var(--space-6);
+        overflow: visible;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        overflow-x: auto;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x proximity;
+    }
+    .blog-filtros::-webkit-scrollbar { display: none; }
+    .blog-filtro {
+        font-size: 0.64rem; padding: 11px 10px;
+        letter-spacing: 0.04em;
+        /* En rejilla el boton ocupa su celda entera y el texto se
+           centra: si se sale, se parte en dos lineas en vez de
+           desbordar. */
+        width: 100%;
+        white-space: normal;
+        line-height: 1.25;
+        text-align: center;
+    }
+}

@@ -63,7 +63,7 @@ schemas:
         }
 # --- datos de su tarjeta en /blog/ (antes escritos a mano alli) ---
 fecha: 2026-07-29
-categoria: "Automatización y procesos"
+categoria: "Automatización con IA"
 tituloTarjeta: "Cómo automatizar mi negocio: por dónde empezar"
 resumen: "Antes de contratar ninguna herramienta: cómo calcular qué tarea te está costando más horas al mes, qué no conviene automatizar y en qué orden hacerlo."
 imagen: "/assets/img/cover-automatizar-negocio.jpg"
@@ -307,9 +307,14 @@ imagenLazy: true
     </section>
 
     <!-- CTA FINAL -->
-    <section class="cta-final">
+    {#- Mismo cierre que el resto del sitio: bloque --night-900
+        con la aurora multicolor encima, para que el pie se
+        enganche sin costura (ver pie.css). Antes los posts
+        usaban una .cta-card clara, la unica del sitio. -#}
+    <section class="cta-final inverse">
+        <canvas class="aurora-canvas" data-alto="1" aria-hidden="true"></canvas>
         <div class="container">
-            <div class="cta-card reveal">
+            <div class="reveal">
                 <h2>¿Cuál de tus tareas automatizarías primero?</h2>
                 <p>Cuéntame cómo trabajas hoy y te ayudo a ver, con este mismo método, por dónde empezar a automatizar sin herramientas complejas.</p>
                 <p class="btn-final-sub">20 minutos · Te digo por dónde empezar aunque no trabajes conmigo</p>

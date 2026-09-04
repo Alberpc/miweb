@@ -3,8 +3,6 @@ No sabes por dónde empezar.
 
 Analizo dónde pierdes tiempo, clientes y dinero, y utilizo IA y automatización para eliminar esos cuellos de botella.
 
-&iquest;No sabes por d&oacute;nde empezar? [Empieza por el diagn&oacute;stico](/diagnostico-operativo/)
-
 - Mafhesa
 - Top Boutique
 - Bioresina

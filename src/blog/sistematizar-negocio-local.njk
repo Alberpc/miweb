@@ -257,9 +257,14 @@ lectura: "6 min"
     </section>
 
     <!-- CTA FINAL -->
-    <section class="cta-final">
+    {#- Mismo cierre que el resto del sitio: bloque --night-900
+        con la aurora multicolor encima, para que el pie se
+        enganche sin costura (ver pie.css). Antes los posts
+        usaban una .cta-card clara, la unica del sitio. -#}
+    <section class="cta-final inverse">
+        <canvas class="aurora-canvas" data-alto="1" aria-hidden="true"></canvas>
         <div class="container">
-            <div class="cta-card reveal">
+            <div class="reveal">
                 <h2>¿Quieres que tu negocio local funcione sin depender de ti?</h2>
                 <p>Cuéntame cómo trabajas y te ayudo a ver por dónde empezar a sistematizar y organizar tus operaciones, sin herramientas complejas ni compromiso.</p>
                 <a href="/#contacto" class="btn-main">Cuéntame tu caso &rarr;</a>
