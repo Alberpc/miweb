@@ -88,6 +88,15 @@
 {% block cabecera %}{% include "nav.njk" %}{% endblock %}
 {% block contenido %}{{ content | safe }}{% endblock %}
 {% block pie %}{% include "footer.njk" %}{% endblock %}
+{#- [4-sep-2026] WhatsApp y chat en TODAS las paginas, no solo la home.
+    Estaban escritos a mano en index.njk / home.njk, asi que el resto del
+    sitio se quedaba sin ellos: quien llegaba por un post o una landing
+    (que es por donde entra el trafico de busqueda) no tenia el atajo. -#}
+{% include "widgets-flotantes.njk" %}
+{%- if sinWidgets != true %}
+    <link rel="stylesheet" href="/assets/chat/widget-chat.css?v={{ v.chatCss }}">
+    <script src="/assets/chat/widget-chat.js?v={{ v.chatJs }}" defer></script>
+{%- endif %}
 {%- if baseJs != false %}
     <script src="/assets/js/base.js" defer></script>
 {%- endif %}

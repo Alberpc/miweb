@@ -40,10 +40,17 @@
    Filtra las tarjetas sin recargar (blog-filtro.js). Los botones son
    <button> reales y no enlaces: no navegan a ningun sitio, cambian el
    estado de esta misma vista. */
+/* [4-sep-2026] El menu no lleva padding propio arriba: .posts ya pone
+   sus --space-8, y sumados daban 128px de hueco entre el hero y los
+   filtros con las tarjetas pegadas justo debajo. El menu quedaba
+   flotando en medio de la nada sin pertenecer ni al hero ni al grid.
+   Ahora el espacio de arriba lo pone solo .posts, y el padding-bottom
+   separa el menu de las tarjetas que filtra (mismo mecanismo que ya
+   usaba la regla de movil, para no mezclar margin y padding). */
 .blog-filtros {
     display: flex; flex-wrap: wrap; justify-content: center;
     gap: 10px;
-    padding: var(--space-8) 0 0;
+    padding: 0 0 var(--space-7);
 }
 .blog-filtro {
     font-family: var(--font-mono); font-size: 0.72rem; font-weight: 500;

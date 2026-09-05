@@ -134,13 +134,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Hojas de Estilos -->
-    <link rel="stylesheet" href="/design-system/tokens.css?v=38">
-    <link rel="stylesheet" href="/css/base.css?v=38">
-    <link rel="stylesheet" href="/css/nav.css?v=38">
-    <link rel="stylesheet" href="/css/botones.css?v=38">
-    <link rel="stylesheet" href="/css/faq.css?v=38">
-    <link rel="stylesheet" href="/css/pie.css?v=38">
-    <link rel="stylesheet" href="/index.css?v=71">
+    <link rel="stylesheet" href="/design-system/tokens.css?v=75">
+    <link rel="stylesheet" href="/css/base.css?v=75">
+    <link rel="stylesheet" href="/css/nav.css?v=75">
+    <link rel="stylesheet" href="/css/botones.css?v=75">
+    <link rel="stylesheet" href="/css/faq.css?v=75">
+    <link rel="stylesheet" href="/css/pie.css?v=75">
+    <link rel="stylesheet" href="/index.css?v=93"><link rel="stylesheet" href="/css/informe-dai360.css?v=75">
     <link rel="stylesheet" href="/assets/cookies/cookie-banner.css?v=1">
 </head>
 <body>
@@ -158,7 +158,7 @@
                 <a href="#soluciones" class="nav-link">Servicios</a>
                 <a href="#caminos" class="nav-link">Cómo Empezar</a>
                 <a href="#sobre-mi" class="nav-link">Sobre Mí</a>
-                <a href="/blog/" class="nav-link">Blog</a>
+                <a href="/blog/" class="nav-link">Blog</a><a href="#contacto" class="nav-link">Contacto</a>
             </div>
             <a href="/diagnostico-operativo/" class="nav-btn"><span class="full-text">Diagnóstico operativo &rarr;</span><span class="short-text">Diagnóstico &rarr;</span></a>
             <button class="nav-burger" id="nav-burger" aria-label="Abrir menú" aria-expanded="false">
@@ -170,6 +170,7 @@
             <a href="#caminos" class="nav-mobile-link">Cómo Empezar</a>
             <a href="#sobre-mi" class="nav-mobile-link">Sobre Mí</a>
             <a href="/blog/" class="nav-mobile-link">Blog</a>
+            <a href="#contacto" class="nav-mobile-link">Contacto</a>
             <a href="/diagnostico-operativo/" class="nav-mobile-cta">Diagnóstico operativo &rarr;</a>
         </div>
     </nav>
@@ -179,7 +180,6 @@
     <header class="hero-section inverse">
         <canvas class="aurora-canvas" data-alto="1" aria-hidden="true"></canvas>
         <div class="hero-content">
-            <div class="hero-badge">IA APLICADA A NEGOCIOS</div>
             <h1 class="hero-title">
                 Sabes que la IA puede ayudarte.<br><span class="chrome-text">No sabes por dónde empezar.</span>
             </h1>
@@ -315,16 +315,74 @@
                 <span class="section-label">CASOS REALES</span>
                 <h2 class="section-title">Esto es lo que pasa cuando lo aplicamos</h2>
                 <p class="section-subtitle">Negocios reales, con sus propios cuellos de botella, resueltos con IA y automatización.</p>
-            </div>
+            </div><div class="caso-carousel">
+                <div class="caso-tabs" role="tablist" aria-label="Casos reales">
+                    <button type="button" class="caso-tab is-active" role="tab" id="caso-tab-0" aria-controls="caso-panel-0" aria-selected="true" data-slide="0">Geko Marketing</button>
+                    <button type="button" class="caso-tab" role="tab" id="caso-tab-1" aria-controls="caso-panel-1" aria-selected="false" tabindex="-1" data-slide="1">Bioresina</button>
+                </div>
 
-            <div class="caso-carousel">
                 <div class="caso-track">
 
-                    <!-- SLIDE 1 &mdash; Bioresina -->
-                    <div class="caso-slide"><div class="caso-cabecera">
-                            <img src="assets/img/bioresina.svg" alt="Bioresina" class="caso-cliente-logo">
-                            <p class="caso-cliente-nombre">Bioresina</p>
-                        </div><div class="caso-steps">
+                    <!-- SLIDE 1 &mdash; Geko -->
+                    <div class="caso-slide" role="tabpanel" id="caso-panel-0" aria-labelledby="caso-tab-0"><div class="caso-steps">
+
+                            <div class="caso-step">
+                                <span class="caso-step-num" aria-hidden="true">01</span>
+                                <span class="caso-step-label">PROBLEMA</span>
+                                <p class="caso-step-title">Leads dispersos, sin visibilidad</p>
+                                <p class="caso-step-desc">No sab&iacute;an de d&oacute;nde ven&iacute;a cada lead ni qui&eacute;n hab&iacute;a comprado y qui&eacute;n no.</p>
+                            </div>
+
+                            <div class="caso-step-arrow" aria-hidden="true">&rarr;</div>
+
+                            <div class="caso-step caso-step-highlight">
+                                <span class="caso-step-num" aria-hidden="true">02</span>
+                                <span class="caso-step-label">SOLUCI&Oacute;N</span>
+                                <p class="caso-step-title">CRM a medida, con dos entradas</p>
+                                <p class="caso-step-desc">Su web capta y manda el lead directo al CRM; y a Claude le pide, hablando o escribiendo, que registre leads y actividad.</p>
+                            </div>
+
+                            <div class="caso-step-arrow" aria-hidden="true">&rarr;</div>
+
+                            <div class="caso-step">
+                                <span class="caso-step-num" aria-hidden="true">03</span>
+                                <span class="caso-step-label">RESULTADO</span>
+                                <p class="caso-step-title">Ning&uacute;n lead se queda sin registrar</p>
+                                <p class="caso-step-desc">Entren por donde entren, quedan dentro con su origen y su actividad. Sin apuntarlos &quot;luego&quot;.</p>
+                            </div>
+
+                        </div><div class="caso-cierre">
+                            <blockquote class="caso-quote-col">
+                                <p class="caso-quote-text">Mi web no me tra&iacute;a nada y los leads viv&iacute;an repartidos: muchos no llegaban ni a apuntarse. Ahora la web capta y entra directo al CRM, y lo dem&aacute;s se lo pido a Claude, con un audio o por escrito: me registra el lead y lo que hemos hablado. Ya no depende de que me siente a rellenarlo.</p><footer class="caso-quote-author">
+                                    <img src="assets/img/guille-garcia.jpg" alt="Guille Garc&iacute;a" class="caso-quote-avatar" width="40" height="40" loading="lazy">
+                                    <span class="caso-quote-firma">
+                                        <span class="caso-quote-nombre">Guille Garc&iacute;a</span>
+                                        <span class="caso-quote-cargo">CEO de Geko Marketing</span>
+                                    </span>
+                                </footer>
+                            </blockquote>
+                            <div class="caso-impact-col">
+                                <span class="caso-impact-titulo">QU&Eacute; CAMBI&Oacute; EN EL D&Iacute;A A D&Iacute;A</span><div class="caso-hechos">
+                                    <p class="caso-hecho">
+                                        <strong>Su web ya capta de verdad</strong>
+                                        Quien deja sus datos entra en el CRM sin pasar por nadie.
+                                    </p>
+                                    <p class="caso-hecho">
+                                        <strong>Se lo pide a Claude y queda dentro</strong>
+                                        Un audio o un mensaje: registra el lead y lo hablado con &eacute;l.
+                                    </p>
+                                    <p class="caso-hecho">
+                                        <strong>Origen y actividad a la vista</strong>
+                                        En cada lead, sin tener que buscarlo.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- SLIDE 2 &mdash; Bioresina -->
+                    <div class="caso-slide" role="tabpanel" id="caso-panel-1" aria-labelledby="caso-tab-1"><div class="caso-steps">
 
                             <div class="caso-step">
                                 <span class="caso-step-num" aria-hidden="true">01</span>
@@ -354,7 +412,13 @@
                         </div><div class="caso-cierre">
                             <blockquote class="caso-quote-col">
                                 <p class="caso-quote-text">Antes, el equipo se pasaba el d&iacute;a preparando y enviando correos uno a uno con su PDF adjunto. Ahora todo eso sale solo, seguimientos incluidos, y hemos recuperado dos horas al d&iacute;a para dedicarlas a otra cosa.</p>
-                                <footer class="caso-quote-author">Equipo de Bioresina</footer>
+                                <footer class="caso-quote-author">
+                                    <img src="assets/img/bioresina.svg" alt="" class="caso-quote-avatar is-logo" width="40" height="40" loading="lazy" aria-hidden="true">
+                                    <span class="caso-quote-firma">
+                                        <span class="caso-quote-nombre">Equipo de Bioresina</span>
+                                        <span class="caso-quote-cargo">Operaciones</span>
+                                    </span>
+                                </footer>
                             </blockquote>
                             <div class="caso-impact-col">
                                 <span class="caso-impact-titulo">IMPACTO REAL EN EL NEGOCIO</span>
@@ -373,67 +437,8 @@
 
                     </div>
 
-                    <!-- SLIDE 2 &mdash; Geko -->
-                    <div class="caso-slide"><div class="caso-cabecera">
-                            <img src="assets/img/geko.svg" alt="Geko Marketing" class="caso-cliente-logo">
-                            <p class="caso-cliente-nombre">Geko Marketing</p>
-                        </div><div class="caso-steps">
-
-                            <div class="caso-step">
-                                <span class="caso-step-num" aria-hidden="true">01</span>
-                                <span class="caso-step-label">PROBLEMA</span>
-                                <p class="caso-step-title">Leads dispersos, sin visibilidad</p>
-                                <p class="caso-step-desc">No sab&iacute;an de d&oacute;nde ven&iacute;a cada lead ni qui&eacute;n hab&iacute;a comprado y qui&eacute;n no.</p>
-                            </div>
-
-                            <div class="caso-step-arrow" aria-hidden="true">&rarr;</div>
-
-                            <div class="caso-step caso-step-highlight">
-                                <span class="caso-step-num" aria-hidden="true">02</span>
-                                <span class="caso-step-label">SOLUCI&Oacute;N</span>
-                                <p class="caso-step-title">CRM a medida, conectado a su web</p>
-                                <p class="caso-step-desc">Todos los leads centralizados en un &uacute;nico sistema, con su origen y estado siempre visibles.</p>
-                            </div>
-
-                            <div class="caso-step-arrow" aria-hidden="true">&rarr;</div>
-
-                            <div class="caso-step">
-                                <span class="caso-step-num" aria-hidden="true">03</span>
-                                <span class="caso-step-label">RESULTADO</span>
-                                <p class="caso-step-title">Todo organizado, en un solo sitio</p>
-                                <p class="caso-step-desc">Sabe d&oacute;nde est&aacute; cada lead, de d&oacute;nde vino y qui&eacute;n le ha comprado y qui&eacute;n no.</p>
-                            </div>
-
-                        </div><div class="caso-cierre">
-                            <blockquote class="caso-quote-col">
-                                <p class="caso-quote-text">Antes de este CRM, Geko Marketing no ten&iacute;a forma de saber de d&oacute;nde ven&iacute;a cada lead ni en qu&eacute; punto se hab&iacute;a quedado. Ahora todo vive en un &uacute;nico sistema conectado a su web: origen, estado y si ha comprado o no, siempre a la vista.</p>
-                            </blockquote>
-                            <div class="caso-impact-col">
-                                <span class="caso-impact-titulo">QU&Eacute; CAMBI&Oacute; EN EL D&Iacute;A A D&Iacute;A</span><div class="caso-hechos">
-                                    <p class="caso-hecho">
-                                        <strong>Un solo sistema</strong>
-                                        Todos los leads centralizados y conectados a su web.
-                                    </p>
-                                    <p class="caso-hecho">
-                                        <strong>Origen y estado a la vista</strong>
-                                        En cada lead, sin tener que buscarlo.
-                                    </p>
-                                    <p class="caso-hecho">
-                                        <strong>Nada sin seguimiento</strong>
-                                        Se sabe qui&eacute;n ha comprado y qui&eacute;n no.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
                 </div>
 
-                <div class="caso-dots">
-                    <button class="caso-dot is-active" data-slide="0" aria-label="Ver caso Bioresina"></button>
-                    <button class="caso-dot" data-slide="1" aria-label="Ver caso Geko"></button>
-                </div>
             </div>
 
         </div>
@@ -441,7 +446,7 @@
 
     
     
-    <section id="como-trabajo" class="section como-trabajo-section inverse reveal">
+    <section id="como-trabajo" class="section como-trabajo-section reveal">
         <div class="container">
             <div class="section-header">
                 <span class="section-label">CÓMO TRABAJO</span>
@@ -645,68 +650,66 @@
 
                 <div class="cierre-visual">
                     
+                    <div class="mant">
+                        <div class="mant-fondo" aria-hidden="true"></div>
 
-                    
-                    <div class="tarjeta tarjeta--alta">
-                        <div class="tarjeta-fondo">
+                        <div class="mant-panel">
+                            <div class="mant-cab">
+                                <span class="mant-titulo">Sistema de presupuestos</span><span class="mant-ejemplo">Ejemplo</span>
+                            </div>
+
                             
-                            <video muted playsinline preload="auto" width="720" height="1000" aria-hidden="true">
-                                <source src="/assets/video/cierre-1.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                        <div class="tarjeta-cuerpo">
+                            <div class="mant-kpis">
+                                <div class="mant-kpi">
+                                    <span class="mant-kpi-n" data-hasta="1240">1.240</span>
+                                    <span class="mant-kpi-k">consultas atendidas</span>
+                                </div>
+                                <div class="mant-kpi">
+                                    <span class="mant-kpi-n" data-hasta="92" data-sufijo="%">92%</span>
+                                    <span class="mant-kpi-k">resueltas sin ti</span>
+                                </div>
+                                <div class="mant-kpi">
+                                    <span class="mant-kpi-n" data-hasta="44" data-sufijo="h">44h</span>
+                                    <span class="mant-kpi-k">recuperadas al mes</span>
+                                </div>
+                                <div class="mant-kpi">
+                                    <span class="mant-kpi-n" data-hasta="6">6</span>
+                                    <span class="mant-kpi-k">ajustes este trimestre</span>
+                                </div>
+                            </div>
+
                             
-                            <span class="dato">Reviso</span>
-                            <span class="dato-k">Cada mes miro que siga respondiendo como debe</span>
-                        </div>
-                        <span class="tarjeta-flecha" aria-hidden="true">
-                            <svg viewBox="0 0 16 16"><path d="M 5 11 L 11 5 M 6 5 h 5 v 5"/></svg>
-                        </span>
-                    </div>
+                            <div class="mant-grafica" role="img" aria-label="Gráfico de consultas atendidas por el sistema mes a mes: la carga sube de forma sostenida a lo largo del año.">
+                                <span class="mant-barra" style="--h: 38%"></span>
+                                <span class="mant-barra" style="--h: 46%"></span>
+                                <span class="mant-barra" style="--h: 41%"></span>
+                                <span class="mant-barra" style="--h: 55%"></span>
+                                <span class="mant-barra" style="--h: 62%"></span>
+                                <span class="mant-barra" style="--h: 58%"></span>
+                                <span class="mant-barra" style="--h: 71%"></span>
+                                <span class="mant-barra" style="--h: 79%"></span>
+                                <span class="mant-barra" style="--h: 68%"></span>
+                                <span class="mant-barra" style="--h: 86%"></span>
+                                <span class="mant-barra" style="--h: 94%"></span>
+                                <span class="mant-barra mant-barra--hoy" style="--h: 100%"></span>
+                            </div>
 
-                    
-                    <div class="tarjeta tarjeta--petalo">
-                        <div class="tarjeta-fondo">
-                            <video autoplay muted loop playsinline preload="metadata" width="1280" height="720" aria-hidden="true">
-                                <source src="/assets/video/cierre-2.mp4" type="video/mp4">
-                            </video>
+                            <div class="mant-pie">
+                                <span class="mant-estado">Funcionando</span>
+                                <span class="mant-pie-k">Último ajuste: hace 6 días</span>
+                            </div>
                         </div>
-                        <div class="tarjeta-cuerpo">
-                            <span class="dato">Ajusto</span>
-                            <span class="dato-k">Lo afino con lo que se aprende de su uso real</span>
-                        </div>
-                        <span class="tarjeta-flecha" aria-hidden="true">
-                            <svg viewBox="0 0 16 16"><path d="M 5 11 L 11 5 M 6 5 h 5 v 5"/></svg>
-                        </span>
-                    </div>
-
-                    
-                    <div class="tarjeta tarjeta--invertida tarjeta--coral">
-                        <div class="tarjeta-fondo">
-                            <video autoplay muted loop playsinline preload="metadata" width="1280" height="720" aria-hidden="true">
-                                <source src="/assets/video/cierre-3.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                        <div class="tarjeta-cuerpo">
-                            <span class="dato">Sostengo</span>
-                            <span class="dato-k">Cuando tu negocio cambia, el sistema cambia con él</span>
-                        </div>
-                        <span class="tarjeta-flecha" aria-hidden="true">
-                            <svg viewBox="0 0 16 16"><path d="M 5 11 L 11 5 M 6 5 h 5 v 5"/></svg>
-                        </span>
                     </div>
                 </div>
 
                 <div class="cierre-texto">
-                    
                     <h3 class="cierre-t">
                         <em>Tu negocio cambia.</em>
                         Tu sistema tiene que cambiar con él.
                     </h3>
+                    
                     <p class="cierre-p">Aquí es donde la mayoría desaparece. Un sistema con IA se desajusta solo: cambian tus precios, tu forma de atender, las herramientas que usas. Nadie te avisa — simplemente empieza a responder peor.</p>
-                    <p class="cierre-p">Yo reviso que siga haciendo lo que tiene que hacer y lo voy afinando con lo que se aprende de su uso real. No es soporte por si se rompe: es que el sistema siga al día contigo.</p>
 
-                    <p class="cierre-nota">La fase que casi nadie te cuenta.</p>
 
                     <a href="/diagnostico-operativo/" class="btn-primary-small cierre-cta">Cómo empezamos <span aria-hidden="true">→</span></a>
                 </div>
@@ -717,8 +720,6 @@
     
     <section id="garantias" class="section garantias-section section-bloque reveal">
         <div class="container">
-            <p class="garantias-intro">Antes de que lo preguntes</p>
-
             <div class="garantias-grid">
                 <article class="garantia reveal">
                     <span class="garantia-icono" aria-hidden="true">
@@ -813,19 +814,169 @@
                     <ul class="dai-lista">
                         <li>Mapa de tus procesos reales, &aacute;rea por &aacute;rea</li>
                         <li>Cuellos de botella localizados y medidos</li>
-                        <li>Roadmap por fases, empezando por los quick wins</li>
+                        <li>Un plan por fases, empezando por lo que se arregla en dos semanas</li>
                         <li>El plan es tuyo, lo implemente yo o no</li>
-                    </ul>
-                    <p class="dai-precio">Desde 1.500&nbsp;&euro;. Si luego implementamos las mejoras, se descuenta del proyecto.</p>
+                    </ul><p class="dai-precio">
+                        <strong>Desde 1.500&nbsp;&euro;</strong>
+                        <span>Si luego implementamos las mejoras, se descuenta &iacute;ntegro del proyecto.</span>
+                    </p>
                     <div class="card-cta-row">
                         <a href="/diagnostico-operativo/" class="btn-primary-small">Ver el diagn&oacute;stico DAI360 &rarr;</a>
                     </div>
-                </div><figure class="dai-viz"><picture>
-                        <source srcset="assets/img/portatil-dai360.webp" type="image/webp">
-                        <img src="assets/img/portatil-dai360.png"
-                             alt="Informe del diagnóstico DAI360 en pantalla: auditoría por área con el flujo de trabajo y su cuello de botella marcado, tabla de oportunidades valoradas por impacto, dificultad y urgencia, y roadmap técnico en tres fases."
-                             width="1626" height="1044" loading="lazy" decoding="async">
-                    </picture>
+                </div><figure class="dai-viz">
+                    <picture class="dai-marco">
+                        <source srcset="assets/img/portatil-marco.webp" type="image/webp">
+                        <img src="assets/img/portatil-marco.png"
+                             alt=""
+                             width="1624" height="1039" loading="lazy" decoding="async" aria-hidden="true">
+                    </picture><div class="dai-pantalla">
+                        <div class="dai-visor">
+                            <div class="dai-scroll">
+                                <article class="informe" aria-hidden="true">
+
+    <header class="informe-cab">
+        <h2>DAI 360</h2>
+        <p class="informe-lead">Diagnóstico completo de tus procesos para escalar sin fricción. Este informe te guía paso a paso para optimizar, integrar y ejecutar.</p>
+        <div class="informe-meta">
+            <span>Nombre del negocio</span>
+            <span>Fecha</span>
+            <span>Auditoría de Alberto Pérez Cabrera</span>
+        </div>
+    </header>
+
+    <!-- 1º AUDITORIA — el flujo BPMN -->
+    <section class="informe-bloque">
+        <h3><em>1º</em> Auditoría de Área</h3>
+        <p class="informe-sub">Auditoría de los 4 ejes operativos: marketing, ventas, operaciones y delivery. Mapa visual de flujos actuales.</p>
+
+        <div class="bpmn-scroll">
+        <svg class="bpmn" viewBox="0 0 730 210" preserveAspectRatio="xMidYMid meet">
+            <defs>
+                <marker id="fl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                    <path d="M0 0 L10 5 L0 10 z" fill="#9A9AA3"/>
+                </marker>
+            </defs>
+
+            <path class="bp-fl" d="M40 76 H68" marker-end="url(#fl)"/>
+            <path class="bp-fl" d="M176 76 H236" marker-end="url(#fl)"/>
+            <path class="bp-fl" d="M270 50 V34 H348" marker-end="url(#fl)"/>
+            <path class="bp-fl" d="M270 102 V140 H348" marker-end="url(#fl)"/>
+            <path class="bp-fl" d="M462 46 H494 V76 H526" marker-end="url(#fl)"/>
+            <path class="bp-fl" d="M462 140 H494 V76 H526" marker-end="url(#fl)"/>
+            <path class="bp-fl" d="M634 76 H668" marker-end="url(#fl)"/>
+
+            <circle class="bp-ini" cx="26" cy="76" r="13"/>
+            <text class="bp-lb" x="26" y="106" text-anchor="middle">ENTRA</text>
+
+            <rect class="bp-task" x="68" y="52" width="108" height="48" rx="7"/>
+            <text class="bp-t" x="122" y="72" text-anchor="middle">Llega consulta</text>
+            <text class="bp-t sm" x="122" y="88" text-anchor="middle">WhatsApp / web</text>
+
+            <path class="bp-gw" d="M236 76 L270 48 L304 76 L270 104 Z"/>
+            <text class="bp-t" x="270" y="80" text-anchor="middle">¿Ficha?</text>
+
+            <rect class="bp-task bad" x="348" y="22" width="114" height="48" rx="7"/>
+            <text class="bp-t" x="405" y="42" text-anchor="middle">Revisión manual</text>
+            <text class="bp-t sm bad-t" x="405" y="58" text-anchor="middle">3 días de media</text>
+
+            <rect class="bp-task" x="348" y="116" width="114" height="48" rx="7"/>
+            <text class="bp-t" x="405" y="136" text-anchor="middle">Presupuesto</text>
+            <text class="bp-t sm" x="405" y="152" text-anchor="middle">desde plantilla</text>
+
+            <rect class="bp-task" x="526" y="52" width="108" height="48" rx="7"/>
+            <text class="bp-t" x="580" y="72" text-anchor="middle">Seguimiento</text>
+            <text class="bp-t sm" x="580" y="88" text-anchor="middle">manual</text>
+
+            <circle class="bp-fin" cx="681" cy="76" r="13"/>
+            <text class="bp-lb" x="681" y="106" text-anchor="middle">CIERRE</text>
+
+            <text class="bp-lb" x="312" y="30" text-anchor="middle">NO</text>
+            <text class="bp-lb" x="312" y="158" text-anchor="middle">SÍ</text>
+
+            <text class="bp-warn" x="405" y="192" text-anchor="middle">◆ CUELLO DE BOTELLA DETECTADO</text>
+        </svg>
+        </div>
+    </section>
+
+    <!-- 2º OPORTUNIDADES -->
+    <section class="informe-bloque">
+        <h3><em>2º</em> Detección de Oportunidades</h3>
+        <p class="informe-sub">Cruzar las ineficiencias detectadas con las soluciones posibles, clasificadas por impacto, dificultad y urgencia.</p>
+
+        <div class="tabla-scroll">
+        <table class="informe-tabla">
+            <thead>
+                <tr><th>Solución propuesta</th><th>Área</th><th>Problema detectado</th><th>Impacto</th><th>Dificultad</th><th>Urgencia</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Sistema de ventas blindado</td>
+                    <td><span class="et et--ventas">Ventas</span></td>
+                    <td>Gestión 100% manual por WhatsApp</td>
+                    <td><span class="chip chip--alto">Alto</span></td>
+                    <td><span class="chip chip--medio">Media</span></td>
+                    <td><span class="chip chip--alto">Crítica</span></td>
+                </tr>
+                <tr>
+                    <td>Gestión de capacidad y fechas</td>
+                    <td><span class="et et--ops">Operaciones</span></td>
+                    <td>Saturación en fechas clave, sin antelación</td>
+                    <td><span class="chip chip--alto">Alto</span></td>
+                    <td><span class="chip chip--bajo">Baja</span></td>
+                    <td><span class="chip chip--alto">Alta</span></td>
+                </tr>
+                <tr>
+                    <td>Cerebro operativo (CRM)</td>
+                    <td><span class="et et--admin">Administración</span></td>
+                    <td>Información fragmentada y sin trazabilidad</td>
+                    <td><span class="chip chip--alto">Alto</span></td>
+                    <td><span class="chip chip--medio">Media</span></td>
+                    <td><span class="chip chip--medio">Media</span></td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </section>
+
+    <!-- 3º ROADMAP -->
+    <section class="informe-bloque">
+        <h3><em>3º</em> Roadmap Técnico</h3>
+        <p class="informe-sub">El plan de integraciones y mejoras, priorizado por impacto y facilidad. Empieza por lo que antes devuelve.</p>
+
+        <div class="tabla-scroll">
+        <table class="informe-tabla"><thead>
+                <tr><th>Fase</th><th>Prioridad</th><th>Qué incluye</th><th>Cuándo</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Fase 0 · Quick wins</td>
+                    <td><span class="chip chip--alto">Primero</span></td>
+                    <td>Agente IA que responde WhatsApp 24/7 y cualifica</td>
+                    <td>0-2 sem.</td>
+                </tr>
+                <tr>
+                    <td>Fase 1</td>
+                    <td><span class="chip chip--medio">Después</span></td>
+                    <td>Presupuestos automáticos + recordatorios de seguimiento</td>
+                    <td>1-2 meses</td>
+                </tr>
+                <tr>
+                    <td>Fase 2</td>
+                    <td><span class="chip chip--bajo">Cuando toque</span></td>
+                    <td>CRM central sincronizado con agenda y facturación</td>
+                    <td>3-4 meses</td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </section>
+
+</article>
+
+                            </div>
+                        </div>
+                    </div>
+
                 </figure>
             </div><p class="dai-atajo">&iquest;Ya sabes lo que necesitas? <a href="#contacto">Cu&eacute;ntamelo directamente</a></p>
         </div>
@@ -994,9 +1145,7 @@
     
 
 
-<footer class="footer-section inverse reveal">
-        
-        <div class="container">
+<footer class="footer-section inverse reveal"><div class="container">
             <div class="footer-grid">
                 <div class="footer-brand-col">
                     <div class="footer-logo-wrap">
@@ -1004,24 +1153,34 @@
                     </div>
                     <p class="footer-brand-desc">
                         Aporto claridad y sistemas de automatización con inteligencia artificial para negocios. Soluciones premium y estables para que tu negocio crezca solo.
-                    </p>
+                    </p><div class="footer-social-wrap">
+                    <div class="footer-social-icons">
+                        <a href="https://www.linkedin.com/in/alberto-p%C3%A9rez-cabrera" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                        </a>
+                        <a href="https://www.instagram.com/albercabrera.ia" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37zM17.5 6.5h.01"/></svg>
+                        </a>
+                    </div>
                 </div>
-                <div class="footer-links-grid">
+                </div><div class="footer-links-grid">
                     <div class="footer-links-col">
                         <h4 class="footer-links-title">Servicios</h4>
                         <ul class="footer-links-list">
-                            <li><a href="#soluciones">Agentes de IA</a></li>
-                            <li><a href="#soluciones">Automatizaciones</a></li>
-                            <li><a href="#soluciones">Sistemas de control</a></li><li><a href="#caso-real">Casos reales</a></li>
+                            <li><a href="#tab-agentes">Agentes de IA</a></li>
+                            <li><a href="#tab-automatizaciones">Automatizaciones</a></li>
+                            <li><a href="#tab-control">Sistemas de control</a></li>
+                            <li><a href="#caso-real">Casos reales</a></li>
                         </ul>
                     </div>
                     <div class="footer-links-col">
-                        <h4 class="footer-links-title">El Método</h4>
+                        <h4 class="footer-links-title">Sobre mí</h4>
                         <ul class="footer-links-list">
                             <li><a href="/diagnostico-operativo/">Diagnóstico DAI360</a></li>
                             <li><a href="#como-trabajo">Metodología</a></li>
                             <li><a href="#sobre-mi">Sobre Mí</a></li>
                             <li><a href="/blog/">Blog</a></li>
+                            <li><a href="#contacto">Contacto</a></li>
                         </ul>
                     </div>
                     <div class="footer-links-col">
@@ -1034,19 +1193,7 @@
                     </div>
                 </div>
             </div>
-            <div class="footer-bottom-bar">
-                <p class="footer-curator">albercabrera.com &copy; 2026</p>
-                <div class="footer-social-wrap">
-                    <span class="footer-social-label">Sígueme:</span>
-                    <div class="footer-social-icons">
-                        <a href="https://www.linkedin.com/in/alberto-p%C3%A9rez-cabrera" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-                        </a>
-                        <a href="https://www.instagram.com/albercabrera.ia" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37zM17.5 6.5h.01"/></svg>
-                        </a>
-                    </div>
-                </div>
+            <div class="footer-bottom-bar"><p class="footer-curator">&copy; 2026 Alberto P&eacute;rez Cabrera</p>
             </div>
         </div>
     </footer>
@@ -1061,12 +1208,12 @@
 
 
     <!-- Script de interactividad -->
-    <script src="/assets/js/aurora.js?v=2"></script>
+    <script src="/assets/js/aurora.js?v=3"></script>
     <script src="/assets/js/base.js" defer></script>
-    <script src="/index.js?v=23"></script>
+    <script src="/index.js?v=26"></script>
 
     <!-- Widget del asistente. Versionar (?v=N) al cambiarlo: la cache es de 1 año -->
-    <link rel="stylesheet" href="/assets/chat/widget-chat.css?v=7">
+    <link rel="stylesheet" href="/assets/chat/widget-chat.css?v=10">
     <script src="/assets/chat/widget-chat.js?v=4" defer></script>
     <script src="/assets/cookies/cookie-banner.js?v=1" defer></script>
 </body>

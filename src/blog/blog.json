@@ -4,5 +4,7 @@
   "paginaActual": "blog",
   "permalink": "/{{ slug }}/index.html",
   "tags": "posts",
-  "usaAurora": true
+  "usaAurora": true,
+  "_comentario_hero": "heroEnBloque: la barra va DENTRO del hero, que ahora es un bloque con margen y esquinas redondeadas como el de la home, el blog y diagnostico. Antes el hero del post iba a sangre y era la unica pagina del sitio que abria asi.",
+  "heroEnBloque": true
 }

@@ -57,8 +57,64 @@
 .inline-cta .btn-inline:hover .btn-label {
     background: var(--cobalt-700);
     color: #FFFFFF;
-    transform: translateY(-1px);
-    box-shadow: 0 8px 30px var(--cobalt-glow);
+    /* [4-sep-2026] HOVER = HALO, no desplazamiento. El translateY movia
+       el boton bajo el cursor y en una fila de dos se notaba el salto.
+       Ahora solo crece la luz alrededor, que es el gesto de decagon:
+       el boton no se mueve, se ENCIENDE. */
+    box-shadow: 0 0 0 4px var(--cobalt-tint), 0 8px 30px var(--cobalt-glow);
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   NIVEL 2 — BOTON SECUNDARIO (.btn-2)
+   ══════════════════════════════════════════════════════════════════
+   [4-sep-2026] Antes solo habia UN aspecto de boton para todo, asi que
+   dos botones en la misma pantalla pesaban igual y competian: el del
+   header y el del hero se leian como la misma llamada repetida.
+
+   Este es el nivel de acompanamiento: mismo tamano y misma tipografia
+   que el primario, pero sin relleno — borde y texto en terracota sobre
+   fondo transparente. Es el patron de decagon (su boton secundario es
+   el azul de marca en outline), y funciona porque el peso visual lo da
+   el RELLENO, no el color: quitando el relleno el boton sigue siendo
+   de la marca pero deja de gritar.
+
+   Sirve sobre claro y sobre oscuro sin cambiar de color, que es lo que
+   evita el salto al hacer scroll. */
+.btn-2 {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 0.94rem;
+    font-weight: 600;
+    color: var(--cobalt-700);
+    background: transparent;
+    padding: 0 var(--space-5);
+    min-height: 52px;
+    line-height: 50px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--cobalt-border);
+    text-decoration: none;
+    text-align: center;
+    transition: all var(--motion-fast) var(--ease-standard);
+}
+.btn-2:hover {
+    color: var(--cobalt-800);
+    border-color: var(--cobalt-500);
+    background: var(--cobalt-tint);
+    box-shadow: 0 0 0 4px var(--cobalt-tint);
+}
+/* Sobre fondo oscuro el terracota oscuro no se lee: sube al tono claro
+   (--cobalt-400, 6.93 sobre carbon) y el borde se aclara con el. */
+.inverse .btn-2,
+.navbar--sobre-hero .btn-2 {
+    color: var(--cobalt-400);
+    border-color: rgba(234, 130, 88, 0.42);
+}
+.inverse .btn-2:hover,
+.navbar--sobre-hero .btn-2:hover {
+    color: var(--cobalt-300);
+    border-color: var(--cobalt-400);
+    background: rgba(234, 130, 88, 0.10);
+    box-shadow: 0 0 0 4px rgba(234, 130, 88, 0.10);
 }
 
 /* ── El boton sobre fondo oscuro: negro con halo multicolor ──────
@@ -73,10 +129,20 @@
    La primera version usaba un pseudo-elemento desbordado por detras
    y se veia el degradado ENTERO, no un borde: el fondo negro solo
    tapaba la zona interior y los 2px de fuera quedaban a la vista. */
-.inverse .btn-main,
-.inverse .btn-primary,
-.inverse .btn-submit,
-.inverse .cta-card .btn-main {
+/* [4-sep-2026] SIN el prefijo .inverse: el primario es el mismo en los
+   dos fondos. Antes solo se aplicaba dentro de un bloque oscuro, asi
+   que el MISMO boton salia negro con halo en el hero y terracota solido
+   dos secciones mas abajo — en no-perder-clientes habia cuatro "Pide tu
+   llamada de 20 min" con dos aspectos distintos. El usuario no puede
+   aprender que significa cada color si el color depende del fondo.
+
+   Funciona en claro porque el relleno es carbon y el texto blanco:
+   18.58 de contraste en cualquier fondo, y el halo lo recorta contra el
+   blanco igual que lo integra en la aurora. */
+.btn-main,
+.btn-primary,
+.btn-submit,
+.cta-card .btn-main {
     position: relative;
     color: #FFFFFF;                    /* 18.58 sobre el carbon */
     border: 1px solid transparent;
@@ -100,10 +166,10 @@
 /* Al pasar el raton el interior aclara un punto y el borde se enciende
    con un halo tenue. Hay que repetir las DOS capas del background: un
    `background: color` suelto borraria la del borde degradado. */
-.inverse .btn-main:hover,
-.inverse .btn-primary:hover,
-.inverse .btn-submit:hover,
-.inverse .cta-card .btn-main:hover {
+.btn-main:hover,
+.btn-primary:hover,
+.btn-submit:hover,
+.cta-card .btn-main:hover {
     background:
         linear-gradient(var(--night-800), var(--night-800)) padding-box,
         /* [2-sep-2026] Sin el teal del final. Son los mismos colores de

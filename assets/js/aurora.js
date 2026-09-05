@@ -74,6 +74,17 @@ document.addEventListener('DOMContentLoaded', () => {
             // El pie es mucho mas bajo que el hero: sin este factor las
             // manchas quedarian fuera de cuadro y solo se veria negro.
             const alto = parseFloat(lienzo.dataset.alto) || 1;
+            /* [4-sep-2026] Intensidad por lienzo (data-intensidad).
+               El radio de las manchas se calcula sobre el ANCHO
+               (r * max(w,h)), no sobre el alto: en el pie, que mide
+               ~390px de alto y 1360 de ancho, la mancha terracota sale
+               de ~980px de radio y lo cubre entero. Resultado: el pie
+               se veia rojo/morado en vez de carbon. Bajar data-alto no
+               lo arregla (mueve el centro, no el tamano), asi que lo
+               que se ajusta es la OPACIDAD: la luz sigue estando, pero
+               como un halo sobre el carbon y no como una capa de
+               color. 1 = sin cambio (hero). */
+            const intensidad = parseFloat(lienzo.dataset.intensidad) || 1;
             const paradas = lienzo.dataset.reparto === 'alto' ? PARADAS_ALTO : PARADAS;
             let w = 0, h = 0, raf = null;
 
@@ -107,8 +118,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     const rr = p.r * d;
                     const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, rr);
                     const [r0, g0, b0] = p.c;
-                    g.addColorStop(0,    `rgba(${r0},${g0},${b0},${p.a})`);
-                    g.addColorStop(0.45, `rgba(${r0},${g0},${b0},${p.a * 0.36})`);
+                    const pa = p.a * intensidad;
+                    g.addColorStop(0,    `rgba(${r0},${g0},${b0},${pa})`);
+                    g.addColorStop(0.45, `rgba(${r0},${g0},${b0},${pa * 0.36})`);
                     g.addColorStop(1,    `rgba(${r0},${g0},${b0},0)`);
                     ctx.fillStyle = g;
                     ctx.beginPath();

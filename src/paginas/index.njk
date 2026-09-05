@@ -75,20 +75,11 @@ schemas:
             { "@type": "Question", "name": "¿Qué pasa con la seguridad de mis datos?", "acceptedAnswer": { "@type": "Answer", "text": "Uso las APIs comerciales de OpenAI y Anthropic, no las versiones gratuitas. Por contrato, esos proveedores no entrenan sus modelos con lo que envías: tu información y la de tus clientes no acaba dentro de un modelo público. Sí guardan las conversaciones un máximo de 30 días para detectar usos abusivos, y después se borran; existe la opción de contratar retención cero si tu caso lo necesita. Además, cada agente lleva filtros de entrada y salida para que no se le pueda sonsacar información con mensajes manipulados." } }
           ]
         }
-trasPie: |
-      <!-- BOTÓN DE WHATSAPP FLOTANTE -->
-      <a href="https://wa.me/34637662054?text=Hola%20Alberto,%20he%20visto%20tu%20web%20y%20quiero%20hacerte%20una%20consulta%20sobre%20IA%20para%20mi%20negocio." class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">
-          <svg class="whatsapp-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436.002 9.858-4.417 9.86-9.86.001-2.638-1.024-5.117-2.884-6.979C16.578 1.904 14.1 1.84 12.01 1.84c-5.439 0-9.862 4.419-9.865 9.866-.001 1.8.49 3.554 1.42 5.11L2.551 21.39l4.096-1.076zM17.486 14.4c-.269-.137-1.593-.787-1.839-.877-.246-.09-.425-.137-.604.137-.179.273-.694.877-.85 1.057-.156.18-.313.202-.582.066-.268-.137-1.136-.419-2.162-1.335-.797-.711-1.336-1.59-1.493-1.864-.157-.273-.017-.42.12-.556.124-.121.269-.313.403-.47.135-.157.179-.269.269-.45.09-.18.045-.338-.021-.472-.069-.137-.604-1.46-.828-2.002-.218-.524-.458-.453-.627-.453-.162 0-.348-.02-.534-.02-.187 0-.49.07-.748.35-.258.28-1.008.986-1.008 2.404 0 1.417 1.031 2.787 1.176 2.977.145.19 2.03 3.1 4.916 4.344.686.296 1.222.473 1.639.605.69.219 1.319.189 1.815.115.553-.083 1.593-.652 1.818-1.284.224-.633.224-1.176.157-1.285-.067-.109-.246-.145-.515-.282z"/>
-          </svg>
-          <span class="whatsapp-tooltip">¿Hablamos por WhatsApp?</span>
-      </a>
 ---
     <!-- CABECERA (HERO SECTION) -->
     <header class="hero-section inverse">
         <canvas class="aurora-canvas" data-alto="1" aria-hidden="true"></canvas>
         <div class="hero-content">
-            <div class="hero-badge">IA APLICADA A NEGOCIOS</div>
             <h1 class="hero-title">
                 Sabes que la IA puede ayudarte.<br><span class="chrome-text">No sabes por dónde empezar.</span>
             </h1>
@@ -287,20 +278,111 @@ trasPie: |
                 <p class="section-subtitle">Negocios reales, con sus propios cuellos de botella, resueltos con IA y automatización.</p>
             </div>
 
+            {#- [5-sep-2026] PESTANYAS en vez de solo los puntos de abajo.
+                Los puntos eran 8px de gris al final de un bloque muy alto:
+                cuando llegabas a ellos ya habias dado el caso por terminado
+                y seguias bajando, asi que el segundo cliente no existia.
+                La pestanya va ARRIBA (se ve que hay dos antes de leer) y
+                dice el nombre (un punto gris no invita a nada).
+                Sin logo a proposito: el de Geko ya sale en la tira del hero
+                y en el polo de la foto de Guille. -#}
             <div class="caso-carousel">
+                <div class="caso-tabs" role="tablist" aria-label="Casos reales">
+                    <button type="button" class="caso-tab is-active" role="tab" id="caso-tab-0" aria-controls="caso-panel-0" aria-selected="true" data-slide="0">Geko Marketing</button>
+                    <button type="button" class="caso-tab" role="tab" id="caso-tab-1" aria-controls="caso-panel-1" aria-selected="false" tabindex="-1" data-slide="1">Bioresina</button>
+                </div>
+
                 <div class="caso-track">
 
-                    <!-- SLIDE 1 &mdash; Bioresina -->
-                    <div class="caso-slide">
+                    <!-- SLIDE 1 &mdash; Geko -->
+                    <div class="caso-slide" role="tabpanel" id="caso-panel-0" aria-labelledby="caso-tab-0">
 
-                        {#- El CLIENTE encabeza el caso; no es un paso mas.
-                            Antes iba como cuarta tarjeta ("EMPRESA") y quedaba
-                            con el logo arriba y un agujero de aire debajo,
-                            porque no es una fase: es de quien va esto. -#}
-                        <div class="caso-cabecera">
-                            <img src="assets/img/bioresina.svg" alt="Bioresina" class="caso-cliente-logo">
-                            <p class="caso-cliente-nombre">Bioresina</p>
+                        {#- TRES pasos, no cuatro, y sin icono: la secuencia ya
+                            la marcan el numero, la etiqueta y la flecha. Los
+                            iconos venian ademas con tres criterios de color
+                            mezclados (currentColor, #B44100 y #ffffff a fuego). -#}
+                        <div class="caso-steps">
+
+                            <div class="caso-step">
+                                <span class="caso-step-num" aria-hidden="true">01</span>
+                                <span class="caso-step-label">PROBLEMA</span>
+                                <p class="caso-step-title">Leads dispersos, sin visibilidad</p>
+                                <p class="caso-step-desc">No sab&iacute;an de d&oacute;nde ven&iacute;a cada lead ni qui&eacute;n hab&iacute;a comprado y qui&eacute;n no.</p>
+                            </div>
+
+                            <div class="caso-step-arrow" aria-hidden="true">&rarr;</div>
+
+                            <div class="caso-step caso-step-highlight">
+                                <span class="caso-step-num" aria-hidden="true">02</span>
+                                <span class="caso-step-label">SOLUCI&Oacute;N</span>
+                                <p class="caso-step-title">CRM a medida, con dos entradas</p>
+                                <p class="caso-step-desc">Su web capta y manda el lead directo al CRM; y a Claude le pide, hablando o escribiendo, que registre leads y actividad.</p>
+                            </div>
+
+                            <div class="caso-step-arrow" aria-hidden="true">&rarr;</div>
+
+                            <div class="caso-step">
+                                <span class="caso-step-num" aria-hidden="true">03</span>
+                                <span class="caso-step-label">RESULTADO</span>
+                                <p class="caso-step-title">Ning&uacute;n lead se queda sin registrar</p>
+                                <p class="caso-step-desc">Entren por donde entren, quedan dentro con su origen y su actividad. Sin apuntarlos &quot;luego&quot;.</p>
+                            </div>
+
                         </div>
+
+                        {#- Cita e impacto planos sobre el fondo, como decagon
+                            (comprobado: sus testimonios van sin tarjeta, con la
+                            metrica en numero grande). Sin comilla decorativa:
+                            --font-display ya no es una serif desde el 31-ago,
+                            asi que salia como dos rayitas pegadas. -#}
+                        <div class="caso-cierre">
+                            <blockquote class="caso-quote-col">
+                                <p class="caso-quote-text">Mi web no me tra&iacute;a nada y los leads viv&iacute;an repartidos: muchos no llegaban ni a apuntarse. Ahora la web capta y entra directo al CRM, y lo dem&aacute;s se lo pido a Claude, con un audio o por escrito: me registra el lead y lo que hemos hablado. Ya no depende de que me siente a rellenarlo.</p>
+                                {#- [5-sep-2026] Foto real de Guille ya puesta.
+                                    PENDIENTE: el TEXTO sigue redactado por
+                                    nosotros con lo que Alberto cuenta del
+                                    proyecto, no son sus palabras. Va firmado con
+                                    su nombre y su cara: NO publicar sin que el lo
+                                    lea y lo apruebe (o lo reescriba a su manera). -#}
+                                <footer class="caso-quote-author">
+                                    <img src="assets/img/guille-garcia.jpg" alt="Guille Garc&iacute;a" class="caso-quote-avatar" width="40" height="40" loading="lazy">
+                                    <span class="caso-quote-firma">
+                                        <span class="caso-quote-nombre">Guille Garc&iacute;a</span>
+                                        <span class="caso-quote-cargo">CEO de Geko Marketing</span>
+                                    </span>
+                                </footer>
+                            </blockquote>
+                            <div class="caso-impact-col">
+                                <span class="caso-impact-titulo">QU&Eacute; CAMBI&Oacute; EN EL D&Iacute;A A D&Iacute;A</span>
+                                {#- Hechos, no cifras. De este caso no hay dato
+                                    de ANTES (cuantos leads entraban, cuantos se
+                                    perdian), y sin ese antes una cifra no es una
+                                    resta: "0 sin seguimiento" y "100% con origen
+                                    visible" decian lo mismo, y "1 vistazo" era
+                                    una frase con un numero delante para que
+                                    rimara. Cuando se consiga el dato real, esto
+                                    vuelve a ser caso-impact-list con num/label. -#}
+                                <div class="caso-hechos">
+                                    <p class="caso-hecho">
+                                        <strong>Su web ya capta de verdad</strong>
+                                        Quien deja sus datos entra en el CRM sin pasar por nadie.
+                                    </p>
+                                    <p class="caso-hecho">
+                                        <strong>Se lo pide a Claude y queda dentro</strong>
+                                        Un audio o un mensaje: registra el lead y lo hablado con &eacute;l.
+                                    </p>
+                                    <p class="caso-hecho">
+                                        <strong>Origen y actividad a la vista</strong>
+                                        En cada lead, sin tener que buscarlo.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- SLIDE 2 &mdash; Bioresina -->
+                    <div class="caso-slide" role="tabpanel" id="caso-panel-1" aria-labelledby="caso-tab-1">
 
                         {#- TRES pasos, no cuatro, y sin icono: la secuencia ya
                             la marcan el numero, la etiqueta y la flecha. Los
@@ -343,7 +425,13 @@ trasPie: |
                         <div class="caso-cierre">
                             <blockquote class="caso-quote-col">
                                 <p class="caso-quote-text">Antes, el equipo se pasaba el d&iacute;a preparando y enviando correos uno a uno con su PDF adjunto. Ahora todo eso sale solo, seguimientos incluidos, y hemos recuperado dos horas al d&iacute;a para dedicarlas a otra cosa.</p>
-                                <footer class="caso-quote-author">Equipo de Bioresina</footer>
+                                <footer class="caso-quote-author">
+                                    <img src="assets/img/bioresina.svg" alt="" class="caso-quote-avatar is-logo" width="40" height="40" loading="lazy" aria-hidden="true">
+                                    <span class="caso-quote-firma">
+                                        <span class="caso-quote-nombre">Equipo de Bioresina</span>
+                                        <span class="caso-quote-cargo">Operaciones</span>
+                                    </span>
+                                </footer>
                             </blockquote>
                             <div class="caso-impact-col">
                                 <span class="caso-impact-titulo">IMPACTO REAL EN EL NEGOCIO</span>
@@ -362,95 +450,8 @@ trasPie: |
 
                     </div>
 
-                    <!-- SLIDE 2 &mdash; Geko -->
-                    <div class="caso-slide">
-
-                        {#- El CLIENTE encabeza el caso; no es un paso mas.
-                            Antes iba como cuarta tarjeta ("EMPRESA") y quedaba
-                            con el logo arriba y un agujero de aire debajo,
-                            porque no es una fase: es de quien va esto. -#}
-                        <div class="caso-cabecera">
-                            <img src="assets/img/geko.svg" alt="Geko Marketing" class="caso-cliente-logo">
-                            <p class="caso-cliente-nombre">Geko Marketing</p>
-                        </div>
-
-                        {#- TRES pasos, no cuatro, y sin icono: la secuencia ya
-                            la marcan el numero, la etiqueta y la flecha. Los
-                            iconos venian ademas con tres criterios de color
-                            mezclados (currentColor, #B44100 y #ffffff a fuego). -#}
-                        <div class="caso-steps">
-
-                            <div class="caso-step">
-                                <span class="caso-step-num" aria-hidden="true">01</span>
-                                <span class="caso-step-label">PROBLEMA</span>
-                                <p class="caso-step-title">Leads dispersos, sin visibilidad</p>
-                                <p class="caso-step-desc">No sab&iacute;an de d&oacute;nde ven&iacute;a cada lead ni qui&eacute;n hab&iacute;a comprado y qui&eacute;n no.</p>
-                            </div>
-
-                            <div class="caso-step-arrow" aria-hidden="true">&rarr;</div>
-
-                            <div class="caso-step caso-step-highlight">
-                                <span class="caso-step-num" aria-hidden="true">02</span>
-                                <span class="caso-step-label">SOLUCI&Oacute;N</span>
-                                <p class="caso-step-title">CRM a medida, conectado a su web</p>
-                                <p class="caso-step-desc">Todos los leads centralizados en un &uacute;nico sistema, con su origen y estado siempre visibles.</p>
-                            </div>
-
-                            <div class="caso-step-arrow" aria-hidden="true">&rarr;</div>
-
-                            <div class="caso-step">
-                                <span class="caso-step-num" aria-hidden="true">03</span>
-                                <span class="caso-step-label">RESULTADO</span>
-                                <p class="caso-step-title">Todo organizado, en un solo sitio</p>
-                                <p class="caso-step-desc">Sabe d&oacute;nde est&aacute; cada lead, de d&oacute;nde vino y qui&eacute;n le ha comprado y qui&eacute;n no.</p>
-                            </div>
-
-                        </div>
-
-                        {#- Cita e impacto planos sobre el fondo, como decagon
-                            (comprobado: sus testimonios van sin tarjeta, con la
-                            metrica en numero grande). Sin comilla decorativa:
-                            --font-display ya no es una serif desde el 31-ago,
-                            asi que salia como dos rayitas pegadas. -#}
-                        <div class="caso-cierre">
-                            <blockquote class="caso-quote-col">
-                                <p class="caso-quote-text">Antes de este CRM, Geko Marketing no ten&iacute;a forma de saber de d&oacute;nde ven&iacute;a cada lead ni en qu&eacute; punto se hab&iacute;a quedado. Ahora todo vive en un &uacute;nico sistema conectado a su web: origen, estado y si ha comprado o no, siempre a la vista.</p>
-                            </blockquote>
-                            <div class="caso-impact-col">
-                                <span class="caso-impact-titulo">QU&Eacute; CAMBI&Oacute; EN EL D&Iacute;A A D&Iacute;A</span>
-                                {#- Hechos, no cifras. De este caso no hay dato
-                                    de ANTES (cuantos leads entraban, cuantos se
-                                    perdian), y sin ese antes una cifra no es una
-                                    resta: "0 sin seguimiento" y "100% con origen
-                                    visible" decian lo mismo, y "1 vistazo" era
-                                    una frase con un numero delante para que
-                                    rimara. Cuando se consiga el dato real, esto
-                                    vuelve a ser caso-impact-list con num/label. -#}
-                                <div class="caso-hechos">
-                                    <p class="caso-hecho">
-                                        <strong>Un solo sistema</strong>
-                                        Todos los leads centralizados y conectados a su web.
-                                    </p>
-                                    <p class="caso-hecho">
-                                        <strong>Origen y estado a la vista</strong>
-                                        En cada lead, sin tener que buscarlo.
-                                    </p>
-                                    <p class="caso-hecho">
-                                        <strong>Nada sin seguimiento</strong>
-                                        Se sabe qui&eacute;n ha comprado y qui&eacute;n no.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
                 </div>
 
-                <div class="caso-dots">
-                    <button class="caso-dot is-active" data-slide="0" aria-label="Ver caso Bioresina"></button>
-                    <button class="caso-dot" data-slide="1" aria-label="Ver caso Geko"></button>
-                </div>
             </div>
 
         </div>
@@ -472,7 +473,7 @@ trasPie: |
        pantallas encendidas. Con la aurora detras, la luz no venia de
        ninguna pieza concreta y el carbon se veia sucio. El hero si la
        conserva: alli el fondo ES el protagonista. #}
-    <section id="como-trabajo" class="section como-trabajo-section inverse reveal">
+    <section id="como-trabajo" class="section como-trabajo-section reveal">
         <div class="container">
             <div class="section-header">
                 <span class="section-label">CÓMO TRABAJO</span>
@@ -744,107 +745,113 @@ trasPie: |
                 </span>
 
                 <div class="cierre-visual">
-                    {# ── LAS TRES TARJETAS ──────────────────────────────────
-                       [1-sep-2026] Tercera version de esta zona, y la que
-                       funciona. Las dos anteriores fallaban por lo mismo: eran
-                       INTERFAZ (burbujas de chat, listas de conversaciones)
-                       sobre fondo plano. Una UI dibujada no emociona ni
-                       demuestra; solo son frases dentro de una caja.
+                    {# ── EL PANEL DE MANTENIMIENTO ──────────────────────────
+                       [4-sep-2026] Cuarta version. Las tres anteriores:
+                         1. burbujas de chat sobre fondo plano;
+                         2. lista de conversaciones, tambien plana;
+                         3. tres tarjetas con un video abstracto de fondo
+                            (una rosa, Jupiter y unas manos de coral) y un
+                            verbo grande encima.
 
-                       El patron bueno: una imagen organica abstracta de fondo
-                       y UN DATO GRANDE encima. La imagen pone el tono, el
-                       numero pone el mensaje. Y al ser abstracta no envejece
-                       ni promete un sector concreto.
+                       La 3 fallaba por dos motivos. Uno: el planeta y el
+                       coral no significaban nada — el propio comentario
+                       pedia "imagen organica abstracta" y Jupiter es un
+                       objeto reconocible. Dos, y mas importante: eran tres
+                       CAJAS CON PALABRAS que repetian el parrafo de al lado
+                       ("Reviso" / "Yo reviso que siga haciendo...").
 
-                       Tres reglas que hacen que el conjunto no parezca tres
-                       piezas sueltas:
-                       · Una sola familia de color (terracota / coral / lila).
-                       · Una de las tres INVIERTE (fondo oscuro) para romper
-                         el ritmo — si no, se leen como una tira.
-                       · La flecha en la esquina, igual en las tres.
+                       Del intento 1 y 2 se aprendio que "una UI dibujada no
+                       emociona"; pero les faltaba lo que hace stripe, que es
+                       ponerla SOBRE un degradado, no sobre fondo plano. El
+                       degradado es el escenario y la UI el objeto: juntos
+                       demuestran, separados solo decoran.
 
-                       LAS IMAGENES: descomenta el <img> de cada tarjeta, deja
-                       el archivo en assets/img/ y borra su .hueco-vacio.
-                       Los textos de .dato y .dato-k son editables: estan
-                       puestos como marcador para ver la maqueta. #}
+                       Lo que muestra es una semana real de mantenimiento: un
+                       aviso de desajuste detectado, el ajuste aplicado y el
+                       resultado. Es el argumento del parrafo, en hechos. #}
+                    <div class="mant">
+                        <div class="mant-fondo" aria-hidden="true"></div>
 
-                    {# 1 · La alta de la izquierda. #}
-                    <div class="tarjeta tarjeta--alta">
-                        <div class="tarjeta-fondo">
-                            {# preload="auto" y sin loop: este video no se reproduce en
-                               bucle, lo va abriendo el scroll (ver index.js). Para
-                               poder saltar a un fotograma concreto hacen falta los
-                               DATOS, no solo los metadatos: con preload="metadata" el
-                               readyState se queda en 1 y el navegador ignora
-                               cualquier currentTime que se le pida. #}
-                            <video muted playsinline preload="auto" width="720" height="1000" aria-hidden="true">
-                                <source src="/assets/video/cierre-1.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                        <div class="tarjeta-cuerpo">
-                            {# [1-sep-2026] Verbos, no cifras. Antes ponia 24/7, < 1 min
-                               y 0 sin contestar: datos de RENDIMIENTO del sistema recien
-                               montado, mientras el parrafo de al lado habla de que un
-                               sistema con IA se desajusta y hay que sostenerlo. Se
-                               contradecian — "0 consultas sin contestar" es justo lo que
-                               deja de ser verdad si nadie lo mantiene.
-                               Los verbos van en primera persona: es lo unico de la
-                               seccion donde Alberto habla como quien se queda. #}
-                            <span class="dato">Reviso</span>
-                            <span class="dato-k">Cada mes miro que siga respondiendo como debe</span>
-                        </div>
-                        <span class="tarjeta-flecha" aria-hidden="true">
-                            <svg viewBox="0 0 16 16"><path d="M 5 11 L 11 5 M 6 5 h 5 v 5"/></svg>
-                        </span>
-                    </div>
+                        <div class="mant-panel">
+                            <div class="mant-cab">
+                                <span class="mant-titulo">Sistema de presupuestos</span>
+                                {#- La etiqueta de ejemplo va SIEMPRE visible, no
+                                    escondida en un title: las cifras de abajo
+                                    tienen forma de panel real y sin decir que
+                                    son de muestra se leerian como datos de un
+                                    cliente. El caso de Bioresina, con sus
+                                    numeros de verdad, esta mas arriba en la
+                                    misma pagina. -#}
+                                <span class="mant-ejemplo">Ejemplo</span>
+                            </div>
 
-                    {# 2 · La de arriba a la derecha. #}
-                    <div class="tarjeta tarjeta--petalo">
-                        <div class="tarjeta-fondo">
-                            <video autoplay muted loop playsinline preload="metadata" width="1280" height="720" aria-hidden="true">
-                                <source src="/assets/video/cierre-2.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                        <div class="tarjeta-cuerpo">
-                            <span class="dato">Ajusto</span>
-                            <span class="dato-k">Lo afino con lo que se aprende de su uso real</span>
-                        </div>
-                        <span class="tarjeta-flecha" aria-hidden="true">
-                            <svg viewBox="0 0 16 16"><path d="M 5 11 L 11 5 M 6 5 h 5 v 5"/></svg>
-                        </span>
-                    </div>
+                            {# Las 4 metricas. data-hasta lo lee index.js para
+                               contar de 0 al valor cuando la pieza entra en
+                               pantalla; el texto ya escrito es el que ve quien
+                               no tenga JS. #}
+                            <div class="mant-kpis">
+                                <div class="mant-kpi">
+                                    <span class="mant-kpi-n" data-hasta="1240">1.240</span>
+                                    <span class="mant-kpi-k">consultas atendidas</span>
+                                </div>
+                                <div class="mant-kpi">
+                                    <span class="mant-kpi-n" data-hasta="92" data-sufijo="%">92%</span>
+                                    <span class="mant-kpi-k">resueltas sin ti</span>
+                                </div>
+                                <div class="mant-kpi">
+                                    <span class="mant-kpi-n" data-hasta="44" data-sufijo="h">44h</span>
+                                    <span class="mant-kpi-k">recuperadas al mes</span>
+                                </div>
+                                <div class="mant-kpi">
+                                    <span class="mant-kpi-n" data-hasta="6">6</span>
+                                    <span class="mant-kpi-k">ajustes este trimestre</span>
+                                </div>
+                            </div>
 
-                    {# 3 · La invertida. Fondo oscuro para romper el ritmo:
-                       tres tarjetas claras seguidas se leen como una tira. #}
-                    <div class="tarjeta tarjeta--invertida tarjeta--coral">
-                        <div class="tarjeta-fondo">
-                            <video autoplay muted loop playsinline preload="metadata" width="1280" height="720" aria-hidden="true">
-                                <source src="/assets/video/cierre-3.mp4" type="video/mp4">
-                            </video>
+                            {# La grafica: 12 barras que se levantan al entrar
+                               en pantalla. Cuenta la misma historia que los
+                               numeros — el volumen que el sistema absorbe mes
+                               a mes — sin necesitar una sola palabra mas. #}
+                            <div class="mant-grafica" role="img" aria-label="Gráfico de consultas atendidas por el sistema mes a mes: la carga sube de forma sostenida a lo largo del año.">
+                                <span class="mant-barra" style="--h: 38%"></span>
+                                <span class="mant-barra" style="--h: 46%"></span>
+                                <span class="mant-barra" style="--h: 41%"></span>
+                                <span class="mant-barra" style="--h: 55%"></span>
+                                <span class="mant-barra" style="--h: 62%"></span>
+                                <span class="mant-barra" style="--h: 58%"></span>
+                                <span class="mant-barra" style="--h: 71%"></span>
+                                <span class="mant-barra" style="--h: 79%"></span>
+                                <span class="mant-barra" style="--h: 68%"></span>
+                                <span class="mant-barra" style="--h: 86%"></span>
+                                <span class="mant-barra" style="--h: 94%"></span>
+                                <span class="mant-barra mant-barra--hoy" style="--h: 100%"></span>
+                            </div>
+
+                            <div class="mant-pie">
+                                <span class="mant-estado">Funcionando</span>
+                                <span class="mant-pie-k">Último ajuste: hace 6 días</span>
+                            </div>
                         </div>
-                        <div class="tarjeta-cuerpo">
-                            <span class="dato">Sostengo</span>
-                            <span class="dato-k">Cuando tu negocio cambia, el sistema cambia con él</span>
-                        </div>
-                        <span class="tarjeta-flecha" aria-hidden="true">
-                            <svg viewBox="0 0 16 16"><path d="M 5 11 L 11 5 M 6 5 h 5 v 5"/></svg>
-                        </span>
                     </div>
                 </div>
 
                 <div class="cierre-texto">
-                    {# Dos lineas, la primera en acento: es como titula decagon
-                       ("Tu negocio evoluciona. / Tu agente de IA tambien
-                       deberia hacerlo."). La tension entre las dos frases es
-                       el argumento entero. #}
                     <h3 class="cierre-t">
                         <em>Tu negocio cambia.</em>
                         Tu sistema tiene que cambiar con él.
                     </h3>
-                    <p class="cierre-p">Aquí es donde la mayoría desaparece. Un sistema con IA se desajusta solo: cambian tus precios, tu forma de atender, las herramientas que usas. Nadie te avisa — simplemente empieza a responder peor.</p>
-                    <p class="cierre-p">Yo reviso que siga haciendo lo que tiene que hacer y lo voy afinando con lo que se aprende de su uso real. No es soporte por si se rompe: es que el sistema siga al día contigo.</p>
+                    {# [4-sep-2026] Un parrafo, no dos. El segundo decia "yo
+                       reviso que siga haciendo lo que tiene que hacer y lo voy
+                       afinando...", que es EXACTAMENTE lo que el panel de al
+                       lado ya ensena paso a paso. Contarlo ademas por escrito
+                       era decir dos veces lo mismo: la seccion tenia 122
+                       palabras en 13 lineas y se leia como un muro.
 
-                    <p class="cierre-nota">La fase que casi nadie te cuenta.</p>
+                       Se queda el primero, que es el que plantea el problema
+                       — lo que el panel no puede mostrar. El "como lo
+                       resuelvo" lo demuestra la pieza. #}
+                    <p class="cierre-p">Aquí es donde la mayoría desaparece. Un sistema con IA se desajusta solo: cambian tus precios, tu forma de atender, las herramientas que usas. Nadie te avisa — simplemente empieza a responder peor.</p>
+
 
                     <a href="/diagnostico-operativo/" class="btn-primary-small cierre-cta">Cómo empezamos <span aria-hidden="true">→</span></a>
                 </div>
@@ -854,12 +861,23 @@ trasPie: |
 
     {# SECCIÓN 4B — LAS TRES GARANTÍAS
        No es una sección de venta: es el bloque que quita miedos. Va
-       después de "caminos" porque ahí es donde aparece la duda callada
-       ("¿esto es legal? ¿es seguro? ¿y mis datos?").
+       después de "cómo trabajo" porque ahí es donde aparece la duda
+       callada ("¿esto es legal? ¿es seguro? ¿y mis datos?"): cuando ya
+       le interesa lo que hacemos. Antes (pegada a soluciones) seríamos
+       nosotros los que le metemos la duda en la cabeza.
+       [5-sep-2026] El comentario decía "después de caminos" y era falso:
+       caminos va DESPUÉS de esta sección, no antes.
 
        Diseño deliberadamente APARTE y sin competir: fondo propio, sin
-       titular de sección grande y sin CTA. Da confianza por presencia,
-       no por volumen.
+       titular de sección y sin CTA. Da confianza por presencia, no por
+       volumen.
+
+       [5-sep-2026] Sin rótulo ninguno. Llevaba encima un
+       .garantias-intro con "Antes de que lo preguntes" y se quitó: iba
+       muy pegado a las tarjetas y no decía de qué iba la sección (había
+       que leerse las tres para saberlo). Los tres títulos ya se explican
+       solos. Si algún día pide rótulo, que sea uno que nombre el tema
+       (legalidad, seguridad, accesos), no una frase de transición.
 
        Fuentes: _docs/metodo/cumplimiento-reglamento-ia.md (art. 50, en
        vigor 2-ago-2026) y _skills/ciberseg-workflows-ia (patrón
@@ -867,8 +885,6 @@ trasPie: |
        marketing: es lo que ya se aplica. #}
     <section id="garantias" class="section garantias-section section-bloque reveal">
         <div class="container">
-            <p class="garantias-intro">Antes de que lo preguntes</p>
-
             <div class="garantias-grid">
                 <article class="garantia reveal">
                     <span class="garantia-icono" aria-hidden="true">
@@ -970,10 +986,19 @@ trasPie: |
                     <ul class="dai-lista">
                         <li>Mapa de tus procesos reales, &aacute;rea por &aacute;rea</li>
                         <li>Cuellos de botella localizados y medidos</li>
-                        <li>Roadmap por fases, empezando por los quick wins</li>
+                        <li>Un plan por fases, empezando por lo que se arregla en dos semanas</li>
                         <li>El plan es tuyo, lo implemente yo o no</li>
                     </ul>
-                    <p class="dai-precio">Desde 1.500&nbsp;&euro;. Si luego implementamos las mejoras, se descuenta del proyecto.</p>
+                    {#- [5-sep-2026] El precio, con jerarquia. Iba todo en
+                        una linea de 0.92rem en gris, mas pequenya que el
+                        cuerpo: el numero se perdia y, con el, la frase que
+                        de verdad quita el miedo (que se descuenta). Sigue
+                        aqui y no solo en /diagnostico-operativo porque
+                        quien no sabe si son 300 o 6.000 no hace clic. -#}
+                    <p class="dai-precio">
+                        <strong>Desde 1.500&nbsp;&euro;</strong>
+                        <span>Si luego implementamos las mejoras, se descuenta &iacute;ntegro del proyecto.</span>
+                    </p>
                     <div class="card-cta-row">
                         <a href="/diagnostico-operativo/" class="btn-primary-small">Ver el diagn&oacute;stico DAI360 &rarr;</a>
                     </div>
@@ -985,15 +1010,39 @@ trasPie: |
                     proporcion de ningun portatil real. La imagen viene
                     recortada con fondo transparente, asi que se apoya sobre
                     el fondo de la seccion en vez de traer el suyo. -#}
+                {#- [5-sep-2026] EL ENTREGABLE, VIVO. Antes era un PNG del
+                    informe ya montado dentro del portatil (mockup hecho en
+                    Magnific): la tabla y el roadmap se veian, pero no se
+                    podian LEER, y eso es justo el argumento de la seccion.
+
+                    Ahora el marco del portatil sigue siendo ese render
+                    (aluminio, camara web, bisel: eso en CSS sale plano),
+                    pero la pantalla esta vacia y dentro va el informe en
+                    HTML real, el mismo include que usa la pagina de
+                    diagnostico. Texto nitido a cualquier zoom, 22 KB de
+                    marco, y si cambia el roadmap cambia en los dos sitios.
+
+                    El informe se desplaza dentro de la pantalla segun el
+                    scroll de la pagina (ver index.js). -#}
                 <figure class="dai-viz">
-                    {#- WebP con PNG de respaldo: 60 KB contra 426. La
-                        transparencia se conserva en los dos. -#}
-                    <picture>
-                        <source srcset="assets/img/portatil-dai360.webp" type="image/webp">
-                        <img src="assets/img/portatil-dai360.png"
-                             alt="Informe del diagnóstico DAI360 en pantalla: auditoría por área con el flujo de trabajo y su cuello de botella marcado, tabla de oportunidades valoradas por impacto, dificultad y urgencia, y roadmap técnico en tres fases."
-                             width="1626" height="1044" loading="lazy" decoding="async">
+                    <picture class="dai-marco">
+                        <source srcset="assets/img/portatil-marco.webp" type="image/webp">
+                        <img src="assets/img/portatil-marco.png"
+                             alt=""
+                             width="1624" height="1039" loading="lazy" decoding="async" aria-hidden="true">
                     </picture>
+
+                    {#- La pantalla: recorta el informe y lo deja asomar.
+                        Sus medidas salen de medir el PNG pixel a pixel
+                        (el bisel superior es de solo 6px de 1039). -#}
+                    <div class="dai-pantalla">
+                        <div class="dai-visor">
+                            <div class="dai-scroll">
+                                {% include "informe-dai360.njk" %}
+                            </div>
+                        </div>
+                    </div>
+
                 </figure>
             </div>
 

@@ -232,6 +232,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 destino.focus();
             });
         });
+
+        /* [4-sep-2026] Llegar a una pestana desde un enlace #tab-*.
+           El pie enlaza cada servicio a SU pestana (antes los tres iban a
+           #soluciones y se llegaba siempre a la misma). Sin esto el
+           navegador solo hace scroll: baja hasta la seccion pero deja
+           abierta la pestana que estuviera, asi que pulsar "Sistemas de
+           control" mostraba "Agentes de IA".
+
+           Se cubre tanto la carga con hash en la URL como el clic estando
+           ya en la pagina (hashchange), que no recarga nada. */
+        const abrirDesdeHash = () => {
+            const id = window.location.hash;
+            if (!id || id.length < 2) return;
+            const tab = document.querySelector('.pieza-tab' + id);
+            if (tab) abrirPieza(tab);
+        };
+        abrirDesdeHash();
+        window.addEventListener('hashchange', abrirDesdeHash);
     }
 
     // 3.5 KPI COUNT UP FOR SYSTEMS CARD
@@ -401,20 +419,136 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // CARRUSEL DE CASOS REALES
+    // [5-sep-2026] Los puntos de abajo pasaron a pestanyas arriba. Como
+    // ahora son un tablist de verdad, hay que llevar tambien aria-selected
+    // y el foco: un tablist se recorre con las flechas, y solo la pestanya
+    // activa entra en el orden del tabulador (patron roving tabindex).
     const casoTrack = document.querySelector('.caso-track');
-    const casoDots = document.querySelectorAll('.caso-dot');
+    const casoTabs = Array.from(document.querySelectorAll('.caso-tab'));
 
-    if (casoTrack && casoDots.length) {
-        const goToSlide = (index) => {
+    if (casoTrack && casoTabs.length) {
+        const goToSlide = (index, moverFoco) => {
             casoTrack.style.transform = `translateX(-${index * 100}%)`;
-            casoDots.forEach((dot, i) => dot.classList.toggle('is-active', i === index));
+            casoTabs.forEach((tab, i) => {
+                const activa = i === index;
+                tab.classList.toggle('is-active', activa);
+                tab.setAttribute('aria-selected', activa ? 'true' : 'false');
+                // Solo la activa es tabulable; a las demas se llega con flechas.
+                if (activa) {
+                    tab.removeAttribute('tabindex');
+                } else {
+                    tab.setAttribute('tabindex', '-1');
+                }
+            });
+            if (moverFoco) casoTabs[index].focus();
         };
 
-        casoDots.forEach((dot) => {
-            dot.addEventListener('click', () => {
-                goToSlide(parseInt(dot.dataset.slide, 10));
+        casoTabs.forEach((tab, i) => {
+            tab.addEventListener('click', () => goToSlide(i, false));
+
+            tab.addEventListener('keydown', (e) => {
+                let destino = null;
+                if (e.key === 'ArrowRight') destino = (i + 1) % casoTabs.length;
+                else if (e.key === 'ArrowLeft') destino = (i - 1 + casoTabs.length) % casoTabs.length;
+                else if (e.key === 'Home') destino = 0;
+                else if (e.key === 'End') destino = casoTabs.length - 1;
+                if (destino === null) return;
+                e.preventDefault();
+                goToSlide(destino, true);
             });
         });
+    }
+
+    // EL INFORME DEL DAI360 SE DESPLAZA DENTRO DE LA PANTALLA
+    // [5-sep-2026] La pieza es el marco del portatil (imagen con la
+    // pantalla vaciada) y el informe en HTML dentro. Al recorrer la
+    // seccion, el informe sube: se ve que hay documento debajo, que es
+    // lo que el PNG anterior no podia contar.
+    //
+    // El informe se pinta a su ancho natural y se ESCALA (ver CSS): sus
+    // piezas traen min-width a fuego y dentro de la pantalla desbordaban.
+    const daiPantalla = document.querySelector('.dai-pantalla');
+    // El visor es quien recorta de verdad (la pantalla lleva padding
+    // para dejar ver el bisel negro), asi que las medidas salen de el.
+    const daiVisor = document.querySelector('.dai-visor');
+    const daiScroll = document.querySelector('.dai-scroll');
+    const menosMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    if (daiPantalla && daiVisor && daiScroll) {
+        // [5-sep-2026] Mas rapido y arrancando antes.
+        // RECORRIDO: cuanto del documento sobrante se recorre. Estaba en
+        // 0.55 y se quedaba a medias; a 0.92 se llega casi al final del
+        // informe, que es lo que da la sensacion de "hay mucho aqui".
+        const RECORRIDO = 0.92;
+        // La ventana de scroll en la que pasa todo, en fracciones de la
+        // altura de la pantalla. Antes se repartia desde que la pieza
+        // asomaba por abajo hasta que salia por arriba (alto + caja):
+        // un recorrido larguisimo en el que el informe apenas se movia
+        // mientras lo mirabas, y terminaba cuando ya habias pasado.
+        // Ahora ARRANCA cuando la pieza esta entrando de verdad (su
+        // borde superior a 0.85 de la altura de ventana) y TERMINA
+        // cuando esta a punto de salir (a 0.15). Menos margen = mas
+        // movimiento por cada rueda de scroll.
+        const INICIO = 0.85;
+        const FIN = 0.15;
+        let pendiente = false;
+        let escala = 1;
+        let sobra = 0;
+
+        // La escala solo cambia al redimensionar, no en cada scroll.
+        const medir = () => {
+            const anchoNatural = parseFloat(
+                getComputedStyle(daiScroll).getPropertyValue('--informe-ancho')
+            ) || 1180;
+            escala = daiVisor.clientWidth / anchoNatural;
+            daiScroll.style.setProperty('--escala', escala);
+            // Alto real que ocupa el informe ya escalado.
+            const altoEscalado = daiScroll.scrollHeight * escala;
+            sobra = Math.max(0, altoEscalado - daiVisor.clientHeight);
+        };
+
+        const actualizar = () => {
+            pendiente = false;
+            if (menosMovimiento.matches) {
+                daiScroll.style.setProperty('--desplazamiento', '0px');
+                return;
+            }
+            const caja = daiVisor.getBoundingClientRect();
+            const alto = window.innerHeight || document.documentElement.clientHeight;
+            if (caja.bottom < 0 || caja.top > alto) return;
+
+            // 0 al empezar la ventana util, 1 al acabarla.
+            const desde = alto * INICIO;
+            const hasta = alto * FIN;
+            let t = (desde - caja.top) / (desde - hasta);
+            t = Math.min(Math.max(t, 0), 1);
+            // Suavizado en los extremos: sin esto el informe arranca y
+            // frena de golpe, que se nota mas cuanto mas rapido va.
+            t = t * t * (3 - 2 * t);
+
+            // El desplazamiento se aplica ANTES de escalar (el transform
+            // va scale() translateY()), asi que se divide por la escala
+            // para que el recorrido en pantalla sea el pedido.
+            const px = (t * RECORRIDO * sobra) / (escala || 1);
+            daiScroll.style.setProperty('--desplazamiento', `${-px}px`);
+        };
+
+        const alScroll = () => {
+            if (pendiente) return;
+            pendiente = true;
+            requestAnimationFrame(actualizar);
+        };
+
+        const alRedimensionar = () => { medir(); actualizar(); };
+
+        window.addEventListener('scroll', alScroll, { passive: true });
+        window.addEventListener('resize', alRedimensionar, { passive: true });
+        medir();
+        actualizar();
+        // Las fuentes cambian el alto del informe al cargar.
+        if (document.fonts && document.fonts.ready) {
+            document.fonts.ready.then(alRedimensionar);
+        }
     }
 
     // VIDEOS DE LOS PILARES
@@ -624,4 +758,59 @@ document.addEventListener('DOMContentLoaded', () => {
         // pasar el raton y al abrir el cliente de correo.
         a.title = destino;
     });
+});
+
+
+// ── EL PANEL DE MANTENIMIENTO: CIFRAS Y BARRAS ───────────────────────
+// [4-sep-2026] Cuando el panel entra en pantalla, los numeros cuentan de
+// 0 a su valor y las barras se levantan (la clase .revelada la recoge el
+// CSS, que pone el retardo de cada una).
+//
+// Los numeros YA estan escritos en el HTML con su valor final: si no hay
+// JS, o si el usuario pide menos movimiento, se ven igual. Esto solo
+// anade el viaje.
+document.addEventListener('DOMContentLoaded', () => {
+    const panel = document.querySelector('.mant');
+    if (!panel) return;
+
+    const menosMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const cifras = Array.from(panel.querySelectorAll('.mant-kpi-n[data-hasta]'));
+
+    function contar(el) {
+        const hasta = parseFloat(el.dataset.hasta);
+        const sufijo = el.dataset.sufijo || '';
+        if (!isFinite(hasta)) return;
+        const DURACION = 1100;
+        const arranque = performance.now();
+
+        function paso(ahora) {
+            const t = Math.min(1, (ahora - arranque) / DURACION);
+            // easeOutCubic: arranca rapido y frena al final, que es como
+            // se lee un contador que "aterriza" en su cifra.
+            const suave = 1 - Math.pow(1 - t, 3);
+            const v = Math.round(hasta * suave);
+            // Separador de miles con punto, como se escribe en espanol
+            // (1.240). toLocaleString depende del idioma del navegador y
+            // en uno en ingles devolvia "1,240"; se formatea a mano.
+            el.textContent = String(v).replace(/\B(?=(\d{3})+(?!\d))/g, '.') + sufijo;
+            if (t < 1) requestAnimationFrame(paso);
+        }
+        requestAnimationFrame(paso);
+    }
+
+    if (menosMovimiento.matches) {
+        panel.classList.add('revelada');
+        return;
+    }
+
+    const obs = new IntersectionObserver((entradas) => {
+        entradas.forEach((e) => {
+            if (!e.isIntersecting) return;
+            panel.classList.add('revelada');
+            cifras.forEach(contar);
+            obs.unobserve(e.target);
+        });
+    }, { threshold: 0.35 });
+
+    obs.observe(panel);
 });

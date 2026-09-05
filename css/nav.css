@@ -84,37 +84,53 @@
    header en terracota solido y el del hero en negro. Al bajar el
    scroll la barra pasa a cristal claro y el boton vuelve al terracota
    de la regla base, que es lo correcto sobre fondo blanco. */
-.navbar--sobre-hero .nav-btn {
-    color: #FFFFFF;
-    border: 1px solid transparent;
-    background:
-        linear-gradient(var(--night-900), var(--night-900)) padding-box,
-        /* [2-sep-2026] Sin el teal del final. Son los mismos colores de
-           la aurora del hero, pero alli el verde va al 97% del ancho y
-           con opacidad 0.23 (se difumina), y aqui iba al 100% de 205px
-           sin difuminar: el mismo color a otra escala cantaba en la
-           esquina. Cierra en azul y sigue recogiendo la escena. */
-        linear-gradient(100deg,
-            var(--cobalt-500) 0%,
-            #A63A70 40%,
-            #8642C4 73%,
-            #3A50BE 100%) border-box;
-}
+/* ══ EL BOTON DEL HEADER ES SECUNDARIO ═════════════════════════════
+   [4-sep-2026 v2] Recorrido de este boton, para no repetir los errores:
 
+   1. Era terracota solido sobre claro y negro con halo sobre el hero.
+      Cambiaba de color a media pagina y se notaba como un fallo.
+   2. Se paso a negro con halo SIEMPRE. Se acabo el salto, pero quedaba
+      identico al CTA del hero: dos botones iguales a 550px, los dos
+      gritando lo mismo.
+
+   Ahora es el nivel SECUNDARIO (.btn-2 en botones.css): outline
+   terracota, sin relleno. Tres cosas a la vez:
+     · no cambia con el scroll (el outline vale en claro y en oscuro);
+     · no compite con el CTA del hero, que es la conversion de verdad;
+     · sigue siendo de la marca, porque el color es el mismo terracota.
+
+   El peso visual lo da el relleno, no el tono: quitandolo el boton
+   acompana en vez de mandar. Es lo que hace decagon con su secundario. */
+.navbar .nav-btn {
+    color: var(--cobalt-700);
+    background: transparent;
+    /* [4-sep-2026] --cobalt-500 al 55%, no --cobalt-border (26%).
+       Medido: el borde al 26% compuesto sobre el nav claro daba 1.37 de
+       contraste, cuando WCAG 1.4.11 pide 3.0 para el contorno de un
+       control. El boton se veia "apagado" y costaba reconocerlo como
+       boton — no era cosa del texto (6.72, correcto), era que el marco
+       casi no existia. */
+    border: 1px solid var(--cobalt-600); /* opaco: al 70% de alfa hacia falta para pasar 3.0, y opaco da 5.68 sin depender del fondo translucido del nav */
+}
+.navbar .nav-btn:hover {
+    color: var(--cobalt-800);
+    border-color: var(--cobalt-500);
+    background: var(--cobalt-tint);
+    box-shadow: 0 0 0 4px var(--cobalt-tint);
+}
+/* Sobre el hero oscuro sube al tono claro (6.93 sobre carbon). */
+.navbar--sobre-hero .nav-btn {
+    color: var(--cobalt-400);
+    background: transparent;
+    /* Sobre el carbon del hero el borde necesita mas cuerpo todavia: el
+       fondo es oscuro y un trazo al 42% se disuelve en el. */
+    border-color: rgba(234, 130, 88, 0.60);
+}
 .navbar--sobre-hero .nav-btn:hover {
-    color: #FFFFFF;
-    background:
-        linear-gradient(var(--night-800), var(--night-800)) padding-box,
-        /* [2-sep-2026] Sin el teal del final. Son los mismos colores de
-           la aurora del hero, pero alli el verde va al 97% del ancho y
-           con opacidad 0.23 (se difumina), y aqui iba al 100% de 205px
-           sin difuminar: el mismo color a otra escala cantaba en la
-           esquina. Cierra en azul y sigue recogiendo la escena. */
-        linear-gradient(100deg,
-            var(--cobalt-500) 0%,
-            #A63A70 40%,
-            #8642C4 73%,
-            #3A50BE 100%) border-box;
+    color: var(--cobalt-300);
+    border-color: var(--cobalt-400);
+    background: rgba(234, 130, 88, 0.10);
+    box-shadow: 0 0 0 4px rgba(234, 130, 88, 0.10);
 }
 
 /* Con el menu movil abierto la barra recupera su fondo aunque siga

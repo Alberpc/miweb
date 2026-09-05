@@ -1,0 +1,162 @@
+{#- EL INFORME DAI360 — COPIA para la HOME (dentro del portatil).
+
+    [5-sep-2026] Es una COPIA del bloque que vive en
+    src/paginas/diagnostico-operativo.njk, no un traslado. Se intento
+    compartir un solo include y al hacerlo se rompio aquella pagina
+    (desaparecio el diagrama BPMN y el riel naranja del puente al
+    precio). Aquella pagina NO se toca: si cambia el informe, se cambia
+    en los dos sitios a mano.
+
+    aria-hidden: es la ilustracion del entregable. -#}
+<article class="informe" aria-hidden="true">
+
+    <header class="informe-cab">
+        <h2>DAI 360</h2>
+        <p class="informe-lead">Diagnóstico completo de tus procesos para escalar sin fricción. Este informe te guía paso a paso para optimizar, integrar y ejecutar.</p>
+        <div class="informe-meta">
+            <span>Nombre del negocio</span>
+            <span>Fecha</span>
+            <span>Auditoría de Alberto Pérez Cabrera</span>
+        </div>
+    </header>
+
+    <!-- 1º AUDITORIA — el flujo BPMN -->
+    <section class="informe-bloque">
+        <h3><em>1º</em> Auditoría de Área</h3>
+        <p class="informe-sub">Auditoría de los 4 ejes operativos: marketing, ventas, operaciones y delivery. Mapa visual de flujos actuales.</p>
+
+        <div class="bpmn-scroll">
+        <svg class="bpmn" viewBox="0 0 730 210" preserveAspectRatio="xMidYMid meet">
+            <defs>
+                <marker id="fl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                    <path d="M0 0 L10 5 L0 10 z" fill="#9A9AA3"/>
+                </marker>
+            </defs>
+
+            <path class="bp-fl" d="M40 76 H68" marker-end="url(#fl)"/>
+            <path class="bp-fl" d="M176 76 H236" marker-end="url(#fl)"/>
+            <path class="bp-fl" d="M270 50 V34 H348" marker-end="url(#fl)"/>
+            <path class="bp-fl" d="M270 102 V140 H348" marker-end="url(#fl)"/>
+            <path class="bp-fl" d="M462 46 H494 V76 H526" marker-end="url(#fl)"/>
+            <path class="bp-fl" d="M462 140 H494 V76 H526" marker-end="url(#fl)"/>
+            <path class="bp-fl" d="M634 76 H668" marker-end="url(#fl)"/>
+
+            <circle class="bp-ini" cx="26" cy="76" r="13"/>
+            <text class="bp-lb" x="26" y="106" text-anchor="middle">ENTRA</text>
+
+            <rect class="bp-task" x="68" y="52" width="108" height="48" rx="7"/>
+            <text class="bp-t" x="122" y="72" text-anchor="middle">Llega consulta</text>
+            <text class="bp-t sm" x="122" y="88" text-anchor="middle">WhatsApp / web</text>
+
+            <path class="bp-gw" d="M236 76 L270 48 L304 76 L270 104 Z"/>
+            <text class="bp-t" x="270" y="80" text-anchor="middle">¿Ficha?</text>
+
+            <rect class="bp-task bad" x="348" y="22" width="114" height="48" rx="7"/>
+            <text class="bp-t" x="405" y="42" text-anchor="middle">Revisión manual</text>
+            <text class="bp-t sm bad-t" x="405" y="58" text-anchor="middle">3 días de media</text>
+
+            <rect class="bp-task" x="348" y="116" width="114" height="48" rx="7"/>
+            <text class="bp-t" x="405" y="136" text-anchor="middle">Presupuesto</text>
+            <text class="bp-t sm" x="405" y="152" text-anchor="middle">desde plantilla</text>
+
+            <rect class="bp-task" x="526" y="52" width="108" height="48" rx="7"/>
+            <text class="bp-t" x="580" y="72" text-anchor="middle">Seguimiento</text>
+            <text class="bp-t sm" x="580" y="88" text-anchor="middle">manual</text>
+
+            <circle class="bp-fin" cx="681" cy="76" r="13"/>
+            <text class="bp-lb" x="681" y="106" text-anchor="middle">CIERRE</text>
+
+            <text class="bp-lb" x="312" y="30" text-anchor="middle">NO</text>
+            <text class="bp-lb" x="312" y="158" text-anchor="middle">SÍ</text>
+
+            <text class="bp-warn" x="405" y="192" text-anchor="middle">◆ CUELLO DE BOTELLA DETECTADO</text>
+        </svg>
+        </div>
+    </section>
+
+    <!-- 2º OPORTUNIDADES -->
+    <section class="informe-bloque">
+        <h3><em>2º</em> Detección de Oportunidades</h3>
+        <p class="informe-sub">Cruzar las ineficiencias detectadas con las soluciones posibles, clasificadas por impacto, dificultad y urgencia.</p>
+
+        <div class="tabla-scroll">
+        <table class="informe-tabla">
+            <thead>
+                <tr><th>Solución propuesta</th><th>Área</th><th>Problema detectado</th><th>Impacto</th><th>Dificultad</th><th>Urgencia</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Sistema de ventas blindado</td>
+                    <td><span class="et et--ventas">Ventas</span></td>
+                    <td>Gestión 100% manual por WhatsApp</td>
+                    <td><span class="chip chip--alto">Alto</span></td>
+                    <td><span class="chip chip--medio">Media</span></td>
+                    <td><span class="chip chip--alto">Crítica</span></td>
+                </tr>
+                <tr>
+                    <td>Gestión de capacidad y fechas</td>
+                    <td><span class="et et--ops">Operaciones</span></td>
+                    <td>Saturación en fechas clave, sin antelación</td>
+                    <td><span class="chip chip--alto">Alto</span></td>
+                    <td><span class="chip chip--bajo">Baja</span></td>
+                    <td><span class="chip chip--alto">Alta</span></td>
+                </tr>
+                <tr>
+                    <td>Cerebro operativo (CRM)</td>
+                    <td><span class="et et--admin">Administración</span></td>
+                    <td>Información fragmentada y sin trazabilidad</td>
+                    <td><span class="chip chip--alto">Alto</span></td>
+                    <td><span class="chip chip--medio">Media</span></td>
+                    <td><span class="chip chip--medio">Media</span></td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </section>
+
+    <!-- 3º ROADMAP -->
+    <section class="informe-bloque">
+        <h3><em>3º</em> Roadmap Técnico</h3>
+        <p class="informe-sub">El plan de integraciones y mejoras, priorizado por impacto y facilidad. Empieza por lo que antes devuelve.</p>
+
+        <div class="tabla-scroll">
+        <table class="informe-tabla">
+            {#- [3-sep-2026 v5.2] La columna "Estado"
+                (Listo / En progreso / Pendiente) se
+                sustituye por PRIORIDAD. Un roadmap se
+                entrega ANTES de implementar nada: no
+                puede haber una fase "Listo" ni "En
+                progreso" porque todavia no ha
+                empezado. Aquello era el tablero de
+                seguimiento del proyecto, no el plan.
+                Prioridad es lo que de verdad ordena un
+                roadmap, y es el argumento de la
+                pagina: que arreglar primero. -#}
+            <thead>
+                <tr><th>Fase</th><th>Prioridad</th><th>Qué incluye</th><th>Cuándo</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Fase 0 · Quick wins</td>
+                    <td><span class="chip chip--alto">Primero</span></td>
+                    <td>Agente IA que responde WhatsApp 24/7 y cualifica</td>
+                    <td>0-2 sem.</td>
+                </tr>
+                <tr>
+                    <td>Fase 1</td>
+                    <td><span class="chip chip--medio">Después</span></td>
+                    <td>Presupuestos automáticos + recordatorios de seguimiento</td>
+                    <td>1-2 meses</td>
+                </tr>
+                <tr>
+                    <td>Fase 2</td>
+                    <td><span class="chip chip--bajo">Cuando toque</span></td>
+                    <td>CRM central sincronizado con agenda y facturación</td>
+                    <td>3-4 meses</td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </section>
+
+</article>

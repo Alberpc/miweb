@@ -72,19 +72,6 @@ Decidir a ojo sale caro, y casi siempre te enteras tarde.
 
 _Negocios reales, con sus propios cuellos de botella, resueltos con IA y automatización._
 
-**PROBLEMA:** 2 horas al d&iacute;a en tareas manuales — 30 emails al d&iacute;a con PDF adjunto, preparados y enviados uno a uno a mano.
-**SOLUCI&Oacute;N:** Automatizaci&oacute;n con Make — Env&iacute;o de emails con PDF automatizado de principio a fin, con 2 seguimientos tambi&eacute;n autom&aacute;ticos.
-**RESULTADO:** 2 horas al d&iacute;a recuperadas — El equipo ya no pierde el d&iacute;a preparando y enviando correos uno a uno.
-
-**44h** recuperadas cada mes
-**13+** semanas laborales liberadas al a&ntilde;o
-
----
-
-**PROBLEMA:** Leads dispersos, sin visibilidad — No sab&iacute;an de d&oacute;nde ven&iacute;a cada lead ni qui&eacute;n hab&iacute;a comprado y qui&eacute;n no.
-**SOLUCI&Oacute;N:** CRM a medida, conectado a su web — Todos los leads centralizados en un &uacute;nico sistema, con su origen y estado siempre visibles.
-**RESULTADO:** Todo organizado, en un solo sitio — Sabe d&oacute;nde est&aacute; cada lead, de d&oacute;nde vino y qui&eacute;n le ha comprado y qui&eacute;n no.
-
 ## Un sistema no se entrega y ya está.
 
 _Montar la automatización es la parte fácil. Lo difícil es que siga funcionando cuando tu negocio cambia._
@@ -119,29 +106,33 @@ _Lo pongo_ a funcionar de verdad
 
 Lo pongo a funcionar con tus datos reales, no con un ejemplo. Tu equipo aprende a usarlo y te queda documentado, para que no dependas de mí para lo del día a día.
 
-Reviso
+Sistema de presupuestosEjemplo
 
-Cada mes miro que siga respondiendo como debe
+1.240
 
-Ajusto
+consultas atendidas
 
-Lo afino con lo que se aprende de su uso real
+92%
 
-Sostengo
+resueltas sin ti
 
-Cuando tu negocio cambia, el sistema cambia con él
+44h
+
+recuperadas al mes
+
+6
+
+ajustes este trimestre
+
+Funcionando
+
+Último ajuste: hace 6 días
 
 ### _Tu negocio cambia._
 
 Tu sistema tiene que cambiar con él.
 
 Aquí es donde la mayoría desaparece. Un sistema con IA se desajusta solo: cambian tus precios, tu forma de atender, las herramientas que usas. Nadie te avisa — simplemente empieza a responder peor.
-
-Yo reviso que siga haciendo lo que tiene que hacer y lo voy afinando con lo que se aprende de su uso real. No es soporte por si se rompe: es que el sistema siga al día contigo.
-
-La fase que casi nadie te cuenta.
-
-Antes de que lo preguntes
 
 ### Cumple la ley europea de IA
 
@@ -177,13 +168,99 @@ Miro las cuatro &aacute;reas de tu negocio: c&oacute;mo llegan tus clientes, c&o
 
 - Cuellos de botella localizados y medidos
 
-- Roadmap por fases, empezando por los quick wins
+- Un plan por fases, empezando por lo que se arregla en dos semanas
 
 - El plan es tuyo, lo implemente yo o no
 
-Desde 1.500 &euro;. Si luego implementamos las mejoras, se descuenta del proyecto.
+**Desde 1.500 &euro;**
 
-&iquest;Ya sabes lo que necesitas? [Cu&eacute;ntamelo directamente](#contacto)
+Si luego implementamos las mejoras, se descuenta &iacute;ntegro del proyecto.
+
+## DAI 360
+
+Diagnóstico completo de tus procesos para escalar sin fricción. Este informe te guía paso a paso para optimizar, integrar y ejecutar.
+
+Nombre del negocio
+
+Fecha
+
+Auditoría de Alberto Pérez Cabrera
+
+### _1º_ Auditoría de Área
+
+Auditoría de los 4 ejes operativos: marketing, ventas, operaciones y delivery. Mapa visual de flujos actuales.
+
+### _2º_ Detección de Oportunidades
+
+Cruzar las ineficiencias detectadas con las soluciones posibles, clasificadas por impacto, dificultad y urgencia.
+
+Solución propuestaÁreaProblema detectadoImpactoDificultadUrgencia
+
+Sistema de ventas blindado
+
+Ventas
+
+Gestión 100% manual por WhatsApp
+
+Alto
+
+Media
+
+Crítica
+
+Gestión de capacidad y fechas
+
+Operaciones
+
+Saturación en fechas clave, sin antelación
+
+Alto
+
+Baja
+
+Alta
+
+Cerebro operativo (CRM)
+
+Administración
+
+Información fragmentada y sin trazabilidad
+
+Alto
+
+Media
+
+Media
+
+### _3º_ Roadmap Técnico
+
+El plan de integraciones y mejoras, priorizado por impacto y facilidad. Empieza por lo que antes devuelve.
+
+FasePrioridadQué incluyeCuándo
+
+Fase 0 · Quick wins
+
+Primero
+
+Agente IA que responde WhatsApp 24/7 y cualifica
+
+0-2 sem.
+
+Fase 1
+
+Después
+
+Presupuestos automáticos + recordatorios de seguimiento
+
+1-2 meses
+
+Fase 2
+
+Cuando toque
+
+CRM central sincronizado con agenda y facturación
+
+3-4 meses
 
 ## Preguntas que me suelen hacer.
 

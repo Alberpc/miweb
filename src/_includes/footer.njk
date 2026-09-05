@@ -18,14 +18,23 @@
       footerAgentesAut: false -> oculta "Agentes Autonomos" (no-perder-clientes)
     El logo pasa de ruta relativa a absoluta, igual que en nav.njk. -#}
     <footer class="footer-section{% if footerInverse != false %} inverse{% endif %} reveal">
-        {# La aurora solo en el pie oscuro: sobre el claro de
-           automatizar-mi-negocio pintaria un rectangulo negro. #}
-        {#- `pieSinAurora: true` en las paginas cuyo bloque anterior ya trae
-            aurora (la home: su contacto la lleva). Dos seguidas se restan
-            fuerza, y en decagon.ai el color vive en el CTA mientras el pie
-            se queda en carbon liso. El resto de paginas la conservan: son
-            su unico punto de color. -#}
-        {% if footerInverse != false and pieSinAurora != true %}<canvas class="aurora-canvas" data-alto="1.5" aria-hidden="true"></canvas>{% endif %}
+        {#- [4-sep-2026] EL PIE NO LLEVA AURORA EN NINGUNA PAGINA.
+            Antes la llevaba salvo donde el bloque anterior ya la traia
+            (`pieSinAurora`, la home y diagnostico). Resultado: dos pies
+            distintos en el mismo sitio — carbon liso en la home, y
+            rojo/morado en blog, posts y legales. El pie es la misma
+            pieza en todas las paginas y tiene que verse igual en todas.
+
+            Ademas el color se le comia el pie entero: el radio de las
+            manchas se calcula sobre el lado MAYOR (r * max(w,h)), asi
+            que en un pie ancho y bajo la mancha terracota salia de ~980px
+            de radio sobre ~390px de alto. En el hero solo asoma por abajo
+            porque es mucho mas alto.
+
+            El color vive en el CTA/contacto que va justo encima, que si
+            la lleva. El pie cierra en carbon liso (--night-900, en
+            pie.css). `pieSinAurora` ya no hace falta y se queda sin uso.
+            -#}
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-brand-col">
@@ -35,27 +44,64 @@
                     <p class="footer-brand-desc">
                         Aporto claridad y sistemas de automatización con inteligencia artificial para negocios. Soluciones premium y estables para que tu negocio crezca solo.
                     </p>
+{#- [4-sep-2026] Las redes suben aqui, bajo el logo y la descripcion.
+                        Estaban en la barra de abajo, junto al copyright — la
+                        zona de letra pequena — y ahi pesaban lo mismo que un
+                        aviso legal. Instagram es marca activa
+                        (@albercabrera.ia), asi que va en la columna de
+                        identidad, que es lo que es. -#}
+                <div class="footer-social-wrap">
+                    <div class="footer-social-icons">
+                        <a href="https://www.linkedin.com/in/alberto-p%C3%A9rez-cabrera" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                        </a>
+                        <a href="https://www.instagram.com/albercabrera.ia" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37zM17.5 6.5h.01"/></svg>
+                        </a>
+                    </div>
                 </div>
+                </div>
+                {#- [4-sep-2026] Reparto de las tres columnas.
+                    Antes: Servicios / El Metodo / Legal, con tres fallos.
+                      · "Agentes de IA", "Automatizaciones" y "Sistemas de
+                        control" apuntaban LOS TRES a #soluciones: el
+                        visitante pulsaba tres cosas distintas y llegaba al
+                        mismo sitio. Ahora cada uno lleva a SU pestana
+                        (#tab-agentes, #tab-automatizaciones, #tab-control),
+                        que ya existian con id propio pero nadie enlazaba.
+                      · "El Metodo" era un cajon de sastre: metia el Blog y
+                        Sobre Mi, que no son metodo.
+                      · Faltaba Contacto, que si esta en la barra.
+
+                    La segunda columna se llama "Sobre mi" y no "El Metodo":
+                    dentro estan el diagnostico, la metodologia, la seccion
+                    Sobre Mi, el blog y contacto — o sea, quien soy y como
+                    trabajo. Bajo "El Metodo" tres de esos cinco enlaces no
+                    encajaban.
+
+                    El blog NO baja a Legal aunque cuadrara mejor de numero
+                    (4-4-4): colgando de ese titulo se leeria como un aviso
+                    legal mas. Queda 4-5-3, pero cada enlace bajo el titulo
+                    que le corresponde. -#}
                 <div class="footer-links-grid">
                     <div class="footer-links-col">
                         <h4 class="footer-links-title">Servicios</h4>
                         <ul class="footer-links-list">
-                            <li><a href="{{ raizPie }}#soluciones">Agentes de IA</a></li>
-                            <li><a href="{{ raizPie }}#soluciones">Automatizaciones</a></li>
-                            <li><a href="{{ raizPie }}#soluciones">Sistemas de control</a></li>
-                            {#- "Dónde actúan" retirado: la sección #donde-actuan
-                                ya no existe en la home. -#}
+                            <li><a href="{{ raizPie }}#tab-agentes">Agentes de IA</a></li>
+                            <li><a href="{{ raizPie }}#tab-automatizaciones">Automatizaciones</a></li>
+                            <li><a href="{{ raizPie }}#tab-control">Sistemas de control</a></li>
                             <li><a href="{{ raizPie }}#caso-real">Casos reales</a></li>
                         </ul>
                     </div>
                     <div class="footer-links-col">
-                        <h4 class="footer-links-title">El Método</h4>
+                        <h4 class="footer-links-title">Sobre mí</h4>
                         <ul class="footer-links-list">
                             <li><a href="{{ footerDai360Href | default("/diagnostico-operativo/") }}">Diagnóstico DAI360</a></li>
                             <li><a href="{{ raizPie }}#como-trabajo">Metodología</a></li>
                             <li><a href="{{ raizPie }}#sobre-mi">Sobre Mí</a></li>
 {% if footerBlog != false %}                            <li><a href="{{ footerBlogHref | default("/blog/") }}">Blog</a></li>
-{% endif %}                        </ul>
+{% endif %}                            <li><a href="{{ raizPie }}#contacto">Contacto</a></li>
+                        </ul>
                     </div>
                     <div class="footer-links-col">
                         <h4 class="footer-links-title">Legal</h4>
@@ -68,18 +114,18 @@
                 </div>
             </div>
             <div class="footer-bottom-bar">
-                <p class="footer-curator">albercabrera.com &copy; {{ anio }}</p>
-                <div class="footer-social-wrap">
-                    <span class="footer-social-label">Sígueme:</span>
-                    <div class="footer-social-icons">
-                        <a href="https://www.linkedin.com/in/alberto-p%C3%A9rez-cabrera" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-                        </a>
-                        <a href="https://www.instagram.com/albercabrera.ia" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37zM17.5 6.5h.01"/></svg>
-                        </a>
-                    </div>
-                </div>
+                {#- [4-sep-2026] El nombre del titular, no el dominio.
+                    El (c) y "todos los derechos reservados" NO son
+                    obligatorios: los derechos de autor nacen con la obra sin
+                    necesidad de aviso (Convenio de Berna, al que Espana esta
+                    adherida). Lo que si exige la LSSI es identificar al
+                    titular, y eso ya lo hace el Aviso Legal enlazado arriba.
+
+                    Asi que aqui manda el criterio: firma quien hace el
+                    trabajo. "albercabrera.com (c) 2026" firmaba un dominio;
+                    el nombre completo es el mismo que figura como titular en
+                    el aviso legal, asi que ademas coinciden. -#}
+                <p class="footer-curator">&copy; {{ anio }} Alberto P&eacute;rez Cabrera</p>
             </div>
         </div>
     </footer>

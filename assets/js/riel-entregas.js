@@ -25,12 +25,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const nodos = Array.from(riel.querySelectorAll('.entrega'));
     if (!nodos.length) return;
 
-    /* El tramo que cruza de la ultima entrega al bloque del precio.
-       El riel vive dentro de .entregas y moria ahi: la linea se
-       cortaba y la bola del precio quedaba flotando sin nada que la
-       uniera. Este tramo se pinta con su propio avance, medido con la
-       misma cabeza de lectura. */
-    const puente = document.querySelector('.entregas-puente');
+    /* [4-sep-2026] El tramo que cruza hasta el bloque del precio ya no
+       se anima aparte: es .entregas-cola, un elemento DENTRO de
+       .entregas, asi que el relleno naranja lo recorre con el mismo
+       --riel-avance que las entregas (igual que .fase-cola en la home).
+       Antes iba fuera, con su propio --puente-avance, y el naranja se
+       apagaba a gris justo antes de la bola. */
 
     const sinMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)');
     let raf = null;
@@ -100,16 +100,6 @@ document.addEventListener('DOMContentLoaded', () => {
             m.entrega.classList.toggle('riel-alcanzado', frente >= m.enRiel - 1);
         });
 
-        /* El puente arranca cuando el riel ya esta lleno: solo entonces
-           tiene sentido que la linea siga bajando hacia el precio. */
-        if (puente) {
-            const cajaP = puente.getBoundingClientRect();
-            const t3 = cajaP.height > 0
-                ? (cabeza - cajaP.top) / cajaP.height
-                : 0;
-            puente.style.setProperty('--puente-avance',
-                Math.min(1, Math.max(0, t3)).toFixed(4));
-        }
     }
 
     function pedir() {
@@ -123,7 +113,6 @@ document.addEventListener('DOMContentLoaded', () => {
            encendidos. Se mantiene el resultado, se quita el viaje. */
         riel.style.setProperty('--riel-avance', '1');
         nodos.forEach((e) => e.classList.add('riel-alcanzado'));
-        if (puente) puente.style.setProperty('--puente-avance', '1');
         return;
     }
 

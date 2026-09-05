@@ -66,6 +66,11 @@
     <link rel="stylesheet" href="/css/faq.css?v={{ site.cssVersion }}">
     <link rel="stylesheet" href="/css/pie.css?v={{ site.cssVersion }}">
     <link rel="stylesheet" href="/index.css?v={{ v.homeCss }}">
+    {#- [5-sep-2026] El informe DAI360 vive dentro del portatil de la
+        seccion de caminos. Sus estilos son los MISMOS que en la pagina de
+        diagnostico, extraidos a su propia hoja: la de diagnostico entera
+        no se puede cargar aqui porque redefine .hero y .section. -#}
+    <link rel="stylesheet" href="/css/informe-dai360.css?v={{ site.cssVersion }}">
     <link rel="stylesheet" href="/assets/cookies/cookie-banner.css?v={{ v.cookieCss }}">
 </head>
 <body>
@@ -81,7 +86,11 @@
 {{ content | safe }}
 
 {% include "footer.njk" %}
-{{ trasPie | safe }}
+{#- [4-sep-2026] Antes aqui se volcaba `trasPie`, un bloque de HTML
+    escrito a mano en el frontmatter de index.njk con la burbuja de
+    WhatsApp. Ahora sale del include comun, que lo comparten todas las
+    paginas. -#}
+{% include "widgets-flotantes.njk" %}
 
     <!-- Script de interactividad -->
     <script src="/assets/js/aurora.js?v={{ v.auroraJs }}"></script>

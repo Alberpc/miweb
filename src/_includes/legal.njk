@@ -55,6 +55,19 @@
 {{ content | safe }}
 
 {% include "footer.njk" %}
+    {#- [4-sep-2026] base.js ADEMAS de index.js. El pie de estas paginas
+        lleva .reveal (arranca en opacity:0 y se enciende al entrar en
+        pantalla), pero el observer que le pone .revealed vive en base.js
+        y las legales solo cargaban index.js: el pie se quedaba invisible
+        para siempre. Medido: existia, 465px de alto y carbon, con
+        opacity 0. Tambien les da el menu movil, que va en ese archivo. -#}
+{#- [4-sep-2026] Los widgets tambien aqui: una legal es un callejon sin
+    salida (se llega desde el pie y no hay CTA), asi que el atajo de
+    contacto es justo lo que hace falta para volver a la conversacion. -#}
+{% include "widgets-flotantes.njk" %}
+    <link rel="stylesheet" href="/assets/chat/widget-chat.css?v={{ v.chatCss }}">
+    <script src="/assets/chat/widget-chat.js?v={{ v.chatJs }}" defer></script>
+    <script src="/assets/js/base.js" defer></script>
     <script src="/index.js?v={{ v.indexJs }}"></script>
     <script src="/assets/cookies/cookie-banner.js?v={{ v.cookieJs }}" defer></script>
 </body>

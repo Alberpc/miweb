@@ -132,13 +132,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/design-system/tokens.css?v=38">
-    <link rel="stylesheet" href="/css/base.css?v=38">
-    <link rel="stylesheet" href="/css/nav.css?v=38">
-    <link rel="stylesheet" href="/css/botones.css?v=38">
-    <link rel="stylesheet" href="/css/faq.css?v=38">
-    <link rel="stylesheet" href="/css/pie.css?v=38">
-    <link rel="stylesheet" href="/css/landing.css?v=38">
+    <link rel="stylesheet" href="/design-system/tokens.css?v=75">
+    <link rel="stylesheet" href="/css/base.css?v=75">
+    <link rel="stylesheet" href="/css/nav.css?v=75">
+    <link rel="stylesheet" href="/css/botones.css?v=75">
+    <link rel="stylesheet" href="/css/faq.css?v=75">
+    <link rel="stylesheet" href="/css/pie.css?v=75">
+    <link rel="stylesheet" href="/css/landing.css?v=75">
 
     <link rel="stylesheet" href="/assets/cookies/cookie-banner.css?v=1">
 </head>
@@ -148,14 +148,14 @@
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
-<nav class="navbar">
+<nav class="navbar navbar--en-hero">
         <div class="nav-container">
             <a href="/" class="logo"><img src="/assets/img/logo-alber-blanco.png" alt="Alber Cabrera"></a>
             <div class="nav-menu">
                 <a href="/#soluciones" class="nav-link">Servicios</a>
                 <a href="/#caminos" class="nav-link">Cómo Empezar</a>
                 <a href="/#sobre-mi" class="nav-link">Sobre Mí</a>
-                <a href="/blog/" class="nav-link current">Blog</a>
+                <a href="/blog/" class="nav-link current">Blog</a><a href="/#contacto" class="nav-link">Contacto</a>
             </div>
             <a href="/#contacto" class="nav-btn">Cuéntame tu caso &rarr;</a>
             <button class="nav-burger" id="nav-burger" aria-label="Abrir menú" aria-expanded="false">
@@ -167,6 +167,7 @@
             <a href="/#caminos" class="nav-mobile-link">Cómo Empezar</a>
             <a href="/#sobre-mi" class="nav-mobile-link">Sobre Mí</a>
             <a href="/blog/" class="nav-mobile-link">Blog</a>
+            <a href="/#contacto" class="nav-mobile-link">Contacto</a>
             <a href="/#contacto" class="nav-mobile-cta">Cuéntame tu caso &rarr;</a>
         </div>
     </nav>
@@ -369,9 +370,7 @@
         </div>
     </section>
 
-<footer class="footer-section inverse reveal">
-        <canvas class="aurora-canvas" data-alto="1.5" aria-hidden="true"></canvas>
-        <div class="container">
+<footer class="footer-section inverse reveal"><div class="container">
             <div class="footer-grid">
                 <div class="footer-brand-col">
                     <div class="footer-logo-wrap">
@@ -379,24 +378,34 @@
                     </div>
                     <p class="footer-brand-desc">
                         Aporto claridad y sistemas de automatización con inteligencia artificial para negocios. Soluciones premium y estables para que tu negocio crezca solo.
-                    </p>
+                    </p><div class="footer-social-wrap">
+                    <div class="footer-social-icons">
+                        <a href="https://www.linkedin.com/in/alberto-p%C3%A9rez-cabrera" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                        </a>
+                        <a href="https://www.instagram.com/albercabrera.ia" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37zM17.5 6.5h.01"/></svg>
+                        </a>
+                    </div>
                 </div>
-                <div class="footer-links-grid">
+                </div><div class="footer-links-grid">
                     <div class="footer-links-col">
                         <h4 class="footer-links-title">Servicios</h4>
                         <ul class="footer-links-list">
-                            <li><a href="/#soluciones">Agentes de IA</a></li>
-                            <li><a href="/#soluciones">Automatizaciones</a></li>
-                            <li><a href="/#soluciones">Sistemas de control</a></li><li><a href="/#caso-real">Casos reales</a></li>
+                            <li><a href="/#tab-agentes">Agentes de IA</a></li>
+                            <li><a href="/#tab-automatizaciones">Automatizaciones</a></li>
+                            <li><a href="/#tab-control">Sistemas de control</a></li>
+                            <li><a href="/#caso-real">Casos reales</a></li>
                         </ul>
                     </div>
                     <div class="footer-links-col">
-                        <h4 class="footer-links-title">El Método</h4>
+                        <h4 class="footer-links-title">Sobre mí</h4>
                         <ul class="footer-links-list">
                             <li><a href="/diagnostico-operativo/">Diagnóstico DAI360</a></li>
                             <li><a href="/#como-trabajo">Metodología</a></li>
                             <li><a href="/#sobre-mi">Sobre Mí</a></li>
                             <li><a href="/blog/">Blog</a></li>
+                            <li><a href="/#contacto">Contacto</a></li>
                         </ul>
                     </div>
                     <div class="footer-links-col">
@@ -409,25 +418,23 @@
                     </div>
                 </div>
             </div>
-            <div class="footer-bottom-bar">
-                <p class="footer-curator">albercabrera.com &copy; 2026</p>
-                <div class="footer-social-wrap">
-                    <span class="footer-social-label">Sígueme:</span>
-                    <div class="footer-social-icons">
-                        <a href="https://www.linkedin.com/in/alberto-p%C3%A9rez-cabrera" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-                        </a>
-                        <a href="https://www.instagram.com/albercabrera.ia" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37zM17.5 6.5h.01"/></svg>
-                        </a>
-                    </div>
-                </div>
+            <div class="footer-bottom-bar"><p class="footer-curator">&copy; 2026 Alberto P&eacute;rez Cabrera</p>
             </div>
         </div>
     </footer>
 
+<!-- BOTÓN DE WHATSAPP FLOTANTE -->
+<a href="https://wa.me/34637662054?text=Hola%20Alberto,%20he%20visto%20tu%20web%20y%20quiero%20hacerte%20una%20consulta%20sobre%20IA%20para%20mi%20negocio." class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">
+    <svg class="whatsapp-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436.002 9.858-4.417 9.86-9.86.001-2.638-1.024-5.117-2.884-6.979C16.578 1.904 14.1 1.84 12.01 1.84c-5.439 0-9.862 4.419-9.865 9.866-.001 1.8.49 3.554 1.42 5.11L2.551 21.39l4.096-1.076zM17.486 14.4c-.269-.137-1.593-.787-1.839-.877-.246-.09-.425-.137-.604.137-.179.273-.694.877-.85 1.057-.156.18-.313.202-.582.066-.268-.137-1.136-.419-2.162-1.335-.797-.711-1.336-1.59-1.493-1.864-.157-.273-.017-.42.12-.556.124-.121.269-.313.403-.47.135-.157.179-.269.269-.45.09-.18.045-.338-.021-.472-.069-.137-.604-1.46-.828-2.002-.218-.524-.458-.453-.627-.453-.162 0-.348-.02-.534-.02-.187 0-.49.07-.748.35-.258.28-1.008.986-1.008 2.404 0 1.417 1.031 2.787 1.176 2.977.145.19 2.03 3.1 4.916 4.344.686.296 1.222.473 1.639.605.69.219 1.319.189 1.815.115.553-.083 1.593-.652 1.818-1.284.224-.633.224-1.176.157-1.285-.067-.109-.246-.145-.515-.282z"/>
+    </svg>
+    <span class="whatsapp-tooltip">¿Hablamos por WhatsApp?</span>
+</a>
+
+    <link rel="stylesheet" href="/assets/chat/widget-chat.css?v=10">
+    <script src="/assets/chat/widget-chat.js?v=4" defer></script>
     <script src="/assets/js/base.js" defer></script>
-    <script src="/assets/js/aurora.js?v=2"></script>
+    <script src="/assets/js/aurora.js?v=3"></script>
     <script src="/assets/js/landing.js" defer></script>
 
     <script src="/assets/cookies/cookie-banner.js?v=1" defer></script>

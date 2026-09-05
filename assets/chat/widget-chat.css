@@ -18,22 +18,29 @@
    --acw-accent-soft es TEXTO y bordes sobre el panel OSCURO: la 400
    (#EA8258), 6.01 sobre el panel — sobre oscuro la 600 se cae a 3.27. */
 .acw-root {
-    /* [2-sep-2026] El panel va en --night-900, el mismo fondo del hero y
-       del pie. Antes usaba el 800, que en el sistema es el color de las
-       TARJETAS sobre oscuro: al pintar con el el fondo, las burbujas se
-       quedaban sin un tono por encima al que subir. */
-    --acw-bg: #121316;        /* --night-900, el panel */
-    --acw-surface: #1F2126;   /* --night-800, las burbujas encima */
-    --acw-line: #3C3E44;      /* --night-600, bordes sobre oscuro */
-    --acw-bg-deep: #121316;   /* --night-900 */
-    --acw-text: #FFFFFF;      /* 16.11 sobre el panel */
-    --acw-text-soft: #C4C4CB; /* cuerpo · 8.98 */
-    --acw-text-mid: #9A9AA3;  /* --on-night-mid, microcopy y placeholders.
-                                 Antes eran #666/#777 sueltos: 3.29 y 4.22,
-                                 los dos por debajo del minimo de 4.5. */
-    --acw-accent: #B44100;    /* --cobalt-600, relleno con texto blanco */
-    --acw-accent-soft: #EA8258; /* --cobalt-400, texto y bordes sobre oscuro */
-    --acw-border: rgba(234, 130, 88, 0.16);
+    /* [5-sep-2026] PANEL CLARO. Estaba en --night-900 (el carbon del hero
+       y el pie) y se veia apagado y frio: gris azulado flotando sobre una
+       web calida y clara. Ahora es papel, como el resto del sitio.
+
+       Lo que se pierde y como se compensa: sobre oscuro el panel se
+       despegaba solo del contenido. En claro hay que darle un borde y una
+       sombra de verdad para que se lea como una capa por encima de la
+       pagina y no como un trozo mas de ella.
+
+       Contrastes comprobados sobre el panel blanco: ink 18.58,
+       ink-soft 10.69, ink-mid 7.12 (6.32 sobre la burbuja), cobalt-600
+       5.68 y blanco sobre cobalt-600 5.68. Todos por encima de AA. */
+    --acw-bg: #FFFFFF;        /* --bg, el panel */
+    --acw-surface: #F1F1F3;   /* --bg-input, las burbujas encima */
+    --acw-line: #E7E7EA;      /* --line, bordes sobre claro */
+    --acw-bg-deep: #F7F7F8;   /* --bg-alt, cabecera y pie del panel */
+    --acw-text: #121316;      /* --ink · 18.58 */
+    --acw-text-soft: #3C3E44; /* --ink-soft, cuerpo · 10.69 */
+    --acw-text-mid: #55585F;  /* --ink-mid, microcopy y placeholders · 7.12 */
+    --acw-accent: #B44100;    /* --cobalt-600, relleno con texto blanco · 5.68 */
+    --acw-accent-soft: #9E3D0C; /* --cobalt-700: sobre CLARO la 400 se cae a
+                                   2.42. La 700 da 6.72 y si es texto. */
+    --acw-border: #E7E7EA;    /* --line: sobre claro un naranja al 16% no se ve */
     --acw-font: 'Geist', system-ui, 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
@@ -58,8 +65,12 @@
        barra. Antes iba en el 300 (claro) y convivian dos terracotas
        distintos en pantalla, con 3.02 de diferencia de luminosidad.
        Como el relleno se oscurece, el icono pasa a blanco. */
-    background-color: #B44100; /* --cobalt-600 */
-    border: 1px solid #B44100;
+    /* [4-sep-2026] Mismo degradado que la burbuja de WhatsApp y que el
+       hover de los iconos de redes: terracota -> magenta. Los valores van
+       en hexadecimal porque esta hoja se carga suelta, sin tokens.css. */
+    background-color: #B44100; /* --cobalt-600, respaldo */
+    background-image: linear-gradient(160deg, #B44100, #A63A70);
+    border: 1px solid transparent;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -73,9 +84,12 @@
 }
 
 .acw-bubble:hover {
-    transform: scale(1.1) translateY(-3px);
     background-color: #DA622D; /* --cobalt-500: aclara al pasar el raton */
-    box-shadow: 0 15px 40px rgba(18, 19, 22, 0.28);
+    background-image: linear-gradient(160deg, #DA622D, #BF4780);
+    /* [4-sep-2026] Halo en vez de salto, igual que .whatsapp-float y que
+       los botones del sistema: el elemento no se mueve, se enciende. */
+    box-shadow: 0 0 0 6px rgba(218, 98, 45, 0.06),
+                0 12px 32px rgba(18, 19, 22, 0.26);
 }
 
 .acw-bubble:hover .acw-bubble-icon {
@@ -110,9 +124,14 @@
     right: 76px;
     top: 50%;
     transform: translateY(-50%) translateX(10px);
+    /* [5-sep-2026] El tooltip se queda OSCURO aunque el panel sea claro:
+       flota sobre la pagina, no sobre el panel, y en oscuro se lee de un
+       vistazo. Pero su color de texto era var(--acw-text), que al pasar
+       el tema a claro se volvio NEGRO: negro sobre negro. Va blanco
+       explicito. */
     background-color: rgba(10, 10, 12, 0.95);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    color: var(--acw-text);
+    color: #FFFFFF;
     padding: 8px 16px;
     border-radius: 6px;
     font-size: 0.8rem;
@@ -142,8 +161,17 @@
     height: min(600px, calc(100vh - 220px));
     background: var(--acw-bg);
     border: 1px solid var(--acw-border);
-    border-radius: 4px;
-    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
+    /* [5-sep-2026] Con el panel en claro, 4px de radio lo dejaban con
+       aire de cuadro de dialogo del sistema. 12px lo acerca al resto de
+       superficies del sitio. */
+    border-radius: 12px;
+    /* La sombra iba a 0.6 de negro: sobre oscuro no se nota, sobre la
+       pagina clara seria una mancha. En claro el panel se despega con
+       varias capas suaves, no con una dura. */
+    box-shadow:
+        0 1px 2px rgba(18, 19, 22, 0.06),
+        0 8px 24px -6px rgba(18, 19, 22, 0.12),
+        0 24px 56px -16px rgba(18, 19, 22, 0.18);
     font-family: var(--acw-font);
     color: var(--acw-text);
     display: none;

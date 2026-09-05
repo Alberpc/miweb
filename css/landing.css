@@ -16,7 +16,22 @@
 
 /* ===== HERO OSCURO DEL ARTÍCULO =====
    Requiere class="inverse" en el <header class="article-hero">. */
-.article-hero.inverse { position: relative; padding: var(--space-11) 0 var(--space-8); }
+/* [4-sep-2026] HERO EN BLOQUE, como el resto del sitio.
+   Iba a sangre y sin fondo propio (lo pintaba solo el canvas de la
+   aurora), asi que era la unica pagina que abria distinta: la barra
+   pegada al borde y el color a todo lo ancho. Ahora es un bloque con
+   margen y las 4 esquinas redondeadas, igual que la home, el blog y
+   diagnostico-operativo, con --night-900 de fondo real por si el JS
+   de la aurora no llega a pintar. El padding-top le deja sitio a la
+   barra, que va DENTRO (heroEnBloque). */
+.article-hero.inverse {
+    position: relative;
+    overflow: hidden;
+    margin: var(--hero-gap);
+    border-radius: var(--radius-xl);
+    background-color: var(--night-900);
+    padding: calc(64px + var(--hero-gap) + var(--space-8)) 0 var(--space-8);
+}
 /* Sin resplandor dorado de fondo. Era un radial al 18% ocupando media
    pantalla arriba a la derecha, y sobre el verde profundo viraba a
    amarillo turbio. El sistema lo dice en su lista de "evitar": el dorado
@@ -150,10 +165,67 @@
 /* La FAQ vive en css/faq.css, compartida con la home. */
 
 /* ===== CTA FINAL =====
-   La seccion va CLARA a proposito. Antes llevaba .inverse y quedaban tres
-   bloques verdes seguidos (CTA + pie, pegados), que se leian como uno solo.
-   Ahora la tarjeta oscura destaca sobre fondo claro y el pie se distingue. */
-.cta-final { padding: var(--space-10) 0 var(--space-11); background-color: var(--bg); }
+   [4-sep-2026] Va OSCURA, con la aurora encima, como el cierre de la
+   home y de diagnostico-operativo.
+
+   Este comentario decia lo contrario ("la seccion va CLARA a
+   proposito") y la regla ponia --bg: es de cuando el CTA del post era
+   una .cta-card clara, la unica del sitio. El marcado ya se migro al
+   patron comun — <section class="cta-final inverse"> con su canvas —
+   pero la regla se quedo atras, asi que la aurora se pintaba sobre
+   fondo blanco y el cierre se veia negro liso y descolgado del pie.
+
+   El fondo va en CSS y no solo en el canvas: si el JS no llega a
+   pintar, el bloque sigue siendo carbon en vez de blanco con texto
+   blanco encima. */
+.cta-final {
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    padding: var(--space-10) 0 var(--space-11);
+    background-color: var(--night-900);
+    /* Mismos margenes y esquinas que el CTA de diagnostico-operativo:
+       bloque con aire a los lados, redondeado arriba, y comiendose el
+       hueco de abajo para engancharse al pie sin costura (pie.css
+       reconoce .cta-final.inverse). Sin esto iba a sangre y el texto
+       colgaba a la izquierda. */
+    margin-left: var(--hero-gap);
+    margin-right: var(--hero-gap);
+    margin-bottom: calc(var(--hero-gap) * -1);
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+}
+/* [4-sep-2026] Medido: el hueco entre el ultimo parrafo y el boton era
+   de 0px — el boton salia pegado al texto. Los posts y landings nunca
+   estilaron el interior del CTA (venia de la .cta-card antigua, que
+   traia su propio espaciado), asi que se copia el ritmo del CTA de
+   diagnostico-operativo: 16px bajo el titular y 40px antes del boton. */
+.cta-final h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.9rem, 4.2vw, 3rem);
+    font-weight: 400; letter-spacing: -0.02em; line-height: 1.15;
+    color: var(--on-night);
+    margin-bottom: var(--space-4);
+}
+.cta-final p {
+    color: var(--on-night-body); font-weight: 300; font-size: 1.08rem;
+    /* Ancho de lectura: a todo lo ancho del bloque el parrafo salia en
+       una sola linea larguisima y se salia de la caja. */
+    max-width: 62ch; margin: 0 auto var(--space-4);
+}
+/* La linea de apoyo ("20 minutos · Te digo por donde empezar") es
+   microcopy, no un parrafo mas: mas pequena y con el aire del boton. */
+.cta-final .btn-final-sub {
+    font-family: var(--font-mono); font-size: 0.76rem;
+    color: var(--on-night-mid);
+    margin-bottom: var(--space-7);
+}
+/* El boton necesita su propio aire: no todos los CTA traen la linea de
+   microcopy (.btn-final-sub) delante, asi que sin esto el ultimo parrafo
+   quedaba a 16px del boton — pegado. Medido en automatizar-asesoria. */
+.cta-final .btn-main { margin-top: var(--space-5); }
+/* Cuando SI hay microcopy, ella pone el hueco y el boton no lo duplica. */
+.cta-final .btn-final-sub + .btn-main { margin-top: 0; }
+.cta-final > .container { position: relative; z-index: 2; }
 .cta-card {
     max-width: 900px; margin: 0 auto; text-align: center;
     /* Tarjeta oscura sobre seccion clara: asi el CTA es UN bloque que

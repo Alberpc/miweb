@@ -195,7 +195,16 @@ body {
    ancho que la ventana (los dos --hero-gap de su margen). Se notaba solo
    en las paginas legales, que son las unicas que cargan este archivo, y
    ademas solo en las cortas: sin barra de scroll vertical no hay nada que
-   absorba el sobrante. El pie lo estiliza pie.css y punto. */
+   absorba el sobrante. El pie lo estiliza pie.css y punto.
+
+   [4-sep-2026] Aquella limpieza se quedo a medias: el comentario decia
+   "y punto" pero debajo seguian 20 reglas .footer-* que volvian a
+   duplicar pie.css. Como legal.css se carga DESPUES, ganaban ellas y el
+   pie de las legales se desincronizaba del resto del sitio. El ultimo
+   sintoma fue el copyright, que salia en minusculas ("alberto perez
+   cabrera") porque aqui seguia un text-transform ya retirado de
+   pie.css. Mismo problema que tuvo el nav cuando vivia por triplicado.
+   Ahora si: el pie lo estiliza pie.css y solo pie.css. */
 
 .footer-grid {
     display: grid;
@@ -209,25 +218,6 @@ body {
     padding: 0 24px;
 }
 
-.footer-brand-col {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.footer-logo-wrap {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    color: var(--on-night);
-}
-
-.footer-logo-wrap img {
-    height: 24px;
-    width: auto;
-    display: block;
-}
-
 .footer-logo-wrap .logo {
     font-family: var(--font-heading);
     font-weight: 800;
@@ -237,126 +227,12 @@ body {
     letter-spacing: -0.05em;
 }
 
-.footer-brand-desc {
-    font-size: 0.9rem;
-    line-height: 1.6;
-    color: var(--on-night-soft);
-    max-width: 380px;
-    font-weight: 300;
-}
-
-/* Grid de Enlaces */
-.footer-links-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
-}
-
-.footer-links-title {
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: var(--on-night);
-    font-weight: 600;
-    margin-bottom: 24px;
-}
-
-.footer-links-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.footer-links-list a {
-    font-size: 0.8rem;
-    color: var(--on-night-soft);
-    text-decoration: none;
-    transition: color 0.3s ease;
-    font-weight: 300;
-    border-bottom: none; /* Evitar la regla general de links de legales */
-}
-
-.footer-links-list a:hover {
-    color: var(--on-night);
-}
-
-/* Fila Inferior (Bottom Bar) */
-.footer-bottom-bar {
-    border-top: 1px solid var(--night-600);
-    padding-top: 32px;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding-left: 24px;
-    padding-right: 24px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.footer-curator {
-    font-size: 0.75rem;
-    text-transform: lowercase;
-    letter-spacing: 0.15em;
-    color: var(--on-night-mid);
-}
-
-.footer-social-wrap {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-}
-
-.footer-social-label {
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: var(--on-night-mid);
-}
-
-.footer-social-icons {
-    display: flex;
-    gap: 16px;
-}
-
-.footer-social-icons a {
-    color: var(--on-night-soft);
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    border-bottom: none; /* Evitar la regla general de links de legales */
-}
-
-.footer-social-icons a:hover {
-    color: var(--on-night);
-    transform: translateY(-2px);
-}
-
 /* ── Responsivo (Móvil y Tablet) ── */
 @media (max-width: 768px) {
-    .footer-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-    .footer-links-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 24px;
-    }
-    .footer-bottom-bar {
-        flex-direction: column;
-        gap: 20px;
-        align-items: flex-start;
-    }
 }
 
 @media (max-width: 480px) {
-    .footer-links-grid {
-        grid-template-columns: 1fr;
-        gap: 24px;
-    }
 }
-
 
 
 /* Footer mini para páginas legales */

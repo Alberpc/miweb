@@ -199,3 +199,132 @@ img, svg, video, canvas, iframe { max-width: 100%; }
         min-height: 44px;
     }
 }
+
+/* ══ BURBUJA FLOTANTE DE WHATSAPP ══════════════════════════════════
+   [4-sep-2026] Traida de index.css. El marcado vive en el include
+   widgets-flotantes.njk y sale en todas las paginas, asi que su CSS
+   tiene que estar en la hoja que todas cargan — que es esta. En
+   index.css solo lo veia la home. */
+.whatsapp-float {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    width: 60px;
+    height: 60px;
+    /* [2-sep-2026] --cobalt-600, el mismo naranja que el boton de la
+       barra y que la burbuja de Alba. Antes iba en el 300 y convivian dos
+       terracotas distintos (3.02 de diferencia de luminosidad); el
+       comentario que habia aqui hablaba todavia del "dorado" de la paleta
+       anterior, asi que el tono venia heredado, no decidido.
+       El verde oficial de WhatsApp sigue fuera: el icono ya es reconocible
+       por su forma. */
+    /* [4-sep-2026] El degradado terracota -> magenta, el mismo que
+       rellena los iconos de redes al pasar el raton. Arranca en
+       --cobalt-600 y no en el 500 (que es el que usa el hover de las
+       redes): sobre el 500 el icono blanco da 3.64 y sobre el 600 da
+       5.68. En un hover pasajero 3.64 pasa —el minimo para un icono es
+       3.0— pero esto es permanente y esta encima del contenido, asi que
+       toma el tono que aprueba tambien como texto.
+
+       Se mantiene el color de fondo debajo: si el degradado no llegara a
+       pintarse, la burbuja sigue siendo terracota y no transparente. */
+    background-color: var(--cobalt-600);
+    background-image: linear-gradient(160deg, var(--cobalt-600), #A63A70);
+    border: 1px solid transparent;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    /* Sombra en carbon, no negra pura: con fondo solido la sombra negra
+       ensuciaba el halo. Sin backdrop-filter, que ya no aplica. */
+    box-shadow: 0 6px 20px rgba(18, 19, 22, 0.22);
+    transition: all 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+/* Version movil. Va DESPUES de la regla de escritorio a proposito: si se
+   declara antes (en el bloque @media general de arriba), la de escritorio
+   la anula y la burbuja se queda en 60px tambien en movil, desalineandose
+   de la de Alba. Mismo right y mismo tamaño que .acw-bubble en movil. */
+@media (max-width: 768px) {
+    .whatsapp-float {
+        bottom: 20px;
+        right: 20px;
+        width: 54px;
+        height: 54px;
+    }
+}
+
+/* Icono BLANCO sobre el terracota: mismo tratamiento que la burbuja de
+   Alba, para que los dos widgets se lean como pareja. Sobre el 600 el
+   carbon daria 3.27 y desapareceria; el blanco da 5.68. */
+.whatsapp-icon {
+    width: 30px;
+    height: 30px;
+    fill: #FFFFFF;
+    transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* [4-sep-2026] HOVER = HALO, igual que los botones del sistema. Antes
+   era scale(1.1) + translateY(-3px): la burbuja saltaba y crecia, un
+   gesto distinto al de los botones, que solo se encienden. Ahora
+   comparten lenguaje — el elemento no se mueve, gana luz.
+   Se mantiene el aclarado a --cobalt-500 porque en un circulo solido el
+   halo solo no se percibe tanto como en un boton con borde. */
+.whatsapp-float:hover {
+    /* Al pasar el raton el degradado ACLARA (arranca en el 500) en vez de
+       cambiar de familia: el boton se enciende, no se transforma. */
+    background-color: var(--cobalt-500);
+    background-image: linear-gradient(160deg, var(--cobalt-500), #BF4780);
+    box-shadow: 0 0 0 6px var(--cobalt-tint),
+                0 12px 32px rgba(18, 19, 22, 0.26);
+}
+
+.whatsapp-float:hover .whatsapp-icon {
+    transform: rotate(10deg);
+}
+
+/* Tooltip de WhatsApp: burbuja oscura flotante, independiente del fondo bajo ella */
+.whatsapp-tooltip {
+    position: absolute;
+    right: 76px;
+    top: 50%;
+    transform: translateY(-50%) translateX(10px);
+    background-color: var(--night-900);
+    border: 1px solid var(--night-600);
+    color: var(--on-night);
+    padding: 8px 16px;
+    border-radius: var(--radius-sm); /* Sistema Bosque Inteligente: radius-sm */
+    font-size: 0.8rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    box-shadow: 0 10px 20px rgba(15, 31, 27, 0.3);
+}
+
+.whatsapp-float:hover .whatsapp-tooltip {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+}
+
+/* Scrollbar: reglas transversales ya en design-system/tokens.css */
+
+/* =============================================================
+   ESTILOS DE CONTENIDO ADICIONALES (FAQ, BOTONES, FORMATO)
+   ============================================================= */
+
+/* Botón secundario de texto en Hero */
+/* Botón primario de tarjetas secundarias, en dorado */
+/* [4-sep-2026] NIVEL SECUNDARIO, en outline. Los dos botones que usan
+   esta clase ("Como empezamos" y "Ver el diagnostico DAI360") llevan a
+   otra pagina: acompanan, no convierten. En relleno solido pesaban lo
+   mismo que el CTA del hero y la home acababa con tres botones
+   gritando a la vez.
+
+   Ademas resuelve el parche de mas abajo: el relleno era --cobalt-400,
+   el tono para fondo OSCURO, y sobre el blanco de la seccion DAI se veia
+   lavado — hubo que sobreescribirlo alli con --cobalt-600. En outline no
+   hace falta la excepcion: el mismo boton vale en los dos fondos. */

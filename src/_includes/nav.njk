@@ -40,6 +40,17 @@
                 <a href="{{ raiz }}#caminos" class="nav-link{% if paginaActual == "caminos" %} current{% endif %}">Cómo Empezar</a>
                 <a href="{{ raiz }}#sobre-mi" class="nav-link{% if paginaActual == "sobre-mi" %} current{% endif %}">Sobre Mí</a>
                 <a href="{{ navBlogHref | default("/blog/") }}" class="nav-link{% if paginaActual == "blog" %} current{% endif %}">Blog</a>
+                {#- [4-sep-2026] Contacto en el menu. El boton de la barra
+                    lleva al diagnostico en la home y a contacto en el resto
+                    del sitio, asi que en la HOME —que es justo donde vive el
+                    formulario— no habia ninguna forma de llegar a contacto
+                    desde la cabecera. El pie si tenia enlace; la barra no.
+
+                    Va como enlace y no como boton para no duplicar la
+                    llamada: el boton sigue siendo el diagnostico (la puerta
+                    de entrada principal) y este es el atajo para quien solo
+                    quiere escribir. -#}
+                <a href="{{ raiz }}#contacto" class="nav-link{% if paginaActual == "contacto" %} current{% endif %}">Contacto</a>
             </div>
             <a href="{{ navCtaHref | default("/#contacto") }}" class="nav-btn">
 {%- if navCtaCorto %}<span class="full-text">{{ navCtaTexto | safe }}</span><span class="short-text">{{ navCtaCorto | safe }}</span>
@@ -54,6 +65,7 @@
             <a href="{{ raiz }}#caminos" class="nav-mobile-link">Cómo Empezar</a>
             <a href="{{ raiz }}#sobre-mi" class="nav-mobile-link">Sobre Mí</a>
             <a href="{{ navBlogHref | default("/blog/") }}" class="nav-mobile-link">Blog</a>
+            <a href="{{ raiz }}#contacto" class="nav-mobile-link">Contacto</a>
             <a href="{{ navCtaHref | default("/#contacto") }}" class="nav-mobile-cta">{{ navCtaTexto | default("Cuéntame tu caso &rarr;") | safe }}</a>
         </div>
     </nav>

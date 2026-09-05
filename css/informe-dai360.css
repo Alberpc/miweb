@@ -1,0 +1,136 @@
+/* ============================================================
+   INFORME DAI360 — COPIA, solo para la HOME (dentro del portatil).
+   ============================================================
+   [5-sep-2026] COPIA de las reglas que viven en
+   diagnostico-operativo.css. Aquella hoja NO se toca.
+
+   Por que copia y no reparto: se intento repartirlas entre las dos
+   hojas y el filtro se llevo por delante reglas que eran de aquella
+   pagina (.pp-*, .entrega-marca, .entregas-puente). Resultado: se
+   rompio el diagrama del apartado 2 y el riel naranja dejo de llegar
+   a la bola del precio.
+
+   El precio de copiar: si cambia el diseño del informe hay que tocar
+   las dos hojas. Asumido, a cambio de no volver a romper esa pagina.
+
+   La hoja entera no se puede cargar en la home: redefine .hero,
+   .hero h1 y .section + .section::before.
+   ============================================================ */
+
+/* EL PANEL DEL INFORME. Una sola pantalla con sus 3 apartados. */
+.informe {
+    position: relative; z-index: 1;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6) var(--space-6) var(--space-5);
+    /* Sombra NEUTRA. Con el fondo ya teñido, una sombra de color
+       ensuciaria el degradado; el documento se despega por
+       profundidad, no por color. */
+    box-shadow:
+        0 1px 2px rgba(18, 19, 22, 0.05),
+        0 12px 28px -8px rgba(18, 19, 22, 0.12),
+        0 32px 64px -24px rgba(18, 19, 22, 0.20);
+    text-align: left;
+}
+
+.informe-cab { padding-bottom: var(--space-4); border-bottom: 1px solid var(--line); }
+
+.informe-cab h2 {
+    font-family: var(--font-display); font-size: 1.5rem; font-weight: 700;
+    letter-spacing: -0.02em; color: var(--ink); margin: 0 0 8px;
+}
+
+.informe-lead {
+    font-size: 0.85rem; color: var(--cobalt-700); margin: 0 0 var(--space-4);
+    padding-left: 12px; border-left: 2px solid var(--cobalt-500);
+    max-width: 72ch;
+}
+
+.informe-meta {
+    display: flex; flex-wrap: wrap; gap: var(--space-5);
+    font-size: 0.76rem; color: var(--ink-mid);
+}
+
+.informe-bloque { padding-top: var(--space-5); }
+
+.informe-bloque + .informe-bloque { border-top: 1px solid var(--line); margin-top: var(--space-5); }
+
+.informe-bloque h3 {
+    font-family: var(--font-display); font-size: 1.12rem; font-weight: 600;
+    letter-spacing: -0.01em; color: var(--ink); margin: 0 0 6px;
+}
+
+.informe-sub {
+    font-size: 0.8rem; color: var(--ink-mid); margin: 0 0 var(--space-4);
+    max-width: 74ch;
+}
+
+.bpmn { width: 100%; min-width: 620px; height: auto; display: block; }
+
+.bp-task { fill: var(--bg-raised); stroke: var(--line-strong); stroke-width: 1; }
+
+.bp-task.bad { fill: var(--rojo-bg); stroke: var(--rojo); }
+
+.bp-gw { fill: var(--cobalt-100); stroke: var(--cobalt-500); stroke-width: 1; }
+
+.bp-ini { fill: var(--bg); stroke: var(--ink-decor); stroke-width: 1.5; }
+
+.bp-fin { fill: var(--bg); stroke: var(--cobalt-600); stroke-width: 2.5; }
+
+.bp-fl { stroke: var(--ink-decor); stroke-width: 1.2; fill: none; }
+
+.bp-t { font-family: var(--font-body); font-size: 10.5px; fill: var(--ink); font-weight: 500; }
+
+.bp-t.sm { font-size: 9px; fill: var(--ink-mid); font-weight: 400; }
+
+.bp-t.bad-t { fill: var(--rojo); font-weight: 600; }
+
+.bp-lb { font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.14em; fill: var(--ink-mid); }
+
+.bp-warn { font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.16em; fill: var(--rojo); font-weight: 600; }
+
+/* ── LAS TABLAS DEL INFORME ───────────────────────────────────── */
+.tabla-scroll { overflow-x: auto; }
+
+.informe-tabla {
+    width: 100%; min-width: 560px; border-collapse: collapse; font-size: 0.8rem;
+}
+
+.informe-tabla th {
+    text-align: left; font-family: var(--font-mono);
+    font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase;
+    font-weight: 500; color: var(--ink-mid);
+    padding: 0 12px 9px 0; border-bottom: 1px solid var(--line-strong);
+    white-space: nowrap;
+}
+
+.informe-tabla td {
+    padding: 9px 12px 9px 0; border-bottom: 1px solid var(--line);
+    color: var(--ink-soft); vertical-align: middle;
+}
+
+.informe-tabla tr:last-child td { border-bottom: 0; }
+
+.informe-tabla td:first-child { color: var(--ink); font-weight: 500; }
+
+.chip--alto  { background: var(--rojo-bg);  color: var(--rojo); }
+
+.chip--medio { background: var(--ambar-bg); color: var(--ambar); }
+
+.chip--bajo  { background: var(--verde-bg); color: var(--verde); }
+
+.et--ventas   { background: var(--chip-1-bg); color: var(--chip-1-ink); }
+
+.et--ops      { background: var(--chip-2-bg); color: var(--chip-2-ink); }
+
+.et--admin    { background: var(--bg-input);  color: var(--ink-soft); }
+
+.informe { padding: var(--space-5) var(--space-4); }
+
+.informe-meta { gap: var(--space-3); }
+
+@media (max-width: 900px) {
+    .informe { padding: var(--space-5) var(--space-4); }
+    .informe-meta { gap: var(--space-3); }
+}

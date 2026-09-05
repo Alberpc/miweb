@@ -254,7 +254,11 @@
    montado sobre el borde del bloque del precio, igual que .riel-bola
    en la home. Es lo que hace que el precio se lea como el DESTINO del
    recorrido y no como una seccion suelta mas abajo. */
-.deal { position: relative; }
+/* [5-sep-2026] z-index explicito: el tramo del riel de .entregas cruza
+   por encima de esta zona, y sin esto tapaba la mitad de arriba de la
+   bola. El bloque del precio va delante; la bola, dentro, sigue con su
+   z-index 3 propio. */
+.deal { position: relative; z-index: 1; }
 .entregas-bola {
     position: absolute;
     /* [3-sep-2026] Usa --riel, no un 50% fijo: en movil el eje se va al
@@ -264,9 +268,11 @@
     width: 38px; height: 38px; border-radius: 50%;
     display: grid; place-items: center;
     background: var(--cobalt-400);
-    /* El aro del color del fondo de la seccion la recorta contra el
-       borde del bloque y la hace flotar. */
-    box-shadow: 0 0 0 6px var(--bg),
+    /* [5-sep-2026] Aro NEGRO, exactamente como .riel-bola en la home.
+       Estaba en var(--bg) (blanco, el fondo de la pagina) y la bola cae
+       sobre el borde del bloque oscuro: el aro blanco la separaba del
+       bloque en vez de recortarla contra el. */
+    box-shadow: 0 0 0 6px var(--night-900),
                 0 0 28px 4px rgba(234, 130, 88, 0.55);
     transform: translate(-50%, -50%);
 }
@@ -281,32 +287,27 @@
    El naranja se pinta con el MISMO --riel-avance que el resto (lo
    escribe riel-entregas.js): asi el frente sigue avanzando en vez de
    aparecer de golpe. */
-.entregas-puente {
-    position: relative;
-    /* Se centra en el mismo eje que el riel: el riel va al 50% de
-       .entregas, que tiene el mismo ancho maximo. */
-    max-width: var(--container-tight);
-    margin: 0 auto;
-    height: calc(var(--space-11) + var(--space-8));
-    /* Sube para solapar el padding inferior de la seccion y llegar
-       hasta el borde del bloque del precio. */
-    margin-bottom: calc((var(--space-11) + var(--space-8)) * -1);
-    pointer-events: none;
-}
-.entregas-puente::before,
-.entregas-puente::after {
-    content: ''; position: absolute; left: var(--riel, 50%); top: 0; bottom: 0;
-    width: 2px; margin-left: -1px; border-radius: 2px;
-}
-/* La linea apagada, siempre visible: sin ella el hueco se ve vacio. */
-.entregas-puente::before { background: var(--line-strong); }
-/* El frente naranja, atado al scroll igual que el riel de arriba. */
-.entregas-puente::after {
-    transform-origin: top center;
-    transform: scaleY(var(--puente-avance, 0));
-    background: linear-gradient(to bottom, var(--cobalt-400), var(--cobalt-500));
-    box-shadow: 0 0 12px var(--cobalt-glow);
-}
+/* [5-sep-2026] LA COLA. Sustituye a .entregas-puente, que vivia FUERA
+   de .entregas con sus propios ::before/::after y se pintaba con
+   --puente-avance: una variable que riel-entregas.js dejo de escribir,
+   asi que el tramo se quedaba SIEMPRE gris.
+
+   Ahora es un bloque dentro de .entregas y solo aporta ALTURA: las
+   lineas (gris y naranja) son las de .entregas::before/::after, que van
+   de top:4px a bottom:0 de .entregas y por tanto la recorren entera.
+   Mismo patron que .fase-cola en la home.
+
+   SIN margin-bottom negativo: lo llevaba y era justo lo que cortaba la
+   linea a media altura del hueco — el margen negativo sube el borde
+   inferior de .entregas, y las lineas mueren en ese borde.
+
+   La altura es el hueco real entre el final de las entregas y el bloque
+   del precio: el padding-bottom de esta seccion mas el padding-top de
+   la siguiente (.section = --space-11 arriba y abajo, ver base.css). */
+/* .entregas se estira ese mismo alto por debajo de su ultima entrega,
+   asi que sus lineas (::before/::after, que van a bottom:0) llegan
+   hasta el borde del bloque negro. El padding NO es margen: no separa
+   nada nuevo, ocupa el hueco que las dos secciones ya dejaban. */
 
 /* ══ LAS 4 PIEZAS DE "QUE TE LLEVAS" ═══════════════════════════════
    [3-sep-2026 v8] Reescritas enteras.
@@ -560,6 +561,26 @@
     width: min(760px, 82%); height: 1px;
     background: linear-gradient(90deg, transparent 0%, var(--line) 30%, var(--line-strong) 50%, var(--line) 70%, transparent 100%);
 }
+/* [5-sep-2026] La seccion del PRECIO no lleva ese separador. Viene
+   detras del puente naranja, que baja desde las entregas hasta la bola
+   del bloque negro: la linea horizontal lo cruzaba por la mitad y
+   partia el recorrido en dos, como si empezara otra seccion. El puente
+   ya es la transicion. */
+.section--precio::before { display: none !important; }
+
+/* [5-sep-2026] EL DIAGRAMA DENTRO DE LA PIEZA 02. El .bpmn del informe
+   trae min-width:620px (pensado para el ancho del documento). Metido en
+   una columna de la rejilla de .entrega desbordaba y el riel central le
+   cruzaba por encima. Aqui se ajusta a su columna: el SVG tiene
+   viewBox, asi que escala sin perder nitidez. */
+.entrega-viz .bpmn-scroll { overflow: visible; }
+.entrega-viz .bpmn {
+    min-width: 0;
+    width: 100%;
+    max-width: var(--pieza-ancho, 100%);
+    height: auto;
+}
+
 .s-head.center { margin-left: auto; margin-right: auto; text-align: center; }
 
 /* Síntomas */
@@ -619,17 +640,48 @@
    precio viven fuera de .entregas y no heredarian la variable. */
 #que-te-llevas, .section--precio { --riel: 50%; }
 
+/* [5-sep-2026] Menos aire en la costura entre las dos: .section trae
+   --space-11 (120px) arriba y abajo, asi que entre el final de las
+   entregas y la bola habia 240px de linea vacia. Se quedan en 64+56. */
+#que-te-llevas { padding-bottom: var(--space-8); }
+.section--precio { padding-top: 56px; }
+
 .entregas {
     position: relative;
     max-width: var(--container-tight);
     margin: 0 auto;
+    /* [5-sep-2026] Se estira hasta el bloque del precio para que sus
+       lineas (::before/::after, que llegan a bottom:0) recorran tambien
+       el hueco entre las dos secciones: antes morian al acabar la
+       ultima entrega y el naranja no llegaba a la bola.
+       El padding crea el tramo y el margen negativo lo reabsorbe, asi
+       que NO anyade separacion: ocupa la que las dos secciones ya
+       dejaban con su --space-11 de padding (base.css).
+       Va DESPUES del `margin: 0 auto`, que si no lo borraria. */
+    /* [5-sep-2026] El tramo hasta la bola: la bola vive en top:0 de
+       .deal, en la SECCION siguiente, asi que hay que cruzar el
+       padding-bottom de esta mas el padding-top de aquella
+       (--space-11 x 2, ver .section en base.css).
+
+       z-index NEGATIVO y pointer-events:none: sin eso esta caja se
+       monta sobre el bloque del precio y TAPA LA MITAD DE ARRIBA DE LA
+       BOLA — se veia media bola, cortada por el fondo blanco. Detras
+       del bloque, la linea llega igual y la bola se ve entera. */
+    padding-bottom: calc(var(--space-8) + 56px);
+    margin-bottom: calc((var(--space-8) + 56px) * -1);
+    z-index: 0;
+    pointer-events: none;
 }
 /* La linea apagada, por el eje central. */
 .entregas::before {
     content: ''; position: absolute; left: var(--riel); top: 4px; bottom: 0;
     width: 2px; margin-left: -1px; border-radius: 2px;
+    /* Muere en transparent abajo, como .fases::before en la home: si
+       llega solida se mete dentro de la bola del precio en vez de
+       morir en su borde. */
     background: linear-gradient(to bottom,
-        transparent 0%, var(--line-strong) 4%, var(--line-strong) 100%);
+        transparent 0%, var(--line-strong) 4%,
+        var(--line-strong) 94%, transparent 100%);
 }
 /* EL RELLENO. --riel-avance (0 a 1) lo escribe riel-entregas.js en
    cada frame. scaleY sobre transform (se compone en GPU) y SIN
@@ -641,7 +693,8 @@
     transform-origin: top center;
     transform: scaleY(var(--riel-avance, 0));
     background: linear-gradient(to bottom,
-        var(--cobalt-600) 0%, var(--cobalt-500) 55%, var(--cobalt-400) 100%);
+        var(--cobalt-600) 0%, var(--cobalt-500) 55%,
+        var(--cobalt-400) 94%, transparent 100%);
     box-shadow: 0 0 12px var(--cobalt-glow);
     will-change: transform;
 }
@@ -650,6 +703,8 @@
    El gap deja el pasillo por donde baja la linea. */
 .entrega {
     position: relative;
+    /* Restaura lo que .entregas apaga para no tapar la bola. */
+    pointer-events: auto;
     display: grid; grid-template-columns: 1fr 1fr;
     gap: var(--space-9);
     align-items: center;
@@ -748,13 +803,23 @@
        halo dorado exterior y brillo interior) sobre --night-800, y
        el resultado era un lavado verde-crema donde el texto casi no
        se leia. Un verde, un borde, una sombra. */
-    position: relative; max-width: 860px; margin: 0 auto; text-align: center;
+    position: relative;
+    /* Delante del tramo del riel, que cruza por detras (ver .entregas):
+       sin esto tapaba la mitad de arriba de la bola. */
+    z-index: 1;
+    max-width: 860px; margin: 0 auto; text-align: center;
     background: var(--night-900);
     border: 1px solid var(--cobalt-border);
     border-radius: var(--radius-lg);
     padding: var(--space-8) var(--space-7);
     box-shadow: 0 30px 70px -35px rgba(15, 31, 27, 0.55);
-    overflow: hidden;
+    /* [5-sep-2026] SIN overflow:hidden. Era lo que PARTIA LA BOLA por la
+       mitad: la bola va montada a caballo del borde superior (top:0 con
+       translateY -50%), asi que la mitad de arriba queda fuera del
+       bloque y el recorte se la comia.
+       Estaba para recortar .deal::before, pero ese pseudo-elemento se
+       quedo vacio (el lavado dorado se retiro), asi que no recorta nada
+       util. .cierre en la home tampoco lo lleva. */
 }
 .deal::before {
     content: ''; position: absolute; inset: 0; pointer-events: none;
@@ -933,7 +998,9 @@
        su left debe apuntar al mismo centro. Medido: cuadra en
        riel - padding + 8. */
     .entrega-marca { left: calc(var(--riel) - var(--space-7) + 8px); }
-    .entregas-puente { max-width: none; }
+    /* [5-sep-2026] .entregas-puente ya no existe; su max-width tampoco
+       hace falta: .entregas-cola vive DENTRO de .entregas y hereda su
+       ancho. */
     .entrega {
         grid-template-columns: 1fr; gap: var(--space-5);
         padding-bottom: var(--space-8);

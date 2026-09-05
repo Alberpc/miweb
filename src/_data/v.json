@@ -1,15 +1,15 @@
 {
-  "indexCss": 113,
-  "legalCss": 104,
+  "indexCss": 114,
+  "legalCss": 105,
   "indexJs": 21,
-  "homeCss": 71,
-  "homeJs": 23,
-  "chatCss": 7,
+  "homeCss": 93,
+  "homeJs": 26,
+  "chatCss": 10,
   "chatJs": 4,
   "cookieCss": 1,
   "cookieJs": 1,
-  "auroraJs": 2,
+  "auroraJs": 3,
   "faqJs": 1,
   "blogFiltroJs": 1,
-  "rielEntregasJs": 3
+  "rielEntregasJs": 6
 }

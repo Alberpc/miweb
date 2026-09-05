@@ -150,32 +150,6 @@ Funciona, perotodo a mano
 
 Dibujo cómo fluye el trabajo en tu negocio, paso a paso (un diagrama BPM: el "plano" de tu empresa). Ahí los cuellos de botella saltan a la vista — hasta para ti.
 
-Extracto del informe
-
-1. Entra la consulta
-
-2 h
-
-2. Se pasa a la hoja de cálculo
-
-1 h
-
-3. Revisión manual del socio
-
-3 días
-
-Aquí se para todo
-
-4. Sale el presupuesto
-
-30 min
-
-5. Seguimiento
-
-—
-
-De 3 h de trabajo a **4 días** de espera.
-
 03
 
 ### Sabes qué arreglar.Ordenado por lo que devuelve.

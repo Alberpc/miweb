@@ -26,8 +26,17 @@
     border-radius: var(--radius-xl);
     overflow: hidden;
 }
-/* La variante clara la usa automatizar-mi-negocio (footerInverse: false). */
-.footer-section.inverse { border-top: none; }
+/* [4-sep-2026] El pie oscuro NO tenia fondo propio: el carbon lo pintaba
+   solo el <canvas> de la aurora. Si el JS no arranca (error, red lenta,
+   navegador con JS desactivado) el canvas se queda vacio y el pie sale
+   transparente sobre el blanco de la pagina, con todo su texto en blanco
+   encima: ilegible. El fondo va en CSS, como ya lo tienen .blog-hero y
+   los demas bloques oscuros; la aurora se pinta ENCIMA y es decoracion,
+   no el fondo. */
+.footer-section.inverse {
+    border-top: none;
+    background-color: var(--night-900);
+}
 
 /* CIERRE UNIDO. Cuando la pagina termina con el bloque de contacto
    oscuro, el pie se pega a el — sin hueco y con las esquinas de arriba
@@ -137,8 +146,12 @@ body:has(.cta-final.inverse) .footer-section {
 
 .footer-curator {
     font-size: 0.75rem;
-    text-transform: lowercase;
-    letter-spacing: 0.15em;
+    /* [4-sep-2026] Sin text-transform:lowercase. Tenia sentido cuando
+       aqui iba un dominio ("albercabrera.com"), que se escribe en
+       minusculas; con el nombre del titular dejaba "alberto perez
+       cabrera" en caja baja, que en un nombre propio se lee como una
+       errata. */
+    letter-spacing: 0.12em;
     color: var(--on-night-mid);
 }
 
@@ -146,28 +159,81 @@ body:has(.cta-final.inverse) .footer-section {
     display: flex;
     align-items: center;
     gap: var(--space-4);
+    /* [4-sep-2026] Aire respecto a la descripcion de marca: ahora vive
+       en la columna de identidad, no pegado al copyright. */
+    margin-top: var(--space-5);
 }
+/* La barra de abajo se queda solo con el copyright, asi que deja de
+   necesitar el reparto a dos lados. */
+.footer-bottom-bar { justify-content: flex-start; }
 
-.footer-social-label {
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: var(--on-night-mid);
-}
+/* ══ REDES ═════════════════════════════════════════════════════════
+   [4-sep-2026] Fuera la etiqueta "Sigueme:" y los iconos crecen.
+   Iban a 16px con un texto delante, en la barra de abajo: se leian como
+   letra pequena. Un icono de LinkedIn o Instagram no necesita que le
+   digan lo que es — la forma ya lo dice — y sin la etiqueta se pueden
+   agrandar sin que el conjunto pese de mas.
 
-.footer-social-icons { display: flex; gap: var(--space-4); }
-
-.footer-social-icons a {
-    color: var(--on-night-soft);
+   Ahora son botones de 44px (el minimo tactil de WCAG 2.5.5, que a 16px
+   sueltos no se cumplia) con el icono a 20px dentro. */
+.footer-social-icons {
     display: flex;
-    align-items: center;
+    gap: var(--space-3);
+}
+.footer-social-icons a {
+    color: var(--on-night-body);
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    position: relative;
+    overflow: hidden;
+    /* El icono va por encima del relleno que entra en el hover. */
+    isolation: isolate;
     transition: color var(--motion-base) var(--ease-standard),
-                transform var(--motion-base) var(--ease-standard);
+                border-color var(--motion-base) var(--ease-standard),
+                box-shadow var(--motion-base) var(--ease-standard);
+}
+.footer-social-icons a svg {
+    position: relative;
+    z-index: 1;
+    transition: transform var(--motion-base) var(--ease-standard);
+}
+/* EL RELLENO. Un degradado que sube desde abajo: en reposo esta fuera
+   del boton (scaleY 0 con origen abajo) y al pasar el raton lo llena.
+   Es el mismo gesto que la barra de un grafico al levantarse — entra,
+   no aparece. */
+.footer-social-icons a::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: linear-gradient(160deg, var(--cobalt-500), #A63A70);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform var(--motion-base) var(--ease-standard);
 }
 .footer-social-icons a:hover {
-    color: var(--on-night);
-    transform: translateY(-2px);
+    color: #FFFFFF;
+    border-color: transparent;
+    /* Halo, como el resto de los botones del sistema. */
+    box-shadow: 0 0 0 4px rgba(218, 98, 45, 0.14),
+                0 10px 26px -10px rgba(218, 98, 45, 0.5);
 }
+.footer-social-icons a:hover::before { transform: scaleY(1); }
+/* El icono se inclina un punto: da sensacion de que responde al raton
+   sin llegar a girar, que se leeria como un juguete. */
+.footer-social-icons a:hover svg { transform: scale(1.08) rotate(-4deg); }
+
+/* Sin movimiento: el relleno aparece sin viaje y el icono no se mueve. */
+@media (prefers-reduced-motion: reduce) {
+    .footer-social-icons a::before,
+    .footer-social-icons a svg { transition: none; }
+    .footer-social-icons a:hover svg { transform: none; }
+}
+
 
 
 @media (max-width: 900px) {

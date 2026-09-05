@@ -74,6 +74,13 @@ html {
 .sobremi-section::before,
 .sobremi-section + .section::before { display: none; }
 
+/* [5-sep-2026] Garantias tampoco la lleva, por el mismo motivo: es un
+   bloque redondeado con fondo propio y despegado de los bordes, asi que
+   ya se separa sola. La linea decia lo mismo por segunda vez y, desde
+   que la seccion tiene su margen de 80px, quedaba flotando en mitad del
+   hueco sin tocar nada. */
+.garantias-section::before { display: none; }
+
 /* HERO SECTION (CABECERA) */
 /* El hero es un BLOQUE con margen, no una banda a sangre: se despega de
    los bordes y deja ver el fondo de pagina alrededor, como decagon.ai.
@@ -119,19 +126,11 @@ html {
     max-width: 620px;
 }
 
-.hero-badge {
-    display: inline-block;
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 0.3em;
-    color: var(--cobalt-400);
-    border: 1px solid var(--cobalt-border);
-    background-color: var(--cobalt-tint);
-    padding: 6px 16px;
-    border-radius: var(--radius-pill);
-    margin-bottom: var(--space-5);
-}
+/* [4-sep-2026] Fuera .hero-badge. Era la pildora "IA APLICADA A
+   NEGOCIOS" sobre el titular: repetia lo que ya decia el propio titular
+   y el parrafo, ocupaba la primera linea de la pagina (el sitio mas
+   valioso) y diagnostico-operativo ya funcionaba sin ella. Ademas es un
+   patron de SaaS gastado que ninguna de las referencias usa. */
 
 .hero-title {
     font-family: var(--font-display);
@@ -299,6 +298,10 @@ html {
 .caso-track {
     display: flex;
     transition: transform 360ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    /* El aire va aqui y no en .caso-tabs: asi la linea de las pestanyas
+       deja de tocar la caja negra del paso 02, que empieza justo en el
+       borde superior de su columna. */
+    padding-top: var(--space-7);
 }
 
 .caso-slide {
@@ -312,27 +315,47 @@ html {
     padding-bottom: 64px;
 }
 
-.caso-dots {
+/* [5-sep-2026] PESTANYAS. Sustituyen a los puntos (.caso-dots/.caso-dot),
+   que iban al final de un bloque de mas de una pantalla: nadie llegaba a
+   verlos, asi que el segundo caso no existia. Van sobre una linea que
+   cruza todo el ancho — la pestanya activa la tapa con su propio filete,
+   que es lo que hace legible cual esta abierta sin pintar cajas. */
+.caso-tabs {
     display: flex;
-    justify-content: center;
-    gap: var(--space-2);
-    margin-top: var(--space-5);
+    gap: var(--space-6);
+    border-bottom: 1px solid var(--line);
 }
 
-.caso-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--line-strong);
+.caso-tab {
+    background: none;
     border: none;
-    padding: 0;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px; /* el filete cae sobre la linea del contenedor */
+    padding: 0 0 var(--space-3);
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--ink-mid);
     cursor: pointer;
-    transition: all 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    white-space: nowrap;
+    transition: color 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
+                border-color 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-.caso-dot.is-active {
-    background: var(--cobalt-600);
-    width: 22px;
+.caso-tab:hover {
+    color: var(--ink);
+}
+
+.caso-tab.is-active {
+    color: var(--ink);
+    font-weight: 500;
+    border-bottom-color: var(--cobalt-600);
+}
+
+/* El foco se ve: son navegables con Tab y con las flechas del teclado. */
+.caso-tab:focus-visible {
+    outline: 2px solid var(--cobalt-600);
+    outline-offset: 3px;
     border-radius: var(--radius-sm);
 }
 
@@ -423,38 +446,6 @@ html {
     margin-bottom: var(--space-3);
 }
 
-/* CABECERA DEL CASO: de quien es esto, antes de contarlo. El logo y el
-   nombre van juntos porque a este tamanyo varios logos no se leen solos
-   (Mafhesa y Bioresina traen el texto muy pequenyo dentro del propio
-   archivo). */
-.caso-cabecera {
-    display: flex;
-    align-items: center;
-    gap: var(--space-4);
-    padding-bottom: var(--space-5);
-    margin-bottom: var(--space-6);
-    border-bottom: 1px solid var(--line);
-}
-
-.caso-cliente-logo {
-    height: 40px;
-    width: auto;
-    max-width: 120px;
-    object-fit: contain;
-    object-position: left center;
-    filter: brightness(0);
-    opacity: 0.62;
-    flex-shrink: 0;
-}
-
-.caso-cliente-nombre {
-    font-family: var(--font-heading);
-    font-size: 1.35rem;
-    font-weight: 500;
-    color: var(--ink);
-    margin: 0;
-}
-
 .caso-step-title {
     font-size: 1.15rem;
     font-weight: 500;
@@ -487,6 +478,13 @@ html {
     border-top: 1px solid var(--line);
 }
 
+/* Ni cursiva, ni comillas, ni filete. La firma (foto + nombre + cargo)
+   ya dice que esto es una resenya. Llego a tener un filete a la izquierda
+   [5-sep-2026] y sobraba: la cita ya queda acotada por la linea de
+   .caso-cierre arriba y la vertical de .caso-impact-col a la derecha, y
+   ademas competia con los filetes cobalto de los .caso-hecho de al lado.
+   En esta zona habia seis lineas contando; se quedan las que separan
+   bloques distintos, no las que decoran. */
 .caso-quote-col {
     margin: 0;
     padding: 0;
@@ -507,17 +505,66 @@ html {
     margin: 0;
 }
 
+/* [5-sep-2026] La firma pasa de una linea de texto a bloque de resenya:
+   avatar redondo + nombre + cargo. Una cita sin cara pesa menos que una
+   resenya, y aqui la prueba social es el punto de la seccion. Va en los
+   dos casos para que al saltar de pestanya no baile: donde no hay persona
+   con foto (Bioresina), el circulo lleva el logo del cliente. */
 .caso-quote-author {
-    font-size: 0.9rem;
-    color: var(--ink-mid);
-    font-weight: 400;
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
     margin-top: var(--space-5);
     font-style: normal;
 }
 
+/* 40px: leible sin competir con la cita, que es lo que se lee. */
+.caso-quote-avatar {
+    width: 40px;
+    height: 40px;
+    flex: 0 0 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    /* Las fotos de perfil traen aire sobre la cabeza; centrado a la mitad
+       exacta la cara queda baja dentro del circulo. */
+    object-position: center 22%;
+    background: var(--bg-sunken);
+    border: 1px solid var(--line);
+}
+
+/* Variante logo: el SVG de marca no se recorta como una cara, se
+   contiene y respira dentro del circulo. */
+.caso-quote-avatar.is-logo {
+    object-fit: contain;
+    padding: 7px;
+}
+
+.caso-quote-firma {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.caso-quote-nombre {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.3;
+}
+
+.caso-quote-cargo {
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--ink-mid);
+    line-height: 1.3;
+}
+
+/* Sin vertical propia: los filetes cobalto de los .caso-hecho ya marcan
+   donde empieza esta columna, y una gris a 64px por delante de ellos
+   dejaba dos separadores verticales casi pegados. */
 .caso-impact-col {
     padding-left: var(--space-8);
-    border-left: 1px solid var(--line);
 }
 
 .caso-impact-titulo {
@@ -606,14 +653,14 @@ html {
     .caso-impact-col {
         padding-left: 0;
         padding-top: var(--space-6);
-        border-left: none;
         border-top: 1px solid var(--line);
     }
-    .caso-cabecera {
-        gap: var(--space-3);
+    /* Con dos nombres cortos caben; si entra un tercer caso, esto
+       pasara a scroll horizontal en vez de apilarse. */
+    .caso-tabs {
+        gap: var(--space-5);
     }
-    .caso-cliente-logo { height: 32px; }
-    .caso-cliente-nombre { font-size: 1.15rem; }
+    .caso-tab { font-size: 0.95rem; }
 }
 
 /* =============================================================
@@ -903,48 +950,6 @@ html {
     padding-top: var(--space-5);
 }
 
-.area-titulo {
-    font-family: var(--font-heading); /* sans: el serif se reserva a >3rem (hero, cifras gigantes) */
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--ink);
-    margin: 0 0 var(--space-4);
-}
-
-.area-problema,
-.area-resultado {
-    font-size: 0.93rem;
-    line-height: 1.6;
-    margin: 0 0 var(--space-3);
-}
-
-.area-problema {
-    color: var(--ink-mid);
-}
-
-.area-resultado {
-    color: var(--ink-soft);
-    margin-bottom: 0;
-}
-
-/* "Hoy" y "Después" en versalita mono: separan los dos estados sin
-   gastar un icono ni un color de fondo. El verde solo aparece en el
-   segundo, que es el único sitio donde significa algo. */
-.area-etq {
-    display: block;
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    font-weight: 700;
-    color: var(--ink-mid);
-    margin-bottom: var(--space-1);
-}
-
-.area-etq-ok {
-    color: var(--verde);
-}
-
 /* =============================================================
    BENEFICIOS (la franja de 4 iconos bajo el hero)
    =============================================================
@@ -1034,12 +1039,6 @@ html {
     transition: border-color 220ms cubic-bezier(0.2, 0.8, 0.2, 1), transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-.timeline-item:hover {
-    border-color: var(--cobalt-border);
-    border-top-color: var(--cobalt-400);
-    transform: translateY(-4px);
-}
-
 /* Número gigante como marca de agua tipográfica: protagonista real
    del paso en vez de un círculo pequeño casi invisible sobre oscuro. */
 .timeline-number {
@@ -1058,25 +1057,6 @@ html {
 
 .timeline-item:hover .timeline-number {
     opacity: 0.85;
-}
-
-.timeline-content {
-    position: relative;
-}
-
-.timeline-title {
-    font-family: var(--font-heading); /* sans: el serif se reserva a >3rem (hero, cifras gigantes) */
-    font-size: 1.35rem;
-    font-weight: 600;
-    margin-bottom: var(--space-3);
-    color: var(--ink);
-}
-
-.timeline-desc {
-    font-size: 0.95rem;
-    color: var(--ink-soft);
-    font-weight: 300;
-    margin-bottom: 0;
 }
 
 @media (max-width: 900px) {
@@ -1105,7 +1085,14 @@ html {
 /* SECCIÓN SOBRE MÍ: DISEÑO DE MONOLITO DE ALTO IMPACTO */
 .sobremi-section {
     position: relative;
-    padding: 120px 0 0 0 !important; /* Sin padding inferior para que la silueta descanse en la base */
+    /* [4-sep-2026] Con padding inferior. Antes era 0 para que la silueta
+       "descansara en la base", y funcionaba mientras debajo hubiera
+       blanco: el corte no se veia porque los dos fondos eran el mismo.
+       Al pasar "como empezar" a gris, la foto quedo tocando la linea
+       donde cambia el color — medido, 0px entre el borde de la imagen y
+       el final de la seccion. Ahora la foto acaba dentro de su propia
+       zona clara y el cambio de fondo ocurre despues. */
+    padding: 120px 0 var(--space-9) 0 !important;
     overflow: hidden;
     min-height: 720px;
     display: flex;
@@ -1316,9 +1303,6 @@ html {
         text-align: center;
         align-items: center;
         padding-bottom: 0;
-    }
-    .sobremi-text .hero-badge {
-        align-self: center !important;
     }
 }
 
@@ -1827,123 +1811,46 @@ html {
 
 /* Retrasos secuenciales adicionales */
 .timeline-item:nth-child(1) { transition-delay: 0.1s; }
-.timeline-item:nth-child(2) { transition-delay: 0.2s; }
-.timeline-item:nth-child(3) { transition-delay: 0.3s; }
 
 
 /* BOTÓN DE WHATSAPP FLOTANTE */
-.whatsapp-float {
-    position: fixed;
-    bottom: 32px;
-    right: 32px;
-    width: 60px;
-    height: 60px;
-    /* [2-sep-2026] --cobalt-600, el mismo naranja que el boton de la
-       barra y que la burbuja de Alba. Antes iba en el 300 y convivian dos
-       terracotas distintos (3.02 de diferencia de luminosidad); el
-       comentario que habia aqui hablaba todavia del "dorado" de la paleta
-       anterior, asi que el tono venia heredado, no decidido.
-       El verde oficial de WhatsApp sigue fuera: el icono ya es reconocible
-       por su forma. */
-    background-color: var(--cobalt-600);
-    border: 1px solid var(--cobalt-600);
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    /* Sombra en carbon, no negra pura: con fondo solido la sombra negra
-       ensuciaba el halo. Sin backdrop-filter, que ya no aplica. */
-    box-shadow: 0 6px 20px rgba(18, 19, 22, 0.22);
-    transition: all 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
-    cursor: pointer;
-    text-decoration: none;
-}
+/* [4-sep-2026] Las reglas de .whatsapp-float se han movido a
+   css/base.css: el marcado ahora sale del include comun y aparece en
+   las 15 paginas, pero index.css solo lo carga la home — en el resto
+   la burbuja salia sin estilos, como un bloque de 1440px en mitad de
+   la pagina (medido). */
 
-/* Version movil. Va DESPUES de la regla de escritorio a proposito: si se
-   declara antes (en el bloque @media general de arriba), la de escritorio
-   la anula y la burbuja se queda en 60px tambien en movil, desalineandose
-   de la de Alba. Mismo right y mismo tamaño que .acw-bubble en movil. */
-@media (max-width: 768px) {
-    .whatsapp-float {
-        bottom: 20px;
-        right: 20px;
-        width: 54px;
-        height: 54px;
-    }
-}
-
-/* Icono BLANCO sobre el terracota: mismo tratamiento que la burbuja de
-   Alba, para que los dos widgets se lean como pareja. Sobre el 600 el
-   carbon daria 3.27 y desapareceria; el blanco da 5.68. */
-.whatsapp-icon {
-    width: 30px;
-    height: 30px;
-    fill: #FFFFFF;
-    transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-.whatsapp-float:hover {
-    transform: scale(1.1) translateY(-3px);
-    background-color: var(--cobalt-500);
-    box-shadow: 0 15px 40px rgba(18, 19, 22, 0.28);
-}
-
-.whatsapp-float:hover .whatsapp-icon {
-    transform: rotate(10deg);
-}
-
-/* Tooltip de WhatsApp: burbuja oscura flotante, independiente del fondo bajo ella */
-.whatsapp-tooltip {
-    position: absolute;
-    right: 76px;
-    top: 50%;
-    transform: translateY(-50%) translateX(10px);
-    background-color: var(--night-900);
-    border: 1px solid var(--night-600);
-    color: var(--on-night);
-    padding: 8px 16px;
-    border-radius: var(--radius-sm); /* Sistema Bosque Inteligente: radius-sm */
-    font-size: 0.8rem;
-    white-space: nowrap;
-    opacity: 0;
-    pointer-events: none;
-    transition: all 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
-    box-shadow: 0 10px 20px rgba(15, 31, 27, 0.3);
-}
-
-.whatsapp-float:hover .whatsapp-tooltip {
-    opacity: 1;
-    transform: translateY(-50%) translateX(0);
-}
-
-/* Scrollbar: reglas transversales ya en design-system/tokens.css */
-
-/* =============================================================
-   ESTILOS DE CONTENIDO ADICIONALES (FAQ, BOTONES, FORMATO)
-   ============================================================= */
-
-/* Botón secundario de texto en Hero */
-/* Botón primario de tarjetas secundarias, en dorado */
 .btn-primary-small {
     display: inline-block;
     font-size: 0.85rem;
     font-weight: 600;
-    color: var(--night-900);
-    background: var(--cobalt-400);
+    color: var(--cobalt-700);
+    background: transparent;
     padding: 0 20px;
     min-height: 48px;
-    line-height: 48px;
-    border-radius: var(--radius-sm); /* Sistema Bosque Inteligente: radio fijo, nunca píldora */
+    line-height: 46px;
+    border-radius: var(--radius-sm);
     text-decoration: none;
-    transition: all 150ms cubic-bezier(0.2, 0.8, 0.2, 1);
-    border: 1px solid transparent;
+    transition: all var(--motion-fast) var(--ease-standard);
+    border: 1px solid var(--cobalt-border);
 }
-
+/* Hover: halo, sin desplazar el boton (mismo gesto que el primario). */
 .btn-primary-small:hover {
-    transform: translateY(-1px);
-    background: var(--cobalt-300);
-    box-shadow: 0 4px 15px var(--cobalt-glow);
+    color: var(--cobalt-800);
+    border-color: var(--cobalt-500);
+    background: var(--cobalt-tint);
+    box-shadow: 0 0 0 4px var(--cobalt-tint);
+}
+/* En el bloque de cierre, que es carbon, sube al tono claro. */
+.cierre .btn-primary-small {
+    color: var(--cobalt-400);
+    border-color: rgba(234, 130, 88, 0.42);
+}
+.cierre .btn-primary-small:hover {
+    color: var(--cobalt-300);
+    border-color: var(--cobalt-400);
+    background: rgba(234, 130, 88, 0.10);
+    box-shadow: 0 0 0 4px rgba(234, 130, 88, 0.10);
 }
 
 /* Fila de CTAs dentro de tarjeta (botón + enlace fantasma) */
@@ -2014,15 +1921,8 @@ html {
    relleno --cobalt-600 y texto blanco, 5.68. El .btn-primary-small
    global usa --cobalt-400, que es el tono para oscuro y sobre blanco se
    ve lavado. */
-.dai-texto .btn-primary-small {
-    background: var(--cobalt-600);
-    color: #FFFFFF;
-}
-
-.dai-texto .btn-primary-small:hover {
-    background: #9C3800;
-    box-shadow: 0 6px 18px -6px rgba(180, 65, 0, 0.45);
-}
+/* El parche que forzaba --cobalt-600 aqui se retira: la clase ya es
+   outline y se lee igual de bien sobre claro que sobre oscuro. */
 
 .dai-desc {
     color: var(--ink-soft);
@@ -2068,11 +1968,27 @@ html {
 /* El precio se dice aqui, no solo en el FAQ: es la objecion real y
    esconderla obliga a buscarla. */
 .dai-precio {
-    font-size: 0.92rem;
-    color: var(--ink-mid);
     border-top: 1px solid var(--line);
     padding-top: var(--space-4);
     margin-bottom: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+/* El numero se lee de un vistazo: es lo que decide si sigues leyendo. */
+.dai-precio strong {
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+}
+
+/* La condicion, debajo y en gris: acompanya al numero, no compite. */
+.dai-precio span {
+    font-size: 0.92rem;
+    color: var(--ink-mid);
+    line-height: 1.5;
 }
 
 /* La salida para quien ya lo tiene claro: una linea, nunca una tarjeta.
@@ -2103,16 +2019,139 @@ html {
 .dai-viz {
     margin: 0;
     position: relative;
+    /* Se sale un poco de su columna hacia la derecha, lo justo para que
+       la tabla se lea. El contenedor no recorta, asi que la sombra
+       respira. */
+    max-width: 110%;
 }
 
-.dai-viz img {
+/* [5-sep-2026] HALO, segunda version — esta vez copiando la receta que
+   YA funciona en .fase-viz::before (seccion "como trabajo").
+
+   El primer intento fallo por tres cosas, y aqui van corregidas:
+   1. Llevaba los CINCO colores de la aurora y al difuminarse se lavaban
+      entre si hasta quedar un gris sucio. Aqui van DOS, los mismos que
+      alli: terracota abriendo a magenta.
+   2. Iba a 0.30-0.55 de opacidad y no se veia. Alli van a 0.78 y 0.60.
+   3. Iba repartido alrededor de la pieza. Alli desborda MUCHO mas por
+      abajo (-30% contra -10%), asi que la luz CAE como una sombra de
+      color en vez de rodear el objeto como un aura.
+
+   Vive en .dai-viz (el padre) y no en la imagen: un pseudo-elemento no
+   puede ponerse por detras del fondo de su propio elemento. */
+.dai-viz::before {
+    content: '';
+    position: absolute;
+    z-index: 0;
+    pointer-events: none;
+    /* SIN border-radius: 50%. Lo copie de .fase-viz y aqui se veia como
+       un SEMICIRCULO rosa recortado bajo la base del portatil — la
+       elipse tiene borde, y con el desbordamiento inferior grande esa
+       curva asoma entera. Alli no se nota porque la pieza tapa mas
+       superficie. Aqui la forma la tienen que dar los propios radiales,
+       que mueren en transparent y no dejan canto. */
+    inset: -10% -4% -20% 2%;
+    filter: blur(60px);
+    /* Dos focos, no una mancha: uno alto a la izquierda y otro bajo a
+       la derecha, para que la luz cruce por detras en diagonal. */
+    background:
+        radial-gradient(42% 40% at 34% 42%,
+            rgba(234, 130, 88, 0.60) 0%,
+            rgba(234, 130, 88, 0.20) 46%,
+            transparent 72%),
+        radial-gradient(40% 38% at 68% 72%,
+            rgba(172, 58, 112, 0.42) 0%,
+            rgba(172, 58, 112, 0.15) 48%,
+            transparent 74%);
+}
+
+/* EL MARCO: el render del portatil (Magnific), con la pantalla vacia y
+   fondo transparente. Va como imagen y no dibujado en CSS porque el
+   aluminio, el reflejo del cristal y la camara web no salen en CSS: un
+   chasis dibujado se lee plano. Ya se intento y se retiro. */
+.dai-marco img {
     display: block;
     width: 100%;
     height: auto;
-    /* Se sale un poco de su columna hacia la derecha, lo justo para que
-       la tabla se lea. El contenedor no recorta (la seccion no tiene
-       overflow hidden), asi que la sombra respira. */
-    max-width: 110%;
+    position: relative;
+    z-index: 2; /* el bisel tapa los bordes del informe */
+    pointer-events: none;
+    /* Sombra proyectada de la silueta, no del rectangulo del <img>: la
+       imagen es un recorte con alfa. */
+    filter:
+        drop-shadow(0 8px 16px rgba(18, 19, 22, 0.10))
+        drop-shadow(0 28px 56px rgba(18, 19, 22, 0.13));
+}
+
+/* LA PANTALLA. Estas medidas NO son a ojo: salen de medir el PNG pixel
+   a pixel, y coinciden con el hueco que se vacio en el cristal. */
+.dai-pantalla {
+    position: absolute;
+    left: 6.65%;
+    top: 0.48%;
+    width: 86.58%;
+    height: 93.36%;
+    overflow: hidden;
+    z-index: 1;
+    /* [5-sep-2026] NEGRO, no blanco. Una pantalla encendida tiene su
+       propio marco interior oscuro: el contenido no llega al borde del
+       cristal. Sin esto el informe salia a sangre y la pieza no se leia
+       como un portatil, sino como un documento con un marco pintado. */
+    background: #0B0B0D;
+    border-radius: 0.4vw;
+    /* [5-sep-2026] Bisel FINO. Estaba en 4.2%/3.4% y quedaba un marco
+       negro gordo que se comia la pantalla. En un portatil real (foto de
+       referencia) el contenido llega casi al borde del cristal: el
+       negro es una linea, no un marco. */
+    padding: 0.9% 0.8%;
+}
+
+/* El visor: lo que recorta el informe y por donde asoma al moverse.
+   Sin barra de ventana (puntos de colores / barra del sistema): la pieza
+   es el INFORME dentro de un portatil, no una captura de un navegador. */
+.dai-visor {
+    overflow: hidden;
+    background: var(--bg);
+    height: 100%;
+    border-radius: 0.15vw;
+}
+
+/* EL CARRIL QUE SE MUEVE.
+   El informe se pinta a su ANCHO NATURAL (--informe-ancho) y se escala
+   entero. Es lo unico que funciona: sus piezas traen min-width a fuego
+   (diagrama 620px, tablas 560px) pensados para una pagina completa, asi
+   que dentro de la pantalla no se encogian, desbordaban. */
+.dai-scroll {
+    /* [5-sep-2026] 1020px. Se probaron 1180 (escala 0.44: todo diminuto,
+       ilegible) y 820 (escala 0.59: se veia como con el zoom al 150%,
+       "muy exagerado"). En una pantalla real el documento se ve ENTERO de
+       ancho, con su margen, no ampliado: 1020 deja el informe completo y
+       legible, y sigue sobrando documento por debajo para recorrer. */
+    --informe-ancho: 1020px;
+    width: var(--informe-ancho);
+    transform-origin: 0 0;
+    transform: scale(var(--escala, 1)) translateY(var(--desplazamiento, 0px));
+    will-change: transform;
+}
+
+/* Dentro de la pantalla el informe es una ilustracion, no un documento
+   que se lea de cerca: fuera la tarjeta (borde, sombra y esquinas) que
+   en la otra pagina lo despega del fondo. Aqui su marco es el portatil. */
+.dai-pantalla .informe {
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    max-width: none;
+    width: 100%;
+}
+
+/* Sin barras dentro de la pantalla: a esta escala el diagrama y las
+   tablas caben, y una barra de scroll dentro de un portatil dibujado no
+   se lee como parte del documento. */
+.dai-pantalla .bpmn-scroll,
+.dai-pantalla .tabla-scroll {
+    overflow: visible;
 }
 
 @media (max-width: 900px) {
@@ -2181,24 +2220,6 @@ html {
     .clientes-tira .logo-cliente[alt="Mafhesa"] { height: 29px; }
     .clientes-tira .logo-cliente[alt="Geko"] { height: 30px; }
 }
-
-/* Salida del hero al diagnostico. El titular ya plantea la duda ("No
-   sabes por donde empezar"), asi que la respuesta va debajo, discreta:
-   quien lo tiene claro usa el boton y sigue bajando. */
-.hero-salida {
-    margin-top: var(--space-4);
-    font-size: 0.92rem;
-    color: var(--on-night-mid, rgba(255, 255, 255, 0.72));
-}
-
-.hero-salida a {
-    color: var(--cobalt-400);
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
-    transition: border-color 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-.hero-salida a:hover { border-bottom-color: var(--cobalt-400); }
 
 /* El aviso: la frase que resume, con filo dorado a la izquierda. */
 .problema-text.highlight {
@@ -2367,7 +2388,17 @@ html {
     display: grid;
     grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
     gap: var(--space-9, 80px);
-    align-items: center;
+    /* [4-sep-2026] `start`, no `center`. Con align-items:center las dos
+       columnas se quedan en la altura de la fila en vez de estirarse, y
+       .glass-form-container media 484px cuando su contenido pedia 841.
+       Como ese contenedor lleva overflow:hidden (recorta el haz de luz
+       giratorio del borde), los 357px sobrantes se cortaban: el boton
+       de enviar salia partido por la mitad. Medido en el navegador.
+
+       Con `start` cada columna crece lo que necesite y el texto de la
+       izquierda se alinea arriba, que es lo natural al lado de un
+       formulario mas alto. */
+    align-items: start;
     max-width: var(--container-narrow);
     margin: 0 auto;
 }
@@ -2474,12 +2505,35 @@ html {
    Y a la altura del resto del formulario: el `.btn-submit` global suma
    `padding: 16px` MAS `min-height: 52px`, asi que salia de 86px de alto
    contra los 53 de los campos — un 62% mas, y se comia el panel. */
+/* [4-sep-2026] PRIMARIO: negro con halo, como el CTA del hero. Es la
+   conversion final de la pagina — el momento en que alguien deja sus
+   datos — asi que le toca el nivel de arriba. En terracota solido se
+   confundia con los secundarios de mas arriba, que solo llevan a otra
+   pagina. El halo ademas lo recorta contra el panel blanco del
+   formulario, donde el naranja se fundia con el propio acento del
+   bloque. */
 .contacto-section .btn-submit {
-    background: var(--cobalt-600);
     color: #FFFFFF;
+    border: 1px solid transparent;
+    background:
+        linear-gradient(var(--night-900), var(--night-900)) padding-box,
+        linear-gradient(100deg,
+            var(--cobalt-500) 0%,
+            #A63A70 40%,
+            #8642C4 73%,
+            #3A50BE 100%) border-box;
     min-height: 0;
     padding: 15px 20px;
     font-size: 0.95rem;
+    /* [4-sep-2026] A ANCHO COMPLETO. Ajustado al texto quedaba una caja
+       naranja corta pegada al borde izquierdo con mucho blanco a su
+       derecha, y se leia como si estuviera cortada. Ocupando la linea
+       entera cierra el formulario: es la accion final, no un boton mas
+       entre otros. Es ademas lo que hacen los campos de arriba, que ya
+       van a ancho completo. */
+    display: block;
+    width: 100%;
+    text-align: center;
     /* El `line-height: 52px` del boton global es lo que de verdad le daba
        la altura (52 + los dos paddings = 82). Quitar solo el min-height no
        bastaba. */
@@ -2487,7 +2541,15 @@ html {
 }
 
 .contacto-section .btn-submit:hover {
-    background: #9C3800;
+    color: #FFFFFF;
+    box-shadow: 0 0 0 4px var(--cobalt-tint), 0 8px 30px var(--cobalt-glow);
+    background:
+        linear-gradient(var(--night-800), var(--night-800)) padding-box,
+        linear-gradient(100deg,
+            var(--cobalt-500) 0%,
+            #A63A70 40%,
+            #8642C4 73%,
+            #3A50BE 100%) border-box;
 }
 
 /* Aire interno del panel: los campos iban con el mismo hueco entre
@@ -2560,16 +2622,12 @@ html {
     background-color: var(--bg);
     padding-top: var(--space-9);
     padding-bottom: var(--space-9);
-}
-
-.garantias-intro {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--ink-mid);
-    margin: 0 0 var(--space-6);
-    text-align: center;
+    /* [5-sep-2026] Viene justo detras de .como-trabajo-section, que
+       tambien es un bloque redondeado y despegado de los bordes. Entre
+       los dos no habia NINGUN margen: solo el padding interno de aqui,
+       asi que los dos cantos redondeados quedaban a cero y se leian
+       pegados. */
+    margin-top: var(--space-9);
 }
 
 /* Dos columnas, no tres: la garantia de datos se saco de aqui y vive
@@ -2735,13 +2793,26 @@ html {
    literal: --bg, --ink y --line ya apuntan solos a sus equivalentes
    oscuros.
    ══════════════════════════════════════════════════════════════════ */
+/* [4-sep-2026] GRIS CLARO, no carbon.
+   Medido en la home: esta seccion media 2226px — mas alta que el propio
+   hero (868) y el doble que cualquier otra. En carbon era una mancha
+   oscura gigante en mitad de la pagina, y despues venian 3110px de
+   blanco seguido (garantias + sobre mi + caminos + FAQ) sin ninguna
+   variacion: el oscuro no se leia como ritmo, se leia como un salto.
+
+   Ahora usa --bg-alt, el gris que los tokens ya describian como "para
+   secciones alternas" pero que la home no usaba en ninguna parte. Es el
+   ritmo de stripe: blanco / gris claro alternando, con el COLOR en las
+   piezas (el riel naranja, el dashboard con su degradado) y no en el
+   fondo. El carbon se reserva a los dos extremos — hero y cierre — que
+   es donde marca principio y final. */
 .como-trabajo-section {
     position: relative;
     overflow: hidden;
     margin-left: var(--hero-gap);
     margin-right: var(--hero-gap);
     border-radius: var(--radius-xl);
-    background-color: var(--night-900);
+    background-color: var(--bg-alt);
 }
 .como-trabajo-section > .container {
     position: relative;
@@ -3602,25 +3673,6 @@ html {
     vector-effect: non-scaling-stroke;
 }
 
-/* El marcador de sitio. Proporcion 16:10 para que al meter la captura
-   la seccion no de un salto de altura. */
-.hueco-vacio {
-    aspect-ratio: 16 / 10;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-2);
-    padding: var(--space-5);
-    text-align: center;
-    background:
-        repeating-linear-gradient(45deg,
-            rgba(255, 255, 255, 0.018) 0 8px,
-            transparent 8px 16px);
-    border: 1px dashed var(--night-600);
-    border-radius: calc(var(--radius-lg) - 1px);
-}
-
 
 /* ── DONDE MUERE LA LINEA ──────────────────────────────────────────
    [1-sep-2026] La bola estaba suelta en el hueco entre la ultima fase
@@ -3692,10 +3744,20 @@ html {
     grid-template-columns: 1.05fr 1fr;
     gap: var(--space-8);
     align-items: center;
-    /* --night-800 sobre el --night-900 de la seccion: la separacion la
-       hace el cambio de plano, no un borde marcado. */
-    background: var(--night-800);
-    border: 1px solid var(--night-700);
+    /* [4-sep-2026] --night-900, el mismo carbon que el hero y el pie.
+       Era --night-800 (31,33,38) porque la seccion entera iba en
+       --night-900 y el bloque tenia que destacar UN plano por encima.
+       Ahora la seccion es gris claro, asi que esa razon desaparecio: el
+       bloque ya destaca por ser lo unico oscuro de la zona, y usar un
+       carbon distinto solo dejaba dos negros que no cuadran entre si en
+       la misma pagina.
+
+       Se queda oscuro y no gris por dos motivos: el riel naranja termina
+       en la bola montada sobre su borde (sobre gris claro el aro que la
+       recorta desapareceria), y dentro va el dashboard, que es un panel
+       de cristal y necesita fondo oscuro para tener contraste. */
+    background: var(--night-900);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: var(--radius-xl);
     padding: var(--space-8);
 }
@@ -3714,12 +3776,13 @@ html {
    · Una sola familia de color, que la ponen las propias imagenes.
    · Una INVIERTE (fondo oscuro) para romper el ritmo.
    · La flecha de la esquina, igual en las tres. */
+/* [4-sep-2026] Ya no es una rejilla de 2x2: eso era para las tres
+   tarjetas de antes. Ahora dentro va UNA sola pieza (el panel de
+   mantenimiento), asi que ocupa la columna entera — medido, con el grid
+   viejo se quedaba en 237px de los 491 disponibles y el texto salia
+   partido palabra a palabra. */
 .cierre-visual {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto;
-    gap: var(--space-4);
-    align-items: stretch;
+    display: block;
 }
 .tarjeta {
     position: relative;
@@ -3783,56 +3846,173 @@ html {
         #000 0%, #000 52%, rgba(0, 0, 0, 0.5) 78%, transparent 100%);
 }
 
-/* El fondo: imagen o video a sangre, detras del contenido. */
-.tarjeta-fondo {
+/* ══ EL PANEL DE MANTENIMIENTO ═════════════════════════════════════
+   [4-sep-2026] Sustituye a las tres tarjetas con degradado. El patron
+   es el de stripe: el degradado va DETRAS, como escenario, y encima se
+   apoya una pieza de interfaz. Ellos no meten palabras dentro del
+   degradado — ponen una UI real flotando sobre el.
+
+   Aqui el degradado usa los colores de la aurora del hero (terracota →
+   violeta → azul) y el panel muestra una semana de mantenimiento: lo
+   que el sistema hizo mal, el ajuste, y el resultado. */
+.mant {
+    position: relative;
+    padding: var(--space-7);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+/* EL ESCENARIO. Dos capas: la mancha de color y una arista clara que la
+   cruza, que es lo que impide que se lea como un fondo liso. */
+.mant-fondo {
     position: absolute;
     inset: 0;
-    z-index: 0;
 }
-.tarjeta-fondo img,
-.tarjeta-fondo video {
-    display: block;
-    width: 100%;
-    height: 100%;
-    /* CONTAIN por defecto. Con cover, un motivo que ocupa todo el
-       cuadro — como el petalo — se comia el encuadre entero: se veia un
-       trozo en vez de la forma, y el texto caia sobre una zona clara
-       (2.03 de contraste, medido). Con contain se ve la pieza COMPLETA
-       y queda fondo oscuro alrededor, que es donde el texto se lee.
-       La tarjeta alta lo sobrescribe mas abajo. */
-    object-fit: contain;
-    /* Arriba y algo mas pequenyo que la tarjeta: la forma vive en la
-       mitad de arriba y la de abajo queda para el texto, que asi se
-       lee sobre fondo oscuro y no sobre la imagen. */
-    /* Por defecto: la forma centrada en la mitad de arriba, con aire
-       alrededor. Cada tarjeta lo afina abajo segun lo que contiene —
-       una flor flota, un coral se apoya. */
-    object-position: 50% 26%;
-    transform: scale(0.86);
-    transform-origin: 50% 26%;
-    /* FUNDIDO A NEGRO POR LOS CUATRO LADOS.
-       Tres imagenes generadas por separado nunca traen exactamente el
-       mismo fondo — una sale negra, otra gris oscuro — y ese borde
-       nitido donde acaba cada foto es lo que delata que son piezas
-       sueltas. Con la mascara, la imagen se disuelve en el fondo de la
-       tarjeta y el borde deja de existir: las tres se leen como una
-       serie aunque no lo sean del todo.
-       Ademas iguala pequenyas diferencias de encuadre, porque lo que
-       se ve de cada foto es su centro. */
-    /* La mascara se ancla al centro de la FORMA (que con contain vive
-       arriba, no en el medio del cuadro) y cierra antes: asi el fundido
-       cae dentro del propio video y su borde recto nunca llega a verse.
-       Con el radio anterior (78%) el degradado terminaba fuera del
-       cuadro y el recorte del video quedaba a la vista. */
-    /* La mascara sigue a la forma, que ahora vive arriba del cuadro. */
-    -webkit-mask-image: radial-gradient(66% 62% at 50% 32%,
-        #000 0%, #000 34%, rgba(0, 0, 0, 0.45) 68%, transparent 94%);
-    mask-image: radial-gradient(66% 62% at 50% 32%,
-        #000 0%, #000 34%, rgba(0, 0, 0, 0.45) 68%, transparent 94%);
-    /* Correccion de tono comun: unifica el brillo y la saturacion de
-       las tres, para que una que venga mas viva no cante al lado de
-       otra mas apagada. */
-    filter: saturate(0.94) brightness(0.96);
+.mant-fondo::before,
+.mant-fondo::after {
+    content: '';
+    position: absolute;
+    inset: -10%;
+}
+.mant-fondo::before {
+    background:
+        radial-gradient(90% 80% at 12% 8%, #F7AB8E 0%, #DA622D 30%, #A63A70 58%, #6B3A8C 78%, #2E2A5A 100%);
+}
+.mant-fondo::after {
+    background: conic-gradient(from 200deg at 88% 4%,
+        rgba(255, 236, 226, 0.26) 0deg,
+        transparent 46deg);
+}
+
+/* EL PANEL. Carbon casi opaco sobre el degradado: se lee como una
+   ventana apoyada encima, no como una caja pintada. */
+.mant-panel {
+    position: relative;
+    z-index: 1;
+    background: rgba(18, 19, 22, 0.86);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: var(--radius-md);
+    padding: var(--space-5);
+    box-shadow: 0 24px 60px -24px rgba(0, 0, 0, 0.6);
+}
+.mant-cab {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-bottom: var(--space-4);
+    margin-bottom: var(--space-5);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+}
+.mant-titulo {
+    font-family: var(--font-mono); font-size: 0.68rem;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--on-night-body);
+}
+/* La etiqueta de ejemplo: discreta pero legible. El panel tiene forma de
+   dashboard real y sin esto sus cifras se leerian como datos de un
+   cliente — el caso con numeros de verdad (Bioresina) va mas arriba. */
+.mant-ejemplo {
+    font-family: var(--font-mono); font-size: 0.58rem;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--on-night-mid);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: var(--radius-pill);
+    padding: 3px 9px;
+}
+
+/* ── LAS CIFRAS ────────────────────────────────────────────────────
+   Rejilla 2x2: cuatro numeros grandes con su etiqueta. En una fila de
+   cuatro a este ancho cada cifra bajaria tanto que dejaria de leerse
+   como dato y pareceria texto pequeno. */
+.mant-kpis {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-5) var(--space-4);
+    margin-bottom: var(--space-6);
+}
+.mant-kpi { display: flex; flex-direction: column; gap: 3px; }
+.mant-kpi-n {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3vw, 1.95rem);
+    font-weight: 500; letter-spacing: -0.02em; line-height: 1;
+    color: var(--on-night);
+    /* tabular-nums: sin esto el ancho baila mientras el contador sube y
+       la etiqueta de debajo se mueve con cada cifra. */
+    font-variant-numeric: tabular-nums;
+}
+.mant-kpi:first-child .mant-kpi-n { color: var(--cobalt-400); }
+.mant-kpi-k {
+    font-size: 0.76rem; font-weight: 300;
+    color: var(--on-night-mid); line-height: 1.3;
+}
+
+/* ── LA GRAFICA ────────────────────────────────────────────────────
+   Doce barras, una por mes. Suben desde abajo cuando la pieza entra en
+   pantalla (.revelada la pone index.js): la animacion es la que cuenta
+   que esto crece, sin escribirlo. */
+.mant-grafica {
+    display: flex; align-items: flex-end; gap: 5px;
+    height: 74px;
+    padding-bottom: 2px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+}
+.mant-barra {
+    flex: 1;
+    height: var(--h);
+    min-height: 4px;
+    border-radius: 3px 3px 0 0;
+    background: linear-gradient(to top, rgba(234, 130, 88, 0.22), rgba(234, 130, 88, 0.55));
+    /* Arranca aplastada contra el suelo y se levanta al revelarse. El
+       origen abajo evita que crezca desde el centro. */
+    transform: scaleY(0.04);
+    transform-origin: bottom;
+    transition: transform 900ms var(--ease-standard);
+}
+/* La ultima es el mes en curso: solida y en el color de marca. */
+.mant-barra--hoy {
+    background: linear-gradient(to top, var(--cobalt-500), var(--cobalt-400));
+    box-shadow: 0 0 18px -2px var(--cobalt-glow);
+}
+.mant.revelada .mant-barra { transform: scaleY(1); }
+/* Cada barra entra un poco despues que la anterior: el retardo es lo que
+   hace que se lea como una ola y no como un bloque que aparece. */
+.mant.revelada .mant-barra:nth-child(1)  { transition-delay: 0ms; }
+.mant.revelada .mant-barra:nth-child(2)  { transition-delay: 45ms; }
+.mant.revelada .mant-barra:nth-child(3)  { transition-delay: 90ms; }
+.mant.revelada .mant-barra:nth-child(4)  { transition-delay: 135ms; }
+.mant.revelada .mant-barra:nth-child(5)  { transition-delay: 180ms; }
+.mant.revelada .mant-barra:nth-child(6)  { transition-delay: 225ms; }
+.mant.revelada .mant-barra:nth-child(7)  { transition-delay: 270ms; }
+.mant.revelada .mant-barra:nth-child(8)  { transition-delay: 315ms; }
+.mant.revelada .mant-barra:nth-child(9)  { transition-delay: 360ms; }
+.mant.revelada .mant-barra:nth-child(10) { transition-delay: 405ms; }
+.mant.revelada .mant-barra:nth-child(11) { transition-delay: 450ms; }
+.mant.revelada .mant-barra:nth-child(12) { transition-delay: 495ms; }
+
+.mant-pie {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: var(--space-3);
+    margin-top: var(--space-4);
+}
+/* El punto verde de "esto esta vivo": el unico verde de la seccion. */
+.mant-estado {
+    font-family: var(--font-mono); font-size: 0.64rem;
+    letter-spacing: 0.1em; color: var(--verde-night);
+    display: inline-flex; align-items: center; gap: 6px;
+}
+.mant-estado::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--verde-night);
+    box-shadow: 0 0 0 3px rgba(61, 220, 132, 0.16);
+}
+.mant-pie-k {
+    font-family: var(--font-mono); font-size: 0.62rem;
+    letter-spacing: 0.06em; color: var(--on-night-mid);
+}
+
+/* Sin movimiento: las barras aparecen ya levantadas. Se mantiene el
+   resultado, se quita el viaje. */
+@media (prefers-reduced-motion: reduce) {
+    .mant-barra { transform: scaleY(1); transition: none; }
 }
 /* El velo que garantiza que el dato se lea SIEMPRE, sea cual sea la
    imagen que acabe entrando. Sin esto, el contraste del texto depende
@@ -3855,13 +4035,6 @@ html {
         rgba(9, 10, 12, 0.4) 50%,
         transparent 78%);
 }
-.tarjeta-cuerpo {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-1);
-}
 
 /* EL DATO. Es el mensaje de la tarjeta, asi que va grande y sin
    competencia: blanco puro sobre el velo oscuro. */
@@ -3878,12 +4051,6 @@ html {
     color: #FFFFFF;
     font-variant-numeric: tabular-nums;
 }
-.dato-k {
-    font-size: 0.84rem;
-    line-height: 1.4;
-    color: rgba(255, 255, 255, 0.92);
-    max-width: 26ch;
-}
 /* La alta puede permitirse el dato mas grande: tiene el doble de alto
    y con el mismo tamanyo se le quedaba mucho aire muerto arriba. */
 .tarjeta--alta .dato { font-size: clamp(2rem, 3.2vw, 2.7rem); }
@@ -3893,60 +4060,6 @@ html {
    es un contraste mas limpio y no obliga a que su imagen sea distinta
    de las otras dos. */
 .tarjeta--invertida .dato { color: var(--cobalt-400); }
-
-/* ── EL ENCUADRE, TARJETA A TARJETA ────────────────────────────────
-   [1-sep-2026] Cada forma pide su sitio y no se pueden tratar igual:
-   una flor flota y necesita aire por los cuatro lados; un coral crece
-   desde su base y tiene que apoyarse. Con un solo encuadre comun, o
-   el petalo se pegaba arriba o el coral quedaba colgando. */
-
-/* El petalo: centrado y algo mas pequenyo, para que respire. */
-/* El planeta (donde antes iba el petalo). El video ya viene con su
-   margen, asi que cover sin escalar. */
-.tarjeta--petalo .tarjeta-fondo video,
-.tarjeta--petalo .tarjeta-fondo img {
-    object-fit: cover;
-    object-position: 50% 46%;
-    transform: none;
-}
-/* El coral: apoyado en el borde de abajo de su cuadro y mas grande,
-   porque crece hacia arriba desde la base. */
-.tarjeta--coral .tarjeta-fondo video,
-.tarjeta--coral .tarjeta-fondo img {
-    object-position: 50% 0%;
-    transform: scale(0.96);
-    transform-origin: 50% 0%;
-}
-
-/* La flecha de la esquina: el gesto que dice "esto lleva a algo".
-   Decorativa — no es un enlace, asi que no se marca como tal. */
-.tarjeta-flecha {
-    position: absolute;
-    z-index: 2;
-    top: var(--space-4);
-    right: var(--space-4);
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(4px);
-}
-.tarjeta-flecha svg {
-    width: 14px;
-    height: 14px;
-    fill: none;
-    stroke: #3C1606;
-    stroke-width: 1.7;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-}
-.tarjeta--invertida .tarjeta-flecha {
-    background: rgba(255, 255, 255, 0.14);
-    border: 1px solid rgba(255, 255, 255, 0.28);
-}
-.tarjeta--invertida .tarjeta-flecha svg { stroke: #FFFFFF; }
 
 /* El marcador de sitio, mientras no hay archivo. Va tenue: debajo ya
    hay un degradado de reserva, asi que solo tiene que recordar la
@@ -3967,7 +4080,6 @@ html {
 
 @media (max-width: 900px) {
     /* En una columna, la alta deja de ocupar dos filas. */
-    .cierre-visual { grid-template-columns: 1fr; }
     .tarjeta--alta {
         grid-column: 1;
         grid-row: auto;
@@ -3975,9 +4087,6 @@ html {
     .tarjeta { min-height: 180px; }
 }
 @media (prefers-reduced-motion: reduce) {
-    /* Los videos de fondo se quedan en su primer fotograma: el pause
-       lo hace el propio navegador al respetar la preferencia. */
-    .tarjeta-fondo video { animation: none; }
 }
 
 
@@ -4005,16 +4114,6 @@ html {
     margin: 0 0 var(--space-4);
     max-width: 54ch;
 }
-.cierre-nota {
-    font-family: var(--font-mono);
-    font-size: 0.76rem;
-    letter-spacing: 0.04em;
-    color: var(--cobalt-400);
-    margin: var(--space-5) 0 0;
-    padding-left: var(--space-3);
-    border-left: 2px solid var(--cobalt-400);
-    line-height: 1.5;
-}
 .cierre-cta {
     margin-top: var(--space-6);
     display: inline-flex;
@@ -4036,7 +4135,16 @@ html {
 }
 @media (max-width: 700px) {
     .cierre { padding: var(--space-5); }
-    .cierre-visual { gap: var(--space-3); }
+    /* [4-sep-2026] EL PANEL EN MOVIL. Medido a 393px: el marco del
+       degradado (--space-7 = 48px) mas el padding del panel dejaban el
+       texto en 130px utiles y las frases se partian en cuatro lineas
+       ("Respondio / mal a 3 / consultas / de precios"). Se recorta el
+       marco: el degradado sigue viendose alrededor, pero fino. */
+    .mant { padding: var(--space-4); }
+    .mant-panel { padding: var(--space-4); }
+    /* La cabecera en dos lineas ocupaba tres; en movil apila etiqueta y
+       estado, que es mas corto que forzarlos en la misma fila. */
+    .mant-cab { flex-direction: column; align-items: flex-start; gap: 6px; }
     .riel-bola {
         width: 30px;
         height: 30px;
@@ -4192,4 +4300,102 @@ html {
     }
     .fase.revealed .fase-pieza { transform: none; }
     .fase-pieza::before { transition: none; }
+}
+
+/* ══ "CÓMO TRABAJO" SOBRE GRIS CLARO ═══════════════════════════════
+   [4-sep-2026] La seccion paso de carbon a --bg-alt (ver el porque en
+   .como-trabajo-section), asi que su texto tiene que dejar de usar la
+   familia --on-night-*, que esta calculada para fondo oscuro. Medido
+   tras el cambio: 20 elementos por debajo de 4.5 de contraste, algunos
+   en 1.41 — practicamente invisibles.
+
+   Se reasignan a la familia --ink-*, que es la del sistema para claro.
+   Va al final del archivo para ganar por orden a las reglas originales
+   sin tener que tocarlas una a una. */
+.como-trabajo-section .section-label { color: var(--cobalt-700); }
+.como-trabajo-section .section-title { color: var(--ink); }
+.como-trabajo-section .section-subtitle { color: var(--ink-soft); }
+
+/* Las fases del riel. */
+.como-trabajo-section .fase-n { color: var(--cobalt-700); }
+.como-trabajo-section .fase-t { color: var(--ink); }
+.como-trabajo-section .fase-p { color: var(--ink-soft); }
+.como-trabajo-section .reglas-n { color: var(--ink-mid); }
+.como-trabajo-section .tk { color: var(--ink-soft); }
+.como-trabajo-section .tk-mal { color: var(--rojo); }
+
+/* El bloque .cierre SIGUE siendo carbon (--night-800): es la pieza que
+   cierra la seccion y remata en la bola del riel, asi que su texto se
+   queda en la familia --on-night-*. Poner aqui --ink lo dejaba casi
+   invisible sobre el propio bloque oscuro. */
+.como-trabajo-section .cierre-t { color: var(--on-night); }
+.como-trabajo-section .cierre-t em { color: var(--cobalt-400); }
+.como-trabajo-section .cierre-p { color: var(--on-night-body); }
+
+/* El panel del dashboard SIGUE siendo oscuro: es una pieza de interfaz
+   apoyada sobre el degradado, no parte del fondo de la seccion. Su
+   texto se queda con la familia --on-night-*, que es la correcta ahi.
+   Se re-declara porque las reglas de arriba, mas genericas, lo pisarian. */
+.como-trabajo-section .mant-titulo { color: var(--on-night-body); }
+.como-trabajo-section .mant-kpi-k { color: var(--on-night-mid); }
+.como-trabajo-section .mant-pie-k { color: var(--on-night-mid); }
+/* El <em> de cada titular de fase ("Entiendo", "Construyo", "Lo pongo a
+   funcionar") iba en --cobalt-400, que es el terracota para fondo
+   OSCURO: sobre el gris daba 2.5 de contraste. Sube al 700 (6.72), que
+   es el mismo que ya usan los numeros de fase. */
+.como-trabajo-section .fase-t em,
+.como-trabajo-section .fase-flecha { color: var(--cobalt-700); }
+
+/* [4-sep-2026] "Sobre mi" se probo en --bg-alt para partir las cuatro
+   secciones claras seguidas que vienen tras "como trabajo", pero se
+   descarta: la foto ya es un bloque oscuro grande y con el fondo gris
+   la seccion acumulaba demasiado contraste para lo que es — la parte
+   mas personal de la pagina, que gana leyendose tranquila.
+
+   El ritmo se queda en: OSCURO (hero) · claro · gris (como trabajo) ·
+   claro · OSCURO (contacto + pie). El gris aparece una sola vez, que es
+   suficiente para romper el muro blanco sin volverlo un patron. */
+
+/* ══ CONTRASTE: TRES ARREGLOS MEDIDOS ══════════════════════════════
+   [4-sep-2026] Auditoria de la home entera comparando cada texto con su
+   fondo REAL (el del ancestro que lo pinta, no el de la seccion).
+
+   1 · .pieza-num iba en --cobalt-400, que es el terracota para fondo
+       OSCURO: sobre el gris del panel de servicios daba 2.27 cuando el
+       minimo para texto grande es 3.
+   2 · .pieza-tab-num daba 2.20 sobre ese mismo gris (minimo 4.5, es
+       texto pequeno).
+   3 · .section-label se quedaba en 4.11 con --cobalt-550, a un pelo del
+       4.5. Sube al 700, que es el tono de enlace sobre claro. */
+.pieza-num { color: var(--cobalt-700); }
+.pieza-tab-num { color: var(--cobalt-800); }
+.section-label { color: var(--cobalt-700); }
+
+/* ══ "CÓMO EMPEZAR" EN GRIS ════════════════════════════════════════
+   [4-sep-2026] Medido: tras "como trabajo" venian cuatro secciones
+   claras seguidas — garantias, sobre mi, caminos y FAQ — sumando 3110px
+   sin una sola variacion de fondo.
+
+   Se elige CAMINOS y no otra por dos razones: parte el muro justo por la
+   mitad (2 claras · gris · 1 clara) y es la seccion de oferta, la que
+   mas gana con tener su propio plano. En "sobre mi" se probo y se
+   descarto: su foto ya es un bloque oscuro grande y el gris le sumaba
+   demasiado contraste a la parte mas personal de la pagina.
+
+   El ritmo final: OSCURO · claro ×3 · GRIS · claro ×2 · GRIS · claro ·
+   OSCURO. El carbon solo abre y cierra, y el gris marca las dos zonas
+   de mas peso (como trabajo y la oferta). */
+.dai-section:not(.inverse) {
+    background-color: var(--bg-alt);
+    /* [4-sep-2026] Bloque con margen y esquinas redondeadas, como el
+       resto de secciones con fondo propio (hero, como trabajo, contacto:
+       las tres a --hero-gap y --radius-xl). Al darle el gris se quedo a
+       sangre y de esquinas rectas, que era la unica del sitio asi.
+
+       El fondo solo se ve si el bloque esta despegado del borde: a
+       sangre, el gris tocaba los laterales de la ventana y no se leia
+       como una pieza sino como un cambio de color de la pagina. */
+    margin-left: var(--hero-gap);
+    margin-right: var(--hero-gap);
+    border-radius: var(--radius-xl);
 }
