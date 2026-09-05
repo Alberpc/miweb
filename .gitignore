@@ -28,3 +28,7 @@ _site/
 # Respaldo local de imagenes originales: 11 MB que no deben
 # hinchar el historial (git no comprime bien los binarios).
 _backup-img-original/
+
+# Bytecode de Python: artefacto compilado de verificar-migracion.py, no fuente.
+__pycache__/
+*.pyc
