@@ -106,7 +106,7 @@ _Lo pongo_ a funcionar de verdad
 
 Lo pongo a funcionar con tus datos reales, no con un ejemplo. Tu equipo aprende a usarlo y te queda documentado, para que no dependas de mí para lo del día a día.
 
-Sistema de presupuestosEjemplo
+Agente de soporteEjemplo
 
 1.240
 

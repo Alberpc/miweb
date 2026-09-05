@@ -1716,8 +1716,17 @@ html {
     /* El <source> de móvil sirve la versión 4:3 (600x450). En 3:4 el vídeo
        solo ocupaba 467px de alto — media pantalla — y la sección entera se
        iba a 3,6 pantallas de scroll. */
+    /* [5-sep-2026] El video salia a 276px en vez de a sangre, pegado a la
+       izquierda y con 45px de hueco a la derecha.
+
+       Causa: el reset `img, svg, video... { max-width: 100% }` de
+       base.css recortaba el `calc(100% + 44px)` a los 276px de la
+       columna, pero los margenes de -22px si se aplicaban. De ahi que
+       quedara estrecho Y descentrado. Hay que levantar ese tope aqui:
+       este video es la excepcion deliberada que sale del padding. */
     .pieza-video {
         width: calc(100% + 44px);
+        max-width: none;
         margin: 0 -22px;
         aspect-ratio: 600 / 450;
         border-left: none;
@@ -1748,8 +1757,13 @@ html {
     .section {
         padding: var(--space-9) 0;
     }
+    /* [5-sep-2026] Era 2rem fijo (32px). El H1 del hero si escala con el
+       viewport y a 360px baja a 29.6px, asi que el titular de seccion
+       adelantaba al de la pagina en las pantallas mas estrechas. Con el
+       clamp acaba justo por debajo y en >=390px se queda en los 2rem de
+       siempre. */
     .section-title {
-        font-size: 2rem;
+        font-size: clamp(1.7rem, 5.6vw, 2rem);
     }
     .form-row {
         grid-template-columns: 1fr;
@@ -2328,9 +2342,21 @@ html {
 }
 
 /* El titular gana rango por tamaño y ancho de línea, no por grosor:
-   Instrument Serif solo tiene un peso, y forzar negrita la emborrona. */
+   Instrument Serif solo tiene un peso, y forzar negrita la emborrona.
+
+   [5-sep-2026] El 2.7rem era FIJO y no bajaba en movil: a 390px daba
+   43.2px contra los 32px del H1 del hero — el titular de seccion se veia
+   un 35% mas grande que el de la pagina, y rompia la jerarquia. Ahora
+   escala con el viewport y tope en los mismos 2.7rem de antes, asi que
+   en escritorio no cambia nada.
+
+   El minimo (1.7rem) esta igualado al de la regla movil generica de
+   .section-title: los 7 titulares de seccion miden lo mismo en movil
+   (27.2px) y solo se separan al crecer la pantalla, que es donde esta
+   seccion pide mas peso. La pendiente es 5.2vw y no mas: por encima de
+   ahi el titular adelantaba al H1 en tablet. */
 .soluciones-section .section-title {
-    font-size: 2.7rem;
+    font-size: clamp(1.7rem, 5.2vw, 2.7rem);
     letter-spacing: -0.025em;
     max-width: 22ch;
 }
