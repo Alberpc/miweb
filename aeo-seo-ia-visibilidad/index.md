@@ -1,4 +1,4 @@
-# AEO: qué es y por qué tu web tiene que estar lista para la IA
+# AEO: cómo hacer tu web visible para la IA
 
 Cada vez más gente pregunta directamente a ChatGPT, Claude o Perplexity en vez de navegar por Google: Gartner calcula que el tráfico tradicional de búsqueda podría caer un 25% en 2026 y más de un 50% en 2028. El SEO sigue importando, pero ya no basta: el nuevo objetivo es el AEO (Answer Engine Optimization), optimizar tu web para que la IA te lea, te entienda y te recomiende como respuesta.
 

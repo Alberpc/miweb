@@ -1,4 +1,4 @@
-# Sistematizar cursos y alumnos en un centro de formación
+# Sistematizar un centro de formación
 
 Sistematizar un centro de formación significa ordenar y automatizar la gestión de matrículas, asistencia, pagos y certificados para que no dependan de que una persona concreta esté disponible. No hace falta un software académico caro desde el primer día: se empieza por la tarea que más tiempo administrativo consume y se va sumando.
 
