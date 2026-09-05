@@ -37,8 +37,12 @@
             <a href="{{ "#" if navLocal else "/" }}" class="logo"><img src="/assets/img/logo-alber-blanco.png" alt="{{ site.nombre }}"></a>
             <div class="nav-menu">
                 <a href="{{ raiz }}#soluciones" class="nav-link{% if paginaActual == "servicios" %} current{% endif %}">Servicios</a>
-                <a href="{{ raiz }}#caminos" class="nav-link{% if paginaActual == "caminos" %} current{% endif %}">Cómo Empezar</a>
+                {#- [5-sep-2026] "Sobre Mi" va ANTES que "Como Empezar" porque
+                    ese es el orden en el que aparecen al bajar por la home
+                    (#sobre-mi es la 6a seccion, #caminos la 7a). Estaban al
+                    reves y el menu contradecia al scroll. -#}
                 <a href="{{ raiz }}#sobre-mi" class="nav-link{% if paginaActual == "sobre-mi" %} current{% endif %}">Sobre Mí</a>
+                <a href="{{ raiz }}#caminos" class="nav-link{% if paginaActual == "caminos" %} current{% endif %}">Cómo Empezar</a>
                 <a href="{{ navBlogHref | default("/blog/") }}" class="nav-link{% if paginaActual == "blog" %} current{% endif %}">Blog</a>
                 {#- [4-sep-2026] Contacto en el menu. El boton de la barra
                     lleva al diagnostico en la home y a contacto en el resto
@@ -62,8 +66,8 @@
         </div>
         <div class="nav-mobile" id="nav-mobile">
             <a href="{{ raiz }}#soluciones" class="nav-mobile-link">Servicios</a>
-            <a href="{{ raiz }}#caminos" class="nav-mobile-link">Cómo Empezar</a>
             <a href="{{ raiz }}#sobre-mi" class="nav-mobile-link">Sobre Mí</a>
+            <a href="{{ raiz }}#caminos" class="nav-mobile-link">Cómo Empezar</a>
             <a href="{{ navBlogHref | default("/blog/") }}" class="nav-mobile-link">Blog</a>
             <a href="{{ raiz }}#contacto" class="nav-mobile-link">Contacto</a>
             <a href="{{ navCtaHref | default("/#contacto") }}" class="nav-mobile-cta">{{ navCtaTexto | default("Cuéntame tu caso &rarr;") | safe }}</a>
