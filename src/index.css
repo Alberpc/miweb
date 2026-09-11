@@ -637,17 +637,68 @@ html {
 
 
 @media (max-width: 900px) {
+    /* [11-sep-2026] LOS PASOS NO SE APILAN: SE DESLIZAN.
+       Apilados, la seccion medida en un iPhone 16 (393x852) daba 2070px
+       = 2,43 pantallas, de las cuales 746 eran solo los tres pasos. Y al
+       apilarse se perdia lo unico que los hace una secuencia: que se
+       leen problema -> solucion -> resultado en una linea.
+       Ahora recorren en horizontal con scroll-snap. El ancho 78% es
+       deliberado: el paso siguiente asoma por el borde derecho, que es
+       lo que dice "esto se desliza" sin tener que escribirlo. */
     .caso-steps {
-        grid-template-columns: 1fr;
+        display: flex;
+        grid-template-columns: none;
         gap: var(--space-4);
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        /* [11-sep-2026] SIN MARGEN NEGATIVO. Lo llevo a probar y era un
+           bug: el margin-inline negativo hacia el scroller 48px mas ancho
+           que su .caso-slide (393 contra 345 medidos), y como los slides
+           van en fila dentro del track, ese sobrante se pintaba ENCIMA
+           del caso de al lado — se leia texto de Geko sobre la caja de
+           Bioresina. El slide ya trae su propio aire lateral; el scroller
+           se queda dentro de sus limites y el ultimo paso respira con
+           scroll-padding, que no cambia el ancho de la caja. */
+        scroll-padding-inline: 0;
+        /* Sin barra a la vista: el asomo del paso 02 ya es la pista. */
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+        /* Momento del dedo sin rebote vertical raro. */
+        overscroll-behavior-x: contain;
     }
+    .caso-steps::-webkit-scrollbar { display: none; }
+
+    .caso-step {
+        flex: 0 0 78%;
+        scroll-snap-align: start;
+        /* Sin stretch: en horizontal las tres cajas se igualaban a la mas
+           alta (la 02, que es la de texto mas largo) y las otras dos
+           quedaban con un palmo de vacio debajo. Cada una a su alto. */
+        align-self: start;
+        /* Vuelven a ser cajas: sueltos en horizontal sin superficie no
+           se distinguen unos de otros. El 02 conserva la suya en carbon. */
+        background: var(--bg-raised);
+        border-radius: var(--radius-md);
+    }
+    .caso-step-highlight { background: var(--night-900); }
+
+    /* Las flechas sobran cuando el orden lo da el propio deslizamiento. */
     .caso-step-arrow {
-        transform: rotate(90deg);
-        padding: var(--space-1) 0;
+        display: none;
     }
     .caso-cierre {
         grid-template-columns: 1fr;
         gap: var(--space-6);
+    }
+    /* [11-sep-2026] La cita baja de 1.3rem a 1rem EN MOVIL. Ese 1.3 se
+       penso para la columna estrecha de dos que hay en escritorio; al
+       apilarse ocupa el ancho entero y se convertia en el texto mas
+       grande de la seccion, por encima incluso de los titulos de paso
+       (medido: 20.8px la cita contra 18.4 el titulo y 14 el cuerpo).
+       Con 1rem deja de competir y pasa de 9 lineas a 7. Sigue un punto
+       por encima del cuerpo: es una resenya, no un parrafo mas. */
+    .caso-quote-text {
+        font-size: 1rem;
     }
     /* Apiladas, la linea divisoria pasa de vertical a horizontal. */
     .caso-impact-col {
