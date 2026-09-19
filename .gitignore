@@ -32,3 +32,8 @@ _backup-img-original/
 # Bytecode de Python: artefacto compilado de verificar-migracion.py, no fuente.
 __pycache__/
 *.pyc
+
+# Skills de agentes: material de trabajo, no de la web. Estaba duplicado en
+# .claude/ (ya ignorado) y en .agents/, y esta segunda copia si se subia y se
+# servia en albercabrera.com. Misma razon que los SPEC-*.md de arriba.
+.agents/
