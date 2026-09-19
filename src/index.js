@@ -331,6 +331,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
 
                 if (response.ok) {
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'generate_lead', {
+                            form_name: 'diagnostico_home'
+                        });
+                    }
                     formMessage.className = "form-message success";
                     formMessage.textContent = "✓ Hecho. Te acabo de mandar un correo para que elijas hora. Revisa tu bandeja de entrada (y la carpeta de spam, por si acaso).";
                     contactForm.reset();
