@@ -18,7 +18,7 @@ RewriteRule ^(.*)$ https://albercabrera.com/$1 [L,R=301]
 # node. El deploy de Hostinger sube la raiz entera, asi que sin esto todo
 # eso quedaria accesible por URL. Ver la regla de no dejar notas internas
 # en carpetas desplegadas.
-RedirectMatch 404 ^/(src|_migracion|_site|node_modules|__pycache__|\.agents|\.claude|_backup-img-original)(/|$)
+RedirectMatch 404 ^/(src|_borradores|_migracion|_site|node_modules|__pycache__|\.agents|\.claude|_backup-img-original)(/|$)
 RedirectMatch 404 ^/(package(-lock)?\.json|\.eleventy\.js|verificar-migracion\.py|skills-lock\.json|comprobar-movil\.sh|\.gitignore)$
 
 # --- URLs limpias: quitar "index.html" de la barra (/index.html -> /) ---
