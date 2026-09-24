@@ -273,12 +273,23 @@
         return f;
     }
 
+    /* Eventos para Analytics (24-sep-2026). Igual que whatsapp_click en
+       base.js: gtag solo empuja al dataLayer y cada evento necesita su
+       activador + etiqueta en GTM. Sin cookies aceptadas gtag no existe, y
+       el chat tiene que seguir funcionando igual. */
+    function medir(evento, datos) {
+        if (typeof gtag !== 'function') { return; }
+        try { gtag('event', evento, datos || {}); } catch (e) { /* medir nunca rompe el chat */ }
+    }
+
     function abrir() {
         if (!estado.montado) { return; }
         estado.abierto = true;
         el.panel.classList.add('acw-panel--open');
         el.bubble.classList.add('acw-bubble--hidden');
         if (estado.historial.length === 0) {
+            // Solo la primera apertura: cerrar y volver a abrir no es otra persona.
+            medir('chat_open', { page_path: location.pathname });
             addMessage(config.saludo, 'bot');
             mostrarAvisoPrivacidad();
         }
@@ -392,6 +403,7 @@
                 var respuesta = (data && data.respuesta) ? String(data.respuesta) : RESPUESTAS.ERROR_TECNICO;
                 addMessage(respuesta, 'bot');
                 if (data && data.leadCompleto) {
+                    medir('chat_lead', { via: 'conversacion' });
                     estado.cerrado = true;
                     bloquearEntrada(true);
                     el.form.classList.add('acw-form--hidden');
@@ -454,6 +466,7 @@
         })
             .then(function (res) {
                 if (!res.ok) { throw new Error('respuesta ' + res.status); }
+                medir('chat_lead', { via: 'formulario_chat' });
                 estadoTxt.className = 'acw-status acw-status--ok';
                 estadoTxt.textContent = 'Hecho. Te acabo de mandar un correo para que elijas hora. Revisa tu bandeja (y el spam, por si acaso).';
                 f.querySelector('.acw-submit').style.display = 'none';

@@ -5,11 +5,12 @@
   "homeCss": 97,
   "homeJs": 26,
   "chatCss": 10,
-  "chatJs": 4,
+  "chatJs": 5,
   "cookieCss": 1,
   "cookieJs": 1,
   "auroraJs": 3,
   "faqJs": 1,
   "blogFiltroJs": 1,
-  "rielEntregasJs": 6
+  "rielEntregasJs": 6,
+  "baseJs": 2
 }

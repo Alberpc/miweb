@@ -61,3 +61,22 @@ const obs = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); obs.unobserve(e.target); } });
 }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// Clics a WhatsApp (24-sep-2026)
+//   Es la via de contacto que mas se usa y Analytics no se enteraba: los
+//   enlaces wa.me salen de la web sin dejar rastro. Un solo escuchador en
+//   el documento cubre la burbuja flotante, el bloque de contacto de la
+//   home y cualquier enlace wa.me que se anada despues.
+//   Igual que generate_lead en index.js: gtag solo empuja al dataLayer, y
+//   hace falta en GTM un activador de evento personalizado
+//   "whatsapp_click" + su etiqueta de evento GA4 (y publicar el
+//   contenedor). Va envuelto en typeof gtag porque sin cookies aceptadas
+//   gtag no existe y el clic tiene que seguir funcionando.
+document.addEventListener('click', (e) => {
+    const enlace = e.target.closest('a[href*="wa.me/"]');
+    if (!enlace || typeof gtag !== 'function') return;
+    gtag('event', 'whatsapp_click', {
+        link_location: enlace.classList.contains('whatsapp-float') ? 'burbuja_flotante' : 'contacto',
+        page_path: location.pathname
+    });
+});
