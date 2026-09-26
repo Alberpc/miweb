@@ -1,4 +1,7 @@
-# Sabes que la IA puede ayudarte.
+# Consultor de IA para negocios
+
+## Sabes que la IA puede ayudarte.
+
 No sabes por dónde empezar.
 
 Analizo dónde pierdes tiempo, clientes y dinero, y utilizo IA y automatización para eliminar esos cuellos de botella.

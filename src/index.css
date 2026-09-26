@@ -132,6 +132,21 @@ html {
    valioso) y diagnostico-operativo ya funcionaba sin ella. Ademas es un
    patron de SaaS gastado que ninguna de las referencias usa. */
 
+/* [26-sep-2026] Vuelve una linea sobre el titular, pero no es aquella
+   pildora: es el H1 real con la keyword ("consultor de ia", 500 busq/mes
+   en Keyword Planner). El gancho grande pasa a h2 con la misma clase y se
+   ve igual. Texto plano, sin caja ni fondo, para no volver al patron SaaS. */
+.hero-kicker {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cobalt-300);
+    line-height: 1.5;
+    margin-bottom: var(--space-4);
+}
+
 .hero-title {
     font-family: var(--font-display);
     font-size: clamp(2.3rem, 4.4vw, 3.6rem); /* Instrument Serif es más estrecho que Inter: subido para que cada frase (separada por <br>) siga cabiendo en 1 línea sin quedar pequeño */
