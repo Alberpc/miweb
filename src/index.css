@@ -739,101 +739,118 @@ html {
    Ahora cada pieza ocupa el ancho completo y se parte en dos: texto y
    vídeo. El vídeo gana ~560px reales y el texto respira. Las filas pares
    invierten el orden para que la vista no caiga siempre en el mismo lado. */
-.piezas-filas {
-    /* Un unico ancho de video para las tres filas. Todo lo demas (el texto)
-       se adapta a lo que sobra: asi las tres piezas se leen como la misma
-       pieza repetida, que es lo que son. */
-    --pieza-video-w: 560px;
+/* [26-sep-2026] ACORDEON A LA IZQUIERDA + VIDEO A LA DERECHA (decagon).
+   Filas y paneles van intercalados en el HTML (fila 1, panel 1, fila
+   2...) porque en movil cada panel se abre bajo su fila.
+   En escritorio el panel se DESHACE (display: contents): su texto cae en
+   la columna 1 justo debajo de su fila y su video sube a la columna 2.
+   Primera version (lista | panel entero a la derecha) descartada: el
+   panel media el doble que la lista y dejaba media columna en blanco.
+   El 5º renglon (1fr) se come la diferencia de alto con el video: sin
+   el, las filas se estiraban para igualarlo. */
+.piezas-lista {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+    grid-template-rows: repeat(4, auto) 1fr;
+    column-gap: var(--space-8, 64px);
+    align-items: start;
+}
 
+.pieza-fila {
+    grid-column: 1;
     display: flex;
-    flex-direction: column;
-    gap: var(--space-6);
-    /* Sin margen: el panel arranca justo donde acaba el rail, para que
-       pestañas y contenido se lean como un unico bloque. */
-    margin-top: 0;
+    align-items: flex-start;
+    gap: var(--space-4);
     width: 100%;
-}
-
-/* Esquinas superiores rectas y sin filo dorado: ese remate ya lo pone la
-   pestaña activa. Con radio arriba quedaba una muesca entre ambos. */
-.pieza[role="tabpanel"] {
-    background: var(--bg-raised);
-    border-top: 1px solid var(--line);
-    border-radius: 0 0 var(--radius-md) var(--radius-md);
-}
-
-/* =============================================================
-   PESTAÑAS DE LAS PIEZAS
-   =============================================================
-   Las tres piezas son alternativas, no pasos: se comparan antes de
-   leerse. La pestaña activa se marca con el filo dorado inferior —
-   es un estado activo, que es donde el sistema permite el acento. */
-/* Cada pestaña es una CAJA, no una palabra suelta: con solo un filo
-   inferior no se leian como control pulsable. La inactiva lleva su
-   superficie hundida y la activa sube al color de la tarjeta, de modo
-   que pestaña y panel se ven como una sola pieza continua. */
-.piezas-tabs {
-    display: flex;
-    gap: var(--space-1);
-    margin-top: var(--space-6);
-    padding: var(--space-1) var(--space-1) 0;
-    background: var(--bg-input);
-    border: 1px solid var(--line);
-    border-bottom: none;
-    border-radius: var(--radius-md) var(--radius-md) 0 0;
-    overflow-x: auto;              /* en movil se desliza, no se apila */
-    scrollbar-width: none;
-}
-.piezas-tabs::-webkit-scrollbar { display: none; }
-
-.pieza-tab {
-    display: flex;
-    align-items: baseline;
-    gap: var(--space-2);
-    flex-shrink: 0;
-    padding: var(--space-3) var(--space-5);
-    background: transparent;
-    border: 1px solid transparent;
-    border-bottom: none;
-    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    padding: var(--space-5) 0;
+    background: none;
+    border: none;
+    border-bottom: 1px solid var(--line);
     font-family: var(--font-body);
-    font-size: 0.95rem;
-    font-weight: 500;
+    text-align: left;
     color: var(--ink-mid);
     cursor: pointer;
-    white-space: nowrap;
-    transition: background-color var(--motion-base) var(--ease-standard),
-                color var(--motion-base) var(--ease-standard);
+    transition: color var(--motion-base) var(--ease-standard);
 }
+.pieza-fila:hover,
+.pieza-fila.is-active { color: var(--ink); }
 
-.pieza-tab:hover {
-    color: var(--ink);
-    background: color-mix(in srgb, var(--bg-raised) 55%, transparent);
-}
-
-/* La activa toma el color del panel y pierde el borde inferior: parece
-   que la pestaña y la tarjeta de abajo son la misma superficie. */
-.pieza-tab.is-active {
-    color: var(--ink);
-    font-weight: 600;
-    background: var(--bg-raised);
-    border-color: var(--line);
-    box-shadow: 0 -2px 0 0 var(--cobalt-600) inset;
-}
-
-.pieza-tab-num {
-    font-size: 0.7rem;
+.pieza-fila-num {
+    padding-top: 0.55em;
+    font-size: 0.72rem;
     font-weight: 600;
     letter-spacing: 0.08em;
-    color: var(--ink-decor);
     font-variant-numeric: tabular-nums;
+    color: var(--ink-mid);
 }
-.pieza-tab.is-active .pieza-tab-num { color: var(--cobalt-600); }
+.pieza-fila.is-active .pieza-fila-num { color: var(--cobalt-700); }
+
+.pieza-fila-texto {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    min-width: 0;
+}
+.pieza-fila-nombre {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
+.pieza-fila-linea {
+    font-size: 0.88rem;
+    line-height: 1.45;
+    color: var(--ink-soft);
+}
+/* Abierta, la linea sobra: debajo ya van la etiqueta y el titular. */
+.pieza-fila.is-active .pieza-fila-linea { display: none; }
+/* Abierta, el filo pasa al final de su texto, no entre fila y texto. */
+.pieza-fila.is-active { border-bottom-color: transparent; }
+
+/* La flecha gira a → cuando la fila esta abierta: señala al panel. */
+.pieza-fila-flecha {
+    margin-left: auto;
+    padding-top: 0.2em;
+    font-size: 1.3rem;
+    line-height: 1;
+    transition: transform var(--motion-base) var(--ease-standard);
+}
+.pieza-fila.is-active .pieza-fila-flecha {
+    transform: rotate(45deg);
+    color: var(--cobalt-700);
+}
+
+/* El panel sin caja: se deshace y sus dos hijos van a la rejilla. */
+.piezas-lista > .pieza:not([hidden]) { display: contents; }
+
+/* El texto, bajo su fila y alineado con el nombre (no con el numero). */
+.piezas-lista .pieza-texto {
+    grid-column: 1;
+    padding: 0 0 var(--space-6) calc(1.6rem + var(--space-4));
+    border-bottom: 1px solid var(--line);
+}
+.pieza-fila-num { min-width: 1.6rem; }
+
+/* El video, en la columna 2 a toda altura; se queda a la vista mientras
+   se lee el texto de la izquierda. */
+.piezas-lista .pieza-video {
+    grid-column: 2;
+    grid-row: 1 / span 5;
+    position: sticky;
+    top: 110px;
+    margin-top: var(--space-5);
+}
+
+/* La descripcion larga fuera: repetia lo que ya dicen titular y lista,
+   y era lo que alargaba el acordeon. */
+.piezas-lista .pieza-desc { display: none; }
 
 /* Al abrirse un panel: sin desplazamiento, solo aparecer. Un panel que
    entra deslizando mueve el vídeo y se nota como salto. */
 @media (prefers-reduced-motion: no-preference) {
-    .pieza[role="tabpanel"] { animation: piezaFade 260ms var(--ease-standard); }
+    .piezas-lista .pieza-texto,
+    .piezas-lista .pieza-video { animation: piezaFade 260ms var(--ease-standard); }
 }
 @keyframes piezaFade {
     from { opacity: 0; }
@@ -844,13 +861,11 @@ html {
    lo que separa la pieza del fondo arena, no solo el borde gris. */
 .pieza {
     display: grid;
-    /* Columnas fijas en px, no en fr: con fr el ancho del video dependia
-       de la columna que le tocara, y en las filas pares (donde va a la
-       izquierda) salia 222px mas estrecho que en las impares. Ahora las
-       tres piezas dan EXACTAMENTE el mismo tamano de video. */
-    grid-template-columns: 1fr var(--pieza-video-w);
-    align-items: center;
-    gap: var(--space-7);
+    /* [26-sep-2026] Una columna: el panel ya es la columna derecha de la
+       lista, y partido en texto | video el video salia a menos de 400px.
+       Video arriba a todo el ancho, texto debajo (ver .pieza-texto). */
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-6);
     background: var(--bg);
     border: 1px solid var(--line);
     /* Borde superior neutro en reposo: el dorado entra solo en hover
@@ -882,10 +897,25 @@ html {
    tres paneles se veian a la vez. */
 .pieza[hidden] { display: none; }
 
-/* Con pestañas, la cabeza del panel repite lo que ya dice la pestaña
-   activa ("01 · Agentes de IA"): se oculta. El marcado se queda en la
-   plantilla para no perderlo si algun dia se vuelve a filas apiladas. */
-.pieza[role="tabpanel"] .pieza-cabeza { display: none; }
+/* [26-sep-2026] El enlace a la pagina de cada servicio, al pie de su
+   texto. Mismo tono de enlace sobre claro (--cobalt-700, 6.7 de
+   contraste) y subrayado solo al pasar, como .dai-atajo. */
+.pieza-enlace {
+    display: inline-block;
+    margin-top: var(--space-4);
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--cobalt-700);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color var(--motion-base) var(--ease-standard);
+}
+.pieza-enlace:hover { border-bottom-color: currentColor; }
+
+/* La cabeza se queda con la etiqueta del SERVICIO (lo que se busca en
+   Google). El número sobra: ya lo lleva la fila. */
+.piezas-lista .pieza-num { display: none; }
+.piezas-lista .pieza-cabeza { margin-bottom: var(--space-3); }
 
 /* El número y la etiqueta comparten línea: la etiqueta sola quedaba
    flotando y el número solo no dice de qué va la pieza. */
@@ -1712,15 +1742,12 @@ html {
     .hero-title {
         font-size: 3.6rem; /* Instrument Serif más estrecho que Inter: recalibrado junto al clamp de arriba */
     }
-    /* 560px fijos no caben aquí: el vídeo baja a 440 y el texto se queda
-       con el resto. Sigue siendo el MISMO ancho en las tres filas. */
-    .piezas-filas {
-        --pieza-video-w: 440px;
+    /* Mitad y mitad: con 1.25fr el acordeon se quedaba sin ancho. */
+    .piezas-lista {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        column-gap: var(--space-6);
     }
-    .pieza {
-        gap: var(--space-6);
-        padding: var(--space-6);
-    }
+    .pieza-fila-nombre { font-size: 1.35rem; }
     .pieza-titulo {
         font-size: 1.5rem;
     }
@@ -1740,25 +1767,37 @@ html {
 }
 
 @media (max-width: 768px) {
-    /* Una sola columna. El vídeo va SIEMPRE primero, también en las filas
-       pares: al apilar, el zigzag deja de tener sentido y lo que importa es
-       que la imagen entre antes que el texto.
-
-       El vídeo se sale del padding a ancho completo: a 360px de pantalla,
-       restarle 44px de márgenes dejaba su texto interno por debajo de lo
-       legible. */
-    .piezas-filas {
+    /* [26-sep-2026] ACORDEON: una columna, y cada panel se abre justo
+       debajo de su fila (por eso el HTML los intercala). Sin caja gris:
+       video y texto van sueltos bajo la fila, como en escritorio, y se
+       ahorran los 56px de relleno de la tarjeta. */
+    .piezas-lista {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: none;
+    }
+    .pieza-fila { padding: var(--space-4) 0; }
+    .pieza-fila-nombre { font-size: 1.25rem; }
+    /* Abierta, la flecha apunta hacia abajo: al panel que tiene debajo. */
+    .pieza-fila.is-active .pieza-fila-flecha { transform: rotate(135deg); }
+    .piezas-lista > .pieza:not([hidden]) {
+        display: flex;
+        flex-direction: column;
         gap: var(--space-4);
+        padding: 0;
+        background: none;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+        overflow: visible;
     }
-    .pieza {
-        grid-template-columns: 1fr;
-        gap: var(--space-5);
-        padding: 28px 22px;
+    .piezas-lista .pieza-texto { padding-left: 0; }
+    .piezas-lista .pieza-video {
+        grid-column: auto;
+        grid-row: auto;
+        position: static;
+        margin: 0;
+        order: -1;
     }
-    .pieza-texto,
-    .pieza:nth-child(even) .pieza-texto { order: 2; }
-    .pieza-video,
-    .pieza:nth-child(even) .pieza-video { order: 1; }
     .pieza-titulo {
         font-size: 1.35rem;
     }
@@ -1781,23 +1820,11 @@ html {
     }
     /* El <source> de móvil sirve la versión 4:3 (600x450). En 3:4 el vídeo
        solo ocupaba 467px de alto — media pantalla — y la sección entera se
-       iba a 3,6 pantallas de scroll. */
-    /* [5-sep-2026] El video salia a 276px en vez de a sangre, pegado a la
-       izquierda y con 45px de hueco a la derecha.
-
-       Causa: el reset `img, svg, video... { max-width: 100% }` de
-       base.css recortaba el `calc(100% + 44px)` a los 276px de la
-       columna, pero los margenes de -22px si se aplicaban. De ahi que
-       quedara estrecho Y descentrado. Hay que levantar ese tope aqui:
-       este video es la excepcion deliberada que sale del padding. */
+       iba a 3,6 pantallas de scroll.
+       [26-sep-2026] Ya no sale a sangre: sin la tarjeta no hay relleno
+       del que salirse, ocupa el ancho de la columna. */
     .pieza-video {
-        width: calc(100% + 44px);
-        max-width: none;
-        margin: 0 -22px;
         aspect-ratio: 600 / 450;
-        border-left: none;
-        border-right: none;
-        border-radius: 0;
     }
     .areas-grid {
         grid-template-columns: 1fr;
@@ -2090,6 +2117,270 @@ html {
 }
 
 .dai-atajo a:hover { border-color: var(--ink); }
+
+/* ── [26-sep-2026] LAS DOS PUERTAS ────────────────────────────────
+   Primera version: dos tarjetas blancas con checks. Alberto: "muy
+   pobre". Era la plantilla de tarjeta de precios, sin nada que mirar.
+   Ahora cada puerta es una columna abierta (sin caja) encabezada por
+   una PIEZA de interfaz en el mismo vidrio con halo que "Como
+   trabajo": la llamada (quien, cuanto, que pasa en ella) y el plan
+   por fases que entrega el DAI360. Debajo, que pasa despues en tres
+   pasos numerados. Mismo peso: misma estructura, mismo boton.
+   El bloque de cierre (precio / "Gratis") se empuja al fondo
+   (margin-top: auto) para que precio y boton queden a la misma
+   altura en las dos. */
+.dai-section {
+    /* El mismo vidrio que .como-trabajo-section (se define alli, en su
+       seccion; aqui se repite porque esta es otra). */
+    --cristal: linear-gradient(155deg,
+        rgb(252, 252, 253) 0%,
+        rgb(249, 246, 244) 64%,
+        rgb(245, 238, 234) 100%);
+}
+
+.puertas {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-9, 80px);
+    max-width: var(--container-narrow);
+    margin: var(--space-8, 64px) auto 0;
+}
+
+.puerta {
+    display: flex;
+    flex-direction: column;
+}
+
+/* EL ESCENARIO DE LA PIEZA: la pieza centrada con su halo detras,
+   como .fase-viz. Alto fijo para que las dos piezas, de alturas
+   distintas, dejen el texto de debajo a la misma linea. */
+.puerta-viz {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* ALTO, no min-height: con min-height la pieza del plan (mas alta)
+       empujaba su texto 40px por debajo del de la llamada. */
+    height: 250px;
+    margin: 0 0 var(--space-6);
+}
+/* El halo, mas suave que en "Como trabajo": alli es fondo carbon y
+   aqui gris claro, donde la misma intensidad se leia como mancha. */
+.puerta-viz::before {
+    content: '';
+    position: absolute;
+    z-index: 0;
+    inset: 4% 10% -8%;
+    border-radius: 50%;
+    filter: blur(48px);
+    pointer-events: none;
+    background:
+        radial-gradient(50% 48% at 40% 44%, rgba(234, 130, 88, 0.42) 0%, transparent 74%),
+        radial-gradient(46% 44% at 66% 74%, rgba(172, 58, 112, 0.26) 0%, transparent 76%);
+}
+
+.puerta-pieza {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 360px);
+    background: var(--cristal);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
+    box-shadow: 0 18px 40px -18px rgba(18, 19, 22, 0.28),
+                0 2px 6px -2px rgba(18, 19, 22, 0.12),
+                0 26px 50px -22px rgba(234, 130, 88, 0.45);
+    font-family: var(--font-body);
+    color: var(--ink);
+    /* MISMO ALTO en las dos: Alberto vio la del plan mucho mas larga
+       que la de la llamada. El contenido se reparte arriba y abajo. */
+    min-height: 196px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Pieza A · la llamada */
+.pp-quien {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+.pp-quien img {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: 50% 12%;
+    background: #E9E4E0;
+    flex-shrink: 0;
+}
+.pp-quien strong {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    line-height: 1.3;
+}
+.pp-quien small {
+    display: block;
+    font-size: 0.78rem;
+    color: var(--ink-mid);
+}
+.pp-chip {
+    margin-left: auto;
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
+    background: var(--cobalt-tint);
+    color: var(--cobalt-700);
+    font-size: 0.72rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+.pp-filas {
+    margin: var(--space-4) 0 0;
+    border-top: 1px solid var(--line);
+}
+.pp-filas > div {
+    display: grid;
+    grid-template-columns: 2.4rem 1fr;
+    gap: var(--space-3);
+    padding: var(--space-3) 0 0;
+}
+.pp-filas dt {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+    padding-top: 0.2em;
+}
+.pp-filas dd {
+    margin: 0;
+    font-size: 0.86rem;
+    line-height: 1.45;
+    color: var(--ink-soft);
+}
+
+/* Pieza B · el plan por fases */
+.pp-cab {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: var(--space-2);
+}
+.pp-cab strong { font-size: 0.9rem; font-weight: 600; }
+.pp-cab small {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+}
+.pp-fases {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.pp-fases li {
+    display: grid;
+    grid-template-columns: 3.4rem minmax(0, 1fr) auto;
+    align-items: baseline;
+    gap: var(--space-2);
+    padding: var(--space-2) 0 var(--space-2) var(--space-3);
+    border-top: 1px solid var(--line);
+    border-left: 2px solid transparent;
+}
+/* La fase que va primero lleva el acento: es el argumento del DAI360
+   (empezar por lo que antes devuelve). */
+.pp-fases li.is-primero { border-left-color: var(--cobalt-600); }
+.pp-fase { font-size: 0.84rem; font-weight: 600; }
+.pp-fases li.is-primero .pp-fase { color: var(--cobalt-700); }
+.pp-cuando {
+    font-size: 0.75rem;
+    color: var(--ink-mid);
+    font-variant-numeric: tabular-nums;
+}
+.pp-que {
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* QUE PASA DESPUES: tres pasos numerados unidos por una linea. */
+.puerta-pasos {
+    list-style: none;
+    counter-reset: paso;
+    /* Arriba 0: el hueco ya lo pone el margin-bottom de .dai-desc, y
+       sumados dejaban casi 50px sueltos. */
+    margin: 0 0 var(--space-6);
+    padding: 0;
+}
+.puerta-pasos li {
+    counter-increment: paso;
+    position: relative;
+    padding: 0 0 var(--space-4) 40px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+}
+.puerta-pasos li:last-child { padding-bottom: 0; }
+.puerta-pasos li::before {
+    content: counter(paso);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1px solid var(--cobalt-border);
+    background: var(--bg);
+    color: var(--cobalt-700);
+    font-size: 0.75rem;
+    font-weight: 700;
+    line-height: 22px;
+    text-align: center;
+}
+.puerta-pasos li:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 12px;
+    top: 26px;
+    bottom: 2px;
+    width: 1px;
+    background: var(--line-strong);
+}
+
+/* El "cuando": es lo que decide la puerta, asi que va primero y en
+   acento. El nombre del servicio viene despues. */
+.puerta-cuando {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--cobalt-700);
+    margin-bottom: var(--space-3);
+}
+
+.puerta .dai-precio { margin-top: auto; }
+/* Interlineado propio: el heredado separaba "DAI360" medio renglon
+   cuando el nombre parte en dos lineas (movil). */
+.puerta .dai-nombre { line-height: 1.2; }
+
+@media (max-width: 768px) {
+    .puertas {
+        grid-template-columns: minmax(0, 1fr);
+        /* Sin caja que las separe, el aire es lo que marca que empieza
+           la segunda puerta. */
+        gap: var(--space-9, 80px);
+        margin-top: var(--space-6);
+    }
+    .puerta-viz { height: auto; margin-bottom: var(--space-6); padding: var(--space-4) 0; }
+    /* A este ancho "Agente de WhatsApp 24/7" no cabe en su hueco y salia
+       cortado con puntos suspensivos: aqui parte en dos lineas. */
+    .pp-que { white-space: normal; }
+    .puerta .dai-nombre { font-size: 1.35rem; }
+}
 
 /* ── LA PIEZA: EL INFORME EN PANTALLA ─────────────────────────────
    Es una imagen, no un chasis dibujado: el portatil en CSS que habia
@@ -2387,17 +2678,6 @@ html {
 .soluciones-section .pieza {
     background: #ECECEF;
     border-color: #E2E2E6;
-}
-
-/* Las pestanyas, medio tono por encima del panel: asi la activa (que va
-   en blanco) se lee como la hoja que sale hacia delante. */
-.soluciones-section .piezas-tabs {
-    background: #E4E4E8;
-    border-color: #E2E2E6;
-}
-
-.soluciones-section .pieza-tab.is-active {
-    background: #ECECEF;
 }
 
 /* El .section-header generico deja un hueco pensado para secciones
@@ -4266,43 +4546,6 @@ html {
    riel se va al borde izquierdo y texto y tarjeta se apilan a su
    derecha. Basta con mover --riel, porque linea, relleno y nodo estan
    todos anclados a esa misma variable. */
-/* [3-sep-2026] LAS PESTANYAS EN MOVIL.
-   Iban con overflow-x: auto, asi que a este ancho la tercera quedaba
-   fuera de vista y habia que deslizar a ciegas para descubrirla — no
-   habia ninguna senyal de que hubiera mas.
-   Son solo 3: caben si se compactan. Se quita el scroll y se reparten
-   el ancho a partes iguales, con el numero encima del texto para que
-   la etiqueta no tenga que abreviarse. */
-@media (max-width: 700px) {
-    .piezas-tabs {
-        overflow-x: visible;
-        gap: 2px;
-    }
-    .pieza-tab {
-        flex: 1 1 0;
-        min-width: 0;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 2px;
-        padding: var(--space-3) var(--space-2);
-        font-size: 0.76rem;
-        line-height: 1.15;
-        /* [4-sep-2026] El texto TIENE que poder partirse en dos lineas:
-           "Sistemas de control" no cabe en un tercio de pantalla y se
-           salia por encima de la pestanya de al lado (se veia
-           "Automatizacione8istemas de contr..."). Con esto cada
-           etiqueta ocupa las lineas que necesite y ninguna invade a su
-           vecina. */
-        white-space: normal;
-        overflow-wrap: break-word;
-        hyphens: auto;
-        text-align: left;
-    }
-    /* Las tres igualan altura para que el borde inferior activo quede
-       a la misma linea aunque una ocupe dos lineas y otra una. */
-    .piezas-tabs { align-items: stretch; }
-}
-
 @media (max-width: 900px) {
     /* El eje se mueve en la SECCION: asi lo siguen la linea, los nodos
        Y la bola del cierre a la vez. Antes solo lo movia .fases y la
@@ -4460,7 +4703,6 @@ html {
    3 · .section-label se quedaba en 4.11 con --cobalt-550, a un pelo del
        4.5. Sube al 700, que es el tono de enlace sobre claro. */
 .pieza-num { color: var(--cobalt-700); }
-.pieza-tab-num { color: var(--cobalt-800); }
 .section-label { color: var(--cobalt-700); }
 
 /* ══ "CÓMO EMPEZAR" EN GRIS ════════════════════════════════════════

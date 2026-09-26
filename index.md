@@ -11,65 +11,87 @@ Analizo dónde pierdes tiempo, clientes y dinero, y utilizo IA y automatización
 - Bioresina
 - Geko
 
-## Sistemas de IA montados sobre cómo trabajas tú
+## Del primer contacto al trabajo hecho
 
-_No son productos de catálogo: son tres piezas que se combinan según lo que te haga falta. Casi siempre empieza por una._
+_Captar clientes, venderles y que el trabajo de dentro se haga solo. Cada pieza funciona por separado; casi siempre se empieza por una._
 
 01
 
-Agentes de IA
+Captar clientes
+
+De la primera búsqueda al contacto.
+
+↗
+
+01
+
+Diseño web y captación
+
+### Que te encuentren. Y que no se escape ninguno.
+
+Una web no sirve si no aparece cuando te buscan, ni si el contacto acaba en un correo que nadie contesta. Monto la web, el posicionamiento y lo que pasa después.
+
+- Una web pensada para conseguir clientes, no para decorar
+
+- Que aparezcas en Google cuando te buscan en tu zona, y en las respuestas de ChatGPT o Gemini
+
+- Cada contacto entra solo en tu CRM, venga de la web, WhatsApp o Instagram
+
+- Seguimiento automático: nadie se queda sin respuesta
+
+Ver servicio →
 
 02
 
-Automatizaciones
+Vender más
 
-03
+Una respuesta cuando hace falta.
 
-Sistemas de control
+↗
 
-01
+02
 
 Agentes de IA
 
-### Atienden, entienden y ejecutan
+### Contestan al momento y agendan a los interesados
 
 Un agente no es un chatbot con respuestas enlatadas. Trabaja con tus datos, entiende lo que le piden y hace la tarea entera.
 
-- Atiende en web, WhatsApp o email con el contexto de tu negocio
+- Responde al momento en web y WhatsApp, con el contexto de tu negocio
 
-- Clasifica lo que entra y lo manda a quien corresponda
+- Distingue al curioso del que de verdad está interesado
 
-- Responde con lo que pone en tus documentos, no con lo que se inventa
+- Agenda la llamada con los que están listos para comprar
 
-- Ejecuta el paso siguiente: crea la ficha, agenda, prepara el presupuesto
+- Hace el seguimiento que hoy no hace nadie
 
-02
-
-Automatizaciones
-
-### El trabajo que come el día, hecho solo
-
-Hay trabajo que hay que hacer y no hace falta que lo haga una persona. Incluye conectar entre sí las herramientas que ya usas.
-
-- Documentos, facturas y correos se archivan solos
-
-- Los informes de cada mañana salen sin que nadie los haga
-
-- Tus herramientas se hablan: se acabó copiar datos de un sitio a otro
+Ver servicio →
 
 03
 
-Sistemas de control
+Ahorrar tiempo
 
-### Saber cómo va sin preguntar a nadie
+El trabajo repetitivo, resuelto.
 
-Decidir a ojo sale caro, y casi siempre te enteras tarde.
+↗
 
-- Un panel con qué entra, qué se cierra y qué quedó pendiente
+03
 
-- Los números del mes, sin cuadrarlos a mano
+Automatización de procesos
 
-- Y si la herramienta que necesitas no existe, se construye
+### El trabajo que come el día, hecho solo
+
+Hay trabajo que hay que hacer y no hace falta que lo haga una persona. Y tampoco hace falta que todas las dudas pasen por ti.
+
+- Documentos, facturas y correos se archivan solos
+
+- Tus herramientas se hablan: se acabó copiar datos de un sitio a otro
+
+- Tu equipo le pregunta a un asistente con tus procedimientos, no a ti
+
+- Lo que sabe tu negocio no se va cuando se va alguien
+
+Ver servicio →
 
 ## Esto es lo que pasa cuando lo aplicamos
 
@@ -159,111 +181,41 @@ Me cuentan que acaban la jornada agotados, con sus hijos delante pero pendientes
 
 > Tú me cuentas qué te agobia, y yo me encargo.
 
-## Antes de montar nada, hay que saber qu&eacute; montar
+## Dos formas de empezar
 
-_La mayor&iacute;a de negocios no necesita m&aacute;s herramientas. Necesita saber cu&aacute;l de todas le est&aacute; costando dinero ahora mismo._
+_Depende de si ya sabes lo que te falta o solo sabes que algo no funciona._
+
+Si ya sabes lo que necesitas
+
+### Una llamada de 20 minutos
+
+Una web que capte, un agente que atienda o un proceso que se haga solo.
+
+1. Me cuentas qu&eacute; quieres y te digo si tiene sentido
+
+2. Si encaja, te preparo una propuesta para tu caso
+
+3. Lo construyo y lo dejo funcionando
+
+**Gratis**
+
+20 minutos por videollamada, sin compromiso.
+
+Si algo no va bien y no sabes qu&eacute;
 
 ### Diagn&oacute;stico operativo DAI360
 
-Miro las cuatro &aacute;reas de tu negocio: c&oacute;mo llegan tus clientes, c&oacute;mo se cierran, c&oacute;mo entregas y c&oacute;mo lo llevas por dentro. Al terminar sabes qu&eacute; te est&aacute; frenando y qu&eacute; merece la pena arreglar primero.
+C&oacute;mo llegan tus clientes, c&oacute;mo se cierran, c&oacute;mo entregas y c&oacute;mo lo llevas por dentro.
 
-- Mapa de tus procesos reales, &aacute;rea por &aacute;rea
+1. Reviso contigo las cuatro &aacute;reas de tu negocio
 
-- Cuellos de botella localizados y medidos
+2. Te entrego el informe con el plan por fases
 
-- Un plan por fases, empezando por lo que se arregla en dos semanas
-
-- El plan es tuyo, lo implemente yo o no
+3. Lo implementas t&uacute; o conmigo: el plan es tuyo
 
 **Desde 1.500 &euro;**
 
 Si luego implementamos las mejoras, se descuenta &iacute;ntegro del proyecto.
-
-## DAI 360
-
-Diagnóstico completo de tus procesos para escalar sin fricción. Este informe te guía paso a paso para optimizar, integrar y ejecutar.
-
-Nombre del negocio
-
-Fecha
-
-Auditoría de Alberto Pérez Cabrera
-
-### _1º_ Auditoría de Área
-
-Auditoría de los 4 ejes operativos: marketing, ventas, operaciones y delivery. Mapa visual de flujos actuales.
-
-### _2º_ Detección de Oportunidades
-
-Cruzar las ineficiencias detectadas con las soluciones posibles, clasificadas por impacto, dificultad y urgencia.
-
-Solución propuestaÁreaProblema detectadoImpactoDificultadUrgencia
-
-Sistema de ventas blindado
-
-Ventas
-
-Gestión 100% manual por WhatsApp
-
-Alto
-
-Media
-
-Crítica
-
-Gestión de capacidad y fechas
-
-Operaciones
-
-Saturación en fechas clave, sin antelación
-
-Alto
-
-Baja
-
-Alta
-
-Cerebro operativo (CRM)
-
-Administración
-
-Información fragmentada y sin trazabilidad
-
-Alto
-
-Media
-
-Media
-
-### _3º_ Roadmap Técnico
-
-El plan de integraciones y mejoras, priorizado por impacto y facilidad. Empieza por lo que antes devuelve.
-
-FasePrioridadQué incluyeCuándo
-
-Fase 0 · Quick wins
-
-Primero
-
-Agente IA que responde WhatsApp 24/7 y cualifica
-
-0-2 sem.
-
-Fase 1
-
-Después
-
-Presupuestos automáticos + recordatorios de seguimiento
-
-1-2 meses
-
-Fase 2
-
-Cuando toque
-
-CRM central sincronizado con agenda y facturación
-
-3-4 meses
 
 ## Preguntas que me suelen hacer.
 
@@ -274,6 +226,10 @@ Uso la Fórmula 4R: una tarea es buena candidata a automatizar si cumple cuatro 
 ¿Para qué tipo de negocio es esto?
 
 Trabajo con negocios de servicios que ya facturan pero dependen demasiado de su dueño: cuando el día se va en tareas manuales y el negocio no avanza sin ti. No vendo herramientas sueltas: primero miro cómo trabajas y automatizo lo que más tiempo o dinero te devuelve.
+
+¿Y si lo que necesito no encaja en nada de esto?
+
+Se construye. Si la herramienta que te hace falta no existe (un panel para ver cómo va el negocio, un CRM a tu medida, una aplicación interna), la monto. Antes vemos si de verdad hace falta: muchas veces basta con conectar bien lo que ya usas.
 
 ¿Necesito saber de tecnología?
 

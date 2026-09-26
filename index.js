@@ -176,22 +176,27 @@ document.addEventListener('DOMContentLoaded', () => {
     //    HTML sin efecto; se puede limpiar al tocar la plantilla.
 
 
-    // 3.2 PESTAÑAS DE "QUE CONSTRUYO"
-    //     Solo se reproduce el video del panel visible: los tres a la vez
-    //     gastaban CPU y bateria sin que nadie mirase dos de ellos.
-    const tabs = document.querySelectorAll('.pieza-tab');
+    // 3.2 SERVICIOS: LISTA (escritorio) / ACORDEON (movil)
+    //     [26-sep-2026] Antes pestañas. Se abre siempre UNO: solo se
+    //     reproduce el video del panel visible, los tres a la vez gastaban
+    //     CPU y bateria sin que nadie mirase dos de ellos.
+    //     Acordeon y no tablist: cada boton es un tabulador normal (sin
+    //     flechas), que es lo que espera un acordeon.
+    const tabs = document.querySelectorAll('.pieza-fila');
 
     if (tabs.length > 0) {
         const abrirPieza = (tab) => {
+            // En movil el panel abierto va ENCIMA de la fila pulsada si esta
+            // mas arriba: al cerrarlo, la fila salta hacia arriba y el dedo
+            // se queda sobre otra cosa. Se mide antes y se compensa despues.
+            const antes = tab.getBoundingClientRect().top;
+
             tabs.forEach(otra => {
                 const panel = document.getElementById(otra.getAttribute('aria-controls'));
                 const activa = (otra === tab);
 
                 otra.classList.toggle('is-active', activa);
-                otra.setAttribute('aria-selected', activa ? 'true' : 'false');
-                // Solo la pestaña activa entra en el orden de tabulacion:
-                // dentro de un tablist las flechas mueven, no el tabulador.
-                otra.tabIndex = activa ? 0 : -1;
+                otra.setAttribute('aria-expanded', activa ? 'true' : 'false');
 
                 if (!panel) return;
                 panel.hidden = !activa;
@@ -212,25 +217,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     video.pause();
                 }
             });
+
+            const salto = tab.getBoundingClientRect().top - antes;
+            // 'instant': con el scroll suave de la pagina el ajuste se
+            // veria como un deslizamiento, y es justo el salto a esconder.
+            if (salto !== 0) window.scrollBy({ top: salto, behavior: 'instant' });
         };
 
         tabs.forEach(tab => {
             tab.addEventListener('click', () => abrirPieza(tab));
-
-            tab.addEventListener('keydown', (e) => {
-                const i = Array.from(tabs).indexOf(tab);
-                let destino = null;
-
-                if (e.key === 'ArrowRight') destino = tabs[(i + 1) % tabs.length];
-                else if (e.key === 'ArrowLeft') destino = tabs[(i - 1 + tabs.length) % tabs.length];
-                else if (e.key === 'Home') destino = tabs[0];
-                else if (e.key === 'End') destino = tabs[tabs.length - 1];
-                else return;
-
-                e.preventDefault();
-                abrirPieza(destino);
-                destino.focus();
-            });
         });
 
         /* [4-sep-2026] Llegar a una pestana desde un enlace #tab-*.
@@ -245,7 +240,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const abrirDesdeHash = () => {
             const id = window.location.hash;
             if (!id || id.length < 2) return;
-            const tab = document.querySelector('.pieza-tab' + id);
+            const tab = document.querySelector('.pieza-fila' + id);
             if (tab) abrirPieza(tab);
         };
         abrirDesdeHash();

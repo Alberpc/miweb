@@ -2,10 +2,9 @@
 layout: home.njk
 navLocal: true
 heroEnBloque: true
-navCtaHref: "/diagnostico-operativo/"
+navCtaHref: "#contacto"
 pieSinAurora: true
-navCtaTexto: "Diagnóstico operativo &rarr;"
-navCtaCorto: "Diagnóstico &rarr;"
+navCtaTexto: "Hablemos &rarr;"
 permalink: /index.html
 title: "Consultor de IA y automatización de procesos | Alber Cabrera"
 description: "Consultor de IA para negocios de servicios en toda España: agentes que atienden 24/7, procesos que se hacen solos y un diagnóstico para empezar."
@@ -67,6 +66,7 @@ schemas:
           "mainEntity": [
             { "@type": "Question", "name": "¿Cómo sé si una tarea de mi negocio se puede automatizar?", "acceptedAnswer": { "@type": "Answer", "text": "Uso la Fórmula 4R: una tarea es buena candidata a automatizar si cumple cuatro cosas: Relevante (importa de verdad para el negocio), Repetitiva (la haces cada día o cada semana), con Reglas claras (sigue unos pasos fijos, no depende de tu intuición) y con Retorno (el tiempo que te ahorra supera el de montarla). Hay dos cosas que conviene NO automatizar todavía: procesos nuevos que aún no dominas (primero se ordenan a mano) y tareas donde un fallo dañaría tu marca, como publicar en redes, que siempre deben pasar por una revisión tuya." } },
             { "@type": "Question", "name": "¿Para qué tipo de negocio es esto?", "acceptedAnswer": { "@type": "Answer", "text": "Trabajo con negocios de servicios que ya facturan pero dependen demasiado de su dueño: cuando el día se va en tareas manuales y el negocio no avanza sin ti. No vendo herramientas sueltas: primero miro cómo trabajas y automatizo lo que más tiempo o dinero te devuelve." } },
+            { "@type": "Question", "name": "¿Y si lo que necesito no encaja en nada de esto?", "acceptedAnswer": { "@type": "Answer", "text": "Se construye. Si la herramienta que te hace falta no existe (un panel para ver cómo va el negocio, un CRM a tu medida, una aplicación interna), la monto. Antes vemos si de verdad hace falta: muchas veces basta con conectar bien lo que ya usas." } },
             { "@type": "Question", "name": "¿Necesito saber de tecnología?", "acceptedAnswer": { "@type": "Answer", "text": "Cero. Tú me cuentas qué te agobia y yo me encargo de la parte técnica. Toda la infraestructura se monta en la nube o se conecta con las herramientas que ya usas, como tu CRM. Si un consultor te llena la reunión de palabros, no es que sepa más: es que no sabe explicarlo." } },
             { "@type": "Question", "name": "¿Por dónde empiezo si no sé qué necesito?", "acceptedAnswer": { "@type": "Answer", "text": "Por el diagnóstico operativo DAI360. Miro tu negocio a fondo, te enseño con claridad dónde pierdes tiempo y dinero, y te doy un plan de qué arreglar primero. Cuesta desde 1.500 euros y, si luego implementamos las mejoras, se descuenta del proyecto." } },
             { "@type": "Question", "name": "¿Cuánto se tarda en dejarlo listo?", "acceptedAnswer": { "@type": "Answer", "text": "Depende del proyecto. Integraciones más sencillas de CRM o un asistente básico de WhatsApp suelen estar listas en 2-3 semanas. Un proyecto de sistema de control o ERP a medida puede llevar de 4 a 8 semanas. Te daré un plazo y un coste cerrado antes de empezar." } },
@@ -148,60 +148,62 @@ schemas:
         El marcado esta en git y en scratchpad/seccion-problema.txt; su
         CSS (.problema-*, .sintomas) sigue en index.css por si vuelve. -#}
 
-    <!-- SECCIÓN 3 — QUÉ CONSTRUYO (las piezas) -->
+    <!-- SECCIÓN 3 — SERVICIOS (las piezas) -->
     <section id="soluciones" class="section soluciones-section section-bloque reveal">
         <div class="container">
             <div class="section-header">
-                <span class="section-label">QUÉ CONSTRUYO</span>
-                <h2 class="section-title">Sistemas de IA montados sobre cómo trabajas tú</h2>
-                <p class="section-subtitle">No son productos de catálogo: son tres piezas que se combinan según lo que te haga falta. Casi siempre empieza por una.</p>
+                <span class="section-label">SERVICIOS</span>
+                <h2 class="section-title">Del primer contacto al trabajo hecho</h2>
+                <p class="section-subtitle">Captar clientes, venderles y que el trabajo de dentro se haga solo. Cada pieza funciona por separado; casi siempre se empieza por una.</p>
             </div>
 
-            {# Pestañas, no tres filas apiladas: las tres piezas son
-               alternativas entre sí ("casi siempre empieza por una"), no
-               una secuencia. Con pestañas los tres nombres se ven de golpe,
-               se compara antes de leer, y solo se reproduce un vídeo a la
-               vez en lugar de tres a la vez.
-               Mismo patrón que steep.app (5 pestañas de producto) y el
-               acordeón Voice/Chat/Email de decagon.ai. #}
-            <div class="piezas-tabs" role="tablist" aria-label="Las tres piezas">
-                <button type="button" class="pieza-tab is-active" role="tab"
-                        id="tab-agentes" aria-controls="panel-agentes" aria-selected="true">
-                    <span class="pieza-tab-num" aria-hidden="true">01</span>
-                    <span class="pieza-tab-nombre">Agentes de IA</span>
-                </button>
-                <button type="button" class="pieza-tab" role="tab"
-                        id="tab-automatizaciones" aria-controls="panel-automatizaciones"
-                        aria-selected="false" tabindex="-1">
-                    <span class="pieza-tab-num" aria-hidden="true">02</span>
-                    <span class="pieza-tab-nombre">Automatizaciones</span>
-                </button>
-                <button type="button" class="pieza-tab" role="tab"
-                        id="tab-control" aria-controls="panel-control"
-                        aria-selected="false" tabindex="-1">
-                    <span class="pieza-tab-num" aria-hidden="true">03</span>
-                    <span class="pieza-tab-nombre">Sistemas de control</span>
-                </button>
-            </div>
+            {# [26-sep-2026] LISTA + PANEL (escritorio) / ACORDEÓN (móvil),
+               en vez de pestañas. Idea de miweb-premium-variante: cada fila
+               lleva nombre + una línea que la explica, así se compara sin
+               abrir nada; en móvil cada panel se abre justo debajo de su fila
+               en lugar de arriba del todo.
+               Sigue abriéndose UNO solo: las tres piezas son alternativas
+               ("casi siempre empieza por una") y así solo corre un vídeo.
+               Marcado de acordeón (button + aria-expanded + region) y no de
+               tablist: un tablist no admite los paneles intercalados entre
+               sus pestañas, que es lo que necesita el móvil.
+               La fila nombra el RESULTADO (lo que piensa el dueño) y la
+               etiqueta del panel el SERVICIO (lo que se busca en Google:
+               agentes de ia, automatización de procesos).
+               Los ids tab-* se quedan: el pie enlaza a ellos. #}
+            <div class="piezas-lista">
 
-            <div class="piezas-filas">
+                <button type="button" class="pieza-fila is-active" id="tab-captar"
+                        aria-controls="panel-captar" aria-expanded="true">
+                    <span class="pieza-fila-num" aria-hidden="true">01</span>
+                    <span class="pieza-fila-texto">
+                        <span class="pieza-fila-nombre">Captar clientes</span>
+                        <span class="pieza-fila-linea">De la primera búsqueda al contacto.</span>
+                    </span>
+                    <span class="pieza-fila-flecha" aria-hidden="true">↗</span>
+                </button>
 
-                <!-- PIEZA 1 — Agentes de IA (destacada) -->
-                <article class="pieza" id="panel-agentes" role="tabpanel"
-                         aria-labelledby="tab-agentes">
+                <!-- PIEZA 1 — Captar clientes (destacada) -->
+                {# [26-sep-2026] Videos intercambiados con Vender: aqui el del
+                   contacto que entra por WhatsApp/web/Instagram y acaba en el
+                   CRM (el panel de cifras no contaba captar). Sigue siendo
+                   provisional hasta que haya uno propio de web -> formulario -> CRM. #}
+                <article class="pieza" id="panel-captar" role="region"
+                         aria-labelledby="tab-captar">
                     <div class="pieza-texto">
                         <div class="pieza-cabeza">
                             <span class="pieza-num" aria-hidden="true">01</span>
-                            <span class="section-label">Agentes de IA</span>
+                            <span class="section-label">Diseño web y captación</span>
                         </div>
-                        <h3 class="pieza-titulo">Atienden, entienden y ejecutan</h3>
-                        <p class="pieza-desc">Un agente no es un chatbot con respuestas enlatadas. Trabaja con tus datos, entiende lo que le piden y hace la tarea entera.</p>
+                        <h3 class="pieza-titulo">Que te encuentren. Y que no se escape ninguno.</h3>
+                        <p class="pieza-desc">Una web no sirve si no aparece cuando te buscan, ni si el contacto acaba en un correo que nadie contesta. Monto la web, el posicionamiento y lo que pasa después.</p>
                         <ul class="pieza-lista">
-                            <li>Atiende en web, WhatsApp o email con el contexto de tu negocio</li>
-                            <li>Clasifica lo que entra y lo manda a quien corresponda</li>
-                            <li>Responde con lo que pone en tus documentos, no con lo que se inventa</li>
-                            <li>Ejecuta el paso siguiente: crea la ficha, agenda, prepara el presupuesto</li>
+                            <li>Una web pensada para conseguir clientes, no para decorar</li>
+                            <li>Que aparezcas en Google cuando te buscan en tu zona, y en las respuestas de ChatGPT o Gemini</li>
+                            <li>Cada contacto entra solo en tu CRM, venga de la web, WhatsApp o Instagram</li>
+                            <li>Seguimiento automático: nadie se queda sin respuesta</li>
                         </ul>
+                        <a class="pieza-enlace" href="/diseno-web-pymes/">Ver servicio &rarr;</a>
                     </div>
                     <video class="pieza-video" width="800" height="480"
                            autoplay muted loop playsinline preload="metadata" aria-label="Un cliente escribe por WhatsApp, la web o Instagram; el agente responde, crea la ficha en el CRM y confirma la cita.">
@@ -210,49 +212,71 @@ schemas:
                     </video>
                 </article>
 
-                <!-- PIEZA 2 — Automatizaciones -->
-                <article class="pieza" id="panel-automatizaciones" role="tabpanel"
-                         aria-labelledby="tab-automatizaciones" hidden>
+                <!-- PIEZA 2 — Vender más (agentes de IA) -->
+                <button type="button" class="pieza-fila" id="tab-vender"
+                        aria-controls="panel-vender" aria-expanded="false">
+                    <span class="pieza-fila-num" aria-hidden="true">02</span>
+                    <span class="pieza-fila-texto">
+                        <span class="pieza-fila-nombre">Vender más</span>
+                        <span class="pieza-fila-linea">Una respuesta cuando hace falta.</span>
+                    </span>
+                    <span class="pieza-fila-flecha" aria-hidden="true">↗</span>
+                </button>
+                <article class="pieza" id="panel-vender" role="region"
+                         aria-labelledby="tab-vender" hidden>
                     <div class="pieza-texto">
                         <div class="pieza-cabeza">
                             <span class="pieza-num" aria-hidden="true">02</span>
-                            <span class="section-label">Automatizaciones</span>
+                            <span class="section-label">Agentes de IA</span>
                         </div>
-                        <h3 class="pieza-titulo">El trabajo que come el día, hecho solo</h3>
-                        <p class="pieza-desc">Hay trabajo que hay que hacer y no hace falta que lo haga una persona. Incluye conectar entre sí las herramientas que ya usas.</p>
+                        <h3 class="pieza-titulo">Contestan al momento y agendan a los interesados</h3>
+                        <p class="pieza-desc">Un agente no es un chatbot con respuestas enlatadas. Trabaja con tus datos, entiende lo que le piden y hace la tarea entera.</p>
                         <ul class="pieza-lista">
-                            <li>Documentos, facturas y correos se archivan solos</li>
-                            <li>Los informes de cada mañana salen sin que nadie los haga</li>
-                            <li>Tus herramientas se hablan: se acabó copiar datos de un sitio a otro</li>
+                            <li>Responde al momento en web y WhatsApp, con el contexto de tu negocio</li>
+                            <li>Distingue al curioso del que de verdad está interesado</li>
+                            <li>Agenda la llamada con los que están listos para comprar</li>
+                            <li>Hace el seguimiento que hoy no hace nadie</li>
                         </ul>
-                    </div>
-                    <video class="pieza-video" width="800" height="480"
-                           muted loop playsinline preload="metadata" aria-label="Llega una factura, se procesa sola y sale archivada en Drive con un aviso enviado por correo.">
-                        <source media="(max-width: 768px)" src="/assets/video/pilar-automatizacion-v.mp4" type="video/mp4">
-                        <source src="/assets/video/pilar-automatizacion.mp4" type="video/mp4">
-                    </video>
-                </article>
-
-                <!-- PIEZA 3 — Sistemas de control -->
-                <article class="pieza" id="panel-control" role="tabpanel"
-                         aria-labelledby="tab-control" hidden>
-                    <div class="pieza-texto">
-                        <div class="pieza-cabeza">
-                            <span class="pieza-num" aria-hidden="true">03</span>
-                            <span class="section-label">Sistemas de control</span>
-                        </div>
-                        <h3 class="pieza-titulo">Saber cómo va sin preguntar a nadie</h3>
-                        <p class="pieza-desc">Decidir a ojo sale caro, y casi siempre te enteras tarde.</p>
-                        <ul class="pieza-lista">
-                            <li>Un panel con qué entra, qué se cierra y qué quedó pendiente</li>
-                            <li>Los números del mes, sin cuadrarlos a mano</li>
-                            <li>Y si la herramienta que necesitas no existe, se construye</li>
-                        </ul>
+                        <a class="pieza-enlace" href="/agentes-ia/">Ver servicio &rarr;</a>
                     </div>
                     <video class="pieza-video" width="800" height="480"
                            muted loop playsinline preload="metadata" aria-label="Un panel con llamadas, cierres, inversión y facturación del mes, con su gráfica por semanas y los últimos movimientos.">
                         <source media="(max-width: 768px)" src="/assets/video/pilar-control-v.mp4" type="video/mp4">
                         <source src="/assets/video/pilar-control.mp4" type="video/mp4">
+                    </video>
+                </article>
+
+                <!-- PIEZA 3 — Ahorrar tiempo (automatización de procesos) -->
+                <button type="button" class="pieza-fila" id="tab-ahorrar"
+                        aria-controls="panel-ahorrar" aria-expanded="false">
+                    <span class="pieza-fila-num" aria-hidden="true">03</span>
+                    <span class="pieza-fila-texto">
+                        <span class="pieza-fila-nombre">Ahorrar tiempo</span>
+                        <span class="pieza-fila-linea">El trabajo repetitivo, resuelto.</span>
+                    </span>
+                    <span class="pieza-fila-flecha" aria-hidden="true">↗</span>
+                </button>
+                <article class="pieza" id="panel-ahorrar" role="region"
+                         aria-labelledby="tab-ahorrar" hidden>
+                    <div class="pieza-texto">
+                        <div class="pieza-cabeza">
+                            <span class="pieza-num" aria-hidden="true">03</span>
+                            <span class="section-label">Automatización de procesos</span>
+                        </div>
+                        <h3 class="pieza-titulo">El trabajo que come el día, hecho solo</h3>
+                        <p class="pieza-desc">Hay trabajo que hay que hacer y no hace falta que lo haga una persona. Y tampoco hace falta que todas las dudas pasen por ti.</p>
+                        <ul class="pieza-lista">
+                            <li>Documentos, facturas y correos se archivan solos</li>
+                            <li>Tus herramientas se hablan: se acabó copiar datos de un sitio a otro</li>
+                            <li>Tu equipo le pregunta a un asistente con tus procedimientos, no a ti</li>
+                            <li>Lo que sabe tu negocio no se va cuando se va alguien</li>
+                        </ul>
+                        <a class="pieza-enlace" href="/automatizacion-procesos/">Ver servicio &rarr;</a>
+                    </div>
+                    <video class="pieza-video" width="800" height="480"
+                           muted loop playsinline preload="metadata" aria-label="Llega una factura, se procesa sola y sale archivada en Drive con un aviso enviado por correo.">
+                        <source media="(max-width: 768px)" src="/assets/video/pilar-automatizacion-v.mp4" type="video/mp4">
+                        <source src="/assets/video/pilar-automatizacion.mp4" type="video/mp4">
                     </video>
                 </article>
 
@@ -969,27 +993,108 @@ schemas:
         </div>
     </section>
 
-    <!-- SECCION 9 - POR DONDE SE EMPIEZA (el DAI360 como puerta de entrada) -->
+    <!-- SECCION 9 - COMO EMPEZAR (dos puertas) -->
+    {#- [26-sep-2026] DOS PUERTAS DEL MISMO PESO. Vuelve la eleccion que se
+        quito el 1-sep, pero por otro motivo: entonces las dos tarjetas
+        acababan en el mismo formulario y elegir no elegia nada. Ahora
+        llevan a sitios distintos (llamada gratuita / pagina del DAI360)
+        y responden a dos dueños distintos: el que sabe que quiere (una
+        web, un agente) y el que solo sabe que algo no va. Lo que de
+        verdad se cobra hoy entra por la puerta A; con el DAI360 como
+        unica entrada, quien queria una web tenia que pasar por un
+        diagnostico de pago.
+        El portatil con el informe se quita de aqui: la pagina del DAI360
+        ya lo enseña entero. Su CSS (.dai-cuerpo, .dai-viz, .dai-pantalla)
+        y el JS del desplazamiento siguen por si vuelve; el JS no hace
+        nada si no encuentra .dai-pantalla. -#}
     <section id="caminos" class="section dai-section reveal">
         <div class="container">
             <div class="section-header centered">
                 <span class="section-label">C&Oacute;MO EMPEZAR</span>
-                <h2 class="section-title">Antes de montar nada, hay que saber qu&eacute; montar</h2>
-                <p class="section-subtitle">La mayor&iacute;a de negocios no necesita m&aacute;s herramientas. Necesita saber cu&aacute;l de todas le est&aacute; costando dinero ahora mismo.</p>
+                <h2 class="section-title">Dos formas de empezar</h2>
+                <p class="section-subtitle">Depende de si ya sabes lo que te falta o solo sabes que algo no funciona.</p>
             </div>
 
-            <div class="dai-cuerpo">
-                <div class="dai-texto">
-                    <h3 class="dai-nombre">Diagn&oacute;stico operativo DAI360</h3>
-                    <p class="dai-desc">
-                        Miro las cuatro &aacute;reas de tu negocio: c&oacute;mo llegan tus clientes, c&oacute;mo se cierran, c&oacute;mo entregas y c&oacute;mo lo llevas por dentro. Al terminar sabes qu&eacute; te est&aacute; frenando y qu&eacute; merece la pena arreglar primero.
+            <div class="puertas">
+                {#- Cada puerta: una PIEZA (lo que te llevas, en el mismo
+                    vidrio con halo que "Como trabajo") y debajo QUE PASA
+                    DESPUES en tres pasos. Una lista de checks decia lo
+                    bueno que es; los pasos dicen que va a pasar, que es
+                    lo que frena a quien no se decide. -#}
+                <article class="puerta">
+                    <figure class="puerta-viz" aria-hidden="true">
+                        <div class="puerta-pieza">
+                            <div class="pp-quien">
+                                <img src="assets/img/sobremi.webp" alt="" width="823" height="744" loading="lazy" decoding="async">
+                                <span>
+                                    <strong>Alberto P&eacute;rez Cabrera</strong>
+                                    <small>Videollamada &middot; 20 min</small>
+                                </span>
+                                <span class="pp-chip">Gratis</span>
+                            </div>
+                            <dl class="pp-filas">
+                                <div><dt>T&uacute;</dt><dd>Me cuentas qu&eacute; quieres conseguir</dd></div>
+                                <div><dt>Yo</dt><dd>Te digo si se puede y c&oacute;mo lo har&iacute;a</dd></div>
+                            </dl>
+                        </div>
+                    </figure>
+                    <span class="puerta-cuando">Si ya sabes lo que necesitas</span>
+                    <h3 class="dai-nombre">Una llamada de 20 minutos</h3>
+                    <p class="dai-desc">Una web que capte, un agente que atienda o un proceso que se haga solo.</p>
+                    <ol class="puerta-pasos">
+                        <li>Me cuentas qu&eacute; quieres y te digo si tiene sentido</li>
+                        <li>Si encaja, te preparo una propuesta para tu caso</li>
+                        <li>Lo construyo y lo dejo funcionando</li>
+                    </ol>
+                    {#- Mismo bloque que el precio del DAI360: las dos puertas
+                        cierran igual (lo que cuesta + la condicion). -#}
+                    <p class="dai-precio">
+                        <strong>Gratis</strong>
+                        <span>20 minutos por videollamada, sin compromiso.</span>
                     </p>
-                    <ul class="dai-lista">
-                        <li>Mapa de tus procesos reales, &aacute;rea por &aacute;rea</li>
-                        <li>Cuellos de botella localizados y medidos</li>
-                        <li>Un plan por fases, empezando por lo que se arregla en dos semanas</li>
-                        <li>El plan es tuyo, lo implemente yo o no</li>
-                    </ul>
+                    <div class="card-cta-row">
+                        <a href="#contacto" class="btn-primary-small">Reservar la llamada &rarr;</a>
+                    </div>
+                </article>
+
+                <article class="puerta">
+                    {#- El plan por fases, con las filas del roadmap del
+                        informe real (informe-dai360.njk). Es un ejemplo. -#}
+                    <figure class="puerta-viz" aria-hidden="true">
+                        <div class="puerta-pieza">
+                            <div class="pp-cab">
+                                <strong>Tu plan &middot; DAI360</strong>
+                                <small>Ejemplo</small>
+                            </div>
+                            <ol class="pp-fases">
+                                {#- Una linea por fase: con dos, la pieza media
+                                    casi el doble que la de la llamada. -#}
+                                <li class="is-primero">
+                                    <span class="pp-fase">Fase 0</span>
+                                    <span class="pp-que">Agente de WhatsApp 24/7</span>
+                                    <span class="pp-cuando">0-2 sem.</span>
+                                </li>
+                                <li>
+                                    <span class="pp-fase">Fase 1</span>
+                                    <span class="pp-que">Presupuestos autom&aacute;ticos</span>
+                                    <span class="pp-cuando">1-2 meses</span>
+                                </li>
+                                <li>
+                                    <span class="pp-fase">Fase 2</span>
+                                    <span class="pp-que">CRM con agenda</span>
+                                    <span class="pp-cuando">3-4 meses</span>
+                                </li>
+                            </ol>
+                        </div>
+                    </figure>
+                    <span class="puerta-cuando">Si algo no va bien y no sabes qu&eacute;</span>
+                    <h3 class="dai-nombre">Diagn&oacute;stico operativo DAI360</h3>
+                    <p class="dai-desc">C&oacute;mo llegan tus clientes, c&oacute;mo se cierran, c&oacute;mo entregas y c&oacute;mo lo llevas por dentro.</p>
+                    <ol class="puerta-pasos">
+                        <li>Reviso contigo las cuatro &aacute;reas de tu negocio</li>
+                        <li>Te entrego el informe con el plan por fases</li>
+                        <li>Lo implementas t&uacute; o conmigo: el plan es tuyo</li>
+                    </ol>
                     {#- [5-sep-2026] El precio, con jerarquia. Iba todo en
                         una linea de 0.92rem en gris, mas pequenya que el
                         cuerpo: el numero se perdia y, con el, la frase que
@@ -1003,56 +1108,15 @@ schemas:
                     <div class="card-cta-row">
                         <a href="/diagnostico-operativo/" class="btn-primary-small">Ver el diagn&oacute;stico DAI360 &rarr;</a>
                     </div>
-                </div>
-
-                {#- EL ENTREGABLE. El informe del DAI360 sobre un portatil,
-                    en imagen: el chasis dibujado en CSS que habia aqui salia
-                    con la pantalla mas alta que ancha, que no es la
-                    proporcion de ningun portatil real. La imagen viene
-                    recortada con fondo transparente, asi que se apoya sobre
-                    el fondo de la seccion en vez de traer el suyo. -#}
-                {#- [5-sep-2026] EL ENTREGABLE, VIVO. Antes era un PNG del
-                    informe ya montado dentro del portatil (mockup hecho en
-                    Magnific): la tabla y el roadmap se veian, pero no se
-                    podian LEER, y eso es justo el argumento de la seccion.
-
-                    Ahora el marco del portatil sigue siendo ese render
-                    (aluminio, camara web, bisel: eso en CSS sale plano),
-                    pero la pantalla esta vacia y dentro va el informe en
-                    HTML real, el mismo include que usa la pagina de
-                    diagnostico. Texto nitido a cualquier zoom, 22 KB de
-                    marco, y si cambia el roadmap cambia en los dos sitios.
-
-                    El informe se desplaza dentro de la pantalla segun el
-                    scroll de la pagina (ver index.js). -#}
-                <figure class="dai-viz">
-                    <picture class="dai-marco">
-                        <source srcset="assets/img/portatil-marco.webp" type="image/webp">
-                        <img src="assets/img/portatil-marco.png"
-                             alt=""
-                             width="1624" height="1039" loading="lazy" decoding="async" aria-hidden="true">
-                    </picture>
-
-                    {#- La pantalla: recorta el informe y lo deja asomar.
-                        Sus medidas salen de medir el PNG pixel a pixel
-                        (el bisel superior es de solo 6px de 1039). -#}
-                    <div class="dai-pantalla">
-                        <div class="dai-visor">
-                            <div class="dai-scroll">
-                                {% include "informe-dai360.njk" %}
-                            </div>
-                        </div>
-                    </div>
-
-                </figure>
+                </article>
             </div>
-
-            {#- La salida para quien ya lo tiene claro es una linea, no una
-                tarjeta gemela: si compite en peso con el diagnostico vuelve
-                a ser la disyuntiva que habiamos quitado. -#}
-            <p class="dai-atajo">&iquest;Ya sabes lo que necesitas? <a href="#contacto">Cu&eacute;ntamelo directamente</a></p>
         </div>
     </section>
+
+    {#- RETIRADO [26-sep-2026]: el portatil con el informe DAI360 que se
+        desplazaba con el scroll (figure.dai-viz + include
+        informe-dai360.njk) y la linea .dai-atajo. Marcado en git, commit
+        7eb8b65. -#}
 
 
     <!-- SECCIÓN 7 — FAQ -->
@@ -1082,6 +1146,16 @@ schemas:
                     </button>
                     <div class="faq-content">
                         <p class="faq-answer">Trabajo con negocios de servicios que ya facturan pero dependen demasiado de su dueño: cuando el día se va en tareas manuales y el negocio no avanza sin ti. No vendo herramientas sueltas: primero miro cómo trabajas y automatizo lo que más tiempo o dinero te devuelve.</p>
+                    </div>
+                </div>
+                <!-- FAQ a medida (lo que antes era la pestaña "Sistemas de control") -->
+                <div class="faq-item reveal">
+                    <button class="faq-trigger">
+                        <span class="faq-question">¿Y si lo que necesito no encaja en nada de esto?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-content">
+                        <p class="faq-answer">Se construye. Si la herramienta que te hace falta no existe (un panel para ver cómo va el negocio, un CRM a tu medida, una aplicación interna), la monto. Antes vemos si de verdad hace falta: muchas veces basta con conectar bien lo que ya usas.</p>
                     </div>
                 </div>
                 <!-- FAQ 3 -->
