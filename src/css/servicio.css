@@ -1,0 +1,826 @@
+/* servicio.css -- lo propio de las tres paginas de servicio:
+   /diseno-web-pymes/, /agentes-ia/ y /automatizacion-procesos/.
+
+   [26-sep-2026] Van ENCIMA de diagnostico-operativo.css (cssArchivo +
+   cssExtra en pagina.njk): de alli heredan hero claro con degradado,
+   secciones, .sintomas, .areas, el riel de .entregas, .quien, FAQ y el
+   cierre oscuro. Asi las cuatro paginas de la oferta (consultoria + tres
+   servicios) se leen como la misma familia. Aqui solo va lo que alli no
+   existe. Si algun dia se hace el re-skin de la variante, se cambia en
+   esos dos archivos y no en cuatro.
+
+   Las piezas de interfaz son EJEMPLOS dibujados en codigo, como las del
+   informe del DAI360: nunca capturas de un cliente real. */
+
+/* ── EL RIEL SIN PRECIO ─────────────────────────────────────────────
+   En el diagnostico el riel baja hasta la bola del bloque del precio,
+   y por eso .entregas se estira por debajo con padding + margen
+   negativo. Aqui no hay bloque de precio (el precio se dice en la
+   llamada): sin anular eso, la linea cruzaba por detras de la seccion
+   siguiente. */
+#como-funciona {
+    --riel: 50%;
+    --cristal: linear-gradient(155deg, rgb(252, 252, 253) 0%, rgb(249, 246, 244) 64%, rgb(245, 238, 234) 100%);
+    --cristal-brillo: linear-gradient(118deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.06) 34%, transparent 58%);
+    --cristal-sombra: 0 18px 40px -14px rgba(26, 29, 35, 0.14), 0 2px 8px -2px rgba(26, 29, 35, 0.08), 0 26px 50px -20px rgba(234, 130, 88, 0.30);
+}
+#como-funciona .entregas { padding-bottom: 0; margin-bottom: 0; }
+#como-funciona .entrega:last-child { padding-bottom: 0; }
+
+/* El cristal comun de todas las piezas de esta pagina. */
+.pz {
+    position: relative;
+    width: 100%;
+    max-width: var(--pieza-ancho, 380px);
+    background: var(--cristal, var(--bg));
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
+    box-shadow: var(--cristal-sombra, 0 18px 40px -18px rgba(18, 19, 22, 0.28));
+    font-family: var(--font-body);
+    color: var(--ink);
+}
+.pz-cab {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-3);
+    margin-bottom: var(--space-3);
+    font-size: 0.86rem;
+    font-weight: 600;
+}
+.pz-cab small {
+    font-size: 0.66rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+}
+
+/* ── EL HERO: LA ESCENA ─────────────────────────────────────────────
+   Donde el diagnostico pone su informe, aqui va la pieza del servicio:
+   el video (agentes, automatizacion) o el recorrido (captacion). Mismo
+   ancho y el mismo marco blanco con sombra que el informe. */
+.escena {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+.escena-video {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 800 / 480;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 30px 70px -30px rgba(18, 19, 22, 0.35),
+                0 2px 8px -2px rgba(18, 19, 22, 0.08);
+}
+
+/* EL RECORRIDO (captacion): tres pantallas seguidas, de la busqueda al
+   CRM. Es el servicio entero en una frase visual: que te encuentren,
+   que te escriban, que no se pierda. */
+.recorrido {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    /* Las tres al mismo alto: centradas, cada una quedaba a una altura
+       distinta y se leian como tarjetas sueltas, no como un recorrido. */
+    align-items: stretch;
+    gap: var(--space-4);
+}
+.recorrido .pz { max-width: none; }
+.recorrido-flecha {
+    align-self: center;
+    color: var(--cobalt-600);
+    font-size: 1.4rem;
+    line-height: 1;
+}
+.rc-paso {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    color: var(--cobalt-700);
+    margin-bottom: var(--space-3);
+}
+/* 1 · Google */
+.rc-busca {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: 8px 12px;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-pill);
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+    background: var(--bg);
+    margin-bottom: var(--space-3);
+}
+.rc-busca svg { width: 14px; height: 14px; stroke: var(--ink-mid); flex-shrink: 0; }
+.rc-res {
+    padding: var(--space-2) 0;
+    border-top: 1px solid var(--line);
+    font-size: 0.78rem;
+    color: var(--ink-mid);
+}
+.rc-res strong { display: block; font-size: 0.86rem; color: var(--ink); font-weight: 600; }
+.rc-res.es-tuyo {
+    margin: 0 calc(var(--space-2) * -1);
+    padding: var(--space-2);
+    border: 1px solid var(--cobalt-border);
+    border-radius: var(--radius-sm);
+    background: var(--cobalt-tint);
+}
+.rc-res.es-tuyo strong { color: var(--cobalt-700); }
+/* 2 · La web */
+.rc-web-barra {
+    display: flex;
+    gap: 5px;
+    margin-bottom: var(--space-3);
+}
+.rc-web-barra i {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--line-strong);
+}
+.rc-web-h {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    line-height: 1.2;
+    font-weight: 500;
+    margin-bottom: var(--space-2);
+}
+.rc-web-p { font-size: 0.76rem; color: var(--ink-mid); margin-bottom: var(--space-3); }
+.rc-web-campo {
+    height: 26px;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-sm);
+    background: var(--bg);
+    margin-bottom: var(--space-2);
+}
+.rc-web-btn {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: var(--radius-sm);
+    background: var(--ink);
+    color: var(--bg);
+    font-size: 0.74rem;
+    font-weight: 600;
+}
+/* 3 · El CRM */
+.rc-lead {
+    padding: var(--space-3);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    background: var(--bg);
+    margin-bottom: var(--space-3);
+}
+.rc-lead strong { display: block; font-size: 0.86rem; }
+.rc-lead span { font-size: 0.74rem; color: var(--ink-mid); }
+.rc-etiqueta {
+    display: inline-block;
+    margin-top: var(--space-2);
+    padding: 2px 8px;
+    border-radius: var(--radius-pill);
+    background: var(--verde-bg);
+    color: var(--verde);
+    font-size: 0.68rem;
+    font-weight: 700;
+}
+.rc-tarea {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: 0.76rem;
+    color: var(--ink-soft);
+}
+.rc-tarea::before {
+    content: '';
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--cobalt-500);
+    flex-shrink: 0;
+}
+
+/* ── PIEZAS DEL RIEL ────────────────────────────────────────────────
+   Una por paso, cada una con su forma: lista, conversacion, aviso.
+   Si las tres fueran la misma tarjeta se leerian como una lista. */
+
+/* Lista con estado (fuentes del agente, herramientas conectadas...) */
+.pz-lista { list-style: none; margin: 0; padding: 0; }
+.pz-lista li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding: var(--space-2) 0;
+    border-top: 1px solid var(--line);
+    font-size: 0.84rem;
+    color: var(--ink-soft);
+}
+.pz-lista li span:last-child {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--verde);
+    white-space: nowrap;
+}
+.pz-lista li.pendiente span:last-child { color: var(--ambar); }
+
+/* Conversacion */
+.pz-chat { display: flex; flex-direction: column; gap: var(--space-2); }
+.burbuja {
+    max-width: 86%;
+    padding: 8px 12px;
+    border-radius: 14px;
+    font-size: 0.82rem;
+    line-height: 1.4;
+}
+.burbuja.cliente {
+    align-self: flex-start;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-bottom-left-radius: 4px;
+    color: var(--ink);
+}
+.burbuja.agente {
+    align-self: flex-end;
+    background: var(--cobalt-tint);
+    border: 1px solid var(--cobalt-border);
+    border-bottom-right-radius: 4px;
+    color: var(--ink);
+}
+/* El aviso de "soy una IA": lo que obliga el art. 50 del Reglamento,
+   dibujado DENTRO de la conversacion de ejemplo. */
+.burbuja-nota {
+    align-self: center;
+    font-size: 0.68rem;
+    color: var(--ink-mid);
+    letter-spacing: 0.02em;
+}
+
+/* Aviso / notificacion */
+.pz-aviso {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--space-3);
+    align-items: start;
+}
+.pz-aviso + .pz-aviso {
+    margin-top: var(--space-3);
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--line);
+}
+.pz-aviso-ic {
+    width: 32px; height: 32px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--cobalt-tint);
+    border: 1px solid var(--cobalt-border);
+}
+.pz-aviso-ic svg { width: 16px; height: 16px; stroke: var(--cobalt-600); fill: none; stroke-width: 2; }
+.pz-aviso strong { display: block; font-size: 0.84rem; margin-bottom: 2px; }
+.pz-aviso span { font-size: 0.78rem; color: var(--ink-mid); line-height: 1.4; }
+
+/* Antes / despues de un proceso (automatizacion) */
+.pz-pasos { list-style: none; margin: 0; padding: 0; counter-reset: pzp; }
+.pz-pasos li {
+    counter-increment: pzp;
+    display: grid;
+    grid-template-columns: 22px 1fr auto;
+    gap: var(--space-2);
+    align-items: baseline;
+    padding: var(--space-2) 0;
+    border-top: 1px solid var(--line);
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+}
+.pz-pasos li::before {
+    content: counter(pzp);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--ink-mid);
+}
+.pz-pasos li em {
+    font-style: normal;
+    font-size: 0.7rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+.pz-pasos li em.mano { color: var(--rojo); }
+.pz-pasos li em.solo { color: var(--verde); }
+
+/* ── CONTRASTE (chatbot vs agente, a mano vs automatico) ─────────── */
+.contraste {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+.contraste-col {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 32px 30px;
+}
+.contraste-col.bien { border-color: var(--cobalt-border); box-shadow: 0 20px 45px -28px rgba(26, 29, 35, 0.18); }
+.contraste-col h3 {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 400;
+    margin-bottom: 18px;
+    color: var(--ink);
+}
+.contraste-col.mal h3 { color: var(--ink-mid); }
+.contraste-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.contraste-col li {
+    position: relative;
+    padding-left: 26px;
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: var(--ink-soft);
+}
+.contraste-col.mal li::before { content: '×'; position: absolute; left: 0; color: var(--ink-decor); font-weight: 700; font-size: 1.1rem; line-height: 1.3; }
+.contraste-col.bien li::before { content: '✓'; position: absolute; left: 0; color: var(--cobalt-600); font-weight: 700; }
+
+/* ── EL CASO REAL ───────────────────────────────────────────────────
+   Tres pasos (problema, solucion, resultado) como en la home, y a la
+   derecha lo que cambio. Solo hechos que el cliente puede reconocer:
+   sin cifras que no esten medidas. */
+.caso {
+    max-width: var(--container-narrow);
+    margin: 0 auto;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: 0 30px 60px -40px rgba(26, 29, 35, 0.25);
+}
+.caso-cab {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding: var(--space-5) var(--space-6);
+    border-bottom: 1px solid var(--line);
+}
+.caso-cab strong { font-size: 1.05rem; font-weight: 600; }
+.caso-cab span {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--cobalt-700);
+}
+.caso-pasos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+.caso-paso {
+    padding: var(--space-6);
+}
+.caso-paso + .caso-paso { border-left: 1px solid var(--line); }
+.caso-paso.resultado { background: var(--cobalt-tint); }
+.caso-paso-label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    color: var(--ink-mid);
+    margin-bottom: var(--space-3);
+}
+.caso-paso.resultado .caso-paso-label { color: var(--cobalt-700); }
+.caso-paso h3 {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.25;
+    margin-bottom: var(--space-2);
+    color: var(--ink);
+}
+.caso-paso p { font-size: 0.92rem; color: var(--ink-soft); font-weight: 300; line-height: 1.55; }
+
+/* ── GARANTIAS (agentes) ─────────────────────────────────────────── */
+.garantias-srv {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+.garantia-srv {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 30px 26px;
+}
+.garantia-srv .ic {
+    width: 44px; height: 44px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--cobalt-tint); border: 1px solid var(--cobalt-border);
+    margin-bottom: 18px;
+}
+.garantia-srv .ic svg { width: 21px; height: 21px; stroke: var(--cobalt-600); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.garantia-srv h3 { font-family: var(--font-body); font-size: 1.05rem; font-weight: 600; margin-bottom: 10px; color: var(--ink); }
+.garantia-srv p { font-size: 0.92rem; color: var(--ink-soft); font-weight: 300; }
+
+/* ── CANALES DE CADA TIPO DE AGENTE ─────────────────────────────────
+   Donde trabaja ese agente, en fichas pequenas al pie de su tarjeta:
+   es lo que distingue a un setter de Instagram de un agente de la web
+   sin tener que leer el parrafo. */
+.area .canales {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 14px;
+}
+.canales span {
+    padding: 3px 10px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--line-strong);
+    font-size: 0.74rem;
+    font-weight: 500;
+    color: var(--ink-soft);
+}
+
+/* ── LAS 4R (automatizacion) ─────────────────────────────────────────
+   Cuatro tarjetas con una R grande: la regla se recuerda por la letra
+   repetida, asi que la letra manda y el texto es corto. Debajo, en una
+   caja aparte y en gris, lo que NO se automatiza: es la otra mitad de
+   la regla, no una nota al pie. */
+.cuatro-r {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+}
+.r {
+    position: relative;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 26px 22px 24px;
+}
+.r-letra {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 3.4rem;
+    font-weight: 500;
+    line-height: 1;
+    color: var(--cobalt-600);
+    margin-bottom: 14px;
+}
+.r h3 {
+    font-family: var(--font-body);
+    font-size: 1.08rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 8px;
+}
+.r p { font-size: 0.92rem; line-height: 1.55; color: var(--ink-soft); font-weight: 300; }
+.r p strong { color: var(--ink); font-weight: 600; }
+
+.no-auto {
+    margin-top: 22px;
+    padding: 26px 28px;
+    border-radius: var(--radius-lg);
+    background: var(--bg-alt);
+    border: 1px solid var(--line);
+}
+.no-auto-t {
+    display: block;
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+    margin-bottom: 14px;
+}
+.no-auto ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+}
+.no-auto li {
+    position: relative;
+    padding-left: 22px;
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    font-weight: 300;
+}
+.no-auto li::before { content: '×'; position: absolute; left: 0; top: -1px; font-size: 1.1rem; font-weight: 700; color: var(--ink-mid); }
+.no-auto li strong { color: var(--ink); font-weight: 600; }
+.no-auto-mas { margin-top: 16px; font-size: 0.88rem; color: var(--ink-soft); }
+.no-auto-mas a { color: var(--cobalt-700); text-decoration: underline; text-underline-offset: 2px; }
+@media (max-width: 900px) {
+    .cuatro-r { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .r { padding: 20px 18px; }
+    .r-letra { font-size: 2.6rem; margin-bottom: 10px; }
+    .no-auto { padding: 22px 20px; }
+    .no-auto ul { grid-template-columns: 1fr; gap: 14px; }
+}
+
+/* ── LAS TRES ETAPAS DE LA WEB (diseno web) ──────────────────────────
+   Una linea horizontal une las tres etapas con un punto por etapa: es
+   una evolucion, no tres opciones sueltas. La de hoy lleva el acento
+   (punto relleno y filo terracota): es donde esta la pagina empujando.
+   En movil la linea pasa a vertical, a la izquierda. */
+.eras {
+    list-style: none;
+    margin: 0 auto;
+    padding: 28px 0 0;
+    max-width: var(--container-narrow);
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+    position: relative;
+}
+.eras::before {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: 26px;
+    right: 26px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--line-strong) 0%, var(--line-strong) 55%, var(--cobalt-500) 100%);
+}
+.era {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 26px 24px 22px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+}
+.era::before {
+    content: '';
+    position: absolute;
+    top: -28px;
+    left: 20px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2px solid var(--line-strong);
+}
+.era--hoy {
+    border-color: var(--cobalt-500);
+    box-shadow: 0 24px 50px -30px rgba(234, 130, 88, 0.45);
+}
+.era--hoy::before {
+    background: var(--cobalt-500);
+    border-color: var(--cobalt-500);
+    box-shadow: 0 0 0 5px var(--cobalt-glow);
+}
+.era-cuando {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+    margin-bottom: 10px;
+}
+.era--hoy .era-cuando { color: var(--cobalt-700); }
+.era h3 {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 10px;
+}
+.era p { font-size: 0.93rem; line-height: 1.55; color: var(--ink-soft); font-weight: 300; margin-bottom: 18px; }
+.era-paquete {
+    margin-top: auto;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+    font-size: 0.86rem;
+    color: var(--ink-mid);
+    text-decoration: none;
+}
+.era-paquete strong { color: var(--cobalt-700); font-weight: 700; }
+.era-paquete:hover strong { text-decoration: underline; }
+
+@media (max-width: 900px) {
+    .eras { grid-template-columns: 1fr; padding: 0 0 0 30px; gap: 16px; }
+    .eras::before {
+        top: 8px; bottom: 8px; left: 6px; right: auto;
+        width: 2px; height: auto;
+        background: linear-gradient(180deg, var(--line-strong) 0%, var(--line-strong) 55%, var(--cobalt-500) 100%);
+    }
+    .era::before { top: 24px; left: -31px; }
+}
+
+/* ── LOS PAQUETES (diseno web) ───────────────────────────────────────
+   [26-sep-2026 v2] Formato de la ficha publica de Alberto: nombre,
+   para que sirve, precio y una lista acumulativa ("Todo lo incluido en
+   Visible" + lo nuevo). El mantenimiento va AL PIE, empujado con
+   margin-top:auto, para que quede a la misma altura en las tres aunque
+   las listas midan distinto.
+   "Recomendada" en Conectada porque lo marca la propia ficha. */
+.paquetes {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+    max-width: var(--container-narrow);
+    margin: 0 auto;
+    align-items: stretch;
+}
+.paquete {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 30px 26px 26px;
+    box-shadow: 0 24px 50px -36px rgba(26, 29, 35, 0.25);
+}
+.paquete--recomendada {
+    border-color: var(--cobalt-500);
+    box-shadow: 0 0 0 1px var(--cobalt-500), 0 28px 56px -30px rgba(234, 130, 88, 0.55);
+}
+.paquete-badge {
+    position: absolute;
+    top: -12px;
+    left: 26px;
+    padding: 4px 12px;
+    border-radius: var(--radius-pill);
+    background: var(--cobalt-600);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+.paquete h3 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 8px;
+}
+.paquete-para {
+    font-size: 0.92rem;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    font-weight: 300;
+    margin: 0 0 var(--space-5);
+    /* Tres lineas reservadas: con dos en una tarjeta y tres en otra, los
+       precios quedaban a alturas distintas y no se comparaban de un
+       vistazo. En movil (una columna) no hace falta. */
+    min-height: 4.5em;
+}
+@media (max-width: 900px) { .paquete-para { min-height: 0; } }
+.paquete-precio {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    margin: 0 0 var(--space-5);
+    padding-bottom: var(--space-5);
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+}
+.paquete-precio span,
+.paquete-precio small { font-size: 0.85rem; color: var(--ink-mid); }
+.paquete-precio strong {
+    font-family: var(--font-display);
+    font-size: 2.3rem;
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1;
+}
+.paquete-lista {
+    list-style: none;
+    margin: 0 0 var(--space-5);
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.paquete-lista li {
+    position: relative;
+    padding-left: 24px;
+    font-size: 0.9rem;
+    line-height: 1.45;
+    color: var(--ink-soft);
+}
+.paquete-lista li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--cobalt-600);
+    font-weight: 700;
+}
+/* "Todo lo incluido en...": el escalon, no una caracteristica mas. */
+.paquete-lista li.todo { color: var(--ink); font-weight: 600; }
+.paquete-lista li.todo::before { content: '+'; }
+.paquete-cuota {
+    margin-top: auto;
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--line);
+    font-size: 0.84rem;
+    line-height: 1.5;
+    color: var(--ink-mid);
+}
+.paquetes-notas {
+    max-width: var(--container-narrow);
+    margin: var(--space-6) auto 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+.paquetes-notas p { font-size: 0.88rem; line-height: 1.55; color: var(--ink-soft); font-weight: 300; }
+.paquetes-notas strong { color: var(--ink); font-weight: 600; }
+
+/* ── LOS OTROS SERVICIOS ─────────────────────────────────────────────
+   Enlaces cruzados al final: quien llega por "agentes de ia" y resulta
+   que lo suyo es la web, no tiene que volver a la home para saberlo. */
+.otros {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    max-width: var(--container-narrow);
+    margin: 0 auto;
+}
+.otro {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--bg);
+    text-decoration: none;
+    color: var(--ink);
+    transition: border-color var(--motion-base) var(--ease-standard),
+                transform var(--motion-base) var(--ease-standard);
+}
+.otro:hover { border-color: var(--cobalt-border); transform: translateY(-3px); }
+.otro small {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--cobalt-700);
+}
+.otro strong { font-size: 1.05rem; font-weight: 600; }
+.otro span { font-size: 0.88rem; color: var(--ink-soft); font-weight: 300; }
+.otro em { font-style: normal; margin-top: auto; padding-top: 8px; font-size: 0.85rem; font-weight: 600; color: var(--cobalt-700); }
+
+/* Enlaces dentro del texto: el tono de enlace sobre claro del sitio
+   (--cobalt-700, 6.7), no el azul por defecto del navegador. */
+.paquetes-notas a, .area p a, .quien-col a, .faq .body a {
+    color: var(--cobalt-700);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+/* ── RESPONSIVE ───────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+    #como-funciona { --riel: 12px; }
+    .recorrido {
+        grid-template-columns: 1fr;
+        gap: var(--space-2);
+    }
+    .recorrido .pz { min-height: 0; }
+    .recorrido-flecha { justify-self: center; transform: rotate(90deg); }
+    .contraste, .garantias-srv, .otros, .paquetes, .paquetes-notas { grid-template-columns: 1fr; }
+    .paquetes-notas { gap: var(--space-3); }
+    .caso-pasos { grid-template-columns: 1fr; }
+    .caso-paso + .caso-paso { border-left: none; border-top: 1px solid var(--line); }
+    .caso-cab { padding: var(--space-4) var(--space-5); flex-direction: column; align-items: flex-start; gap: 4px; }
+    .caso-paso { padding: var(--space-5); }
+    .pz { max-width: none; }
+    /* En movil el video sirve la version 4:3 (<source media>). */
+    .escena-video { aspect-ratio: 600 / 450; }
+
+    /* MOVIL MAS CORTO. Medido a 390px: la pagina salia a 12.200px
+       (unas 14 pantallas), y 2.100 de ellos eran solo el relleno de
+       120px arriba y abajo de cada seccion (.section en base.css). */
+    .section { padding: var(--space-8) 0; }
+    .sintoma, .area, .garantia-srv { padding: 22px 20px; }
+    .otro { padding: 18px 20px; }
+
+    /* El recorrido del hero, en carrusel: apilado eran tres pantallas
+       seguidas antes de llegar al primer titular. Asi se ve la primera
+       entera y asoma la segunda, que es lo que invita a deslizar. */
+    .recorrido {
+        display: flex;
+        align-items: stretch;
+        gap: var(--space-3);
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        margin: 0 calc(var(--space-5) * -1);
+        padding: 4px var(--space-5) var(--space-5);
+        scrollbar-width: none;
+    }
+    .recorrido::-webkit-scrollbar { display: none; }
+    .recorrido .pz { flex: 0 0 82%; scroll-snap-align: center; }
+    .recorrido-flecha { display: none; }
+}

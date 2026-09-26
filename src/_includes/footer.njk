@@ -67,7 +67,7 @@
                         control" apuntaban LOS TRES a #soluciones: el
                         visitante pulsaba tres cosas distintas y llegaba al
                         mismo sitio. Ahora cada uno lleva a SU pestana
-                        (#tab-agentes, #tab-automatizaciones, #tab-control),
+                        (hoy #tab-captar, #tab-vender, #tab-ahorrar),
                         que ya existian con id propio pero nadie enlazaba.
                       · "El Metodo" era un cajon de sastre: metia el Blog y
                         Sobre Mi, que no son metodo.
@@ -87,16 +87,18 @@
                     <div class="footer-links-col">
                         <h4 class="footer-links-title">Servicios</h4>
                         <ul class="footer-links-list">
-                            <li><a href="{{ raizPie }}#tab-agentes">Agentes de IA</a></li>
-                            <li><a href="{{ raizPie }}#tab-automatizaciones">Automatizaciones</a></li>
-                            <li><a href="{{ raizPie }}#tab-control">Sistemas de control</a></li>
+                            {#- [26-sep-2026] Cada servicio a SU pagina, ya
+                                no a su pestaña de la home. -#}
+                            <li><a href="/diseno-web-pymes/">Diseño web y captación</a></li>
+                            <li><a href="/agentes-ia/">Agentes de IA</a></li>
+                            <li><a href="/automatizacion-procesos/">Automatización de procesos</a></li>
                             <li><a href="{{ raizPie }}#caso-real">Casos reales</a></li>
                         </ul>
                     </div>
                     <div class="footer-links-col">
                         <h4 class="footer-links-title">Sobre mí</h4>
                         <ul class="footer-links-list">
-                            <li><a href="{{ footerDai360Href | default("/diagnostico-operativo/") }}">Diagnóstico DAI360</a></li>
+                            <li><a href="{{ footerDai360Href | default("/diagnostico-operativo/") }}">Consultoría DAI360</a></li>
                             <li><a href="{{ raizPie }}#como-trabajo">Metodología</a></li>
                             <li><a href="{{ raizPie }}#sobre-mi">Sobre Mí</a></li>
 {% if footerBlog != false %}                            <li><a href="{{ footerBlogHref | default("/blog/") }}">Blog</a></li>

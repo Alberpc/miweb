@@ -17,6 +17,13 @@
 {%- if cssArchivo %}
     <link rel="stylesheet" href="/css/{{ cssArchivo }}.css?v={{ site.cssVersion }}">
 {%- endif %}
+{#- [26-sep-2026] cssExtra: un segundo archivo encima del primero. Lo usan
+    las paginas de servicio: heredan todo el sistema de
+    diagnostico-operativo.css (hero claro, riel, para quien, FAQ, cierre)
+    y ponen solo lo suyo en servicio.css, en vez de copiar 600 lineas. -#}
+{%- if cssExtra %}
+    <link rel="stylesheet" href="/css/{{ cssExtra }}.css?v={{ site.cssVersion }}">
+{%- endif %}
 {%- if cssPagina %}
     <style>
 {{ cssPagina | safe }}

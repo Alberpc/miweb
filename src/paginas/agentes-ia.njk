@@ -1,0 +1,394 @@
+---
+layout: pagina.njk
+paginaActual: servicios
+permalink: "/agentes-ia/index.html"
+title: "Agentes de IA para empresas: ventas, soporte y citas | Alber Cabrera"
+description: "Agentes de IA para empresas: cualifican y venden en Instagram y WhatsApp, atienden a tus clientes en la web y responden a tu equipo con tus documentos."
+slug: "agentes-ia"
+ogType: "website"
+ogTitle: "Agentes de IA que atienden a tus clientes cuando tú no puedes"
+ogDescription: "Agentes de ventas en Instagram y WhatsApp, de atención al cliente, de citas y para tu equipo. Con tus datos y cumpliendo la ley europea de IA."
+twitterTitle: "Agentes de IA para empresas"
+twitterDescription: "Venden, atienden, agendan y responden a tu equipo, con los datos de tu negocio."
+ogImage: "https://albercabrera.com/assets/img/og-image.jpg"
+ogImageSize: false
+robots: "index, follow"
+canonical: "https://albercabrera.com/agentes-ia/"
+navCtaHref: "#cta"
+navCtaTexto: "Pide tu llamada"
+pieSinAurora: true
+usaAurora: true
+usaRielEntregas: true
+usaFaq: true
+heroEnBloque: true
+cssArchivo: "diagnostico-operativo"
+cssExtra: "servicio"
+schemas:
+  - |
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "Agentes de IA para empresas",
+      "serviceType": "Agentes de inteligencia artificial para atención al cliente, cualificación de contactos y reserva de citas",
+      "url": "https://albercabrera.com/agentes-ia/",
+      "description": "Agentes de IA para empresas: agentes de ventas o setters que cualifican en Instagram y WhatsApp, agentes de atención al cliente en la web, agentes de citas y seguimiento, y agentes internos que responden con la documentación de la empresa (RAG). Cumplen el artículo 50 del Reglamento europeo de IA.",
+      "provider": {
+        "@type": "Person",
+        "name": "Alberto Pérez Cabrera",
+        "email": "alberto@albercabrera.com",
+        "url": "https://albercabrera.com/"
+      },
+      "areaServed": { "@type": "Country", "name": "España" },
+      "audience": { "@type": "BusinessAudience", "name": "Pymes y negocios de servicios que reciben consultas de clientes" }
+    }
+  - |
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://albercabrera.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Servicios", "item": "https://albercabrera.com/#soluciones" },
+        { "@type": "ListItem", "position": 3, "name": "Agentes de IA" }
+      ]
+    }
+  - |
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "¿Qué diferencia hay entre un agente de IA y un chatbot?", "acceptedAnswer": { "@type": "Answer", "text": "Un chatbot de los de siempre sigue un guion: si la pregunta no está en su lista, se pierde. Un agente de IA entiende lo que le preguntan aunque se lo digan con otras palabras, trabaja con los datos reales de tu negocio (precios, horarios, agenda) y hace la tarea entera: contesta, pregunta lo que falta y deja la cita reservada." } },
+        { "@type": "Question", "name": "¿Y si el agente se equivoca o no sabe contestar?", "acceptedAnswer": { "@type": "Answer", "text": "Se le define qué puede responder y qué no. Si la pregunta se sale de lo que sabe, si es una queja o si hay mucho dinero de por medio, no improvisa: te pasa la conversación. Las primeras semanas reviso contigo sus respuestas y se ajusta lo que haga falta." } },
+        { "@type": "Question", "name": "¿Es legal usar un agente de IA con mis clientes?", "acceptedAnswer": { "@type": "Answer", "text": "Sí, cumpliendo el Reglamento europeo de IA. Desde agosto de 2026 obliga a que la persona sepa que habla con una IA y a darle salida a un humano: los agentes que monto lo hacen desde el primer mensaje. Lo que no monto son usos de alto riesgo, como filtrar currículums o decidir sobre créditos." } },
+        { "@type": "Question", "name": "¿Cuánto cuesta un agente de IA?", "acceptedAnswer": { "@type": "Answer", "text": "Depende de qué tiene que hacer, por cuántos canales, cuántas conversaciones y con qué herramientas se conecta: no cuesta lo mismo un agente de preguntas frecuentes que un setter que cualifica y agenda en Instagram. Hay un montaje inicial y una cuota mensual por mantenerlo. Te doy los números cerrados en la llamada. Si además necesitas web, el paquete web Autónoma ya incluye uno." } },
+        { "@type": "Question", "name": "¿Qué es un agente con RAG?", "acceptedAnswer": { "@type": "Answer", "text": "RAG significa que el agente, antes de responder, busca en tus propios documentos: procedimientos, catálogo, tarifas, contratos. Así contesta con la información de tu empresa y no con lo que sabe de internet, y puede decir de dónde lo ha sacado." } },
+        { "@type": "Question", "name": "¿Cuánto se tarda en tenerlo funcionando?", "acceptedAnswer": { "@type": "Answer", "text": "Unas semanas. Se empieza por un canal y un trabajo, por ejemplo contestar y agendar en WhatsApp, y se amplía cuando ese funciona." } },
+        { "@type": "Question", "name": "¿Funciona con mi WhatsApp?", "acceptedAnswer": { "@type": "Answer", "text": "Se conecta a través de la API oficial de WhatsApp Business, que es la vía que WhatsApp permite para esto. En la llamada vemos cómo encaja con el número que ya usas." } }
+      ]
+    }
+---
+    <!-- HERO -->
+    {#- [26-sep-2026] Pagina de servicio. Misma familia que
+        /diagnostico-operativo/: hero claro con el degradado y, donde alli
+        va el informe, aqui va el video del agente (el mismo de la home).
+        Palabra clave: "agentes de ia" (5.000 busquedas/mes, Keyword
+        Planner sep-2026); de apoyo "chatbot para empresas".
+        [26-sep-2026 v2] Alberto: se quedaba en "un bot de WhatsApp", que es
+        casi un chatbot. Ahora se abre por TIPOS de agente (ventas/setter en
+        Instagram y WhatsApp, atencion al cliente, citas y seguimiento, RAG
+        interno). Apoyos: "chatbot para instagram" (poco volumen pero la puja
+        mas cara del listado) y "chatbot para ventas". Sin precio: depende de
+        cada empresa (ver CLAUDE.md raiz). -#}
+    <header class="hero">
+        <div class="container">
+            <div class="hero-texto">
+                <h1>Agentes de IA que atienden a tus clientes <span class="hl">cuando tú no puedes.</span></h1>
+                <p class="sub">Cualifican y venden en Instagram y WhatsApp, atienden a tus clientes en la web y responden a tu equipo con tus documentos: agentes de IA para empresas que trabajan con los datos de tu negocio. Tú te quedas con las conversaciones que importan.</p>
+                <div class="hero-ctas">
+                    <a href="#cta" class="btn-main">Pide tu llamada de 20 minutos &rarr;</a>
+                    <a href="#como-funciona" class="link-soft">Ver cómo funciona &darr;</a>
+                </div>
+            </div>
+            <div class="escena">
+                <video class="escena-video" width="800" height="480"
+                       autoplay muted loop playsinline preload="metadata"
+                       aria-label="Un cliente escribe por WhatsApp, la web o Instagram; el agente responde, crea la ficha en el CRM y confirma la cita.">
+                    <source media="(max-width: 768px)" src="/assets/video/pilar-agente-v.mp4" type="video/mp4">
+                    <source src="/assets/video/pilar-agente.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </header>
+
+    <!-- ¿TE SUENA? -->
+    <section class="section" id="te-suena">
+        <div class="container">
+            <div class="s-head reveal">
+                <span class="s-label">¿TE SUENA?</span>
+                <h2 class="s-title">Te escriben más de lo que puedes contestar.</h2>
+                <p class="s-sub">Y cada mensaje que se queda sin respuesta es alguien que acaba en otro sitio.</p>
+            </div>
+            <div class="sintomas">
+                <div class="sintoma reveal"><strong>«Contesto el WhatsApp hasta en la cena»</strong>Precios, horarios, disponibilidad: las mismas diez preguntas, todos los días, a cualquier hora.</div>
+                <div class="sintoma reveal"><strong>«Por la mañana ya no están»</strong>Te escriben a las once de la noche. Cuando contestas a las nueve, ya han pedido cita en otro sitio.</div>
+                <div class="sintoma reveal"><strong>«Todo pasa por mí»</strong>Cómo se hace esto, qué le digo a este cliente, cuánto cobramos por aquello. Tu equipo no avanza sin preguntarte.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NO ES UN CHATBOT -->
+    <section class="section">
+        <div class="container">
+            <div class="s-head center reveal">
+                <span class="s-label">NO ES UN CHATBOT</span>
+                <h2 class="s-title">Un chatbot contesta. Un agente resuelve.</h2>
+            </div>
+            <div class="contraste">
+                <div class="contraste-col mal reveal">
+                    <h3>El chatbot de siempre</h3>
+                    <ul>
+                        <li>Respuestas enlatadas que no salen del guion</li>
+                        <li>Si la pregunta no está en su lista, se pierde</li>
+                        <li>No sabe nada de tu agenda ni de tus precios</li>
+                        <li>Acaba en «llame usted en horario de oficina»</li>
+                    </ul>
+                </div>
+                <div class="contraste-col bien reveal">
+                    <h3>Un agente de IA</h3>
+                    <ul>
+                        <li>Entiende lo que le preguntan, lo digan como lo digan</li>
+                        <li>Trabaja con tus precios, horarios y servicios reales</li>
+                        <li>Consulta tu agenda y deja la cita reservada</li>
+                        <li>Si no sabe o no debe contestar, te pasa la conversación</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- QUÉ HACE -->
+    <section class="section">
+        <div class="container">
+            <div class="s-head reveal">
+                <span class="s-label">TIPOS DE AGENTES</span>
+                <h2 class="s-title">Un agente de IA para cada trabajo.</h2>
+                <p class="s-sub">No es un bot que vale para todo. Cada agente hace un trabajo concreto, en el canal donde ese trabajo pasa. Se empieza por uno y se suman los demás cuando ese funciona.</p>
+            </div>
+            <div class="areas">
+                <div class="area reveal">
+                    <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg></span>
+                    <h3>Agente de ventas (setter)</h3>
+                    <p>Contesta a quien te escribe por un anuncio o una publicación, hace las preguntas que harías tú, separa al curioso del que va en serio y le agenda la llamada de venta.</p>
+                    <p class="canales"><span>Instagram</span><span>WhatsApp</span><span>Facebook</span></p>
+                </div>
+                <div class="area reveal">
+                    <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.6 8.6 0 0 1-3.8-.9L3 21l1.9-5.2a8.4 8.4 0 1 1 16.1-4.3z"/></svg></span>
+                    <h3>Agente de atención al cliente</h3>
+                    <p>Resuelve las preguntas de siempre (horarios, precios, plazos, cómo funciona) a cualquier hora, recoge los datos del que quiere algo más y pasa a una persona las quejas y los casos raros.</p>
+                    <p class="canales"><span>Tu web</span><span>WhatsApp</span><span>Email</span></p>
+                </div>
+                <div class="area reveal">
+                    <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18M9 15l2 2 4-4"/></svg></span>
+                    <h3>Agente de citas y seguimiento</h3>
+                    <p>Reserva en tu calendario, manda los recordatorios para que no falten, y vuelve a escribir a quien pidió presupuesto y se quedó a medias.</p>
+                    <p class="canales"><span>WhatsApp</span><span>Tu web</span><span>Tu agenda</span></p>
+                </div>
+                <div class="area reveal">
+                    <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg></span>
+                    <h3>Agente con tus documentos (RAG)</h3>
+                    <p>Responde buscando en los documentos de tu empresa: procedimientos, catálogo, tarifas. Tu equipo le pregunta a él y no a ti, o tus clientes consultan tu catálogo sin esperar a nadie.</p>
+                    <p class="canales"><span>Tu equipo</span><span>Tus clientes</span><span>Tus documentos</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CÓMO FUNCIONA -->
+    <section class="section" id="como-funciona">
+        <div class="container">
+            <div class="s-head reveal">
+                <span class="s-label">CÓMO FUNCIONA</span>
+                <h2 class="s-title">De cómo trabajas tú a un agente que lo hace igual.</h2>
+                <p class="s-sub">Tu parte es una conversación y revisar sus primeras respuestas. El montaje lo hago yo, en semanas, no en meses.</p>
+            </div>
+            <div class="entregas" data-riel>
+
+                <div class="entrega reveal"><span class="entrega-marca" aria-hidden="true"></span>
+                    <div class="entrega-texto">
+                        <span class="entrega-num">01</span>
+                        <h3><span class="h3-acento">Aprende tu negocio.</span>Con tus datos, no con los de internet.</h3>
+                        <p>Le doy lo que necesita para contestar como lo harías tú: tus servicios, precios, horarios, las preguntas de siempre y los casos en los que tiene que avisarte.</p>
+                    </div>
+                    <div class="entrega-viz">
+                        <div class="pz" aria-hidden="true">
+                            <div class="pz-cab">Lo que sabe el agente <small>Ejemplo</small></div>
+                            <ul class="pz-lista">
+                                <li><span>Servicios y precios</span><span>✓ Cargado</span></li>
+                                <li><span>Horarios y festivos</span><span>✓ Cargado</span></li>
+                                <li><span>Preguntas frecuentes</span><span>✓ Cargado</span></li>
+                                <li><span>Cuándo pasarte la conversación</span><span>✓ Definido</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="entrega reveal"><span class="entrega-marca" aria-hidden="true"></span>
+                    <div class="entrega-texto">
+                        <span class="entrega-num">02</span>
+                        <h3><span class="h3-acento">Atiende y resuelve.</span>Y dice que es una IA desde el primer mensaje.</h3>
+                        <p>Contesta, pregunta lo que necesita saber y deja la llamada o la cita reservada. Avisa de que es un asistente de IA, como exige la ley europea desde agosto de 2026, y nunca se hace pasar por una persona.</p>
+                    </div>
+                    <div class="entrega-viz">
+                        <div class="pz" aria-hidden="true">
+                            <div class="pz-cab">Instagram · mensaje directo <small>Ejemplo</small></div>
+                            <div class="pz-chat">
+                                <span class="burbuja-nota">Asistente de IA · puedes pedir hablar con una persona</span>
+                                <div class="burbuja cliente">Hola! Vi vuestro anuncio de reformas de cocina, ¿cuánto cuesta?</div>
+                                <div class="burbuja agente">¡Hola! Depende del tamaño y de lo que quieras cambiar. ¿Cuántos metros tiene, más o menos?</div>
+                                <div class="burbuja cliente">Unos 12, y queremos cambiarla entera</div>
+                                <div class="burbuja agente">Eso es justo lo que hacemos. ¿Te va bien una llamada con el jefe de obra el martes a las 18:00?</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="entrega reveal"><span class="entrega-marca" aria-hidden="true"></span>
+                    <div class="entrega-texto">
+                        <span class="entrega-num">03</span>
+                        <h3><span class="h3-acento">Te pasa lo importante.</span>Tú decides; él se encarga del resto.</h3>
+                        <p>Cada conversación queda en tu CRM con lo que se habló. Y cuando algo necesita a una persona, una queja, un caso raro o un cliente grande, te llega el aviso al momento.</p>
+                    </div>
+                    <div class="entrega-viz">
+                        <div class="pz" aria-hidden="true">
+                            <div class="pz-aviso">
+                                <span class="pz-aviso-ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M9 15l2 2 4-4"/></svg></span>
+                                <div><strong>Lead cualificado</strong><span>Cocina completa, 12 m² · llamada el martes a las 18:00 · guardado en el CRM</span></div>
+                            </div>
+                            <div class="pz-aviso">
+                                <span class="pz-aviso-ic"><svg viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6"/><path d="M10.5 21a1.5 1.5 0 0 0 3 0"/></svg></span>
+                                <div><strong>Te necesito</strong><span>Una empresa pide presupuesto para 12 personas. Te paso la conversación.</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- GARANTÍAS -->
+    <section class="section">
+        <div class="container">
+            <div class="s-head reveal">
+                <span class="s-label">SIN SUSTOS</span>
+                <h2 class="s-title">Legal, seguro y con tus datos en su sitio.</h2>
+            </div>
+            <div class="garantias-srv">
+                <div class="garantia-srv reveal">
+                    <span class="ic"><svg viewBox="0 0 48 48"><path d="M24 9v31M14 40h20M10 15h28"/><circle cx="24" cy="12" r="2.6"/><path d="M10 15 4.5 27h11zM38 15l-5.5 12h11z"/></svg></span>
+                    <h3>Cumple la ley europea de IA</h3>
+                    <p>Desde agosto de 2026 es obligatorio: el agente dice que es una IA y siempre deja salida a una persona. Y no se usa para nada que el reglamento prohíbe o considera de alto riesgo, como filtrar currículums.</p>
+                </div>
+                <div class="garantia-srv reveal">
+                    <span class="ic"><svg viewBox="0 0 48 48"><path d="M24 5 9 10.5v12c0 9.5 6.3 16.8 15 19.5 8.7-2.7 15-10 15-19.5v-12z"/><rect x="18.5" y="23" width="11" height="8.5" rx="1.6"/><path d="M21 23v-2.6a3 3 0 0 1 6 0V23"/></svg></span>
+                    <h3>Probado contra manipulaciones</h3>
+                    <p>Hay quien intenta engañar a estos sistemas para que se salten sus normas o suelten información. Lleva filtros a la entrada y a la salida, y lo pruebo con esos ataques antes de entregarlo.</p>
+                </div>
+                <div class="garantia-srv reveal">
+                    <span class="ic"><svg viewBox="0 0 48 48"><ellipse cx="24" cy="12" rx="14" ry="5"/><path d="M10 12v12c0 2.8 6.3 5 14 5s14-2.2 14-5V12"/><path d="M10 24v12c0 2.8 6.3 5 14 5s14-2.2 14-5V24"/></svg></span>
+                    <h3>Tus datos no entrenan a nadie</h3>
+                    <p>Se monta con APIs de pago, que no usan tu información para entrenar modelos públicos. Si trabajas con datos sensibles, se puede alojar todo en servidores europeos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PARA QUIÉN -->
+    <section class="section">
+        <div class="container">
+            <div class="s-head center reveal">
+                <span class="s-label">HONESTAMENTE</span>
+                <h2 class="s-title">Para quién es (y para quién no).</h2>
+            </div>
+            <div class="quien">
+                <div class="quien-col si reveal">
+                    <h3>Es para ti si…</h3>
+                    <ul>
+                        <li>Te escriben por WhatsApp, la web o redes y no llegas a todo.</li>
+                        <li>Repites las mismas respuestas cada día.</li>
+                        <li>Pierdes citas o ventas por contestar tarde.</li>
+                        <li>Tu equipo depende de ti para cualquier duda.</li>
+                    </ul>
+                </div>
+                <div class="quien-col no reveal">
+                    <h3>No es para ti si…</h3>
+                    <ul>
+                        <li>Todavía no te escribe casi nadie: primero hay que <a href="/diseno-web-pymes/">conseguir que te encuentren</a>.</li>
+                        <li>Quieres que decida sobre personas, como filtrar currículums: es alto riesgo según la ley europea y no lo monto.</li>
+                        <li>Buscas prescindir de tu equipo: el agente les quita lo repetitivo, no el trabajo.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="preguntas">
+        <div class="container">
+            <div class="s-head center reveal">
+                <span class="s-label">DUDAS RÁPIDAS</span>
+                <h2 class="s-title">Lo que me suelen preguntar.</h2>
+            </div>
+            <div class="faqs">
+                <div class="faq reveal">
+                    <button type="button">¿Qué diferencia hay entre un agente de IA y un chatbot?<span class="ico">+</span></button>
+                    <div class="body"><p>Un chatbot de los de siempre sigue un guion: si la pregunta no está en su lista, se pierde. Un agente de IA <strong>entiende lo que le preguntan</strong> aunque se lo digan con otras palabras, trabaja con los datos reales de tu negocio (precios, horarios, agenda) y hace la tarea entera: contesta, pregunta lo que falta y deja la cita reservada.</p></div>
+                </div>
+                <div class="faq reveal">
+                    <button type="button">¿Y si el agente se equivoca o no sabe contestar?<span class="ico">+</span></button>
+                    <div class="body"><p>Se le define qué puede responder y qué no. Si la pregunta se sale de lo que sabe, si es una queja o si hay mucho dinero de por medio, <strong>no improvisa: te pasa la conversación</strong>. Las primeras semanas reviso contigo sus respuestas y se ajusta lo que haga falta.</p></div>
+                </div>
+                <div class="faq reveal">
+                    <button type="button">¿Es legal usar un agente de IA con mis clientes?<span class="ico">+</span></button>
+                    <div class="body"><p>Sí, cumpliendo el Reglamento europeo de IA. Desde agosto de 2026 obliga a que la persona sepa que habla con una IA y a darle salida a un humano: los agentes que monto <strong>lo hacen desde el primer mensaje</strong>. Lo que no monto son usos de alto riesgo, como filtrar currículums o decidir sobre créditos. Si quieres el detalle, lo explico en <a href="/ley-ia-chatbot-negocio/">este artículo sobre la ley de IA y los chatbots</a>.</p></div>
+                </div>
+                <div class="faq reveal">
+                    <button type="button">¿Cuánto cuesta un agente de IA?<span class="ico">+</span></button>
+                    <div class="body"><p>Depende de qué tiene que hacer, por cuántos canales, cuántas conversaciones y con qué herramientas se conecta: no cuesta lo mismo un agente de preguntas frecuentes que un setter que cualifica y agenda en Instagram. Hay un montaje inicial y una cuota mensual por mantenerlo. <strong>Te doy los números cerrados en la llamada.</strong> Si además necesitas web, el paquete web <a href="/diseno-web-pymes/#paquetes">Autónoma</a> ya incluye uno.</p></div>
+                </div>
+                <div class="faq reveal">
+                    <button type="button">¿Qué es un agente con RAG?<span class="ico">+</span></button>
+                    <div class="body"><p>RAG significa que el agente, antes de responder, <strong>busca en tus propios documentos</strong>: procedimientos, catálogo, tarifas, contratos. Así contesta con la información de tu empresa y no con lo que sabe de internet, y puede decir de dónde lo ha sacado.</p></div>
+                </div>
+                <div class="faq reveal">
+                    <button type="button">¿Cuánto se tarda en tenerlo funcionando?<span class="ico">+</span></button>
+                    <div class="body"><p><strong>Unas semanas.</strong> Se empieza por un canal y un trabajo, por ejemplo contestar y agendar en WhatsApp, y se amplía cuando ese funciona.</p></div>
+                </div>
+                <div class="faq reveal">
+                    <button type="button">¿Funciona con mi WhatsApp?<span class="ico">+</span></button>
+                    <div class="body"><p>Se conecta a través de la <strong>API oficial de WhatsApp Business</strong>, que es la vía que WhatsApp permite para esto. En la llamada vemos cómo encaja con el número que ya usas.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- OTROS SERVICIOS -->
+    <section class="section">
+        <div class="container">
+            <div class="s-head center reveal">
+                <span class="s-label">OTROS SERVICIOS</span>
+                <h2 class="s-title">Por si lo tuyo va por otro lado.</h2>
+            </div>
+            <div class="otros">
+                <a class="otro reveal" href="/diseno-web-pymes/">
+                    <small>Captar clientes</small>
+                    <strong>Diseño web para pymes</strong>
+                    <span>Que te encuentren en Google y que ningún contacto se pierda.</span>
+                    <em>Ver servicio &rarr;</em>
+                </a>
+                <a class="otro reveal" href="/automatizacion-procesos/">
+                    <small>Ahorrar tiempo</small>
+                    <strong>Automatización de procesos</strong>
+                    <span>El trabajo repetitivo de dentro, hecho solo.</span>
+                    <em>Ver servicio &rarr;</em>
+                </a>
+                <a class="otro reveal" href="/diagnostico-operativo/">
+                    <small>Consultoría</small>
+                    <strong>Diagnóstico DAI360</strong>
+                    <span>Si sabes que algo falla pero no dónde.</span>
+                    <em>Ver consultoría &rarr;</em>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="cta-final inverse" id="cta">
+        <canvas class="aurora-canvas" data-alto="1" aria-hidden="true"></canvas>
+        <div class="container">
+            <div class="reveal">
+                <h2>¿Vemos qué parte de tu atención puede hacer un agente?</h2>
+                <p>Veinte minutos por videollamada. Me cuentas cómo te escriben tus clientes y te digo si un agente tiene sentido en tu caso. Si no lo tiene, también.</p>
+                <a href="/#contacto" class="btn-main">Pide tu llamada de 20 minutos &rarr;</a>
+            </div>
+        </div>
+    </section>
