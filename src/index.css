@@ -200,6 +200,12 @@ html {
     gap: var(--space-4);
 }
 
+.hero-cta-nota {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+}
+
 /* Botón con brillo de cromo líquido metálico */
 
 

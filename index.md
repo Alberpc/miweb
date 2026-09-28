@@ -6,6 +6,8 @@ No sabes por dónde empezar.
 
 Analizo dónde pierdes tiempo, clientes y dinero, y utilizo IA y automatización para eliminar esos cuellos de botella.
 
+Gratis. Si no puedo ayudarte, te lo digo.
+
 - Mafhesa
 - Top Boutique
 - Bioresina

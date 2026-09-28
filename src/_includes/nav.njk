@@ -36,7 +36,18 @@
         <div class="nav-container">
             <a href="{{ "#" if navLocal else "/" }}" class="logo"><img src="/assets/img/logo-alber-blanco.png" alt="{{ site.nombre }}"></a>
             <div class="nav-menu">
-                <a href="{{ raiz }}#soluciones" class="nav-link{% if paginaActual == "servicios" %} current{% endif %}">Servicios</a>
+                {#- [28-sep-2026] Desplegable con las 3 paginas de servicio
+                    (publicadas el 27-sep). "Servicios" sigue bajando a la
+                    seccion de la home; el panel se abre con hover y con
+                    foco (teclado). En movil van como subenlaces. -#}
+                <div class="nav-item-sub">
+                    <a href="{{ raiz }}#soluciones" class="nav-link{% if paginaActual == "servicios" %} current{% endif %}">Servicios</a>
+                    <div class="nav-sub">
+                        <a href="/diseno-web-pymes/" class="nav-sub-link">Diseño web</a>
+                        <a href="/agentes-ia/" class="nav-sub-link">Agentes de IA</a>
+                        <a href="/automatizacion-procesos/" class="nav-sub-link">Automatización de procesos</a>
+                    </div>
+                </div>
                 {#- [26-sep-2026] "Consultoria" sustituye a "Como Empezar": la
                     oferta es consultoria (DAI360) + implementacion (los
                     servicios), y "consultoria de IA" se busca; "diagnostico
@@ -56,6 +67,9 @@
         </div>
         <div class="nav-mobile" id="nav-mobile">
             <a href="{{ raiz }}#soluciones" class="nav-mobile-link">Servicios</a>
+            <a href="/diseno-web-pymes/" class="nav-mobile-link nav-mobile-sublink">Diseño web</a>
+            <a href="/agentes-ia/" class="nav-mobile-link nav-mobile-sublink">Agentes de IA</a>
+            <a href="/automatizacion-procesos/" class="nav-mobile-link nav-mobile-sublink">Automatización de procesos</a>
             <a href="/diagnostico-operativo/" class="nav-mobile-link">Consultoría</a>
             <a href="{{ raiz }}#sobre-mi" class="nav-mobile-link">Sobre Mí</a>
             <a href="{{ navBlogHref | default("/blog/") }}" class="nav-mobile-link">Blog</a>

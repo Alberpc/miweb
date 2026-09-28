@@ -212,6 +212,62 @@
     color: var(--ink);
 }
 
+/* ---- Desplegable de Servicios (solo escritorio) ----
+   El panel es siempre cristal claro, tambien sobre el hero oscuro:
+   asi los enlaces van en tinta en los dos estados de la barra.
+   El padding-top hace de puente para que el hover no se corte al
+   bajar el raton del enlace al panel. */
+.nav-item-sub {
+    position: relative;
+    display: flex; /* el enlace queda como item flex, igual que sus hermanos: sin esto bajaba 2px */
+}
+.nav-sub {
+    position: absolute;
+    top: 100%;
+    left: -16px;
+    padding-top: 14px;
+    display: flex;
+    flex-direction: column;
+    min-width: 240px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4px);
+    transition: opacity 180ms cubic-bezier(0.2, 0.8, 0.2, 1),
+                transform 180ms cubic-bezier(0.2, 0.8, 0.2, 1),
+                visibility 180ms;
+}
+.nav-sub::before {
+    content: "";
+    position: absolute;
+    inset: 14px 0 0 0;
+    z-index: -1;
+    background-color: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 20px 40px rgba(15, 31, 27, 0.12);
+}
+.nav-item-sub:hover .nav-sub,
+.nav-item-sub:focus-within .nav-sub {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+.nav-sub-link {
+    color: var(--ink-mid);
+    text-decoration: none;
+    font-size: 0.85rem;
+    padding: 10px 16px;
+    transition: color 150ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.nav-sub-link:first-child { margin-top: 8px; }
+.nav-sub-link:last-child  { margin-bottom: 8px; }
+.nav-sub-link:hover,
+.nav-sub-link:focus-visible {
+    color: var(--ink);
+}
+
 
 .nav-btn .short-text {
     display: none;
@@ -295,6 +351,12 @@
 .nav-mobile-link:hover {
     color: var(--ink);
     background: var(--bg-alt);
+}
+
+/* Las 3 paginas de servicio, colgando de "Servicios". */
+.nav-mobile-sublink {
+    font-size: 0.92rem;
+    padding: 8px 16px 8px 32px;
 }
 
 .nav-mobile-cta {
