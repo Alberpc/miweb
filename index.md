@@ -215,9 +215,9 @@ C&oacute;mo llegan tus clientes, c&oacute;mo se cierran, c&oacute;mo entregas y 
 
 3. Lo implementas t&uacute; o conmigo: el plan es tuyo
 
-**Desde 1.500 &euro;**
+**Desde 990 &euro;**
 
-Si luego implementamos las mejoras, se descuenta &iacute;ntegro del proyecto.
+Precio de lanzamiento. Si luego implementamos las mejoras, se descuenta &iacute;ntegro del proyecto.
 
 ## Preguntas que me suelen hacer.
 
@@ -239,7 +239,7 @@ Cero. Tú me cuentas qué te agobia y yo me encargo de la parte técnica. Toda l
 
 ¿Por dónde empiezo si no sé qué necesito?
 
-Por el diagnóstico operativo DAI360. Miro tu negocio a fondo, te enseño con claridad dónde pierdes tiempo y dinero, y te doy un plan de qué arreglar primero. Cuesta desde 1.500€ y, si luego implementamos las mejoras, se descuenta del proyecto.
+Por el diagnóstico operativo DAI360. Miro tu negocio a fondo, te enseño con claridad dónde pierdes tiempo y dinero, y te doy un plan de qué arreglar primero. Cuesta desde 990€ y, si luego implementamos las mejoras, se descuenta del proyecto.
 
 ¿Cuánto se tarda en dejarlo listo?
 

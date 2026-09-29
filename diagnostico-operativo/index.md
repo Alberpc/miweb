@@ -202,7 +202,7 @@ Ajustecontinuo
 
 ## Si luego lo arreglamos juntos, recuperas hasta el último euro.
 
-**1.500€** Precio cerrado, que te confirmo antes de empezar. Si tu negocio es grande lo hablamos, pero lo sabrás antes de decidir, nunca después.
+**990€** Precio de lanzamiento para los primeros clientes. Precio cerrado, que te confirmo antes de empezar. Si tu negocio es grande lo hablamos, pero lo sabrás antes de decidir, nunca después.
 
 ### Si no seguimos
 
@@ -212,7 +212,7 @@ Sabes exactamente qué falla, por qué y en qué orden arreglarlo. Lo ejecutas c
 
 ### Si lo implementamos juntos
 
-Recuperas los 1.500€
+Recuperas los 990€
 
 Lo que pagaste por el diagnóstico _se descuenta íntegro_ de la implementación.
 
@@ -244,7 +244,7 @@ Un diagnóstico operativo es un análisis completo de tu negocio **antes de toca
 
 ### ¿Cuánto cuesta el diagnóstico DAI360?
 
-Parte de **1.500€**, con precio cerrado que te confirmo antes de empezar según el tamaño de tu negocio: no es lo mismo revisar un despacho de 3 personas que una empresa de 30. Lo sabes antes de decidir, no después. Y si tras el diagnóstico decides que yo implemente las mejoras, lo que pagaste **se descuenta íntegro** del proyecto. O te llevas un plan que vale su precio, o recuperas lo que pagaste.
+Parte de **990€**, precio de lanzamiento para los primeros clientes, con precio cerrado que te confirmo antes de empezar según el tamaño de tu negocio: no es lo mismo revisar un despacho de 3 personas que una empresa de 30. Lo sabes antes de decidir, no después. Y si tras el diagnóstico decides que yo implemente las mejoras, lo que pagaste **se descuenta íntegro** del proyecto. O te llevas un plan que vale su precio, o recuperas lo que pagaste.
 
 ### ¿Cuánto tiempo me va a quitar a mí y a mi equipo?
 
