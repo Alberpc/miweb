@@ -163,11 +163,11 @@ Aquí es donde la mayoría desaparece. Un sistema con IA se desajusta solo: camb
 
 ### Cumple la ley europea de IA
 
-El Reglamento Europeo de IA obliga desde agosto de 2026. Tu agente dice que es una IA, deja salida a un humano y no hace nada de lo que el reglamento prohíbe. Sale cumpliendo, sin coste extra.
+El Reglamento Europeo de IA obliga desde agosto de 2026. Tu agente dice que es una IA y no hace nada de lo que el reglamento prohíbe. Y aunque no es obligatorio, siempre deja salida a un humano. Sale cumpliendo, sin coste extra.
 
 ### Agentes seguros
 
-Hay gente que intenta manipular estos sistemas para que se salten sus normas o suelten información. Todos mis agentes llevan filtros a la entrada y a la salida, y los pruebo con esos ataques antes de entregar.
+Hay gente que intenta manipular estos sistemas para que se salten sus normas o suelten información. Todos mis agentes llevan filtros a la entrada y a la salida, y los pruebo con esos ataques antes de entregar. Además, cada agente solo tiene acceso a lo que necesita para su trabajo, nada más.
 
 ### Tus accesos, bajo llave
 

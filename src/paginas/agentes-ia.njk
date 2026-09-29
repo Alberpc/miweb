@@ -58,7 +58,7 @@ schemas:
       "mainEntity": [
         { "@type": "Question", "name": "¿Qué diferencia hay entre un agente de IA y un chatbot?", "acceptedAnswer": { "@type": "Answer", "text": "Un chatbot de los de siempre sigue un guion: si la pregunta no está en su lista, se pierde. Un agente de IA entiende lo que le preguntan aunque se lo digan con otras palabras, trabaja con los datos reales de tu negocio (precios, horarios, agenda) y hace la tarea entera: contesta, pregunta lo que falta y deja la cita reservada." } },
         { "@type": "Question", "name": "¿Y si el agente se equivoca o no sabe contestar?", "acceptedAnswer": { "@type": "Answer", "text": "Se le define qué puede responder y qué no. Si la pregunta se sale de lo que sabe, si es una queja o si hay mucho dinero de por medio, no improvisa: te pasa la conversación. Las primeras semanas reviso contigo sus respuestas y se ajusta lo que haga falta." } },
-        { "@type": "Question", "name": "¿Es legal usar un agente de IA con mis clientes?", "acceptedAnswer": { "@type": "Answer", "text": "Sí, cumpliendo el Reglamento europeo de IA. Desde agosto de 2026 obliga a que la persona sepa que habla con una IA y a darle salida a un humano: los agentes que monto lo hacen desde el primer mensaje. Lo que no monto son usos de alto riesgo, como filtrar currículums o decidir sobre créditos." } },
+        { "@type": "Question", "name": "¿Es legal usar un agente de IA con mis clientes?", "acceptedAnswer": { "@type": "Answer", "text": "Sí, cumpliendo el Reglamento europeo de IA. Desde agosto de 2026 obliga a que la persona sepa que habla con una IA: los agentes que monto lo avisan desde el primer mensaje y, además, siempre dejan salida a un humano. Lo que no monto son usos de alto riesgo, como filtrar currículums o decidir sobre créditos." } },
         { "@type": "Question", "name": "¿Cuánto cuesta un agente de IA?", "acceptedAnswer": { "@type": "Answer", "text": "Depende de qué tiene que hacer, por cuántos canales, cuántas conversaciones y con qué herramientas se conecta: no cuesta lo mismo un agente de preguntas frecuentes que un setter que cualifica y agenda en Instagram. Hay un montaje inicial y una cuota mensual por mantenerlo. Te doy los números cerrados en la llamada. Si además necesitas web, el paquete web Autónoma ya incluye uno." } },
         { "@type": "Question", "name": "¿Qué es un agente con RAG?", "acceptedAnswer": { "@type": "Answer", "text": "RAG significa que el agente, antes de responder, busca en tus propios documentos: procedimientos, catálogo, tarifas, contratos. Así contesta con la información de tu empresa y no con lo que sabe de internet, y puede decir de dónde lo ha sacado." } },
         { "@type": "Question", "name": "¿Cuánto se tarda en tenerlo funcionando?", "acceptedAnswer": { "@type": "Answer", "text": "Unas semanas. Se empieza por un canal y un trabajo, por ejemplo contestar y agendar en WhatsApp, y se amplía cuando ese funciona." } },
@@ -266,7 +266,7 @@ schemas:
                 <div class="garantia-srv reveal">
                     <span class="ic"><svg viewBox="0 0 48 48"><path d="M24 9v31M14 40h20M10 15h28"/><circle cx="24" cy="12" r="2.6"/><path d="M10 15 4.5 27h11zM38 15l-5.5 12h11z"/></svg></span>
                     <h3>Cumple la ley europea de IA</h3>
-                    <p>Desde agosto de 2026 es obligatorio: el agente dice que es una IA y siempre deja salida a una persona. Y no se usa para nada que el reglamento prohíbe o considera de alto riesgo, como filtrar currículums.</p>
+                    <p>Desde agosto de 2026 es obligatorio que el agente diga que es una IA. Y aunque la ley no lo exige, siempre deja salida a una persona. Y no se usa para nada que el reglamento prohíbe o considera de alto riesgo, como filtrar currículums.</p>
                 </div>
                 <div class="garantia-srv reveal">
                     <span class="ic"><svg viewBox="0 0 48 48"><path d="M24 5 9 10.5v12c0 9.5 6.3 16.8 15 19.5 8.7-2.7 15-10 15-19.5v-12z"/><rect x="18.5" y="23" width="11" height="8.5" rx="1.6"/><path d="M21 23v-2.6a3 3 0 0 1 6 0V23"/></svg></span>
@@ -277,6 +277,11 @@ schemas:
                     <span class="ic"><svg viewBox="0 0 48 48"><ellipse cx="24" cy="12" rx="14" ry="5"/><path d="M10 12v12c0 2.8 6.3 5 14 5s14-2.2 14-5V12"/><path d="M10 24v12c0 2.8 6.3 5 14 5s14-2.2 14-5V24"/></svg></span>
                     <h3>Tus datos no entrenan a nadie</h3>
                     <p>Se monta con APIs de pago, que no usan tu información para entrenar modelos públicos. Si trabajas con datos sensibles, se puede alojar todo en servidores europeos.</p>
+                </div>
+                <div class="garantia-srv reveal">
+                    <span class="ic"><svg viewBox="0 0 48 48"><rect x="7" y="9" width="34" height="30" rx="3"/><path d="m17 24 5 5 9-10"/></svg></span>
+                    <h3>Solo toca lo que le dejas</h3>
+                    <p>Cada agente tiene acceso únicamente a lo que necesita para su trabajo: si atiende consultas, no ve tu facturación. Y tú decides qué hace solo y qué tiene que pasar antes por ti, como publicar una respuesta en Google o borrar un dato.</p>
                 </div>
             </div>
         </div>
@@ -329,7 +334,7 @@ schemas:
                 </div>
                 <div class="faq reveal">
                     <button type="button">¿Es legal usar un agente de IA con mis clientes?<span class="ico">+</span></button>
-                    <div class="body"><p>Sí, cumpliendo el Reglamento europeo de IA. Desde agosto de 2026 obliga a que la persona sepa que habla con una IA y a darle salida a un humano: los agentes que monto <strong>lo hacen desde el primer mensaje</strong>. Lo que no monto son usos de alto riesgo, como filtrar currículums o decidir sobre créditos. Si quieres el detalle, lo explico en <a href="/ley-ia-chatbot-negocio/">este artículo sobre la ley de IA y los chatbots</a>.</p></div>
+                    <div class="body"><p>Sí, cumpliendo el Reglamento europeo de IA. Desde agosto de 2026 obliga a que la persona sepa que habla con una IA: los agentes que monto <strong>lo avisan desde el primer mensaje</strong> y, además, siempre dejan salida a un humano. Lo que no monto son usos de alto riesgo, como filtrar currículums o decidir sobre créditos. Si quieres el detalle, lo explico en <a href="/ley-ia-chatbot-negocio/">este artículo sobre la ley de IA y los chatbots</a>.</p></div>
                 </div>
                 <div class="faq reveal">
                     <button type="button">¿Cuánto cuesta un agente de IA?<span class="ico">+</span></button>

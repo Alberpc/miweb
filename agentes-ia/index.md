@@ -114,7 +114,7 @@ Te necesitoUna empresa pide presupuesto para 12 personas. Te paso la conversaci�
 
 ### Cumple la ley europea de IA
 
-Desde agosto de 2026 es obligatorio: el agente dice que es una IA y siempre deja salida a una persona. Y no se usa para nada que el reglamento prohíbe o considera de alto riesgo, como filtrar currículums.
+Desde agosto de 2026 es obligatorio que el agente diga que es una IA. Y aunque la ley no lo exige, siempre deja salida a una persona. Y no se usa para nada que el reglamento prohíbe o considera de alto riesgo, como filtrar currículums.
 
 ### Probado contra manipulaciones
 
@@ -123,6 +123,10 @@ Hay quien intenta engañar a estos sistemas para que se salten sus normas o suel
 ### Tus datos no entrenan a nadie
 
 Se monta con APIs de pago, que no usan tu información para entrenar modelos públicos. Si trabajas con datos sensibles, se puede alojar todo en servidores europeos.
+
+### Solo toca lo que le dejas
+
+Cada agente tiene acceso únicamente a lo que necesita para su trabajo: si atiende consultas, no ve tu facturación. Y tú decides qué hace solo y qué tiene que pasar antes por ti, como publicar una respuesta en Google o borrar un dato.
 
 ## Para quién es (y para quién no).
 
@@ -156,7 +160,7 @@ Se le define qué puede responder y qué no. Si la pregunta se sale de lo que sa
 
 ### ¿Es legal usar un agente de IA con mis clientes?
 
-Sí, cumpliendo el Reglamento europeo de IA. Desde agosto de 2026 obliga a que la persona sepa que habla con una IA y a darle salida a un humano: los agentes que monto **lo hacen desde el primer mensaje**. Lo que no monto son usos de alto riesgo, como filtrar currículums o decidir sobre créditos. Si quieres el detalle, lo explico en [este artículo sobre la ley de IA y los chatbots](/ley-ia-chatbot-negocio/).
+Sí, cumpliendo el Reglamento europeo de IA. Desde agosto de 2026 obliga a que la persona sepa que habla con una IA: los agentes que monto **lo avisan desde el primer mensaje** y, además, siempre dejan salida a un humano. Lo que no monto son usos de alto riesgo, como filtrar currículums o decidir sobre créditos. Si quieres el detalle, lo explico en [este artículo sobre la ley de IA y los chatbots](/ley-ia-chatbot-negocio/).
 
 ### ¿Cuánto cuesta un agente de IA?
 

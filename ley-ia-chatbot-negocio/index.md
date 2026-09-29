@@ -1,6 +1,6 @@
 # Ley de IA: qué debes hacer si tienes un chatbot
 
-Desde el **2 de agosto de 2026** se aplican las obligaciones de transparencia del Reglamento europeo de IA. Si tu negocio tiene un chatbot en la web o en WhatsApp, la persona que escribe tiene derecho a saber que habla con una máquina y a pedir que le atienda alguien. Se cumple cambiando tres frases.
+Desde el **2 de agosto de 2026** se aplican las obligaciones de transparencia del Reglamento europeo de IA. Si tu negocio tiene un chatbot en la web o en WhatsApp, la persona que escribe tiene derecho a saber que habla con una máquina. Se cumple cambiando tres frases.
 
 No es un plazo que venga: es uno que ya pasó hace siete semanas. Y afecta a bastantes más negocios de los que creen estar afectados, porque la mayoría asocia el Reglamento de IA con grandes tecnológicas y no con la clínica que da citas por WhatsApp.
 
@@ -8,7 +8,7 @@ La buena noticia es que la parte que ya obliga es la más barata de cumplir. No 
 
 ## ¿Qué obliga exactamente, y desde cuándo?
 
-La obligación de transparencia se resume en tres gestos: **decir que es una IA, dar salida a una persona y marcar lo que generas**. El aviso debe darse desde el inicio de la primera interacción y de forma clara y distinguible, salvo que resulte obvio.
+La obligación de transparencia se resume en dos gestos: **decir que es una IA y marcar lo que generas**. Dar salida a una persona no lo exige la ley, pero conviene: evita discutir si el aviso se entendió. El aviso debe darse desde el inicio de la primera interacción y de forma clara y distinguible, salvo que resulte obvio.
 
 Si tu negocio…Tienes que…
 
