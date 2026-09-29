@@ -116,7 +116,7 @@ desde **990 &euro;** + IVA
 
 - Analytics, Search Console y panel de visitas y contactos
 
-Mantenimiento desde 69 &euro;/mes, cuando yo me encargo del alojamiento y el cuidado de la web.
+Mantenimiento desde 69 &euro;/mes: alojamiento, que la web siga funcionando y hasta 2 cambios pequeños al mes (de hasta 30 minutos cada uno).
 
 Recomendada
 
@@ -138,7 +138,7 @@ desde **1.790 &euro;** + IVA
 
 - Panel de conversaciones, contactos y citas
 
-Mantenimiento desde 149 &euro;/mes. Las conexiones se definen en la propuesta.
+Mantenimiento desde 149 &euro;/mes: lo de Visible, que las conexiones sigan funcionando y hasta 4 cambios pequeños al mes. Las conexiones se definen en la propuesta.
 
 ### Autónoma
 
@@ -166,7 +166,7 @@ desde **2.990 &euro;** + IVA
 
 - Más automatizaciones según tu proceso, definidas en la propuesta
 
-Mantenimiento desde 299 &euro;/mes, más consumo y canales contratados. El canal, las acciones y las integraciones se definen en la propuesta.
+Mantenimiento desde 299 &euro;/mes, más consumo y canales contratados: lo de Conectada, revisión mensual del agente y hasta 4 cambios pequeños al mes. El canal, las acciones y las integraciones se definen en la propuesta.
 
 **Amplía tu proyecto según lo necesites:** páginas, blog, SEO local, optimización de Google Business, auditoría de visibilidad y conversión, imágenes y vídeos con IA, efectos visuales, procesos adicionales, integraciones o tienda online. Y si lo tuyo es un agente con más alcance, mira [agentes de IA](/agentes-ia/).
 
