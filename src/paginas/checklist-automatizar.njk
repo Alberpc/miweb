@@ -1,0 +1,291 @@
+---
+layout: pagina.njk
+permalink: "/recursos/checklist-automatizar/index.html"
+title: "¿Merece la pena automatizarlo? Checklist | Alber Cabrera"
+description: "La checklist para saber qué procesos de tu negocio automatizar y cuáles no. Pásale una tarea y te dice si está lista."
+slug: "recursos/checklist-automatizar"
+ogType: "website"
+ogTitle: "¿Merece la pena automatizarlo?"
+ogDescription: "La checklist para saber qué procesos de tu negocio automatizar y cuáles no."
+ogImage: "https://albercabrera.com/assets/img/og-image.jpg"
+ogImageSize: false
+robots: "noindex, nofollow"
+canonical: "https://albercabrera.com/recursos/checklist-automatizar/"
+navCtaHref: "/#contacto"
+navCtaTexto: "Hablemos"
+cssArchivo: "checklist-automatizar"
+jsPagina: |
+  (function () {
+    var form = document.getElementById('ck-form');
+    if (!form) return;
+    var R = [
+      { k: 'relevancia', n: 'Relevancia' },
+      { k: 'repeticion', n: 'Repetición' },
+      { k: 'reglas', n: 'Reglas claras' },
+      { k: 'retorno', n: 'Retorno' }
+    ];
+    var res = document.getElementById('ck-resultado');
+    var lista = document.getElementById('ck-lista');
+    var cuerpo = document.getElementById('ck-lista-cuerpo');
+    var CLAVE = 'checklist-automatizar-lista';
+    var filas = [];
+    try { filas = JSON.parse(localStorage.getItem(CLAVE)) || []; } catch (e) { filas = []; }
+
+    function marcado(name) { var el = form.elements[name]; return !!(el && el.checked); }
+    function nota(k) {
+      var el = form.querySelector('input[name="' + k + '"]:checked');
+      return el ? Number(el.value) : null;
+    }
+
+    function evaluar() {
+      var nombre = form.elements.proceso.value.trim();
+      var notas = R.map(function (r) { return nota(r.k); });
+      var completas = notas.every(function (n) { return n !== null; });
+      var total = completas ? notas.reduce(function (a, b) { return a + b; }, 0) : null;
+      var faltan = [];
+      if (!marcado('simplifica')) faltan.push('simplificarlo');
+      if (!marcado('valida')) faltan.push('validarlo');
+      if (!marcado('documenta')) faltan.push('documentarlo');
+      var quema = marcado('quema');
+      var marca = marcado('marca');
+      var v = { nombre: nombre, total: total, quema: quema };
+
+      if (marcado('nuevo') || marcado('variable')) {
+        v.tono = 'no';
+        v.titulo = 'Todavía no está listo';
+        v.texto = marcado('nuevo')
+          ? 'Es un proceso nuevo. Hazlo a mano unas semanas y, cuando salga igual siempre, vuelve a pasarlo por aquí.'
+          : 'Cada vez se hace de una forma. Primero ponlo de acuerdo con tu equipo: automatizar el desorden solo lo multiplica.';
+      } else if (!completas) {
+        v.tono = 'vacio';
+        v.titulo = 'Puntúa las 4R';
+        v.texto = 'Cuando le pongas nota a las cuatro, aquí te sale si merece la pena automatizarlo.';
+      } else if (total >= 7) {
+        if (faltan.length) {
+          v.tono = 'casi';
+          v.titulo = 'Buen candidato, pero prepáralo antes';
+          v.texto = 'Tiene nota de sobra (' + total + '/8), pero antes te falta ' + unir(faltan) + '. Hazlo y automatízalo.';
+        } else {
+          v.tono = 'si';
+          v.titulo = 'Automatízalo';
+          v.texto = 'Nota ' + total + '/8. Es un proceso maduro, se repite y tiene reglas claras. Aquí la automatización te devuelve horas de verdad.';
+        }
+      } else if (total >= 4) {
+        var min = Math.min.apply(null, notas);
+        var floja = R[notas.indexOf(min)].n;
+        v.tono = 'casi';
+        v.titulo = 'Todavía no';
+        v.texto = 'Nota ' + total + '/8. Lo que más le falta es «' + floja + '». ' +
+          (floja === 'Reglas claras' ? 'Vuelve al paso 2 y ordénalo primero.' : 'Mira si mejorando eso sube la nota.');
+      } else {
+        v.tono = quema ? 'casi' : 'no';
+        v.titulo = quema ? 'Nota baja, pero te quema' : 'Déjalo como está';
+        v.texto = quema
+          ? 'Nota ' + total + '/8. No ahorra muchas horas, pero quitártela de encima también es rentable. Súbela en tu lista.'
+          : 'Nota ' + total + '/8. No es mala tarea, simplemente no es para automatizar. Tu tiempo rinde más en otra.';
+      }
+      if (marca && (v.tono === 'si' || v.tono === 'casi') && completas) {
+        v.texto += ' Como un fallo se vería desde fuera, deja siempre a una persona que revise antes de que salga.';
+      }
+      if (quema && v.tono === 'si') v.texto += ' Y encima te la quitas de encima: empieza por esta.';
+      return v;
+    }
+
+    function unir(a) {
+      return a.length === 1 ? a[0] : a.slice(0, -1).join(', ') + ' y ' + a[a.length - 1];
+    }
+
+    function pintar() {
+      var v = evaluar();
+      res.className = 'ck-resultado ck-resultado--' + v.tono;
+      res.querySelector('.ck-resultado-titulo').textContent = v.titulo;
+      res.querySelector('.ck-resultado-texto').textContent = v.texto;
+      document.getElementById('ck-guardar').disabled = v.tono === 'vacio' && !marcado('nuevo');
+      return v;
+    }
+
+    function pintarLista() {
+      cuerpo.innerHTML = '';
+      filas.forEach(function (f, i) {
+        var tr = document.createElement('tr');
+        [f.nombre || 'Proceso ' + (i + 1), f.total === null ? '-' : f.total + '/8', f.titulo].forEach(function (t, j) {
+          var td = document.createElement('td');
+          td.textContent = t;
+          if (j === 2) td.className = 'ck-td-' + f.tono;
+          tr.appendChild(td);
+        });
+        cuerpo.appendChild(tr);
+      });
+      lista.hidden = filas.length === 0;
+    }
+
+    form.addEventListener('change', pintar);
+    form.addEventListener('input', pintar);
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var v = pintar();
+      filas.push({ nombre: v.nombre, total: v.total, titulo: v.titulo, tono: v.tono });
+      filas.sort(function (a, b) { return (b.total || 0) - (a.total || 0); });
+      try { localStorage.setItem(CLAVE, JSON.stringify(filas)); } catch (err) {}
+      pintarLista();
+      form.reset();
+      pintar();
+      lista.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    document.getElementById('ck-borrar').addEventListener('click', function () {
+      filas = [];
+      try { localStorage.removeItem(CLAVE); } catch (err) {}
+      pintarLista();
+    });
+    document.querySelectorAll('[data-imprimir]').forEach(function (b) {
+      b.addEventListener('click', function () { window.print(); });
+    });
+    pintar();
+    pintarLista();
+  })();
+---
+<main class="ck">
+    <header class="ck-cabecera">
+        <div class="ck-ancho">
+            <p class="ck-eyebrow">Checklist gratuita</p>
+            <h1>¿Merece la pena <span>automatizarlo?</span></h1>
+            <p class="ck-sub">La checklist para saber qué procesos de tu negocio automatizar y cuáles no.</p>
+        </div>
+    </header>
+
+    <section class="ck-ancho ck-intro">
+        <p class="ck-frase">La IA no arregla el caos. Lo acelera.</p>
+        <p>Si un proceso funciona mal y lo automatizas, no lo has mejorado: ahora falla más rápido y más veces.</p>
+        <p>Por eso esta checklist no empieza preguntando «¿dónde meto IA?». Empieza preguntando: <strong>¿qué proceso de mi negocio funciona y merece la pena multiplicar?</strong></p>
+        <p>Son 3 pasos. Coge una tarea que te coma tiempo cada semana y pásala por los tres. Al final te sale si merece la pena.</p>
+    </section>
+
+    <form id="ck-form" class="ck-ancho ck-form" autocomplete="off">
+        <label class="ck-proceso">
+            <span>¿Qué tarea vas a revisar?</span>
+            <input type="text" name="proceso" placeholder="Ej.: enviar las facturas a los clientes" maxlength="80">
+        </label>
+
+        <fieldset class="ck-paso">
+            <legend><span class="ck-num">1</span> El filtro: lo que NO se automatiza (todavía)</legend>
+            <p class="ck-ayuda">Si marcas alguna de las dos primeras, para aquí. Ese proceso aún no está listo.</p>
+            <label class="ck-check">
+                <input type="checkbox" name="nuevo">
+                <span><strong>Es un proceso nuevo.</strong> Lo acabas de empezar y todavía lo vas cambiando sobre la marcha.
+                <em>Hazlo a mano unas semanas. Cuando funcione igual siempre, vuelve aquí.</em></span>
+            </label>
+            <label class="ck-check">
+                <input type="checkbox" name="variable">
+                <span><strong>Cada vez se hace de una forma distinta.</strong> Depende de quién lo haga o del día.
+                <em>Primero ponlo de acuerdo con tu equipo. Automatizar el desorden solo lo multiplica.</em></span>
+            </label>
+            <label class="ck-check">
+                <input type="checkbox" name="marca">
+                <span><strong>Un fallo dañaría tu imagen delante de los clientes.</strong>
+                <em>Se puede automatizar, pero siempre con una persona que revise antes de que salga.</em></span>
+            </label>
+        </fieldset>
+
+        <fieldset class="ck-paso">
+            <legend><span class="ck-num">2</span> Prepara el proceso</legend>
+            <p class="ck-ayuda">Antes de automatizar nada, el proceso tiene que pasar por estas tres. <strong>Marca las que tu proceso ya cumple.</strong> Si falta alguna, el resultado te dirá cuál tienes que hacer antes de automatizar.</p>
+            <label class="ck-check">
+                <input type="checkbox" name="simplifica">
+                <span><strong>Simplifica.</strong> ¿Sobra algún paso? ¿Hay algo que se hace dos veces o que ya nadie sabe por qué se hace? Quítalo.</span>
+            </label>
+            <label class="ck-check">
+                <input type="checkbox" name="valida">
+                <span><strong>Valida.</strong> ¿Funciona bien hecho a mano? Si a mano sale mal, automatizado saldrá mal más rápido.</span>
+            </label>
+            <label class="ck-check">
+                <input type="checkbox" name="documenta">
+                <span><strong>Documenta.</strong> ¿Está escrito el paso a paso? Si mañana lo hiciera otra persona, ¿sabría hacerlo sin preguntarte?</span>
+            </label>
+        </fieldset>
+
+        <fieldset class="ck-paso">
+            <legend><span class="ck-num">3</span> Puntúalo con la Fórmula 4R</legend>
+            <p class="ck-ayuda">Es el método que uso para decidir qué se automatiza en un negocio. Dale a cada R una nota: 0 (no), 1 (a medias) o 2 (sí, claramente).</p>
+
+            <div class="ck-r">
+                <p class="ck-r-titulo"><strong>Relevancia.</strong> ¿Es importante para el negocio? Si un día no se hace, ¿se frena algo o pierdes dinero? <em>Ejemplo: emitir las facturas a tiempo.</em></p>
+                <div class="ck-notas" role="radiogroup" aria-label="Nota de relevancia">
+                    <label><input type="radio" name="relevancia" value="0"><span>0</span></label>
+                    <label><input type="radio" name="relevancia" value="1"><span>1</span></label>
+                    <label><input type="radio" name="relevancia" value="2"><span>2</span></label>
+                </div>
+            </div>
+            <div class="ck-r">
+                <p class="ck-r-titulo"><strong>Repetición.</strong> ¿Se hace a menudo, cada día o cada semana? Cuanto más se repite, más tiempo te devuelve automatizarla.</p>
+                <div class="ck-notas" role="radiogroup" aria-label="Nota de repetición">
+                    <label><input type="radio" name="repeticion" value="0"><span>0</span></label>
+                    <label><input type="radio" name="repeticion" value="1"><span>1</span></label>
+                    <label><input type="radio" name="repeticion" value="2"><span>2</span></label>
+                </div>
+            </div>
+            <div class="ck-r">
+                <p class="ck-r-titulo"><strong>Reglas claras.</strong> ¿Siempre se hace igual, paso A, paso B, paso C? Si necesita intuición o decisiones distintas cada vez, una máquina no la va a hacer bien.</p>
+                <div class="ck-notas" role="radiogroup" aria-label="Nota de reglas claras">
+                    <label><input type="radio" name="reglas" value="0"><span>0</span></label>
+                    <label><input type="radio" name="reglas" value="1"><span>1</span></label>
+                    <label><input type="radio" name="reglas" value="2"><span>2</span></label>
+                </div>
+                <aside class="ck-ia">
+                    <strong>¿Y la IA?</strong> Automatizar es que algo se haga solo siguiendo reglas. La IA solo hace falta en el paso donde hay que leer o entender algo, como un email o un mensaje. Primero, que el proceso tenga reglas; después, IA solo en ese paso que lo necesita.
+                </aside>
+            </div>
+            <div class="ck-r">
+                <p class="ck-r-titulo"><strong>Retorno.</strong> ¿Lo que cuesta montarlo lo recuperas en tiempo ahorrado y en errores que dejas de cometer?</p>
+                <div class="ck-notas" role="radiogroup" aria-label="Nota de retorno">
+                    <label><input type="radio" name="retorno" value="0"><span>0</span></label>
+                    <label><input type="radio" name="retorno" value="1"><span>1</span></label>
+                    <label><input type="radio" name="retorno" value="2"><span>2</span></label>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset class="ck-paso ck-extra">
+            <legend>Un extra: la tarea que te quema</legend>
+            <p class="ck-ayuda">Hay tareas que no suman muchas horas pero te ponen de mal humor cada vez que las haces: perseguir un pago, copiar datos de un sitio a otro, contestar siempre lo mismo. Aunque su nota no sea alta, súbelas en la lista.</p>
+            <label class="ck-check">
+                <input type="checkbox" name="quema">
+                <span><strong>Esta tarea me quema.</strong></span>
+            </label>
+        </fieldset>
+
+        <div id="ck-resultado" class="ck-resultado" aria-live="polite">
+            <p class="ck-resultado-etiqueta">Resultado</p>
+            <p class="ck-resultado-titulo"></p>
+            <p class="ck-resultado-texto"></p>
+            <button type="submit" id="ck-guardar" class="btn-main">Guardar y revisar otra tarea</button>
+        </div>
+    </form>
+
+    <section id="ck-lista" class="ck-ancho ck-lista" hidden>
+        <h2>Tu lista</h2>
+        <p class="ck-ayuda">Empieza por la que tenga la nota más alta. Una sola. Cuando funcione, vas a por la siguiente.</p>
+        <div class="ck-tabla-envoltorio">
+            <table class="ck-tabla">
+                <thead><tr><th>Proceso</th><th>Nota</th><th>Resultado</th></tr></thead>
+                <tbody id="ck-lista-cuerpo"></tbody>
+            </table>
+        </div>
+        <div class="ck-lista-acciones">
+            <button type="button" class="btn-main" data-imprimir>Descargar en PDF</button>
+            <button type="button" class="btn-ghost" id="ck-borrar">Vaciar la lista</button>
+        </div>
+    </section>
+
+    <section class="ck-ancho ck-cierre">
+        <p>Automatizar no va de meter IA en todas partes. Va de quitarte de las manos el trabajo que te come el día, y que siga funcionando cuando tú no estás.</p>
+        <div class="ck-cta">
+            <h2>¿Quieres que le eche un ojo a tu proceso?</h2>
+            <p>Si alguna tarea te ha dejado dudas, o te ha salido «Automatízalo» y no sabes por dónde empezar, cuéntamela y la miramos juntos. Sin compromiso.</p>
+            <div class="ck-cta-botones">
+                <a class="btn-main" href="https://wa.me/34637662054?text=Hola%20Alberto%2C%20he%20hecho%20la%20checklist%20de%20automatizar%20y%20me%20gustar%C3%ADa%20que%20me%20miraras%20un%20proceso%3A%20" target="_blank" rel="noopener">Escríbeme por WhatsApp</a>
+                <a class="btn-ghost" href="https://ig.me/m/albercabrera.ia" target="_blank" rel="noopener">O por Instagram</a>
+            </div>
+        </div>
+        <p class="ck-firma">@albercabrera.ia · albercabrera.com</p>
+    </section>
+</main>
