@@ -4739,3 +4739,105 @@ html {
     margin-right: var(--hero-gap);
     border-radius: var(--radius-xl);
 }
+
+/* CASO MAFHESA — primer slide del carrusel de casos. Dos columnas: texto a
+   la izquierda, las dos cifras grandes a la derecha. Mismos tokens que
+   .caso-impact-* para que pese igual que el slide de Bioresina. */
+.caso-maf {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: var(--space-8);
+    align-items: center;
+}
+.caso-maf-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: var(--cobalt-600);
+    font-weight: 600;
+    display: block;
+}
+.caso-maf-titulo {
+    font-family: var(--font-heading);
+    font-size: clamp(1.7rem, 3.2vw, 2.4rem);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1.12;
+    color: var(--ink);
+    margin: var(--space-4) 0 var(--space-5);
+}
+.caso-maf-texto {
+    font-size: 0.95rem;
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    max-width: 440px;
+    margin: 0;
+}
+.caso-maf-lista {
+    margin: var(--space-5) 0 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: var(--ink-soft);
+    max-width: 440px;
+}
+.caso-maf-lista li {
+    padding: 9px 0;
+    border-top: 1px solid var(--line);
+}
+.caso-maf-tag {
+    display: block;
+    margin-top: var(--space-5);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    color: var(--ink-soft);
+}
+.caso-maf-stats {
+    padding-left: var(--space-8);
+}
+.caso-maf-par {
+    display: grid;
+    gap: 34px;
+}
+.caso-maf-num {
+    font-family: var(--font-display, var(--font-heading));
+    font-size: clamp(5rem, 8.5vw, 7.5rem);
+    font-weight: 500;
+    letter-spacing: -0.06em;
+    line-height: 0.95;
+    color: var(--cobalt-600);
+    margin: 0;
+}
+.caso-maf-num span {
+    font-size: 0.5em;
+    letter-spacing: -0.05em;
+}
+.caso-maf-label {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: var(--ink-soft);
+    margin: 6px 0 0;
+}
+.caso-maf-pie {
+    display: block;
+    margin-top: 40px;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    color: var(--ink-soft);
+}
+@media (max-width: 900px) {
+    .caso-maf {
+        grid-template-columns: 1fr;
+        gap: var(--space-6);
+    }
+    .caso-maf-stats {
+        padding-left: 0;
+        padding-top: var(--space-6);
+        border-top: 1px solid var(--line);
+    }
+    .caso-maf-num { font-size: 4.5rem; }
+}
