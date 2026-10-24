@@ -26,6 +26,8 @@ export default function (eleventyConfig) {
     eleventyConfig.addPassthroughCopy({ "src/index.css": "index.css" });
     eleventyConfig.addPassthroughCopy({ "src/index.js": "index.js" });
     eleventyConfig.addPassthroughCopy({ "src/legal.css": "legal.css" });
+    // Landing del diagnóstico (noindex): HTML autónomo, se copia tal cual.
+    eleventyConfig.addPassthroughCopy({ "src/diagnostico": "diagnostico" });
     // De videos/ solo se despliega lo que se ve (el HTML del proyecto y sus
     // renders/snapshots). Los .md y los package.json son notas y config
     // internas: se quedan en el repo, no en el servidor publico.
@@ -38,6 +40,7 @@ export default function (eleventyConfig) {
     // (test-guardrails.html -> test-guardrails/index.html, README.md -> HTML).
     eleventyConfig.ignores.add("src/assets/**/*");
     eleventyConfig.ignores.add("src/design-system/**/*");
+    eleventyConfig.ignores.add("src/diagnostico/**/*");
     // videos/ son proyectos de HyperFrames (AGENTS.md, CLAUDE.md, package.json).
     // Sin esto Eleventy los renderiza y publica las notas internas como
     // paginas: /videos/<x>/AGENTS/ y /videos/<x>/CLAUDE/. Ver la regla de
