@@ -4,7 +4,7 @@
 
 No sabes por dónde empezar.
 
-Analizo dónde pierdes tiempo, clientes y dinero, y utilizo IA y automatización para eliminar esos cuellos de botella.
+Miro dónde pierdes tiempo, clientes y dinero, y uso IA para que deje de pasar.
 
 Gratis. Si no puedo ayudarte, te lo digo.
 
@@ -37,7 +37,7 @@ Una web no sirve si no aparece cuando te buscan, ni si el contacto acaba en un c
 
 - Que aparezcas en Google cuando te buscan en tu zona, y en las respuestas de ChatGPT o Gemini
 
-- Cada contacto entra solo en tu CRM, venga de la web, WhatsApp o Instagram
+- Cada contacto queda guardado solo en tu lista de clientes, venga de la web, WhatsApp o Instagram
 
 - Seguimiento automático: nadie se queda sin respuesta
 
@@ -97,7 +97,7 @@ Ver servicio →
 
 ## Esto es lo que pasa cuando lo aplicamos
 
-_Negocios reales, con sus propios cuellos de botella, resueltos con IA y automatización._
+_Negocios reales, con sus propios atascos, resueltos con IA y automatización._
 
 ## Un sistema no se entrega y ya está.
 
@@ -119,7 +119,7 @@ a. La consulta espera a mañana
 
 4. 4. Se pasa la cita a mano a la agenda
 
-3 de cada 4 consultas mueren en el paso 3
+Aquí es donde se pierde la consulta
 
 02
 
@@ -135,19 +135,19 @@ Lo pongo a funcionar con tus datos reales, no con un ejemplo. Tu equipo aprende 
 
 Agente de soporteEjemplo
 
-1.240
+860
 
 consultas atendidas
 
-92%
+87%
 
 resueltas sin ti
 
-44h
+31h
 
 recuperadas al mes
 
-6
+4
 
 ajustes este trimestre
 
@@ -177,7 +177,7 @@ Las claves de tus herramientas no viven en un archivo suelto ni en un chat: van 
 
 Soy Alberto Pérez Cabrera. Ayudo a negocios pequeños y medianos a aplicar IA donde de verdad les cambia el día, no donde queda bien.
 
-Antes de esto me dediqué a otra cosa muy distinta, de las que te dejan sin horas y sin cabeza al final del día. Por eso hago lo que hago: me mueve ayudar a la gente a recuperar su tiempo.
+Antes de esto trabajé en obra, en pavimentos: jornadas de doce horas o más, pasando frío, pasando calor y trabajando con productos químicos. También trabajé en una agencia de marketing diseñando webs. Por eso hago lo que hago: me mueve ayudar a la gente a recuperar su tiempo.
 
 Me cuentan que acaban la jornada agotados, con sus hijos delante pero pendientes del móvil por cosas que una herramienta podría hacer sola. Mi trabajo es que la IA se ocupe de eso, para que tu negocio trabaje para ti y no al revés.
 
@@ -221,6 +221,14 @@ Precio de lanzamiento. Si luego implementamos las mejoras, se descuenta &iacute;
 
 ## Preguntas que me suelen hacer.
 
+¿Vas a acabar vendiéndome algo que no necesito?
+
+No. Si lo que te hace falta es cambiar un proceso o contratar a alguien, eso es lo que te voy a decir. Me pagas por saber qué pasa en tu negocio, no por comprarme herramientas. Prefiero decirte que no me necesitas y que me recomiendes.
+
+¿Qué garantías tengo de que funcione?
+
+Mi trabajo no es entregarte código y marcharme. Te entrego el sistema funcionando, probado con datos reales de tu negocio y con tu equipo capacitado para usarlo. Antes de empezar dejamos por escrito qué tiene que hacer el sistema. Si al entregarlo no lo hace, lo corrijo sin cobrarte más hasta que lo haga.
+
 ¿Cómo sé si una tarea de mi negocio se puede automatizar?
 
 Uso la Fórmula 4R: una tarea es buena candidata a automatizar si cumple cuatro cosas — Relevante (importa de verdad para el negocio), Repetitiva (la haces cada día o cada semana), con Reglas claras (sigue unos pasos fijos, no depende de tu intuición) y con Retorno (el tiempo que te ahorra supera el de montarla). Hay dos cosas que conviene NO automatizar todavía: procesos nuevos que aún no dominas (primero se ordenan a mano) y tareas donde un fallo dañaría tu marca, como publicar en redes, que siempre deben pasar por una revisión tuya.
@@ -235,7 +243,7 @@ Se construye. Si la herramienta que te hace falta no existe (un panel para ver c
 
 ¿Necesito saber de tecnología?
 
-Cero. Tú me cuentas qué te agobia y yo me encargo de la parte técnica. Toda la infraestructura se monta en la nube o se conecta con las herramientas que ya usas, como tu CRM. Si un consultor te llena la reunión de palabros, no es que sepa más: es que no sabe explicarlo.
+Cero. Tú me cuentas qué te agobia y yo me encargo de la parte técnica. Todo se monta en internet o se conecta con las herramientas que ya usas. Si un consultor te llena la reunión de palabros, no es que sepa más: es que no sabe explicarlo.
 
 ¿Por dónde empiezo si no sé qué necesito?
 
@@ -243,19 +251,11 @@ Por el diagnóstico operativo DAI360. Miro tu negocio a fondo, te enseño con cl
 
 ¿Cuánto se tarda en dejarlo listo?
 
-Depende del proyecto. Integraciones más sencillas de CRM o un asistente básico de WhatsApp suelen estar listas en 2-3 semanas. Un proyecto de sistema de control o ERP a medida puede llevar de 4 a 8 semanas. Te daré un plazo y un coste cerrado antes de empezar.
-
-¿Vas a acabar vendiéndome algo que no necesito?
-
-No. Si lo que te hace falta es cambiar un proceso o contratar a alguien, eso es lo que te voy a decir. Me pagas por saber qué pasa en tu negocio, no por comprarme herramientas. Prefiero decirte que no me necesitas y que me recomiendes.
-
-¿Qué garantías tengo de que funcione?
-
-Mi trabajo no es entregarte código y marcharme. Te entrego el sistema funcionando, probado con datos reales de tu negocio y con tu equipo capacitado para usarlo. Si no funciona según lo que acordamos, me encargo de corregirlo sin coste adicional.
+Depende del proyecto. Conectar tus herramientas con un registro de clientes o montar un asistente básico de WhatsApp suele llevar 2-3 semanas. Un sistema de gestión a medida puede llevar de 4 a 8 semanas. Te daré un plazo y un coste cerrado antes de empezar.
 
 ¿Qué pasa con la seguridad de mis datos?
 
-Uso las APIs comerciales de OpenAI y Anthropic, no las versiones gratuitas. Por contrato, esos proveedores no entrenan sus modelos con lo que envías: tu información y la de tus clientes no acaba dentro de un modelo público. Sí guardan las conversaciones un máximo de 30 días para detectar usos abusivos, y después se borran; existe la opción de contratar retención cero si tu caso lo necesita. Además, cada agente lleva filtros de entrada y salida para que no se le pueda sonsacar información con mensajes manipulados.
+Uso las versiones de pago de OpenAI y Anthropic, no las gratuitas. Por contrato, esos proveedores no entrenan sus modelos con lo que envías: tu información y la de tus clientes no acaba dentro de un modelo público. Sí guardan las conversaciones un máximo de 30 días para detectar usos abusivos, y después se borran; se puede contratar una opción en la que no guardan nada, si tu caso lo necesita. Además, cada agente lleva filtros que revisan lo que entra y lo que sale, para que no se le pueda sonsacar información con mensajes manipulados.
 
 ## &iquest;Hablamos de tu negocio?
 
