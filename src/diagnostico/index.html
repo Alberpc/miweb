@@ -3,6 +3,36 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Consent Mode v2 + GTM: copia de miweb-premium/src/_includes/consent-gtm.njk.
+     Tiene que ir antes que cualquier otra etiqueta de medición. -->
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+(function () {
+    var consentimientoGuardado = 'denied';
+    try {
+        var raw = localStorage.getItem('acc_consent_v1');
+        if (raw) {
+            var data = JSON.parse(raw);
+            if (data && data.analytics === true) consentimientoGuardado = 'granted';
+        }
+    } catch (e) { /* localStorage no disponible: se queda en denied */ }
+    gtag('consent', 'default', {
+        'analytics_storage': consentimientoGuardado,
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'wait_for_update': 500
+    });
+})();
+</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KQT7RNTB');</script>
+<!-- End Google Tag Manager -->
 <title>Qué automatizar con IA en tu negocio, en 7 días | Alberto Cabrera</title>
 <meta name="description" content="Me cuentas cómo trabajáis y en 7 días te digo qué automatizar con IA, en qué orden y cuántas horas al mes os cuestan hoy esas tareas.">
 <meta name="robots" content="noindex, nofollow">
@@ -173,8 +203,13 @@ button.vsl:hover .vsl-play, button.vsl:focus-visible .vsl-play { transform: scal
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
 </style>
+<link rel="stylesheet" href="/assets/cookies/cookie-banner.css?v=1">
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KQT7RNTB"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
 <!-- ENLACE DEL CALENDARIO: todos los botones usan el mismo. -->
 
@@ -331,12 +366,14 @@ button.vsl:hover .vsl-play, button.vsl:focus-visible .vsl-play { transform: scal
 
 </main>
 
-<footer class="pie">Alberto Pérez Cabrera · NIF 53664793C · alberto@albercabrera.com · <a href="https://albercabrera.com/aviso-legal">Aviso legal</a> · <a href="https://albercabrera.com/politica-de-privacidad">Política de privacidad</a></footer>
+<footer class="pie">Alberto Pérez Cabrera · NIF 53664793C · alberto@albercabrera.com · <a href="https://albercabrera.com/aviso-legal">Aviso legal</a> · <a href="https://albercabrera.com/politica-de-privacidad">Política de privacidad</a> · <a href="https://albercabrera.com/cookies">Cookies</a></footer>
 <div class="sticky-cta"><a class="btn" href="https://calendly.com/alberto-albercabrera/30min">Agendar llamada de 30 min</a></div>
 
 <script>
   document.querySelectorAll('.vsl[data-yt]').forEach(function (b) {
     b.addEventListener('click', function () {
+      // Evento para GTM: cuántos le dan al play de la VSL
+      window.dataLayer.push({ event: 'vsl_play' });
       var f = document.createElement('iframe');
       f.src = 'https://www.youtube-nocookie.com/embed/' + b.dataset.yt + '?autoplay=1&rel=0&modestbranding=1&playsinline=1';
       f.title = 'Vídeo: diagnóstico de procesos';
@@ -349,5 +386,6 @@ button.vsl:hover .vsl-play, button.vsl:focus-visible .vsl-play { transform: scal
     });
   });
 </script>
+<script src="/assets/cookies/cookie-banner.js?v=1" defer></script>
 </body>
 </html>
