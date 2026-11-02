@@ -853,3 +853,36 @@ h3 {
 @media (max-width: 860px) {
     .garantias-filas article { grid-template-columns: 1fr; gap: 14px; }
 }
+
+/* ── Calculadora en la home (copiada de paginas.css) ──────────── */
+.calc-home { padding-bottom: var(--space-11); }
+.pg-calc {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    margin-top: var(--space-8);
+    background: var(--night-900);
+    color: var(--on-night-body);
+}
+.pg-calc-form { padding: var(--space-7); display: flex; flex-direction: column; gap: var(--space-5); }
+.pg-calc-form h3 { font-family: var(--font-display); font-weight: 400; font-size: 1.8rem; letter-spacing: -0.03em; color: var(--on-night); }
+.pg-calc label { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--on-night-soft); }
+.pg-calc label output { color: var(--menta); font-size: 14px; }
+.pg-calc input[type="range"] { width: 100%; accent-color: var(--menta); height: 28px; }
+.pg-calc-res { padding: var(--space-7); background: var(--menta); color: var(--negro); display: flex; flex-direction: column; justify-content: center; }
+.pg-calc-res strong {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(5rem, 10vw, 9rem);
+    line-height: 0.9;
+    letter-spacing: -0.06em;
+    font-variant-numeric: tabular-nums;
+}
+.pg-calc-res strong small { font-size: 0.35em; letter-spacing: -0.02em; }
+.pg-calc-res p { margin-top: 10px; font-size: 1.05rem; }
+.pg-calc-res em { font-style: normal; font-family: var(--font-mono); font-size: 12px; margin-top: 18px; opacity: 0.7; }
+
+.calc-home .pg-calc { margin-top: 0; }
+.pg-calc .text-link { color: var(--on-night); margin-top: auto; width: max-content; }
+@media (max-width: 900px) { .calc-home .pg-calc { grid-template-columns: 1fr; } .calc-home { padding-bottom: var(--space-9); } }
+@media (max-width: 560px) { .calc-home .pg-calc-form, .calc-home .pg-calc-res { padding: var(--space-6) var(--space-5); } }
+.partida { padding-bottom: var(--space-9); }

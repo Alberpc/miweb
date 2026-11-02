@@ -372,3 +372,46 @@ body:has(.hero:not(.inverse)) .navbar--sobre-hero .nav-btn:hover {
 .footer-section .footer-grid { max-width: none; padding: 0; margin-bottom: 0; }
 .ck-ia, .ck-cta { background: var(--bg-alt) !important; border: 0 !important; border-top: 2px solid var(--ink) !important; }
 .ck-num { background: var(--ink) !important; color: var(--bg) !important; border-radius: 0 !important; }
+
+/* ── Blog: el primer artículo, destacado a dos columnas ────────── */
+@media (min-width: 901px) {
+    .posts-grid > .post-card:first-child {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: 1.3fr 1fr;
+        gap: var(--space-7);
+        align-items: center;
+        padding-bottom: var(--space-7);
+        border-top: 0 !important;
+        border-bottom: 1px solid var(--ink) !important;
+        margin-bottom: var(--space-4);
+    }
+    .posts-grid > .post-card:first-child .post-thumb { aspect-ratio: 16 / 10; height: auto; }
+    .posts-grid > .post-card:first-child .post-thumb img { height: 100%; }
+    .posts-grid > .post-card:first-child h2 { font-size: clamp(2.2rem, 3.6vw, 3.4rem); line-height: 1.02; letter-spacing: -0.04em; }
+    .posts-grid > .post-card:first-child p { font-size: 1.08rem; }
+}
+.post-thumb img { transition: transform 0.8s var(--ease-standard); }
+.post-card:hover .post-thumb img { transform: scale(1.04); }
+
+/* ── Cierre de los artículos: banda menta, como en las páginas de
+   servicio ─────────────────────────────────────────────────────── */
+.article-hero ~ .cta-final,
+.cta-final.inverse {
+    background: var(--menta) !important;
+    color: var(--negro);
+}
+.article-hero ~ .cta-final h2,
+.cta-final.inverse h2 { color: var(--negro); }
+.article-hero ~ .cta-final p,
+.cta-final.inverse p { color: var(--negro); opacity: 0.85; }
+.cta-final.inverse .btn-main,
+.cta-final.inverse .btn-main:hover { background: var(--negro); border-color: var(--negro); color: var(--crema); }
+.cta-final.inverse .btn-main:hover { background: transparent; color: var(--negro); }
+.cta-final.inverse .btn-final-sub { color: var(--negro); }
+
+/* Índice lateral del artículo: número de sección en mono */
+.toc a { font-size: 14px; }
+.toc a.active { color: var(--ink); font-weight: 500; }
+.prose a { color: var(--cobalt-700); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.prose h2 { font-size: clamp(1.8rem, 2.6vw, 2.4rem); line-height: 1.08; margin-top: var(--space-8); }

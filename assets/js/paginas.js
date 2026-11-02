@@ -100,3 +100,16 @@
         informe.style.setProperty('--escala', '1');
     }
 })();
+
+/* Barra fija de móvil (no-perder-clientes): aparece al pasar el hero y
+   se esconde cuando el formulario ya está a la vista. */
+(function () {
+    const barra = document.getElementById('cta-movil');
+    const hero = document.querySelector('.pg-hero');
+    const cierre = document.getElementById('cierre');
+    if (!barra || !hero || !cierre) return;
+    let pasadoHero = false, formVisible = false;
+    const pintar = () => barra.classList.toggle('visible', pasadoHero && !formVisible);
+    new IntersectionObserver(([e]) => { pasadoHero = !e.isIntersecting; pintar(); }).observe(hero);
+    new IntersectionObserver(([e]) => { formVisible = e.isIntersecting; pintar(); }, { threshold: 0.15 }).observe(cierre);
+})();

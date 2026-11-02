@@ -205,3 +205,28 @@ document.querySelectorAll('a[data-mail][data-dom]').forEach((a) => {
     });
     ver(0, false);
 })();
+
+/* ── Calculadora de horas (misma lógica que paginas.js) ─────────── */
+(function () {
+    /* Calculadora: minutos × veces por semana → horas al mes */
+    const calc = document.querySelector('[data-calc]');
+    if (calc) {
+        const min = calc.querySelector('#calc-min');
+        const veces = calc.querySelector('#calc-veces');
+        const oMin = calc.querySelector('#calc-min-o');
+        const oVeces = calc.querySelector('#calc-veces-o');
+        const horas = calc.querySelector('#calc-horas');
+        const dias = calc.querySelector('#calc-dias');
+        function calcular() {
+            const h = (+min.value * +veces.value * 52 / 12) / 60;
+            oMin.textContent = min.value + ' min';
+            oVeces.textContent = veces.value + ' veces';
+            horas.textContent = h >= 10 ? Math.round(h) : h.toFixed(1).replace('.', ',');
+            dias.textContent = Math.round(h * 12 / 8);
+        }
+        min.addEventListener('input', calcular);
+        veces.addEventListener('input', calcular);
+        calcular();
+    }
+
+})();
