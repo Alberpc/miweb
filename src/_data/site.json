@@ -5,10 +5,10 @@
   "dominio": "https://albercabrera.com",
   "gtm": "GTM-KQT7RNTB",
   "email": "alberto@albercabrera.com",
-  "cssVersion": 78,
+  "cssVersion": 79,
   "navCta": {
     "href": "/#contacto",
     "texto": "Cuéntame tu caso &rarr;"
   },
-  "themeColor": "#0F1F1B"
+  "themeColor": "#1D1D1B"
 }

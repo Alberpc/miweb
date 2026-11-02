@@ -38,12 +38,8 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-brand-col">
-                    <div class="footer-logo-wrap">
-                        <a href="/" class="logo"><img src="/assets/img/logo-alber-blanco.png" alt="{{ site.nombre }}"></a>
-                    </div>
-                    <p class="footer-brand-desc">
-                        Aporto claridad y sistemas de automatización con inteligencia artificial para negocios. Soluciones premium y estables para que tu negocio crezca solo.
-                    </p>
+                    <a href="/" class="logo footer-logo" aria-label="contravía · {{ site.nombre }}, inicio">{% include "logo.njk" %}</a>
+                    <p class="footer-brand-desc">IA aplicada a negocios de servicios: que atiendan antes, hagan seguimiento sin depender de nadie y dejen de hacer a mano lo que no hace falta.</p>
 {#- [4-sep-2026] Las redes suben aqui, bajo el logo y la descripcion.
                         Estaban en la barra de abajo, junto al copyright — la
                         zona de letra pequena — y ahi pesaban lo mismo que un
@@ -128,6 +124,7 @@
                     el nombre completo es el mismo que figura como titular en
                     el aviso legal, asi que ademas coinciden. -#}
                 <p class="footer-curator">&copy; {{ anio }} Alberto P&eacute;rez Cabrera</p>
+                <p class="footer-curator footer-lema">facilitar · habilitar · conectar · simplificar</p>
             </div>
         </div>
     </footer>

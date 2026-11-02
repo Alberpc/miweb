@@ -70,8 +70,8 @@
     background-color: var(--bg);
     background-image:
         linear-gradient(142deg,
-            rgba(234, 130,  88, 0.16)  0%,
-            rgba(234, 130,  88, 0.05) 22%,
+            rgba(8, 255, 171, 0.16)  0%,
+            rgba(8, 255, 171, 0.05) 22%,
             rgba(255, 255, 255, 0)    44%),
         linear-gradient(300deg,
             rgba( 58,  80, 190, 0.13)  0%,
@@ -273,7 +273,7 @@
        sobre el borde del bloque oscuro: el aro blanco la separaba del
        bloque en vez de recortarla contra el. */
     box-shadow: 0 0 0 6px var(--night-900),
-                0 0 28px 4px rgba(234, 130, 88, 0.55);
+                0 0 28px 4px rgba(8, 255, 171, 0.55);
     transform: translate(-50%, -50%);
 }
 .entregas-bola svg { width: 17px; height: 17px; fill: var(--night-900); }
@@ -483,7 +483,7 @@
     inset: -30% -12% -40%;
     filter: blur(52px);
     background: radial-gradient(50% 50% at 22% 40%,
-        rgba(234, 130, 88, 0.30) 0%, rgba(234, 130, 88, 0.10) 50%, transparent 78%);
+        rgba(8, 255, 171, 0.30) 0%, rgba(8, 255, 171, 0.10) 50%, transparent 78%);
 }
 .pr-tramo {
     background: var(--bg);
@@ -625,7 +625,7 @@
 #que-te-llevas {
     --cristal: linear-gradient(155deg, rgb(252, 252, 253) 0%, rgb(249, 246, 244) 64%, rgb(245, 238, 234) 100%);
     --cristal-brillo: linear-gradient(118deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.06) 34%, transparent 58%);
-    --cristal-sombra: 0 18px 40px -14px rgba(26,29,35,0.14), 0 2px 8px -2px rgba(26,29,35,0.08), 0 26px 50px -20px rgba(234, 130, 88, 0.30);
+    --cristal-sombra: 0 18px 40px -14px rgba(26,29,35,0.14), 0 2px 8px -2px rgba(26,29,35,0.08), 0 26px 50px -20px rgba(8, 255, 171, 0.30);
 }
 /* [3-sep-2026 v7] LINEA DEL TIEMPO CON EL RIEL AL CENTRO.
    Antes el riel iba pegado a la izquierda y todo el contenido a un
@@ -853,7 +853,7 @@
        la cifra sea el punto de luz del bloque. */
     color: var(--cobalt-400);
     font-size: clamp(3.2rem, 7vw, 4.6rem);
-    text-shadow: 0 0 42px rgba(234, 130, 88, 0.28);
+    text-shadow: 0 0 42px rgba(8, 255, 171, 0.28);
 }
 .deal-price-note {
     /* [3-sep-2026 v6] La nota ya no es una coletilla de 5 palabras:
@@ -889,8 +889,8 @@
 .deal-path.highlight {
     border-color: var(--cobalt-400);
     background: linear-gradient(160deg,
-        rgba(234, 130, 88, 0.10) 0%,
-        rgba(234, 130, 88, 0.03) 60%,
+        rgba(8, 255, 171, 0.10) 0%,
+        rgba(8, 255, 171, 0.03) 60%,
         transparent 100%), var(--night-800);
 }
 

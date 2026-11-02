@@ -34,7 +34,7 @@
         pegada al borde como una barra normal. -#}
     <nav class="navbar{% if heroEnBloque %} navbar--en-hero{% endif %}">
         <div class="nav-container">
-            <a href="{{ "#" if navLocal else "/" }}" class="logo"><img src="/assets/img/logo-alber-blanco.png" alt="{{ site.nombre }}"></a>
+            <a href="{{ "#" if navLocal else "/" }}" class="logo" aria-label="contravía · {{ site.nombre }}, inicio">{% include "logo.njk" %}</a>
             <div class="nav-menu">
                 {#- [28-sep-2026] Desplegable con las 3 paginas de servicio
                     (publicadas el 27-sep). "Servicios" sigue bajando a la
@@ -62,7 +62,7 @@
 {%- else %}{{ navCtaTexto | default("Cuéntame tu caso &rarr;") | safe }}
 {%- endif %}</a>
             <button class="nav-burger" id="nav-burger" aria-label="Abrir menú" aria-expanded="false">
-                <span></span><span></span><span></span>
+                <span class="nav-burger-t">Menú</span><span class="nav-burger-i" aria-hidden="true">+</span>
             </button>
         </div>
         <div class="nav-mobile" id="nav-mobile">

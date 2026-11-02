@@ -76,1303 +76,433 @@ schemas:
           ]
         }
 ---
-    <!-- CABECERA (HERO SECTION) -->
-    <header class="hero-section inverse">
-        <canvas class="aurora-canvas" data-alto="1" aria-hidden="true"></canvas>
-        <div class="hero-content">
-            <h1 class="hero-kicker">Consultor de IA para negocios</h1>
-            <h2 class="hero-title">
-                Sabes que la IA puede ayudarte.<br><span class="chrome-text">No sabes por dónde empezar.</span>
-            </h2>
-            <p class="hero-subtitle">
-                Miro dónde pierdes tiempo, clientes y dinero, y uso IA para que deje de pasar.
+{#- ==================================================================
+    HOME · rebrand contravía × dirección Refero (2-nov-2026)
+    ==================================================================
+    Sigue la Variante 01 (taller/Proyectos/miweb-premium-variante,
+    DIRECCION.md): hero a sangre con tipografía grande, composición
+    asimétrica 1 / 2.15, radio 0, CTAs delineadas, demos sobre negro
+    estilo Linear e indicadores pequeños en menta.
+    Cada sección tiene composición propia; ninguna repite la rejilla
+    de tarjetas de otra. El copy es el de la home anterior: se revisa
+    aparte.
+    ================================================================== -#}
+
+    <header class="hero inverse" id="inicio">
+        <div class="hero-arte" aria-hidden="true">
+            <picture>
+                <source media="(max-width: 760px)" srcset="/assets/img/hero-canales-900.webp">
+                <img src="/assets/img/hero-canales.webp" alt="" width="1672" height="941" fetchpriority="high" decoding="async">
+            </picture>
+        </div>
+        <div class="hero-sombra" aria-hidden="true"></div>
+
+        <div class="hero-cuerpo wrap">
+            <h1 class="eyebrow hero-eyebrow entra">Consultor de IA para negocios</h1>
+            <p class="hero-titulo" role="heading" aria-level="2">
+                <span class="linea"><span>Sabes que la IA</span></span>
+                <span class="linea"><span>puede ayudarte.</span></span>
+                <span class="linea linea--suave"><span>No sabes por</span></span>
+                <span class="linea linea--suave"><span>dónde empezar.</span></span>
             </p>
-            <div class="hero-cta-wrapper">
-                <a href="#contacto" class="btn-primary">Reservar llamada de 20 min &rarr;</a>
-                <p class="hero-cta-nota">Gratis. Si no puedo ayudarte, te lo digo.</p>
+            <div class="hero-pie-texto entra">
+                <p>Miro dónde pierdes tiempo, clientes y dinero, y uso IA para que deje de pasar.</p>
+                <div class="hero-acciones">
+                    <a href="#contacto" class="btn-main">Reservar llamada de 20 min <span class="flecha" aria-hidden="true">↗</span></a>
+                    <span class="hero-nota"><i class="punto" aria-hidden="true"></i>Gratis. Si no puedo ayudarte, te lo digo.</span>
+                </div>
             </div>
+        </div>
+
+        <div class="hero-barra wrap">
+            <a href="#punto-de-partida">Explora lo que podemos cambiar <span aria-hidden="true">↓</span></a>
+            <button type="button" id="movimiento" aria-pressed="false">Pausar movimiento <span aria-hidden="true">Ⅱ</span></button>
         </div>
     </header>
 
-    <!-- TIRA DE LOGOS - prueba social temprana, deliberadamente discreta -->
-    <section id="clientes" class="clientes-tira reveal">
-        <div class="logos-track">
-            <img src="assets/img/mafhesa.png" alt="Mafhesa" class="logo-cliente">
-            <img src="assets/img/topboutique.png" alt="Top Boutique" class="logo-cliente">
-            <img src="assets/img/bioresina.svg" alt="Bioresina" class="logo-cliente">
-            <img src="assets/img/geko.svg" alt="Geko" class="logo-cliente">
+    <section class="clientes wrap" id="clientes" aria-label="Negocios con los que he trabajado">
+        <p>En buena compañía.</p>
+        <div class="clientes-logos">
+            <img src="/assets/img/mafhesa.png" alt="Mafhesa" loading="lazy" decoding="async">
+            <img src="/assets/img/topboutique.png" alt="Top Boutique" loading="lazy" decoding="async">
+            <img src="/assets/img/bioresina.svg" alt="Bioresina" loading="lazy" decoding="async">
+            <img src="/assets/img/geko.svg" alt="Geko Marketing" loading="lazy" decoding="async">
         </div>
     </section>
 
-
-    <!-- SECCIÓN 2 — EL PROBLEMA -->
-    <!-- SECCION 2 - BENEFICIOS: que se lleva, antes de contarle el problema -->
-    {#- SECCION "BENEFICIOS" retirada (2-sep-2026).
-        Era una tira de cuatro tarjetas (Mas oportunidades / Menos tareas
-        manuales / Mas control / Sistemas escalables) entre los logos y
-        "Que construyo". Tres motivos:
-
-        1. Era la UNICA seccion con contenido sin etiqueta ni titulo. Las
-           demas llevan la suya (QUE CONSTRUYO, CASOS REALES, COMO
-           TRABAJO...), asi que esta aparecia flotando sin decir que era.
-
-        2. Decia lo mismo que la seccion siguiente, pero en abstracto:
-           "Lo repetitivo lo hace el sistema, no tu" vs "Documentos,
-           facturas y correos se archivan solos". El lector se comia la
-           version vaga antes de la concreta.
-
-        3. El copy valdria para cualquier consultora de IA. No distinguia.
-
-        Comprobado en referencias (leidas, no de memoria): decagon y
-        basecamp NO tienen tira de beneficios — del heroe van a producto o
-        a prueba. steep y slite SI, pero con titulo de seccion encima y
-        diciendo capacidades concretas, no adjetivos.
-        El razonamiento de fondo: los beneficios abstractos sustituian al
-        producto cuando no se podia enseñar. Esta web SI lo enseña (tres
-        videos de la cosa funcionando), asi que no hacen falta.
-
-        Si se quiere recuperar algo aqui, la via buena son CIFRAS (las 44h
-        al mes y 13+ semanas al año de Bioresina), como hace decagon: eso
-        es prueba, no promesa.
-
-        El marcado esta en git y en scratchpad/seccion-beneficios.txt; su
-        CSS (.beneficios-*, .beneficio-*) sigue en index.css por si vuelve. -#}
-
-
-    {#- SECCION 2 "LA REALIDAD" retirada (30-ago-2026).
-        Dos motivos: el copy hablaba solo al dueño que trabaja solo ("si
-        paras tu, para todo", "sin margen para crecer sin contratar") y
-        dejaba fuera a los negocios CON equipo, que son la mitad de las
-        landings (asesorias, clinicas, inmobiliarias, formacion). Y
-        ninguna referencia (steep, decagon, stripe, getharvest) dedica una
-        seccion al dolor: van del heroe directas al resultado.
-        El marcado esta en git y en scratchpad/seccion-problema.txt; su
-        CSS (.problema-*, .sintomas) sigue en index.css por si vuelve. -#}
-
-    <!-- SECCIÓN 3 — SERVICIOS (las piezas) -->
-    <section id="soluciones" class="section soluciones-section section-bloque reveal">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label">SERVICIOS</span>
-                <h2 class="section-title">Del primer contacto al trabajo hecho</h2>
-                <p class="section-subtitle">Captar clientes, venderles y que el trabajo de dentro se haga solo. Cada pieza funciona por separado; casi siempre se empieza por una.</p>
-            </div>
-
-            {# [26-sep-2026] LISTA + PANEL (escritorio) / ACORDEÓN (móvil),
-               en vez de pestañas. Idea de miweb-premium-variante: cada fila
-               lleva nombre + una línea que la explica, así se compara sin
-               abrir nada; en móvil cada panel se abre justo debajo de su fila
-               en lugar de arriba del todo.
-               Sigue abriéndose UNO solo: las tres piezas son alternativas
-               ("casi siempre empieza por una") y así solo corre un vídeo.
-               Marcado de acordeón (button + aria-expanded + region) y no de
-               tablist: un tablist no admite los paneles intercalados entre
-               sus pestañas, que es lo que necesita el móvil.
-               La fila nombra el RESULTADO (lo que piensa el dueño) y la
-               etiqueta del panel el SERVICIO (lo que se busca en Google:
-               agentes de ia, automatización de procesos).
-               Los ids tab-* se quedan: el pie enlaza a ellos. #}
-            <div class="piezas-lista">
-
-                <button type="button" class="pieza-fila is-active" id="tab-captar"
-                        aria-controls="panel-captar" aria-expanded="true">
-                    <span class="pieza-fila-num" aria-hidden="true">01</span>
-                    <span class="pieza-fila-texto">
-                        <span class="pieza-fila-nombre">Captar clientes</span>
-                        <span class="pieza-fila-linea">De la primera búsqueda al contacto.</span>
-                    </span>
-                    <span class="pieza-fila-flecha" aria-hidden="true">↗</span>
-                </button>
-
-                <!-- PIEZA 1 — Captar clientes (destacada) -->
-                {# [26-sep-2026] Videos intercambiados con Vender: aqui el del
-                   contacto que entra por WhatsApp/web/Instagram y acaba en el
-                   CRM (el panel de cifras no contaba captar). Sigue siendo
-                   provisional hasta que haya uno propio de web -> formulario -> CRM. #}
-                <article class="pieza" id="panel-captar" role="region"
-                         aria-labelledby="tab-captar">
-                    <div class="pieza-texto">
-                        <div class="pieza-cabeza">
-                            <span class="pieza-num" aria-hidden="true">01</span>
-                            <span class="section-label">Diseño web y captación</span>
-                        </div>
-                        <h3 class="pieza-titulo">Que te encuentren. Y que no se escape ninguno.</h3>
-                        <p class="pieza-desc">Una web no sirve si no aparece cuando te buscan, ni si el contacto acaba en un correo que nadie contesta. Monto la web, el posicionamiento y lo que pasa después.</p>
-                        <ul class="pieza-lista">
-                            <li>Una web pensada para conseguir clientes, no para decorar</li>
-                            <li>Que aparezcas en Google cuando te buscan en tu zona, y en las respuestas de ChatGPT o Gemini</li>
-                            <li>Cada contacto queda guardado solo en tu lista de clientes, venga de la web, WhatsApp o Instagram</li>
-                            <li>Seguimiento automático: nadie se queda sin respuesta</li>
-                        </ul>
-                        <a class="pieza-enlace" href="/diseno-web-pymes/">Ver servicio &rarr;</a>
-                    </div>
-                    <video class="pieza-video" width="800" height="480"
-                           autoplay muted loop playsinline preload="metadata" aria-label="Un cliente escribe por WhatsApp, la web o Instagram; el agente responde, crea la ficha en el CRM y confirma la cita.">
-                        <source media="(max-width: 768px)" src="/assets/video/pilar-agente-v.mp4" type="video/mp4">
-                        <source src="/assets/video/pilar-agente.mp4" type="video/mp4">
-                    </video>
-                </article>
-
-                <!-- PIEZA 2 — Vender más (agentes de IA) -->
-                <button type="button" class="pieza-fila" id="tab-vender"
-                        aria-controls="panel-vender" aria-expanded="false">
-                    <span class="pieza-fila-num" aria-hidden="true">02</span>
-                    <span class="pieza-fila-texto">
-                        <span class="pieza-fila-nombre">Vender más</span>
-                        <span class="pieza-fila-linea">Una respuesta cuando hace falta.</span>
-                    </span>
-                    <span class="pieza-fila-flecha" aria-hidden="true">↗</span>
-                </button>
-                <article class="pieza" id="panel-vender" role="region"
-                         aria-labelledby="tab-vender" hidden>
-                    <div class="pieza-texto">
-                        <div class="pieza-cabeza">
-                            <span class="pieza-num" aria-hidden="true">02</span>
-                            <span class="section-label">Agentes de IA</span>
-                        </div>
-                        <h3 class="pieza-titulo">Contestan al momento y agendan a los interesados</h3>
-                        <p class="pieza-desc">Un agente no es un chatbot con respuestas enlatadas. Trabaja con tus datos, entiende lo que le piden y hace la tarea entera.</p>
-                        <ul class="pieza-lista">
-                            <li>Responde al momento en web y WhatsApp, con el contexto de tu negocio</li>
-                            <li>Distingue al curioso del que de verdad está interesado</li>
-                            <li>Agenda la llamada con los que están listos para comprar</li>
-                            <li>Hace el seguimiento que hoy no hace nadie</li>
-                        </ul>
-                        <a class="pieza-enlace" href="/agentes-ia/">Ver servicio &rarr;</a>
-                    </div>
-                    <video class="pieza-video" width="800" height="480"
-                           muted loop playsinline preload="metadata" aria-label="Un panel con llamadas, cierres, inversión y facturación del mes, con su gráfica por semanas y los últimos movimientos.">
-                        <source media="(max-width: 768px)" src="/assets/video/pilar-control-v.mp4" type="video/mp4">
-                        <source src="/assets/video/pilar-control.mp4" type="video/mp4">
-                    </video>
-                </article>
-
-                <!-- PIEZA 3 — Ahorrar tiempo (automatización de procesos) -->
-                <button type="button" class="pieza-fila" id="tab-ahorrar"
-                        aria-controls="panel-ahorrar" aria-expanded="false">
-                    <span class="pieza-fila-num" aria-hidden="true">03</span>
-                    <span class="pieza-fila-texto">
-                        <span class="pieza-fila-nombre">Ahorrar tiempo</span>
-                        <span class="pieza-fila-linea">El trabajo repetitivo, resuelto.</span>
-                    </span>
-                    <span class="pieza-fila-flecha" aria-hidden="true">↗</span>
-                </button>
-                <article class="pieza" id="panel-ahorrar" role="region"
-                         aria-labelledby="tab-ahorrar" hidden>
-                    <div class="pieza-texto">
-                        <div class="pieza-cabeza">
-                            <span class="pieza-num" aria-hidden="true">03</span>
-                            <span class="section-label">Automatización de procesos</span>
-                        </div>
-                        <h3 class="pieza-titulo">El trabajo que come el día, hecho solo</h3>
-                        <p class="pieza-desc">Hay trabajo que hay que hacer y no hace falta que lo haga una persona. Y tampoco hace falta que todas las dudas pasen por ti.</p>
-                        <ul class="pieza-lista">
-                            <li>Documentos, facturas y correos se archivan solos</li>
-                            <li>Tus herramientas se hablan: se acabó copiar datos de un sitio a otro</li>
-                            <li>Tu equipo le pregunta a un asistente con tus procedimientos, no a ti</li>
-                            <li>Lo que sabe tu negocio no se va cuando se va alguien</li>
-                        </ul>
-                        <a class="pieza-enlace" href="/automatizacion-procesos/">Ver servicio &rarr;</a>
-                    </div>
-                    <video class="pieza-video" width="800" height="480"
-                           muted loop playsinline preload="metadata" aria-label="Llega una factura, se procesa sola y sale archivada en Drive con un aviso enviado por correo.">
-                        <source media="(max-width: 768px)" src="/assets/video/pilar-automatizacion-v.mp4" type="video/mp4">
-                        <source src="/assets/video/pilar-automatizacion.mp4" type="video/mp4">
-                    </video>
-                </article>
-
+    {#- 01 · Punto de partida: rejilla asimétrica, titular grande a la
+        derecha y texto estrecho debajo. Sin caja. -#}
+    <section class="partida wrap seccion" id="punto-de-partida">
+        <p class="eyebrow reveal">01 / El punto de partida</p>
+        <div>
+            <h2 class="titular reveal">Hay trabajo que ya no deberías estar haciendo.</h2>
+            <div class="partida-texto reveal">
+                <p>Responder lo mismo diez veces, pasar datos de un sitio a otro, perseguir presupuestos. Entre todo eso apenas queda tiempo para dirigir el negocio.</p>
+                <p>Miro cómo funciona tu negocio por dentro y construyo lo que se ocupa de ese trabajo. Empezamos por el atasco que más te cuesta.</p>
+                <a class="text-link" href="#soluciones">Así lo resolvemos <span class="flecha" aria-hidden="true">↘</span></a>
             </div>
         </div>
     </section>
 
-    {#- SECCION 3b "DONDE ACTUAN" retirada (30-ago-2026).
-        Contaba en abstracto el mismo antes->despues que la seccion de
-        casos cuenta con empresa, logo y proceso real; y sus tres areas
-        (Captacion / Operaciones / Control) se solapaban con las tres
-        piezas de arriba. Ninguna referencia (steep, decagon, stripe)
-        tiene una seccion asi: todas ponen el antes->despues pegado a un
-        cliente con nombre. El marcado esta en el historial de git y en
-        scratchpad/seccion-donde-actuan.txt; su CSS (.donde-section,
-        .areas-grid, .area*) sigue en index.css por si vuelve. -#}
-
-    <!-- SECCIÓN 7A — CASOS REALES (carrusel) -->
-    <section id="caso-real" class="section caso-section reveal">
-        <div class="container">
-            <div class="section-header centered">
-                <span class="section-label">CASOS REALES</span>
-                <h2 class="section-title">Esto es lo que pasa cuando lo aplicamos</h2>
-                <p class="section-subtitle">Negocios reales, con sus propios atascos, resueltos con IA y automatización.</p>
+    {#- 02 · Servicios: lista de pestañas a la izquierda y una demo sobre
+        negro a la derecha (Linear). Los tres paneles están en el HTML,
+        no los pinta el JS: sin JS se ven los tres seguidos. -#}
+    <section class="servicios seccion" id="soluciones">
+        <div class="wrap">
+            <div class="cabecera reveal">
+                <p class="eyebrow">02 / Lo que construyo</p>
+                <h2 class="titular">Del primer contacto al trabajo hecho.</h2>
             </div>
 
-            {#- [5-sep-2026] PESTANYAS en vez de solo los puntos de abajo.
-                Los puntos eran 8px de gris al final de un bloque muy alto:
-                cuando llegabas a ellos ya habias dado el caso por terminado
-                y seguias bajando, asi que el segundo cliente no existia.
-                La pestanya va ARRIBA (se ve que hay dos antes de leer) y
-                dice el nombre (un punto gris no invita a nada).
-                Sin logo a proposito: el de Geko ya sale en la tira del hero
-                y en el polo de la foto de Guille. -#}
-            <div class="caso-carousel">
-                <div class="caso-tabs" role="tablist" aria-label="Casos reales">
-                    <button type="button" class="caso-tab is-active" role="tab" id="caso-tab-0" aria-controls="caso-panel-0" aria-selected="true" data-slide="0">Mafhesa</button>
-                    <button type="button" class="caso-tab" role="tab" id="caso-tab-1" aria-controls="caso-panel-1" aria-selected="false" tabindex="-1" data-slide="1">Geko Marketing</button>
-                    <button type="button" class="caso-tab" role="tab" id="caso-tab-2" aria-controls="caso-panel-2" aria-selected="false" tabindex="-1" data-slide="2">Bioresina</button>
+            <div class="servicios-rejilla reveal">
+                <div class="servicios-lista" role="tablist" aria-label="Servicios">
+                    <button type="button" role="tab" id="tab-captar" aria-controls="panel-captar" aria-selected="true">
+                        <span class="num">01</span>
+                        <span class="nombre">Diseño web y captación<small>Que te encuentren. Y que no se escape ninguno.</small></span>
+                        <b aria-hidden="true">↗</b>
+                    </button>
+                    <button type="button" role="tab" id="tab-vender" aria-controls="panel-vender" aria-selected="false" tabindex="-1">
+                        <span class="num">02</span>
+                        <span class="nombre">Agentes de IA<small>Contestan al momento y agendan a los interesados.</small></span>
+                        <b aria-hidden="true">↗</b>
+                    </button>
+                    <button type="button" role="tab" id="tab-ahorrar" aria-controls="panel-ahorrar" aria-selected="false" tabindex="-1">
+                        <span class="num">03</span>
+                        <span class="nombre">Automatización de procesos<small>El trabajo que come el día, hecho solo.</small></span>
+                        <b aria-hidden="true">↗</b>
+                    </button>
                 </div>
 
-                <div class="caso-track">
-
-                    <!-- SLIDE 0 &mdash; MAFHESA -->
-                    <div class="caso-slide" role="tabpanel" id="caso-panel-0" aria-labelledby="caso-tab-0"><div class="caso-steps">
-
-                            <div class="caso-step">
-                                <span class="caso-step-num" aria-hidden="true">01</span>
-                                <span class="caso-step-label">PROBLEMA</span>
-                                <p class="caso-step-title">Quien buscaba un relojero en Madrid no la encontraba</p>
-                                <p class="caso-step-desc">Mafhesa vende y repara relojer&iacute;a desde 1978 en Calle Carretas.</p>
-                            </div>
-
-                            <div class="caso-step-arrow" aria-hidden="true">&rarr;</div>
-
-                            <div class="caso-step caso-step-highlight">
-                                <span class="caso-step-num" aria-hidden="true">02</span>
-                                <span class="caso-step-label">SOLUCI&Oacute;N</span>
-                                <p class="caso-step-title">Una web nueva que aparece en Google y en ChatGPT</p>
-                                <p class="caso-step-desc">Una web nueva, con textos pensados para que Google te encuentre y para que ChatGPT y otras IA te recomienden.</p>
-                            </div>
-
-                            <div class="caso-step-arrow" aria-hidden="true">&rarr;</div>
-
-                            <div class="caso-step">
-                                <span class="caso-step-num" aria-hidden="true">03</span>
-                                <span class="caso-step-label">RESULTADO</span>
-                                <p class="caso-step-title">Aparece cuando la gente busca</p>
-                                <p class="caso-step-desc">Casi medio siglo en Madrid. Ahora tambi&eacute;n en Google.</p>
-                            </div>
-
-                        </div><div class="caso-cierre">
-                            <div>
-                                <span class="caso-impact-titulo">QU&Eacute; SE HIZO</span><div class="caso-hechos">
-                                    <p class="caso-hecho">
-                                        <strong>Web nueva</strong>
-                                        Una p&aacute;gina por servicio.
-                                    </p>
-                                    <p class="caso-hecho">
-                                        <strong>Posicionamiento org&aacute;nico</strong>
-                                        Y ficha de Google ordenada.
-                                    </p>
-                                    <p class="caso-hecho">
-                                        <strong>Automatizaci&oacute;n de rese&ntilde;as</strong>
-                                        Con aprobaci&oacute;n del due&ntilde;o.
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="caso-impact-col">
-                                <span class="caso-impact-titulo">IMPACTO REAL EN EL NEGOCIO</span>
-                                <div class="caso-impact-list">
-                                <div class="caso-impact-item">
-                                    <p class="caso-impact-num">43&times;</p>
-                                    <p class="caso-impact-label">m&aacute;s visibilidad en Google</p>
-                                </div>
-                                </div>
-                                <p class="caso-impact-label">Datos de Search Console, &uacute;ltimos 90 d&iacute;as.</p>
+                <div class="servicios-paneles">
+                    <article class="panel inverse" role="tabpanel" id="panel-captar" aria-labelledby="tab-captar" tabindex="0"
+                             data-pasos="Llega una consulta desde la web|Se guarda sola en tu CRM, con su origen|Sale el primer seguimiento, sin que nadie lo escriba">
+                        <div class="panel-top"><span>Un sistema en marcha</span><span class="panel-ejemplo">Ejemplo ilustrativo</span></div>
+                        <div class="flujo">
+                            <div class="flujo-nodo"><span class="nodo-ico" aria-hidden="true">⌕</span><span>Google</span></div>
+                            <div class="flujo-linea" aria-hidden="true"><i></i></div>
+                            <div class="flujo-centro"><span>Tu web</span><small>Capta</small></div>
+                            <div class="flujo-linea" aria-hidden="true"><i></i></div>
+                            <div class="flujo-nodo"><span class="nodo-ico" aria-hidden="true">✓</span><span>Tu CRM</span></div>
+                        </div>
+                        <div class="actividad" aria-live="polite"><span class="punto" aria-hidden="true"></span><div><strong class="actividad-t">Nuevo contacto registrado</strong><p class="actividad-p">Origen, datos y siguiente paso. En el mismo sitio.</p></div><span class="actividad-ok" aria-hidden="true">✓</span></div>
+                        <div class="panel-texto">
+                            <h3>Que te encuentren.<br>Que el contacto llegue.</h3>
+                            <ul>
+                                <li>Una web pensada para conseguir clientes, no para decorar</li>
+                                <li>Que aparezcas en Google y en las respuestas de ChatGPT o Gemini</li>
+                                <li>Cada contacto queda guardado en tu lista de clientes, venga de donde venga</li>
+                                <li>Seguimiento automático: nadie se queda sin respuesta</li>
+                            </ul>
+                            <div class="panel-acciones">
+                                <button type="button" class="text-link panel-recorrido">Ver el recorrido <span class="flecha" aria-hidden="true">→</span></button>
+                                <a class="text-link" href="/diseno-web-pymes/">Ver servicio <span class="flecha" aria-hidden="true">↗</span></a>
                             </div>
                         </div>
+                    </article>
 
-                    </div>
-
-                    <!-- SLIDE 1 &mdash; Geko -->
-                    <div class="caso-slide" role="tabpanel" id="caso-panel-1" aria-labelledby="caso-tab-1">
-
-                        {#- TRES pasos, no cuatro, y sin icono: la secuencia ya
-                            la marcan el numero, la etiqueta y la flecha. Los
-                            iconos venian ademas con tres criterios de color
-                            mezclados (currentColor, #B44100 y #ffffff a fuego). -#}
-                        <div class="caso-steps">
-
-                            <div class="caso-step">
-                                <span class="caso-step-num" aria-hidden="true">01</span>
-                                <span class="caso-step-label">PROBLEMA</span>
-                                <p class="caso-step-title">Clientes interesados repartidos por todas partes</p>
-                                <p class="caso-step-desc">No sab&iacute;an de d&oacute;nde ven&iacute;a cada interesado ni qui&eacute;n hab&iacute;a comprado y qui&eacute;n no.</p>
-                            </div>
-
-                            <div class="caso-step-arrow" aria-hidden="true">&rarr;</div>
-
-                            <div class="caso-step caso-step-highlight">
-                                <span class="caso-step-num" aria-hidden="true">02</span>
-                                <span class="caso-step-label">SOLUCI&Oacute;N</span>
-                                <p class="caso-step-title">Un registro de clientes a medida, con dos entradas</p>
-                                <p class="caso-step-desc">Su web capta y manda al interesado directo a su registro de clientes (CRM); y a Claude le pide, hablando o escribiendo, que apunte los contactos y lo que se ha hablado.</p>
-                            </div>
-
-                            <div class="caso-step-arrow" aria-hidden="true">&rarr;</div>
-
-                            <div class="caso-step">
-                                <span class="caso-step-num" aria-hidden="true">03</span>
-                                <span class="caso-step-label">RESULTADO</span>
-                                <p class="caso-step-title">Ning&uacute;n lead se queda sin registrar</p>
-                                <p class="caso-step-desc">Entren por donde entren, quedan dentro con su origen y su actividad. Sin apuntarlos &quot;luego&quot;.</p>
-                            </div>
-
+                    <article class="panel inverse" role="tabpanel" id="panel-vender" aria-labelledby="tab-vender" tabindex="0"
+                             data-pasos="Un cliente pregunta por WhatsApp a las 23:40|El agente responde con los datos de tu negocio|Propone una cita y te avisa">
+                        <div class="panel-top"><span>Un sistema en marcha</span><span class="panel-ejemplo">Ejemplo ilustrativo</span></div>
+                        <div class="flujo">
+                            <div class="flujo-nodo"><span class="nodo-ico" aria-hidden="true">✉</span><span>Consulta</span></div>
+                            <div class="flujo-linea" aria-hidden="true"><i></i></div>
+                            <div class="flujo-centro"><span>Agente</span><small>Responde</small></div>
+                            <div class="flujo-linea" aria-hidden="true"><i></i></div>
+                            <div class="flujo-nodo"><span class="nodo-ico" aria-hidden="true">◷</span><span>Agenda</span></div>
                         </div>
-
-                        {#- Cita e impacto planos sobre el fondo, como decagon
-                            (comprobado: sus testimonios van sin tarjeta, con la
-                            metrica en numero grande). Sin comilla decorativa:
-                            --font-display ya no es una serif desde el 31-ago,
-                            asi que salia como dos rayitas pegadas. -#}
-                        <div class="caso-cierre">
-                            <blockquote class="caso-quote-col">
-                                <p class="caso-quote-text">Mi web no me tra&iacute;a nada y los leads viv&iacute;an repartidos: muchos no llegaban ni a apuntarse. Ahora la web capta y entra directo al CRM, y lo dem&aacute;s se lo pido a Claude, con un audio o por escrito: me registra el lead y lo que hemos hablado. Ya no depende de que me siente a rellenarlo.</p>
-                                {#- [5-sep-2026] Foto real de Guille ya puesta.
-                                    PENDIENTE: el TEXTO sigue redactado por
-                                    nosotros con lo que Alberto cuenta del
-                                    proyecto, no son sus palabras. Va firmado con
-                                    su nombre y su cara: NO publicar sin que el lo
-                                    lea y lo apruebe (o lo reescriba a su manera). -#}
-                                <footer class="caso-quote-author">
-                                    <img src="assets/img/guille-garcia.jpg" alt="Guille Garc&iacute;a" class="caso-quote-avatar" width="40" height="40" loading="lazy">
-                                    <span class="caso-quote-firma">
-                                        <span class="caso-quote-nombre">Guille Garc&iacute;a</span>
-                                        <span class="caso-quote-cargo">CEO de Geko Marketing</span>
-                                    </span>
-                                </footer>
-                            </blockquote>
-                            <div class="caso-impact-col">
-                                <span class="caso-impact-titulo">QU&Eacute; CAMBI&Oacute; EN EL D&Iacute;A A D&Iacute;A</span>
-                                {#- Hechos, no cifras. De este caso no hay dato
-                                    de ANTES (cuantos leads entraban, cuantos se
-                                    perdian), y sin ese antes una cifra no es una
-                                    resta: "0 sin seguimiento" y "100% con origen
-                                    visible" decian lo mismo, y "1 vistazo" era
-                                    una frase con un numero delante para que
-                                    rimara. Cuando se consiga el dato real, esto
-                                    vuelve a ser caso-impact-list con num/label. -#}
-                                <div class="caso-hechos">
-                                    <p class="caso-hecho">
-                                        <strong>Su web ya capta de verdad</strong>
-                                        Quien deja sus datos entra en el CRM sin pasar por nadie.
-                                    </p>
-                                    <p class="caso-hecho">
-                                        <strong>Se lo pide a Claude y queda dentro</strong>
-                                        Un audio o un mensaje: registra el lead y lo hablado con &eacute;l.
-                                    </p>
-                                    <p class="caso-hecho">
-                                        <strong>Origen y actividad a la vista</strong>
-                                        En cada lead, sin tener que buscarlo.
-                                    </p>
-                                </div>
+                        <div class="actividad" aria-live="polite"><span class="punto" aria-hidden="true"></span><div><strong class="actividad-t">Cita lista para confirmar</strong><p class="actividad-p">El agente recoge la consulta y propone un horario.</p></div><span class="actividad-ok" aria-hidden="true">✓</span></div>
+                        <div class="panel-texto">
+                            <h3>Una respuesta a tiempo.<br>Una oportunidad atendida.</h3>
+                            <ul>
+                                <li>Responde al momento en web y WhatsApp, con el contexto de tu negocio</li>
+                                <li>Distingue al curioso del que de verdad está interesado</li>
+                                <li>Agenda la llamada con los que están listos para comprar</li>
+                                <li>Hace el seguimiento que hoy no hace nadie</li>
+                            </ul>
+                            <div class="panel-acciones">
+                                <button type="button" class="text-link panel-recorrido">Ver el recorrido <span class="flecha" aria-hidden="true">→</span></button>
+                                <a class="text-link" href="/agentes-ia/">Ver servicio <span class="flecha" aria-hidden="true">↗</span></a>
                             </div>
                         </div>
+                    </article>
 
-                    </div>
-
-                    <!-- SLIDE 2 &mdash; Bioresina -->
-                    <div class="caso-slide" role="tabpanel" id="caso-panel-2" aria-labelledby="caso-tab-2">
-
-                        {#- TRES pasos, no cuatro, y sin icono: la secuencia ya
-                            la marcan el numero, la etiqueta y la flecha. Los
-                            iconos venian ademas con tres criterios de color
-                            mezclados (currentColor, #B44100 y #ffffff a fuego). -#}
-                        <div class="caso-steps">
-
-                            <div class="caso-step">
-                                <span class="caso-step-num" aria-hidden="true">01</span>
-                                <span class="caso-step-label">PROBLEMA</span>
-                                <p class="caso-step-title">2 horas al d&iacute;a en tareas manuales</p>
-                                <p class="caso-step-desc">30 emails al d&iacute;a con PDF adjunto, preparados y enviados uno a uno a mano.</p>
-                            </div>
-
-                            <div class="caso-step-arrow" aria-hidden="true">&rarr;</div>
-
-                            <div class="caso-step caso-step-highlight">
-                                <span class="caso-step-num" aria-hidden="true">02</span>
-                                <span class="caso-step-label">SOLUCI&Oacute;N</span>
-                                <p class="caso-step-title">Automatizaci&oacute;n con Make</p>
-                                <p class="caso-step-desc">Env&iacute;o de emails con PDF automatizado de principio a fin, con 2 seguimientos tambi&eacute;n autom&aacute;ticos.</p>
-                            </div>
-
-                            <div class="caso-step-arrow" aria-hidden="true">&rarr;</div>
-
-                            <div class="caso-step">
-                                <span class="caso-step-num" aria-hidden="true">03</span>
-                                <span class="caso-step-label">RESULTADO</span>
-                                <p class="caso-step-title">2 horas al d&iacute;a recuperadas</p>
-                                <p class="caso-step-desc">El equipo ya no pierde el d&iacute;a preparando y enviando correos uno a uno.</p>
-                            </div>
-
+                    <article class="panel inverse" role="tabpanel" id="panel-ahorrar" aria-labelledby="tab-ahorrar" tabindex="0"
+                             data-pasos="Llega una factura al correo|Se procesa y se archiva en Drive|Sale el aviso a quien corresponde">
+                        <div class="panel-top"><span>Un sistema en marcha</span><span class="panel-ejemplo">Ejemplo ilustrativo</span></div>
+                        <div class="flujo">
+                            <div class="flujo-nodo"><span class="nodo-ico" aria-hidden="true">▤</span><span>Factura</span></div>
+                            <div class="flujo-linea" aria-hidden="true"><i></i></div>
+                            <div class="flujo-centro"><span>Proceso</span><small>Solo</small></div>
+                            <div class="flujo-linea" aria-hidden="true"><i></i></div>
+                            <div class="flujo-nodo"><span class="nodo-ico" aria-hidden="true">✓</span><span>Archivada</span></div>
                         </div>
-
-                        {#- Cita e impacto planos sobre el fondo, como decagon
-                            (comprobado: sus testimonios van sin tarjeta, con la
-                            metrica en numero grande). Sin comilla decorativa:
-                            --font-display ya no es una serif desde el 31-ago,
-                            asi que salia como dos rayitas pegadas. -#}
-                        <div class="caso-cierre">
-                            <blockquote class="caso-quote-col">
-                                <p class="caso-quote-text">Antes, el equipo se pasaba el d&iacute;a preparando y enviando correos uno a uno con su PDF adjunto. Ahora todo eso sale solo, seguimientos incluidos, y hemos recuperado dos horas al d&iacute;a para dedicarlas a otra cosa.</p>
-                                <footer class="caso-quote-author">
-                                    <img src="assets/img/bioresina.svg" alt="" class="caso-quote-avatar is-logo" width="40" height="40" loading="lazy" aria-hidden="true">
-                                    <span class="caso-quote-firma">
-                                        <span class="caso-quote-nombre">Equipo de Bioresina</span>
-                                        <span class="caso-quote-cargo">Operaciones</span>
-                                    </span>
-                                </footer>
-                            </blockquote>
-                            <div class="caso-impact-col">
-                                <span class="caso-impact-titulo">IMPACTO REAL EN EL NEGOCIO</span>
-                                <div class="caso-impact-list">
-                                <div class="caso-impact-item">
-                                    <p class="caso-impact-num">44h</p>
-                                    <p class="caso-impact-label">recuperadas cada mes</p>
-                                </div>
-                                <div class="caso-impact-item">
-                                    <p class="caso-impact-num">13+</p>
-                                    <p class="caso-impact-label">semanas laborales liberadas al a&ntilde;o</p>
-                                </div>
-                                </div>
+                        <div class="actividad" aria-live="polite"><span class="punto" aria-hidden="true"></span><div><strong class="actividad-t">Documento archivado y avisado</strong><p class="actividad-p">Cada archivo en su sitio, sin copiar datos a mano.</p></div><span class="actividad-ok" aria-hidden="true">✓</span></div>
+                        <div class="panel-texto">
+                            <h3>El trabajo se repite.<br>Tú ya no tienes que hacerlo.</h3>
+                            <ul>
+                                <li>Documentos, facturas y correos se archivan solos</li>
+                                <li>Tus herramientas se hablan: se acabó copiar datos de un sitio a otro</li>
+                                <li>Tu equipo pregunta a un asistente con tus procedimientos, no a ti</li>
+                                <li>Lo que sabe tu negocio no se va cuando se va alguien</li>
+                            </ul>
+                            <div class="panel-acciones">
+                                <button type="button" class="text-link panel-recorrido">Ver el recorrido <span class="flecha" aria-hidden="true">→</span></button>
+                                <a class="text-link" href="/automatizacion-procesos/">Ver servicio <span class="flecha" aria-hidden="true">↗</span></a>
                             </div>
                         </div>
-
-                    </div>
-
+                    </article>
                 </div>
-
             </div>
-
         </div>
     </section>
 
-    {# SECCIÓN 5 — CÓMO TRABAJO
-       [31-ago-2026] Reescrita. Antes eran tres pasos genéricos
-       ("entiendo tu negocio / diseño la solución / implemento y
-       garantizo") que cabían en la web de cualquier consultor de
-       cualquier sector: copy intercambiable.
+    {#- 03 · Casos: tres composiciones distintas. Bioresina = cifra
+        monumental en bloque partido; Geko = texto + cita con línea;
+        Mafhesa = banda negra con la cifra a la derecha. -#}
+    <section class="casos wrap seccion" id="caso-real">
+        <div class="cabecera reveal">
+            <p class="eyebrow">03 / En negocios reales</p>
+            <h2 class="titular">Se nota en el día a día.</h2>
+        </div>
 
-       Ahora son las cuatro fases reales de un sistema de automatización.
-       La cuarta es la que importa: casi nadie cuenta que un sistema con
-       IA hay que sostenerlo, y es lo que separa a quien monta algo y
-       desaparece de quien se queda. Sin cifras ni plazos a propósito. #}
-    {# [1-sep-2026] Sin aurora-canvas. Pintaba manchas de acento
-       animadas por el fondo de la seccion, y el halo naranja tiene que
-       salir SOLO de las piezas de UI — es lo que las hace parecer
-       pantallas encendidas. Con la aurora detras, la luz no venia de
-       ninguna pieza concreta y el carbon se veia sucio. El hero si la
-       conserva: alli el fondo ES el protagonista. #}
-    <section id="como-trabajo" class="section como-trabajo-section reveal">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label">CÓMO TRABAJO</span>
-                <h2 class="section-title">Un sistema no se entrega y ya está.</h2>
-                <p class="section-subtitle">Montar la automatización es la parte fácil. Lo difícil es que siga funcionando cuando tu negocio cambia.</p>
+        <article class="caso-bio reveal">
+            <div class="caso-bio-info">
+                <p class="eyebrow">Bioresina / Automatización</p>
+                <h3>Los correos salen solos. El equipo sigue con su trabajo.</h3>
+                <p>30 correos al día con su PDF, preparados y enviados uno a uno. Ahora el envío y los dos seguimientos funcionan solos, con Make.</p>
+                <blockquote>«Hemos recuperado dos horas al día para dedicarlas a otra cosa.»<footer>Equipo de Bioresina · Operaciones</footer></blockquote>
             </div>
+            <div class="caso-bio-cifra">
+                <span class="cifra">2<span>h</span></span>
+                <p>recuperadas cada día</p>
+                <dl>
+                    <div><dt>44 h</dt><dd>al mes</dd></div>
+                    <div><dt>13+</dt><dd>semanas laborales al año</dd></div>
+                </dl>
+                <div class="barras" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            </div>
+        </article>
 
-            <ol class="fases">
+        <article class="caso-geko reveal">
+            <div>
+                <p class="eyebrow">Geko Marketing / Captación + CRM</p>
+                <h3>Cada contacto, en su sitio.</h3>
+                <p>Los interesados vivían repartidos y muchos no llegaban ni a apuntarse. Ahora la web capta y entra directa al CRM, y lo demás se lo pide a Claude con un audio o un mensaje.</p>
+                <ul class="caso-hechos">
+                    <li>La web ya capta de verdad</li>
+                    <li>Un audio a Claude y el lead queda registrado</li>
+                    <li>Origen y actividad a la vista en cada lead</li>
+                </ul>
+            </div>
+            <blockquote>
+                <p>«Ya no depende de que me siente a rellenarlo.»</p>
+                <footer>
+                    <img src="/assets/img/guille-garcia.jpg" alt="" width="48" height="48" loading="lazy">
+                    <span>Guille García<small>CEO de Geko Marketing</small></span>
+                </footer>
+            </blockquote>
+        </article>
 
-                {# ── FASE 01 · EL DIAGNOSTICO ───────────────────────────────
-                   Pieza: bloque de reglas en monoespaciado, como el panel de
-                   AOPs de decagon. Es lo que mejor cuenta un diagnostico:
-                   texto leido, con lo que falla marcado dentro del propio
-                   texto. Flota suelto sobre el carbon, sin chasis de ventana. #}
-                <li class="fase reveal">
-                    <span class="fase-marca" aria-hidden="true"></span>
-                    <div class="fase-cuerpo">
-                        <span class="fase-n">01</span>
-                        {# Titular tipo decagon: frase corta con la palabra
-                           clave en acento, no una etiqueta suelta. El <em>
-                           no es enfasis tipografico, es la palabra que nombra
-                           la fase — por eso lleva el color. #}
-                        <h3 class="fase-t"><em>Entiendo</em> cómo trabajas</h3>
-                        <p class="fase-p">Antes de proponerte nada, miro cómo trabajas de verdad: por dónde entran los clientes, qué se hace a mano y dónde se atasca. La mayoría de lo que frena un negocio no está donde parece.</p>
-                    </div>
+        <article class="caso-mafhesa inverse reveal">
+            <div class="caso-mafhesa-texto">
+                <p class="eyebrow">Mafhesa / Web + posicionamiento</p>
+                <h3>Relojería desde 1978 en Calle Carretas. Ahora también en Google.</h3>
+                <p>Quien buscaba un relojero en Madrid no la encontraba. Web nueva con una página por servicio, ficha de Google ordenada y reseñas automatizadas con aprobación del dueño.</p>
+            </div>
+            <div class="caso-mafhesa-cifra">
+                <span class="cifra">43<span>×</span></span>
+                <p>más visibilidad en Google</p>
+                <small>Datos de Search Console, últimos 90 días.</small>
+            </div>
+        </article>
+    </section>
 
-                    <figure class="fase-viz" aria-hidden="true">
-                        <div class="fase-pieza fase-pieza--reglas">
-                            <ol class="reglas">
-                                <li><span class="reglas-n">1.</span> Entra una <b class="tk">@consulta</b> por WhatsApp</li>
-                                <li><span class="reglas-n">2.</span> Alguien la lee <b class="tk">cuando puede</b></li>
-                                <li class="es-fallo">
-                                    <span class="reglas-n">3.</span> Si <b class="tk">@fuera_de_horario</b>
-                                    <ul>
-                                        <li>a. La consulta <b class="tk-mal">espera a mañana</b></li>
-                                    </ul>
-                                </li>
-                                <li><span class="reglas-n">4.</span> Se pasa la cita <b class="tk">a mano</b> a la agenda</li>
-                            </ol>
-                            <p class="reglas-pie"><span class="pin"></span> Aquí es donde se pierde la consulta</p>
-                        </div>
-                    </figure>
+    {#- 04 · Método: bloque negro, tres columnas con línea arriba y un
+        cierre sobre el mantenimiento. -#}
+    <section class="metodo inverse seccion" id="como-trabajo">
+        <div class="wrap">
+            <div class="cabecera reveal">
+                <p class="eyebrow">04 / Cómo trabajo</p>
+                <h2 class="titular">Primero entiendo. Después construyo.</h2>
+            </div>
+            <ol class="metodo-pasos">
+                <li class="reveal">
+                    <span class="metodo-num">01 — Entiendo</span>
+                    <h3>Cómo trabajas de verdad.</h3>
+                    <p>Por dónde entran los clientes, qué se hace a mano y dónde se atasca. La mayoría de lo que frena un negocio no está donde parece.</p>
                 </li>
-
-                {# ── FASE 02 · LO QUE SE MONTA ──────────────────────────────
-                   Pieza: el flujo ya arreglado. Es la unica fase que pide un
-                   diagrama de verdad (algo se conecta con algo), asi que aqui
-                   si va SVG — pero desnudo sobre el carbon, sin ventana ni
-                   fila de indicadores. #}
-                <li class="fase reveal">
-                    <span class="fase-marca" aria-hidden="true"></span>
-                    <div class="fase-cuerpo">
-                        <span class="fase-n">02</span>
-                        <h3 class="fase-t"><em>Construyo</em> solo lo que hace falta</h3>
-                        <p class="fase-p">Monto solo lo que resuelve el atasco que encontramos. No un paquete cerrado: el agente, la automatización o el panel que tu caso pide, conectado a las herramientas que ya usas.</p>
-                    </div>
-
-                    <figure class="fase-viz" aria-hidden="true">
-                        <div class="fase-pieza fase-pieza--flujo">
-                            {# viewBox 320x140, con 6 de margen a cada lado. El
-                               anterior era 300 de ancho y el ultimo chip acababa
-                               en x=314: se salia del lienzo y se veia cortado.
-                               Ahora nada pasa de x=314 dentro de un lienzo de 320. #}
-                            <svg class="flujo" viewBox="0 0 320 140" role="img">
-
-                                {# ── FILA DE ARRIBA: entra la consulta, la coge el agente ── #}
-                                <rect class="nodo" x="6" y="16" width="80" height="34" rx="8"/>
-                                {# WhatsApp: burbuja con cola y auricular. Es por donde
-                                   entra la consulta en casi todos estos negocios. #}
-                                <g class="marca marca--wa">
-                                    <path class="marca-f" d="M 21 26 a 7.5 7.5 0 1 0 -6.6 11.1 l 4.2 1.1 l -1.1 -3.9 a 7.5 7.5 0 0 0 3.5 -8.3 z"/>
-                                    <path class="marca-h" d="M 16.4 29.6 c 0.9 2.2 2.4 3.5 4.4 4.1 l 1 -1.3 l 1.6 0.6 l -0.3 1.7 c -2.9 0.4 -5.9 -1.9 -7 -4.6 l 1.4 -0.9 z"/>
-                                </g>
-                                <text class="nodo-t" x="34" y="37">Consulta</text>
-
-                                <path class="hilo" d="M 86 33 H 104"/>
-                                <polygon class="punta" points="104,30 110,33 104,36"/>
-
-                                {# ── EL AGENTE: lo que se monta, en acento ──
-                                   Icono de agente de IA: cabeza con antena y dos ojos,
-                                   que es como se dibuja un bot en todas partes. Antes
-                                   era un circulo con un tic, que no decia "agente". #}
-                                <g class="es-nuevo">
-                                    <rect class="nodo nodo--acento" x="110" y="8" width="100" height="50" rx="10"/>
-                                    <g class="bot">
-                                        <path class="bot-antena" d="M 160 13 V 17"/>
-                                        <circle class="bot-punto" cx="160" cy="12" r="1.6"/>
-                                        <rect class="bot-cara" x="152" y="17" width="16" height="12" rx="4"/>
-                                        <circle class="bot-ojo" cx="156.6" cy="23" r="1.5"/>
-                                        <circle class="bot-ojo" cx="163.4" cy="23" r="1.5"/>
-                                    </g>
-                                    <text class="nodo-t nodo-t--acento" x="160" y="41">Agente</text>
-                                    <text class="nodo-s" x="160" y="51">responde al momento</text>
-                                </g>
-
-                                <path class="hilo" d="M 210 33 H 228"/>
-                                <polygon class="punta" points="228,30 234,33 228,36"/>
-
-                                <rect class="nodo" x="234" y="16" width="80" height="34" rx="8"/>
-                                {# Calendario: cuadricula con las dos anillas arriba y
-                                   el dia marcado en acento. #}
-                                <g class="marca marca--cal">
-                                    <rect class="marca-h" x="243" y="26" width="13" height="12" rx="2"/>
-                                    <path class="marca-h" d="M 243 30 h 13 M 246.5 24.5 v 3 M 252.5 24.5 v 3"/>
-                                    <rect class="marca-dia" x="245.5" y="32" width="3" height="3" rx="0.6"/>
-                                </g>
-                                <text class="nodo-t" x="262" y="37">Agenda</text>
-
-                                {# ── LO QUE EL AGENTE ENGANCHA POR DEBAJO ──
-                                   Las herramientas que el cliente YA usa. Salen del
-                                   agente, no del camino principal, por eso el hilo va
-                                   punteado. #}
-                                <path class="hilo hilo--suave" d="M 160 58 V 78 H 48 V 96"/>
-                                <path class="hilo hilo--suave" d="M 160 58 V 96"/>
-                                <path class="hilo hilo--suave" d="M 160 58 V 78 H 272 V 96"/>
-
-                                {# CRM: tres fichas de contacto apiladas. No hay logo
-                                   universal de CRM, asi que se dibuja el objeto. #}
-                                <rect class="chip" x="6" y="96" width="84" height="28" rx="14"/>
-                                <g class="marca marca--crm">
-                                    <circle class="marca-h" cx="20" cy="107" r="2.6"/>
-                                    <path class="marca-h" d="M 16 114 a 4 4 0 0 1 8 0"/>
-                                </g>
-                                <text class="chip-t" x="30" y="113">tu CRM</text>
-
-                                {# Google Calendar: el marco cuadrado con la esquina
-                                   doblada y el 31, que es como se reconoce. #}
-                                <rect class="chip" x="118" y="96" width="84" height="28" rx="14"/>
-                                <g class="marca marca--gcal">
-                                    <path class="marca-h" d="M 128 102 h 9 l 4 4 v 9 h -13 z"/>
-                                    <path class="marca-h" d="M 137 102 v 4 h 4"/>
-                                    <text class="marca-31" x="134" y="112">31</text>
-                                </g>
-                                <text class="chip-t" x="147" y="113">tu calendario</text>
-
-                                {# Gmail: el sobre con la M del pliegue, en su rojo. #}
-                                <rect class="chip" x="230" y="96" width="84" height="28" rx="14"/>
-                                <g class="marca marca--gmail">
-                                    <rect class="marca-h" x="240" y="103" width="14" height="10" rx="1.6"/>
-                                    <path class="marca-m" d="M 240 104 l 7 5.4 l 7 -5.4"/>
-                                </g>
-                                <text class="chip-t" x="259" y="113">tu correo</text>
-                            </svg>
-                        </div>
-                    </figure>
+                <li class="reveal">
+                    <span class="metodo-num">02 — Construyo</span>
+                    <h3>Solo lo que hace falta.</h3>
+                    <p>El agente, la automatización o el panel que tu caso pide, conectado a las herramientas que ya usas. Nada de paquetes cerrados.</p>
                 </li>
-
-                {# ── FASE 03 · LA PUESTA EN MARCHA ──────────────────────────
-                   [1-sep-2026] Aqui habia un hueco de imagen, y era la unica
-                   fase SIN pieza dibujada: entre la 01 y la 02, que si la
-                   tienen, se leia como un sitio a medio hacer. La captura se
-                   va al bloque de cierre, donde hay sitio de verdad para
-                   ensenyar imagenes.
-
-                   Pieza: el ABANICO DE PANELES en perspectiva, replicando el
-                   "Escala tu agente" de decagon con el acento terracota. Son
-                   cinco laminas de cristal escalonadas en 3D, cada una con su
-                   grafica: barras, area, rejilla.
-
-                   Encaja con lo que cuenta la fase mejor que un panel unico
-                   plano — no es UNA pantalla, es el sistema entero puesto a
-                   funcionar y dando datos desde el primer dia. #}
-                <li class="fase reveal">
-                    <span class="fase-marca" aria-hidden="true"></span>
-                    <div class="fase-cuerpo">
-                        <span class="fase-n">03</span>
-                        <h3 class="fase-t"><em>Lo pongo</em> a funcionar de verdad</h3>
-                        <p class="fase-p">Lo pongo a funcionar con tus datos reales, no con un ejemplo. Tu equipo aprende a usarlo y te queda documentado, para que no dependas de mí para lo del día a día.</p>
-                    </div>
-
-                    <figure class="fase-viz" aria-hidden="true">
-                        <div class="fase-pieza fase-pieza--abanico">
-                            <div class="abanico">
-
-                                {# Lamina 1 · BARRAS. La de delante, la mas
-                                   opaca y la que mas se lee. #}
-                                <div class="lam lam--1">
-                                    <svg class="lam-svg" viewBox="0 0 100 120" preserveAspectRatio="none">
-                                        <rect class="lam-barra" x="10" y="74" width="9" height="36" rx="2"/>
-                                        <rect class="lam-barra" x="23" y="40" width="9" height="70" rx="2"/>
-                                        <rect class="lam-barra" x="36" y="56" width="9" height="54" rx="2"/>
-                                        <rect class="lam-barra" x="49" y="26" width="9" height="84" rx="2"/>
-                                        <rect class="lam-barra" x="62" y="46" width="9" height="64" rx="2"/>
-                                        <rect class="lam-barra" x="75" y="66" width="9" height="44" rx="2"/>
-                                    </svg>
-                                </div>
-
-                                {# Lamina 2 · lisa, solo un renglon de cabecera:
-                                   entre dos graficas, una lamina casi vacia da
-                                   el respiro que hace que se lean como pila. #}
-                                <div class="lam lam--2">
-                                    <svg class="lam-svg" viewBox="0 0 100 120" preserveAspectRatio="none">
-                                        <rect class="lam-linea" x="12" y="16" width="34" height="4" rx="2"/>
-                                        <rect class="lam-linea" x="12" y="26" width="20" height="4" rx="2"/>
-                                    </svg>
-                                </div>
-
-                                {# Lamina 3 · AREA. La curva rellena con su
-                                   linea encima y el punto del maximo. #}
-                                <div class="lam lam--3">
-                                    <svg class="lam-svg" viewBox="0 0 100 120" preserveAspectRatio="none">
-                                        <path class="lam-area" d="M 8 110 L 8 84 L 26 66 L 44 30 L 62 52 L 80 40 L 92 58 L 92 110 Z"/>
-                                        <path class="lam-curva" d="M 8 84 L 26 66 L 44 30 L 62 52 L 80 40 L 92 58"/>
-                                        <circle class="lam-punto" cx="44" cy="30" r="3.4"/>
-                                    </svg>
-                                </div>
-
-                                {# Lamina 4 · REJILLA. La de atras casi no se
-                                   ve; es la que da profundidad al abanico. #}
-                                <div class="lam lam--4">
-                                    <svg class="lam-svg" viewBox="0 0 100 120" preserveAspectRatio="none">
-                                        <path class="lam-rejilla" d="M 0 24 H 100 M 0 48 H 100 M 0 72 H 100 M 0 96 H 100"/>
-                                        <path class="lam-rejilla" d="M 20 0 V 120 M 40 0 V 120 M 60 0 V 120 M 80 0 V 120"/>
-                                        <path class="lam-arco" d="M 6 112 C 30 108 40 34 50 34 C 60 34 70 108 94 112"/>
-                                    </svg>
-                                </div>
-
-                                {# Lamina 5 · la ultima, solo unas barras
-                                   pequenyas asomando por el borde. #}
-                                <div class="lam lam--5">
-                                    <svg class="lam-svg" viewBox="0 0 100 120" preserveAspectRatio="none">
-                                        <rect class="lam-barra" x="16" y="80" width="10" height="30" rx="2"/>
-                                        <rect class="lam-barra" x="32" y="62" width="10" height="48" rx="2"/>
-                                        <rect class="lam-barra" x="48" y="88" width="10" height="22" rx="2"/>
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                    </figure>
+                <li class="reveal">
+                    <span class="metodo-num">03 — Lo pongo a funcionar</span>
+                    <h3>Con tus datos reales.</h3>
+                    <p>Tu equipo aprende a usarlo y queda documentado, para que el día a día no dependa de mí.</p>
                 </li>
-
-                {# ── EL TRAMO FINAL ────────────────────────────────────────
-                   [1-sep-2026] Va DENTRO de la lista, no como un div aparte
-                   debajo. Fuera, la linea de fondo y el relleno naranja (que
-                   se dibujan sobre el alto del <ol>) no lo cubrian: la linea
-                   llegaba encendida, se apagaba a gris en este tramo y volvia
-                   a encenderse en la bola. Metido en la lista, el naranja
-                   corre sin costura hasta el final. #}
-                <li class="fase-cola" aria-hidden="true"></li>
             </ol>
-        </div>
-
-        {# ── EL BLOQUE DE CIERRE ────────────────────────────────────────────
-           [1-sep-2026] Antes esto era la fase 04, un paso mas colgando del
-           riel. Pero no ES un paso: es la conclusion de los tres anteriores —
-           lo que pasa DESPUES de que el sistema este entregado. Como paso
-           numerado se leia igual de importante que los otros tres, y es lo
-           que separa el servicio del de cualquier otro.
-
-           Asi que se saca del riel y se convierte en el bloque final, gris
-           oscuro y a todo ancho, con las imagenes a la izquierda y el texto a
-           la derecha. Es el patron exacto con el que decagon cierra su
-           seccion. #}
-        <div class="container">
-            <div class="cierre reveal">
-                {# ── DONDE MUERE LA LINEA ───────────────────────────────
-                   La bola va montada sobre el borde superior del bloque
-                   gris, no suelta en el hueco de antes: es lo que hace que
-                   la linea temporal TERMINE aqui y entregue este bloque,
-                   igual que en decagon. Dentro de .cierre y no fuera, para
-                   que siga pegada al borde pase lo que pase con el alto. #}
-                <span class="riel-bola" aria-hidden="true">
-                    {# El destello de cuatro puntas de decagon, no una
-                       estrella de cinco: la de cinco se lee como
-                       "valoracion" o "favorito". Esta es la marca de que
-                       algo esta vivo — dos husos cruzados de lados
-                       concavos, que es lo que le da el filo. #}
-                    <svg viewBox="0 0 16 16"><path d="M 8 1.4 C 8.6 5 9.9 6.6 14.6 8 C 9.9 9.4 8.6 11 8 14.6 C 7.4 11 6.1 9.4 1.4 8 C 6.1 6.6 7.4 5 8 1.4 Z"/></svg>
-                </span>
-
-                <div class="cierre-visual">
-                    {# ── EL PANEL DE MANTENIMIENTO ──────────────────────────
-                       [4-sep-2026] Cuarta version. Las tres anteriores:
-                         1. burbujas de chat sobre fondo plano;
-                         2. lista de conversaciones, tambien plana;
-                         3. tres tarjetas con un video abstracto de fondo
-                            (una rosa, Jupiter y unas manos de coral) y un
-                            verbo grande encima.
-
-                       La 3 fallaba por dos motivos. Uno: el planeta y el
-                       coral no significaban nada — el propio comentario
-                       pedia "imagen organica abstracta" y Jupiter es un
-                       objeto reconocible. Dos, y mas importante: eran tres
-                       CAJAS CON PALABRAS que repetian el parrafo de al lado
-                       ("Reviso" / "Yo reviso que siga haciendo...").
-
-                       Del intento 1 y 2 se aprendio que "una UI dibujada no
-                       emociona"; pero les faltaba lo que hace stripe, que es
-                       ponerla SOBRE un degradado, no sobre fondo plano. El
-                       degradado es el escenario y la UI el objeto: juntos
-                       demuestran, separados solo decoran.
-
-                       Lo que muestra es una semana real de mantenimiento: un
-                       aviso de desajuste detectado, el ajuste aplicado y el
-                       resultado. Es el argumento del parrafo, en hechos. #}
-                    <div class="mant">
-                        <div class="mant-fondo" aria-hidden="true"></div>
-
-                        <div class="mant-panel">
-                            <div class="mant-cab">
-                                <span class="mant-titulo">Agente de soporte</span>
-                                {#- La etiqueta de ejemplo va SIEMPRE visible, no
-                                    escondida en un title: las cifras de abajo
-                                    tienen forma de panel real y sin decir que
-                                    son de muestra se leerian como datos de un
-                                    cliente. El caso de Bioresina, con sus
-                                    numeros de verdad, esta mas arriba en la
-                                    misma pagina. -#}
-                                <span class="mant-ejemplo">Ejemplo</span>
-                            </div>
-
-                            {# Las 4 metricas. data-hasta lo lee index.js para
-                               contar de 0 al valor cuando la pieza entra en
-                               pantalla; el texto ya escrito es el que ve quien
-                               no tenga JS. #}
-                            <div class="mant-kpis">
-                                <div class="mant-kpi">
-                                    <span class="mant-kpi-n" data-hasta="860">860</span>
-                                    <span class="mant-kpi-k">consultas atendidas</span>
-                                </div>
-                                <div class="mant-kpi">
-                                    <span class="mant-kpi-n" data-hasta="87" data-sufijo="%">87%</span>
-                                    <span class="mant-kpi-k">resueltas sin ti</span>
-                                </div>
-                                <div class="mant-kpi">
-                                    <span class="mant-kpi-n" data-hasta="31" data-sufijo="h">31h</span>
-                                    <span class="mant-kpi-k">recuperadas al mes</span>
-                                </div>
-                                <div class="mant-kpi">
-                                    <span class="mant-kpi-n" data-hasta="4">4</span>
-                                    <span class="mant-kpi-k">ajustes este trimestre</span>
-                                </div>
-                            </div>
-
-                            {# La grafica: 12 barras que se levantan al entrar
-                               en pantalla. Cuenta la misma historia que los
-                               numeros — el volumen que el sistema absorbe mes
-                               a mes — sin necesitar una sola palabra mas. #}
-                            <div class="mant-grafica" role="img" aria-label="Gráfico de consultas atendidas por el sistema mes a mes: la carga sube de forma sostenida a lo largo del año.">
-                                <span class="mant-barra" style="--h: 38%"></span>
-                                <span class="mant-barra" style="--h: 46%"></span>
-                                <span class="mant-barra" style="--h: 41%"></span>
-                                <span class="mant-barra" style="--h: 55%"></span>
-                                <span class="mant-barra" style="--h: 62%"></span>
-                                <span class="mant-barra" style="--h: 58%"></span>
-                                <span class="mant-barra" style="--h: 71%"></span>
-                                <span class="mant-barra" style="--h: 79%"></span>
-                                <span class="mant-barra" style="--h: 68%"></span>
-                                <span class="mant-barra" style="--h: 86%"></span>
-                                <span class="mant-barra" style="--h: 94%"></span>
-                                <span class="mant-barra mant-barra--hoy" style="--h: 100%"></span>
-                            </div>
-
-                            <div class="mant-pie">
-                                <span class="mant-estado">Funcionando</span>
-                                <span class="mant-pie-k">Último ajuste: hace 6 días</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="cierre-texto">
-                    <h3 class="cierre-t">
-                        <em>Tu negocio cambia.</em>
-                        Tu sistema tiene que cambiar con él.
-                    </h3>
-                    {# [4-sep-2026] Un parrafo, no dos. El segundo decia "yo
-                       reviso que siga haciendo lo que tiene que hacer y lo voy
-                       afinando...", que es EXACTAMENTE lo que el panel de al
-                       lado ya ensena paso a paso. Contarlo ademas por escrito
-                       era decir dos veces lo mismo: la seccion tenia 122
-                       palabras en 13 lineas y se leia como un muro.
-
-                       Se queda el primero, que es el que plantea el problema
-                       — lo que el panel no puede mostrar. El "como lo
-                       resuelvo" lo demuestra la pieza. #}
-                    <p class="cierre-p">Aquí es donde la mayoría desaparece. Un sistema con IA se desajusta solo: cambian tus precios, tu forma de atender, las herramientas que usas. Nadie te avisa — simplemente empieza a responder peor.</p>
-
-
-                    <a href="/diagnostico-operativo/" class="btn-primary-small cierre-cta">Cómo empezamos <span aria-hidden="true">→</span></a>
-                </div>
+            <div class="metodo-cierre reveal">
+                <p class="metodo-frase">Un sistema no se entrega y ya está. Si tu negocio cambia, se ajusta.</p>
+                <p>Montar la automatización es la parte fácil. Lo difícil es que siga funcionando cuando cambian tus precios, tu equipo o tus herramientas. Por eso acordamos el acompañamiento desde el principio.</p>
             </div>
         </div>
     </section>
 
-    {# SECCIÓN 4B — LAS TRES GARANTÍAS
-       No es una sección de venta: es el bloque que quita miedos. Va
-       después de "cómo trabajo" porque ahí es donde aparece la duda
-       callada ("¿esto es legal? ¿es seguro? ¿y mis datos?"): cuando ya
-       le interesa lo que hacemos. Antes (pegada a soluciones) seríamos
-       nosotros los que le metemos la duda en la cabeza.
-       [5-sep-2026] El comentario decía "después de caminos" y era falso:
-       caminos va DESPUÉS de esta sección, no antes.
+    {#- 05 · Garantías: tabla de tres filas (título | texto). -#}
+    <section class="garantias wrap seccion" id="garantias">
+        <div class="cabecera reveal">
+            <p class="eyebrow">05 / Lo que no se negocia</p>
+            <h2 class="titular">Legal, seguro y a tu nombre.</h2>
+        </div>
+        <div class="garantias-filas">
+            <article class="reveal">
+                <span class="garantia-num">A</span>
+                <h3>Cumple la ley europea de IA</h3>
+                <p>El Reglamento Europeo de IA obliga desde agosto de 2026. Tu agente dice que es una IA y no hace nada de lo que el reglamento prohíbe. Y aunque no es obligatorio, siempre deja salida a un humano. Sale cumpliendo, sin coste extra.</p>
+            </article>
+            <article class="reveal">
+                <span class="garantia-num">B</span>
+                <h3>Agentes seguros</h3>
+                <p>Hay quien intenta manipular estos sistemas para que se salten sus normas o suelten información. Mis agentes llevan filtros a la entrada y a la salida, y los pruebo con esos ataques antes de entregar. Cada agente solo accede a lo que necesita.</p>
+            </article>
+            <article class="reveal">
+                <span class="garantia-num">C</span>
+                <h3>Tus accesos, bajo llave</h3>
+                <p>Las claves de tus herramientas no viven en un archivo suelto ni en un chat: van en un gestor cifrado. Al terminar el proyecto, los accesos quedan a tu nombre.</p>
+            </article>
+        </div>
+    </section>
 
-       Diseño deliberadamente APARTE y sin competir: fondo propio, sin
-       titular de sección y sin CTA. Da confianza por presencia, no por
-       volumen.
-
-       [5-sep-2026] Sin rótulo ninguno. Llevaba encima un
-       .garantias-intro con "Antes de que lo preguntes" y se quitó: iba
-       muy pegado a las tarjetas y no decía de qué iba la sección (había
-       que leerse las tres para saberlo). Los tres títulos ya se explican
-       solos. Si algún día pide rótulo, que sea uno que nombre el tema
-       (legalidad, seguridad, accesos), no una frase de transición.
-
-       Fuentes: _docs/metodo/cumplimiento-reglamento-ia.md (art. 50, en
-       vigor 2-ago-2026) y _skills/ciberseg-workflows-ia (patrón
-       sándwich, guardrails entrada/salida). Nada de esto es promesa de
-       marketing: es lo que ya se aplica. #}
-    <section id="garantias" class="section garantias-section section-bloque reveal">
-        <div class="container">
-            <div class="garantias-grid">
-                <article class="garantia reveal">
-                    <span class="garantia-icono" aria-hidden="true">
-                        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <path d="M24 9v31"/>
-                            <path d="M14 40h20"/>
-                            <path d="M10 15h28"/>
-                            <circle cx="24" cy="12" r="2.6" fill="currentColor" stroke="none"/>
-                            <path d="M10 15 4.5 27h11z"/>
-                            <path d="M38 15 32.5 27h11z"/>
-                        </svg>
-                    </span>
-                    <h3 class="garantia-t">Cumple la ley europea de IA</h3>
-                    <p class="garantia-p">El Reglamento Europeo de IA obliga desde agosto de 2026. Tu agente dice que es una IA y no hace nada de lo que el reglamento prohíbe. Y aunque no es obligatorio, siempre deja salida a un humano. Sale cumpliendo, sin coste extra.</p>
-                </article>
-
-                <article class="garantia reveal">
-                    <span class="garantia-icono" aria-hidden="true">
-                        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <path d="M24 5 9 10.5v12c0 9.5 6.3 16.8 15 19.5 8.7-2.7 15-10 15-19.5v-12L24 5Z"/>
-                            <rect x="18.5" y="23" width="11" height="8.5" rx="1.6"/>
-                            <path d="M21 23v-2.6a3 3 0 0 1 6 0V23"/>
-                        </svg>
-                    </span>
-                    <h3 class="garantia-t">Agentes seguros</h3>
-                    <p class="garantia-p">Hay gente que intenta manipular estos sistemas para que se salten sus normas o suelten información. Todos mis agentes llevan filtros a la entrada y a la salida, y los pruebo con esos ataques antes de entregar. Además, cada agente solo tiene acceso a lo que necesita para su trabajo, nada más.</p>
-                </article>
-                <article class="garantia reveal">
-                    <span class="garantia-icono" aria-hidden="true">
-                        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="17" cy="24" r="8.5"/>
-                            <circle cx="17" cy="24" r="2.8" fill="currentColor" stroke="none"/>
-                            <path d="M25.5 24H42"/>
-                            <path d="M34 24v6.5"/>
-                            <path d="M42 24v5"/>
-                        </svg>
-                    </span>
-                    <h3 class="garantia-t">Tus accesos, bajo llave</h3>
-                    <p class="garantia-p">Las claves de tus herramientas no viven en un archivo suelto ni en un chat: van en un gestor cifrado donde ni el propio proveedor puede leerlas. Al terminar el proyecto, los accesos quedan a tu nombre.</p>
-                </article>
-
+    {#- 06 · Sobre mí: retrato grande a la izquierda, texto a la derecha. -#}
+    <section class="sobremi seccion" id="sobre-mi">
+        <div class="wrap sobremi-rejilla">
+            <figure class="sobremi-retrato reveal">
+                <picture>
+                    <source srcset="/assets/img/sobremi.webp" type="image/webp">
+                    <img src="/assets/img/sobremi.png?v=20" alt="Alberto Pérez Cabrera" width="823" height="744" loading="lazy" decoding="async">
+                </picture>
+                <figcaption>Alberto Pérez Cabrera<br>Founder de contravía · Consultor de IA para negocios</figcaption>
+            </figure>
+            <div class="sobremi-texto reveal">
+                <p class="eyebrow">06 / La persona detrás</p>
+                <h2 class="titular">Sé lo que es un trabajo que te consume.</h2>
+                <p>Soy Alberto. Ayudo a negocios pequeños y medianos a aplicar IA donde de verdad les cambia el día, no donde queda bien.</p>
+                <p>Antes de esto trabajé en obra, en pavimentos: jornadas de doce horas o más, con frío, con calor y con productos químicos. También diseñé webs en una agencia de marketing. Por eso hago lo que hago: me mueve que la gente recupere su tiempo.</p>
+                <p>Me cuentan que acaban la jornada agotados, con sus hijos delante pero pendientes del móvil por cosas que una herramienta podría hacer sola. Mi trabajo es que la IA se ocupe de eso.</p>
+                <blockquote>Tú me cuentas qué te agobia, y yo me encargo.</blockquote>
             </div>
         </div>
     </section>
 
-    <section id="sobre-mi" class="section sobremi-section reveal">
-        <div class="sobremi-bg-text">ALBER</div>
-        <div class="container grid-two-cols">
-            <div class="sobremi-visual inverse reveal">
-                <div class="sobremi-portrait-container">
-                    {#- webp primero: 57 KB contra los 400 del PNG, con la
-                        misma transparencia. El PNG queda de respaldo. -#}
-                    <picture>
-                        <source srcset="assets/img/sobremi.webp" type="image/webp">
-                        <img src="assets/img/sobremi.png?v=20" alt="Alberto Pérez Cabrera"
-                             class="sobremi-portrait" width="823" height="744"
-                             loading="lazy" decoding="async">
-                    </picture>
-                    <div class="portrait-glow"></div>
-                </div>
+    {#- 07 · Cómo empezar: dos puertas partidas por una línea vertical,
+        sin tarjetas. -#}
+    <section class="caminos seccion" id="caminos">
+        <div class="wrap">
+            <div class="cabecera reveal">
+                <p class="eyebrow">07 / Cómo empezar</p>
+                <h2 class="titular">Dos formas de empezar.</h2>
             </div>
-            <div class="sobremi-text reveal">
-                <span class="section-label">SOBRE MÍ</span>
-                <h2 class="section-title">Sé lo que es un trabajo que te consume.</h2>
-                <p class="sobremi-p">
-                    Soy Alberto Pérez Cabrera. Ayudo a negocios pequeños y medianos a aplicar IA donde de verdad les cambia el día, no donde queda bien.
-                </p>
-                <p class="sobremi-p">
-                    Antes de esto trabajé en obra, en pavimentos: jornadas de doce horas o más, pasando frío, pasando calor y trabajando con productos químicos. También trabajé en una agencia de marketing diseñando webs. Por eso hago lo que hago: me mueve ayudar a la gente a recuperar su tiempo.
-                </p>
-                <p class="sobremi-p">
-                    Me cuentan que acaban la jornada agotados, con sus hijos delante pero pendientes del móvil por cosas que una herramienta podría hacer sola. Mi trabajo es que la IA se ocupe de eso, para que tu negocio trabaje para ti y no al revés.
-                </p>
-                {#- La frase que resume la propuesta, fuera del parrafo: al
-                    final del tercer bloque de texto se perdia. Cierra la
-                    seccion, que es donde tiene fuerza. -#}
-                <blockquote class="sobremi-cita">
-                    Tú me cuentas qué te agobia, y yo me encargo.
-                </blockquote>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECCION 9 - COMO EMPEZAR (dos puertas) -->
-    {#- [26-sep-2026] DOS PUERTAS DEL MISMO PESO. Vuelve la eleccion que se
-        quito el 1-sep, pero por otro motivo: entonces las dos tarjetas
-        acababan en el mismo formulario y elegir no elegia nada. Ahora
-        llevan a sitios distintos (llamada gratuita / pagina del DAI360)
-        y responden a dos dueños distintos: el que sabe que quiere (una
-        web, un agente) y el que solo sabe que algo no va. Lo que de
-        verdad se cobra hoy entra por la puerta A; con el DAI360 como
-        unica entrada, quien queria una web tenia que pasar por un
-        diagnostico de pago.
-        El portatil con el informe se quita de aqui: la pagina del DAI360
-        ya lo enseña entero. Su CSS (.dai-cuerpo, .dai-viz, .dai-pantalla)
-        y el JS del desplazamiento siguen por si vuelve; el JS no hace
-        nada si no encuentra .dai-pantalla. -#}
-    <section id="caminos" class="section dai-section reveal">
-        <div class="container">
-            <div class="section-header centered">
-                <span class="section-label">C&Oacute;MO EMPEZAR</span>
-                <h2 class="section-title">Dos formas de empezar</h2>
-                <p class="section-subtitle">Depende de si ya sabes lo que te falta o solo sabes que algo no funciona.</p>
-            </div>
-
-            <div class="puertas">
-                {#- Cada puerta: una PIEZA (lo que te llevas, en el mismo
-                    vidrio con halo que "Como trabajo") y debajo QUE PASA
-                    DESPUES en tres pasos. Una lista de checks decia lo
-                    bueno que es; los pasos dicen que va a pasar, que es
-                    lo que frena a quien no se decide. -#}
-                <article class="puerta">
-                    <figure class="puerta-viz" aria-hidden="true">
-                        <div class="puerta-pieza">
-                            <div class="pp-quien">
-                                <img src="assets/img/sobremi.webp" alt="" width="823" height="744" loading="lazy" decoding="async">
-                                <span>
-                                    <strong>Alberto P&eacute;rez Cabrera</strong>
-                                    <small>Videollamada &middot; 20 min</small>
-                                </span>
-                                <span class="pp-chip">Gratis</span>
-                            </div>
-                            <dl class="pp-filas">
-                                <div><dt>T&uacute;</dt><dd>Me cuentas qu&eacute; quieres conseguir</dd></div>
-                                <div><dt>Yo</dt><dd>Te digo si se puede y c&oacute;mo lo har&iacute;a</dd></div>
-                            </dl>
-                        </div>
-                    </figure>
-                    <span class="puerta-cuando">Si ya sabes lo que necesitas</span>
-                    <h3 class="dai-nombre">Una llamada de 20 minutos</h3>
-                    <p class="dai-desc">Una web que capte, un agente que atienda o un proceso que se haga solo.</p>
-                    <ol class="puerta-pasos">
-                        <li>Me cuentas qu&eacute; quieres y te digo si tiene sentido</li>
+            <div class="caminos-rejilla">
+                <article class="camino reveal">
+                    <p class="camino-cuando">Si ya sabes lo que necesitas</p>
+                    <h3>Una llamada de 20 minutos</h3>
+                    <p>Una web que capte, un agente que atienda o un proceso que se haga solo.</p>
+                    <ol>
+                        <li>Me cuentas qué quieres y te digo si tiene sentido</li>
                         <li>Si encaja, te preparo una propuesta para tu caso</li>
                         <li>Lo construyo y lo dejo funcionando</li>
                     </ol>
-                    {#- Mismo bloque que el precio del DAI360: las dos puertas
-                        cierran igual (lo que cuesta + la condicion). -#}
-                    <p class="dai-precio">
-                        <strong>Gratis</strong>
-                        <span>20 minutos por videollamada, sin compromiso.</span>
-                    </p>
-                    <div class="card-cta-row">
-                        <a href="#contacto" class="btn-primary-small">Reservar la llamada &rarr;</a>
-                    </div>
+                    <p class="camino-precio"><strong>Gratis</strong><span>20 minutos por videollamada, sin compromiso.</span></p>
+                    <a href="#contacto" class="btn-main">Reservar la llamada <span class="flecha" aria-hidden="true">↗</span></a>
                 </article>
-
-                <article class="puerta">
-                    {#- El plan por fases, con las filas del roadmap del
-                        informe real (informe-dai360.njk). Es un ejemplo. -#}
-                    <figure class="puerta-viz" aria-hidden="true">
-                        <div class="puerta-pieza">
-                            <div class="pp-cab">
-                                <strong>Tu plan &middot; DAI360</strong>
-                                <small>Ejemplo</small>
-                            </div>
-                            <ol class="pp-fases">
-                                {#- Una linea por fase: con dos, la pieza media
-                                    casi el doble que la de la llamada. -#}
-                                <li class="is-primero">
-                                    <span class="pp-fase">Fase 0</span>
-                                    <span class="pp-que">Agente de WhatsApp 24/7</span>
-                                    <span class="pp-cuando">0-2 sem.</span>
-                                </li>
-                                <li>
-                                    <span class="pp-fase">Fase 1</span>
-                                    <span class="pp-que">Presupuestos autom&aacute;ticos</span>
-                                    <span class="pp-cuando">1-2 meses</span>
-                                </li>
-                                <li>
-                                    <span class="pp-fase">Fase 2</span>
-                                    <span class="pp-que">CRM con agenda</span>
-                                    <span class="pp-cuando">3-4 meses</span>
-                                </li>
-                            </ol>
-                        </div>
-                    </figure>
-                    <span class="puerta-cuando">Si algo no va bien y no sabes qu&eacute;</span>
-                    <h3 class="dai-nombre">Diagn&oacute;stico operativo DAI360</h3>
-                    <p class="dai-desc">C&oacute;mo llegan tus clientes, c&oacute;mo se cierran, c&oacute;mo entregas y c&oacute;mo lo llevas por dentro.</p>
-                    <ol class="puerta-pasos">
-                        <li>Reviso contigo las cuatro &aacute;reas de tu negocio</li>
+                <article class="camino reveal">
+                    <p class="camino-cuando">Si algo no va bien y no sabes qué</p>
+                    <h3>Diagnóstico operativo DAI360</h3>
+                    <p>Cómo llegan tus clientes, cómo se cierran, cómo entregas y cómo lo llevas por dentro.</p>
+                    <ol>
+                        <li>Reviso contigo las cuatro áreas de tu negocio</li>
                         <li>Te entrego el informe con el plan por fases</li>
-                        <li>Lo implementas t&uacute; o conmigo: el plan es tuyo</li>
+                        <li>Lo implementas tú o conmigo: el plan es tuyo</li>
                     </ol>
-                    {#- [5-sep-2026] El precio, con jerarquia. Iba todo en
-                        una linea de 0.92rem en gris, mas pequenya que el
-                        cuerpo: el numero se perdia y, con el, la frase que
-                        de verdad quita el miedo (que se descuenta). Sigue
-                        aqui y no solo en /diagnostico-operativo porque
-                        quien no sabe si son 300 o 6.000 no hace clic. -#}
-                    <p class="dai-precio">
-                        <strong>Desde 990&nbsp;&euro;</strong>
-                        <span>Precio de lanzamiento. Si luego implementamos las mejoras, se descuenta &iacute;ntegro del proyecto.</span>
-                    </p>
-                    <div class="card-cta-row">
-                        <a href="/diagnostico-operativo/" class="btn-primary-small">Ver el diagn&oacute;stico DAI360 &rarr;</a>
-                    </div>
+                    <p class="camino-precio"><strong>Desde 990&nbsp;€</strong><span>Precio de lanzamiento. Si luego implementamos las mejoras, se descuenta íntegro del proyecto.</span></p>
+                    <a href="/diagnostico-operativo/" class="btn-2">Ver el diagnóstico DAI360 <span class="flecha" aria-hidden="true">↗</span></a>
                 </article>
             </div>
         </div>
     </section>
 
-    {#- RETIRADO [26-sep-2026]: el portatil con el informe DAI360 que se
-        desplazaba con el scroll (figure.dai-viz + include
-        informe-dai360.njk) y la linea .dai-atajo. Marcado en git, commit
-        7eb8b65. -#}
-
-
-    <!-- SECCIÓN 7 — FAQ -->
-    <section id="faq" class="section faq-section section-bloque reveal">
-        <div class="container">
-            <div class="section-header centered">
-                <span class="section-label">PREGUNTAS FRECUENTES</span>
-                <h2 class="section-title">Preguntas que me suelen hacer.</h2>
-            </div>
-
-            <div class="faq-container">
-                <!-- FAQ 1 -->
-                <div class="faq-item reveal">
-                    <button class="faq-trigger">
-                        <span class="faq-question">¿Vas a acabar vendiéndome algo que no necesito?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-content">
-                        <p class="faq-answer">No. Si lo que te hace falta es cambiar un proceso o contratar a alguien, eso es lo que te voy a decir. Me pagas por saber qué pasa en tu negocio, no por comprarme herramientas. Prefiero decirte que no me necesitas y que me recomiendes.</p>
-                    </div>
-                </div>
-                <!-- FAQ 2 -->
-                <div class="faq-item reveal">
-                    <button class="faq-trigger">
-                        <span class="faq-question">¿Qué garantías tengo de que funcione?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-content">
-                        <p class="faq-answer">Mi trabajo no es entregarte código y marcharme. Te entrego el sistema funcionando, probado con datos reales de tu negocio y con tu equipo capacitado para usarlo. Antes de empezar dejamos por escrito qué tiene que hacer el sistema. Si al entregarlo no lo hace, lo corrijo sin cobrarte más hasta que lo haga.</p>
-                    </div>
-                </div>
-                <!-- FAQ 3 -->
-                <div class="faq-item reveal">
-                    <button class="faq-trigger">
-                        <span class="faq-question">¿Cómo sé si una tarea de mi negocio se puede automatizar?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-content">
-                        <p class="faq-answer">Uso la Fórmula 4R: una tarea es buena candidata a automatizar si cumple cuatro cosas — Relevante (importa de verdad para el negocio), Repetitiva (la haces cada día o cada semana), con Reglas claras (sigue unos pasos fijos, no depende de tu intuición) y con Retorno (el tiempo que te ahorra supera el de montarla). Hay dos cosas que conviene NO automatizar todavía: procesos nuevos que aún no dominas (primero se ordenan a mano) y tareas donde un fallo dañaría tu marca, como publicar en redes, que siempre deben pasar por una revisión tuya.</p>
-                    </div>
-                </div>
-                <!-- FAQ 4 -->
-                <div class="faq-item reveal">
-                    <button class="faq-trigger">
-                        <span class="faq-question">¿Para qué tipo de negocio es esto?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-content">
-                        <p class="faq-answer">Trabajo con negocios de servicios que ya facturan pero dependen demasiado de su dueño: cuando el día se va en tareas manuales y el negocio no avanza sin ti. No vendo herramientas sueltas: primero miro cómo trabajas y automatizo lo que más tiempo o dinero te devuelve.</p>
-                    </div>
-                </div>
-                <!-- FAQ a medida (lo que antes era la pestaña "Sistemas de control") -->
-                <div class="faq-item reveal">
-                    <button class="faq-trigger">
-                        <span class="faq-question">¿Y si lo que necesito no encaja en nada de esto?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-content">
-                        <p class="faq-answer">Se construye. Si la herramienta que te hace falta no existe (un panel para ver cómo va el negocio, un CRM a tu medida, una aplicación interna), la monto. Antes vemos si de verdad hace falta: muchas veces basta con conectar bien lo que ya usas.</p>
-                    </div>
-                </div>
-                <!-- FAQ 5 -->
-                <div class="faq-item reveal">
-                    <button class="faq-trigger">
-                        <span class="faq-question">¿Necesito saber de tecnología?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-content">
-                        <p class="faq-answer">Cero. Tú me cuentas qué te agobia y yo me encargo de la parte técnica. Todo se monta en internet o se conecta con las herramientas que ya usas. Si un consultor te llena la reunión de palabros, no es que sepa más: es que no sabe explicarlo.</p>
-                    </div>
-                </div>
-                <!-- FAQ 6 -->
-                <div class="faq-item reveal">
-                    <button class="faq-trigger">
-                        <span class="faq-question">¿Por dónde empiezo si no sé qué necesito?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-content">
-                        <p class="faq-answer">Por el diagnóstico operativo DAI360. Miro tu negocio a fondo, te enseño con claridad dónde pierdes tiempo y dinero, y te doy un plan de qué arreglar primero. Cuesta desde 990€ y, si luego implementamos las mejoras, se descuenta del proyecto.</p>
-                    </div>
-                </div>
-                <!-- FAQ 7 -->
-                <div class="faq-item reveal">
-                    <button class="faq-trigger">
-                        <span class="faq-question">¿Cuánto se tarda en dejarlo listo?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-content">
-                        <p class="faq-answer">Depende del proyecto. Conectar tus herramientas con un registro de clientes o montar un asistente básico de WhatsApp suele llevar 2-3 semanas. Un sistema de gestión a medida puede llevar de 4 a 8 semanas. Te daré un plazo y un coste cerrado antes de empezar.</p>
-                    </div>
-                </div>
-                <!-- FAQ 8 -->
-                <div class="faq-item reveal">
-                    <button class="faq-trigger">
-                        <span class="faq-question">¿Qué pasa con la seguridad de mis datos?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-content">
-                        <p class="faq-answer">Uso las versiones de pago de OpenAI y Anthropic, no las gratuitas. Por contrato, esos proveedores no entrenan sus modelos con lo que envías: tu información y la de tus clientes no acaba dentro de un modelo público. Sí guardan las conversaciones un máximo de 30 días para detectar usos abusivos, y después se borran; se puede contratar una opción en la que no guardan nada, si tu caso lo necesita. Además, cada agente lleva filtros que revisan lo que entra y lo que sale, para que no se le pueda sonsacar información con mensajes manipulados.</p>
-                    </div>
-                </div>
-            </div>
+    {#- 08 · FAQ: rejilla asimétrica con <details>. Mismo texto que el
+        FAQPage del frontmatter. -#}
+    <section class="preguntas wrap seccion" id="faq">
+        <p class="eyebrow reveal">08 / Antes de hablar</p>
+        <div class="reveal">
+            <h2 class="titular">Preguntas que me suelen hacer.</h2>
+            <details><summary>¿Vas a acabar vendiéndome algo que no necesito?<span aria-hidden="true">+</span></summary><p>No. Si lo que te hace falta es cambiar un proceso o contratar a alguien, eso es lo que te voy a decir. Me pagas por saber qué pasa en tu negocio, no por comprarme herramientas. Prefiero decirte que no me necesitas y que me recomiendes.</p></details>
+            <details><summary>¿Qué garantías tengo de que funcione?<span aria-hidden="true">+</span></summary><p>Mi trabajo no es entregarte código y marcharme. Te entrego el sistema funcionando, probado con datos reales de tu negocio y con tu equipo capacitado para usarlo. Antes de empezar dejamos por escrito qué tiene que hacer el sistema. Si al entregarlo no lo hace, lo corrijo sin cobrarte más hasta que lo haga.</p></details>
+            <details><summary>¿Cómo sé si una tarea de mi negocio se puede automatizar?<span aria-hidden="true">+</span></summary><p>Uso la Fórmula 4R: una tarea es buena candidata a automatizar si cumple cuatro cosas: Relevante (importa de verdad para el negocio), Repetitiva (la haces cada día o cada semana), con Reglas claras (sigue unos pasos fijos, no depende de tu intuición) y con Retorno (el tiempo que te ahorra supera el de montarla). Hay dos cosas que conviene NO automatizar todavía: procesos nuevos que aún no dominas (primero se ordenan a mano) y tareas donde un fallo dañaría tu marca, como publicar en redes, que siempre deben pasar por una revisión tuya.</p></details>
+            <details><summary>¿Para qué tipo de negocio es esto?<span aria-hidden="true">+</span></summary><p>Trabajo con negocios de servicios que ya facturan pero dependen demasiado de su dueño: cuando el día se va en tareas manuales y el negocio no avanza sin ti. No vendo herramientas sueltas: primero miro cómo trabajas y automatizo lo que más tiempo o dinero te devuelve.</p></details>
+            <details><summary>¿Y si lo que necesito no encaja en nada de esto?<span aria-hidden="true">+</span></summary><p>Se construye. Si la herramienta que te hace falta no existe (un panel para ver cómo va el negocio, un CRM a tu medida, una aplicación interna), la monto. Antes vemos si de verdad hace falta: muchas veces basta con conectar bien lo que ya usas.</p></details>
+            <details><summary>¿Necesito saber de tecnología?<span aria-hidden="true">+</span></summary><p>Cero. Tú me cuentas qué te agobia y yo me encargo de la parte técnica. Todo se monta en internet o se conecta con las herramientas que ya usas. Si un consultor te llena la reunión de palabros, no es que sepa más: es que no sabe explicarlo.</p></details>
+            <details><summary>¿Por dónde empiezo si no sé qué necesito?<span aria-hidden="true">+</span></summary><p>Por el diagnóstico operativo DAI360. Miro tu negocio a fondo, te enseño con claridad dónde pierdes tiempo y dinero, y te doy un plan de qué arreglar primero. Cuesta desde 990€ y, si luego implementamos las mejoras, se descuenta del proyecto.</p></details>
+            <details><summary>¿Cuánto se tarda en dejarlo listo?<span aria-hidden="true">+</span></summary><p>Depende del proyecto. Conectar tus herramientas con un registro de clientes o montar un asistente básico de WhatsApp suele llevar 2-3 semanas. Un sistema de gestión a medida puede llevar de 4 a 8 semanas. Te daré un plazo y un coste cerrado antes de empezar.</p></details>
+            <details><summary>¿Qué pasa con la seguridad de mis datos?<span aria-hidden="true">+</span></summary><p>Uso las versiones de pago de OpenAI y Anthropic, no las gratuitas. Por contrato, esos proveedores no entrenan sus modelos con lo que envías: tu información y la de tus clientes no acaba dentro de un modelo público. Sí guardan las conversaciones un máximo de 30 días para detectar usos abusivos, y después se borran; se puede contratar una opción en la que no guardan nada, si tu caso lo necesita. Además, cada agente lleva filtros que revisan lo que entra y lo que sale, para que no se le pueda sonsacar información con mensajes manipulados.</p></details>
         </div>
     </section>
 
-    <!-- SECCIÓN 8 — CTA FINAL + FORMULARIO -->
-    {#- EL CIERRE. Contacto y pie forman un solo bloque oscuro, como en
-        decagon.ai: alli el ultimo CTA y el pie son ambos oscuros y se
-        leen como una pieza. Pero OJO con la diferencia — en decagon la
-        aurora vive en el bloque del CTA y el pie es carbon liso. Aqui
-        igual: la aurora se le quito al pie (footer.njk) y vive aqui,
-        porque dos auroras seguidas se restan fuerza.
-
-        A dos columnas y no centrado: el formulario ya existia centrado y
-        dejaba media pantalla vacia; a la izquierda entran las vias
-        alternativas, que antes no estaban en ningun sitio. -#}
-    <section id="contacto" class="section contacto-section inverse reveal">
-        <canvas class="aurora-canvas" data-alto="1.2" aria-hidden="true"></canvas>
-        <div class="container">
-            <div class="contacto-grid">
-
-                <div class="contacto-texto">
-                    <span class="section-label">CONTACTO</span>
-                    <h2 class="section-title">&iquest;Hablamos de tu negocio?</h2>
-                    <p class="section-subtitle">Cu&eacute;ntame qu&eacute; te est&aacute; frenando. Si puedo ayudarte, te lo digo claro. Si no, tambi&eacute;n.</p>
-
-                    <p class="contacto-nota">Son 20 minutos por videollamada, para ver si puedo ayudarte. <strong>Gratis y sin compromiso.</strong></p>
-
-                    {#- Las vias alternativas, para quien no quiere rellenar
-                        cinco campos. El whatsapp ya existia como boton
-                        flotante; aqui se dice ademas con todas las letras. -#}
+    {#- 09 · Contacto: titular monumental sobre negro y el formulario
+        debajo, a dos columnas. Los id del formulario son los mismos de
+        antes: index.js los usa para el envío a n8n y el generate_lead. -#}
+    <section class="contacto inverse" id="contacto">
+        <div class="wrap">
+            <p class="eyebrow reveal">Empecemos por tu negocio</p>
+            <h2 class="contacto-titular reveal">¿Qué te está quitando tiempo?</h2>
+            <div class="contacto-rejilla">
+                <div class="contacto-texto reveal">
+                    <p>Cuéntame qué te está frenando. Si puedo ayudarte, te lo digo claro. Si no, también.</p>
+                    <p class="contacto-nota"><i class="punto" aria-hidden="true"></i>20 minutos por videollamada. Gratis y sin compromiso.</p>
                     <div class="contacto-vias">
-                        <span class="contacto-vias-t">O si lo prefieres, directamente:</span>
-                        <a class="contacto-via" href="https://wa.me/34685546948?text=Hola%20Alberto,%20he%20visto%20tu%20web%20y%20quiero%20hacerte%20una%20consulta%20sobre%20IA%20para%20mi%20negocio." target="_blank" rel="noopener noreferrer">
-                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436.002 9.858-4.417 9.86-9.86.001-2.638-1.024-5.117-2.884-6.979C16.578 1.904 14.1 1.84 12.01 1.84c-5.439 0-9.862 4.419-9.865 9.866-.001 1.8.49 3.554 1.42 5.11L2.551 21.39l4.096-1.076z"/></svg>
-                            <span>WhatsApp</span>
-                        </a>
-                        {#- La direccion no se escribe en el HTML: se arma en
-                            index.js desde dos trozos, para no dejarla a mano
-                            de los recolectores de spam. Sin JS el enlace
-                            sigue funcionando contra el formulario. -#}
-                        <a class="contacto-via" href="#contacto" data-mail="alberto" data-dom="albercabrera.com">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><path d="m3 6 9 6.5L21 6"/></svg>
-                            <span>Email</span>
-                        </a>
+                        <span>O directamente:</span>
+                        <a class="text-link" href="https://wa.me/34685546948?text=Hola%20Alberto,%20he%20visto%20tu%20web%20y%20quiero%20hacerte%20una%20consulta%20sobre%20IA%20para%20mi%20negocio." target="_blank" rel="noopener noreferrer">WhatsApp <span class="flecha" aria-hidden="true">↗</span></a>
+                        <a class="text-link" href="#contacto" data-mail="alberto" data-dom="albercabrera.com">Email <span class="flecha" aria-hidden="true">↗</span></a>
                     </div>
                 </div>
 
-                {#- El formulario en panel propio: cinco campos directamente
-                    sobre la aurora no se leerian. El panel les da fondo
-                    neutro y deja el color alrededor. -#}
-                <div class="glass-form-container reveal">
-                    <form id="diagnostico-form" class="glass-form" action="#" method="POST">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="nombre">Tu Nombre</label>
-                                <input type="text" id="nombre" name="nombre" placeholder="Ej. Carlos Mendoza" maxlength="100" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="empresa">Empresa</label>
-                                <input type="text" id="empresa" name="empresa" placeholder="Ej. Mendoza Consulting" maxlength="100" required>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="email">Correo electr&oacute;nico</label>
-                                <input type="email" id="email" name="email" placeholder="carlos@empresa.com" maxlength="150" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="telefono">Tel&eacute;fono <span class="form-opt">(opcional)</span></label>
-                                <input type="tel" id="telefono" name="telefono" placeholder="Ej. 600 123 456" maxlength="30">
-                            </div>
+                <form id="diagnostico-form" class="formulario reveal" action="#" method="POST">
+                    <div class="form-fila">
+                        <div class="form-group">
+                            <label for="nombre">Tu nombre</label>
+                            <input type="text" id="nombre" name="nombre" autocomplete="name" maxlength="100" required>
                         </div>
                         <div class="form-group">
-                            <label for="mensaje">&iquest;Qu&eacute; quieres mejorar o qu&eacute; te est&aacute; quitando m&aacute;s tiempo en tu negocio hoy?</label>
-                            <textarea id="mensaje" name="mensaje" rows="4" placeholder="Ej. Mandar presupuestos nos lleva horas, los clientes nos escriben fuera de horario, o tenemos caos con los leads..." maxlength="2000" required></textarea>
+                            <label for="empresa">Empresa</label>
+                            <input type="text" id="empresa" name="empresa" autocomplete="organization" maxlength="100" required>
                         </div>
-                        <!-- Campo Honeypot oculto para evitar bots de spam -->
-                        <div style="display: none;">
-                            <input type="text" id="validation_honey" name="validation_honey" tabindex="-1" autocomplete="off">
+                    </div>
+                    <div class="form-fila">
+                        <div class="form-group">
+                            <label for="email">Correo electrónico</label>
+                            <input type="email" id="email" name="email" autocomplete="email" maxlength="150" required>
                         </div>
-                        <div class="form-check-wrap">
-                            <label class="form-check">
-                                <input type="checkbox" id="acepta-privacidad" name="acepta_privacidad" required>
-                                <span>He le&iacute;do y acepto la <a href="/politica-de-privacidad" target="_blank" rel="noopener">pol&iacute;tica de privacidad</a>.</span>
-                            </label>
+                        <div class="form-group">
+                            <label for="telefono">Teléfono <span class="form-opt">(opcional)</span></label>
+                            <input type="tel" id="telefono" name="telefono" autocomplete="tel" maxlength="30">
                         </div>
-                        <button type="submit" class="btn-submit">Reservar mi sesi&oacute;n de 20 min &rarr;</button>
-                        <div id="form-message" class="form-message"></div>
-                    </form>
-                </div>
-
+                    </div>
+                    <div class="form-group">
+                        <label for="mensaje">¿Qué quieres mejorar o qué te quita más tiempo hoy?</label>
+                        <textarea id="mensaje" name="mensaje" rows="4" placeholder="Ej. Mandar presupuestos nos lleva horas, los clientes escriben fuera de horario…" maxlength="2000" required></textarea>
+                    </div>
+                    <div class="form-trampa" aria-hidden="true">
+                        <input type="text" id="validation_honey" name="validation_honey" tabindex="-1" autocomplete="off">
+                    </div>
+                    <label class="form-check">
+                        <input type="checkbox" id="acepta-privacidad" name="acepta_privacidad" required>
+                        <span>He leído y acepto la <a href="/politica-de-privacidad" target="_blank" rel="noopener">política de privacidad</a>.</span>
+                    </label>
+                    <button type="submit" class="btn-submit">Reservar mi sesión de 20 min <span class="flecha" aria-hidden="true">↗</span></button>
+                    <div id="form-message" class="form-message" role="status"></div>
+                </form>
             </div>
         </div>
     </section>
-
-    <!-- SECCIÓN DEL FOOTER CLÁSICO -->
-    

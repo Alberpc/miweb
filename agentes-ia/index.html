@@ -43,7 +43,7 @@
     <link rel="canonical" href="https://albercabrera.com/agentes-ia/">
     <meta name="robots" content="index, follow">
     <meta name="author" content="Alberto Pérez Cabrera">
-    <meta name="theme-color" content="#0F1F1B">
+    <meta name="theme-color" content="#1D1D1B">
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png">
     <link rel="icon" type="image/x-icon" href="/assets/img/favicon.ico">
     <link rel="apple-touch-icon" href="/assets/img/favicon-512.png">
@@ -119,16 +119,17 @@
          solo cargaban Inter, y por eso sus titulares no heredaban la serif. -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/design-system/tokens.css?v=78">
-    <link rel="stylesheet" href="/css/base.css?v=78">
-    <link rel="stylesheet" href="/css/nav.css?v=78">
-    <link rel="stylesheet" href="/css/botones.css?v=78">
-    <link rel="stylesheet" href="/css/faq.css?v=78">
-    <link rel="stylesheet" href="/css/pie.css?v=78">
-    <link rel="stylesheet" href="/css/diagnostico-operativo.css?v=78">
-    <link rel="stylesheet" href="/css/servicio.css?v=78">
+    <link href="https://fonts.googleapis.com/css2?family=Hepta+Slab:wght@300;400;500;800;900&family=Geist:wght@300;400;500;600&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/design-system/tokens.css?v=79">
+    <link rel="stylesheet" href="/css/base.css?v=79">
+    <link rel="stylesheet" href="/css/nav.css?v=79">
+    <link rel="stylesheet" href="/css/botones.css?v=79">
+    <link rel="stylesheet" href="/css/faq.css?v=79">
+    <link rel="stylesheet" href="/css/pie.css?v=79">
+    <link rel="stylesheet" href="/css/diagnostico-operativo.css?v=79">
+    <link rel="stylesheet" href="/css/servicio.css?v=79">
 
+    <link rel="stylesheet" href="/css/sistema.css?v=79">
     <link rel="stylesheet" href="/assets/cookies/cookie-banner.css?v=1">
 </head>
 <body>
@@ -140,7 +141,8 @@
 
 <nav class="navbar navbar--en-hero">
         <div class="nav-container">
-            <a href="/" class="logo"><img src="/assets/img/logo-alber-blanco.png" alt="Alber Cabrera"></a>
+            <a href="/" class="logo" aria-label="contravía · Alber Cabrera, inicio"><span class="logo-marca" aria-hidden="true">contravía</span><span class="logo-sub" aria-hidden="true">alber cabrera</span>
+</a>
             <div class="nav-menu"><div class="nav-item-sub">
                     <a href="/#soluciones" class="nav-link current">Servicios</a>
                     <div class="nav-sub">
@@ -154,7 +156,7 @@
             </div>
             <a href="#cta" class="nav-btn">Pide tu llamada</a>
             <button class="nav-burger" id="nav-burger" aria-label="Abrir menú" aria-expanded="false">
-                <span></span><span></span><span></span>
+                <span class="nav-burger-t">Menú</span><span class="nav-burger-i" aria-hidden="true">+</span>
             </button>
         </div>
         <div class="nav-mobile" id="nav-mobile">
@@ -493,12 +495,9 @@
 <footer class="footer-section inverse reveal"><div class="container">
             <div class="footer-grid">
                 <div class="footer-brand-col">
-                    <div class="footer-logo-wrap">
-                        <a href="/" class="logo"><img src="/assets/img/logo-alber-blanco.png" alt="Alber Cabrera"></a>
-                    </div>
-                    <p class="footer-brand-desc">
-                        Aporto claridad y sistemas de automatización con inteligencia artificial para negocios. Soluciones premium y estables para que tu negocio crezca solo.
-                    </p><div class="footer-social-wrap">
+                    <a href="/" class="logo footer-logo" aria-label="contravía · Alber Cabrera, inicio"><span class="logo-marca" aria-hidden="true">contravía</span><span class="logo-sub" aria-hidden="true">alber cabrera</span>
+</a>
+                    <p class="footer-brand-desc">IA aplicada a negocios de servicios: que atiendan antes, hagan seguimiento sin depender de nadie y dejen de hacer a mano lo que no hace falta.</p><div class="footer-social-wrap">
                     <div class="footer-social-icons">
                         <a href="https://www.linkedin.com/in/alberto-p%C3%A9rez-cabrera" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
@@ -538,6 +537,7 @@
                 </div>
             </div>
             <div class="footer-bottom-bar"><p class="footer-curator">&copy; 2026 Alberto P&eacute;rez Cabrera</p>
+                <p class="footer-curator footer-lema">facilitar · habilitar · conectar · simplificar</p>
             </div>
         </div>
     </footer>
@@ -553,7 +553,7 @@
 
     <link rel="stylesheet" href="/assets/chat/widget-chat.css?v=10">
     <script src="/assets/chat/widget-chat.js?v=5" defer></script>
-    <script src="/assets/js/base.js?v=2" defer></script>
+    <script src="/assets/js/base.js?v=3" defer></script>
     <script src="/assets/js/aurora.js?v=3"></script>
     <script src="/assets/js/riel-entregas.js?v=6"></script>
     <script src="/assets/js/faq.js?v=1"></script>

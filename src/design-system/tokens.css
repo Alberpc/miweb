@@ -1,248 +1,180 @@
 /* ══════════════════════════════════════════════════════════════════
-   albercabrera.com · TOKENS DE COLOR
-   Fuente de verdad. Ningún otro archivo del proyecto debe contener
-   un valor de color literal.
+   albercabrera.com · TOKENS — rebrand contravía × dirección Refero
+   ══════════════════════════════════════════════════════════════════
+   Fuente de verdad de color, tipo, espacio y radios. Ningún otro
+   archivo debe llevar un color literal (salvo imágenes y SVG).
 
-   Dirección: cuerpo claro NEUTRO · hero y footer oscuros con aurora ·
-   terracota como único color de acción. Sin acento secundario.
+   [2-nov-2026] Rama feat/rebrand-contravia-refero. Dos fuentes:
+   · Paleta y logo: NOI para contravía (negro #1D1D1B, crema #FFFDEB,
+     menta #08FFAB; Hepta Slab, Geist, IBM Plex Mono).
+   · Lenguaje visual: la Variante 01 de taller/miweb-premium-variante,
+     sacada de Refero (Exo Ape: escala tipográfica grande, composición
+     asimétrica, radio 0, CTAs delineadas; Linear: demos sobre negro;
+     indicadores pequeños de color funcional).
 
-   [31-ago-2026] Se retiró el verde y el dorado. Motivo: el verde teñía
-   los neutros (fondo, bordes, tinta, scrollbar), y eso es el 80% de la
-   superficie de la página — por eso la web "tenía un color" y no se
-   sentía minimalista por mucho que se cambiara el acento. Las cuatro
-   referencias (steep, decagon, default.com, grammarly) usan neutros SIN
-   tinte y reservan el color a piezas pequeñas.
+   Reglas:
+   · Menta = señal y acción. Nunca texto sobre claro (1.29:1). Sobre
+     claro el acento de texto es --cobalt-700.
+   · Radio 0 en todo lo editorial. 6px solo en UI de ejemplo (demos).
+   · Sin degradados de marca, sin sombras de tarjeta.
 
-   Todos los ratios cumplen WCAG 2.1 AA y están comentados al lado.
-   Formato: ratio sobre --bg / sobre --bg-alt.
+   Los nombres heredados (--cobalt-*, --night-*) se mantienen: son el
+   contrato que usa el CSS de cada página. El token es el contrato, no
+   la descripción del color.
    ══════════════════════════════════════════════════════════════════ */
 
 :root {
+  /* ── Marca ─────────────────────────────────────────────────────── */
+  --negro:  #1D1D1B;
+  --crema:  #FFFDEB;
+  --menta:  #08FFAB;
 
-  /* ── TERRACOTA · único color de acción ────────────────────────────
-     Escala generada en OKLCH (matiz 42, croma 0.165) para que los pasos
-     se vean parejos: en HSL un "50% de luz" naranja pesa mucho más que
-     un azul y la escala se rompe al extenderla.
+  /* ── MENTA · único color de acción ─────────────────────────────── */
+  --cobalt-100:   #DBFCEF;
+  --cobalt-200:   #B6F9E0;
+  --cobalt-300:   #8CFFD6;
+  --cobalt-400:   #47FFC1;  /* texto sobre oscuro · 13.6:1            */
+  --cobalt-500:   #08FFAB;  /* SOLO relleno o señal, nunca texto claro */
+  --cobalt-550:   #00845A;  /* eyebrow sobre claro · 4.6:1             */
+  --cobalt-600:   #00704A;  /* 6.0:1                                   */
+  --cobalt-700:   #005C3D;  /* enlaces sobre claro · 7.9:1             */
+  --cobalt-800:   #004A31;
 
-     Los nombres siguen siendo --cobalt-* a propósito: 59 usos en
-     index.css apuntan a ellos. Renombrarlos sería tocar 59 sitios para
-     no cambiar nada. El token es el contrato, no su nombre.
+  --cobalt-glow:   rgba(8, 255, 171, 0.16);
+  --cobalt-border: rgba(8, 255, 171, 0.32);
+  --cobalt-tint:   rgba(8, 255, 171, 0.08);
 
-     REGLA DE USO — el paso depende del fondo:
-       sobre claro  → 600 (5.68) o 700 (6.72). El 500 NO: da 3.64.
-       sobre oscuro → 400 (6.93). El 600 NO: sobre negro cae a 3.27.
-     Es el mismo aviso que da el sistema de Pipe, que usa esta paleta:
-     "evita blanco sobre el naranja, contraste insuficiente". */
-  --cobalt-100:   #FFF2ED;  /* 255, 242, 237 — chips, fondos teñidos       */
-  --cobalt-200:   #FFE3D7;  /* 255, 227, 215 — fondo de chip, borde suave  */
-  --cobalt-300:   #F7AB8E;  /* 247, 171, 142 — decorativo sobre oscuro     */
-  --cobalt-400:   #EA8258;  /* 234, 130,  88 — TEXTO sobre oscuro · 6.93   */
-  --cobalt-500:   #DA622D;  /* 218,  98,  45 — SOLO relleno, nunca texto   */
-  --cobalt-550:   #C44A08;  /* 196,  74,   8 — eyebrow en claro · 4.85/4.53*/
-  --cobalt-600:   #B44100;  /* 180,  65,   0 — botón en claro · 5.68/5.31  */
-  --cobalt-700:   #9E3D0C;  /* 158,  61,  12 — enlaces en claro · 6.72/6.27*/
-  --cobalt-800:   #7E310D;  /* 126,  49,  13 — activo, texto en chip· 9.00 */
+  /* Chips de categoría: neutros. El color vive en un punto de 8px
+     (indicador funcional, no relleno). */
+  --chip-1-bg: #F1EFDC;  --chip-1-ink: #1D1D1B;
+  --chip-2-bg: #F1EFDC;  --chip-2-ink: #1D1D1B;
+  --chip-3-bg: #F1EFDC;  --chip-3-ink: #1D1D1B;
 
-  --cobalt-glow:   rgba(218, 98, 45, 0.14);
-  --cobalt-border: rgba(218, 98, 45, 0.26);
-  --cobalt-tint:   rgba(218, 98, 45, 0.06);
+  /* ── SUPERFICIES OSCURAS ───────────────────────────────────────── */
+  --night-900:    #1D1D1B;
+  --night-800:    #252523;
+  --night-700:    #2E2E2B;
+  --night-600:    #3D3D39;
 
-  /* ── CHIPS DE LOS TRES PILARES ────────────────────────────────────
-     Pares fondo-pálido / texto-oscuro, como los de steep y tailark.
-     NO son colores de marca: solo etiquetan categoría. Nunca se usan
-     en botones, enlaces ni bordes de sección.
-     Ratio = tinta sobre SU fondo, no sobre --bg. */
-  --chip-1-bg: #FFE3D7;  --chip-1-ink: #7E310D;  /* agentes · 7.38 */
-  --chip-2-bg: #F0E3FF;  --chip-2-ink: #5E3288;  /* bandeja · 7.49 */
-  --chip-3-bg: #D8F0EC;  --chip-3-ink: #005A52;  /* panel   · 6.81 */
+  --on-night:      #FFFDEB;
+  --on-night-body: #D9D8CB;
+  --on-night-soft: #BDBCB0;
+  --on-night-mid:  #9E9D93;
 
-  /* ── SUPERFICIES OSCURAS · hero, footer, bloques inversos ─────────
-     Carbón neutro, sin tinte. El hero y el pie llevan encima la aurora
-     (degradado terracota→magenta→violeta→azul→teal pintado en canvas),
-     así que el color lo pone esa capa: la base debe ser neutra o la
-     aurora sale sucia. */
-  --night-900:    #121316;  /*  18,  19,  22 — fondo de hero y footer      */
-  --night-800:    #1F2126;  /*  31,  33,  38 — tarjetas sobre oscuro       */
-  --night-700:    #2B2E35;  /*  43,  46,  53 — hover de tarjeta oscura     */
-  --night-600:    #3C3E44;  /*  60,  62,  68 — bordes y divisores oscuros  */
+  /* ── CUERPO CLARO ──────────────────────────────────────────────── */
+  --bg:           #FFFDEB;  /* crema: fondo de página                 */
+  --bg-alt:       #F4F2DF;  /* crema tostada: secciones alternas      */
+  --bg-raised:    #FFFDEB;  /* las piezas se separan por línea, no tono */
+  --bg-input:     #FFFFF6;
+  --bg-sunken:    #EDEBD6;
 
-  --on-night:      #FFFFFF; /* 255, 255, 255 — titular invertido  · 18.58  */
-  --on-night-body: #D2D2D7; /* 210, 210, 215 — párrafos           · 12.33  */
-  --on-night-soft: #B4B6BD; /* 180, 182, 189 — secundario         ·  9.17  */
-  --on-night-mid:  #9A9AA3; /* 154, 154, 163 — microcopy, legales ·  6.66  */
+  --ink:          #1D1D1B;
+  --ink-soft:     #3A3A36;  /* 11:1  */
+  --ink-mid:      #5E5E57;  /* 6.4:1 */
+  --ink-decor:    #A9A89C;  /* solo líneas e iconos */
+  --ink-faint:    var(--ink-mid);
 
-  /* ── CUERPO CLARO ─────────────────────────────────────────────── */
-  --bg:           #FFFFFF;  /* Blanco — fondo de página                    */
-  --bg-alt:       #F7F7F8;  /* Gris neutro — secciones alternas            */
+  --line:         #DEDCC8;
+  --line-strong:  #1D1D1B;
 
-  /* Superficie ELEVADA. Con --bg en blanco puro ya no se puede subir
-     más hacia la luz, así que la tarjeta se distingue por BORDE y no
-     por tono: --bg-raised es el gris de sección y la tarjeta lleva
-     --line. Es lo que hace openai developers (#fff página, #f9f9f9
-     tarjeta): invierte la relación en vez de inventar un blanco más
-     blanco. Sobre --bg-alt la superficie elevada vuelve a ser --bg. */
-  --bg-raised:    #F7F7F8;  /* 247, 247, 248 — tarjetas sobre --bg         */
-  --bg-input:     #F1F1F3;  /* 241, 241, 243 — inputs, superficies hundidas*/
-  --bg-sunken:    #EAEAEE;  /* 234, 234, 238 — pista de scrollbar          */
+  --glass-bg:     var(--bg);
+  --glass-border: var(--line);
 
-  /* ── TINTA · gris neutro, sin sesgo ─────────────────────────────────
-     Antes tenía sesgo verde bosque. Ese tinte estaba en el texto, los
-     bordes y el fondo a la vez — el 80% de la superficie — y era la
-     causa real de que la web "tuviera un color". Ahora los neutros son
-     neutros y el color vive solo en el acento y los chips.
-     --ink-decor NO es un token de texto: 2.79 no llega a AA. */
-  --ink:          #121316;  /*  18,  19,  22 — titulares  · 18.58 / 17.35  */
-  --ink-soft:     #3C3E44;  /*  60,  62,  68 — párrafos   · 10.69 /  9.98  */
-  --ink-mid:      #55585F;  /*  85,  88,  95 — microcopy  ·  7.12 /  6.65  */
-  --ink-decor:    #9A9AA3;  /* 154, 154, 163 — SOLO bordes, puntos, iconos */
-  --ink-faint:    var(--ink-mid);  /* alias de compatibilidad · 7.12/6.65  */
-
-  --line:         #E7E7EA;  /* 231, 231, 234 — bordes de tarjeta           */
-  --line-strong:  #D2D2D7;  /* 210, 210, 215 — bordes de input, hover      */
-
-  /* ── CRISTAL ──────────────────────────────────────────────────── */
-  --glass-bg:     rgba(255, 255, 255, 0.72);
-  --glass-border: rgba(18, 19, 22, 0.09);
-
-  /* ── SEMÁNTICOS · sobre claro ─────────────────────────────────── */
-  --rojo:         #B91C1C;  /* 185,  28,  28 · 6.47 / 5.62                 */
-  --rojo-bg:      rgba(185, 28, 28, 0.07);
-  --rojo-border:  rgba(185, 28, 28, 0.20);
-  --rojo-solid:   #DC2626;  /* 220,  38,  38 — relleno de botón, texto #fff*/
-
-  --verde:        #0B7A3B;  /*  11, 122,  59 · 5.44 / 4.72                 */
-  --verde-bg:     rgba(11, 122, 59, 0.07);
-  --verde-border: rgba(11, 122, 59, 0.22);
-
-  --ambar:        #9A4A08;  /* 154,  74,   8 · 6.26 / 5.43                 */
+  /* ── SEMÁNTICOS ────────────────────────────────────────────────── */
+  --rojo:         #B42318;
+  --rojo-bg:      rgba(180, 35, 24, 0.07);
+  --rojo-border:  rgba(180, 35, 24, 0.24);
+  --rojo-solid:   #D92D20;
+  --verde:        #00704A;
+  --verde-bg:     rgba(0, 112, 74, 0.07);
+  --verde-border: rgba(0, 112, 74, 0.24);
+  --ambar:        #9A4A08;
   --ambar-bg:     rgba(154, 74, 8, 0.07);
-  --ambar-border: rgba(154, 74, 8, 0.30);
+  --ambar-border: rgba(154, 74, 8, 0.28);
+  --rojo-night:   #FF7A6E;
+  --verde-night:  #47FFC1;
+  --ambar-night:  #F5B041;
 
-  /* ── SEMÁNTICOS · sobre oscuro ────────────────────────────────── */
-  --rojo-night:   #FF6B6B;  /* 255, 107, 107 ·  6.81                       */
-  --verde-night:  #3DDC84;  /*  61, 220, 132 · 10.60                       */
-  --ambar-night:  #F5A524;  /* 245, 165,  36 ·  9.27                       */
-
-  /* ── TIPOGRAFÍA ────────────────────────────────────────────────
-     [31-ago-2026] Fuera Inter e Instrument Serif.
-
-     Motivo: ninguna de las webs de referencia usa Inter. Lo que se ve
-     listado como "Inter" en las fichas de estilo es el SUSTITUTO que se
-     anota cuando la fuente real es de pago — Pipe usa Suisse Int'l,
-     dotconnect usa Aeonik Pro, Grammarly usa Matter, Lovable usa Camera
-     Plain. Copiar el sustituto es copiar el relleno, no la elección.
-
-     Bricolage Grotesque es una grotesca con carácter propio (la g, la a
-     y la y tienen forma reconocible) sin irse a lo experimental: da voz
-     donde Inter no da ninguna. Geist sostiene cuerpo e interfaz.
-
-     Bricolage es de eje óptico variable: se le pasa opsz junto al peso,
-     por eso el enlace de Google Fonts lleva 12..96. */
-  --font-display: 'Bricolage Grotesque', 'Geist', system-ui, sans-serif;
-  --font-heading: 'Bricolage Grotesque', 'Geist', system-ui, sans-serif;
+  /* ── TIPOGRAFÍA ────────────────────────────────────────────────── */
+  --font-display: 'Hepta Slab', Georgia, serif;
+  --font-heading: 'Hepta Slab', Georgia, serif;
   --font-body:    'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono:    ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --font-mono:    'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
 
-  /* ════════════════════════════════════════════════════════════════
-     ESCALAS DEL SISTEMA — espaciado, radios, movimiento y sombra
-     ════════════════════════════════════════════════════════════════
-     Faltaban aqui: este archivo solo traia color y tipografia, asi que
-     los espaciados y los radios se venian poniendo a ojo. Son los del
-     documento oficial (_docs/negocio/sistema-diseno-bosque-inteligente).
+  /* Pesos: los titulares grandes van finos (400) y apretados, al modo
+     Exo Ape; el 800 se reserva al logo y a cifras. */
+  --display-weight: 400;
+  --display-track:  -0.035em;
 
-     Regla del sistema: "un nuevo color, radio o tamano no entra por
-     intuicion". Si un valor no esta en estas escalas, no se usa.
-     ════════════════════════════════════════════════════════════════ */
+  /* Escala de titulares */
+  --fs-hero:  clamp(3rem, 6.4vw, 6.2rem);
+  --fs-h2:    clamp(2.4rem, 5vw, 4.6rem);
+  --fs-h3:    clamp(1.5rem, 2.2vw, 2.1rem);
 
-  /* Espaciado. Prioriza 16/24/32/48/64/96. */
-  --space-1:  4px;    /* micro-ajustes */
-  --space-2:  8px;    /* gap pequeno / icono */
-  --space-3:  12px;   /* label / input interno */
-  --space-4:  16px;   /* elemento base */
-  --space-5:  24px;   /* grupos */
-  --space-6:  32px;   /* cards / bloques */
-  --space-7:  48px;   /* separacion de componentes */
-  --space-8:  64px;   /* secciones internas */
-  --space-9:  80px;   /* separacion de bloques */
-  --space-10: 96px;   /* secciones */
-  --space-11: 120px;  /* hero / transiciones */
+  /* ── ESPACIO ───────────────────────────────────────────────────── */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  24px;
+  --space-6:  32px;
+  --space-7:  48px;
+  --space-8:  64px;
+  --space-9:  80px;
+  --space-10: 96px;
+  --space-11: 128px;
 
-  /* Radios. Pill SOLO para badges: los botones van a 8px. */
-  --radius-sm:   8px;    /* inputs, botones */
-  --radius-md:   12px;   /* cards */
-  --radius-lg:   16px;   /* bloques destacados */
-  --radius-xl:   20px;   /* contenedores especiales */
-  --radius-pill: 999px;  /* badges puntuales */
+  /* ── RADIOS · 0 en editorial, 6px en UI de ejemplo ─────────────── */
+  --radius-sm:   0;
+  --radius-md:   0;
+  --radius-lg:   0;
+  --radius-xl:   0;
+  --radius-ui:   6px;
+  --radius-pill: 999px;
 
-  /* Aire alrededor del hero: lo separa de los bordes de la ventana para
-     que se lea como un bloque dentro de la pagina, no como el fondo. */
-  --hero-gap:         16px;
+  --hero-gap: 0px;
 
-  /* Contenedor y grid.
-     Escala de anchos en pasos de 80px. Antes solo existian los dos
-     primeros y las secciones se inventaban el suyo a mano (1120, 1100,
-     1040, 1000): al no venir de ningun sitio no se sabia si 1100 y 1120
-     eran una decision o un descuido.
-       wide   — el maximo absoluto, para piezas a sangre
-       max    — el de .container y la navbar: la cuadricula de la web
-       narrow — bloques de dos columnas que a 1200 quedan estirados
-       tight  — bloques de lectura y secuencias (fases, timeline) */
-  --container-max:    1200px;
-  --container-wide:   1280px;
-  /* [2-sep-2026] narrow y tight se miden sobre el ANCHO DE CONTENIDO, no
-     sobre el de la caja: .container son 1200 con 24px de padding a cada
-     lado, o sea 1152 utiles. Antes narrow era 1120 y quedaba 32px mas
-     estrecho que todo lo demas sin que fuera una decision — salia de
-     comparar un ancho sin padding con uno que si lo tiene.
-     Ahora bajan de 80 en 80 desde esos 1152, que es el salto que ya
-     habia entre max y wide. */
-  --container-narrow: 1072px;
-  --container-tight:   992px;
-  --gutter-desktop:   32px;
-  --gutter-tablet:    24px;
+  /* ── CONTENEDOR ────────────────────────────────────────────────── */
+  --container-max:    1280px;
+  --container-wide:   1440px;
+  --container-narrow: 1120px;
+  --container-tight:   960px;
+  --gutter-desktop:   56px;
+  --gutter-tablet:    36px;
   --gutter-mobile:    20px;
-  --grid-gap:         24px;
+  --grid-gap:         32px;
 
-  /* Movimiento */
-  --motion-fast:   150ms;
-  --motion-base:   220ms;
-  --motion-slow:   360ms;
-  --ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
+  /* ── MOVIMIENTO ────────────────────────────────────────────────── */
+  --motion-fast:   160ms;
+  --motion-base:   240ms;
+  --motion-slow:   800ms;
+  --ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
 
-  /* Sombras */
-  --shadow-subtle: 0 8px 24px rgba(15, 31, 27, 0.08);
-  --shadow-soft:   0 16px 40px rgba(15, 31, 27, 0.10);
-
+  /* Sin sombras de tarjeta: la separación es por línea. */
+  --shadow-subtle: none;
+  --shadow-soft:   none;
 }
 
 
-/* ══════════════════════════════════════════════════════════════════
-   BLOQUE INVERSO
-
-   Cualquier sección con class="inverse" reasigna sus tokens al modo
-   oscuro. Los componentes de dentro no necesitan CSS propio: heredan.
-
-   Uso:  <header class="hero inverse">   <footer class="inverse">
-
-   Esto es lo que hace que un solo juego de componentes funcione en
-   ambos fondos. NO crear un :root paralelo por página.
-   ══════════════════════════════════════════════════════════════════ */
-
+/* ══ BLOQUE INVERSO ════════════════════════════════════════════════
+   class="inverse" reasigna los tokens a negro. Los componentes de
+   dentro heredan sin CSS propio. */
 .inverse {
   --bg:           var(--night-900);
-  --bg-alt:       var(--night-900);
-  --bg-raised:    var(--night-800);  /* sobre oscuro, elevarse es aclarar igual */
+  --bg-alt:       var(--night-800);
+  --bg-raised:    var(--night-800);
   --bg-input:     var(--night-800);
+  --bg-sunken:    var(--night-700);
   --glass-bg:     var(--night-800);
   --glass-border: var(--night-600);
   --line:         var(--night-600);
-  --line-strong:  #40483F;
+  --line-strong:  var(--on-night);
 
   --ink:          var(--on-night);
   --ink-soft:     var(--on-night-body);
   --ink-mid:      var(--on-night-mid);
   --ink-faint:    var(--on-night-mid);
-  --ink-decor:    #6E7970;
+  --ink-decor:    #6E6D64;
 
   --rojo:         var(--rojo-night);
   --verde:        var(--verde-night);
@@ -253,42 +185,23 @@
 }
 
 
-/* ══════════════════════════════════════════════════════════════════
-   REGLAS TRANSVERSALES
-   ══════════════════════════════════════════════════════════════════ */
-
-/* Foco visible — WCAG 2.4.7. Obligatorio en todo elemento interactivo. */
-:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+/* ══ TRANSVERSALES ═════════════════════════════════════════════════ */
+:where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
   outline: 2px solid var(--cobalt-600);
-  outline-offset: 3px;
-  border-radius: 4px;
+  outline-offset: 4px;
 }
-.inverse :where(a, button, input, textarea, select, [tabindex]):focus-visible {
+.inverse :where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
   outline-color: var(--cobalt-400);
 }
 
-/* Capa sobre vídeo de fondo. Nunca negro puro: el vídeo devolvería
-   un gris sucio y se perdería la temperatura fría. */
 .video-overlay {
-  background: linear-gradient(
-    to bottom,
-    rgba(15, 31, 27, 0.62) 0%,
-    rgba(15, 31, 27, 0.82) 100%
-  );
+  background: linear-gradient(to bottom, rgba(29, 29, 27, 0.6), rgba(29, 29, 27, 0.85));
 }
 
-/* Scrollbar y selección van en NEUTRO, no en dorado.
-   El acento se reserva a CTAs, estados activos, enlaces y foco. Un
-   scrollbar dorado acompaña al lector por toda la página y gasta el
-   único color de marca en un elemento que no es una acción. */
-html { scrollbar-color: var(--line-strong) var(--bg-sunken); }
+html { scrollbar-color: var(--ink-decor) var(--bg-sunken); }
 ::-webkit-scrollbar-track       { background: var(--bg-sunken); }
-::-webkit-scrollbar-thumb       { background: var(--line-strong); border: 2px solid var(--bg-sunken); border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: var(--ink-decor); }
-::selection { background: rgba(27, 33, 29, 0.12); color: var(--ink); }
+::-webkit-scrollbar-thumb       { background: var(--ink-decor); border: 2px solid var(--bg-sunken); }
+::selection { background: var(--menta); color: var(--negro); }
 
-/* En movil el hero casi llena la pantalla: menos margen para no comerse
-   ancho util de texto. */
-@media (max-width: 700px) {
-  :root { --hero-gap: 10px; }
-}
+@media (max-width: 1100px) { :root { --gutter-desktop: 36px; } }
+@media (max-width: 760px)  { :root { --gutter-desktop: 20px; } }

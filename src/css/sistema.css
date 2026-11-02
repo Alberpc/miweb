@@ -1,0 +1,374 @@
+/* ══════════════════════════════════════════════════════════════════
+   sistema.css — contravía × Refero para TODAS las páginas interiores
+   ══════════════════════════════════════════════════════════════════
+   Se carga la última (base.njk y legal.njk), encima de la hoja de cada
+   página. Aplica las reglas de la dirección (DIRECCION.md de la
+   Variante 01) sin reescribir el HTML de cada landing:
+   · Radio 0, sin sombras de tarjeta, sin degradados de marca.
+   · Las piezas se separan por línea fina, no por caja.
+   · Titulares en Hepta Slab fino y apretado; rótulos en mono.
+   · Cabeceras de sección asimétricas (rótulo | titular), alineadas a
+     la izquierda, como en la home.
+   · Ninguna palabra del titular en otro color.
+   · Cierre en negro liso, sin aurora.
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ── Tipografía ──────────────────────────────────────────────── */
+h1, h2, h3,
+.s-title, .section-title {
+    font-family: var(--font-display);
+    font-weight: var(--display-weight);
+    letter-spacing: var(--display-track);
+}
+.hl, .h3-acento, h1 .hl, h2 .hl,
+.hero h1 .hl, .article-hero.inverse h1 .hl {
+    background: none !important;
+    -webkit-text-fill-color: currentColor !important;
+    color: inherit !important;
+}
+
+.s-label, .section-label, .hero-cat, .eyebrow,
+.faq-head .s-label {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+}
+.inverse .s-label, .inverse .section-label, .inverse .hero-cat { color: var(--on-night-mid); }
+
+/* ── Cabecera de sección asimétrica ──────────────────────────── */
+.s-head,
+.s-head.center,
+.faq-head {
+    display: grid;
+    grid-template-columns: 1fr 2.15fr;
+    column-gap: var(--space-8);
+    max-width: none;
+    margin: 0 0 var(--space-8);
+    text-align: left;
+}
+.s-head > .s-label,
+.faq-head > .s-label { grid-column: 1; grid-row: 1 / span 3; padding-top: 14px; margin: 0; }
+.s-head > :not(.s-label),
+.faq-head > :not(.s-label) { grid-column: 2; margin-left: 0; margin-right: 0; }
+.s-title, .faq-head h2 {
+    font-size: clamp(2.1rem, 4.2vw, 3.8rem);
+    line-height: 1.04;
+    margin-bottom: var(--space-4);
+    text-wrap: balance;
+}
+.s-sub { font-weight: 400; color: var(--ink-soft); font-size: 1.05rem; }
+
+/* ── Ritmo y separadores ─────────────────────────────────────── */
+.section { padding: var(--space-11) 0; }
+.section + .section::before { display: none !important; }
+.section + .section { border-top: 1px solid var(--line); }
+
+/* ── Hero de las páginas interiores ──────────────────────────── */
+.hero:not(.inverse) {
+    margin: 0;
+    border-radius: 0;
+    background-image: none;
+    background-color: var(--bg);
+    padding-top: calc(72px + var(--space-10));
+    border-bottom: 1px solid var(--ink);
+}
+.hero:not(.inverse) .hero-texto {
+    max-width: none;
+    margin: 0 0 var(--space-8);
+    text-align: left;
+    display: grid;
+    grid-template-columns: 1fr 2.15fr;
+    column-gap: var(--space-8);
+}
+.hero:not(.inverse) .hero-texto > * { grid-column: 2; }
+.hero:not(.inverse) .hero-texto > .s-label,
+.hero:not(.inverse) .hero-texto > .eyebrow,
+.hero:not(.inverse) .hero-texto > .hero-cat { grid-column: 1; grid-row: 1 / span 4; padding-top: 18px; }
+.hero h1 {
+    font-size: clamp(2.8rem, 6vw, 5.6rem);
+    font-weight: var(--display-weight);
+    line-height: 1;
+    letter-spacing: -0.045em;
+    max-width: 16ch;
+    margin: 0 0 var(--space-5);
+    text-align: left;
+}
+.hero p.sub { margin: 0 0 var(--space-6); max-width: 52ch; font-weight: 400; text-align: left; }
+.hero-ctas { justify-content: flex-start; }
+
+/* Hero oscuro (no-perder-clientes) y cabecera de artículos */
+.hero.inverse,
+.article-hero.inverse {
+    margin: 0;
+    border-radius: 0;
+    background-image: none;
+    background-color: var(--night-900);
+}
+.hero.inverse .aurora-canvas,
+.article-hero .aurora-canvas,
+.cta-final .aurora-canvas,
+.footer-section .aurora-canvas { display: none !important; }
+.hero-centered, .hero-ctas-centered { text-align: left; justify-content: flex-start; }
+.hero-centered h1, .hero-centered p { margin-left: 0; margin-right: 0; }
+.article-hero.inverse h1 {
+    font-weight: var(--display-weight);
+    letter-spacing: -0.04em;
+    line-height: 1.02;
+}
+
+/* ── Piezas: línea arriba en vez de caja ─────────────────────── */
+:where(.sintoma, .garantia-srv, .area, .otro, .quien-col, .contraste-col,
+       .servicio-card, .beneficio, .related-card, .post-card, .paquete,
+       .caso, .deal, .glass-card, .card, .cta-card, .pz, .informe,
+       .mockup, .pipe-wrap, .escena-video, .hero-figure, .diferenciador-photo,
+       .key-points li, .toc, .asked-box, .inline-cta) {
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+:where(.sintoma, .garantia-srv, .area, .otro, .quien-col, .contraste-col,
+       .servicio-card, .beneficio, .related-card, .post-card) {
+    background: transparent !important;
+    border: 0 !important;
+    border-top: 1px solid var(--ink) !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+:where(.sintoma, .garantia-srv, .area, .otro, .servicio-card, .related-card, .post-card):hover {
+    transform: none !important;
+    border-top-color: var(--cobalt-600) !important;
+}
+.contraste-col.bien,
+.quien-col.si { border-top: 2px solid var(--ink) !important; }
+.contraste-col.mal,
+.quien-col.no { border-top-color: var(--line) !important; color: var(--ink-mid); }
+
+/* Piezas que son UI de ejemplo: superficie con borde, radio 6px. */
+:where(.pz, .informe, .mockup, .pipe-wrap, .escena-video, .paquete, .caso, .deal) {
+    border-radius: var(--radius-ui) !important;
+    border: 1px solid var(--line) !important;
+}
+.paquete--recomendada { border-color: var(--ink) !important; }
+
+/* Iconos en círculo/caja de color → solo trazo */
+:where(.ic, .ico, .icon, .icono) { background: transparent !important; border-radius: 0 !important; }
+
+/* Chips/etiquetas: rectas, en mono */
+:where(.canales span, .chip, .tag, .post-tag, .cat-chip) {
+    border-radius: 0 !important;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+}
+
+/* ── FAQ de las landings (.faq > button + .body) ─────────────── */
+.faqs { max-width: none; gap: 0; border-top: 1px solid var(--ink); }
+.faq {
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    border-radius: 0;
+}
+.faq button {
+    font-size: 17px;
+    font-weight: 500;
+    padding: 24px 0;
+}
+.faq .ico { color: var(--ink); font-weight: 300; font-size: 26px; }
+.faq.open button, .faq button:hover { color: var(--cobalt-700); }
+.faq .body p { padding-left: 0; }
+
+/* FAQ de las otras (.faq-item) */
+.faq-container { max-width: none; border-top: 1px solid var(--ink); }
+.faq-item { border-bottom: 1px solid var(--line); }
+.faq-trigger { flex-direction: row; justify-content: space-between; padding: 24px 0; }
+.faq-question { font-size: 17px; }
+.faq-icon { color: var(--ink); font-size: 26px; font-weight: 300; }
+.faq-item:hover .faq-question,
+.faq-item.active .faq-question { color: var(--cobalt-700); }
+.faq-item.active .faq-icon { color: var(--cobalt-700); }
+.faq-answer { padding-left: 0; }
+.faq-section { background: var(--bg); }
+
+/* ── Cierre: negro liso, titular grande a la izquierda ───────── */
+.cta-final,
+.cta-final.inverse {
+    margin: 0;
+    border-radius: 0;
+    background: var(--night-900) !important;
+    background-image: none !important;
+    text-align: left;
+    padding: var(--space-11) 0 var(--space-10);
+}
+.cta-final > .container { display: flex; flex-direction: column; align-items: flex-start; }
+.cta-final h2 {
+    font-size: clamp(2.8rem, 6.4vw, 6rem);
+    line-height: 1;
+    letter-spacing: -0.045em;
+    color: var(--on-night);
+    max-width: 16ch;
+    margin-left: 0;
+    margin-right: 0;
+}
+.cta-final p { max-width: 52ch; margin-left: 0; margin-right: 0; font-weight: 400; }
+.cta-final + .footer-section { border-top: 1px solid var(--night-600); }
+
+/* ── Formularios fuera de la home ────────────────────────────── */
+:where(.glass-form, .glass-form-container) {
+    background: transparent !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+}
+:where(.glass-form, .form-group) :where(input, textarea, select) {
+    border-radius: 0 !important;
+}
+
+/* ── Enlaces suaves ──────────────────────────────────────────── */
+.link-soft {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 2px;
+}
+
+/* ── Móvil ───────────────────────────────────────────────────── */
+@media (max-width: 760px) {
+    .section { padding: var(--space-9) 0; }
+    .s-head, .s-head.center, .faq-head,
+    .hero:not(.inverse) .hero-texto { display: block; }
+    .s-head > .s-label, .faq-head > .s-label,
+    .hero:not(.inverse) .hero-texto > .s-label { display: block; padding-top: 0; margin-bottom: var(--space-4); }
+    .hero:not(.inverse) { padding-top: calc(64px + var(--space-8)); }
+    .hero h1 { font-size: clamp(2.4rem, 11vw, 3.6rem); }
+    .cta-final { padding: var(--space-9) 0; }
+    .cta-final h2 { font-size: clamp(2.4rem, 11vw, 3.6rem); }
+}
+
+/* Barra sobre un hero CLARO: tinta oscura (la regla de nav.css asume
+   hero negro). */
+body:has(.hero:not(.inverse)) .navbar--sobre-hero {
+    color: var(--ink);
+    border-bottom-color: var(--line);
+}
+body:has(.hero:not(.inverse)) .navbar--sobre-hero .nav-btn:hover {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--bg);
+}
+
+/* Héroes y bloques centrados de no-perder-clientes → a la izquierda,
+   como el resto del sitio. */
+.hero-content-centered { text-align: left; align-items: flex-start; }
+.hero-content-centered h1 {
+    font-size: clamp(2.8rem, 6vw, 5.6rem);
+    line-height: 1;
+    letter-spacing: -0.045em;
+    max-width: 16ch;
+    margin-left: 0;
+}
+.hero-content-centered p { margin-left: 0; margin-right: 0; }
+.hero.inverse { padding-top: calc(72px + var(--space-10)); padding-bottom: var(--space-10); }
+.flujo-head, .cierre-text, .servicios-cta { text-align: left; margin-left: 0; }
+.flujo-head h2, .cierre-text h2 { font-size: clamp(2.1rem, 4.2vw, 3.8rem); line-height: 1.04; }
+
+/* ── Blog: índice ────────────────────────────────────────────── */
+.blog-hero {
+    margin: 0 !important;
+    border-radius: 0 !important;
+    background: var(--night-900) !important;
+    background-image: none !important;
+    text-align: left;
+    padding: calc(72px + var(--space-10)) 0 var(--space-9) !important;
+}
+.blog-hero .aurora-canvas { display: none !important; }
+.blog-hero h1 {
+    font-size: clamp(3.4rem, 9vw, 8rem);
+    line-height: 0.95;
+    letter-spacing: -0.05em;
+    color: var(--on-night);
+    text-align: left;
+}
+.blog-hero .sub { text-align: left; margin-left: 0; color: var(--on-night-soft); }
+.blog-filtros { justify-content: flex-start; }
+.blog-filtro {
+    border-radius: 0 !important;
+    font-family: var(--font-mono);
+    font-size: 12px;
+}
+.blog-filtro[aria-pressed="true"] { background: var(--ink) !important; color: var(--bg) !important; border-color: var(--ink) !important; }
+.posts-grid { column-gap: var(--space-6); row-gap: var(--space-8); }
+.post-info { padding-left: 0 !important; padding-right: 0 !important; }
+.post-card h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 1.5rem;
+    line-height: 1.12;
+    letter-spacing: -0.025em;
+}
+.post-thumb { border-radius: 0 !important; }
+.post-cat, .post-more { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-mid); }
+.post-card:hover .post-more { color: var(--cobalt-700); }
+
+/* ── Artículos ───────────────────────────────────────────────── */
+.article-hero.inverse { padding-top: calc(72px + var(--space-9)) !important; }
+.article-hero.inverse .hero-cat {
+    border-radius: 0;
+    border: 0;
+    padding: 0;
+    letter-spacing: 0.1em;
+    color: var(--cobalt-400);
+}
+.article-hero.inverse h1 { font-size: clamp(2.6rem, 5.4vw, 4.8rem); }
+.hero-figure { border-radius: 0 !important; }
+.prose .lead-answer {
+    background: transparent !important;
+    border: 0 !important;
+    border-top: 1px solid var(--ink) !important;
+    border-bottom: 1px solid var(--line) !important;
+    border-radius: 0 !important;
+    padding: 22px 0 !important;
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+}
+.key-points li {
+    background: transparent !important;
+    border: 0 !important;
+    border-bottom: 1px solid var(--line) !important;
+    border-radius: 0 !important;
+    padding: 12px 0 !important;
+}
+.key-points li::before { background: var(--menta) !important; box-shadow: 0 0 0 1px var(--ink) !important; }
+.stat-box {
+    background: var(--bg-alt) !important;
+    border: 0 !important;
+    border-top: 2px solid var(--ink) !important;
+    border-radius: 0 !important;
+}
+.stat-box .stat-num { font-weight: 400; color: var(--ink); }
+.prose blockquote { border-left: 0 !important; border-top: 1px solid var(--ink); padding: 18px 0 0 !important; font-family: var(--font-display); font-size: 1.35rem; line-height: 1.35; }
+.prose h2, .prose h3 { font-family: var(--font-display); font-weight: 400; letter-spacing: -0.025em; }
+.toc ul { border-left-color: var(--line); }
+.toc a.active { border-left-color: var(--ink); }
+
+/* ── Checklist ───────────────────────────────────────────────── */
+.ck h1 span { color: inherit; }
+.ck h1 { font-weight: 400; letter-spacing: -0.04em; }
+.ck [class*="ck-"] { border-radius: 0 !important; box-shadow: none !important; }
+.ck-notas input:checked + span { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+
+/* ── Legales ─────────────────────────────────────────────────── */
+.legal-content h1, .legal h1 { font-weight: 400; letter-spacing: -0.04em; }
+.legal-content h2, .legal h2 { font-family: var(--font-display); font-weight: 400; letter-spacing: -0.02em; }
+.footer-section .container { width: min(var(--container-max), calc(100% - 2 * var(--gutter-desktop))); max-width: none; padding: 0; }
+.footer-section .footer-grid { grid-template-columns: 1.2fr 2fr; }
+@media (max-width: 900px) { .footer-section .footer-grid { grid-template-columns: 1fr; } }
+.footer-section .footer-grid { max-width: none; padding: 0; margin-bottom: 0; }
+.ck-ia, .ck-cta { background: var(--bg-alt) !important; border: 0 !important; border-top: 2px solid var(--ink) !important; }
+.ck-num { background: var(--ink) !important; color: var(--bg) !important; border-radius: 0 !important; }

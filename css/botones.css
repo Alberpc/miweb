@@ -1,219 +1,150 @@
 /* ============================================================
-   botones.css — LOS botones del sitio. Un solo archivo.
+   botones.css — contravía × Refero
    ============================================================
-   Antes habia 12 definiciones repartidas en 5 archivos (.btn-main,
-   .btn-primary, .nav-btn, .btn-submit, .cta, .btn-label...) y 8 de
-   ellas ponian el texto en BLANCO sobre el dorado. Cada pagina con
-   CSS propio se traia su copia, asi que arreglar una no arreglaba
-   las demas.
-
-   [31-ago-2026] El boton pasa a TERRACOTA SOLIDO sobre claro y a NEGRO
-   CON HALO sobre oscuro. Motivo medido: el mismo boton aparece en los
-   dos contextos y ningun tono de terracota sirve para ambos.
-     · #B44100 con texto blanco -> 5.68 en claro, pero 3.27 sobre el
-       hero: suspende.
-     · #EA8258 -> 6.93 sobre el hero, pero pide texto oscuro y entonces
-       lee a boton de oferta.
-   La salida es la de decagon: sobre oscuro el relleno es el propio
-   carbon y el color va en un halo degradado alrededor. Asi el texto
-   es blanco sobre negro (18.58) y el boton sigue perteneciendo a la
-   escena porque el halo recoge los colores de la aurora.
-
-   Regla del sistema:
-     - sobre claro: fondo --cobalt-600, texto BLANCO, 5.68
-     - sobre oscuro (.inverse): fondo carbon, texto blanco, halo
-     - radio 8px, nunca pildora
+   Dos botones en todo el sitio:
+   · Primario (.btn-main, .btn-primary, .btn-submit): relleno.
+     Sobre claro, negro con texto crema; sobre oscuro, menta con
+     texto negro. Radio 0. La flecha final se desplaza al pasar.
+   · Secundario (.btn-2, .btn-ghost): delineado con currentColor.
+   El de la barra (.nav-btn) vive en nav.css.
    ============================================================ */
 
 .btn-main,
 .btn-primary,
-.nav-btn,
 .btn-submit,
+.btn-primary-small,
 .subnav .cta,
 .cta-card .btn-main,
 .inline-cta .btn-inline .btn-label {
-    display: inline-block;
-    font-family: var(--font-body);
-    font-size: 0.94rem;
-    font-weight: 600;
-    color: #FFFFFF;
-    background: var(--cobalt-600);
-    padding: 0 var(--space-5);
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
     min-height: 52px;
-    line-height: 52px;
-    border-radius: var(--radius-sm);
-    border: 1px solid transparent;
+    padding: 0 22px;
+    border: 1px solid var(--ink);
+    border-radius: 0;
+    background: var(--ink);
+    color: var(--bg);
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1.2;
     text-decoration: none;
-    text-align: center;
-    transition: all var(--motion-fast) var(--ease-standard);
+    cursor: pointer;
+    box-shadow: none;
+    transition: background-color var(--motion-fast) var(--ease-standard),
+                color var(--motion-fast) var(--ease-standard),
+                border-color var(--motion-fast) var(--ease-standard);
 }
 
 .btn-main:hover,
 .btn-primary:hover,
-.nav-btn:hover,
 .btn-submit:hover,
+.btn-primary-small:hover,
 .subnav .cta:hover,
 .cta-card .btn-main:hover,
 .inline-cta .btn-inline:hover .btn-label {
-    background: var(--cobalt-700);
-    color: #FFFFFF;
-    /* [4-sep-2026] HOVER = HALO, no desplazamiento. El translateY movia
-       el boton bajo el cursor y en una fila de dos se notaba el salto.
-       Ahora solo crece la luz alrededor, que es el gesto de decagon:
-       el boton no se mueve, se ENCIENDE. */
-    box-shadow: 0 0 0 4px var(--cobalt-tint), 0 8px 30px var(--cobalt-glow);
+    background: var(--menta);
+    border-color: var(--ink);
+    color: var(--negro);
+    transform: none;
+    box-shadow: none;
 }
 
-/* ══════════════════════════════════════════════════════════════════
-   NIVEL 2 — BOTON SECUNDARIO (.btn-2)
-   ══════════════════════════════════════════════════════════════════
-   [4-sep-2026] Antes solo habia UN aspecto de boton para todo, asi que
-   dos botones en la misma pantalla pesaban igual y competian: el del
-   header y el del hero se leian como la misma llamada repetida.
-
-   Este es el nivel de acompanamiento: mismo tamano y misma tipografia
-   que el primario, pero sin relleno — borde y texto en terracota sobre
-   fondo transparente. Es el patron de decagon (su boton secundario es
-   el azul de marca en outline), y funciona porque el peso visual lo da
-   el RELLENO, no el color: quitando el relleno el boton sigue siendo
-   de la marca pero deja de gritar.
-
-   Sirve sobre claro y sobre oscuro sin cambiar de color, que es lo que
-   evita el salto al hacer scroll. */
-.btn-2 {
-    display: inline-block;
-    font-family: var(--font-body);
-    font-size: 0.94rem;
-    font-weight: 600;
-    color: var(--cobalt-700);
+/* Sobre negro: menta. */
+.inverse .btn-main,
+.inverse .btn-primary,
+.inverse .btn-submit,
+.inverse .btn-primary-small,
+.inverse .cta-card .btn-main,
+.cta-card.inverse .btn-main {
+    background: var(--menta);
+    border-color: var(--menta);
+    color: var(--negro);
+}
+.inverse .btn-main:hover,
+.inverse .btn-primary:hover,
+.inverse .btn-submit:hover,
+.inverse .btn-primary-small:hover,
+.cta-card.inverse .btn-main:hover {
     background: transparent;
-    padding: 0 var(--space-5);
-    min-height: 52px;
-    line-height: 50px;
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--cobalt-border);
-    text-decoration: none;
-    text-align: center;
-    transition: all var(--motion-fast) var(--ease-standard);
-}
-.btn-2:hover {
-    color: var(--cobalt-800);
-    border-color: var(--cobalt-500);
-    background: var(--cobalt-tint);
-    box-shadow: 0 0 0 4px var(--cobalt-tint);
-}
-/* Sobre fondo oscuro el terracota oscuro no se lee: sube al tono claro
-   (--cobalt-400, 6.93 sobre carbon) y el borde se aclara con el. */
-.inverse .btn-2,
-.navbar--sobre-hero .btn-2 {
-    color: var(--cobalt-400);
-    border-color: rgba(234, 130, 88, 0.42);
-}
-.inverse .btn-2:hover,
-.navbar--sobre-hero .btn-2:hover {
-    color: var(--cobalt-300);
-    border-color: var(--cobalt-400);
-    background: rgba(234, 130, 88, 0.10);
-    box-shadow: 0 0 0 4px rgba(234, 130, 88, 0.10);
-}
-
-/* ── El boton sobre fondo oscuro: negro con halo multicolor ──────
-   El halo se pinta con un pseudo-elemento detras y desenfocado, no
-   con un border-image: asi el degradado desborda el contorno y se
-   lee como luz, que es lo que hace que el boton se integre en la
-   aurora en vez de quedar pegado encima. */
-/* El degradado va en el FONDO del boton y el negro se pinta encima
-   recortado al padding-box. Resultado: solo asoma 1px de degradado
-   por el contorno, que es el borde de luz de decagon.
-
-   La primera version usaba un pseudo-elemento desbordado por detras
-   y se veia el degradado ENTERO, no un borde: el fondo negro solo
-   tapaba la zona interior y los 2px de fuera quedaban a la vista. */
-/* [4-sep-2026] SIN el prefijo .inverse: el primario es el mismo en los
-   dos fondos. Antes solo se aplicaba dentro de un bloque oscuro, asi
-   que el MISMO boton salia negro con halo en el hero y terracota solido
-   dos secciones mas abajo — en no-perder-clientes habia cuatro "Pide tu
-   llamada de 20 min" con dos aspectos distintos. El usuario no puede
-   aprender que significa cada color si el color depende del fondo.
-
-   Funciona en claro porque el relleno es carbon y el texto blanco:
-   18.58 de contraste en cualquier fondo, y el halo lo recorta contra el
-   blanco igual que lo integra en la aurora. */
-.btn-main,
-.btn-primary,
-.btn-submit,
-.cta-card .btn-main {
-    position: relative;
-    color: #FFFFFF;                    /* 18.58 sobre el carbon */
-    border: 1px solid transparent;
-    background:
-        linear-gradient(var(--night-900), var(--night-900)) padding-box,
-        /* [2-sep-2026] Sin el teal del final. Son los mismos colores de
-           la aurora del hero, pero alli el verde va al 97% del ancho y
-           con opacidad 0.23 (se difumina), y aqui iba al 100% de 205px
-           sin difuminar: el mismo color a otra escala cantaba en la
-           esquina. Cierra en azul y sigue recogiendo la escena. */
-        linear-gradient(100deg,
-            var(--cobalt-500) 0%,
-            #A63A70 40%,
-            #8642C4 73%,
-            #3A50BE 100%) border-box;
-    transition: background var(--motion-fast) var(--ease-standard),
-                transform var(--motion-fast) var(--ease-standard),
-                box-shadow var(--motion-fast) var(--ease-standard);
-}
-
-/* Al pasar el raton el interior aclara un punto y el borde se enciende
-   con un halo tenue. Hay que repetir las DOS capas del background: un
-   `background: color` suelto borraria la del borde degradado. */
-.btn-main:hover,
-.btn-primary:hover,
-.btn-submit:hover,
-.cta-card .btn-main:hover {
-    background:
-        linear-gradient(var(--night-800), var(--night-800)) padding-box,
-        /* [2-sep-2026] Sin el teal del final. Son los mismos colores de
-           la aurora del hero, pero alli el verde va al 97% del ancho y
-           con opacidad 0.23 (se difumina), y aqui iba al 100% de 205px
-           sin difuminar: el mismo color a otra escala cantaba en la
-           esquina. Cierra en azul y sigue recogiendo la escena. */
-        linear-gradient(100deg,
-            var(--cobalt-500) 0%,
-            #A63A70 40%,
-            #8642C4 73%,
-            #3A50BE 100%) border-box;
-    color: #FFFFFF;
-    transform: translateY(-1px);
-    box-shadow: 0 6px 22px rgba(218, 98, 45, 0.20);
-}
-
-
-/* Variante secundaria: mismo tamano, sin relleno. */
-.btn-ghost {
-    display: inline-block;
-    font-family: var(--font-body);
-    font-size: 0.94rem;
-    font-weight: 600;
+    border-color: var(--on-night);
     color: var(--on-night);
-    background: transparent;
-    padding: 0 var(--space-5);
-    min-height: 52px;
-    line-height: 52px;
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--night-600);
-    text-decoration: none;
-    transition: all var(--motion-fast) var(--ease-standard);
-}
-.btn-ghost:hover {
-    border-color: var(--cobalt-400);
-    color: var(--cobalt-300);
 }
 
-/* El nav va mas compacto que un boton de cuerpo. */
-.nav-btn,
-.subnav .cta {
-    font-size: 0.8rem;
-    padding: 0 18px;
-    min-height: 40px;
-    line-height: 40px;
+.btn-submit:disabled { opacity: 0.6; cursor: progress; }
+
+/* Secundario delineado */
+.btn-2,
+.btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+    min-height: 52px;
+    padding: 0 22px;
+    border: 1px solid currentColor;
+    border-radius: 0;
+    background: transparent;
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color var(--motion-fast) var(--ease-standard),
+                color var(--motion-fast) var(--ease-standard);
+}
+.btn-2:hover,
+.btn-ghost:hover {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--bg);
+}
+.inverse .btn-2,
+.inverse .btn-ghost,
+.navbar--sobre-hero .btn-2 { color: var(--on-night); }
+.inverse .btn-2:hover,
+.inverse .btn-ghost:hover {
+    background: var(--on-night);
+    border-color: var(--on-night);
+    color: var(--negro);
+}
+
+/* Enlace de texto con flecha (patrón Refero): subrayado a todo el
+   ancho, flecha a la derecha. */
+.text-link,
+.link-flecha {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+    min-height: 44px;
+    padding: 6px 0;
+    border: 0;
+    border-bottom: 1px solid currentColor;
+    color: inherit;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    background: none;
+    cursor: pointer;
+}
+.text-link .flecha,
+.link-flecha .flecha,
+.btn-main .flecha,
+.btn-2 .flecha {
+    font-size: 20px;
+    line-height: 1;
+    transition: transform var(--motion-fast) var(--ease-standard);
+}
+.text-link:hover .flecha,
+.link-flecha:hover .flecha,
+.btn-main:hover .flecha,
+.btn-2:hover .flecha { transform: translate(3px, -3px); }
+
+@media (prefers-reduced-motion: reduce) {
+    .text-link .flecha, .link-flecha .flecha, .btn-main .flecha, .btn-2 .flecha { transition: none; }
 }

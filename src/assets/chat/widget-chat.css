@@ -30,17 +30,17 @@
        Contrastes comprobados sobre el panel blanco: ink 18.58,
        ink-soft 10.69, ink-mid 7.12 (6.32 sobre la burbuja), cobalt-600
        5.68 y blanco sobre cobalt-600 5.68. Todos por encima de AA. */
-    --acw-bg: #FFFFFF;        /* --bg, el panel */
-    --acw-surface: #F1F1F3;   /* --bg-input, las burbujas encima */
-    --acw-line: #E7E7EA;      /* --line, bordes sobre claro */
-    --acw-bg-deep: #F7F7F8;   /* --bg-alt, cabecera y pie del panel */
-    --acw-text: #121316;      /* --ink · 18.58 */
-    --acw-text-soft: #3C3E44; /* --ink-soft, cuerpo · 10.69 */
-    --acw-text-mid: #55585F;  /* --ink-mid, microcopy y placeholders · 7.12 */
-    --acw-accent: #B44100;    /* --cobalt-600, relleno con texto blanco · 5.68 */
-    --acw-accent-soft: #9E3D0C; /* --cobalt-700: sobre CLARO la 400 se cae a
+    --acw-bg: #FFFDEB;        /* --bg, el panel */
+    --acw-surface: #F4F2DF;   /* --bg-input, las burbujas encima */
+    --acw-line: #DEDCC8;      /* --line, bordes sobre claro */
+    --acw-bg-deep: #F4F2DF;   /* --bg-alt, cabecera y pie del panel */
+    --acw-text: #1D1D1B;      /* --ink · 18.58 */
+    --acw-text-soft: #3A3A36; /* --ink-soft, cuerpo · 10.69 */
+    --acw-text-mid: #5E5E57;  /* --ink-mid, microcopy y placeholders · 7.12 */
+    --acw-accent: #1D1D1B;    /* --cobalt-600, relleno con texto blanco · 5.68 */
+    --acw-accent-soft: #005C3D; /* --cobalt-700: sobre CLARO la 400 se cae a
                                    2.42. La 700 da 6.72 y si es texto. */
-    --acw-border: #E7E7EA;    /* --line: sobre claro un naranja al 16% no se ve */
+    --acw-border: #DEDCC8;    /* --line: sobre claro un naranja al 16% no se ve */
     --acw-font: 'Geist', system-ui, 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
@@ -68,8 +68,9 @@
     /* [4-sep-2026] Mismo degradado que la burbuja de WhatsApp y que el
        hover de los iconos de redes: terracota -> magenta. Los valores van
        en hexadecimal porque esta hoja se carga suelta, sin tokens.css. */
-    background-color: #B44100; /* --cobalt-600, respaldo */
-    background-image: linear-gradient(160deg, #B44100, #A63A70);
+    background-color: #1D1D1B;
+    background-image: none;
+    border: 1px solid #3D3D39;
     border: 1px solid transparent;
     border-radius: 50%;
     display: flex;
@@ -84,8 +85,8 @@
 }
 
 .acw-bubble:hover {
-    background-color: #DA622D; /* --cobalt-500: aclara al pasar el raton */
-    background-image: linear-gradient(160deg, #DA622D, #BF4780);
+    background-color: #2E2E2B;
+    background-image: none;
     /* [4-sep-2026] Halo en vez de salto, igual que .whatsapp-float y que
        los botones del sistema: el elemento no se mueve, se enciende. */
     box-shadow: 0 0 0 6px rgba(218, 98, 45, 0.06),
@@ -133,7 +134,7 @@
     border: 1px solid rgba(255, 255, 255, 0.08);
     color: #FFFFFF;
     padding: 8px 16px;
-    border-radius: 6px;
+    border-radius: 0;
     font-size: 0.8rem;
     white-space: nowrap;
     opacity: 0;
@@ -164,7 +165,7 @@
     /* [5-sep-2026] Con el panel en claro, 4px de radio lo dejaban con
        aire de cuadro de dialogo del sistema. 12px lo acerca al resto de
        superficies del sitio. */
-    border-radius: 12px;
+    border-radius: 0;
     /* La sombra iba a 0.6 de negro: sobre oscuro no se nota, sobre la
        pagina clara seria una mancha. En claro el panel se despega con
        varias capas suaves, no con una dura. */
@@ -257,7 +258,7 @@
     padding: 11px 14px;
     font-size: 14px;
     line-height: 1.55;
-    border-radius: 4px;
+    border-radius: 0;
     white-space: pre-wrap;
     word-wrap: break-word;
     overflow-wrap: anywhere;
@@ -310,7 +311,7 @@
     padding: 13px 14px;
     background: var(--acw-surface);
     border: 1px solid var(--acw-border);
-    border-radius: 4px;
+    border-radius: 0;
 }
 
 .acw-typing--on {
@@ -360,7 +361,7 @@
     flex: 1 1 auto;
     background: var(--acw-surface);
     border: 1px solid var(--acw-border);
-    border-radius: 4px;
+    border-radius: 0;
     color: var(--acw-text);
     font-family: var(--acw-font);
     font-size: 14px;
@@ -388,7 +389,7 @@
 .acw-send {
     background: var(--acw-accent);
     border: none;
-    border-radius: 4px;
+    border-radius: 0;
     color: #ffffff;
     cursor: pointer;
     width: 40px;
@@ -402,7 +403,7 @@
 }
 
 .acw-send:hover:not(:disabled) {
-    background: #DA622D; /* --cobalt-500 */
+    background: #2E2E2B;
 }
 
 .acw-send:disabled {
@@ -450,7 +451,7 @@
 .acw-field {
     background: var(--acw-surface);
     border: 1px solid var(--acw-border);
-    border-radius: 4px;
+    border-radius: 0;
     color: var(--acw-text);
     font-family: var(--acw-font);
     font-size: 14px;
@@ -477,7 +478,7 @@
 .acw-submit {
     background: var(--acw-accent);
     border: none;
-    border-radius: 4px;
+    border-radius: 0;
     color: #ffffff;
     cursor: pointer;
     font-family: var(--acw-font);
@@ -490,7 +491,7 @@
 }
 
 .acw-submit:hover:not(:disabled) {
-    background: #DA622D; /* --cobalt-500 */
+    background: #2E2E2B;
 }
 
 .acw-submit:disabled {

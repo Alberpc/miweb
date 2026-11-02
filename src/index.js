@@ -1,816 +1,173 @@
-/* -------------------------------------------------------------
-   INTERACTIVIDAD Y ANIMACIONES: CROMO LÍQUIDO & TITANIO
-   ALBER CABRERA - WEB PREMIUM
-   ------------------------------------------------------------- */
+/* ══════════════════════════════════════════════════════════════════
+   index.js — HOME · contravía × Refero (2-nov-2026)
+   ══════════════════════════════════════════════════════════════════
+   Menú móvil y reveal viven en assets/js/base.js. Aquí solo lo de la
+   home: pausa de movimiento, pestañas de servicios con su recorrido de
+   ejemplo, parallax del hero, envío del formulario y el email ofuscado.
+   ══════════════════════════════════════════════════════════════════ */
 
-document.addEventListener('DOMContentLoaded', () => {
-    // Si se llega con un #ancla en la URL (ej. desde el diagnóstico a #contacto)
-    if (window.location.hash) {
-        const target = document.querySelector(window.location.hash);
-        if (target) {
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-    }
+document.documentElement.classList.add('js');
 
-    // 1.2 BARRA TRANSPARENTE SOBRE EL HERO
-    //     Movida a assets/js/base.js (3-sep-2026): buscaba
-    //     .navbar--en-hero, que ya no es exclusivo de la home
-    //     (diagnostico-operativo tambien tiene hero en bloque). Vive en
-    //     base.js porque lo cargan los tres layouts.
+/* ── Movimiento: respeta el sistema y deja pausarlo a mano ───────── */
+const prefiereQuieto = matchMedia('(prefers-reduced-motion: reduce)');
+const botonMovimiento = document.getElementById('movimiento');
+let pausado = prefiereQuieto.matches;
 
-    // 1.5 MENÚ HAMBURGUESA (MÓVIL) y 2. SCROLL REVEAL
-    //     Movidos a assets/js/base.js (3-sep-2026): eran copia exacta
-    //     de lo que ya hacia base.js para el resto de paginas. La home
-    //     no cargaba base.js y por eso llevaba su propia copia; ahora
-    //     home.njk tambien lo carga (ver ese archivo).
+function fijarMovimiento(valor) {
+    pausado = valor;
+    document.documentElement.classList.toggle('pausado', pausado);
+    if (!botonMovimiento) return;
+    botonMovimiento.setAttribute('aria-pressed', String(pausado));
+    botonMovimiento.innerHTML = pausado
+        ? 'Activar movimiento <span aria-hidden="true">▷</span>'
+        : 'Pausar movimiento <span aria-hidden="true">Ⅱ</span>';
+}
+fijarMovimiento(pausado);
+if (botonMovimiento) botonMovimiento.addEventListener('click', () => fijarMovimiento(!pausado));
+prefiereQuieto.addEventListener('change', (e) => fijarMovimiento(e.matches));
 
-    // 2.5 EL RIEL DE "COMO TRABAJO"
-    //
-    // La linea naranja sigue al scroll de forma CONTINUA, no a saltos de
-    // fase. Antes iba con una escalera de :has() en el CSS y se veia
-    // poco dinamica: pegaba cuatro tirones y ya.
-    //
-    // El avance se mide con el centro de la pantalla como cabeza de
-    // lectura: 0 cuando el primer nodo llega a esa altura, 1 cuando la
-    // alcanza el ultimo. Se mide contra los NODOS y no contra la
-    // seccion entera para que la linea y los puntos no puedan
-    // desincronizarse — son el mismo calculo.
-    const rielFases = document.querySelector('.fases');
+/* ── Parallax suave del hero ─────────────────────────────────────── */
+const arte = document.querySelector('.hero-arte');
+let esperando = false;
+addEventListener('scroll', () => {
+    if (!arte || esperando || pausado) return;
+    esperando = true;
+    requestAnimationFrame(() => {
+        const y = scrollY;
+        if (y < 1100) arte.style.transform = `translateY(${Math.min(y * 0.15, 110)}px)`;
+        esperando = false;
+    });
+}, { passive: true });
 
-    if (rielFases) {
-        const nodos = Array.from(rielFases.querySelectorAll('.fase'));
-        const sinMovimientoRiel = window.matchMedia('(prefers-reduced-motion: reduce)');
-        let rafRiel = null;
+/* ── Servicios: tablist con paneles reales en el HTML ────────────── */
+const pestanas = Array.from(document.querySelectorAll('.servicios-lista [role="tab"]'));
+const paneles = pestanas.map((t) => document.getElementById(t.getAttribute('aria-controls')));
+let temporizadores = [];
 
-        // Coloca cada punto en el eje de su fase. Se mide en vez de
-        // calcularlo en el CSS para que siga cuadrando si un titular
-        // ocupa dos lineas o cambia la tipografia.
-        //
-        // [1-sep-2026] Dos alturas segun el ancho, porque el layout ya
-        // no es el mismo a los dos lados del corte:
-        //  · >900: texto y pieza van enfrentados y CENTRADOS, asi que
-        //    el punto cae a media altura del bloque de texto — su eje
-        //    de simetria. Antes iba al titulo y, con las columnas ya
-        //    centradas, quedaba flotando por encima de todo.
-        //  · <=900: una sola columna con el riel al borde. Ahi el punto
-        //    tiene que marcar el ARRANQUE de la fase, o sea el titulo:
-        //    a media altura caeria en mitad del parrafo, o mas abajo
-        //    aun con la pieza debajo, y no senyalaria nada.
-        const unaColumna = window.matchMedia('(max-width: 900px)');
+function pararRecorrido() {
+    temporizadores.forEach(clearTimeout);
+    temporizadores = [];
+    paneles.forEach((p) => {
+        if (!p) return;
+        p.classList.remove('corriendo');
+        const b = p.querySelector('.panel-recorrido');
+        if (b) { b.disabled = false; b.innerHTML = 'Ver el recorrido <span class="flecha" aria-hidden="true">→</span>'; }
+        const t = p.querySelector('.actividad-t');
+        const d = p.querySelector('.actividad-p');
+        if (t && t.dataset.original) { t.textContent = t.dataset.original; d.textContent = d.dataset.original; }
+    });
+}
 
-        function alinearMarcas() {
-            nodos.forEach((fase) => {
-                const cuerpo = fase.querySelector('.fase-cuerpo');
-                const titulo = fase.querySelector('.fase-t');
-                const ref = unaColumna.matches ? titulo : cuerpo;
-                if (!ref) return;
-                const y = ref.offsetTop + ref.offsetHeight / 2;
-                fase.style.setProperty('--marca-y', y + 'px');
-            });
-        }
+function elegir(i, enfocar) {
+    pararRecorrido();
+    pestanas.forEach((t, j) => {
+        const activa = i === j;
+        t.setAttribute('aria-selected', String(activa));
+        t.tabIndex = activa ? 0 : -1;
+        if (paneles[j]) paneles[j].hidden = !activa;
+    });
+    if (enfocar) pestanas[i].focus();
+}
 
-        function pintarRiel() {
-            rafRiel = null;
-
-            const cabeza = window.innerHeight * 0.5;
-            const rielCaja = rielFases.getBoundingClientRect();
-
-            // Posicion de cada nodo dentro del riel. Se lee del punto
-            // (.fase-marca) y no del <li>, porque el punto es lo que el
-            // ojo ve encenderse.
-            const marcas = nodos.map((fase) => {
-                const marca = fase.querySelector('.fase-marca');
-                const caja = (marca || fase).getBoundingClientRect();
-                return {
-                    fase: fase,
-                    centroEnPantalla: caja.top + caja.height / 2,
-                    centroEnRiel: caja.top + caja.height / 2 - rielCaja.top
-                };
-            });
-
-            if (!marcas.length) return;
-
-            const primero = marcas[0];
-            const ultimo = marcas[marcas.length - 1];
-
-            // Cuanto ha recorrido la cabeza de lectura entre el primer
-            // nodo y el ultimo, de 0 a 1.
-            const recorrido = ultimo.centroEnPantalla - primero.centroEnPantalla;
-            let t = recorrido > 0
-                ? (cabeza - primero.centroEnPantalla) / recorrido
-                : 0;
-            t = Math.min(1, Math.max(0, t));
-
-            // De ahi al alto real de la linea: se traduce a la posicion
-            // del nodo correspondiente para que el frente naranja muera
-            // justo en un punto y no a media altura entre dos.
-            //
-            // [1-sep-2026] Salvo al final. El recorrido acaba en el ultimo
-            // NODO, pero la linea sigue mas abajo hasta la bola del bloque
-            // de cierre: parando el naranja en el nodo, ese tramo se
-            // quedaba gris y la linea se veia cortada en dos.
-            // Por eso, pasado el ultimo nodo, el frente sigue avanzando
-            // hasta el final del riel — que es justo donde esta la bola.
-            const alto = rielCaja.height || 1;
-            let avance;
-            if (t < 1) {
-                avance = (primero.centroEnRiel +
-                    (ultimo.centroEnRiel - primero.centroEnRiel) * t) / alto;
-            } else {
-                // Segundo tramo: del ultimo nodo al final de la linea,
-                // medido con la misma cabeza de lectura.
-                const restante = alto - ultimo.centroEnRiel;
-                const yaRecorrido = cabeza - ultimo.centroEnPantalla;
-                const t2 = restante > 0
-                    ? Math.min(1, Math.max(0, yaRecorrido / restante))
-                    : 1;
-                avance = (ultimo.centroEnRiel + restante * t2) / alto;
-            }
-
-            rielFases.style.setProperty('--riel-avance', avance.toFixed(4));
-
-            // Un nodo se enciende cuando el frente ya lo ha pasado.
-            const frenteEnRiel = avance * alto;
-            marcas.forEach((m) => {
-                m.fase.classList.toggle('riel-alcanzado',
-                    frenteEnRiel >= m.centroEnRiel - 1);
-            });
-        }
-
-        function pedirRiel() {
-            if (rafRiel === null) rafRiel = requestAnimationFrame(pintarRiel);
-        }
-
-        alinearMarcas();
-
-        if (sinMovimientoRiel.matches) {
-            // Sin movimiento: la linea aparece entera y los puntos
-            // encendidos. Se mantiene el resultado, se quita el viaje.
-            rielFases.style.setProperty('--riel-avance', '1');
-            nodos.forEach((fase) => fase.classList.add('riel-alcanzado'));
-        } else {
-            window.addEventListener('scroll', pedirRiel, { passive: true });
-            window.addEventListener('resize', () => {
-                alinearMarcas();
-                pedirRiel();
-            });
-            pintarRiel();
-        }
-
-        // Las fuentes de Google llegan despues del primer pintado y
-        // cambian el alto de los titulares: sin esto los puntos quedan
-        // desplazados hasta que alguien toca el scroll.
-        if (document.fonts && document.fonts.ready) {
-            document.fonts.ready.then(() => {
-                alinearMarcas();
-                pedirRiel();
-            });
-        }
-    }
-
-
-    // 3. El hover de las tarjetas ya no necesita JS: era el resplandor que
-    //    seguia al raton, retirado del CSS porque sobre fondo claro se leia
-    //    como una mancha. La elevacion la hace ahora .glass-card:hover, que
-    //    ademas respeta prefers-reduced-motion. [data-tilt] se queda en el
-    //    HTML sin efecto; se puede limpiar al tocar la plantilla.
-
-
-    // 3.2 SERVICIOS: LISTA (escritorio) / ACORDEON (movil)
-    //     [26-sep-2026] Antes pestañas. Se abre siempre UNO: solo se
-    //     reproduce el video del panel visible, los tres a la vez gastaban
-    //     CPU y bateria sin que nadie mirase dos de ellos.
-    //     Acordeon y no tablist: cada boton es un tabulador normal (sin
-    //     flechas), que es lo que espera un acordeon.
-    const tabs = document.querySelectorAll('.pieza-fila');
-
-    if (tabs.length > 0) {
-        const abrirPieza = (tab) => {
-            // En movil el panel abierto va ENCIMA de la fila pulsada si esta
-            // mas arriba: al cerrarlo, la fila salta hacia arriba y el dedo
-            // se queda sobre otra cosa. Se mide antes y se compensa despues.
-            const antes = tab.getBoundingClientRect().top;
-
-            tabs.forEach(otra => {
-                const panel = document.getElementById(otra.getAttribute('aria-controls'));
-                const activa = (otra === tab);
-
-                otra.classList.toggle('is-active', activa);
-                otra.setAttribute('aria-expanded', activa ? 'true' : 'false');
-
-                if (!panel) return;
-                panel.hidden = !activa;
-
-                const video = panel.querySelector('video');
-                if (!video) return;
-                if (activa) {
-                    // Marca para el bucle encadenado: si el video estaba
-                    // en su respiro entre pasadas, al volver sabe que
-                    // sigue a la vista y tiene que arrancar.
-                    video.dataset.visible = '1';
-                    // play() devuelve promesa: si el navegador la rechaza
-                    // (politica de autoplay) no debe romper el resto.
-                    const p = video.play();
-                    if (p) p.catch(() => {});
-                } else {
-                    video.dataset.visible = '0';
-                    video.pause();
-                }
-            });
-
-            const salto = tab.getBoundingClientRect().top - antes;
-            // 'instant': con el scroll suave de la pagina el ajuste se
-            // veria como un deslizamiento, y es justo el salto a esconder.
-            if (salto !== 0) window.scrollBy({ top: salto, behavior: 'instant' });
-        };
-
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => abrirPieza(tab));
-        });
-
-        /* [4-sep-2026] Llegar a una pestana desde un enlace #tab-*.
-           El pie enlaza cada servicio a SU pestana (antes los tres iban a
-           #soluciones y se llegaba siempre a la misma). Sin esto el
-           navegador solo hace scroll: baja hasta la seccion pero deja
-           abierta la pestana que estuviera, asi que pulsar "Sistemas de
-           control" mostraba "Agentes de IA".
-
-           Se cubre tanto la carga con hash en la URL como el clic estando
-           ya en la pagina (hashchange), que no recarga nada. */
-        const abrirDesdeHash = () => {
-            const id = window.location.hash;
-            if (!id || id.length < 2) return;
-            const tab = document.querySelector('.pieza-fila' + id);
-            if (tab) abrirPieza(tab);
-        };
-        abrirDesdeHash();
-        window.addEventListener('hashchange', abrirDesdeHash);
-    }
-
-    // 3.5 KPI COUNT UP FOR SYSTEMS CARD
-    const kpis = document.querySelectorAll('.kpi-count');
-    if (kpis.length > 0) {
-        const kpiObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const el = entry.target;
-                    const val = parseInt(el.getAttribute('data-val'));
-                    let current = 0;
-                    const duration = 1500; // 1.5 segundos
-                    const stepTime = Math.abs(Math.floor(duration / val));
-                    
-                    const isPlus = el.textContent.startsWith('+');
-                    
-                    const timer = setInterval(() => {
-                        current += Math.ceil(val / 30); // incrementos más rápidos
-                        if (current >= val) {
-                            el.textContent = (isPlus ? '+' : '') + val;
-                            clearInterval(timer);
-                        } else {
-                            el.textContent = (isPlus ? '+' : '') + current;
-                        }
-                    }, Math.max(stepTime, 20));
-                    
-                    kpiObserver.unobserve(el);
-                }
-            });
-        }, { threshold: 0.2 });
-        
-        kpis.forEach(kpi => kpiObserver.observe(kpi));
-    }
-
-
-    // 5. ENVÍO DE FORMULARIO DE CONTACTO INTERACTIVO
-    const contactForm = document.getElementById('diagnostico-form');
-    const formMessage = document.getElementById('form-message');
-
-    if (contactForm && formMessage) {
-        contactForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            // Validar campo Honeypot para bloquear bots automatizados
-            const honey = document.getElementById('validation_honey');
-            if (honey && honey.value.trim() !== '') {
-                console.warn("Spam bot detected. Submission aborted.");
-                return;
-            }
-
-            const submitBtn = contactForm.querySelector('.btn-submit');
-            const originalBtnText = submitBtn ? submitBtn.innerHTML : "Reservar mi sesión de 20 min &rarr;";
-
-            if (submitBtn) {
-                submitBtn.disabled = true;
-                submitBtn.innerHTML = "Enviando...";
-            }
-
-            formMessage.className = "form-message";
-            formMessage.textContent = "Enviando...";
-
-            const data = {
-                nombre: document.getElementById('nombre').value,
-                empresa: document.getElementById('empresa').value,
-                email: document.getElementById('email').value,
-                telefono: document.getElementById('telefono').value,
-                problema: document.getElementById('mensaje').value || "",
-                fecha: new Date().toISOString(),
-                origen: "Web Home v3"
-            };
-
-            try {
-                const response = await fetch("https://alberto-core-n8n.saeasu.easypanel.host/webhook/d127116a-771a-4670-8f52-1288034a25e5", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(data)
-                });
-
-                if (response.ok) {
-                    if (typeof gtag === 'function') {
-                        gtag('event', 'generate_lead', {
-                            form_name: 'diagnostico_home'
-                        });
-                    }
-                    formMessage.className = "form-message success";
-                    formMessage.textContent = "✓ Hecho. Te acabo de mandar un correo para que elijas hora. Revisa tu bandeja de entrada (y la carpeta de spam, por si acaso).";
-                    contactForm.reset();
-                    // Limpiar clases focused y has-value de los inputs para resetear floating labels
-                    contactForm.querySelectorAll('.form-group').forEach(group => {
-                        group.classList.remove('focused', 'has-value');
-                    });
-                } else {
-                    throw new Error("Server error");
-                }
-            } catch (error) {
-                console.error("Error submitting form:", error);
-                formMessage.className = "form-message error";
-                formMessage.textContent = "Hubo un error al enviar la solicitud. Por favor, inténtalo de nuevo o contáctanos por WhatsApp.";
-            } finally {
-                if (submitBtn) {
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = originalBtnText;
-                }
-            }
-        });
-    }
-
-    // 6. ACORDEÓN DE PREGUNTAS FRECUENTES (FAQ)
-    const faqItems = document.querySelectorAll('.faq-item');
-    
-    faqItems.forEach(item => {
-        const trigger = item.querySelector('.faq-trigger');
-        
-        trigger.addEventListener('click', () => {
-            const isActive = item.classList.contains('active');
-            
-            // Cerrar todos los demás acordeones abiertos
-            faqItems.forEach(otherItem => {
-                otherItem.classList.remove('active');
-                otherItem.querySelector('.faq-content').style.maxHeight = null;
-            });
-            
-            // Si el actual no estaba activo, abrirlo
-            if (!isActive) {
-                item.classList.add('active');
-                const content = item.querySelector('.faq-content');
-                // Ajustar dinámicamente la altura según el scrollHeight real
-                content.style.maxHeight = content.scrollHeight + 'px';
-            }
+if (pestanas.length) {
+    elegir(0, false);
+    pestanas.forEach((t, i) => {
+        t.addEventListener('click', () => elegir(i, false));
+        t.addEventListener('keydown', (e) => {
+            const n = pestanas.length;
+            let sig;
+            if (e.key === 'ArrowDown' || e.key === 'ArrowRight') sig = (i + 1) % n;
+            if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') sig = (i + n - 1) % n;
+            if (e.key === 'Home') sig = 0;
+            if (e.key === 'End') sig = n - 1;
+            if (sig !== undefined) { e.preventDefault(); elegir(sig, true); }
         });
     });
 
-    // 7. AURORA DEL HERO Y DEL PIE
-    //    Movida a assets/js/aurora.js (3-sep-2026): el mismo motor de
-    //    canvas ahora lo carga tambien diagnostico-operativo, asi que
-    //    vive en un archivo compartido en vez de solo aqui.
+    paneles.forEach((p) => {
+        if (!p) return;
+        const boton = p.querySelector('.panel-recorrido');
+        const titulo = p.querySelector('.actividad-t');
+        const texto = p.querySelector('.actividad-p');
+        if (!boton || !titulo || !texto) return;
+        titulo.dataset.original = titulo.textContent;
+        texto.dataset.original = texto.textContent;
+        const pasos = (p.dataset.pasos || '').split('|').filter(Boolean);
 
-    // 10. INPUTS DE FORMULARIO ESTILO VERCEL (FLOATING LABELS)
-    const formInputs = document.querySelectorAll('.glass-form input, .glass-form select, .glass-form textarea');
-    formInputs.forEach(input => {
-        const group = input.closest('.form-group');
-        if (!group) return;
-
-        input.addEventListener('focus', () => {
-            group.classList.add('focused');
+        boton.addEventListener('click', () => {
+            pararRecorrido();
+            boton.disabled = true;
+            boton.textContent = 'Recorrido en curso…';
+            p.classList.add('corriendo');
+            pasos.forEach((paso, k) => {
+                temporizadores.push(setTimeout(() => {
+                    titulo.textContent = paso;
+                    texto.textContent = `Paso ${k + 1} de ${pasos.length} · Ejemplo ilustrativo`;
+                }, k * 1150));
+            });
+            temporizadores.push(setTimeout(() => {
+                p.classList.remove('corriendo');
+                boton.disabled = false;
+                boton.innerHTML = 'Repetir recorrido <span class="flecha" aria-hidden="true">↻</span>';
+            }, pasos.length * 1150 + 300));
         });
+    });
+}
 
-        input.addEventListener('blur', () => {
-            group.classList.remove('focused');
-            if (input.value.trim() !== '') {
-                group.classList.add('has-value');
-            } else {
-                group.classList.remove('has-value');
+/* ── Formulario de contacto → n8n ────────────────────────────────── */
+const contactForm = document.getElementById('diagnostico-form');
+const formMessage = document.getElementById('form-message');
+
+if (contactForm && formMessage) {
+    contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const honey = document.getElementById('validation_honey');
+        if (honey && honey.value.trim() !== '') return;
+
+        const submitBtn = contactForm.querySelector('.btn-submit');
+        const originalBtnText = submitBtn ? submitBtn.innerHTML : '';
+        if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Enviando…'; }
+
+        formMessage.className = 'form-message';
+        formMessage.textContent = 'Enviando…';
+
+        const data = {
+            nombre: document.getElementById('nombre').value,
+            empresa: document.getElementById('empresa').value,
+            email: document.getElementById('email').value,
+            telefono: document.getElementById('telefono').value,
+            problema: document.getElementById('mensaje').value || '',
+            fecha: new Date().toISOString(),
+            origen: 'Web Home v3'
+        };
+
+        try {
+            const response = await fetch('https://alberto-core-n8n.saeasu.easypanel.host/webhook/d127116a-771a-4670-8f52-1288034a25e5', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+            if (!response.ok) throw new Error('Server error');
+            if (typeof gtag === 'function') {
+                gtag('event', 'generate_lead', { form_name: 'diagnostico_home' });
             }
-        });
-
-        // Evento input para cuando cambia el valor
-        input.addEventListener('input', () => {
-            if (input.value.trim() !== '') {
-                group.classList.add('has-value');
-            } else {
-                group.classList.remove('has-value');
-            }
-        });
-
-        // Verificación inicial
-        if (input.value && input.value.trim() !== '') {
-            group.classList.add('has-value');
+            formMessage.className = 'form-message success';
+            formMessage.textContent = '✓ Hecho. Te acabo de mandar un correo para que elijas hora. Revisa tu bandeja de entrada (y la carpeta de spam, por si acaso).';
+            contactForm.reset();
+        } catch (error) {
+            console.error('Error submitting form:', error);
+            formMessage.className = 'form-message error';
+            formMessage.textContent = 'Hubo un error al enviar la solicitud. Por favor, inténtalo de nuevo o escríbeme por WhatsApp.';
+        } finally {
+            if (submitBtn) { submitBtn.disabled = false; submitBtn.innerHTML = originalBtnText; }
         }
     });
+}
 
-    // CARRUSEL DE CASOS REALES
-    // [5-sep-2026] Los puntos de abajo pasaron a pestanyas arriba. Como
-    // ahora son un tablist de verdad, hay que llevar tambien aria-selected
-    // y el foco: un tablist se recorre con las flechas, y solo la pestanya
-    // activa entra en el orden del tabulador (patron roving tabindex).
-    const casoTrack = document.querySelector('.caso-track');
-    const casoTabs = Array.from(document.querySelectorAll('.caso-tab'));
-
-    if (casoTrack && casoTabs.length) {
-        const goToSlide = (index, moverFoco) => {
-            casoTrack.style.transform = `translateX(-${index * 100}%)`;
-            casoTabs.forEach((tab, i) => {
-                const activa = i === index;
-                tab.classList.toggle('is-active', activa);
-                tab.setAttribute('aria-selected', activa ? 'true' : 'false');
-                // Solo la activa es tabulable; a las demas se llega con flechas.
-                if (activa) {
-                    tab.removeAttribute('tabindex');
-                } else {
-                    tab.setAttribute('tabindex', '-1');
-                }
-            });
-            if (moverFoco) casoTabs[index].focus();
-        };
-
-        casoTabs.forEach((tab, i) => {
-            tab.addEventListener('click', () => goToSlide(i, false));
-
-            tab.addEventListener('keydown', (e) => {
-                let destino = null;
-                if (e.key === 'ArrowRight') destino = (i + 1) % casoTabs.length;
-                else if (e.key === 'ArrowLeft') destino = (i - 1 + casoTabs.length) % casoTabs.length;
-                else if (e.key === 'Home') destino = 0;
-                else if (e.key === 'End') destino = casoTabs.length - 1;
-                if (destino === null) return;
-                e.preventDefault();
-                goToSlide(destino, true);
-            });
-        });
-    }
-
-    // EL INFORME DEL DAI360 SE DESPLAZA DENTRO DE LA PANTALLA
-    // [5-sep-2026] La pieza es el marco del portatil (imagen con la
-    // pantalla vaciada) y el informe en HTML dentro. Al recorrer la
-    // seccion, el informe sube: se ve que hay documento debajo, que es
-    // lo que el PNG anterior no podia contar.
-    //
-    // El informe se pinta a su ancho natural y se ESCALA (ver CSS): sus
-    // piezas traen min-width a fuego y dentro de la pantalla desbordaban.
-    const daiPantalla = document.querySelector('.dai-pantalla');
-    // El visor es quien recorta de verdad (la pantalla lleva padding
-    // para dejar ver el bisel negro), asi que las medidas salen de el.
-    const daiVisor = document.querySelector('.dai-visor');
-    const daiScroll = document.querySelector('.dai-scroll');
-    const menosMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-    if (daiPantalla && daiVisor && daiScroll) {
-        // [5-sep-2026] Mas rapido y arrancando antes.
-        // RECORRIDO: cuanto del documento sobrante se recorre. Estaba en
-        // 0.55 y se quedaba a medias; a 0.92 se llega casi al final del
-        // informe, que es lo que da la sensacion de "hay mucho aqui".
-        const RECORRIDO = 0.92;
-        // La ventana de scroll en la que pasa todo, en fracciones de la
-        // altura de la pantalla. Antes se repartia desde que la pieza
-        // asomaba por abajo hasta que salia por arriba (alto + caja):
-        // un recorrido larguisimo en el que el informe apenas se movia
-        // mientras lo mirabas, y terminaba cuando ya habias pasado.
-        // Ahora ARRANCA cuando la pieza esta entrando de verdad (su
-        // borde superior a 0.85 de la altura de ventana) y TERMINA
-        // cuando esta a punto de salir (a 0.15). Menos margen = mas
-        // movimiento por cada rueda de scroll.
-        const INICIO = 0.85;
-        const FIN = 0.15;
-        let pendiente = false;
-        let escala = 1;
-        let sobra = 0;
-
-        // La escala solo cambia al redimensionar, no en cada scroll.
-        const medir = () => {
-            const anchoNatural = parseFloat(
-                getComputedStyle(daiScroll).getPropertyValue('--informe-ancho')
-            ) || 1180;
-            escala = daiVisor.clientWidth / anchoNatural;
-            daiScroll.style.setProperty('--escala', escala);
-            // Alto real que ocupa el informe ya escalado.
-            const altoEscalado = daiScroll.scrollHeight * escala;
-            sobra = Math.max(0, altoEscalado - daiVisor.clientHeight);
-        };
-
-        const actualizar = () => {
-            pendiente = false;
-            if (menosMovimiento.matches) {
-                daiScroll.style.setProperty('--desplazamiento', '0px');
-                return;
-            }
-            const caja = daiVisor.getBoundingClientRect();
-            const alto = window.innerHeight || document.documentElement.clientHeight;
-            if (caja.bottom < 0 || caja.top > alto) return;
-
-            // 0 al empezar la ventana util, 1 al acabarla.
-            const desde = alto * INICIO;
-            const hasta = alto * FIN;
-            let t = (desde - caja.top) / (desde - hasta);
-            t = Math.min(Math.max(t, 0), 1);
-            // Suavizado en los extremos: sin esto el informe arranca y
-            // frena de golpe, que se nota mas cuanto mas rapido va.
-            t = t * t * (3 - 2 * t);
-
-            // El desplazamiento se aplica ANTES de escalar (el transform
-            // va scale() translateY()), asi que se divide por la escala
-            // para que el recorrido en pantalla sea el pedido.
-            const px = (t * RECORRIDO * sobra) / (escala || 1);
-            daiScroll.style.setProperty('--desplazamiento', `${-px}px`);
-        };
-
-        const alScroll = () => {
-            if (pendiente) return;
-            pendiente = true;
-            requestAnimationFrame(actualizar);
-        };
-
-        const alRedimensionar = () => { medir(); actualizar(); };
-
-        window.addEventListener('scroll', alScroll, { passive: true });
-        window.addEventListener('resize', alRedimensionar, { passive: true });
-        medir();
-        actualizar();
-        // Las fuentes cambian el alto del informe al cargar.
-        if (document.fonts && document.fonts.ready) {
-            document.fonts.ready.then(alRedimensionar);
-        }
-    }
-
-    // VIDEOS DE LOS PILARES
-    // Dos cosas que el atributo autoplay no resuelve solo:
-    // 1) Tres bucles a la vez son mucho movimiento para quien lo tiene
-    //    desactivado en el sistema. El video se queda en su primer fotograma,
-    //    pero sigue ahi: es contenido, no decoracion.
-    // 2) Reproducir los tres a la vez desde el principio gasta CPU aunque
-    //    esten fuera de pantalla, asi que solo corre el que se esta viendo.
-    const pilarVideos = document.querySelectorAll('.pieza-video');
-
-    if (pilarVideos.length) {
-        const sinMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-        if (sinMovimiento) {
-            pilarVideos.forEach((v) => {
-                v.removeAttribute('autoplay');
-                v.removeAttribute('loop');
-                v.pause();
-            });
-        } else if ('IntersectionObserver' in window) {
-            // EL BUCLE, a mano en vez de con el `loop` nativo.
-            // La animacion de dentro se apaga sola antes de que acabe el
-            // archivo (fundido de salida ~0.4s antes del final), asi que
-            // el ULTIMO fotograma y el PRIMERO son identicos: papel liso.
-            // Con `loop` el navegador corta de uno a otro de golpe y ese
-            // salto de tiempo se nota igual aunque los dos extremos sean
-            // iguales.
-            // Aqui no se funde nada — tocar la opacidad seria peor, porque
-            // el <video> se volveria transparente y se veria el panel gris
-            // de la seccion. Lo que se hace es quedarse quieto en ese
-            // ultimo fotograma blanco y rebobinar parado: el corte es de
-            // un blanco a otro blanco identico, invisible por definicion,
-            // y el respiro hace que se lea como un ciclo y no como un
-            // bucle nervioso.
-            // Minimo a proposito: la animacion YA deja ~0.4s de papel en
-            // blanco al final del archivo, asi que este respiro se SUMA a
-            // esos. A 500ms el hueco total pasaba de un segundo y se leia
-            // como un paron. Con 120 el ciclo encadena casi seguido y
-            // sigue sin el tiron del reinicio instantaneo.
-            const REPOSO = 120;   // ms parado en el fotograma final
-
-            const encadenar = (v) => {
-                if (v.dataset.reiniciando === '1') return;
-                v.dataset.reiniciando = '1';
-
-                // Se queda como esta (ultimo fotograma, blanco) el respiro
-                // entero; solo despues rebobina y arranca.
-                window.setTimeout(() => {
-                    v.currentTime = 0;
-                    // Solo sigue si el video continua a la vista: si el
-                    // usuario se ha ido, lo despierta el observer.
-                    if (v.dataset.visible === '1') {
-                        v.play().catch(() => {});
-                    }
-                    v.dataset.reiniciando = '0';
-                }, REPOSO);
-            };
-
-            pilarVideos.forEach((v) => {
-                // El `loop` del HTML estorba: reiniciaria al instante y no
-                // dejaria el respiro.
-                v.loop = false;
-                v.addEventListener('ended', () => encadenar(v));
-            });
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach((entry) => {
-                    const v = entry.target;
-                    v.dataset.visible = entry.isIntersecting ? '1' : '0';
-                    if (entry.isIntersecting) {
-                        // play() devuelve una promesa que el navegador puede
-                        // rechazar (politicas de autoplay): sin catch salta un
-                        // error no capturado en consola.
-                        if (v.dataset.reiniciando !== '1') {
-                            v.play().catch(() => {});
-                        }
-                    } else {
-                        v.pause();
-                    }
-                });
-            }, { threshold: 0.25 });
-
-            pilarVideos.forEach((v) => observer.observe(v));
-        }
-    }
-
-    // ── LA FLOR QUE SE ABRE CON EL SCROLL ──────────────────────────
-    // [1-sep-2026] La flor del bloque de cierre no va en bucle: su
-    // apertura la controla el scroll, igual que el riel naranja de las
-    // fases. El video no se reproduce — se le mueve currentTime a mano
-    // segun donde este la tarjeta en pantalla.
-    //
-    // Con arranque automatico, no scroll puro: al entrar en pantalla se
-    // abre sola una vez. Si no, quien pasa deprisa veria una flor
-    // cerrada e inmovil — que es justo lo contrario de lo que la pieza
-    // cuenta. A partir de esa primera apertura, manda el dedo.
-    const flor = document.querySelector('.tarjeta--alta video');
-
-    if (flor) {
-        const sinMovimientoFlor = window.matchMedia('(prefers-reduced-motion: reduce)');
-        let rafFlor = null;
-        let arrancada = false;
-        let manda = false;   // pasa a true cuando termina la apertura automatica
-
-        // Sin autoplay ni loop: este video no se reproduce solo nunca.
-        flor.removeAttribute('autoplay');
-        flor.removeAttribute('loop');
-        flor.loop = false;
-        flor.pause();
-
-        function pintarFlor() {
-            rafFlor = null;
-            if (!manda || !flor.duration) return;
-
-            const caja = flor.getBoundingClientRect();
-            // De 0 a 1 segun cuanto ha subido la tarjeta por la pantalla.
-            // Se mide contra el alto de ventana + el de la tarjeta para
-            // que el recorrido completo quepa en un scroll natural.
-            const total = window.innerHeight + caja.height;
-            const hecho = window.innerHeight - caja.top;
-            let t = Math.min(1, Math.max(0, hecho / total));
-
-            // El tramo util es el central: los extremos se gastarian
-            // mientras la tarjeta aun entra o ya sale de pantalla.
-            t = Math.min(1, Math.max(0, (t - 0.18) / 0.5));
-
-            const destino = t * (flor.duration - 0.05);
-            // Solo se toca si el salto es apreciable: escribir
-            // currentTime en cada frame con diferencias minimas hace
-            // que el video tartamudee.
-            if (Math.abs(flor.currentTime - destino) > 0.03) {
-                // seekable vacio = el navegador aun no puede saltar (el
-                // video no tiene datos suficientes). Se reintenta al frame
-                // siguiente en vez de perder la orden.
-                if (flor.seekable && flor.seekable.length) {
-                    flor.currentTime = destino;
-                } else {
-                    pedirFlor();
-                }
-            }
-        }
-
-        function pedirFlor() {
-            if (rafFlor === null) rafFlor = requestAnimationFrame(pintarFlor);
-        }
-
-        if (sinMovimientoFlor.matches) {
-            // Sin movimiento: la flor se queda abierta del todo. Se
-            // mantiene el resultado y se quita el viaje.
-            flor.addEventListener('loadedmetadata', () => {
-                flor.currentTime = flor.duration - 0.05;
-            });
-        } else if ('IntersectionObserver' in window) {
-            const obsFlor = new IntersectionObserver((entradas) => {
-                entradas.forEach((e) => {
-                    if (!e.isIntersecting || arrancada) return;
-                    arrancada = true;
-                    // La apertura automatica de bienvenida. Cuando
-                    // termina, el scroll toma el control.
-                    // Se escucha 'ended' en vez de vigilar currentTime a
-                    // mano: al acabar, el navegador lo devuelve a 0 antes de
-                    // que un requestAnimationFrame llegue a leerlo, y la flor
-                    // se quedaba cerrada y sorda al scroll.
-                    function tomaElMando() {
-                        if (manda) return;
-                        manda = true;
-                        window.addEventListener('scroll', pedirFlor, { passive: true });
-                        window.addEventListener('resize', pedirFlor);
-                        pedirFlor();
-                    }
-
-                    // El mando pasa al scroll en cuanto acaba la apertura.
-                    // No se toca currentTime aqui: al terminar, el navegador
-                    // lo devuelve a 0 por su cuenta DESPUES de este manejador
-                    // y cualquier valor que se escriba se pierde. Da igual —
-                    // el primer pintarFlor() lo coloca donde toca segun el
-                    // scroll, que es justo lo que queremos.
-                    flor.addEventListener('ended', () => {
-                        flor.pause();
-                        tomaElMando();
-                    }, { once: true });
-
-                    // Si el navegador bloquea el autoplay, el scroll se hace
-                    // cargo directamente y la flor nunca se queda cerrada.
-                    flor.play().catch(tomaElMando);
-                });
-            }, { threshold: 0.3 });
-
-            obsFlor.observe(flor);
-        }
-    }
-});
-
-
-// ── EL EMAIL, ARMADO EN CLIENTE ──────────────────────────────────────
-// La direccion no viaja escrita en el HTML: los recolectores de spam
-// rastrean `mailto:` y texto con arroba en el marcado. Aqui se junta a
-// partir de los dos data-* y se convierte en enlace de verdad.
-// Sin JS el enlace apunta al formulario, que hace el mismo trabajo.
-document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('a[data-mail][data-dom]').forEach((a) => {
-        const destino = a.dataset.mail + String.fromCharCode(64) + a.dataset.dom;
-        a.href = 'mailto:' + destino;
-        a.setAttribute('aria-label', 'Escribir un correo');
-        // El texto visible sigue diciendo "Email": la direccion se ve al
-        // pasar el raton y al abrir el cliente de correo.
-        a.title = destino;
-    });
-});
-
-
-// ── EL PANEL DE MANTENIMIENTO: CIFRAS Y BARRAS ───────────────────────
-// [4-sep-2026] Cuando el panel entra en pantalla, los numeros cuentan de
-// 0 a su valor y las barras se levantan (la clase .revelada la recoge el
-// CSS, que pone el retardo de cada una).
-//
-// Los numeros YA estan escritos en el HTML con su valor final: si no hay
-// JS, o si el usuario pide menos movimiento, se ven igual. Esto solo
-// anade el viaje.
-document.addEventListener('DOMContentLoaded', () => {
-    const panel = document.querySelector('.mant');
-    if (!panel) return;
-
-    const menosMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const cifras = Array.from(panel.querySelectorAll('.mant-kpi-n[data-hasta]'));
-
-    function contar(el) {
-        const hasta = parseFloat(el.dataset.hasta);
-        const sufijo = el.dataset.sufijo || '';
-        if (!isFinite(hasta)) return;
-        const DURACION = 1100;
-        const arranque = performance.now();
-
-        function paso(ahora) {
-            const t = Math.min(1, (ahora - arranque) / DURACION);
-            // easeOutCubic: arranca rapido y frena al final, que es como
-            // se lee un contador que "aterriza" en su cifra.
-            const suave = 1 - Math.pow(1 - t, 3);
-            const v = Math.round(hasta * suave);
-            // Separador de miles con punto, como se escribe en espanol
-            // (1.240). toLocaleString depende del idioma del navegador y
-            // en uno en ingles devolvia "1,240"; se formatea a mano.
-            el.textContent = String(v).replace(/\B(?=(\d{3})+(?!\d))/g, '.') + sufijo;
-            if (t < 1) requestAnimationFrame(paso);
-        }
-        requestAnimationFrame(paso);
-    }
-
-    if (menosMovimiento.matches) {
-        panel.classList.add('revelada');
-        return;
-    }
-
-    const obs = new IntersectionObserver((entradas) => {
-        entradas.forEach((e) => {
-            if (!e.isIntersecting) return;
-            panel.classList.add('revelada');
-            cifras.forEach(contar);
-            obs.unobserve(e.target);
-        });
-    }, { threshold: 0.35 });
-
-    obs.observe(panel);
+/* ── Email ofuscado: se arma aquí para no dejarlo en el HTML ─────── */
+document.querySelectorAll('a[data-mail][data-dom]').forEach((a) => {
+    const destino = a.dataset.mail + String.fromCharCode(64) + a.dataset.dom;
+    a.href = 'mailto:' + destino;
+    a.title = destino;
 });

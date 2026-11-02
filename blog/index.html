@@ -43,7 +43,7 @@
     <link rel="canonical" href="https://albercabrera.com/blog/">
     <meta name="robots" content="index, follow">
     <meta name="author" content="Alberto Pérez Cabrera">
-    <meta name="theme-color" content="#0F1F1B">
+    <meta name="theme-color" content="#1D1D1B">
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png">
     <link rel="icon" type="image/x-icon" href="/assets/img/favicon.ico">
     <link rel="apple-touch-icon" href="/assets/img/favicon-512.png">
@@ -68,15 +68,16 @@
          solo cargaban Inter, y por eso sus titulares no heredaban la serif. -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/design-system/tokens.css?v=78">
-    <link rel="stylesheet" href="/css/base.css?v=78">
-    <link rel="stylesheet" href="/css/nav.css?v=78">
-    <link rel="stylesheet" href="/css/botones.css?v=78">
-    <link rel="stylesheet" href="/css/faq.css?v=78">
-    <link rel="stylesheet" href="/css/pie.css?v=78">
-    <link rel="stylesheet" href="/css/blog.css?v=78">
+    <link href="https://fonts.googleapis.com/css2?family=Hepta+Slab:wght@300;400;500;800;900&family=Geist:wght@300;400;500;600&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/design-system/tokens.css?v=79">
+    <link rel="stylesheet" href="/css/base.css?v=79">
+    <link rel="stylesheet" href="/css/nav.css?v=79">
+    <link rel="stylesheet" href="/css/botones.css?v=79">
+    <link rel="stylesheet" href="/css/faq.css?v=79">
+    <link rel="stylesheet" href="/css/pie.css?v=79">
+    <link rel="stylesheet" href="/css/blog.css?v=79">
 
+    <link rel="stylesheet" href="/css/sistema.css?v=79">
     <link rel="stylesheet" href="/assets/cookies/cookie-banner.css?v=1">
 </head>
 <body>
@@ -88,7 +89,8 @@
 
 <nav class="navbar navbar--en-hero">
         <div class="nav-container">
-            <a href="/" class="logo"><img src="/assets/img/logo-alber-blanco.png" alt="Alber Cabrera"></a>
+            <a href="/" class="logo" aria-label="contravía · Alber Cabrera, inicio"><span class="logo-marca" aria-hidden="true">contravía</span><span class="logo-sub" aria-hidden="true">alber cabrera</span>
+</a>
             <div class="nav-menu"><div class="nav-item-sub">
                     <a href="/#soluciones" class="nav-link">Servicios</a>
                     <div class="nav-sub">
@@ -102,7 +104,7 @@
             </div>
             <a href="/#contacto" class="nav-btn">Cuéntame tu caso &rarr;</a>
             <button class="nav-burger" id="nav-burger" aria-label="Abrir menú" aria-expanded="false">
-                <span></span><span></span><span></span>
+                <span class="nav-burger-t">Menú</span><span class="nav-burger-i" aria-hidden="true">+</span>
             </button>
         </div>
         <div class="nav-mobile" id="nav-mobile">
@@ -152,7 +154,7 @@
                         <h2>Tu chatbot ya está obligado a decir que es una IA</h2>
                         <p>El Reglamento europeo de IA obliga desde agosto. Afecta a cualquier negocio con un bot en la web o en WhatsApp. Qué hay que hacer, en concreto y sin alarmismo.</p>
                         <div class="post-meta">
-                            <time datetime="Sun Sep 20 2026 02:00:00 GMT+0200 (hora de verano de Europa central)">20 sep 2026</time>
+                            <time datetime="Sun Sep 20 2026 00:00:00 GMT+0000 (Coordinated Universal Time)">20 sep 2026</time>
                             <span class="dot"></span>
                             <span>7 min</span>
                         </div>
@@ -168,7 +170,7 @@
                         <h2>Tenía el chatbot protegido. No lo estaba.</h2>
                         <p>Ataqué mi propio agente con los payloads de una auditoría. Aguantó casi todo, pero encontré tres fallos que no esperaba. Qué se juega un negocio al poner un bot de cara al público.</p>
                         <div class="post-meta">
-                            <time datetime="Sun Sep 20 2026 02:00:00 GMT+0200 (hora de verano de Europa central)">20 sep 2026</time>
+                            <time datetime="Sun Sep 20 2026 00:00:00 GMT+0000 (Coordinated Universal Time)">20 sep 2026</time>
                             <span class="dot"></span>
                             <span>8 min</span>
                         </div>
@@ -184,7 +186,7 @@
                         <h2>El fin del SEO tradicional y el nacimiento del AEO</h2>
                         <p>Ya no navegamos, preguntamos a la IA. Qué es el AEO, cómo funcionan los AI Crawlers y cómo saber si tu web es visible para ChatGPT, Claude o Gemini.</p>
                         <div class="post-meta">
-                            <time datetime="Mon Aug 24 2026 02:00:00 GMT+0200 (hora de verano de Europa central)">24 ago 2026</time>
+                            <time datetime="Mon Aug 24 2026 00:00:00 GMT+0000 (Coordinated Universal Time)">24 ago 2026</time>
                             <span class="dot"></span>
                             <span>8 min</span>
                         </div>
@@ -200,7 +202,7 @@
                         <h2>Cómo automatizar mi negocio: por dónde empezar</h2>
                         <p>Antes de contratar ninguna herramienta: cómo calcular qué tarea te está costando más horas al mes, qué no conviene automatizar y en qué orden hacerlo.</p>
                         <div class="post-meta">
-                            <time datetime="Wed Jul 29 2026 02:00:00 GMT+0200 (hora de verano de Europa central)">29 jul 2026</time>
+                            <time datetime="Wed Jul 29 2026 00:00:00 GMT+0000 (Coordinated Universal Time)">29 jul 2026</time>
                             <span class="dot"></span>
                             <span>7 min</span>
                         </div>
@@ -216,7 +218,7 @@
                         <h2>Automatizar una asesoría o gestoría con IA</h2>
                         <p>Facturas, conciliación, gestión documental y atención al cliente: qué automatizar primero sin cambiar de software contable.</p>
                         <div class="post-meta">
-                            <time datetime="Sat Jul 18 2026 02:00:00 GMT+0200 (hora de verano de Europa central)">18 jul 2026</time>
+                            <time datetime="Sat Jul 18 2026 00:00:00 GMT+0000 (Coordinated Universal Time)">18 jul 2026</time>
                             <span class="dot"></span>
                             <span>7 min</span>
                         </div>
@@ -232,7 +234,7 @@
                         <h2>Automatizar una inmobiliaria con IA sin perder leads</h2>
                         <p>En captación inmobiliaria gana quien responde primero. Qué automatizar para no perder visitas por llegar tarde al lead.</p>
                         <div class="post-meta">
-                            <time datetime="Sat Jul 18 2026 02:00:00 GMT+0200 (hora de verano de Europa central)">18 jul 2026</time>
+                            <time datetime="Sat Jul 18 2026 00:00:00 GMT+0000 (Coordinated Universal Time)">18 jul 2026</time>
                             <span class="dot"></span>
                             <span>7 min</span>
                         </div>
@@ -248,7 +250,7 @@
                         <h2>Por qué tu negocio depende de ti y no crece</h2>
                         <p>No es que seas imprescindible: es que el negocio está montado sobre ti, no sobre procesos. Cómo salir de la trampa, área por área.</p>
                         <div class="post-meta">
-                            <time datetime="Sat Jul 11 2026 02:00:00 GMT+0200 (hora de verano de Europa central)">11 jul 2026</time>
+                            <time datetime="Sat Jul 11 2026 00:00:00 GMT+0000 (Coordinated Universal Time)">11 jul 2026</time>
                             <span class="dot"></span>
                             <span>9 min</span>
                         </div>
@@ -264,7 +266,7 @@
                         <h2>Automatizar el seguimiento de leads en clínicas</h2>
                         <p>Qué automatizar primero en el seguimiento de leads de una clínica, y qué cambia en la agenda y en los pacientes nuevos.</p>
                         <div class="post-meta">
-                            <time datetime="Wed Jun 03 2026 02:00:00 GMT+0200 (hora de verano de Europa central)">3 jun 2026</time>
+                            <time datetime="Wed Jun 03 2026 00:00:00 GMT+0000 (Coordinated Universal Time)">3 jun 2026</time>
                             <span class="dot"></span>
                             <span>6 min</span>
                         </div>
@@ -280,7 +282,7 @@
                         <h2>Sistematizar cursos y alumnos en un centro de formación</h2>
                         <p>Qué automatizar primero en la gestión de un centro de formación, y qué gana el equipo y el alumno con ello.</p>
                         <div class="post-meta">
-                            <time datetime="Fri Apr 10 2026 02:00:00 GMT+0200 (hora de verano de Europa central)">10 abr 2026</time>
+                            <time datetime="Fri Apr 10 2026 00:00:00 GMT+0000 (Coordinated Universal Time)">10 abr 2026</time>
                             <span class="dot"></span>
                             <span>6 min</span>
                         </div>
@@ -296,7 +298,7 @@
                         <h2>Sistematizar un negocio local sin herramientas complejas</h2>
                         <p>Con documentación simple, hábitos claros y formación constante ganas eficiencia y rentabilidad, sin software complejo.</p>
                         <div class="post-meta">
-                            <time datetime="Sun Apr 05 2026 02:00:00 GMT+0200 (hora de verano de Europa central)">5 abr 2026</time>
+                            <time datetime="Sun Apr 05 2026 00:00:00 GMT+0000 (Coordinated Universal Time)">5 abr 2026</time>
                             <span class="dot"></span>
                             <span>6 min</span>
                         </div>
@@ -312,12 +314,9 @@
 <footer class="footer-section inverse reveal"><div class="container">
             <div class="footer-grid">
                 <div class="footer-brand-col">
-                    <div class="footer-logo-wrap">
-                        <a href="/" class="logo"><img src="/assets/img/logo-alber-blanco.png" alt="Alber Cabrera"></a>
-                    </div>
-                    <p class="footer-brand-desc">
-                        Aporto claridad y sistemas de automatización con inteligencia artificial para negocios. Soluciones premium y estables para que tu negocio crezca solo.
-                    </p><div class="footer-social-wrap">
+                    <a href="/" class="logo footer-logo" aria-label="contravía · Alber Cabrera, inicio"><span class="logo-marca" aria-hidden="true">contravía</span><span class="logo-sub" aria-hidden="true">alber cabrera</span>
+</a>
+                    <p class="footer-brand-desc">IA aplicada a negocios de servicios: que atiendan antes, hagan seguimiento sin depender de nadie y dejen de hacer a mano lo que no hace falta.</p><div class="footer-social-wrap">
                     <div class="footer-social-icons">
                         <a href="https://www.linkedin.com/in/alberto-p%C3%A9rez-cabrera" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
@@ -357,6 +356,7 @@
                 </div>
             </div>
             <div class="footer-bottom-bar"><p class="footer-curator">&copy; 2026 Alberto P&eacute;rez Cabrera</p>
+                <p class="footer-curator footer-lema">facilitar · habilitar · conectar · simplificar</p>
             </div>
         </div>
     </footer>
@@ -372,7 +372,7 @@
 
     <link rel="stylesheet" href="/assets/chat/widget-chat.css?v=10">
     <script src="/assets/chat/widget-chat.js?v=5" defer></script>
-    <script src="/assets/js/base.js?v=2" defer></script>
+    <script src="/assets/js/base.js?v=3" defer></script>
     <script src="/assets/js/aurora.js?v=3"></script>
     <script src="/assets/js/blog-filtro.js?v=1"></script>
 

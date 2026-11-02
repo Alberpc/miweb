@@ -22,7 +22,7 @@
     --riel: 50%;
     --cristal: linear-gradient(155deg, rgb(252, 252, 253) 0%, rgb(249, 246, 244) 64%, rgb(245, 238, 234) 100%);
     --cristal-brillo: linear-gradient(118deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.06) 34%, transparent 58%);
-    --cristal-sombra: 0 18px 40px -14px rgba(26, 29, 35, 0.14), 0 2px 8px -2px rgba(26, 29, 35, 0.08), 0 26px 50px -20px rgba(234, 130, 88, 0.30);
+    --cristal-sombra: 0 18px 40px -14px rgba(26, 29, 35, 0.14), 0 2px 8px -2px rgba(26, 29, 35, 0.08), 0 26px 50px -20px rgba(8, 255, 171, 0.30);
 }
 #como-funciona .entregas { padding-bottom: 0; margin-bottom: 0; }
 #como-funciona .entrega:last-child { padding-bottom: 0; }
@@ -570,7 +570,7 @@
 }
 .era--hoy {
     border-color: var(--cobalt-500);
-    box-shadow: 0 24px 50px -30px rgba(234, 130, 88, 0.45);
+    box-shadow: 0 24px 50px -30px rgba(8, 255, 171, 0.45);
 }
 .era--hoy::before {
     background: var(--cobalt-500);
@@ -643,7 +643,7 @@
 }
 .paquete--recomendada {
     border-color: var(--cobalt-500);
-    box-shadow: 0 0 0 1px var(--cobalt-500), 0 28px 56px -30px rgba(234, 130, 88, 0.55);
+    box-shadow: 0 0 0 1px var(--cobalt-500), 0 28px 56px -30px rgba(8, 255, 171, 0.55);
 }
 .paquete-badge {
     position: absolute;

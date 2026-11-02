@@ -46,8 +46,8 @@
 
 .article-hero.inverse .hero-cat {
     display: inline-block; font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.3em;
-    color: var(--cobalt-300); border: 1px solid rgba(214, 186, 130, 0.30);
-    background: rgba(200, 168, 94, 0.12); padding: 6px 15px; border-radius: var(--radius-pill); margin-bottom: 26px;
+    color: var(--cobalt-300); border: 1px solid var(--night-600);
+    background: transparent; padding: 6px 15px; border-radius: var(--radius-pill); margin-bottom: 26px;
     text-transform: uppercase;
 }
 .article-hero.inverse h1 {

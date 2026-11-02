@@ -1,400 +1,263 @@
 /* ============================================================
-   nav.css — LA cabecera del sitio. Un solo componente.
+   nav.css — la cabecera del sitio (rebrand contravía × Refero)
    ============================================================
-   Antes vivia por triplicado: .navbar en index.css (home), .subnav
-   en landing.css (posts) y una tercera copia dentro del <style> del
-   indice del blog. Por eso el boton del blog se quedo MARRON cuando
-   ya se habia arreglado el de la home: al estar duplicado, cada copia
-   iba por su lado.
-
-   Ahora lo cargan las tres. Lo que se cambie aqui vale para todas.
+   Barra fija, a sangre, con una línea fina debajo. Sobre un hero
+   oscuro arranca transparente y en crema (base.js pone/quita
+   .navbar--sobre-hero). Al bajar pasa a fondo crema con línea negra.
+   Logo de texto (logo.njk): hereda currentColor, sirve en claro y
+   oscuro sin cambiar de imagen.
    ============================================================ */
 
-/* NAVEGACIÓN STICKY — barra de ancho completo pegada arriba.
-   Era una pastilla flotante de 1200px separada del borde: ese patron
-   ("floating pill nav") se lee hoy como decoracion, y ninguna de las
-   referencias lo usa (decagon, steep, stripe y getharvest llevan barra
-   completa translucida). Las pildoras se quedan DENTRO: los botones y
-   los badges, que es donde el sistema las define. */
 .navbar {
     position: fixed;
-    top: var(--hero-gap);
-    left: var(--hero-gap);
-    right: var(--hero-gap);
-    width: auto;
-    height: 64px;
-    /* Muy translucida: se ve pasar el contenido por debajo, que es lo que
-       da la sensacion de cristal. El blur alto es lo que mantiene el
-       texto legible pese a la transparencia. */
-    background-color: rgba(255, 255, 255, 0.55);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid var(--glass-border);
-    border-radius: var(--radius-lg);
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 72px;
     z-index: 1000;
-    animation: fadeInNav 360ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    color: var(--ink);
+    background-color: var(--bg);
+    border-bottom: 1px solid var(--line-strong);
+    transition: background-color var(--motion-base) var(--ease-standard),
+                color var(--motion-base) var(--ease-standard),
+                border-color var(--motion-base) var(--ease-standard);
 }
 
-@keyframes fadeInNav {
-    0%   { opacity: 0.4; }
-    100% { opacity: 1; }
-}
-
-/* En la home la barra va DENTRO del bloque del hero: se mete un
-   --hero-gap mas (el margen del propio hero) por cada lado, de modo que
-   queda encima de su fondo oscuro y no en una banda aparte.
-   Solo la home tiene hero en bloque; el resto de paginas usan la regla
-   de arriba. El nav es un include compartido, por eso la diferencia va
-   por clase y no moviendo el marcado. */
-.navbar--en-hero {
-    top: calc(var(--hero-gap) * 2);
-    left: calc(var(--hero-gap) * 2);
-    right: calc(var(--hero-gap) * 2);
-}
-
-/* =============================================================
-   ESTADO ARRIBA DEL TODO — barra transparente sobre el hero
-   =============================================================
-   Mientras el hero llena la pantalla la barra desaparece: sin fondo,
-   sin borde y con el texto en blanco, porque debajo esta el carbon
-   con la aurora. Al bajar, el JS quita .navbar--sobre-hero y vuelve
-   el cristal claro de la regla base, con su transicion. */
 .navbar--sobre-hero {
     background-color: transparent;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    border-color: transparent;
-}
-
-.navbar--sobre-hero .nav-link       { color: var(--on-night-body); }
-.navbar--sobre-hero .nav-link:hover { color: var(--on-night); }
-.navbar--sobre-hero .logo           { color: var(--on-night); }
-/* El logo ya es blanco de origen: sobre el hero se deja tal cual y se
-   retira el invert que lo oscurece para el resto de la pagina. */
-.navbar--sobre-hero .logo img       { filter: none; }
-
-/* El icono hamburguesa tambien va en blanco sobre el hero. */
-.navbar--sobre-hero .nav-burger span { background: var(--on-night); }
-
-/* El boton del header, mientras la barra esta sobre el hero, es el
-   MISMO negro con borde degradado que el CTA del hero. El navbar vive
-   fuera de .hero-section, asi que no hereda .inverse y hay que
-   repetirlo aqui.
-   Sin esto se veian dos botones distintos en la misma pantalla: el del
-   header en terracota solido y el del hero en negro. Al bajar el
-   scroll la barra pasa a cristal claro y el boton vuelve al terracota
-   de la regla base, que es lo correcto sobre fondo blanco. */
-/* ══ EL BOTON DEL HEADER ES SECUNDARIO ═════════════════════════════
-   [4-sep-2026 v2] Recorrido de este boton, para no repetir los errores:
-
-   1. Era terracota solido sobre claro y negro con halo sobre el hero.
-      Cambiaba de color a media pagina y se notaba como un fallo.
-   2. Se paso a negro con halo SIEMPRE. Se acabo el salto, pero quedaba
-      identico al CTA del hero: dos botones iguales a 550px, los dos
-      gritando lo mismo.
-
-   Ahora es el nivel SECUNDARIO (.btn-2 en botones.css): outline
-   terracota, sin relleno. Tres cosas a la vez:
-     · no cambia con el scroll (el outline vale en claro y en oscuro);
-     · no compite con el CTA del hero, que es la conversion de verdad;
-     · sigue siendo de la marca, porque el color es el mismo terracota.
-
-   El peso visual lo da el relleno, no el tono: quitandolo el boton
-   acompana en vez de mandar. Es lo que hace decagon con su secundario. */
-.navbar .nav-btn {
-    color: var(--cobalt-700);
-    background: transparent;
-    /* [4-sep-2026] --cobalt-500 al 55%, no --cobalt-border (26%).
-       Medido: el borde al 26% compuesto sobre el nav claro daba 1.37 de
-       contraste, cuando WCAG 1.4.11 pide 3.0 para el contorno de un
-       control. El boton se veia "apagado" y costaba reconocerlo como
-       boton — no era cosa del texto (6.72, correcto), era que el marco
-       casi no existia. */
-    border: 1px solid var(--cobalt-600); /* opaco: al 70% de alfa hacia falta para pasar 3.0, y opaco da 5.68 sin depender del fondo translucido del nav */
-}
-.navbar .nav-btn:hover {
-    color: var(--cobalt-800);
-    border-color: var(--cobalt-500);
-    background: var(--cobalt-tint);
-    box-shadow: 0 0 0 4px var(--cobalt-tint);
-}
-/* Sobre el hero oscuro sube al tono claro (6.93 sobre carbon). */
-.navbar--sobre-hero .nav-btn {
-    color: var(--cobalt-400);
-    background: transparent;
-    /* Sobre el carbon del hero el borde necesita mas cuerpo todavia: el
-       fondo es oscuro y un trazo al 42% se disuelve en el. */
-    border-color: rgba(234, 130, 88, 0.60);
-}
-.navbar--sobre-hero .nav-btn:hover {
-    color: var(--cobalt-300);
-    border-color: var(--cobalt-400);
-    background: rgba(234, 130, 88, 0.10);
-    box-shadow: 0 0 0 4px rgba(234, 130, 88, 0.10);
-}
-
-/* Con el menu movil abierto la barra recupera su fondo aunque siga
-   sobre el hero: si no, el panel desplegado flota sobre el vídeo sin
-   superficie que lo sostenga. */
-.navbar--sobre-hero:has(.nav-burger.open) {
-    background-color: rgba(255, 255, 255, 0.55);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border-color: var(--glass-border);
-}
-.navbar--sobre-hero:has(.nav-burger.open) .nav-link       { color: var(--ink-mid); }
-.navbar--sobre-hero:has(.nav-burger.open) .nav-link:hover { color: var(--ink); }
-.navbar--sobre-hero:has(.nav-burger.open) .nav-burger span { background: var(--ink); }
-.navbar--sobre-hero:has(.nav-burger.open) .logo img { filter: invert(1) brightness(0.12); }
-
-/* La barra pasa de transparente a cristal sin salto. */
-.navbar {
-    transition: background-color 260ms var(--ease-standard),
-                border-color 260ms var(--ease-standard),
-                backdrop-filter 260ms var(--ease-standard);
+    color: var(--on-night);
+    border-bottom-color: rgba(255, 253, 235, 0.16);
 }
 
 .nav-container {
     height: 100%;
     width: 100%;
-    /* Centrado al mismo ancho que .container: con la barra a sangre, el
-       contenido tiene que seguir alineado con el resto de la pagina, no
-       pegarse a los bordes de la ventana. */
-    max-width: var(--container-max);
+    max-width: calc(var(--container-max) + 2 * var(--gutter-desktop));
     margin: 0 auto;
     padding: 0 var(--gutter-desktop);
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    gap: 40px;
 }
 
-@media (max-width: 900px) {
-    .nav-container { padding: 0 var(--gutter-mobile); }
-}
-
+/* ── Logo ───────────────────────────────────────────────────── */
 .logo {
-    font-family: var(--font-heading);
-    font-weight: 300;
-    font-size: 1.4rem;
-    color: var(--ink);
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    color: inherit;
     text-decoration: none;
-    letter-spacing: -0.05em;
-    position: relative;
-    transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    flex-shrink: 0;
 }
-
-.logo:hover {
-    transform: scale(1.05);
-}
-
-.logo img {
-    height: 24px;
-    width: auto;
+.logo-marca {
     display: block;
-    filter: invert(1) brightness(0.12);
+    height: 0.7em;
+    overflow: hidden;
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 32px;
+    line-height: 1;
+    letter-spacing: -0.045em;
 }
+.logo-sub {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    line-height: 1;
+    margin-top: 3px;
+}
+.logo img { display: none; }
 
+/* ── Enlaces ────────────────────────────────────────────────── */
 .nav-menu {
     display: flex;
+    align-items: center;
     gap: 32px;
+    margin-left: auto;
 }
-
 .nav-link {
-    color: var(--ink-mid);
-    text-decoration: none;
-    font-size: 0.85rem;
-    font-weight: 400;
-    letter-spacing: 0.05em;
-    transition: color 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-.nav-link:hover {
-    color: var(--ink);
-}
-
-/* ---- Desplegable de Servicios (solo escritorio) ----
-   El panel es siempre cristal claro, tambien sobre el hero oscuro:
-   asi los enlaces van en tinta en los dos estados de la barra.
-   El padding-top hace de puente para que el hover no se corte al
-   bajar el raton del enlace al panel. */
-.nav-item-sub {
     position: relative;
-    display: flex; /* el enlace queda como item flex, igual que sus hermanos: sin esto bajaba 2px */
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: inherit;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 450;
 }
+.nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 100%;
+    bottom: 10px;
+    height: 1px;
+    background: currentColor;
+    transition: right var(--motion-base) var(--ease-standard);
+}
+.nav-link:hover::after,
+.nav-link.current::after { right: 0; }
+
+/* Desplegable de servicios */
+.nav-item-sub { position: relative; }
 .nav-sub {
     position: absolute;
-    top: 100%;
-    left: -16px;
-    padding-top: 14px;
+    top: calc(100% + 14px);
+    left: -20px;
+    min-width: 260px;
     display: flex;
     flex-direction: column;
-    min-width: 240px;
+    background: var(--night-900);
+    color: var(--on-night);
+    border: 1px solid var(--night-600);
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-4px);
-    transition: opacity 180ms cubic-bezier(0.2, 0.8, 0.2, 1),
-                transform 180ms cubic-bezier(0.2, 0.8, 0.2, 1),
-                visibility 180ms;
+    transform: translateY(-6px);
+    transition: opacity var(--motion-fast) var(--ease-standard),
+                transform var(--motion-fast) var(--ease-standard),
+                visibility 0s linear var(--motion-fast);
 }
 .nav-sub::before {
-    content: "";
+    content: '';
     position: absolute;
-    inset: 14px 0 0 0;
-    z-index: -1;
-    background-color: rgba(255, 255, 255, 0.94);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid var(--glass-border);
-    border-radius: var(--radius-lg);
-    box-shadow: 0 20px 40px rgba(15, 31, 27, 0.12);
+    left: 0; right: 0; top: -16px; height: 16px;
 }
 .nav-item-sub:hover .nav-sub,
 .nav-item-sub:focus-within .nav-sub {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
+    transform: none;
+    transition-delay: 0s;
 }
 .nav-sub-link {
-    color: var(--ink-mid);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    color: inherit;
     text-decoration: none;
-    font-size: 0.85rem;
-    padding: 10px 16px;
-    transition: color 150ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    font-size: 14px;
+    border-bottom: 1px solid var(--night-600);
 }
-.nav-sub-link:first-child { margin-top: 8px; }
-.nav-sub-link:last-child  { margin-bottom: 8px; }
-.nav-sub-link:hover,
-.nav-sub-link:focus-visible {
-    color: var(--ink);
+.nav-sub-link:last-child { border-bottom: 0; }
+.nav-sub-link::after { content: '↗'; font-size: 16px; opacity: 0.5; transition: opacity var(--motion-fast); }
+.nav-sub-link:hover { background: var(--night-800); }
+.nav-sub-link:hover::after { opacity: 1; color: var(--menta); }
+
+/* ── CTA: delineada, flecha que se desplaza ─────────────────── */
+.nav-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    min-height: 44px;
+    padding: 0 18px;
+    border: 1px solid currentColor;
+    color: inherit;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: background-color var(--motion-fast) var(--ease-standard),
+                color var(--motion-fast) var(--ease-standard),
+                border-color var(--motion-fast) var(--ease-standard);
 }
-
-
-.nav-btn .short-text {
-    display: none;
+.nav-btn:hover {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--bg);
 }
-
-@media (max-width: 900px) {
-    .nav-btn .full-text {
-        display: none;
-    }
-    .nav-btn .short-text {
-        display: inline;
-    }
+.navbar--sobre-hero .nav-btn:hover {
+    background: var(--menta);
+    border-color: var(--menta);
+    color: var(--negro);
 }
+.nav-btn .short-text { display: none; }
 
-
-/* ---- Hamburguesa (solo móvil) ---- */
+/* ── Botón de menú (móvil) ──────────────────────────────────── */
 .nav-burger {
     display: none;
-    flex-direction: column;
-    justify-content: center;
-    gap: 5px;
-    width: 42px;
-    height: 42px;
-    padding: 10px;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+    padding: 0 0 0 8px;
     background: none;
-    border: 1px solid var(--line-strong);
-    border-radius: 50%;
+    border: 0;
+    color: inherit;
+    font: 500 13px var(--font-body);
     cursor: pointer;
 }
-
-.nav-burger span {
-    display: block;
-    width: 100%;
-    height: 1.5px;
-    background: var(--ink);
-    border-radius: var(--radius-sm);
-    transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1), opacity 150ms cubic-bezier(0.2, 0.8, 0.2, 1);
+.nav-burger-i {
+    font-size: 22px;
+    line-height: 1;
+    font-weight: 300;
+    transition: transform var(--motion-base) var(--ease-standard);
 }
+.nav-burger.open .nav-burger-i { transform: rotate(45deg); }
 
-.nav-burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-.nav-burger.open span:nth-child(2) { opacity: 0; }
-.nav-burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-
-/* Panel desplegable móvil */
 .nav-mobile {
+    display: none;
     position: absolute;
-    top: calc(100% + 12px);
+    top: 72px;
     left: 0;
     right: 0;
-    display: none;
     flex-direction: column;
-    gap: 4px;
-    padding: 18px;
-    background-color: rgba(255, 255, 255, 0.94);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid var(--glass-border);
-    border-radius: var(--radius-xl); /* Sistema Bosque Inteligente: radius-xl, contenedores especiales */
-    box-shadow: 0 30px 60px rgba(15, 31, 27, 0.14);
-    opacity: 0;
-    transform: translateY(-8px);
-    transition: opacity 220ms cubic-bezier(0.2, 0.8, 0.2, 1), transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
-    pointer-events: none;
+    padding: 12px var(--gutter-desktop) 28px;
+    background: var(--night-900);
+    color: var(--on-night);
+    border-bottom: 1px solid var(--night-600);
+    max-height: calc(100svh - 72px);
+    overflow-y: auto;
 }
-
-.nav-mobile.open {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-}
-
+.nav-mobile.open { display: flex; }
 .nav-mobile-link {
-    color: var(--ink-mid);
+    display: flex;
+    align-items: center;
+    min-height: 56px;
+    color: inherit;
     text-decoration: none;
-    font-size: 1rem;
-    padding: 12px 16px;
-    border-radius: var(--radius-md);
-    transition: all 150ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    font-family: var(--font-display);
+    font-size: 26px;
+    letter-spacing: -0.02em;
+    border-bottom: 1px solid var(--night-600);
 }
-
-.nav-mobile-link:hover {
-    color: var(--ink);
-    background: var(--bg-alt);
-}
-
-/* Las 3 paginas de servicio, colgando de "Servicios". */
 .nav-mobile-sublink {
-    font-size: 0.92rem;
-    padding: 8px 16px 8px 32px;
+    min-height: 48px;
+    padding-left: 20px;
+    font-family: var(--font-body);
+    font-size: 15px;
+    letter-spacing: 0;
+    color: var(--on-night-soft);
 }
-
 .nav-mobile-cta {
-    margin-top: 10px;
-    text-align: center;
-    font-weight: 600;
-    font-size: 0.95rem;
-    color: var(--night-900);
-    background: var(--cobalt-400);
-    padding: 14px 16px;
-    border-radius: var(--radius-sm); /* Sistema Bosque Inteligente: radio fijo, nunca píldora */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 56px;
+    margin-top: 24px;
+    padding: 0 20px;
+    background: var(--menta);
+    color: var(--negro);
     text-decoration: none;
+    font-weight: 600;
 }
 
-/* ---- Movil: fuera el menu, entra la hamburguesa ----
-   Estaba en index.css, dentro de un @media general de la home, asi que
-   blog y posts se quedaban SIN hamburguesa al unificar el componente.
-   Vive aqui porque es del nav, no de la home. */
-@media (max-width: 768px) {
-    /* En movil manda la hamburguesa: fuera el menu y el boton de la
-       pastilla. Al extraer esto de index.css se colo un `display: flex`
-       en .nav-menu (en vez de none) y se perdio .nav-btn, asi que los
-       enlaces de escritorio salian apretados y cortados por la derecha
-       en las 14 paginas. No se veia como desborde porque body lleva
-       overflow-x: hidden, que tapa el sintoma. */
-    /* Van con .navbar delante a proposito. botones.css se carga DESPUES
-       que este archivo y da `display: inline-block` a .nav-btn; con la
-       misma especificidad gana el ultimo archivo, asi que la regla base
-       de botones.css se comia este `none`. Con el padre delante este
-       selector pesa mas y no depende del orden de carga. */
-    .navbar .nav-menu,
-    .navbar .nav-btn {
-        display: none;
-    }
-    .nav-burger {
-        display: flex;
-    }
-    .nav-mobile {
-        display: flex; /* visible pero oculto por opacity hasta .open */
-    }
+@media (max-width: 960px) {
+    .nav-menu { display: none; }
+    .nav-btn { margin-left: auto; }
+    .nav-burger { display: inline-flex; }
+}
+@media (max-width: 520px) {
+    .navbar { height: 64px; }
+    .nav-mobile { top: 64px; max-height: calc(100svh - 64px); }
+    .nav-container { gap: 16px; }
+    .logo-marca { font-size: 26px; }
+    .logo-sub { font-size: 9.5px; }
+    .nav-btn { padding: 0 12px; font-size: 13px; }
+    .nav-btn .full-text { display: none; }
+    .nav-btn .short-text { display: inline; }
+}
+@media (max-width: 380px) {
+    .nav-btn { display: none; }
 }

@@ -8,88 +8,36 @@
    Lo que se cambie aqui vale para las 14 paginas.
    ============================================================ */
 
-/* ===== FOOTER OSCURO =====
-   Requiere class="inverse" en el <footer class="footer-section">. */
-/* Bloque con margen y esquinas redondeadas, igual que el hero y las
-   secciones .section-bloque: el pie es la ultima pieza de la pagina, no
-   una banda pegada al borde. Sin borde superior: ya lo separa el aire. */
+/* ===== PIE · contravía × Refero =====
+   Negro a sangre, sin tarjetas. Logo grande a la izquierda, tres
+   columnas de enlaces con titulillo en mono, línea legal abajo.
+   Cuando la página cierra con un bloque oscuro, el pie se pega a él
+   con una línea fina en vez de un hueco. */
 .footer-section {
     position: relative;
-    /* `width: auto` sobre un elemento de bloque NO descuenta los margenes
-       laterales: el pie salia 2x--hero-gap mas ancho que la ventana y
-       provocaba scroll horizontal. Se veia solo en las paginas cortas
-       (aviso-legal), donde no hay barra vertical que absorba el sobrante.
-       Viene de antes del cierre unido. */
-    width: calc(100% - var(--hero-gap) * 2);
-    margin: var(--hero-gap);
-    padding: var(--space-10) 0 var(--space-8);
-    border-radius: var(--radius-xl);
-    overflow: hidden;
+    background: var(--night-900);
+    color: var(--on-night-body);
+    padding: var(--space-10) 0 var(--space-6);
+    border-top: 1px solid var(--night-600);
 }
-/* [4-sep-2026] El pie oscuro NO tenia fondo propio: el carbon lo pintaba
-   solo el <canvas> de la aurora. Si el JS no arranca (error, red lenta,
-   navegador con JS desactivado) el canvas se queda vacio y el pie sale
-   transparente sobre el blanco de la pagina, con todo su texto en blanco
-   encima: ilegible. El fondo va en CSS, como ya lo tienen .blog-hero y
-   los demas bloques oscuros; la aurora se pinta ENCIMA y es decoracion,
-   no el fondo. */
-.footer-section.inverse {
-    border-top: none;
-    background-color: var(--night-900);
-}
-
-/* CIERRE UNIDO. Cuando la pagina termina con el bloque de contacto
-   oscuro, el pie se pega a el — sin hueco y con las esquinas de arriba
-   rectas — para que los dos se lean como una sola pieza (decagon.ai).
-   Solo aplica donde ese bloque existe: en el resto de paginas el pie
-   sigue siendo un bloque despegado. .cta-final.inverse es el mismo
-   patron en diagnostico-operativo, con su propio nombre de seccion. */
-body:has(.contacto-section.inverse) .footer-section,
-body:has(.cta-final.inverse) .footer-section {
-    margin-top: 0;
-    border-radius: 0 0 var(--radius-xl) var(--radius-xl);
-}
-
-/* El pie oscuro lleva la aurora en un canvas de fondo (z-index 0).
-   Sin esto su contenido queda por debajo y no se ve. */
+.footer-section.inverse { background: var(--night-900); }
 .footer-section > .container { position: relative; z-index: 2; }
 
 .footer-grid {
     display: grid;
-    grid-template-columns: 1.2fr 1.8fr;
+    grid-template-columns: 1.2fr 2fr;
     gap: var(--space-8);
-    margin-bottom: var(--space-8);
+    padding-bottom: var(--space-9);
 }
-
-.footer-brand-col {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4);
-    max-width: 380px;
-}
-
-.footer-logo-wrap {
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
-    color: var(--on-night);
-}
-/* El logo del pie va sobre fondo oscuro: BLANCO. Sin filter:none hereda
-   el invert(1) del nav (que existe para la pastilla clara) y sale negro
-   sobre negro. La correccion vivia solo en index.css, asi que las paginas
-   que no lo cargan salian con el logo negro. */
-.footer-logo-wrap .logo img {
-    height: 26px;
-    width: auto;
-    display: block;
-    filter: none;
-}
-
+.footer-brand-col { display: flex; flex-direction: column; gap: var(--space-5); }
+.footer-logo { color: var(--on-night); }
+.footer-logo .logo-marca { font-size: clamp(48px, 6vw, 84px); }
+.footer-logo .logo-sub { font-size: clamp(14px, 1.3vw, 18px); margin-top: 6px; }
 .footer-brand-desc {
-    font-size: 0.9rem;
+    max-width: 380px;
+    font-size: 15px;
     line-height: 1.6;
     color: var(--on-night-soft);
-    font-weight: 300;
 }
 
 .footer-links-grid {
@@ -97,159 +45,65 @@ body:has(.cta-final.inverse) .footer-section {
     grid-template-columns: repeat(3, 1fr);
     gap: var(--space-6);
 }
-
 .footer-links-title {
-    font-family: var(--font-heading);
-    font-size: 0.85rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--on-night);
-    margin-bottom: var(--space-5);
+    color: var(--on-night-mid);
+    padding-bottom: var(--space-4);
+    margin-bottom: var(--space-2);
+    border-bottom: 1px solid var(--night-600);
 }
-
-.footer-links-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    /* Menos gap porque cada enlace ya aporta su propio padding
-       tactil: el espacio visible entre ellos es el mismo. */
-    gap: var(--space-2);
-}
-
+.footer-links-list { list-style: none; display: flex; flex-direction: column; }
 .footer-links-list a {
-    font-size: 0.8rem;
-    font-weight: 300;
-    color: var(--on-night-soft);
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    color: var(--on-night-body);
     text-decoration: none;
-    transition: color var(--motion-base) var(--ease-standard);
-    /* [3-sep-2026] Area tactil. El enlace solo ocupaba el alto de su
-       texto (~18px) y se pulsa con el pulgar: WCAG 2.5.5 y las guias
-       de Apple y Android piden 44px. El padding vertical se compensa
-       con un margen negativo para que la lista no se estire — el area
-       crece, el diseno no cambia. */
-    display: inline-block;
-    padding: 7px 0;
-    margin: -7px 0;
+    font-size: 15px;
+    transition: color var(--motion-fast) var(--ease-standard);
 }
-.footer-links-list a:hover { color: var(--on-night); }
+.footer-links-list a:hover { color: var(--menta); }
 
 .footer-bottom-bar {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-top: var(--space-6);
-    border-top: 1px solid var(--night-600);
     flex-wrap: wrap;
+    justify-content: space-between;
     gap: var(--space-4);
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--night-600);
 }
-
 .footer-curator {
-    font-size: 0.75rem;
-    /* [4-sep-2026] Sin text-transform:lowercase. Tenia sentido cuando
-       aqui iba un dominio ("albercabrera.com"), que se escribe en
-       minusculas; con el nombre del titular dejaba "alberto perez
-       cabrera" en caja baja, que en un nombre propio se lee como una
-       errata. */
-    letter-spacing: 0.12em;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.04em;
     color: var(--on-night-mid);
 }
 
-.footer-social-wrap {
-    display: flex;
-    align-items: center;
-    gap: var(--space-4);
-    /* [4-sep-2026] Aire respecto a la descripcion de marca: ahora vive
-       en la columna de identidad, no pegado al copyright. */
-    margin-top: var(--space-5);
-}
-/* La barra de abajo se queda solo con el copyright, asi que deja de
-   necesitar el reparto a dos lados. */
-.footer-bottom-bar { justify-content: flex-start; }
-
-/* ══ REDES ═════════════════════════════════════════════════════════
-   [4-sep-2026] Fuera la etiqueta "Sigueme:" y los iconos crecen.
-   Iban a 16px con un texto delante, en la barra de abajo: se leian como
-   letra pequena. Un icono de LinkedIn o Instagram no necesita que le
-   digan lo que es — la forma ya lo dice — y sin la etiqueta se pueden
-   agrandar sin que el conjunto pese de mas.
-
-   Ahora son botones de 44px (el minimo tactil de WCAG 2.5.5, que a 16px
-   sueltos no se cumplia) con el icono a 20px dentro. */
-.footer-social-icons {
-    display: flex;
-    gap: var(--space-3);
-}
+.footer-social-wrap { margin-top: var(--space-2); }
+.footer-social-icons { display: flex; gap: var(--space-2); }
 .footer-social-icons a {
-    color: var(--on-night-body);
-    display: grid;
+    display: inline-grid;
     place-items: center;
     width: 44px;
     height: 44px;
-    border-radius: var(--radius-sm);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    position: relative;
-    overflow: hidden;
-    /* El icono va por encima del relleno que entra en el hover. */
-    isolation: isolate;
-    transition: color var(--motion-base) var(--ease-standard),
-                border-color var(--motion-base) var(--ease-standard),
-                box-shadow var(--motion-base) var(--ease-standard);
+    border: 1px solid var(--night-600);
+    color: var(--on-night);
+    transition: background-color var(--motion-fast), color var(--motion-fast), border-color var(--motion-fast);
 }
-.footer-social-icons a svg {
-    position: relative;
-    z-index: 1;
-    transition: transform var(--motion-base) var(--ease-standard);
-}
-/* EL RELLENO. Un degradado que sube desde abajo: en reposo esta fuera
-   del boton (scaleY 0 con origen abajo) y al pasar el raton lo llena.
-   Es el mismo gesto que la barra de un grafico al levantarse — entra,
-   no aparece. */
-.footer-social-icons a::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    background: linear-gradient(160deg, var(--cobalt-500), #A63A70);
-    transform: scaleY(0);
-    transform-origin: bottom;
-    transition: transform var(--motion-base) var(--ease-standard);
-}
-.footer-social-icons a:hover {
-    color: #FFFFFF;
-    border-color: transparent;
-    /* Halo, como el resto de los botones del sistema. */
-    box-shadow: 0 0 0 4px rgba(218, 98, 45, 0.14),
-                0 10px 26px -10px rgba(218, 98, 45, 0.5);
-}
-.footer-social-icons a:hover::before { transform: scaleY(1); }
-/* El icono se inclina un punto: da sensacion de que responde al raton
-   sin llegar a girar, que se leeria como un juguete. */
-.footer-social-icons a:hover svg { transform: scale(1.08) rotate(-4deg); }
-
-/* Sin movimiento: el relleno aparece sin viaje y el icono no se mueve. */
-@media (prefers-reduced-motion: reduce) {
-    .footer-social-icons a::before,
-    .footer-social-icons a svg { transition: none; }
-    .footer-social-icons a:hover svg { transform: none; }
-}
-
-
+.footer-social-icons a svg { width: 18px; height: 18px; }
+.footer-social-icons a:hover { background: var(--menta); border-color: var(--menta); color: var(--negro); }
 
 @media (max-width: 900px) {
-    .article-layout { grid-template-columns: 1fr; gap: 0; }
-    .toc { display: none; }
-    .article-hero.inverse { padding: var(--space-10) 0 var(--space-7); }
-    .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+    .footer-grid { grid-template-columns: 1fr; gap: var(--space-7); }
 }
 @media (max-width: 560px) {
-    .prose .lead-answer { font-size: 1.06rem; padding: 22px 22px; }
-    .cta-card { padding: 44px 24px; }
-    .footer-links-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
-}
-@media (max-width: 480px) {
-    .footer-links-grid { grid-template-columns: 1fr; gap: 24px; }
-    .footer-bottom-bar { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .footer-section { padding-top: var(--space-8); }
+    .footer-links-grid { grid-template-columns: 1fr 1fr; }
+    .footer-links-col:last-child { grid-column: 1 / -1; }
 }
 
 /* ============================================================

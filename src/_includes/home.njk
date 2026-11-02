@@ -54,10 +54,10 @@
     </script>
 {% endfor %}
 
-    <!-- Google Fonts: Instrument Serif (titulares) e Inter (cuerpo) -->
+    <!-- Fuentes contravía: Hepta Slab (titulares), Geist (cuerpo), IBM Plex Mono (rótulos) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Hepta+Slab:wght@300;400;500;800;900&family=Geist:wght@300;400;500;600&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
     <!-- Hojas de Estilos -->
     <link rel="stylesheet" href="/design-system/tokens.css?v={{ site.cssVersion }}">
     <link rel="stylesheet" href="/css/base.css?v={{ site.cssVersion }}">
@@ -66,11 +66,6 @@
     <link rel="stylesheet" href="/css/faq.css?v={{ site.cssVersion }}">
     <link rel="stylesheet" href="/css/pie.css?v={{ site.cssVersion }}">
     <link rel="stylesheet" href="/index.css?v={{ v.homeCss }}">
-    {#- [5-sep-2026] El informe DAI360 vive dentro del portatil de la
-        seccion de caminos. Sus estilos son los MISMOS que en la pagina de
-        diagnostico, extraidos a su propia hoja: la de diagnostico entera
-        no se puede cargar aqui porque redefine .hero y .section. -#}
-    <link rel="stylesheet" href="/css/informe-dai360.css?v={{ site.cssVersion }}">
     <link rel="stylesheet" href="/assets/cookies/cookie-banner.css?v={{ v.cookieCss }}">
 </head>
 <body>
@@ -93,9 +88,8 @@
 {% include "widgets-flotantes.njk" %}
 
     <!-- Script de interactividad -->
-    <script src="/assets/js/aurora.js?v={{ v.auroraJs }}"></script>
     <script src="/assets/js/base.js?v={{ v.baseJs }}" defer></script>
-    <script src="/index.js?v={{ v.homeJs }}"></script>
+    <script src="/index.js?v={{ v.homeJs }}" defer></script>
 
     <!-- Widget del asistente. Versionar (?v=N) al cambiarlo: la cache es de 1 año -->
     <link rel="stylesheet" href="/assets/chat/widget-chat.css?v={{ v.chatCss }}">

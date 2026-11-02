@@ -39,9 +39,9 @@
         <svg id="rail-svg" width="600" height="450" viewBox="0 0 600 450" style="position: absolute; inset: 0; z-index: 1;">
           <defs>
             <linearGradient id="railGrad" gradientUnits="userSpaceOnUse" x1="0" y1="180" x2="0" y2="640">
-              <stop offset="0%" stop-color="#B44100" stop-opacity="0.30" />
-              <stop offset="50%" stop-color="#B44100" stop-opacity="0.5" />
-              <stop offset="100%" stop-color="#B44100" stop-opacity="0.30" />
+              <stop offset="0%" stop-color="#00704A" stop-opacity="0.30" />
+              <stop offset="50%" stop-color="#00704A" stop-opacity="0.5" />
+              <stop offset="100%" stop-color="#00704A" stop-opacity="0.30" />
             </linearGradient>
           </defs>
           <!-- entrada vertical -->
@@ -73,7 +73,7 @@
         <div id="proceso">
           <div id="proceso-ring"></div>
           <div id="proceso-box">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#B44100" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" width="34" height="34" aria-label="Automatizacion">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#00704A" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" width="34" height="34" aria-label="Automatizacion">
               <circle cx="9.2" cy="9.2" r="2.5"/>
               <path d="M9.2 3.4v1.6M9.2 13.4v1.6M3.4 9.2h1.6M13.4 9.2h1.6M5.1 5.1l1.15 1.15M12.15 12.15l1.15 1.15M13.3 5.1l-1.15 1.15M6.25 12.15L5.1 13.3"/>
               <circle cx="16.4" cy="16.4" r="1.9"/>
@@ -95,7 +95,7 @@
               <path fill="#ffba00" d="M73.4 26.5l-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3L43.65 25l16.15 28h27.45c0-1.55-.4-3.1-1.2-4.5z"/>
             </svg>
             <span class="destino-check">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#B44100" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" width="15" height="15">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#00704A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" width="15" height="15">
                 <polyline points="20 6 9 17 4 12"/>
               </svg>
             </span>
@@ -114,7 +114,7 @@
               <path fill="#C5221F" d="M10.7 118v79l106.6 80.3v-192L96 85.3C61.4 58.6 10.7 83.9 10.7 118z"/>
             </svg>
             <span class="destino-check">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#B44100" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" width="15" height="15">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#00704A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" width="15" height="15">
                 <polyline points="20 6 9 17 4 12"/>
               </svg>
             </span>
@@ -128,7 +128,7 @@
       .bg-field {
         position: absolute; inset: 0; z-index: 0;
         /* [1-sep-2026] Sin resplandor: sobre papel el halo terracota al 9%
-           daba un beige (#F8EEE8) que se separaba del blanco 1.142 — mas
+           daba un beige (#E3FBF1) que se separaba del blanco 1.142 — mas
            que el propio video del panel gris. En la escena verde oscura si
            aportaba profundidad; aqui solo ensuciaba. La profundidad la dan
            ya las sombras de las tarjetas. */
@@ -158,7 +158,7 @@
       .doc-amount {
         margin-top: auto;
         font-size: 13.5px; font-weight: 700;
-        color: #121316;
+        color: #1D1D1B;
         font-variant-numeric: tabular-nums;
         white-space: nowrap;
       }
@@ -185,7 +185,7 @@
       #proceso-box {
         width: 84px; height: 84px; border-radius: 22px;
         background: linear-gradient(165deg, #FFFFFF, #F2F2F4);
-        border: 2px solid rgba(180, 65, 0, 0.42);
+        border: 2px solid rgba(0, 112, 74, 0.42);
         box-shadow: 0 14px 32px -12px rgba(18, 19, 22, 0.30), inset 0 1px 0 #FFFFFF;
         display: flex; align-items: center; justify-content: center;
       }
@@ -193,15 +193,15 @@
         position: absolute; top: 0; left: 50%;
         margin-left: -48px; margin-top: -6px;
         width: 96px; height: 96px; border-radius: 50%;
-        border: 2px solid rgba(180, 65, 0, 0.8);
+        border: 2px solid rgba(0, 112, 74, 0.8);
         opacity: 0;
       }
-      #proceso-label { color: rgba(234, 130, 88, 0.96); font-weight: 600; font-size: 18px; }
+      #proceso-label { color: #00704A; font-weight: 600; font-size: 18px; }
 
       .destino-box {
         width: 72px; height: 72px; border-radius: 19px;
         background: linear-gradient(165deg, #FFFFFF, #F4F4F6);
-        border: 1.5px solid rgba(180, 65, 0, 0.26);
+        border: 1.5px solid rgba(0, 112, 74, 0.26);
         box-shadow: 0 14px 32px rgba(0, 0, 0, 0.14);
         display: flex; align-items: center; justify-content: center;
         position: relative;
@@ -209,8 +209,8 @@
       .destino-check {
         position: absolute; right: -7px; bottom: -7px;
         width: 26px; height: 26px; border-radius: 50%;
-        background: #121316;
-        border: 2px solid rgba(180, 65, 0, 0.55);
+        background: #1D1D1B;
+        border: 2px solid rgba(0, 112, 74, 0.55);
         display: flex; align-items: center; justify-content: center;
         opacity: 0;
       }
