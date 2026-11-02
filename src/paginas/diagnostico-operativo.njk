@@ -18,11 +18,8 @@ navCtaHref: "#cta"
 navCtaTexto: "Cuéntame tu caso"
 footerDai360Href: "/"
 pieSinAurora: true
-usaAurora: true
-usaRielEntregas: true
-usaFaq: true
 heroEnBloque: true
-cssArchivo: "diagnostico-operativo"
+cssArchivo: "paginas"
 schemas:
   - |
     {
@@ -156,53 +153,38 @@ schemas:
         }
       ]
     }
+usaPaginas: true
 ---
-    <!-- HERO -->
-    {#- [3-sep-2026 v5] HERO CLARO + EL INFORME COMO UN DOCUMENTO.
 
-        Se retira el hero oscuro y las 3 piezas sueltas de antes. Lo
-        que se ensena ahora es UNA sola pantalla: el informe DAI360 tal
-        como se entrega, con sus 3 apartados en vertical (auditoria de
-        area con el flujo BPMN, deteccion de oportunidades y roadmap
-        tecnico) — el mismo documento que el cliente recibe.
-
-        Fondo BLANCO, no negro: el entregable es un documento y un
-        documento se lee sobre papel. El halo terracota sale de detras
-        del panel como una sombra de color, y es lo unico que pone
-        atmosfera. Sin animaciones. -#}
-    <header class="hero">
-        <div class="container">
-            <div class="hero-texto">
-                <h1>Sabes que algo no va bien. <span class="hl">No sabes dónde.</span></h1>
-                <p class="sub">Audito las cuatro áreas de tu negocio y te enseño, con claridad, qué merece la pena arreglar primero.</p>
-                <div class="hero-ctas">
-                    <a href="/#contacto" class="btn-main">Cuéntame tu caso &rarr;</a>
+    <header class="pg-hero inverse pg-hero--con-pieza">
+        <div class="pg-wrap">
+            <div class="pg-hero-meta"><span><b>●</b> Consultoría · Diagnóstico DAI360</span><span>Marketing · Ventas · Entrega · Administración</span><span>1–2 semanas</span></div>
+            <div class="pg-hero-rejilla">
+                <h1>
+                    <span class="pg-linea"><span>Sabes que algo</span></span>
+                    <span class="pg-linea"><span>no va bien.</span></span>
+                    <span class="pg-linea"><span class="suave">No sabes</span></span>
+                    <span class="pg-linea"><span class="suave">dónde.</span></span>
+                </h1>
+                <div class="pg-hero-lado">
+                    <p>Audito las cuatro áreas de tu negocio y te enseño, con claridad, qué merece la pena arreglar primero.</p>
+                    <div class="pg-hero-acc">
+                        <a href="#cta" class="btn-main">Cuéntame tu caso <span class="flecha" aria-hidden="true">↗</span></a>
+                        <a href="#que-te-llevas" class="text-link">Qué te llevas <span class="flecha" aria-hidden="true">↓</span></a>
+                    </div>
                 </div>
             </div>
-
-            {#- EL INFORME: una sola pantalla, no tres tarjetas.
-                aria-hidden porque es la ilustracion del entregable; lo
-                que cuenta esta escrito en texto en "Que te llevas". -#}
-            <div class="informe-wrap">
-                <article class="informe" aria-hidden="true">
-
+            <div class="pg-hero-pieza pg-informe-escena">
+                <article class="pg-informe" aria-hidden="true">
                     <header class="informe-cab">
                         <h2>DAI 360</h2>
                         <p class="informe-lead">Diagnóstico completo de tus procesos para escalar sin fricción. Este informe te guía paso a paso para optimizar, integrar y ejecutar.</p>
-                        <div class="informe-meta">
-                            <span>Nombre del negocio</span>
-                            <span>Fecha</span>
-                            <span>Auditoría de Alberto Pérez Cabrera</span>
-                        </div>
+                        <div class="informe-meta"><span>Nombre del negocio</span><span>Fecha</span><span>Auditoría de Alberto Pérez Cabrera</span></div>
                     </header>
-
-                    <!-- 1º AUDITORIA — el flujo BPMN -->
                     <section class="informe-bloque">
                         <h3><em>1º</em> Auditoría de Área</h3>
                         <p class="informe-sub">Auditoría de los 4 ejes operativos: marketing, ventas, operaciones y delivery. Mapa visual de flujos actuales.</p>
-
-                        <div class="bpmn-scroll">
-                        <svg class="bpmn" viewBox="0 0 730 210" preserveAspectRatio="xMidYMid meet">
+                        <div class="bpmn-scroll"><svg class="bpmn" viewBox="0 0 730 210" preserveAspectRatio="xMidYMid meet">
                             <defs>
                                 <marker id="fl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
                                     <path d="M0 0 L10 5 L0 10 z" fill="#9A9AA3"/>
@@ -246,228 +228,106 @@ schemas:
                             <text class="bp-lb" x="312" y="158" text-anchor="middle">SÍ</text>
 
                             <text class="bp-warn" x="405" y="192" text-anchor="middle">◆ CUELLO DE BOTELLA DETECTADO</text>
-                        </svg>
-                        </div>
+                        </svg></div>
                     </section>
-
-                    <!-- 2º OPORTUNIDADES -->
                     <section class="informe-bloque">
                         <h3><em>2º</em> Detección de Oportunidades</h3>
                         <p class="informe-sub">Cruzar las ineficiencias detectadas con las soluciones posibles, clasificadas por impacto, dificultad y urgencia.</p>
-
                         <div class="tabla-scroll">
-                        <table class="informe-tabla">
-                            <thead>
-                                <tr><th>Solución propuesta</th><th>Área</th><th>Problema detectado</th><th>Impacto</th><th>Dificultad</th><th>Urgencia</th></tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Sistema de ventas blindado</td>
-                                    <td><span class="et et--ventas">Ventas</span></td>
-                                    <td>Gestión 100% manual por WhatsApp</td>
-                                    <td><span class="chip chip--alto">Alto</span></td>
-                                    <td><span class="chip chip--medio">Media</span></td>
-                                    <td><span class="chip chip--alto">Crítica</span></td>
-                                </tr>
-                                <tr>
-                                    <td>Gestión de capacidad y fechas</td>
-                                    <td><span class="et et--ops">Operaciones</span></td>
-                                    <td>Saturación en fechas clave, sin antelación</td>
-                                    <td><span class="chip chip--alto">Alto</span></td>
-                                    <td><span class="chip chip--bajo">Baja</span></td>
-                                    <td><span class="chip chip--alto">Alta</span></td>
-                                </tr>
-                                <tr>
-                                    <td>Cerebro operativo (CRM)</td>
-                                    <td><span class="et et--admin">Administración</span></td>
-                                    <td>Información fragmentada y sin trazabilidad</td>
-                                    <td><span class="chip chip--alto">Alto</span></td>
-                                    <td><span class="chip chip--medio">Media</span></td>
-                                    <td><span class="chip chip--medio">Media</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                            <table class="informe-tabla">
+                                <thead><tr><th>Solución propuesta</th><th>Área</th><th>Problema detectado</th><th>Impacto</th><th>Dificultad</th><th>Urgencia</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Sistema de ventas blindado</td><td><span class="et">Ventas</span></td><td>Gestión 100% manual por WhatsApp</td><td><span class="chip chip--alto">Alto</span></td><td><span class="chip chip--medio">Media</span></td><td><span class="chip chip--alto">Crítica</span></td></tr>
+                                    <tr><td>Gestión de capacidad y fechas</td><td><span class="et">Operaciones</span></td><td>Saturación en fechas clave, sin antelación</td><td><span class="chip chip--alto">Alto</span></td><td><span class="chip chip--bajo">Baja</span></td><td><span class="chip chip--alto">Alta</span></td></tr>
+                                    <tr><td>Cerebro operativo (CRM)</td><td><span class="et">Administración</span></td><td>Información fragmentada y sin trazabilidad</td><td><span class="chip chip--alto">Alto</span></td><td><span class="chip chip--medio">Media</span></td><td><span class="chip chip--medio">Media</span></td></tr>
+                                </tbody>
+                            </table>
                         </div>
                     </section>
-
-                    <!-- 3º ROADMAP -->
                     <section class="informe-bloque">
                         <h3><em>3º</em> Roadmap Técnico</h3>
                         <p class="informe-sub">El plan de integraciones y mejoras, priorizado por impacto y facilidad. Empieza por lo que antes devuelve.</p>
-
                         <div class="tabla-scroll">
-                        <table class="informe-tabla">
-                            {#- [3-sep-2026 v5.2] La columna "Estado"
-                                (Listo / En progreso / Pendiente) se
-                                sustituye por PRIORIDAD. Un roadmap se
-                                entrega ANTES de implementar nada: no
-                                puede haber una fase "Listo" ni "En
-                                progreso" porque todavia no ha
-                                empezado. Aquello era el tablero de
-                                seguimiento del proyecto, no el plan.
-                                Prioridad es lo que de verdad ordena un
-                                roadmap, y es el argumento de la
-                                pagina: que arreglar primero. -#}
-                            <thead>
-                                <tr><th>Fase</th><th>Prioridad</th><th>Qué incluye</th><th>Cuándo</th></tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Fase 0 · Quick wins</td>
-                                    <td><span class="chip chip--alto">Primero</span></td>
-                                    <td>Agente IA que responde WhatsApp 24/7 y cualifica</td>
-                                    <td>0-2 sem.</td>
-                                </tr>
-                                <tr>
-                                    <td>Fase 1</td>
-                                    <td><span class="chip chip--medio">Después</span></td>
-                                    <td>Presupuestos automáticos + recordatorios de seguimiento</td>
-                                    <td>1-2 meses</td>
-                                </tr>
-                                <tr>
-                                    <td>Fase 2</td>
-                                    <td><span class="chip chip--bajo">Cuando toque</span></td>
-                                    <td>CRM central sincronizado con agenda y facturación</td>
-                                    <td>3-4 meses</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                            <table class="informe-tabla">
+                                <thead><tr><th>Fase</th><th>Prioridad</th><th>Qué incluye</th><th>Cuándo</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Fase 0 · Quick wins</td><td><span class="chip chip--alto">Primero</span></td><td>Agente IA que responde WhatsApp 24/7 y cualifica</td><td>0-2 sem.</td></tr>
+                                    <tr><td>Fase 1</td><td><span class="chip chip--medio">Después</span></td><td>Presupuestos automáticos + recordatorios de seguimiento</td><td>1-2 meses</td></tr>
+                                    <tr><td>Fase 2</td><td><span class="chip chip--bajo">Cuando toque</span></td><td>CRM central sincronizado con agenda y facturación</td><td>3-4 meses</td></tr>
+                                </tbody>
+                            </table>
                         </div>
                     </section>
-
                 </article>
             </div>
         </div>
     </header>
 
-    <!-- SÍNTOMAS -->
-    <section class="section" id="que-es">
-        <div class="container">
-            <div class="s-head reveal">
-                <span class="s-label">¿TE SUENA?</span>
-                <h2 class="s-title">El negocio funciona, pero cuesta más de lo que debería.</h2>
-                <p class="s-sub">Si te reconoces en alguna de estas, el DAI360 está pensado exactamente para ti.</p>
+    <section class="pg-sec" id="que-es">
+        <div class="pg-wrap">
+            <div class="pg-cab reveal">
+                <span class="pg-eyebrow">¿Te suena?</span>
+                <h2 class="pg-h2">El negocio funciona, pero cuesta más de lo que debería.</h2>
+                <p class="pg-sub">Si te reconoces en alguna de estas, el DAI360 está pensado exactamente para ti.</p>
             </div>
-            <div class="sintomas">
-                <div class="sintoma reveal"><strong>«No me da la vida»</strong>El día se te va en tareas que aburren: pasar datos, responder lo mismo mil veces, perseguir clientes. Y lo importante siempre queda para mañana.</div>
-                <div class="sintoma reveal"><strong>«Se me escapan clientes»</strong>Te escriben fuera de horario y cuando contestas ya se han ido con otro. O piden presupuesto y el seguimiento se pierde por el camino.</div>
-                <div class="sintoma reveal"><strong>«Lo llevo todo en la cabeza»</strong>Excel por aquí, WhatsApp por allá, papeles por todos lados. Nadie más que tú sabe cómo va el negocio de verdad.</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- QUÉ ANALIZA -->
-    <section class="section">
-        <div class="container">
-            <div class="s-head reveal">
-                <span class="s-label">LA AUDITORÍA</span>
-                <h2 class="s-title">Audito las cuatro áreas de tu negocio.</h2>
-                <p class="s-sub">Por eso se llama 360: una auditoría completa de las cuatro áreas donde se decide si un negocio gana o pierde dinero.</p>
-            </div>
-            <div class="areas">
-                <div class="area reveal">
-                    <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M3 11l18-8-8 18-2.5-7.5z"/></svg></span>
-                    <h3>Marketing</h3>
-                    <p>Cómo te conoce la gente y de dónde vienen los interesados: tu web, tus redes, tu publicidad. Qué funciona, qué no, y cuántos contactos se pierden antes de llegar a ti.</p>
-                </div>
-                <div class="area reveal">
-                    <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg></span>
-                    <h3>Ventas</h3>
-                    <p>Qué pasa desde que alguien pregunta hasta que compra: cuánto tardáis en responder, cómo se hace el seguimiento, dónde se enfrían los presupuestos y por qué se caen ventas que estaban hechas.</p>
-                </div>
-                <div class="area reveal">
-                    <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>
-                    <h3>Entrega</h3>
-                    <p>Cómo entregáis vuestro producto o servicio: los procesos internos, los tiempos, las tareas repetitivas que comen horas y los pasos que dependen de una sola persona (normalmente tú).</p>
-                </div>
-                <div class="area reveal">
-                    <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 7l8-4 8 4v10l-8 4-8-4z"/><path d="M4 7l8 4 8-4M12 11v10"/></svg></span>
-                    <h3>Administración</h3>
-                    <p>Facturación, cobros, datos y herramientas: qué programas usáis, cuáles no se hablan entre sí, qué vive solo en un Excel y si los números que miras te sirven de verdad para decidir.</p>
-                </div>
+            <div class="pg-citas">
+                <div class="pg-cita reveal"><blockquote>No me da la vida</blockquote><p>El día se te va en tareas que aburren: pasar datos, responder lo mismo mil veces, perseguir clientes. Y lo importante siempre queda para mañana.</p></div>
+                <div class="pg-cita reveal"><blockquote>Se me escapan clientes</blockquote><p>Te escriben fuera de horario y cuando contestas ya se han ido con otro. O piden presupuesto y el seguimiento se pierde por el camino.</p></div>
+                <div class="pg-cita reveal"><blockquote>Lo llevo todo en la cabeza</blockquote><p>Excel por aquí, WhatsApp por allá, papeles por todos lados. Nadie más que tú sabe cómo va el negocio de verdad.</p></div>
             </div>
         </div>
     </section>
 
-    {#- QUÉ TE LLEVAS — fusion de "Qué recibes" + "El método" (3-sep-2026).
-        Antes eran dos secciones seguidas contando casi lo mismo: un
-        timeline de circulos con texto, y debajo una parrilla de 3
-        diagramas SVG que repetia en dibujo lo que el timeline ya decia
-        en palabras. Ahora es una sola narrativa: cada entrega lleva SU
-        pieza visual al lado, alternando, como hace "Como trabajo" en
-        la home (texto + pieza ilustrada, sin duplicar el contenido en
-        dos sitios). Los 3 diagramas SVG animados son los mismos que ya
-        existian en "El método"; el diagrama de la entrega 02 es nuevo
-        (no tenia equivalente antes). -#}
-    <section class="section" id="que-te-llevas">
-        <div class="container">
-            <div class="s-head reveal">
-                <span class="s-label">QUÉ TE LLEVAS</span>
-                <h2 class="s-title">No es un informe para el cajón. Es un plan.</h2>
-                <p class="s-sub">Al terminar el diagnóstico recibes cosas concretas que puedes usar desde el primer día, con o sin mí. Tu parte son unas 2 horas: un cuestionario y una charla. El resto lo hago yo, en una o dos semanas, no en meses.</p>
+    <section class="pg-sec pg-sec--crema">
+        <div class="pg-wrap">
+            <div class="pg-cab reveal">
+                <span class="pg-eyebrow">La auditoría</span>
+                <h2 class="pg-h2">Audito las cuatro áreas de tu negocio.</h2>
+                <p class="pg-sub">Por eso se llama 360: una auditoría completa de las cuatro áreas donde se decide si un negocio gana o pierde dinero.</p>
             </div>
-            {#- [3-sep-2026 v6] LINEA DEL TIEMPO, no filas alternando lado.
+            <div class="pg-cuadrante reveal">
+                <div><span class="pg-cuadrante-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M3 11l18-8-8 18-2.5-7.5z"/></svg></span><h3>Marketing</h3><p>Cómo te conoce la gente y de dónde vienen los interesados: tu web, tus redes, tu publicidad. Qué funciona, qué no, y cuántos contactos se pierden antes de llegar a ti.</p></div>
+                <div><span class="pg-cuadrante-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg></span><h3>Ventas</h3><p>Qué pasa desde que alguien pregunta hasta que compra: cuánto tardáis en responder, cómo se hace el seguimiento, dónde se enfrían los presupuestos y por qué se caen ventas que estaban hechas.</p></div>
+                <div><span class="pg-cuadrante-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span><h3>Entrega</h3><p>Cómo entregáis vuestro producto o servicio: los procesos internos, los tiempos, las tareas repetitivas que comen horas y los pasos que dependen de una sola persona (normalmente tú).</p></div>
+                <div><span class="pg-cuadrante-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 7l8-4 8 4v10l-8 4-8-4z"/><path d="M4 7l8 4 8-4M12 11v10"/></svg></span><h3>Administración</h3><p>Facturación, cobros, datos y herramientas: qué programas usáis, cuáles no se hablan entre sí, qué vive solo en un Excel y si los números que miras te sirven de verdad para decidir.</p></div>
+                <div class="pg-cuadrante-centro" aria-hidden="true">360</div>
+            </div>
+        </div>
+    </section>
 
-                    Antes las 4 entregas alternaban lado (texto izquierda /
-                    pieza derecha y al reves), y cada diagrama llevaba un
-                    punto naranja dando vueltas en bucle infinito
-                    (animateMotion repeatCount="indefinite"): movimiento
-                    decorativo que no significaba nada, el mismo tic que ya
-                    se quito del hero.
-
-                    Ahora es el mismo riel que "Como trabajo" en la home:
-                    todo a un lado, una linea vertical que se va llenando de
-                    naranja segun bajas y un nodo por entrega que se enciende
-                    cuando la linea lo alcanza. El movimiento lo marca el
-                    scroll — el dedo del lector — y no un temporizador.
-                    Reutiliza --riel-avance de index.js, no codigo nuevo. -#}
-                <div class="entregas" data-riel>
-
-                <!-- 01 Auditoría de las 4 áreas — el panel del hero, en miniatura -->
-                <div class="entrega reveal"><span class="entrega-marca" aria-hidden="true"></span>
-                    <div class="entrega-texto">
-                        <span class="entrega-num">01</span>
-                        <h3><span class="h3-acento">Sabes qué falla.</span>Las 4 áreas, con nota.</h3>
+    <section class="pg-sec" id="que-te-llevas">
+        <div class="pg-wrap">
+            <div class="pg-cab reveal">
+                <span class="pg-eyebrow">Qué te llevas</span>
+                <h2 class="pg-h2">No es un informe para el cajón. Es un plan.</h2>
+                <p class="pg-sub">Recibes cosas concretas que puedes usar desde el primer día, con o sin mí. Tu parte son unas 2 horas: un cuestionario y una charla. El resto lo hago yo, en una o dos semanas.</p>
+            </div>
+            <div class="pg-pasos" data-pasos>
+                <nav class="pg-pasos-indice" aria-label="Entregables">
+                    <p class="pg-pasos-cont"><b>01</b><small> / 04</small></p>
+                    <a href="#paso-d1"><span>01</span>Sabes qué falla</a>
+                    <a href="#paso-d2"><span>02</span>Ves dónde se atasca</a>
+                    <a href="#paso-d3"><span>03</span>Sabes qué arreglar</a>
+                    <a href="#paso-d4"><span>04</span>Y por dónde empezar</a>
+                    <div class="pg-barra" aria-hidden="true"><i></i></div>
+                </nav>
+                <ol class="pg-pasos-lista">
+                    <li class="pg-paso" id="paso-d1">
+                        <span class="pg-paso-n">Entregable 01</span>
+                        <h3>Sabes qué falla.<small>Las 4 áreas, con nota.</small></h3>
                         <p>El estado real de marketing, ventas, entrega y administración: qué funciona, qué cojea y cuánto te está costando. Claro y con ejemplos de tu día a día.</p>
-                    </div>
-                    <div class="entrega-viz" style="--pieza-ancho: 330px">
-                        <div class="entrega-pieza pieza-cuadrante">
-                            <div class="cd-celda cd--mal">
-                                <span class="cd-area">Ventas</span>
-                                <span class="cd-nota">4 de cada 10 presupuestos<br>sin seguimiento</span>
-                                <span class="cd-punto" aria-hidden="true"></span>
-                            </div>
-                            <div class="cd-celda cd--medio">
-                                <span class="cd-area">Marketing</span>
-                                <span class="cd-nota">Llegan contactos,<br>nadie los ordena</span>
-                            </div>
-                            <div class="cd-celda cd--medio">
-                                <span class="cd-area">Entrega</span>
-                                <span class="cd-nota">Depende de una<br>sola persona</span>
-                            </div>
-                            <div class="cd-celda cd--bien">
-                                <span class="cd-area">Administración</span>
-                                <span class="cd-nota">Funciona, pero<br>todo a mano</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 02 El mapa de tus procesos — diagrama BPM con el cuello de botella marcado -->
-                <div class="entrega reveal"><span class="entrega-marca" aria-hidden="true"></span>
-                    <div class="entrega-texto">
-                        <span class="entrega-num">02</span>
-                        <h3><span class="h3-acento">Ves dónde se atasca.</span>Tus procesos, dibujados.</h3>
-                        <p>Dibujo cómo fluye el trabajo en tu negocio, paso a paso (un diagrama BPM: el "plano" de tu empresa). Ahí los cuellos de botella saltan a la vista — hasta para ti.</p>
-                    </div>
-                    <div class="entrega-viz" style="--pieza-ancho: 560px">
-                        {#- [5-sep-2026] El DIAGRAMA, no la lista. Aqui habia
-                            un .pieza-papel con .pp-flujo (los pasos en
-                            texto con sus horas). El apartado habla de
-                            "tus procesos DIBUJADOS", asi que ensenya el
-                            mismo BPMN que lleva el informe. -#}
-                        <div class="bpmn-scroll">
-                            <svg class="bpmn" viewBox="0 0 730 210" preserveAspectRatio="xMidYMid meet">
+                        <div class="pg-paso-viz" aria-hidden="true"><div class="ui"><div class="ui-cab">Estado por área <small>Ejemplo</small></div><div class="pz-cuadro">
+                            <div class="mal"><b>Ventas</b>4 de cada 10 presupuestos sin seguimiento</div>
+                            <div class="medio"><b>Marketing</b>Llegan contactos, nadie los ordena</div>
+                            <div class="medio"><b>Entrega</b>Depende de una sola persona</div>
+                            <div class="bien"><b>Administración</b>Funciona, pero todo a mano</div>
+                        </div></div></div>
+                    </li>
+                    <li class="pg-paso" id="paso-d2">
+                        <span class="pg-paso-n">Entregable 02</span>
+                        <h3>Ves dónde se atasca.<small>Tus procesos, dibujados.</small></h3>
+                        <p>Dibujo cómo fluye el trabajo en tu negocio, paso a paso (un diagrama BPM: el plano de tu empresa). Ahí los cuellos de botella saltan a la vista, hasta para ti.</p>
+                        <div class="pg-paso-viz" aria-hidden="true"><div class="ui"><div class="bpmn-scroll"><svg class="bpmn" viewBox="0 0 730 210" preserveAspectRatio="xMidYMid meet">
                                 <defs>
                                     <marker id="fl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
                                         <path d="M0 0 L10 5 L0 10 z" fill="#9A9AA3"/>
@@ -511,131 +371,61 @@ schemas:
                                 <text class="bp-lb" x="312" y="158" text-anchor="middle">SÍ</text>
 
                                 <text class="bp-warn" x="405" y="192" text-anchor="middle">◆ CUELLO DE BOTELLA DETECTADO</text>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 03 Oportunidades detectadas — problema→solución -->
-                <div class="entrega reveal"><span class="entrega-marca" aria-hidden="true"></span>
-                    <div class="entrega-texto">
-                        <span class="entrega-num">03</span>
-                        <h3><span class="h3-acento">Sabes qué arreglar.</span>Ordenado por lo que devuelve.</h3>
+                            </svg></div></div></div>
+                    </li>
+                    <li class="pg-paso" id="paso-d3">
+                        <span class="pg-paso-n">Entregable 03</span>
+                        <h3>Sabes qué arreglar.<small>Ordenado por lo que devuelve.</small></h3>
                         <p>Cruzo cada cuello de botella con su solución concreta, clasificada por impacto, dificultad y urgencia. Sabes qué te duele, cuánto y qué lo arregla.</p>
-                    </div>
-                    <div class="entrega-viz" style="--pieza-ancho: 500px">
-                        <div class="entrega-pieza pieza-tabla">
-                            <div class="pt-fila pt-cab">
-                                <span>Lo que pasa</span>
-                                <span>Lo que lo arregla</span>
-                                <span class="pt-ind">IMP</span>
-                                <span class="pt-ind">ESF</span>
-                            </div>
-                            <div class="pt-fila">
-                                <span>Presupuestos sin seguir</span>
-                                <span class="pt-sol">Recordatorio automático</span>
-                                <span class="pt-ind"><i class="pt-n3"></i></span>
-                                <span class="pt-ind"><i class="pt-n1"></i></span>
-                            </div>
-                            <div class="pt-fila">
-                                <span>Revisión manual de 3 días</span>
-                                <span class="pt-sol">Plantilla + validación</span>
-                                <span class="pt-ind"><i class="pt-n3"></i></span>
-                                <span class="pt-ind"><i class="pt-n2"></i></span>
-                            </div>
-                            <div class="pt-fila">
-                                <span>Datos en 4 sitios</span>
-                                <span class="pt-sol">Un solo panel</span>
-                                <span class="pt-ind"><i class="pt-n2"></i></span>
-                                <span class="pt-ind"><i class="pt-n2"></i></span>
-                            </div>
-                            <p class="pt-pie">…y 9 más, ordenadas por lo que antes devuelve.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 04 Roadmap por quick wins — linea de fases -->
-                <div class="entrega reveal"><span class="entrega-marca" aria-hidden="true"></span>
-                    <div class="entrega-texto">
-                        <span class="entrega-num">04</span>
-                        <h3><span class="h3-acento">Y por dónde empezar.</span>El plan, por fases.</h3>
-                        <p>El plan de acción por fases: primero las victorias rápidas (lo que más devuelve con menos esfuerzo), después las piezas grandes. Te lo entrego y te lo explico en una sesión contigo.</p>
-                    </div>
-                    <div class="entrega-viz" style="--pieza-ancho: 560px">
-                        <div class="entrega-pieza pieza-regla">
-                            <div class="pr-tramo pr--ya">
-                                <span class="pr-cuando">0-2 sem.</span>
-                                <span class="pr-que">Recordatorios<br>automáticos</span>
-                            </div>
-                            <div class="pr-tramo">
-                                <span class="pr-cuando">1-2 meses</span>
-                                <span class="pr-que">Presupuestos<br>en plantilla</span>
-                            </div>
-                            <div class="pr-tramo">
-                                <span class="pr-cuando">3-4 meses</span>
-                                <span class="pr-que">Panel<br>único</span>
-                            </div>
-                            <div class="pr-tramo pr--dim">
-                                <span class="pr-cuando">Después</span>
-                                <span class="pr-que">Ajuste<br>continuo</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+                        <div class="pg-paso-viz" aria-hidden="true"><div class="ui"><div class="pz-tabla">
+                            <div><span>Lo que pasa</span><span>Lo que lo arregla</span><span>IMP</span><span>ESF</span></div>
+                            <div><span>Presupuestos sin seguir</span><span class="sol">Recordatorio automático</span><i class="n3"></i><i class="n1"></i></div>
+                            <div><span>Revisión manual de 3 días</span><span class="sol">Plantilla + validación</span><i class="n3"></i><i class="n2"></i></div>
+                            <div><span>Datos en 4 sitios</span><span class="sol">Un solo panel</span><i class="n2"></i><i class="n2"></i></div>
+                        </div></div></div>
+                    </li>
+                    <li class="pg-paso" id="paso-d4">
+                        <span class="pg-paso-n">Entregable 04</span>
+                        <h3>Y por dónde empezar.<small>El plan, por fases.</small></h3>
+                        <p>Primero las victorias rápidas (lo que más devuelve con menos esfuerzo), después las piezas grandes. Te lo entrego y te lo explico en una sesión contigo.</p>
+                        <div class="pg-paso-viz" aria-hidden="true"><div class="ui"><div class="pz-fases">
+                            <div><small>0-2 sem.</small>Recordatorios automáticos</div>
+                            <div><small>1-2 meses</small>Presupuestos en plantilla</div>
+                            <div><small>3-4 meses</small>Panel único</div>
+                            <div><small>Después</small>Ajuste continuo</div>
+                        </div></div></div>
+                    </li>
+                </ol>
+                <div class="pg-puntos" aria-label="Ir a un entregable"></div>
             </div>
         </div>
     </section>
 
-    <!-- LA JUGADA DEL ANTICIPO -->
-    <section class="section section--precio">
-        <div class="container">
-            {#- [3-sep-2026 v7] El bloque del precio cuelga del riel: la
-                linea temporal de "Que te llevas" baja hasta aqui y
-                termina en un destello montado sobre su borde. Asi el
-                precio se lee como el DESTINO del recorrido y no como
-                una seccion suelta. Mismo componente que .riel-bola en
-                la home. -#}
-            <div class="deal reveal">
-                <span class="entregas-bola" aria-hidden="true">
-                    {#- El destello de cuatro puntas, no una estrella de
-                        cinco: la de cinco se lee como "valoracion". -#}
-                    <svg viewBox="0 0 16 16"><path d="M 8 1.4 C 8.6 5 9.9 6.6 14.6 8 C 9.9 9.4 8.6 11 8 14.6 C 7.4 11 6.1 9.4 1.4 8 C 6.1 6.6 7.4 5 8 1.4 Z"/></svg>
-                </span>
-                <h2>Si luego lo arreglamos juntos, recuperas hasta el último euro.</h2>
-                <p class="deal-price"><strong>990€</strong><span class="deal-price-note">Precio de lanzamiento para los primeros clientes. Precio cerrado, que te confirmo antes de empezar. Si tu negocio es grande lo hablamos, pero lo sabrás antes de decidir, nunca después.</span></p>
-                {#- [3-sep-2026 v6] Las dos vias, con su remate arriba.
-                    Antes eran dos cajas identicas salvo el color del
-                    borde y sin nada que resumiera cada una: habia que
-                    leerse los dos parrafos enteros para pillar la
-                    jugada. Ahora cada via abre con SU resultado en
-                    grande (te lo quedas / 0 EUR) y el parrafo solo lo
-                    explica. -#}
-                <div class="deal-paths">
-                    <div class="deal-path">
-                        <span class="deal-path-label">Si no seguimos</span>
-                        <strong class="deal-path-remate">El plan es tuyo</strong>
-                        <p>Sabes exactamente qué falla, por qué y en qué orden arreglarlo. Lo ejecutas con quien quieras, o cuando quieras.</p>
-                    </div>
-                    <div class="deal-path highlight">
-                        <span class="deal-path-label">Si lo implementamos juntos</span>
-                        <strong class="deal-path-remate">Recuperas los 990€</strong>
-                        <p>Lo que pagaste por el diagnóstico <em>se descuenta íntegro</em> de la implementación.</p>
-                    </div>
+    <section class="pg-sec pg-sec--crema">
+        <div class="pg-wrap">
+            <div class="pg-precio-dai reveal">
+                <div class="pg-precio-dai-cifra">
+                    <span class="pg-eyebrow">Precio de lanzamiento</span>
+                    <strong>990€</strong>
+                    <h2>Si luego lo arreglamos juntos, recuperas hasta el último euro.</h2>
+                    <p>Precio cerrado, que te confirmo antes de empezar. Si tu negocio es grande lo hablamos, pero lo sabrás antes de decidir, nunca después.</p>
+                </div>
+                <div class="pg-caminos2">
+                    <div><small>Si no seguimos</small><strong>El plan es tuyo</strong><p>Sabes exactamente qué falla, por qué y en qué orden arreglarlo. Lo ejecutas con quien quieras, o cuando quieras.</p></div>
+                    <div><small>Si lo implementamos juntos</small><strong>Recuperas los 990€</strong><p>Lo que pagaste por el diagnóstico se descuenta íntegro de la implementación.</p></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- PARA QUIÉN -->
-    <section class="section">
-        <div class="container">
-            <div class="s-head center reveal">
-                <span class="s-label">HONESTAMENTE</span>
-                <h2 class="s-title">Para quién es (y para quién no).</h2>
+    <section class="pg-sec">
+        <div class="pg-wrap">
+            <div class="pg-cab pg-cab--solo reveal">
+                <span class="pg-eyebrow">Honestamente</span>
+                <h2 class="pg-h2">Para quién es (y para quién no).</h2>
             </div>
-            <div class="quien">
-                <div class="quien-col si reveal">
+            <div class="pg-quien">
+                <div class="pg-ficha pg-ficha--si reveal">
                     <h3>Es para ti si…</h3>
                     <ul>
                         <li>Tienes un negocio que ya factura y funciona.</li>
@@ -644,10 +434,10 @@ schemas:
                         <li>Prefieres que te hablen claro, sin palabros técnicos.</li>
                     </ul>
                 </div>
-                <div class="quien-col no reveal">
+                <div class="pg-ficha pg-ficha--no reveal">
                     <h3>No es para ti si…</h3>
                     <ul>
-                        <li>Ya sabes exactamente qué necesitas — entonces vamos directos al proyecto y te ahorras el diagnóstico.</li>
+                        <li>Ya sabes exactamente qué necesitas: entonces vamos directos al proyecto y te ahorras el diagnóstico.</li>
                         <li>Buscas una fórmula mágica que lo arregle todo sin cambiar nada.</li>
                         <li>Tu negocio está empezando y aún no hay procesos que revisar.</li>
                     </ul>
@@ -656,71 +446,36 @@ schemas:
         </div>
     </section>
 
-    <!-- FAQ -->
-    <section class="section" id="preguntas">
-        <div class="container">
-            <div class="s-head center reveal">
-                <span class="s-label">DUDAS RÁPIDAS</span>
-                <h2 class="s-title">Lo que me suelen preguntar.</h2>
+    <section class="pg-sec pg-sec--crema" id="preguntas">
+        <div class="pg-wrap pg-faq">
+            <div class="pg-faq-lado reveal">
+                <span class="pg-eyebrow">Dudas rápidas</span>
+                <h2 class="pg-h2">Lo que me suelen preguntar.</h2>
+                <p>¿No está tu pregunta? Escríbeme y te contesto yo, no un bot.</p>
+                <a class="text-link" href="https://wa.me/34685546948" target="_blank" rel="noopener noreferrer">Preguntar por WhatsApp <span class="flecha" aria-hidden="true">↗</span></a>
             </div>
-            <div class="faqs">
-                <div class="faq reveal">
-                    <button type="button">¿Qué es exactamente un diagnóstico operativo y qué me llevo al final?<span class="ico">+</span></button>
-                    <div class="body"><p>Un diagnóstico operativo es un análisis completo de tu negocio <strong>antes de tocar nada</strong>. En el DAI360 audito las cuatro áreas que tiene toda empresa: marketing, ventas, entrega y administración. Al terminar te llevas cuatro cosas concretas: el estado real de cada área, el mapa de tus procesos dibujado paso a paso, la lista de oportunidades clasificadas por impacto y dificultad, y un roadmap por fases empezando por las victorias rápidas. Es un plan que puedes ejecutar con quien quieras, conmigo o sin mí.</p></div>
-                </div>
-                <div class="faq reveal">
-                    <button type="button">¿Cuánto cuesta el diagnóstico DAI360?<span class="ico">+</span></button>
-                    <div class="body"><p>Parte de <strong>990€</strong>, precio de lanzamiento para los primeros clientes, con precio cerrado que te confirmo antes de empezar según el tamaño de tu negocio: no es lo mismo revisar un despacho de 3 personas que una empresa de 30. Lo sabes antes de decidir, no después. Y si tras el diagnóstico decides que yo implemente las mejoras, lo que pagaste <strong>se descuenta íntegro</strong> del proyecto. O te llevas un plan que vale su precio, o recuperas lo que pagaste.</p></div>
-                </div>
-                <div class="faq reveal">
-                    <button type="button">¿Cuánto tiempo me va a quitar a mí y a mi equipo?<span class="ico">+</span></button>
-                    <div class="body"><p>A ti, unas <strong>2 horas</strong> en total: un cuestionario inicial y una conversación conmigo. Después necesito algunos ratos cortos con quien ejecuta cada proceso de verdad, porque el dueño casi nunca sabe cómo se hace realmente el trabajo del día a día. El resto lo hago yo por mi cuenta. Está diseñado para no interrumpir tu operativa: si te cuesta más de eso, algo estoy haciendo mal.</p></div>
-                </div>
-                <div class="faq reveal">
-                    <button type="button">¿Cuánto tarda el diagnóstico completo?<span class="ico">+</span></button>
-                    <div class="body"><p>Entre <strong>una y dos semanas</strong> desde que arrancamos hasta que te siento delante del roadmap y te lo explico. No son meses de reuniones ni un comité de validación: eso es consultoría de empresa grande. En un negocio como el tuyo el diagnóstico tiene que ser rápido o deja de ser útil, porque el problema que tienes hoy te sigue costando dinero mientras alguien lo estudia.</p></div>
-                </div>
-                <div class="faq reveal">
-                    <button type="button">Ya contraté una agencia y compré un CRM, y no funcionó. ¿Por qué esto sí?<span class="ico">+</span></button>
-                    <div class="body"><p>Porque tu CRM probablemente no era el problema. Lo habitual es que una agencia te monte lo que has pedido y se vaya, y a los tres meses el cuello de botella aparece en otra área donde ya no hay nadie. Nadie miró cómo encajaban las piezas antes de instalar la primera. El DAI360 analiza <strong>las cuatro áreas antes de proponer nada</strong>. A veces la conclusión es que no necesitas un CRM nuevo, sino usar bien el que ya tienes.</p></div>
-                </div>
-                <div class="faq reveal">
-                    <button type="button">¿Mi empresa es demasiado pequeña para un diagnóstico así?<span class="ico">+</span></button>
-                    <div class="body"><p>Es justo para ti si ya facturas y tienes equipo: negocios de servicios donde el dueño lleva años creciendo a pulso y ahora es él mismo el cuello de botella de todo. <strong>No es para ti</strong> si acabas de abrir, porque todavía no hay procesos que revisar, ni si ya sabes exactamente qué necesitas: en ese caso vamos directos al proyecto y te ahorras el diagnóstico.</p></div>
-                </div>
-                <div class="faq reveal">
-                    <button type="button">¿Y si después del diagnóstico no quiero implementar nada?<span class="ico">+</span></button>
-                    <div class="body"><p>No pasa nada. El plan es tuyo y puedes ejecutarlo con quien quieras, o guardarlo para el año que viene. No hay ninguna obligación de contratar nada más. El diagnóstico <strong>vale por sí solo</strong> porque lo que compras es claridad: saber qué falla, por qué y en qué orden arreglarlo. Eso no caduca y no depende de que yo siga en la foto.</p></div>
-                </div>
-                <div class="faq reveal">
-                    <button type="button">¿Necesito saber de tecnología o de inteligencia artificial?<span class="ico">+</span></button>
-                    <div class="body"><p>Cero. El DAI360 existe precisamente para que <strong>no tengas que entenderla</strong>. Yo la entiendo por ti y te la traduzco a decisiones de negocio: cuánto tiempo pierdes aquí, cuánto dinero se te escapa allá, y qué merece la pena arreglar primero. Tú solo tienes que conocer tu empresa, que ya la conoces. Si algún consultor te llena una reunión de palabros, no es que sepa más: es que no sabe explicarlo.</p></div>
-                </div>
-                <div class="faq reveal">
-                    <button type="button">¿Vas a acabar vendiéndome una automatización que no necesito?<span class="ico">+</span></button>
-                    <div class="body"><p>Si el diagnóstico dice que lo que te falta es contratar a una persona, cambiar un proceso o simplemente dejar de hacer algo, eso es lo que va a poner el informe. <strong>Me pagas por saber qué pasa en tu negocio, no por comprarme herramientas.</strong> Un vendedor siempre encuentra un motivo para venderte lo que ya tenía en el catálogo. Prefiero decirte que no me necesitas y que me recomiendes, que montarte algo que dentro de seis meses no usa nadie.</p></div>
-                </div>
-                <div class="faq reveal">
-                    <button type="button">¿Qué pasa con la información de mi empresa y de mis clientes?<span class="ico">+</span></button>
-                    <div class="body"><p>Se queda donde tiene que estar. Durante el diagnóstico trabajo con <strong>tus procesos</strong>, no necesito volcar tu base de datos de clientes en ningún sitio. Y si más adelante implementamos algo con IA, las integraciones se montan con APIs de pago, que funcionan distinto a la versión gratuita del navegador: la información de tu negocio <strong>no se usa para entrenar modelos públicos</strong>. Si manejas datos sensibles, como historiales clínicos o expedientes legales, se puede montar todo en servidores europeos o en local.</p></div>
-                </div>
+            <div class="pg-faq-lista reveal">
+                <details><summary>¿Qué es exactamente un diagnóstico operativo y qué me llevo al final?<i aria-hidden="true">+</i></summary><p>Un diagnóstico operativo es un análisis completo de tu negocio <strong>antes de tocar nada</strong>. En el DAI360 audito las cuatro áreas que tiene toda empresa: marketing, ventas, entrega y administración. Al terminar te llevas cuatro cosas concretas: el estado real de cada área, el mapa de tus procesos dibujado paso a paso, la lista de oportunidades clasificadas por impacto y dificultad, y un roadmap por fases empezando por las victorias rápidas. Es un plan que puedes ejecutar con quien quieras, conmigo o sin mí.</p></details>
+                <details><summary>¿Cuánto cuesta el diagnóstico DAI360?<i aria-hidden="true">+</i></summary><p>Parte de <strong>990€</strong>, precio de lanzamiento para los primeros clientes, con precio cerrado que te confirmo antes de empezar según el tamaño de tu negocio: no es lo mismo revisar un despacho de 3 personas que una empresa de 30. Lo sabes antes de decidir, no después. Y si tras el diagnóstico decides que yo implemente las mejoras, lo que pagaste <strong>se descuenta íntegro</strong> del proyecto. O te llevas un plan que vale su precio, o recuperas lo que pagaste.</p></details>
+                <details><summary>¿Cuánto tiempo me va a quitar a mí y a mi equipo?<i aria-hidden="true">+</i></summary><p>A ti, unas <strong>2 horas</strong> en total: un cuestionario inicial y una conversación conmigo. Después necesito algunos ratos cortos con quien ejecuta cada proceso de verdad, porque el dueño casi nunca sabe cómo se hace realmente el trabajo del día a día. El resto lo hago yo por mi cuenta. Está diseñado para no interrumpir tu operativa: si te cuesta más de eso, algo estoy haciendo mal.</p></details>
+                <details><summary>¿Cuánto tarda el diagnóstico completo?<i aria-hidden="true">+</i></summary><p>Entre <strong>una y dos semanas</strong> desde que arrancamos hasta que te siento delante del roadmap y te lo explico. No son meses de reuniones ni un comité de validación: eso es consultoría de empresa grande. En un negocio como el tuyo el diagnóstico tiene que ser rápido o deja de ser útil, porque el problema que tienes hoy te sigue costando dinero mientras alguien lo estudia.</p></details>
+                <details><summary>Ya contraté una agencia y compré un CRM, y no funcionó. ¿Por qué esto sí?<i aria-hidden="true">+</i></summary><p>Porque tu CRM probablemente no era el problema. Lo habitual es que una agencia te monte lo que has pedido y se vaya, y a los tres meses el cuello de botella aparece en otra área donde ya no hay nadie. Nadie miró cómo encajaban las piezas antes de instalar la primera. El DAI360 analiza <strong>las cuatro áreas antes de proponer nada</strong>. A veces la conclusión es que no necesitas un CRM nuevo, sino usar bien el que ya tienes.</p></details>
+                <details><summary>¿Mi empresa es demasiado pequeña para un diagnóstico así?<i aria-hidden="true">+</i></summary><p>Es justo para ti si ya facturas y tienes equipo: negocios de servicios donde el dueño lleva años creciendo a pulso y ahora es él mismo el cuello de botella de todo. <strong>No es para ti</strong> si acabas de abrir, porque todavía no hay procesos que revisar, ni si ya sabes exactamente qué necesitas: en ese caso vamos directos al proyecto y te ahorras el diagnóstico.</p></details>
+                <details><summary>¿Y si después del diagnóstico no quiero implementar nada?<i aria-hidden="true">+</i></summary><p>No pasa nada. El plan es tuyo y puedes ejecutarlo con quien quieras, o guardarlo para el año que viene. No hay ninguna obligación de contratar nada más. El diagnóstico <strong>vale por sí solo</strong> porque lo que compras es claridad: saber qué falla, por qué y en qué orden arreglarlo. Eso no caduca y no depende de que yo siga en la foto.</p></details>
+                <details><summary>¿Necesito saber de tecnología o de inteligencia artificial?<i aria-hidden="true">+</i></summary><p>Cero. El DAI360 existe precisamente para que <strong>no tengas que entenderla</strong>. Yo la entiendo por ti y te la traduzco a decisiones de negocio: cuánto tiempo pierdes aquí, cuánto dinero se te escapa allá, y qué merece la pena arreglar primero. Tú solo tienes que conocer tu empresa, que ya la conoces. Si algún consultor te llena una reunión de palabros, no es que sepa más: es que no sabe explicarlo.</p></details>
+                <details><summary>¿Vas a acabar vendiéndome una automatización que no necesito?<i aria-hidden="true">+</i></summary><p>Si el diagnóstico dice que lo que te falta es contratar a una persona, cambiar un proceso o simplemente dejar de hacer algo, eso es lo que va a poner el informe. <strong>Me pagas por saber qué pasa en tu negocio, no por comprarme herramientas.</strong> Un vendedor siempre encuentra un motivo para venderte lo que ya tenía en el catálogo. Prefiero decirte que no me necesitas y que me recomiendes, que montarte algo que dentro de seis meses no usa nadie.</p></details>
+                <details><summary>¿Qué pasa con la información de mi empresa y de mis clientes?<i aria-hidden="true">+</i></summary><p>Se queda donde tiene que estar. Durante el diagnóstico trabajo con <strong>tus procesos</strong>, no necesito volcar tu base de datos de clientes en ningún sitio. Y si más adelante implementamos algo con IA, las integraciones se montan con APIs de pago, que funcionan distinto a la versión gratuita del navegador: la información de tu negocio <strong>no se usa para entrenar modelos públicos</strong>. Si manejas datos sensibles, como historiales clínicos o expedientes legales, se puede montar todo en servidores europeos o en local.</p></details>
             </div>
         </div>
     </section>
 
-    <!-- CTA FINAL -->
-    {#- inverse: mismo tratamiento que el cierre de la home (fondo
-        --night-900 + aurora), para que la pagina abra y cierre con el
-        mismo color y el pie se enganche sin costura (ver pie.css). -#}
-    <section class="cta-final inverse" id="cta">
-        <canvas class="aurora-canvas" data-alto="1" aria-hidden="true"></canvas>
-        <div class="container">
-            <div class="reveal">
-                <h2>¿Vemos dónde está perdiendo tu negocio?</h2>
+    <section class="pg-cierre" id="cta">
+        <span class="pg-cierre-marca" aria-hidden="true">contravía</span>
+        <div class="pg-wrap">
+            <h2 class="reveal">¿Vemos dónde está perdiendo tu negocio?</h2>
+            <div class="pg-cierre-pie reveal">
                 <p>Cuéntame tu caso y te digo si el DAI360 tiene sentido para ti. Si no lo tiene, también te lo digo.</p>
-                <a href="/#contacto" class="btn-main">Pedir mi diagnóstico &rarr;</a>
+                <a href="/#contacto" class="btn-main">Pedir mi diagnóstico <span class="flecha" aria-hidden="true">↗</span></a>
             </div>
         </div>
     </section>
-
-    

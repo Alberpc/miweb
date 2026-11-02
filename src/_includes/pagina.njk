@@ -49,6 +49,9 @@
 {%- if usaFaq %}
     <script src="/assets/js/faq.js?v={{ v.faqJs }}"></script>
 {%- endif %}
+{%- if usaPaginas %}
+    <script src="/assets/js/paginas.js?v={{ v.paginasJs }}" defer></script>
+{%- endif %}
 {%- if jsPagina %}
     <script>
 {{ jsPagina | safe }}

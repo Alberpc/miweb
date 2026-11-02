@@ -62,11 +62,11 @@
   --on-night-mid:  #9E9D93;
 
   /* ── CUERPO CLARO ──────────────────────────────────────────────── */
-  --bg:           #FFFDEB;  /* crema: fondo de página                 */
-  --bg-alt:       #F4F2DF;  /* crema tostada: secciones alternas      */
-  --bg-raised:    #FFFDEB;  /* las piezas se separan por línea, no tono */
-  --bg-input:     #FFFFF6;
-  --bg-sunken:    #EDEBD6;
+  --bg:           #FFFFFF;  /* blanco: fondo de página (contraste)    */
+  --bg-alt:       #FFFDEB;  /* crema de marca: secciones alternas     */
+  --bg-raised:    #FFFFFF;
+  --bg-input:     #FFFFFF;
+  --bg-sunken:    #F4F2DF;
 
   --ink:          #1D1D1B;
   --ink-soft:     #3A3A36;  /* 11:1  */
@@ -74,7 +74,7 @@
   --ink-decor:    #A9A89C;  /* solo líneas e iconos */
   --ink-faint:    var(--ink-mid);
 
-  --line:         #DEDCC8;
+  --line:         #E5E3D3;
   --line-strong:  #1D1D1B;
 
   --glass-bg:     var(--bg);
