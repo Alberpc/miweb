@@ -860,3 +860,8 @@
 .inverse .pg-eyebrow::before { display: inline-block; background: var(--menta); }
 .pg-cab > .pg-eyebrow, .pg-faq-lado > .pg-eyebrow { justify-self: start; }
 .pg-precio-dai .pg-eyebrow { background: transparent; color: var(--cobalt-400); padding: 0; }
+
+/* Las animaciones de servicio son oscuras: la ventana también. */
+.pg-ventana { background: #1D1D1B; border-color: var(--night-600); max-width: 1040px; margin-inline: auto; }
+.pg-hero-pieza .pg-ventana-barra { background: #252523; border-bottom-color: var(--night-600); color: var(--on-night-mid); }
+.pg-hero-pieza .pg-ventana-barra i { background: var(--night-600); }

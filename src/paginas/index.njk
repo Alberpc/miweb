@@ -128,14 +128,14 @@ schemas:
         <p class="clientes-t wrap">En buena compañía.</p>
         <div class="clientes-cinta">
             <ul class="clientes-pista">
-                <li><b>Mafhesa</b><span>Relojería · Madrid, 1978</span></li>
-                <li><b>Top Boutique</b><span>Moda</span></li>
-                <li><b>Bioresina</b><span>Automatización</span></li>
-                <li><b>Geko Marketing</b><span>Agencia de marketing</span></li>
-                <li aria-hidden="true"><b>Mafhesa</b><span>Relojería · Madrid, 1978</span></li>
-                <li aria-hidden="true"><b>Top Boutique</b><span>Moda</span></li>
-                <li aria-hidden="true"><b>Bioresina</b><span>Automatización</span></li>
-                <li aria-hidden="true"><b>Geko Marketing</b><span>Agencia de marketing</span></li>
+                <li><b>Mafhesa</b></li>
+                <li><b>Top Boutique</b></li>
+                <li><b>Bioresina</b></li>
+                <li><b>Geko Marketing</b></li>
+                <li aria-hidden="true"><b>Mafhesa</b></li>
+                <li aria-hidden="true"><b>Top Boutique</b></li>
+                <li aria-hidden="true"><b>Bioresina</b></li>
+                <li aria-hidden="true"><b>Geko Marketing</b></li>
             </ul>
         </div>
     </section>
@@ -275,7 +275,14 @@ schemas:
             <h2 class="titular">Se nota en el día a día.</h2>
         </div>
 
-        <article class="caso-bio reveal">
+        <div class="casos-tabs reveal" role="tablist" aria-label="Casos reales">
+            <button type="button" role="tab" id="tab-bio" aria-controls="caso-bio" aria-selected="true">Bioresina</button>
+            <button type="button" role="tab" id="tab-geko" aria-controls="caso-geko" aria-selected="false" tabindex="-1">Geko Marketing</button>
+            <button type="button" role="tab" id="tab-mafhesa" aria-controls="caso-mafhesa" aria-selected="false" tabindex="-1">Mafhesa</button>
+            <span class="casos-tabs-n" aria-hidden="true"><b>1</b> / 3</span>
+        </div>
+        <div class="casos-pista">
+        <article class="caso-bio caso" id="caso-bio" role="tabpanel" aria-labelledby="tab-bio">
             <div class="caso-bio-info">
                 <p class="eyebrow">Bioresina / Automatización</p>
                 <h3>Los correos salen solos. El equipo sigue con su trabajo.</h3>
@@ -293,7 +300,7 @@ schemas:
             </div>
         </article>
 
-        <article class="caso-geko reveal">
+        <article class="caso-geko caso" id="caso-geko" role="tabpanel" aria-labelledby="tab-geko">
             <div>
                 <p class="eyebrow">Geko Marketing / Captación + CRM</p>
                 <h3>Cada contacto, en su sitio.</h3>
@@ -313,7 +320,7 @@ schemas:
             </blockquote>
         </article>
 
-        <article class="caso-mafhesa inverse reveal">
+        <article class="caso-mafhesa caso inverse" id="caso-mafhesa" role="tabpanel" aria-labelledby="tab-mafhesa">
             <div class="caso-mafhesa-texto">
                 <p class="eyebrow">Mafhesa / Web + posicionamiento</p>
                 <h3>Relojería desde 1978 en Calle Carretas. Ahora también en Google.</h3>
@@ -325,6 +332,7 @@ schemas:
                 <small>Datos de Search Console, últimos 90 días.</small>
             </div>
         </article>
+        </div>
     </section>
 
     {#- 04 · Método: bloque negro, tres columnas con línea arriba y un
@@ -367,17 +375,34 @@ schemas:
         </div>
         <div class="garantias-filas">
             <article class="reveal">
-                <span class="garantia-num">A</span>
+                <span class="garantia-ico" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M24 9v31"/>
+                            <path d="M14 40h20"/>
+                            <path d="M10 15h28"/>
+                            <circle cx="24" cy="12" r="2.6" fill="currentColor" stroke="none"/>
+                            <path d="M10 15 4.5 27h11z"/>
+                            <path d="M38 15 32.5 27h11z"/>
+                        </svg></span>
                 <h3>Cumple la ley europea de IA</h3>
                 <p>El Reglamento Europeo de IA obliga desde agosto de 2026. Tu agente dice que es una IA y no hace nada de lo que el reglamento prohíbe. Y aunque no es obligatorio, siempre deja salida a un humano. Sale cumpliendo, sin coste extra.</p>
             </article>
             <article class="reveal">
-                <span class="garantia-num">B</span>
+                <span class="garantia-ico" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M24 5 9 10.5v12c0 9.5 6.3 16.8 15 19.5 8.7-2.7 15-10 15-19.5v-12L24 5Z"/>
+                            <rect x="18.5" y="23" width="11" height="8.5" rx="1.6"/>
+                            <path d="M21 23v-2.6a3 3 0 0 1 6 0V23"/>
+                        </svg></span>
                 <h3>Agentes seguros</h3>
                 <p>Hay quien intenta manipular estos sistemas para que se salten sus normas o suelten información. Mis agentes llevan filtros a la entrada y a la salida, y los pruebo con esos ataques antes de entregar. Cada agente solo accede a lo que necesita.</p>
             </article>
             <article class="reveal">
-                <span class="garantia-num">C</span>
+                <span class="garantia-ico" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="17" cy="24" r="8.5"/>
+                            <circle cx="17" cy="24" r="2.8" fill="currentColor" stroke="none"/>
+                            <path d="M25.5 24H42"/>
+                            <path d="M34 24v6.5"/>
+                            <path d="M42 24v5"/>
+                        </svg></span>
                 <h3>Tus accesos, bajo llave</h3>
                 <p>Las claves de tus herramientas no viven en un archivo suelto ni en un chat: van en un gestor cifrado. Al terminar el proyecto, los accesos quedan a tu nombre.</p>
             </article>

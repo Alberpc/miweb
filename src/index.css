@@ -802,3 +802,54 @@ h3 {
 .metodo .eyebrow,
 .caso-mafhesa .eyebrow { background: transparent; color: var(--cobalt-400); padding: 0; }
 .caso-bio-info .eyebrow, .caso-geko .eyebrow { margin-bottom: 4px; }
+
+/* ── Casos en carrusel con pestañas (2-nov-2026) ─────────────────
+   Uno a la vista: así la sección no empuja el resto de la home hacia
+   abajo. Sin JS se ven los tres seguidos. */
+.casos-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: var(--space-6);
+}
+.casos-tabs button {
+    min-height: 44px;
+    padding: 0 18px;
+    border: 1px solid var(--ink);
+    background: transparent;
+    color: var(--ink);
+    font: 500 15px var(--font-body);
+    cursor: pointer;
+    transition: background-color var(--motion-fast), color var(--motion-fast);
+}
+.casos-tabs button:hover { background: var(--bg-alt); }
+.casos-tabs button[aria-selected="true"] { background: var(--ink); color: var(--bg); }
+.casos-tabs-n { margin-left: auto; font-family: var(--font-mono); font-size: 13px; color: var(--ink-mid); }
+.casos-tabs-n b { color: var(--ink); font-weight: 500; }
+.js .casos-pista .caso[hidden] { display: none; }
+.casos-pista .caso { animation: caso-entra 0.6s var(--ease-standard); }
+.caso-geko { padding: 48px; background: var(--bg-alt); }
+@keyframes caso-entra { from { opacity: 0; transform: translateX(24px); } to { opacity: 1; transform: none; } }
+@media (max-width: 760px) {
+    .casos-tabs { flex-wrap: nowrap; overflow-x: auto; margin-inline: calc(-1 * var(--gutter-desktop)); padding-inline: var(--gutter-desktop); scrollbar-width: none; }
+    .casos-tabs button { flex-shrink: 0; }
+    .casos-tabs-n { display: none; }
+    .caso-geko { padding: 28px 24px; }
+}
+
+/* ── Garantías con icono ─────────────────────────────────────── */
+.garantias-filas article { grid-template-columns: 80px 0.85fr 1.3fr; align-items: center; }
+.garantia-ico {
+    display: grid;
+    place-items: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--menta);
+    color: var(--negro);
+}
+.garantia-ico svg { width: 32px; height: 32px; }
+@media (max-width: 860px) {
+    .garantias-filas article { grid-template-columns: 1fr; gap: 14px; }
+}

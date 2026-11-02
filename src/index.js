@@ -176,3 +176,32 @@ document.querySelectorAll('a[data-mail][data-dom]').forEach((a) => {
     a.href = 'mailto:' + destino;
     a.title = destino;
 });
+
+/* ── Casos reales: pestañas ──────────────────────────────────────── */
+(function () {
+    const tabs = Array.from(document.querySelectorAll('.casos-tabs [role="tab"]'));
+    if (!tabs.length) return;
+    const contador = document.querySelector('.casos-tabs-n b');
+    function ver(i, enfocar) {
+        tabs.forEach((t, j) => {
+            const activa = i === j;
+            t.setAttribute('aria-selected', String(activa));
+            t.tabIndex = activa ? 0 : -1;
+            const panel = document.getElementById(t.getAttribute('aria-controls'));
+            if (panel) panel.hidden = !activa;
+        });
+        if (contador) contador.textContent = i + 1;
+        if (enfocar) tabs[i].focus();
+    }
+    tabs.forEach((t, i) => {
+        t.addEventListener('click', () => ver(i, false));
+        t.addEventListener('keydown', (e) => {
+            const n = tabs.length;
+            let sig;
+            if (e.key === 'ArrowRight') sig = (i + 1) % n;
+            if (e.key === 'ArrowLeft') sig = (i + n - 1) % n;
+            if (sig !== undefined) { e.preventDefault(); ver(sig, true); }
+        });
+    });
+    ver(0, false);
+})();

@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1200, height=900" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Geist"; font-weight: 400; src: url("assets/fonts/geist-sans-latin-400-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Geist"; font-weight: 500; src: url("assets/fonts/geist-sans-latin-500-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Geist"; font-weight: 600; src: url("assets/fonts/geist-sans-latin-600-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Hepta Slab"; font-weight: 400; src: url("assets/fonts/hepta-slab-latin-400-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Hepta Slab"; font-weight: 800; src: url("assets/fonts/hepta-slab-latin-800-normal.woff2") format("woff2"); }
+      @font-face { font-family: "IBM Plex Mono"; font-weight: 400; src: url("assets/fonts/ibm-plex-mono-latin-400-normal.woff2") format("woff2"); }
+      @font-face { font-family: "IBM Plex Mono"; font-weight: 500; src: url("assets/fonts/ibm-plex-mono-latin-500-normal.woff2") format("woff2"); }
+      /* Automatización (2-nov-2026). Llega una factura, una línea menta la
+         lee, los datos saltan a su registro, el PDF se archiva y sale el
+         aviso. El contador de arriba sube uno. Nadie ha tocado nada.
+         Bucle 9 s. */
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1200px; height: 900px; overflow: hidden; background: #1D1D1B; }
+      body { font-family: "Geist", system-ui, sans-serif; color: #FFFDEB; }
+      .grid { position: absolute; inset: 0; background-image: radial-gradient(rgba(255,253,235,0.06) 1.2px, transparent 1.2px); background-size: 36px 36px; }
+      .contador { position: absolute; right: 70px; top: 60px; text-align: right; }
+      .contador small { display: block; font-family: "IBM Plex Mono"; font-size: 17px; letter-spacing: 0.08em; text-transform: uppercase; color: #9E9D93; }
+      .contador b { display: block; font-family: "Hepta Slab"; font-weight: 800; font-size: 110px; letter-spacing: -0.06em; line-height: 1; color: #08FFAB; }
+      .contador .num { display: inline-block; position: relative; overflow: hidden; height: 110px; vertical-align: top; }
+      .contador .num span { display: block; height: 110px; }
+
+      .factura { position: absolute; left: 80px; top: 220px; width: 420px; height: 560px; background: #FFFDEB; color: #1D1D1B; border-radius: 10px; padding: 38px 36px; overflow: hidden; }
+      .factura h3 { font-family: "Hepta Slab"; font-weight: 800; font-size: 34px; letter-spacing: -0.03em; }
+      .factura .meta { font-family: "IBM Plex Mono"; font-size: 14px; color: #5E5E57; margin-top: 6px; }
+      .campo { margin-top: 26px; padding: 10px 12px; border-radius: 6px; }
+      .campo small { display: block; font-family: "IBM Plex Mono"; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #5E5E57; }
+      .campo b { display: block; font-size: 22px; font-weight: 600; margin-top: 4px; }
+      .lineas { margin-top: 26px; display: grid; gap: 10px; }
+      .lineas i { display: block; height: 10px; border-radius: 5px; background: #E5E3D3; }
+      .scan { position: absolute; left: 0; right: 0; top: 0; height: 4px; background: #08FFAB; box-shadow: 0 0 30px 8px rgba(8,255,171,0.45); opacity: 0; }
+
+      .registro { position: absolute; left: 600px; top: 300px; width: 520px; border-radius: 14px; background: #252523; border: 1px solid #3D3D39; padding: 26px 28px; }
+      .registro h4 { font-family: "IBM Plex Mono"; font-weight: 400; font-size: 15px; letter-spacing: 0.08em; text-transform: uppercase; color: #9E9D93; margin-bottom: 10px; }
+      .fila { display: flex; justify-content: space-between; align-items: baseline; padding: 16px 0; border-top: 1px solid #3D3D39; font-size: 20px; }
+      .fila span { color: #9E9D93; font-size: 17px; }
+      .fila b { font-weight: 500; }
+      .carpeta { position: absolute; left: 600px; top: 640px; display: flex; align-items: center; gap: 18px; font-family: "IBM Plex Mono"; font-size: 19px; color: #D9D8CB; }
+      .carpeta .ico { width: 64px; height: 50px; border-radius: 6px; background: #08FFAB; position: relative; }
+      .carpeta .ico::before { content: ""; position: absolute; left: 0; top: -9px; width: 26px; height: 12px; border-radius: 4px 4px 0 0; background: #08FFAB; }
+      .aviso { position: absolute; left: 600px; top: 740px; width: 520px; display: flex; gap: 16px; align-items: center; padding: 18px 22px; border-radius: 14px; background: #FFFDEB; color: #1D1D1B; }
+      .aviso i { width: 12px; height: 12px; border-radius: 50%; background: #08FFAB; box-shadow: 0 0 0 2px #1D1D1B; flex-shrink: 0; }
+      .aviso b { font-weight: 600; font-size: 19px; }
+      .aviso span { display: block; font-size: 15px; color: #5E5E57; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="9" data-width="1200" data-height="900"
+         style="position: relative; width: 1200px; height: 900px; background: #1D1D1B; overflow: hidden;">
+      <div id="escena" class="clip" data-start="0" data-duration="9" data-track-index="0" style="position: absolute; inset: 0;">
+        <div class="grid"></div>
+        <div class="contador"><small>Hechas solas este mes</small><b><span class="num"><span id="n-viejo">128</span><span id="n-nuevo">129</span></span></b></div>
+
+        <div class="factura" id="factura">
+          <h3>Factura</h3>
+          <p class="meta">Nº 2026-0418 · PDF adjunto</p>
+          <div class="campo" id="c1"><small>Proveedor</small><b>Resinas del Norte</b></div>
+          <div class="campo" id="c2"><small>Importe</small><b>1.240,00 €</b></div>
+          <div class="campo" id="c3"><small>Vence</small><b>30 de noviembre</b></div>
+          <div class="lineas"><i style="width: 90%"></i><i style="width: 70%"></i><i style="width: 80%"></i></div>
+          <div class="scan" id="scan"></div>
+        </div>
+
+        <div class="registro" id="registro">
+          <h4>Registro de facturas</h4>
+          <div class="fila" id="r1"><span>Proveedor</span><b>Resinas del Norte</b></div>
+          <div class="fila" id="r2"><span>Importe</span><b>1.240,00 €</b></div>
+          <div class="fila" id="r3"><span>Vence</span><b>30 nov</b></div>
+        </div>
+        <div class="carpeta" id="carpeta"><div class="ico"></div>Drive / Facturas / 2026</div>
+        <div class="aviso" id="aviso"><i></i><div><b>Aviso enviado a administración</b><span>Factura registrada y archivada</span></div></div>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        window.__timelines = window.__timelines || {};
+        const tl = gsap.timeline({ paused: true });
+        gsap.set("#factura", { opacity: 0, x: -60, rotate: -4 });
+        gsap.set(["#registro", "#r1", "#r2", "#r3", "#carpeta", "#aviso"], { opacity: 0 });
+        gsap.set(["#r1", "#r2", "#r3"], { x: -30 });
+        gsap.set("#aviso", { y: 30 });
+        gsap.set("#n-nuevo", { yPercent: 0 });
+
+        tl.to("#factura", { opacity: 1, x: 0, rotate: 0, duration: 0.7, ease: "power3.out" }, 0.2);
+        tl.to("#scan", { opacity: 1, duration: 0.15 }, 1.0);
+        tl.fromTo("#scan", { top: 0 }, { top: 556, duration: 1.4, ease: "none" }, 1.0);
+        tl.to("#scan", { opacity: 0, duration: 0.2 }, 2.4);
+        ["#c1", "#c2", "#c3"].forEach((c, i) => {
+          tl.to(c, { backgroundColor: "rgba(8,255,171,0.35)", duration: 0.25 }, 1.25 + i * 0.35);
+        });
+        tl.to("#registro", { opacity: 1, duration: 0.4 }, 2.3);
+        ["#r1", "#r2", "#r3"].forEach((r, i) => {
+          tl.to(r, { opacity: 1, x: 0, duration: 0.45, ease: "power3.out" }, 2.6 + i * 0.25);
+        });
+        // El PDF se va a su carpeta
+        tl.to("#carpeta", { opacity: 1, duration: 0.4 }, 3.8);
+        tl.to("#factura", { x: 560, y: 380, scale: 0.12, opacity: 0, duration: 0.9, ease: "power2.in" }, 4.2);
+        tl.to("#carpeta .ico", { scale: 1.15, duration: 0.2, yoyo: true, repeat: 1 }, 5.05);
+        // Aviso y contador
+        tl.to("#aviso", { opacity: 1, y: 0, duration: 0.5, ease: "back.out(1.5)" }, 5.4);
+        tl.to(["#n-viejo", "#n-nuevo"], { yPercent: -100, duration: 0.5, ease: "power3.inOut" }, 5.8);
+
+        // Salida y vuelta al estado inicial
+        tl.to(["#registro", "#carpeta", "#aviso", ".contador"], { opacity: 0, duration: 0.5 }, 8.3);
+        tl.set(["#r1", "#r2", "#r3"], { opacity: 0, x: -30 }, 8.85);
+        tl.set(["#c1", "#c2", "#c3"], { backgroundColor: "rgba(8,255,171,0)" }, 8.85);
+        tl.set("#factura", { x: -60, y: 0, scale: 1, rotate: -4, opacity: 0 }, 8.85);
+        tl.set("#aviso", { y: 30 }, 8.85);
+        tl.set(["#n-viejo", "#n-nuevo"], { yPercent: 0 }, 8.85);
+        tl.set(".contador", { opacity: 1 }, 8.9);
+        tl.set({}, {}, 9);
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>

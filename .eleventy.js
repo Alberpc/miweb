@@ -32,7 +32,7 @@ export default function (eleventyConfig) {
     // renders/snapshots). Los .md y los package.json son notas y config
     // internas: se quedan en el repo, no en el servidor publico.
     eleventyConfig.addPassthroughCopy({ "src/videos": "videos" }, {
-        filter: (ruta) => !/\.(md|json)$/i.test(ruta),
+        filter: (ruta) => !/\.(md|json|woff2)$/i.test(ruta),
     });
 
     // Estos archivos viven dentro de carpetas que se copian tal cual; sin
