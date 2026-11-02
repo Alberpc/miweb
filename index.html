@@ -186,11 +186,10 @@
 
 
 <header class="hero inverse" id="inicio">
-        <div class="hero-arte" aria-hidden="true">
-            <picture>
-                <source media="(max-width: 760px)" srcset="/assets/img/hero-canales-900.webp">
-                <img src="/assets/img/hero-canales.webp" alt="" width="1672" height="941" fetchpriority="high" decoding="async">
-            </picture>
+        <div class="hero-arte" aria-hidden="true"><video id="portada-video" autoplay muted loop playsinline preload="auto" poster="/assets/img/portada-poster.webp" width="1920" height="1080">
+                <source media="(max-width: 900px)" src="/assets/video/portada-720.mp4" type="video/mp4">
+                <source src="/assets/video/portada.mp4" type="video/mp4">
+            </video>
         </div>
         <div class="hero-sombra" aria-hidden="true"></div>
 
@@ -217,13 +216,19 @@
         </div>
     </header>
 
-    <section class="clientes wrap" id="clientes" aria-label="Negocios con los que he trabajado">
-        <p>En buena compañía.</p>
-        <div class="clientes-logos">
-            <img src="/assets/img/mafhesa.png" alt="Mafhesa" loading="lazy" decoding="async">
-            <img src="/assets/img/topboutique.png" alt="Top Boutique" loading="lazy" decoding="async">
-            <img src="/assets/img/bioresina.svg" alt="Bioresina" loading="lazy" decoding="async">
-            <img src="/assets/img/geko.svg" alt="Geko Marketing" loading="lazy" decoding="async">
+    <section class="clientes" id="clientes" aria-label="Negocios con los que he trabajado">
+        <p class="clientes-t wrap">En buena compañía.</p>
+        <div class="clientes-cinta">
+            <ul class="clientes-pista">
+                <li><b>Mafhesa</b><span>Relojería · Madrid, 1978</span></li>
+                <li><b>Top Boutique</b><span>Moda</span></li>
+                <li><b>Bioresina</b><span>Automatización</span></li>
+                <li><b>Geko Marketing</b><span>Agencia de marketing</span></li>
+                <li aria-hidden="true"><b>Mafhesa</b><span>Relojería · Madrid, 1978</span></li>
+                <li aria-hidden="true"><b>Top Boutique</b><span>Moda</span></li>
+                <li aria-hidden="true"><b>Bioresina</b><span>Automatización</span></li>
+                <li aria-hidden="true"><b>Geko Marketing</b><span>Agencia de marketing</span></li>
+            </ul>
         </div>
     </section><section class="partida wrap seccion" id="punto-de-partida">
         <p class="eyebrow reveal">01 / El punto de partida</p>

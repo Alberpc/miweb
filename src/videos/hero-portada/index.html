@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      /* Portada de contravía (2-nov-2026).
+         Lo que entra por muchos sitios y desordenado (canales a la
+         izquierda del nodo) sale por un solo sitio y ordenado (derecha).
+         La mitad izquierda queda casi vacía: ahí va el titular de la web.
+         Bucle perfecto de 8 s: todo lo que se mueve tiene un periodo que
+         divide 8 s, y los rótulos empiezan y acaban invisibles. */
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #111211; }
+      body { font-family: "Geist", system-ui, sans-serif; }
+      .grid {
+        position: absolute; inset: 0;
+        background-image: radial-gradient(rgba(255, 253, 235, 0.06) 1.2px, transparent 1.2px);
+        background-size: 40px 40px;
+        -webkit-mask-image: radial-gradient(60% 80% at 78% 50%, #000 30%, transparent 85%);
+                mask-image: radial-gradient(60% 80% at 78% 50%, #000 30%, transparent 85%);
+      }
+      .halo {
+        position: absolute; left: 1480px; top: 540px; width: 900px; height: 900px;
+        transform: translate(-50%, -50%);
+        background: radial-gradient(circle, rgba(8, 255, 171, 0.10) 0%, rgba(8, 255, 171, 0) 60%);
+      }
+      svg { position: absolute; inset: 0; }
+      .base { fill: none; stroke: rgba(255, 253, 235, 0.10); stroke-width: 1.5; }
+      .base-out { fill: none; stroke: rgba(8, 255, 171, 0.22); stroke-width: 1.5; }
+      .cometa { fill: none; stroke: #FFFDEB; stroke-width: 2.5; stroke-linecap: round; }
+      .cometa-out { fill: none; stroke: #08FFAB; stroke-width: 3; stroke-linecap: round; }
+
+      .nodo {
+        position: absolute; left: 1480px; top: 540px; width: 168px; height: 168px;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        background: #1D1D1B;
+        border: 1.5px solid rgba(8, 255, 171, 0.7);
+        display: grid; place-items: center;
+      }
+      .nodo-centro {
+        width: 52px; height: 52px; border-radius: 50%; background: #08FFAB;
+        box-shadow: 0 0 60px 10px rgba(8, 255, 171, 0.35);
+      }
+      .anillo {
+        position: absolute; left: 1480px; top: 540px; width: 168px; height: 168px;
+        transform: translate(-50%, -50%);
+        border-radius: 50%; border: 1.5px solid rgba(8, 255, 171, 0.6);
+      }
+
+      .chip {
+        position: absolute;
+        padding: 12px 18px;
+        border-radius: 999px;
+        background: rgba(29, 29, 27, 0.92);
+        border: 1px solid rgba(255, 253, 235, 0.16);
+        color: rgba(255, 253, 235, 0.86);
+        font-family: "IBM Plex Mono", ui-monospace, monospace;
+        font-size: 21px; letter-spacing: 0.02em; white-space: nowrap;
+        opacity: 0;
+      }
+      .chip b { color: #FFFDEB; font-weight: 500; }
+      .chip-out { background: #08FFAB; color: #1D1D1B; border-color: #08FFAB; }
+      .chip-out b { color: #1D1D1B; }
+      .punto { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #08FFAB; margin-right: 10px; vertical-align: middle; }
+      .chip-out .punto { background: #1D1D1B; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="8" data-width="1920" data-height="1080"
+         style="position: relative; width: 1920px; height: 1080px; background: #111211; overflow: hidden;">
+      <div id="escena" class="clip" data-start="0" data-duration="8" data-track-index="0" style="position: absolute; inset: 0;">
+        <div class="grid"></div>
+        <div class="halo"></div>
+
+        <svg width="1920" height="1080" viewBox="0 0 1920 1080"><g transform="translate(230 0)">
+          <!-- Entradas: seis caminos que llegan torcidos al nodo -->
+          <path id="e1" class="base" d="M 760 120 C 980 140, 1000 420, 1170 500" />
+          <path id="e2" class="base" d="M 700 300 C 900 300, 1020 470, 1168 525" />
+          <path id="e3" class="base" d="M 820 540 C 950 520, 1060 560, 1166 540" />
+          <path id="e4" class="base" d="M 690 760 C 900 780, 1010 600, 1168 556" />
+          <path id="e5" class="base" d="M 780 980 C 1000 960, 1020 650, 1172 580" />
+          <path id="e6" class="base" d="M 1060 40 C 1080 240, 1150 380, 1222 462" />
+          <!-- Salidas: tres caminos rectos y paralelos -->
+          <path id="s1" class="base-out" d="M 1334 520 H 1500 C 1560 520, 1580 380, 1640 380 H 1960" />
+          <path id="s2" class="base-out" d="M 1334 540 H 1960" />
+          <path id="s3" class="base-out" d="M 1334 560 H 1500 C 1560 560, 1580 700, 1640 700 H 1960" />
+
+          <!-- Cometas: el mismo trazo con un guion corto que viaja -->
+          <path class="cometa" data-ruta="e1" d="M 760 120 C 980 140, 1000 420, 1170 500" />
+          <path class="cometa" data-ruta="e2" d="M 700 300 C 900 300, 1020 470, 1168 525" />
+          <path class="cometa" data-ruta="e3" d="M 820 540 C 950 520, 1060 560, 1166 540" />
+          <path class="cometa" data-ruta="e4" d="M 690 760 C 900 780, 1010 600, 1168 556" />
+          <path class="cometa" data-ruta="e5" d="M 780 980 C 1000 960, 1020 650, 1172 580" />
+          <path class="cometa" data-ruta="e6" d="M 1060 40 C 1080 240, 1150 380, 1222 462" />
+          <path class="cometa-out" data-ruta="s1" d="M 1334 520 H 1500 C 1560 520, 1580 380, 1640 380 H 1960" />
+          <path class="cometa-out" data-ruta="s2" d="M 1334 540 H 1960" />
+          <path class="cometa-out" data-ruta="s3" d="M 1334 560 H 1500 C 1560 560, 1580 700, 1640 700 H 1960" />
+        </g></svg>
+
+        <div class="anillo" id="anillo1"></div>
+        <div class="anillo" id="anillo2"></div>
+        <div class="nodo"><div class="nodo-centro" id="centro"></div></div>
+
+        <!-- Lo que entra -->
+        <div class="chip" id="c1" style="left: 1010px; top: 56px;"><span class="punto"></span><b>WhatsApp</b> · 23:40</div>
+        <div class="chip" id="c2" style="left: 1330px; top: 150px;"><b>Formulario web</b></div>
+        <div class="chip" id="c3" style="left: 1020px; top: 940px;"><b>Factura.pdf</b> · 3 adjuntos</div>
+        <div class="chip" id="c4" style="left: 1310px; top: 860px;"><b>Instagram</b> · mensaje</div>
+        <div class="chip" id="c5" style="left: 1060px; top: 248px;"><b>Presupuesto</b> sin respuesta</div>
+        <!-- Lo que sale -->
+        <div class="chip chip-out" id="o1" style="left: 1590px; top: 322px;"><span class="punto"></span><b>Cita</b> · martes 18:00</div>
+        <div class="chip chip-out" id="o2" style="left: 1640px; top: 482px;"><span class="punto"></span><b>Lead</b> en el CRM</div>
+        <div class="chip chip-out" id="o3" style="left: 1590px; top: 642px;"><span class="punto"></span><b>Archivada</b> y avisada</div>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        window.__timelines = window.__timelines || {};
+        const T = 8;
+        const tl = gsap.timeline({ paused: true });
+
+        // Cometas: dasharray "guion hueco" con periodo P >= longitud, y el
+        // offset se desplaza un número entero de periodos en 8 s → bucle
+        // sin costura empiece donde empiece.
+        const vueltas = { e1: 3, e2: 2, e3: 4, e4: 3, e5: 2, e6: 2, s1: 4, s2: 4, s3: 4 };
+        const fase = { e1: 0.1, e2: 0.55, e3: 0.3, e4: 0.8, e5: 0.2, e6: 0.65, s1: 0.0, s2: 0.33, s3: 0.66 };
+        document.querySelectorAll("[data-ruta]").forEach((el) => {
+          const id = el.dataset.ruta;
+          const L = el.getTotalLength();
+          const seg = id[0] === "s" ? 120 : 90;
+          const P = L + seg;
+          const ini = P * (1 - fase[id]);
+          gsap.set(el, { strokeDasharray: seg + " " + (P - seg), strokeDashoffset: ini });
+          tl.to(el, { strokeDashoffset: ini - P * vueltas[id], duration: T, ease: "none" }, 0);
+        });
+
+        // Nodo: late cuatro veces (periodo 2 s) y emite anillos.
+        gsap.set(["#anillo1", "#anillo2"], { xPercent: -50, yPercent: -50, scale: 1, opacity: 0 });
+        for (let k = 0; k < 4; k++) {
+          const t0 = k * 2;
+          tl.fromTo("#centro", { scale: 1 }, { scale: 1.18, duration: 0.35, ease: "power2.out" }, t0 + 0.6);
+          tl.to("#centro", { scale: 1, duration: 0.6, ease: "power2.inOut" }, t0 + 0.95);
+          tl.fromTo(k % 2 ? "#anillo2" : "#anillo1", { scale: 1, opacity: 0.7 }, { scale: 2.6, opacity: 0, duration: 1.6, ease: "power2.out" }, t0 + 0.6);
+        }
+
+        // Rótulos: entran, se quedan un momento y se van. Ninguno queda
+        // visible en 0 ni en 8.
+        const entrada = [["#c1", 0.3], ["#c3", 1.4], ["#c2", 2.6], ["#c5", 3.9], ["#c4", 5.1]];
+        entrada.forEach(([sel, t]) => {
+          tl.fromTo(sel, { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, t);
+          tl.to(sel, { opacity: 0, x: 40, duration: 0.5, ease: "power2.in" }, t + 1.9);
+        });
+        const salida = [["#o2", 1.2], ["#o1", 2.9], ["#o3", 4.6], ["#o2", 6.0]];
+        salida.forEach(([sel, t]) => {
+          tl.fromTo(sel, { opacity: 0, x: -30, scale: 0.94 }, { opacity: 1, x: 0, scale: 1, duration: 0.5, ease: "back.out(1.6)" }, t);
+          tl.to(sel, { opacity: 0, x: 30, duration: 0.45, ease: "power2.in" }, t + 1.4);
+        });
+        tl.set({}, {}, T);
+
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>

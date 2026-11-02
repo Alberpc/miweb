@@ -13,9 +13,14 @@ const prefiereQuieto = matchMedia('(prefers-reduced-motion: reduce)');
 const botonMovimiento = document.getElementById('movimiento');
 let pausado = prefiereQuieto.matches;
 
+const videoPortada = document.getElementById('portada-video');
 function fijarMovimiento(valor) {
     pausado = valor;
     document.documentElement.classList.toggle('pausado', pausado);
+    if (videoPortada) {
+        if (pausado) videoPortada.pause();
+        else videoPortada.play().catch(() => {});
+    }
     if (!botonMovimiento) return;
     botonMovimiento.setAttribute('aria-pressed', String(pausado));
     botonMovimiento.innerHTML = pausado
