@@ -886,3 +886,8 @@ h3 {
 @media (max-width: 900px) { .calc-home .pg-calc { grid-template-columns: 1fr; } .calc-home { padding-bottom: var(--space-9); } }
 @media (max-width: 560px) { .calc-home .pg-calc-form, .calc-home .pg-calc-res { padding: var(--space-6) var(--space-5); } }
 .partida { padding-bottom: var(--space-9); }
+
+/* Foto recortada sobre menta (3-nov-2026) */
+.sobremi-retrato { background: var(--menta); aspect-ratio: 4 / 4.4; }
+.sobremi-retrato img { object-fit: contain; object-position: center bottom; }
+.sobremi-retrato figcaption { background: var(--negro); }

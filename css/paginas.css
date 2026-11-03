@@ -994,3 +994,5 @@
     .pg-form { padding: var(--space-6) var(--space-5); }
     .ui-kanban { grid-template-columns: 1fr 1fr; }
 }
+.pg-split-foto { background: var(--menta); aspect-ratio: 4 / 4.4; }
+.pg-split-foto img { object-fit: contain; object-position: center bottom; }
