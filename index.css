@@ -891,3 +891,11 @@ h3 {
 .sobremi-retrato { background: var(--menta); aspect-ratio: 4 / 4.4; }
 .sobremi-retrato img { object-fit: contain; object-position: center bottom; }
 .sobremi-retrato figcaption { background: var(--negro); }
+
+/* Foto: el pie va debajo, no encima; la figura apoya en el borde
+   inferior del bloque menta (3-nov-2026). */
+.sobremi-retrato { aspect-ratio: auto; background: none; overflow: visible; display: flex; flex-direction: column; }
+.sobremi-retrato picture { display: block; aspect-ratio: 1 / 1; background: var(--menta); overflow: hidden; }
+.sobremi-retrato img { width: 100%; height: 100%; object-fit: cover; object-position: center 8%; }
+.sobremi-retrato figcaption { position: static; padding: 16px 0 0; background: none; color: var(--ink-mid); border-top: 0; }
+@media (max-width: 860px) { .sobremi-retrato picture { aspect-ratio: 1 / 1; max-height: none; } .sobremi-retrato { max-height: none; } }

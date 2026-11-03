@@ -996,3 +996,8 @@
 }
 .pg-split-foto { background: var(--menta); aspect-ratio: 4 / 4.4; }
 .pg-split-foto img { object-fit: contain; object-position: center bottom; }
+.pg-split-foto { aspect-ratio: 1 / 1; }
+.pg-split-foto img { object-fit: cover; object-position: center 8%; }
+.pg-form .form-message { font-size: 15px; min-height: 1.4em; }
+.pg-form .form-message.success { color: var(--cobalt-400); }
+.pg-form .form-message.error { color: var(--rojo-night); }

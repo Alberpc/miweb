@@ -113,3 +113,50 @@
     new IntersectionObserver(([e]) => { pasadoHero = !e.isIntersecting; pintar(); }).observe(hero);
     new IntersectionObserver(([e]) => { formVisible = e.isIntersecting; pintar(); }, { threshold: 0.15 }).observe(cierre);
 })();
+
+/* Formulario de no-perder-clientes → mismo webhook de n8n que la home
+   (3-nov-2026). Antes no tenía envío: el botón no mandaba nada. Va con
+   origen propio para distinguir estos leads en n8n. */
+(function () {
+    const form = document.getElementById('leads-form');
+    const msg = document.getElementById('form-message');
+    if (!form || !msg) return;
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const honey = document.getElementById('validation_honey');
+        if (honey && honey.value.trim() !== '') return;
+        const btn = form.querySelector('.btn-submit');
+        const textoBtn = btn ? btn.innerHTML : '';
+        if (btn) { btn.disabled = true; btn.textContent = 'Enviando…'; }
+        msg.className = 'form-message';
+        msg.textContent = 'Enviando…';
+        const negocio = document.getElementById('negocio').value || '';
+        const data = {
+            nombre: document.getElementById('nombre').value,
+            empresa: negocio,
+            email: document.getElementById('email').value,
+            telefono: document.getElementById('telefono').value,
+            problema: negocio ? 'Negocio: ' + negocio : '',
+            fecha: new Date().toISOString(),
+            origen: 'Landing no-perder-clientes'
+        };
+        try {
+            const r = await fetch('https://alberto-core-n8n.saeasu.easypanel.host/webhook/d127116a-771a-4670-8f52-1288034a25e5', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+            if (!r.ok) throw new Error('Server error');
+            if (typeof gtag === 'function') gtag('event', 'generate_lead', { form_name: 'no_perder_clientes' });
+            msg.className = 'form-message success';
+            msg.textContent = '✓ Hecho. Te acabo de mandar un correo para que elijas hora. Revisa tu bandeja de entrada (y la carpeta de spam, por si acaso).';
+            form.reset();
+        } catch (err) {
+            console.error('Error al enviar el formulario:', err);
+            msg.className = 'form-message error';
+            msg.textContent = 'No se ha podido enviar. Inténtalo de nuevo o escríbeme por WhatsApp.';
+        } finally {
+            if (btn) { btn.disabled = false; btn.innerHTML = textoBtn; }
+        }
+    });
+})();
