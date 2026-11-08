@@ -899,3 +899,69 @@ h3 {
 .sobremi-retrato img { width: 100%; height: 100%; object-fit: cover; object-position: center 8%; }
 .sobremi-retrato figcaption { position: static; padding: 16px 0 0; background: none; color: var(--ink-mid); border-top: 0; }
 @media (max-width: 860px) { .sobremi-retrato picture { aspect-ratio: 1 / 1; max-height: none; } .sobremi-retrato { max-height: none; } }
+
+/* ══ 02 · QUÉ HAGO · dos puertas (8-nov-2026) ════════════════════ */
+.puertas { background: var(--bg-alt); border-block: 1px solid var(--line); }
+.puertas-rejilla { display: grid; grid-template-columns: 1.6fr 1fr; gap: 14px; align-items: stretch; }
+.puerta-cuando { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
+.puerta-sistemas { display: flex; flex-direction: column; gap: var(--space-6); padding: 44px 44px 40px; }
+.puerta-sistemas .puerta-cuando { color: var(--cobalt-400); }
+.puerta-sistemas h3, .puerta-dai h3 {
+    margin-top: 14px;
+    font-size: clamp(2.4rem, 4vw, 3.8rem);
+    line-height: 1;
+    letter-spacing: -0.045em;
+}
+.puerta-sistemas h3 { color: var(--on-night); }
+.puerta-sistemas header > p:last-child { margin-top: 16px; max-width: 52ch; color: var(--on-night-soft); }
+.piezas { border-top: 1px solid var(--night-600); }
+.piezas a {
+    position: relative;
+    display: grid;
+    grid-template-columns: 40px 1fr auto;
+    gap: 16px;
+    align-items: center;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--night-600);
+    color: var(--on-night);
+    text-decoration: none;
+    isolation: isolate;
+    transition: padding var(--motion-base) var(--ease-standard), color var(--motion-fast);
+}
+.piezas a::before {
+    content: '';
+    position: absolute;
+    inset: 0 -16px;
+    z-index: -1;
+    background: var(--menta);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform var(--motion-base) var(--ease-standard);
+}
+.piezas a:hover { color: var(--negro); padding-left: 10px; }
+.piezas a:hover::before { transform: scaleY(1); }
+.pieza-n { font-family: var(--font-mono); font-size: 12px; color: var(--on-night-mid); }
+.piezas a:hover .pieza-n, .piezas a:hover small { color: var(--negro); }
+.pieza-t { font-family: var(--font-display); font-size: clamp(1.35rem, 2vw, 1.75rem); letter-spacing: -0.025em; line-height: 1.1; }
+.pieza-t small { display: block; margin-top: 4px; font-family: var(--font-body); font-size: 14px; letter-spacing: 0; color: var(--on-night-soft); }
+.piezas i { font-style: normal; font-size: 22px; transition: transform var(--motion-base) var(--ease-standard); }
+.piezas a:hover i { transform: translate(4px, -4px); }
+.puerta-sistemas footer { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 24px; margin-top: auto; }
+.puerta-sistemas footer span { font-family: var(--font-mono); font-size: 12px; color: var(--on-night-mid); }
+
+.puerta-dai { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; padding: 44px 40px 40px; background: var(--menta); color: var(--negro); }
+.puerta-dai h3 { color: var(--negro); margin-top: 0; }
+.puerta-dai > p:not([class]) { max-width: 40ch; }
+.puerta-precio { margin-top: auto; padding-top: var(--space-5); border-top: 1px solid var(--negro); width: 100%; display: flex; flex-direction: column; gap: 6px; }
+.puerta-precio strong { font-family: var(--font-display); font-weight: 800; font-size: clamp(3.6rem, 6vw, 5.4rem); line-height: 0.9; letter-spacing: -0.06em; }
+.puerta-precio span { font-size: 14px; max-width: 34ch; }
+.puerta-dai .btn-2 { color: var(--negro); border-color: var(--negro); }
+.puerta-dai .btn-2:hover { background: var(--negro); color: var(--menta); }
+
+@media (max-width: 960px) {
+    .puertas-rejilla { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) {
+    .puerta-sistemas, .puerta-dai { padding: 28px 22px; }
+    .piezas a { grid-template-columns: 30px 1fr auto; gap: 10px; }
+}
