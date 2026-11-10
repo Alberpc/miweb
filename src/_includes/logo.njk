@@ -1,4 +1,6 @@
-{#- Logo en texto. Sale de site.json → marca, para poder cambiar de
-    nombre (contravía u otro) sin tocar plantillas. Con partido: true se
-    usa el corte por arriba de la propuesta de NOI. -#}
-<span class="logo-marca{% if not site.marca.partido %} logo-marca--entera{% endif %}" aria-hidden="true">{{ site.marca.nombre }}</span><span class="logo-sub" aria-hidden="true">{{ site.marca.sub }}</span>
+{#- Logo: símbolo AC + nombre en texto. Sale de site.json → marca, para
+    poder cambiar de nombre (contravía u otro) sin tocar plantillas.
+    El AC es una máscara: toma el color del texto (blanco sobre negro,
+    negro sobre claro). Con partido: true se usa el corte de NOI. -#}
+{%- if site.marca.simbolo %}<span class="logo-ac" aria-hidden="true"></span>{% endif -%}
+<span class="logo-texto"><span class="logo-marca{% if not site.marca.partido %} logo-marca--entera{% endif %}" aria-hidden="true">{{ site.marca.nombre }}</span><span class="logo-sub" aria-hidden="true">{{ site.marca.sub }}</span></span>

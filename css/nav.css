@@ -268,3 +268,27 @@
 .footer-logo .logo-marca--entera { font-size: clamp(40px, 5vw, 64px); }
 .footer-logo .logo-marca--entera + .logo-sub { font-size: 12px; margin-top: 10px; }
 @media (max-width: 520px) { .logo-marca--entera { font-size: 21px; } }
+
+/* Símbolo AC + nombre */
+.logo { flex-direction: row; align-items: center; gap: 12px; }
+.logo-texto { display: inline-flex; flex-direction: column; align-items: flex-start; }
+.logo-ac {
+    display: block;
+    width: 52px;
+    aspect-ratio: 320 / 164;
+    background: currentColor;
+    -webkit-mask: url("/assets/img/logo-ac.png") center / contain no-repeat;
+            mask: url("/assets/img/logo-ac.png") center / contain no-repeat;
+    flex-shrink: 0;
+}
+.footer-logo { gap: 20px; }
+.footer-logo .logo-ac { width: clamp(90px, 9vw, 130px); }
+@media (max-width: 520px) { .logo-ac { width: 42px; } .logo { gap: 9px; } }
+@media (max-width: 380px) { .logo-texto .logo-sub { display: none; } }
+@media (max-width: 520px) {
+    .logo-texto .logo-sub { display: none; }
+    .logo-marca--entera { font-size: 19px; }
+    .logo-ac { width: 38px; }
+    .nav-container { gap: 10px; }
+    .nav-btn { padding: 0 10px; }
+}
