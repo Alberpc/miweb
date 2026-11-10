@@ -14,7 +14,7 @@
   "marca": {
     "nombre": "alber cabrera",
     "sub": "ia y automatización",
-    "partido": false,
-    "simbolo": true
+    "partido": true,
+    "simbolo": false
   }
 }

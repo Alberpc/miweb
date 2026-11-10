@@ -178,3 +178,5 @@
 /* Logo del pie compacto (10-nov-2026) */
 .footer-logo .logo-marca--entera { font-size: clamp(28px, 3vw, 40px); white-space: nowrap; }
 .footer-logo .logo-ac { width: clamp(64px, 6vw, 84px); }
+.footer-logo .logo-marca:not(.logo-marca--entera) { font-size: clamp(48px, 5.4vw, 76px); white-space: nowrap; }
+.footer-logo .logo-marca:not(.logo-marca--entera) + .logo-sub { display: block; font-size: clamp(13px, 1.2vw, 17px); margin-top: 6px; }

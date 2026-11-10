@@ -302,3 +302,21 @@
 .footer-logo .logo-ac { width: clamp(64px, 6vw, 84px); }
 .footer-logo { gap: 16px; }
 @media (max-width: 520px) { .logo-marca--entera { font-size: 19px; } .logo-ac { width: 36px; } }
+
+/* Logo "partido" de NOI con el nombre (10-nov-2026): la palabra
+   cortada por arriba y "ia y automatización" debajo, espaciada. Anula
+   las reglas compactas de arriba, que eran para el logo con símbolo. */
+.logo-marca:not(.logo-marca--entera) { font-size: 30px; height: 0.7em; }
+.logo-marca:not(.logo-marca--entera) + .logo-sub {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: none;
+    margin-top: 3px;
+}
+@media (max-width: 520px) {
+    .logo-marca:not(.logo-marca--entera) { font-size: 25px; }
+    .logo-marca:not(.logo-marca--entera) + .logo-sub { font-size: 9px; letter-spacing: 0.26em; }
+}
