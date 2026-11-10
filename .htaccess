@@ -34,8 +34,8 @@ RewriteRule ^(aviso-legal|cookies|politica-de-privacidad)\.html$ /$1 [R=301,L]
 # 2) Sirve el archivo .html cuando se pide la URL limpia (sin redirigir)
 RewriteRule ^(aviso-legal|cookies|politica-de-privacidad)$ $1.html [L]
 
-# --- Pagina 404 personalizada (opcional, si existe) ---
-# ErrorDocument 404 /404.html
+# --- Pagina 404 personalizada (10-nov-2026: ya existe, src/paginas/404.njk) ---
+ErrorDocument 404 /404.html
 
 # --- Cache de archivos estaticos (mejora velocidad) ---
 <IfModule mod_expires.c>

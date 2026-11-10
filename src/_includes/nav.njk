@@ -63,7 +63,7 @@
             </div>
             <a href="{{ navCtaHref | default("/#contacto") }}" class="nav-btn">
 {%- if navCtaCorto %}<span class="full-text">{{ navCtaTexto | safe }}</span><span class="short-text">{{ navCtaCorto | safe }}</span>
-{%- else %}{{ navCtaTexto | default("Cuéntame tu caso &rarr;") | safe }}
+{%- else %}{{ navCtaTexto | default("Hablemos &rarr;") | safe }}
 {%- endif %}</a>
             <button class="nav-burger" id="nav-burger" aria-label="Abrir menú" aria-expanded="false">
                 <span class="nav-burger-t">Menú</span><span class="nav-burger-i" aria-hidden="true">+</span>
@@ -80,6 +80,6 @@
             <a href="/#caso-real" class="nav-mobile-link">Casos</a>
             <a href="{{ raiz }}#sobre-mi" class="nav-mobile-link">Sobre mí</a>
             <a href="{{ navBlogHref | default("/blog/") }}" class="nav-mobile-link">Blog</a>
-            <a href="{{ navCtaHref | default("/#contacto") }}" class="nav-mobile-cta">{{ navCtaTexto | default("Cuéntame tu caso &rarr;") | safe }}</a>
+            <a href="{{ navCtaHref | default("/#contacto") }}" class="nav-mobile-cta">{{ navCtaTexto | default("Hablemos &rarr;") | safe }}</a>
         </div>
     </nav>

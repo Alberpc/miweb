@@ -1066,3 +1066,9 @@
 .pg-bento--enlaces .pg-tile { min-height: 0; }
 .pg-bento--enlaces .pg-tile h3 { margin-top: var(--space-6); }
 @media (max-width: 900px) { .pg-tile-lista--cols { grid-template-columns: 1fr; } }
+/* 404 */
+.pg-404 { padding-bottom: var(--space-10); }
+.pg-404-enlaces { margin-top: var(--space-9); border-top-color: var(--night-600); }
+.pg-404 .pg-otro { color: var(--on-night); border-bottom-color: var(--night-600); }
+.pg-404 .pg-otro span, .pg-404 .pg-otro small { color: var(--on-night-soft); }
+.pg-404 .pg-otro:hover, .pg-404 .pg-otro:hover span, .pg-404 .pg-otro:hover small { color: var(--negro); }
