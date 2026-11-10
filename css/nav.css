@@ -292,3 +292,13 @@
     .nav-container { gap: 10px; }
     .nav-btn { padding: 0 10px; }
 }
+
+/* Logo compacto (10-nov-2026): sin la línea pequeña, más bajo. */
+.logo-texto .logo-sub { display: none; }
+.logo-marca--entera { font-size: 21px; }
+.logo-ac { width: 40px; }
+.logo { gap: 10px; }
+.footer-logo .logo-marca--entera { font-size: clamp(28px, 3vw, 40px); white-space: nowrap; }
+.footer-logo .logo-ac { width: clamp(64px, 6vw, 84px); }
+.footer-logo { gap: 16px; }
+@media (max-width: 520px) { .logo-marca--entera { font-size: 19px; } .logo-ac { width: 36px; } }

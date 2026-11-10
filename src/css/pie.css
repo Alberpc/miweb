@@ -175,3 +175,6 @@
 }
 .subfooter a { color: var(--ink-soft); text-decoration: none; }
 .subfooter a:hover { color: var(--ink); }
+/* Logo del pie compacto (10-nov-2026) */
+.footer-logo .logo-marca--entera { font-size: clamp(28px, 3vw, 40px); white-space: nowrap; }
+.footer-logo .logo-ac { width: clamp(64px, 6vw, 84px); }

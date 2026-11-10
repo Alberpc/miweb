@@ -965,3 +965,7 @@ h3 {
     .puerta-sistemas, .puerta-dai { padding: 28px 22px; }
     .piezas a { grid-template-columns: 30px 1fr auto; gap: 10px; }
 }
+/* Titular de dos líneas (10-nov-2026): algo más grande que el de cuatro. */
+.hero-titulo { font-size: clamp(3.2rem, 8vw, 7.6rem); }
+.hero-pie-texto > p { max-width: 420px; }
+@media (max-width: 760px) { .hero-arte video { opacity: 0.4; } }
