@@ -969,3 +969,59 @@ h3 {
 .hero-titulo { font-size: clamp(3.2rem, 8vw, 7.6rem); }
 .hero-pie-texto > p { max-width: 420px; }
 @media (max-width: 760px) { .hero-arte video { opacity: 0.4; } }
+
+/* ══ CUATRO VERBOS (10-nov-2026) ═════════════════════════════════ */
+.verbos { padding-block: var(--space-11); overflow: hidden; }
+.verbos-rejilla { display: grid; grid-template-columns: 1fr 1.25fr; gap: var(--space-9); align-items: center; }
+.verbos-sim {
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-mono);
+    font-weight: 300;
+    font-size: clamp(5.5rem, 13vw, 12rem);
+    line-height: 0.9;
+    letter-spacing: 0.02em;
+}
+.verbos-sim span:nth-child(odd) { color: var(--menta); }
+.verbos-sim span:nth-child(even) { color: var(--on-night); }
+.verbos .eyebrow { color: var(--on-night-mid); }
+.verbos-t {
+    margin-top: var(--space-4);
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(2rem, 3.6vw, 3.2rem);
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    color: var(--on-night);
+}
+.verbos-lista { list-style: none; margin-top: var(--space-7); border-top: 1px solid var(--night-600); }
+.verbos-lista li {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: var(--space-5);
+    align-items: baseline;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--night-600);
+}
+.verbos-lista b {
+    font-family: var(--font-mono);
+    font-weight: 300;
+    font-size: clamp(1.3rem, 2vw, 1.7rem);
+    letter-spacing: 0.18em;
+    color: var(--menta);
+}
+.verbos-lista span { color: var(--on-night-body); font-size: 1.02rem; }
+@media (max-width: 900px) {
+    .verbos-rejilla { grid-template-columns: 1fr; gap: var(--space-7); }
+    .verbos-sim { flex-direction: row; flex-wrap: wrap; font-size: clamp(3.4rem, 17vw, 6rem); }
+}
+@media (max-width: 560px) {
+    .verbos { padding-block: var(--space-9); }
+    .verbos-lista li { grid-template-columns: 1fr; gap: 6px; }
+}
+.verbos-lista li { grid-template-columns: 250px 1fr; }
+.verbos-lista b { letter-spacing: 0.12em; white-space: nowrap; }
+@media (max-width: 900px) {
+    .verbos-sim { flex-direction: column; font-size: clamp(3.6rem, 16vw, 5.5rem); }
+}
+@media (max-width: 560px) { .verbos-lista li { grid-template-columns: 1fr; } }
