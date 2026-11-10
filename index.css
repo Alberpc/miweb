@@ -165,7 +165,7 @@ h3 {
 .clientes { padding-top: var(--space-7); border-bottom: 1px solid var(--line); overflow: hidden; }
 .clientes-t { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-mid); }
 .clientes-cinta { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
-.clientes-pista { list-style: none; display: flex; width: max-content; animation: cinta 36s linear infinite; }
+.clientes-pista { list-style: none; display: flex; width: max-content; animation: cinta 64s linear infinite; }
 .clientes-pista li {
     display: flex;
     align-items: baseline;
