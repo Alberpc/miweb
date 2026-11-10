@@ -1025,3 +1025,5 @@ h3 {
     .verbos-sim { flex-direction: column; font-size: clamp(3.6rem, 16vw, 5.5rem); }
 }
 @media (max-width: 560px) { .verbos-lista li { grid-template-columns: 1fr; } }
+.verbos-sub { margin-top: var(--space-4); color: var(--on-night-soft); font-size: 1.05rem; }
+.verbos-lista { margin-top: var(--space-6); }
