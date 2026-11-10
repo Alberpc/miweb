@@ -10,5 +10,10 @@
     "href": "/#contacto",
     "texto": "Cuéntame tu caso &rarr;"
   },
-  "themeColor": "#1D1D1B"
+  "themeColor": "#1D1D1B",
+  "marca": {
+    "nombre": "alber cabrera",
+    "sub": "ia y automatización",
+    "partido": false
+  }
 }

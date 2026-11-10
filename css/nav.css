@@ -261,3 +261,10 @@
 @media (max-width: 380px) {
     .nav-btn { display: none; }
 }
+
+/* Logo sin el corte de NOI (marca provisional "alber cabrera"). */
+.logo-marca--entera { height: auto; overflow: visible; font-size: 24px; letter-spacing: -0.035em; line-height: 0.95; }
+.logo-marca--entera + .logo-sub { margin-top: 5px; letter-spacing: 0.22em; font-size: 10px; text-transform: uppercase; font-family: var(--font-mono); font-weight: 400; }
+.footer-logo .logo-marca--entera { font-size: clamp(40px, 5vw, 64px); }
+.footer-logo .logo-marca--entera + .logo-sub { font-size: 12px; margin-top: 10px; }
+@media (max-width: 520px) { .logo-marca--entera { font-size: 21px; } }

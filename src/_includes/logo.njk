@@ -1,4 +1,4 @@
-{#- Logo contravía (NOI, 15-oct-2026): la palabra cortada por arriba
-    ("logo partido") y el nombre del founder debajo, en fino y espaciado.
-    Es texto, no imagen: se adapta a fondo claro u oscuro con currentColor. -#}
-<span class="logo-marca" aria-hidden="true">contravía</span><span class="logo-sub" aria-hidden="true">alber cabrera</span>
+{#- Logo en texto. Sale de site.json → marca, para poder cambiar de
+    nombre (contravía u otro) sin tocar plantillas. Con partido: true se
+    usa el corte por arriba de la propuesta de NOI. -#}
+<span class="logo-marca{% if not site.marca.partido %} logo-marca--entera{% endif %}" aria-hidden="true">{{ site.marca.nombre }}</span><span class="logo-sub" aria-hidden="true">{{ site.marca.sub }}</span>
