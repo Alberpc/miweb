@@ -208,25 +208,54 @@ document.querySelectorAll('a[data-mail][data-dom]').forEach((a) => {
 
 /* ── Calculadora de horas (misma lógica que paginas.js) ─────────── */
 (function () {
-    /* Calculadora: minutos × veces por semana → horas al mes */
+    /* Calculadora: minutos × veces × personas → horas y euros al mes.
+       Tiempo y veces van por una escala de pasos que crecen
+       (data-escala "1-10:1,15-60:5" = de 1 en 1 hasta 10, luego de 5 en 5),
+       para que los valores pequeños, los más habituales, tengan sitio. */
     const calc = document.querySelector('[data-calc]');
-    if (calc) {
-        const min = calc.querySelector('#calc-min');
-        const veces = calc.querySelector('#calc-veces');
-        const oMin = calc.querySelector('#calc-min-o');
-        const oVeces = calc.querySelector('#calc-veces-o');
-        const horas = calc.querySelector('#calc-horas');
-        const dias = calc.querySelector('#calc-dias');
+    if (calc) (() => {
+        const q = (s) => calc.querySelector(s);
+        const escala = (input) => {
+            const d = input.dataset.escala;
+            if (!d) return null;
+            const v = [];
+            d.split(',').forEach((tramo) => {
+                const [rango, paso] = tramo.split(':');
+                const [ini, fin] = rango.split('-').map(Number);
+                for (let x = ini; x <= fin; x += +paso) v.push(x);
+            });
+            return v;
+        };
+        const ctrl = ['min', 'veces', 'personas', 'coste'].map((id) => {
+            const input = q('#calc-' + id);
+            return { id, input, out: q('#calc-' + id + '-o'), valores: input && escala(input) };
+        });
+        if (ctrl.some((c) => !c.input)) return;
+        const valor = (c) => c.valores ? c.valores[+c.input.value] : +c.input.value;
+        const durac = (m) => m < 60 ? m + ' min' : Math.floor(m / 60) + ' h' + (m % 60 ? ' ' + (m % 60) + ' min' : '');
+        const texto = {
+            min: durac,
+            veces: (n) => n + (n === 1 ? ' vez' : ' veces'),
+            personas: (n) => n + (n === 1 ? ' persona' : ' personas'),
+            coste: (n) => n + ' €/h'
+        };
+        const euros = new Intl.NumberFormat('es-ES', { maximumFractionDigits: 0, useGrouping: 'always' }); // 3.830, no 3830
         function calcular() {
-            const h = (+min.value * +veces.value * 52 / 12) / 60;
-            oMin.textContent = min.value + ' min';
-            oVeces.textContent = veces.value + ' veces';
-            horas.textContent = h >= 10 ? Math.round(h) : h.toFixed(1).replace('.', ',');
-            dias.textContent = Math.round(h * 12 / 8);
+            const v = {};
+            ctrl.forEach((c) => {
+                v[c.id] = valor(c);
+                const t = texto[c.id](v[c.id]);
+                c.out.textContent = t;
+                c.input.setAttribute('aria-valuetext', t);
+            });
+            const h = v.min * v.veces * v.personas * 46 / 12 / 60;
+            q('#calc-horas').textContent = h >= 10 ? euros.format(Math.round(h)) : h.toFixed(1).replace('.', ',');
+            const e = h * v.coste;
+            q('#calc-euros').textContent = euros.format(e >= 100 ? Math.round(e / 10) * 10 : Math.round(e)) + ' €';
+            q('#calc-dias').textContent = euros.format(Math.round(h * 12 / 8));
         }
-        min.addEventListener('input', calcular);
-        veces.addEventListener('input', calcular);
+        ctrl.forEach((c) => c.input.addEventListener('input', calcular));
         calcular();
-    }
+    })();
 
 })();

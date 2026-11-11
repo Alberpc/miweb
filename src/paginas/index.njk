@@ -168,20 +168,27 @@ schemas:
             <div class="pg-calc-form">
                 <h3 id="calc-t">¿Cuánto te come esa tarea que repites?</h3>
                 <div>
-                    <label for="calc-min">Lo que tarda cada vez <output id="calc-min-o" for="calc-min">5 min</output></label>
-                    <input type="range" id="calc-min" min="1" max="60" step="1" value="5">
+                    <label for="calc-min">Lo que tarda cada vez <output id="calc-min-o" for="calc-min">30 min</output></label>
+                    <input type="range" id="calc-min" min="0" max="31" step="1" value="13" data-escala="1-10:1,15-60:5,75-240:15">
                 </div>
                 <div>
-                    <label for="calc-veces">Veces por semana <output id="calc-veces-o" for="calc-veces">40 veces</output></label>
-                    <input type="range" id="calc-veces" min="1" max="200" step="1" value="40">
+                    <label for="calc-veces">Veces por semana <output id="calc-veces-o" for="calc-veces">10 veces</output></label>
+                    <input type="range" id="calc-veces" min="0" max="22" step="1" value="9" data-escala="1-10:1,15-50:5,60-100:10">
+                </div>
+                <div>
+                    <label for="calc-personas">Personas que la hacen <output id="calc-personas-o" for="calc-personas">2 personas</output></label>
+                    <input type="range" id="calc-personas" min="1" max="10" step="1" value="2">
+                </div>
+                <div>
+                    <label for="calc-coste">Coste de una hora <output id="calc-coste-o" for="calc-coste">20 €/h</output></label>
+                    <input type="range" id="calc-coste" min="10" max="60" step="1" value="20">
                 </div>
                 <a class="text-link" href="/automatizacion-procesos/">Qué se puede automatizar <span class="flecha" aria-hidden="true">↗</span></a>
             </div>
             <div class="pg-calc-res" aria-live="polite">
-                <strong><span id="calc-horas">14</span><small> h</small></strong>
-                <p>al mes en esa sola tarea. Unas <b id="calc-dias">22</b> jornadas de 8 horas al año.</p>
-                <em>Cálculo: minutos × veces × 52 semanas ÷ 12 meses.</em>
-            </div>
+                <strong><span id="calc-horas">38</span><small> h</small></strong>
+                <p>al mes en esa sola tarea: unos <b id="calc-euros">770 €</b> de sueldo. <b id="calc-dias">58</b> jornadas de 8 horas al año.</p>
+                <em>Cálculo: minutos × veces × personas × 46 semanas laborables ÷ 12 meses. Euros: horas × coste de una hora.</em>            </div>
         </div>
     </section>
 

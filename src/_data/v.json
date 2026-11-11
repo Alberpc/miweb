@@ -3,7 +3,7 @@
   "legalCss": 105,
   "indexJs": 22,
   "homeCss": 103,
-  "homeJs": 28,
+  "homeJs": 29,
   "chatCss": 11,
   "chatJs": 6,
   "cookieCss": 2,
@@ -13,5 +13,5 @@
   "blogFiltroJs": 1,
   "rielEntregasJs": 6,
   "baseJs": 3,
-  "paginasJs": 2
+  "paginasJs": 3
 }
