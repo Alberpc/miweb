@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<!-- Google Consent Mode v2: denegado por defecto, o el valor ya guardado
+         por el visitante, antes de que cargue GTM (si esto llegara despues
+         de gtm.js, la etiqueta ya habria evaluado "denied" y no se re-dispara). -->
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    (function () {
+        var consentimientoGuardado = 'denied';
+        try {
+            var raw = localStorage.getItem('acc_consent_v1');
+            if (raw) {
+                var data = JSON.parse(raw);
+                if (data && data.analytics === true) consentimientoGuardado = 'granted';
+            }
+        } catch (e) { /* localStorage no disponible: se queda en denied */ }
+        gtag('consent', 'default', {
+            'analytics_storage': consentimientoGuardado,
+            'ad_storage': 'denied',
+            'ad_user_data': 'denied',
+            'ad_personalization': 'denied',
+            'wait_for_update': 500
+        });
+    })();
+    </script>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KQT7RNTB');</script>
+    <!-- End Google Tag Manager -->
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Qué es un agente de IA explicado sin tecnicismos: en qué se diferencia de un chatbot, para qué sirve en una empresa y cuándo no te hace falta.">
+    <title>Qué es un agente de IA, para qué sirve y ejemplos | Alber Cabrera</title>
+
+    <!-- SEO técnico -->
+    <link rel="canonical" href="https://albercabrera.com/que-es-un-agente-de-ia/">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Alberto Pérez Cabrera">
+    <meta name="theme-color" content="#1D1D1B">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png">
+    <link rel="icon" type="image/x-icon" href="/assets/img/favicon.ico">
+    <link rel="apple-touch-icon" href="/assets/img/favicon-512.png">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="es_ES">
+    <meta property="og:url" content="https://albercabrera.com/que-es-un-agente-de-ia/">
+    <meta property="og:site_name" content="Alberto Pérez Cabrera">
+    <meta property="og:title" content="Qué es un agente de IA (y en qué se diferencia de un chatbot)">
+    <meta property="og:description" content="Un chatbot responde. Un agente, además, hace cosas. Qué es, cuatro usos en empresas y cuándo no te hace falta uno.">
+    <meta property="og:image" content="https://albercabrera.com/assets/img/que-es-agente-ia.jpg">
+    <meta property="og:image:width" content="1600">
+    <meta property="og:image:height" content="1000">
+    <meta property="article:published_time" content="2026-11-12">
+    <meta property="article:modified_time" content="2026-11-12">
+    <meta property="article:author" content="Alberto Pérez Cabrera">
+
+    <!-- Twitter/X Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Qué es un agente de IA (y en qué se diferencia de un chatbot)">
+    <meta name="twitter:description" content="Un chatbot responde. Un agente, además, hace cosas. Qué es, cuatro usos en empresas y cuándo no te hace falta uno.">
+    <meta name="twitter:image" content="https://albercabrera.com/assets/img/que-es-agente-ia.jpg">
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Qué es un agente de IA: para qué sirve y cómo lo usan las empresas",
+  "description": "Qué es un agente de IA explicado sin tecnicismos: en qué se diferencia de un chatbot y de una automatización, cuatro usos en empresas y cuándo no hace falta.",
+  "image": "https://albercabrera.com/assets/img/que-es-agente-ia.jpg",
+  "datePublished": "2026-11-12",
+  "dateModified": "2026-11-12",
+  "author": {
+    "@type": "Person",
+    "name": "Alberto Pérez Cabrera",
+    "jobTitle": "Consultor de IA para negocios",
+    "url": "https://albercabrera.com/"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Alberto Pérez Cabrera",
+    "url": "https://albercabrera.com/"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://albercabrera.com/que-es-un-agente-de-ia/"
+  },
+  "articleSection": "Automatización con IA",
+  "inLanguage": "es-ES"
+}
+
+    </script>
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "¿Un agente de IA sustituye a un empleado?", "acceptedAnswer": { "@type": "Answer", "text": "No. Se queda con lo repetitivo para que tu equipo dedique su tiempo a lo que necesita criterio humano: los casos difíciles, las ventas grandes, la relación con el cliente." } },
+    { "@type": "Question", "name": "¿Es lo mismo un agente de IA que ChatGPT?", "acceptedAnswer": { "@type": "Answer", "text": "No. ChatGPT es el cerebro. El agente es ese cerebro con el conocimiento de tu empresa, acceso a tus herramientas y unas reglas de qué puede hacer." } },
+    { "@type": "Question", "name": "¿Necesito saber programar para tener un agente de IA?", "acceptedAnswer": { "@type": "Answer", "text": "No para usarlo. Montarlo bien sí requiere conectar herramientas y definir reglas, y eso lo hace quien lo implanta. Tú tienes que aportar cómo funciona tu proceso." } },
+    { "@type": "Question", "name": "¿Dónde puede funcionar un agente de IA?", "acceptedAnswer": { "@type": "Answer", "text": "En la web, en WhatsApp, en Instagram, en el correo o dentro de la empresa, como apoyo para tu equipo. Depende de dónde esté la tarea que quieres quitarte." } },
+    { "@type": "Question", "name": "¿Cuánto cuesta un agente de IA?", "acceptedAnswer": { "@type": "Answer", "text": "Depende de qué tiene que hacer y con cuántas herramientas tiene que conectarse. Un agente que responde con tus documentos no se parece a uno que gestiona pedidos y citas. Se estima viendo el proceso concreto." } }
+  ]
+}
+
+    </script>
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://albercabrera.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://albercabrera.com/blog/" },
+    { "@type": "ListItem", "position": 3, "name": "Qué es un agente de IA" }
+  ]
+}
+
+    </script>
+
+
+    <!-- Fuentes del sistema Bosque Inteligente: Instrument Serif para los
+         titulares e Inter para el cuerpo, las mismas que la home. Los posts
+         solo cargaban Inter, y por eso sus titulares no heredaban la serif. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hepta+Slab:wght@300;400;500;800;900&family=Geist:wght@300;400;500;600&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/design-system/tokens.css?v=81">
+    <link rel="stylesheet" href="/css/base.css?v=81">
+    <link rel="stylesheet" href="/css/nav.css?v=81">
+    <link rel="stylesheet" href="/css/botones.css?v=81">
+    <link rel="stylesheet" href="/css/faq.css?v=81">
+    <link rel="stylesheet" href="/css/pie.css?v=81">
+    <link rel="stylesheet" href="/css/landing.css?v=81">
+
+    <link rel="stylesheet" href="/css/sistema.css?v=81">
+    <link rel="stylesheet" href="/assets/cookies/cookie-banner.css?v=2">
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KQT7RNTB"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+<nav class="navbar navbar--en-hero">
+        <div class="nav-container">
+            <a href="/" class="logo" aria-label="Alber Cabrera, inicio"><span class="logo-texto"><span class="logo-marca" aria-hidden="true">alber cabrera</span><span class="logo-sub" aria-hidden="true">ia y automatización</span></span>
+</a>
+            <div class="nav-menu"><div class="nav-item-sub">
+                    <a href="/sistemas-a-medida/" class="nav-link">Sistemas a medida</a>
+                    <div class="nav-sub">
+                        <a href="/sistemas-a-medida/" class="nav-sub-link">Todas las piezas</a>
+                        <a href="/agentes-ia/" class="nav-sub-link">Agentes de IA</a>
+                        <a href="/automatizacion-procesos/" class="nav-sub-link">Automatización de procesos</a>
+                        <a href="/no-perder-clientes/" class="nav-sub-link">CRM y seguimiento</a>
+                        <a href="/diseno-web-pymes/" class="nav-sub-link">Web que capta</a>
+                        <a href="/sistemas-a-medida/#apps" class="nav-sub-link">Apps y paneles a medida</a>
+                    </div>
+                </div><a href="/diagnostico-operativo/" class="nav-link">Consultoría DAI360</a>
+                <a href="/#caso-real" class="nav-link">Casos</a>
+                <a href="/#sobre-mi" class="nav-link">Sobre mí</a>
+                <a href="/blog/" class="nav-link current">Blog</a>
+            </div>
+            <a href="/#contacto" class="nav-btn">Hablemos &rarr;</a>
+            <button class="nav-burger" id="nav-burger" aria-label="Abrir menú" aria-expanded="false">
+                <span class="nav-burger-t">Menú</span><span class="nav-burger-i" aria-hidden="true">+</span>
+            </button>
+        </div>
+        <div class="nav-mobile" id="nav-mobile">
+            <a href="/sistemas-a-medida/" class="nav-mobile-link">Sistemas a medida</a>
+            <a href="/agentes-ia/" class="nav-mobile-link nav-mobile-sublink">Agentes de IA</a>
+            <a href="/automatizacion-procesos/" class="nav-mobile-link nav-mobile-sublink">Automatización de procesos</a>
+            <a href="/no-perder-clientes/" class="nav-mobile-link nav-mobile-sublink">CRM y seguimiento</a>
+            <a href="/diseno-web-pymes/" class="nav-mobile-link nav-mobile-sublink">Web que capta</a>
+            <a href="/sistemas-a-medida/#apps" class="nav-mobile-link nav-mobile-sublink">Apps y paneles a medida</a>
+            <a href="/diagnostico-operativo/" class="nav-mobile-link">Consultoría DAI360</a>
+            <a href="/#caso-real" class="nav-mobile-link">Casos</a>
+            <a href="/#sobre-mi" class="nav-mobile-link">Sobre mí</a>
+            <a href="/blog/" class="nav-mobile-link">Blog</a>
+            <a href="/#contacto" class="nav-mobile-cta">Hablemos &rarr;</a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="article-hero inverse">
+        <div class="container hero-inner">
+            <nav class="breadcrumb" aria-label="Ruta de navegación">
+                <a href="/">Inicio</a> <span>/</span> <a href="/blog/">Blog</a> <span>/</span> Qué es un agente de IA
+            </nav>
+            <span class="hero-cat">Automatización con IA</span>
+            <h1>Qué es un agente de IA: <span class="hl">para qué sirve y cómo lo usan las empresas</span></h1>
+            <div class="article-meta">
+                <span class="author">Alberto Pérez Cabrera</span>
+                <span class="dot"></span>
+                <time datetime="2026-11-12">12 de noviembre de 2026</time>
+                <span class="dot"></span>
+                <span>7 min de lectura</span>
+            </div>
+            <figure class="hero-figure">
+                <picture>
+                    <source srcset="../assets/img/que-es-agente-ia.webp" type="image/webp">
+                    <img src="../assets/img/que-es-agente-ia.jpg" alt="Esquema de un agente de IA: el cliente pide cambiar una camisa por la talla M, el agente consulta la tienda online y el almacén, y según haya stock programa el envío o le ofrece otra talla" width="1600" height="1000" fetchpriority="high" decoding="async">
+                </picture>
+            </figure>
+        </div>
+    </header>
+
+    <!-- CUERPO -->
+    <div class="article-body">
+        <div class="container">
+            <div class="article-layout">
+
+                <!-- ÍNDICE STICKY -->
+                <aside class="toc" aria-label="Índice del artículo">
+                    <span class="toc-label">En este artículo</span>
+                    <ul>
+                        <li><a href="#que-es">¿Qué es un agente de IA, sin tecnicismos?</a></li>
+                        <li><a href="#diferencia">¿En qué se diferencia de un chatbot?</a></li>
+                        <li><a href="#ejemplos">¿Para qué sirve? Cuatro ejemplos</a></li>
+                        <li><a href="#cuando-no">¿Cuándo NO lo necesitas?</a></li>
+                        <li><a href="#riesgos">¿Qué riesgos tiene?</a></li>
+                        <li><a href="#empezar">¿Cómo empezar sin tirar el dinero?</a></li>
+                        <li><a href="#faq">Preguntas frecuentes</a></li>
+                    </ul>
+                </aside>
+
+                <!-- PROSA -->
+                <article class="prose">
+
+                    <!-- RESPUESTA DIRECTA (40-60 palabras) -->
+                    <p class="lead-answer">
+                        Un agente de IA es un programa al que le das un objetivo y decide por sí mismo los pasos para cumplirlo. Lee lo que le llega, consulta la información de tu empresa, usa las herramientas que le conectas (correo, calendario, CRM, tienda online) y actúa. <strong>Un chatbot responde. Un agente, además, hace cosas.</strong>
+                    </p>
+
+                    <p>
+                        Llevas meses oyendo hablar de agentes de IA. En LinkedIn, en webinars, en la propuesta que te mandó una agencia. Todo el mundo dice que van a cambiar tu forma de trabajar, pero casi nadie explica qué es un agente de IA en concreto ni qué haría en tu empresa un martes cualquiera.
+                    </p>
+                    <p>
+                        Este artículo va de eso: qué es, en qué se diferencia de lo que ya conoces, cuatro usos concretos y, lo más importante, cuándo no lo necesitas.
+                    </p>
+
+                    <h2 id="que-es">¿Qué es un agente de IA, explicado sin tecnicismos?</h2>
+                    <p>
+                        Piensa en una persona nueva que entra en tu equipo. Para que haga bien su trabajo necesita tres cosas: saber pensar, conocer cómo funciona tu empresa y tener acceso a las herramientas que usa el resto.
+                    </p>
+                    <p>
+                        Un agente de IA tiene esas mismas tres piezas:
+                    </p>
+                    <ul>
+                        <li><strong>El cerebro:</strong> un modelo de lenguaje, el mismo tipo de IA que hay detrás de ChatGPT, Gemini o Claude. Es lo que le permite entender un mensaje escrito como lo escribiría una persona y decidir qué hacer.</li>
+                        <li><strong>El conocimiento:</strong> tus documentos, tus políticas, tu catálogo, tus procedimientos. Sin esto, el agente responde con lo que sabe de internet, no con lo que es verdad en tu empresa.</li>
+                        <li><strong>Las manos:</strong> las herramientas a las que le das acceso. Consultar un pedido, apuntar una cita en el calendario, crear una ficha en el CRM, mandar un email.</li>
+                    </ul>
+                    <p>
+                        A eso se le suman unas reglas: qué puede hacer solo, qué tiene que consultar y cuándo debe pasarle el caso a una persona. Esas reglas son las que separan un agente útil de uno peligroso.
+                    </p>
+
+                    <h2 id="diferencia">¿En qué se diferencia un agente de IA de un chatbot o de una automatización?</h2>
+                    <p>
+                        Es la duda más común, y con razón: muchas herramientas que se venden como "agentes" son chatbots con otro nombre.
+                    </p>
+                    <table>
+                        <thead>
+                            <tr><th></th><th>Qué hace</th><th>Si algo se sale del guion</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Automatización</strong></td><td>Siempre los mismos pasos, en el mismo orden</td><td>Se para o da error</td></tr>
+                            <tr><td><strong>Chatbot</strong></td><td>Conversa y responde preguntas</td><td>Responde lo que puede</td></tr>
+                            <tr><td><strong>Agente de IA</strong></td><td>Entiende la petición, decide qué paso toca y lo ejecuta</td><td>Busca otra forma o pasa el caso a una persona</td></tr>
+                        </tbody>
+                    </table>
+                    <p>
+                        Con un ejemplo se ve mejor. <strong>Automatización:</strong> llega un formulario, se guarda en el CRM y sale un email, siempre igual. <strong>Chatbot:</strong> "¿A qué hora abrís?", "De 9 a 18". <strong>Agente:</strong> "Quiero cambiar la talla de mi pedido", y el agente localiza el pedido, comprueba la política de cambios y lo gestiona.
+                    </p>
+                    <p>
+                        Una automatización es como una cinta transportadora: rápida y fiable, pero solo hace lo que le marcaste. Un chatbot es un mostrador de información. Un agente se parece más a una persona del equipo con un margen de decisión acotado.
+                    </p>
+                    <p class="pullquote">
+                        La prueba rápida cuando te ofrezcan un "agente": pregunta qué puede hacer además de responder. Si la respuesta es "nada", es un chatbot.
+                    </p>
+
+                    <h2 id="ejemplos">¿Para qué sirve un agente de IA en una empresa? Cuatro ejemplos</h2>
+                    <p>
+                        Los agentes no son cosa de un sector. Sirven allí donde hay tareas que se repiten mucho, que necesitan algo de criterio y que hoy dependen de que alguien esté pendiente.
+                    </p>
+
+                    <h3>1. Tienda online: atención al cliente y pedidos</h3>
+                    <p>
+                        Una tienda online recibe todos los días las mismas preguntas: dónde está mi pedido, cómo hago una devolución, qué talla me pido. Muchas llegan de noche o el fin de semana.
+                    </p>
+                    <p>
+                        Un agente conectado a la tienda consulta el estado real del pedido, aplica tu política de devoluciones, recomienda la talla según la guía del producto y, si el caso es raro (un cliente enfadado, un pedido que no aparece), se lo pasa a una persona con todo el contexto ya escrito.
+                    </p>
+
+                    <h3>2. Onboarding de clientes o de empleados</h3>
+                    <p>
+                        Cuando un cliente acaba de contratar, empieza el ida y vuelta: pedirle documentos, comprobar que están bien, explicarle los siguientes pasos, avisar al equipo que le va a atender.
+                    </p>
+                    <p>
+                        Un agente puede llevar ese proceso: pide lo que falta, revisa que llegue completo, responde las dudas de la primera semana y avisa a tu equipo cuando todo está listo. Con empleados nuevos pasa igual: dónde se piden las vacaciones, qué herramienta se usa para qué, a quién preguntar cada cosa.
+                    </p>
+
+                    <h3>3. El conocimiento de tu empresa en un solo sitio</h3>
+                    <p>
+                        En casi todas las empresas el conocimiento está repartido: PDFs en una carpeta, procedimientos en el Drive, condiciones de cada producto en un Excel y lo más importante en la cabeza de dos personas.
+                    </p>
+                    <p>
+                        Un agente puede buscar en todos esos documentos antes de responder y decir de dónde ha sacado la respuesta. A esto se le llama <strong>RAG</strong>, que en la práctica significa que el agente consulta tus documentos en vez de inventar. Un comercial pregunta las condiciones de garantía de un producto, alguien de soporte pregunta el procedimiento para un caso concreto, y la respuesta llega en segundos con la fuente al lado.
+                    </p>
+
+                    <h3>4. Setter: responder y cualificar contactos nuevos</h3>
+                    <p>
+                        Entra un mensaje por Instagram o WhatsApp a las once de la noche. Si nadie contesta hasta el día siguiente, ese contacto ya ha escrito a otros tres.
+                    </p>
+                    <p>
+                        Un agente setter responde al momento, hace las preguntas que haría tu comercial para saber si encaja (qué necesita, para cuándo, qué ha probado ya) y, si encaja, le reserva la llamada en tu calendario. Si no encaja, se lo dice con educación. Tu comercial llega a la llamada sabiendo con quién habla.
+                    </p>
+
+                    <div class="inline-cta reveal">
+                        <span class="ic-label">Aplícalo a tu caso</span>
+                        <h3>¿Cuál de estos cuatro se parece más a tu día a día?</h3>
+                        <p>Te digo si tu caso pide un agente, una automatización más simple o ninguna de las dos.</p>
+                        <a href="/?origen=blog-que-es-un-agente-de-ia#contacto" class="btn-inline">
+                            <span class="btn-label">Ver qué automatizar primero &rarr;</span>
+                            <span class="btn-sub">20 min · Te digo por dónde empezar aunque no trabajes conmigo</span>
+                        </a>
+                    </div>
+
+                    <h2 id="cuando-no">¿Cuándo NO necesitas un agente de IA?</h2>
+                    <p>
+                        Esta parte no la vas a leer en la web de quien vende agentes, pero te ahorra dinero:
+                    </p>
+                    <ul>
+                        <li><strong>Si el proceso no está claro ni para tu equipo.</strong> Un agente hace más rápido lo que ya haces. Si hoy cada persona lo hace a su manera, el agente heredará el desorden.</li>
+                        <li><strong>Si la tarea es siempre igual.</strong> Si no hace falta decidir nada, una automatización normal es más sencilla y más fiable.</li>
+                        <li><strong>Si el volumen es bajo.</strong> Cinco consultas a la semana se responden a mano sin problema.</li>
+                        <li><strong>Si la información no está escrita en ningún sitio.</strong> El agente no puede consultar lo que solo sabe tu mejor empleado. Primero hay que ponerlo por escrito.</li>
+                    </ul>
+                    <p>
+                        Lo primero casi nunca es el agente: es ordenar el proceso. Después, el agente se monta mucho más rápido y falla mucho menos.
+                    </p>
+
+                    <h2 id="riesgos">¿Qué riesgos tiene un agente de IA y cómo se controlan?</h2>
+                    <p>
+                        Un agente puede equivocarse con seguridad, es decir, dar una respuesta que suena convincente pero es falsa. Además, alguien puede intentar manipularlo con mensajes preparados para que diga o haga lo que no debe. Y si maneja datos de clientes, entra en juego la protección de datos y la ley europea de inteligencia artificial, que obliga a avisar de que se está hablando con una IA.
+                    </p>
+                    <p>
+                        Nada de eso impide usarlo. Obliga a montarlo bien:
+                    </p>
+                    <ul>
+                        <li>Que solo tenga acceso a lo que necesita para su tarea, nada más.</li>
+                        <li>Reglas claras de qué puede hacer solo y qué debe pasar a una persona.</li>
+                        <li>Revisar sus conversaciones, sobre todo las primeras semanas.</li>
+                    </ul>
+                    <p>
+                        Lo cuento con más detalle en <a href="/seguridad-chatbot-empresa/">los riesgos de un chatbot con IA</a> y en <a href="/ley-ia-chatbot-negocio/">qué exige la ley de IA a tu chatbot</a>.
+                    </p>
+
+                    <h2 id="empezar">¿Cómo empezar con un agente de IA sin tirar el dinero?</h2>
+                    <ol>
+                        <li><strong>Elige un solo proceso</strong> que se repita mucho y que hoy te quite tiempo o clientes.</li>
+                        <li><strong>Escribe cómo lo hace tu mejor persona:</strong> qué pregunta, qué consulta, cuándo pide ayuda.</li>
+                        <li><strong>Empieza con un agente que proponga y una persona que apruebe.</strong> Durante las primeras semanas el agente prepara la respuesta o la acción y alguien de tu equipo le da el visto bueno.</li>
+                        <li><strong>Mide:</strong> cuánto tarda en responder, cuántos casos resuelve solo y cuántos pasa a una persona.</li>
+                        <li><strong>Dale más autonomía cuando confíes en él</strong>, no antes.</li>
+                    </ol>
+                    <p>
+                        Si quieres ver qué tipos de agentes monto y cómo trabajo, lo tienes en <a href="/agentes-ia/">agentes de IA para empresas</a>.
+                    </p>
+
+                </article>
+            </div>
+        </div>
+    </div>
+
+    <!-- SIGUE LEYENDO -->
+    <section class="related" aria-label="Sigue leyendo">
+        <div class="container">
+            <div class="related-inner">
+                <h2>Sigue leyendo</h2>
+                <div class="related-grid">
+                    <a href="/seguridad-chatbot-empresa/" class="related-card">
+                        <span class="r-cat">Negocio y procesos</span>
+                        <h3>Riesgos de un chatbot con IA: lo que encontré al auditar el mío</h3>
+                    </a>
+                    <a href="/automatizar-mi-negocio/" class="related-card">
+                        <span class="r-cat">Automatización con IA</span>
+                        <h3>Cómo automatizar mi negocio: por dónde empezar</h3>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq-section" id="faq">
+        <div class="container">
+            <div class="faq-head">
+                <span class="s-label">FAQ</span>
+                <h2>Preguntas frecuentes</h2>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <button class="faq-trigger">
+                        <span class="faq-question">¿Un agente de IA sustituye a un empleado?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-content">
+                        <p class="faq-answer">No. Se queda con lo repetitivo para que tu equipo dedique su tiempo a lo que necesita criterio humano: los casos difíciles, las ventas grandes, la relación con el cliente.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-trigger">
+                        <span class="faq-question">¿Es lo mismo un agente de IA que ChatGPT?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-content">
+                        <p class="faq-answer">No. ChatGPT es el cerebro. El agente es ese cerebro con el conocimiento de tu empresa, acceso a tus herramientas y unas reglas de qué puede hacer.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-trigger">
+                        <span class="faq-question">¿Necesito saber programar para tener un agente de IA?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-content">
+                        <p class="faq-answer">No para usarlo. Montarlo bien sí requiere conectar herramientas y definir reglas, y eso lo hace quien lo implanta. Tú tienes que aportar cómo funciona tu proceso.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-trigger">
+                        <span class="faq-question">¿Dónde puede funcionar un agente de IA?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-content">
+                        <p class="faq-answer">En la web, en WhatsApp, en Instagram, en el correo o dentro de la empresa, como apoyo para tu equipo. Depende de dónde esté la tarea que quieres quitarte.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-trigger">
+                        <span class="faq-question">¿Cuánto cuesta un agente de IA?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-content">
+                        <p class="faq-answer">Depende de qué tiene que hacer y con cuántas herramientas tiene que conectarse. Un agente que responde con tus documentos no se parece a uno que gestiona pedidos y citas. Se estima viendo el proceso concreto.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="cta-final inverse">
+        <canvas class="aurora-canvas" data-alto="1" aria-hidden="true"></canvas>
+        <div class="container">
+            <div class="reveal">
+                <h2>¿No sabes si lo tuyo es para un agente?</h2>
+                <p>En 20 minutos vemos tu caso y te digo si te conviene un agente, una automatización simple o primero ordenar el proceso.</p>
+                <p class="btn-final-sub">Te digo por dónde empezar aunque no trabajes conmigo</p>
+                <a href="/?origen=blog-que-es-un-agente-de-ia#contacto" class="btn-main">Ver qué automatizar primero &rarr;</a>
+            </div>
+        </div>
+    </section>
+
+<footer class="footer-section inverse reveal"><div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand-col">
+                    <a href="/" class="logo footer-logo" aria-label="Alber Cabrera, inicio"><span class="logo-texto"><span class="logo-marca" aria-hidden="true">alber cabrera</span><span class="logo-sub" aria-hidden="true">ia y automatización</span></span>
+</a>
+                    <p class="footer-brand-desc">IA aplicada a negocios de servicios: que atiendan antes, hagan seguimiento sin depender de nadie y dejen de hacer a mano lo que no hace falta.</p><div class="footer-social-wrap">
+                    <div class="footer-social-icons">
+                        <a href="https://www.linkedin.com/in/alberto-p%C3%A9rez-cabrera" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                        </a>
+                        <a href="https://www.instagram.com/albercabrera.ia" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37zM17.5 6.5h.01"/></svg>
+                        </a>
+                    </div>
+                </div>
+                </div><div class="footer-links-grid">
+                    <div class="footer-links-col">
+                        <h4 class="footer-links-title">Sistemas a medida</h4>
+                        <ul class="footer-links-list">
+                            <li><a href="/sistemas-a-medida/">Todas las piezas</a></li>
+                            <li><a href="/agentes-ia/">Agentes de IA</a></li>
+                            <li><a href="/automatizacion-procesos/">Automatización de procesos</a></li>
+                            <li><a href="/no-perder-clientes/">CRM y seguimiento</a></li>
+                            <li><a href="/diseno-web-pymes/">Web que capta</a></li>
+                            <li><a href="/sistemas-a-medida/#apps">Apps y paneles a medida</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-links-col">
+                        <h4 class="footer-links-title">Sobre mí</h4>
+                        <ul class="footer-links-list">
+                            <li><a href="/diagnostico-operativo/">Consultoría DAI360</a></li>
+                            <li><a href="/#caso-real">Casos reales</a></li>
+                            <li><a href="/#como-trabajo">Metodología</a></li>
+                            <li><a href="/#sobre-mi">Sobre mí</a></li>
+                            <li><a href="/#contacto">Contacto</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-links-col">
+                        <h4 class="footer-links-title">Legal</h4>
+                        <ul class="footer-links-list">
+                            <li><a href="/aviso-legal">Aviso Legal</a></li>
+                            <li><a href="/politica-de-privacidad">Privacidad</a></li>
+                            <li><a href="/cookies">Cookies</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom-bar"><p class="footer-curator">&copy; 2026 Alberto P&eacute;rez Cabrera</p>
+                <p class="footer-curator footer-lema">facilitar · habilitar · conectar · simplificar</p>
+            </div>
+        </div>
+    </footer>
+
+<!-- BOTÓN DE WHATSAPP FLOTANTE -->
+<a href="https://wa.me/34685546948?text=Hola%20Alberto,%20he%20visto%20tu%20web%20y%20quiero%20hacerte%20una%20consulta%20sobre%20IA%20para%20mi%20negocio." class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">
+    <svg class="whatsapp-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436.002 9.858-4.417 9.86-9.86.001-2.638-1.024-5.117-2.884-6.979C16.578 1.904 14.1 1.84 12.01 1.84c-5.439 0-9.862 4.419-9.865 9.866-.001 1.8.49 3.554 1.42 5.11L2.551 21.39l4.096-1.076zM17.486 14.4c-.269-.137-1.593-.787-1.839-.877-.246-.09-.425-.137-.604.137-.179.273-.694.877-.85 1.057-.156.18-.313.202-.582.066-.268-.137-1.136-.419-2.162-1.335-.797-.711-1.336-1.59-1.493-1.864-.157-.273-.017-.42.12-.556.124-.121.269-.313.403-.47.135-.157.179-.269.269-.45.09-.18.045-.338-.021-.472-.069-.137-.604-1.46-.828-2.002-.218-.524-.458-.453-.627-.453-.162 0-.348-.02-.534-.02-.187 0-.49.07-.748.35-.258.28-1.008.986-1.008 2.404 0 1.417 1.031 2.787 1.176 2.977.145.19 2.03 3.1 4.916 4.344.686.296 1.222.473 1.639.605.69.219 1.319.189 1.815.115.553-.083 1.593-.652 1.818-1.284.224-.633.224-1.176.157-1.285-.067-.109-.246-.145-.515-.282z"/>
+    </svg>
+    <span class="whatsapp-tooltip">¿Hablamos por WhatsApp?</span>
+</a>
+
+    <link rel="stylesheet" href="/assets/chat/widget-chat.css?v=11">
+    <script src="/assets/chat/widget-chat.js?v=6" defer></script>
+    <script src="/assets/js/base.js?v=3" defer></script>
+    <script src="/assets/js/aurora.js?v=3"></script>
+    <script src="/assets/js/landing.js" defer></script>
+
+    <script src="/assets/cookies/cookie-banner.js?v=1" defer></script>
+</body>
+</html>
