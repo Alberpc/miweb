@@ -111,6 +111,22 @@ button.vsl { width: 100%; padding: 0; cursor: pointer; font: inherit; }
 .vsl-play { position: relative; transition: transform .2s ease; }
 button.vsl:hover .vsl-play, button.vsl:focus-visible .vsl-play { transform: scale(1.08); }
 .vsl-nota { margin-top: 14px; font-size: .92rem; text-align: center; }
+/* Móvil: que el vídeo y su play se vean en el primer pantallazo, sin scroll */
+.sub-movil { display: none; }
+@media (max-width: 600px) {
+  .hero { padding-top: 22px; }
+  .hero h1 { font-size: 1.75rem; margin-top: 12px; }
+  .hero .sub { display: none; }
+  .hero .sub.sub-movil { display: block; margin-top: 10px; font-size: 1rem; color: var(--on-dark); font-weight: 600; }
+  .hero-grid { margin-top: 18px; }
+  /* Aviso de cookies compacto: barra abajo que no tapa el play.
+     "body" delante para ganar al cookie-banner.css, que se carga después. */
+  body .acc-banner { padding: 0; }
+  body .acc-card { border-radius: 0; border-width: 1px 0 0; padding: 10px 14px calc(10px + env(safe-area-inset-bottom)); }
+  body .acc-text { font-size: 12px; line-height: 1.45; margin-bottom: 8px; }
+  body .acc-actions { flex-direction: row; flex-wrap: nowrap; gap: 8px; }
+  body .acc-btn { flex: 1 1 0; width: auto; padding: 10px 6px; }
+}
 
 .oferta { background: var(--dark-card); border: 1px solid var(--dark-line); border-radius: 14px; padding: 26px 24px; text-align: left; }
 .oferta .kicker { font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); text-align: center; }
@@ -221,6 +237,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <span class="tag">Para dueños de negocio con equipo</span>
       <h1>Descubre qué automatizar primero y <span class="acc">qué necesita de verdad tu negocio.</span></h1>
       <p class="sub">Si todo pasa por ti, te pasas el día apagando fuegos y sabes que tienes que meter IA pero no por dónde empezar: <strong>en 7 días tendrás claro qué hacer, en qué orden y cuánto tiempo se os va hoy en ello.</strong></p>
+      <p class="sub sub-movil">En 7 días tendrás claro qué hacer, en qué orden y cuánto tiempo se os va hoy en ello.</p>
 
       <div class="hero-grid">
         <div>
