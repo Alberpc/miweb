@@ -1,4 +1,4 @@
-# Ley de IA: qué debes hacer si tienes un chatbot
+# AI Act y chatbots: qué exige la ley de IA en 2026
 
 Desde el **2 de agosto de 2026** se aplican las obligaciones de transparencia del Reglamento europeo de IA. Si tu negocio tiene un chatbot en la web o en WhatsApp, la persona que escribe tiene derecho a saber que habla con una máquina. Se cumple cambiando tres frases.
 

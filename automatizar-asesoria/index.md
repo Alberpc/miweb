@@ -1,4 +1,4 @@
-# Automatizar una asesoría o gestoría con IA
+# IA para gestorías y asesorías: qué automatizar primero
 
 Automatizar una asesoría o gestoría con IA significa que el trabajo repetitivo de back-office (registrar facturas, conciliar el banco, clasificar documentos, contestar las dudas de siempre) se haga solo, sin cambiar de programa contable. Se empieza por lo que más horas consume y menos criterio requiere, y el asesor se queda con lo que de verdad necesita a un profesional.
 

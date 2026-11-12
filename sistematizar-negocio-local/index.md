@@ -1,4 +1,4 @@
-# Cómo sistematizar un negocio local
+# Cómo sistematizar un negocio: guía paso a paso
 
 Sistematizar un negocio local no exige software complejo ni grandes inversiones: basta con documentar tus procesos clave, apoyarte en herramientas simples (hojas de cálculo, listas, formularios) y formar a tu equipo de forma constante. Empieza por un área problemática, implántalo unas semanas y ajusta según los resultados.
 

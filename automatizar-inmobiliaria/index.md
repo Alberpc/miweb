@@ -1,4 +1,4 @@
-# Automatizar una inmobiliaria con IA
+# IA para inmobiliarias: qué automatizar primero
 
 Automatizar una inmobiliaria con IA significa que cada lead nuevo reciba respuesta al instante, se le hagan las preguntas de siempre (zona, presupuesto, tipo de inmueble) y se le haga seguimiento sin que dependa de que un agente tenga un hueco. Se empieza por la respuesta inmediata y la cualificación, que es donde más ventas se pierden por tardanza.
 

@@ -1,4 +1,4 @@
-# Seguridad de un chatbot con IA: qué puede salir mal
+# Riesgos de un chatbot para empresas: qué puede salir mal
 
 Un chatbot con IA de cara al público tiene cuatro riesgos reales: que le saquen información, que se invente respuestas, que alguien lo use y te dispare la factura, y que el filtro de seguridad acabe bloqueando a clientes de verdad. Ninguno es motivo para no ponerlo. Todos son motivo para preguntar cómo está montado.
 
