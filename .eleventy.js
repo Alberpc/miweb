@@ -21,6 +21,7 @@ export default function (eleventyConfig) {
     eleventyConfig.addPassthroughCopy({ "src/design-system": "design-system" });
     eleventyConfig.addPassthroughCopy({ "src/.htaccess": ".htaccess" });
     eleventyConfig.addPassthroughCopy({ "src/robots.txt": "robots.txt" });
+    eleventyConfig.addPassthroughCopy({ "src/llms.txt": "llms.txt" });
     eleventyConfig.addPassthroughCopy({ "src/sitemap.xml": "sitemap.xml" });
     eleventyConfig.addPassthroughCopy({ "src/favicon.svg": "favicon.svg" });
     eleventyConfig.addPassthroughCopy({ "src/index.css": "index.css" });

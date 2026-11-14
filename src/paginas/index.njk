@@ -22,9 +22,48 @@ schemas:
   - |
         {
           "@context": "https://schema.org",
+          "@type": "Organization",
+          "@id": "https://albercabrera.com/#organization",
+          "name": "Alber Cabrera",
+          "legalName": "Alberto Pérez Cabrera",
+          "url": "https://albercabrera.com/",
+          "logo": "https://albercabrera.com/assets/img/favicon-512.png",
+          "email": "alberto@albercabrera.com",
+          "telephone": "+34685546948",
+          "description": "Consultoría de IA y automatización para negocios de servicios en toda España.",
+          "areaServed": { "@type": "Country", "name": "España" },
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "customer service",
+            "email": "alberto@albercabrera.com",
+            "telephone": "+34685546948",
+            "availableLanguage": "es"
+          },
+          "sameAs": [
+            "https://www.linkedin.com/in/alberto-p%C3%A9rez-cabrera",
+            "https://www.instagram.com/albercabrera.ia"
+          ]
+        }
+  - |
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "@id": "https://albercabrera.com/#website",
+          "name": "Alber Cabrera",
+          "url": "https://albercabrera.com/",
+          "inLanguage": "es-ES",
+          "publisher": { "@id": "https://albercabrera.com/#organization" }
+        }
+  - |
+        {
+          "@context": "https://schema.org",
           "@type": "ProfessionalService",
           "name": "Alberto Pérez Cabrera, Consultor de IA para negocios",
           "url": "https://albercabrera.com/",
+          "sameAs": [
+            "https://www.linkedin.com/in/alberto-p%C3%A9rez-cabrera",
+            "https://www.instagram.com/albercabrera.ia"
+          ],
           "image": "https://albercabrera.com/assets/img/favicon-512.png",
           "description": "Consultor de IA para negocios de servicios en toda España: agentes que atienden clientes 24/7, diseño web de alta conversión y sistemas a medida (CRM, paneles, apps). Diagnóstico operativo DAI360.",
           "email": "alberto@albercabrera.com",
