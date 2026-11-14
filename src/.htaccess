@@ -12,6 +12,10 @@ RewriteRule ^(.*)$ https://albercabrera.com/$1 [L,R=301]
 RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://albercabrera.com/$1 [L,R=301]
 
+# --- 14-nov-2026: la pagina de diseno web pasa de /diseno-web-pymes/ a /diseno-web/ (301) ---
+# Alberto quito "pymes" para no cerrar la oferta. Las URLs viejas (y el ancla #paquetes) siguen llegando.
+RewriteRule ^diseno-web-pymes/?$ /diseno-web/ [R=301,L]
+
 # --- Carpetas de trabajo que NO deben servirse ---------------------------
 # Desde que la web se compila con Eleventy, el repo lleva ademas la fuente
 # (src/), la copia congelada del HTML de antes (_migracion/) y la config de
