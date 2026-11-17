@@ -67,8 +67,11 @@ h3 {
 .hero {
     position: relative;
     isolation: isolate;
-    min-height: 760px;
-    height: min(980px, 100svh);
+    /* [17-nov-2026] Antes height fija: con el bloque de Alba el contenido
+       no cabía y overflow:hidden lo cortaba. Ahora crece con el contenido y
+       el padding-bottom deja sitio a .hero-barra (absoluta abajo). */
+    min-height: max(760px, min(980px, 100svh));
+    padding-bottom: 104px;
     overflow: hidden;
     background: #111211;
     color: var(--on-night);
@@ -128,6 +131,112 @@ h3 {
     color: var(--on-night-soft);
 }
 .entra { animation: aparece 1.2s 0.4s both; }
+
+/* ── Alba en el hero (17-nov-2026) ───────────────────────────────
+   Bajo el botón de reservar: es la vía para quien aún no se decide,
+   no la acción principal. Por eso va sin relleno ni halo. */
+.hero-alba {
+    align-self: stretch;
+    padding-top: var(--space-5);
+    border-top: 1px solid rgba(255, 253, 235, 0.14);
+}
+.hero-alba-titulo {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 8px;
+    margin-bottom: 12px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--on-night);
+}
+.hero-alba-titulo small {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    color: var(--on-night-soft);
+}
+.hero-alba-mano {
+    display: inline-block;
+    font-size: 18px;
+    transform-origin: 70% 70%;
+    animation: saluda 2.6s ease-in-out infinite;
+}
+@keyframes saluda {
+    0%, 60%, 100% { transform: rotate(0); }
+    10%, 30% { transform: rotate(16deg); }
+    20%, 40% { transform: rotate(-8deg); }
+}
+.pausado .hero-alba-mano { animation: none; }
+@media (prefers-reduced-motion: reduce) { .hero-alba-mano { animation: none; } }
+
+.hero-alba-caja {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 4px 4px 16px;
+    background: rgba(255, 253, 235, 0.08);
+    border: 1px solid rgba(255, 253, 235, 0.24);
+    border-radius: var(--radius-md);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    transition: border-color 0.2s;
+}
+.hero-alba-caja:focus-within { border-color: var(--menta); }
+.hero-alba-caja input {
+    flex: 1;
+    min-width: 0;
+    padding: 11px 0;
+    font: inherit;
+    font-size: 16px; /* 16px: por debajo, iOS hace zoom al enfocar */
+    color: var(--on-night);
+    background: none;
+    border: 0;
+    outline: none;
+}
+.hero-alba-caja input::placeholder { color: var(--on-night-soft); }
+.hero-alba-caja button {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    font-size: 18px;
+    color: var(--night-900);
+    background: var(--on-night);
+    border: 0;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+}
+.hero-alba-caja button:focus-visible { outline: 2px solid var(--menta); outline-offset: 2px; }
+
+.hero-alba-sugerencias {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+.hero-alba-sugerencias button {
+    min-height: 36px;
+    padding: 7px 14px;
+    font: inherit;
+    font-size: 13px;
+    color: var(--on-night);
+    background: none;
+    border: 1px solid rgba(255, 253, 235, 0.28);
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: border-color 0.2s, color 0.2s;
+}
+.hero-alba-sugerencias button:hover,
+.hero-alba-sugerencias button:focus-visible { border-color: var(--menta); color: var(--menta); outline: none; }
+/* Globito del widget oculto mientras el bloque del hero se ve (index.js). */
+.alba-en-hero .acw-bubble { opacity: 0; visibility: hidden; pointer-events: none; }
+.hero-alba-aviso {
+    margin-top: 10px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--on-night-soft);
+}
 
 .hero-barra {
     position: absolute;
@@ -740,8 +849,22 @@ h3 {
     .metodo-frase, .metodo-cierre > p:last-child { grid-column: auto; }
     .metodo-cierre > p:last-child { margin-top: var(--space-4); }
 
-    .hero { min-height: 700px; height: 100svh; max-height: 920px; }
-    .hero-cuerpo { padding-top: 130px; }
+    .hero { min-height: max(700px, 100svh); padding-bottom: 76px; }
+    .hero-cuerpo { padding-top: 112px; }
+    /* Sugerencias en una fila deslizable: en columna se comían ~80px
+       de la primera pantalla. El margen negativo deja que asomen al borde. */
+    .hero-alba-sugerencias {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scrollbar-width: none;
+        margin-right: calc(-1 * var(--gutter-desktop));
+        padding-right: var(--gutter-desktop);
+    }
+    .hero-alba-sugerencias::-webkit-scrollbar { display: none; }
+    /* Hueco para el botón flotante de WhatsApp (52px + 16px de borde):
+       sin él tapaba el botón de enviar en 390×844. */
+    .hero-alba-caja { margin-right: 52px; }
+    .hero-alba-sugerencias button { flex-shrink: 0; }
     .hero-titulo { font-size: clamp(44px, 12.5vw, 76px); max-width: none; }
     .hero-arte video { object-position: 82% center; opacity: 0.75; }
     .hero-sombra { background: linear-gradient(0deg, rgba(17,18,17,0.95) 10%, rgba(17,18,17,0.55) 60%, rgba(17,18,17,0.35)); }

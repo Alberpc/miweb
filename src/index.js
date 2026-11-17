@@ -258,4 +258,41 @@ document.querySelectorAll('a[data-mail][data-dom]').forEach((a) => {
         calcular();
     })();
 
+    /* ── Alba en el hero (17-nov-2026) ─────────────────────────────
+       Abre el widget con la pregunta ya enviada (ACW.preguntar, en
+       widget-chat.js). Si el widget no ha cargado, no se toca el envío:
+       el form tiene action="#contacto" y lleva al formulario. */
+    (() => {
+        const bloque = document.getElementById('hero-alba');
+        if (!bloque) return;
+        const form = bloque.querySelector('.hero-alba-caja');
+        const input = form.querySelector('input');
+
+        /* Mientras el bloque se ve, el globito de Alba sobra (dos entradas a
+           lo mismo) y en móvil tapaba el botón de enviar. Vuelve al salir. */
+        if ('IntersectionObserver' in window) {
+            new IntersectionObserver(([entrada]) => {
+                document.documentElement.classList.toggle('alba-en-hero', entrada.isIntersecting);
+            }).observe(bloque);
+        }
+
+        form.addEventListener('submit', (e) => {
+            if (!window.ACW || typeof window.ACW.preguntar !== 'function') return;
+            e.preventDefault();
+            if (!input.value.trim()) { input.focus(); return; }
+            window.ACW.preguntar(input.value, 'hero');
+            input.value = '';
+        });
+
+        bloque.querySelectorAll('.hero-alba-sugerencias button').forEach((boton) => {
+            boton.addEventListener('click', () => {
+                if (window.ACW && typeof window.ACW.preguntar === 'function') {
+                    window.ACW.preguntar(boton.textContent, 'hero');
+                } else {
+                    location.hash = 'contacto';
+                }
+            });
+        });
+    })();
+
 })();

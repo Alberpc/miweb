@@ -152,6 +152,22 @@ schemas:
                     <a href="#contacto" class="btn-main">Reservar llamada de 20 min <span class="flecha" aria-hidden="true">↗</span></a>
                     <span class="hero-nota"><i class="punto" aria-hidden="true"></i>Gratis. Si no puedo ayudarte, te lo digo.</span>
                 </div>
+                {#- [17-nov-2026] Alba en la primera pantalla, no solo en la
+                    esquina. Spec: _docs/specs/2026-11-17-alba-en-hero-design.md
+                    (Mi universo). Sin JS o sin widget, el form lleva a #contacto. #}
+                <div class="hero-alba" id="hero-alba">
+                    <p class="hero-alba-titulo"><span class="hero-alba-mano" aria-hidden="true">👋</span> ¿Tienes una duda antes? <small>Respuesta en segundos</small></p>
+                    <form class="hero-alba-caja" action="#contacto">
+                        <input type="text" name="pregunta" maxlength="500" placeholder="Pregúntale a Alba..." aria-label="Escribe tu pregunta para Alba" autocomplete="off">
+                        <button type="submit" aria-label="Enviar"><span aria-hidden="true">↗</span></button>
+                    </form>
+                    <div class="hero-alba-sugerencias" role="group" aria-label="Preguntas sugeridas">
+                        <button type="button">Necesito una web</button>
+                        <button type="button">¿Sirve para mi negocio?</button>
+                        <button type="button">Quiero quitarme trabajo repetitivo</button>
+                    </div>
+                    <p class="hero-alba-aviso">Alba es una IA y puede equivocarse.</p>
+                </div>
             </div>
         </div>
 

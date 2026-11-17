@@ -186,7 +186,7 @@
     <link rel="stylesheet" href="/css/botones.css?v=81">
     <link rel="stylesheet" href="/css/faq.css?v=81">
     <link rel="stylesheet" href="/css/pie.css?v=81">
-    <link rel="stylesheet" href="/index.css?v=103">
+    <link rel="stylesheet" href="/index.css?v=104">
     <link rel="stylesheet" href="/assets/cookies/cookie-banner.css?v=2">
 </head>
 <body>
@@ -256,6 +256,19 @@
                 <div class="hero-acciones">
                     <a href="#contacto" class="btn-main">Reservar llamada de 20 min <span class="flecha" aria-hidden="true">↗</span></a>
                     <span class="hero-nota"><i class="punto" aria-hidden="true"></i>Gratis. Si no puedo ayudarte, te lo digo.</span>
+                </div>
+                <div class="hero-alba" id="hero-alba">
+                    <p class="hero-alba-titulo"><span class="hero-alba-mano" aria-hidden="true">👋</span> ¿Tienes una duda antes? <small>Respuesta en segundos</small></p>
+                    <form class="hero-alba-caja" action="#contacto">
+                        <input type="text" name="pregunta" maxlength="500" placeholder="Pregúntale a Alba..." aria-label="Escribe tu pregunta para Alba" autocomplete="off">
+                        <button type="submit" aria-label="Enviar"><span aria-hidden="true">↗</span></button>
+                    </form>
+                    <div class="hero-alba-sugerencias" role="group" aria-label="Preguntas sugeridas">
+                        <button type="button">Necesito una web</button>
+                        <button type="button">¿Sirve para mi negocio?</button>
+                        <button type="button">Quiero quitarme trabajo repetitivo</button>
+                    </div>
+                    <p class="hero-alba-aviso">Alba es una IA y puede equivocarse.</p>
                 </div>
             </div>
         </div>
@@ -656,11 +669,11 @@
 
     <!-- Script de interactividad -->
     <script src="/assets/js/base.js?v=3" defer></script>
-    <script src="/index.js?v=29" defer></script>
+    <script src="/index.js?v=30" defer></script>
 
     <!-- Widget del asistente. Versionar (?v=N) al cambiarlo: la cache es de 1 año -->
     <link rel="stylesheet" href="/assets/chat/widget-chat.css?v=11">
-    <script src="/assets/chat/widget-chat.js?v=6" defer></script>
+    <script src="/assets/chat/widget-chat.js?v=7" defer></script>
     <script src="/assets/cookies/cookie-banner.js?v=1" defer></script>
 </body>
 </html>

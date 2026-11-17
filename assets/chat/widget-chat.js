@@ -237,7 +237,8 @@
         document.body.appendChild(raiz);
 
         // Eventos
-        el.bubble.addEventListener('click', abrir);
+        // Funcion envolvente: el listener recibe el Event, no un origen.
+        el.bubble.addEventListener('click', function () { abrir('burbuja'); });
         el.close.addEventListener('click', cerrar);
         el.form.addEventListener('submit', alEnviar);
         el.input.addEventListener('keydown', function (e) {
@@ -282,18 +283,41 @@
         try { gtag('event', evento, datos || {}); } catch (e) { /* medir nunca rompe el chat */ }
     }
 
-    function abrir() {
+    /* origen: 'hero' (bloque de la portada) o 'burbuja' (la esquina). Va en
+       chat_open para comparar en Analytics por donde empieza la gente. */
+    function abrir(origen) {
         if (!estado.montado) { return; }
         estado.abierto = true;
         el.panel.classList.add('acw-panel--open');
         el.bubble.classList.add('acw-bubble--hidden');
         if (estado.historial.length === 0) {
             // Solo la primera apertura: cerrar y volver a abrir no es otra persona.
-            medir('chat_open', { page_path: location.pathname });
+            medir('chat_open', {
+                page_path: location.pathname,
+                origen: origen === 'hero' ? 'hero' : 'burbuja'
+            });
             addMessage(config.saludo, 'bot');
             mostrarAvisoPrivacidad();
         }
         el.input.focus();
+    }
+
+    /* Abre el panel con una pregunta ya enviada (bloque del hero, 17-nov-2026).
+       Pasa por alEnviar, asi que hereda sanitizado, guardrails y topes.
+       Devuelve true solo si el mensaje ha entrado en el flujo de envio. */
+    function preguntar(texto, origen) {
+        if (!estado.montado) { return false; }
+        var limpio = sanitizeInput(texto);
+        if (!limpio) { return false; }
+        if (estado.enviando || estado.cerrado) {
+            // Alba aun responde, o el chat ya termino (ahi se ve el respaldo).
+            abrir(origen);
+            return false;
+        }
+        abrir(origen);
+        el.input.value = limpio;
+        alEnviar();
+        return true;
     }
 
     function cerrar() {
@@ -509,6 +533,7 @@
         sanitizeInput: sanitizeInput,
         detectAbuse: detectAbuse,
         open: abrir,
+        preguntar: preguntar,
         close: cerrar,
         addMessage: addMessage,
         showFallback: showFallback
