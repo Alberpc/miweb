@@ -81,7 +81,12 @@ const casos = [
   ['saludo pasa', 'abu', 'hola buenas', r => r === null],
   ['cuenta su problema pasa', 'abu', 'se me escapan clientes que escriben de noche', r => r === null],
   ['da su nombre pasa', 'abu', 'me llamo Carlos y llevo una gestoria', r => r === null],
-  ['escribe su email pasa', 'abu', 'carlos@gestoriamendoza.es', r => r === null]
+  ['escribe su email pasa', 'abu', 'carlos@gestoriamendoza.es', r => r === null],
+
+  // --- sugerencias del hero (17-nov-2026): NUNCA pueden caer en un rechazo ---
+  ['sugerencia hero 1 pasa', 'abu', 'Necesito una web', r => r === null],
+  ['sugerencia hero 2 pasa', 'abu', '¿Sirve para mi negocio?', r => r === null],
+  ['sugerencia hero 3 pasa', 'abu', 'Quiero quitarme trabajo repetitivo', r => r === null]
 ];
 
 let pass = 0, fail = 0;
