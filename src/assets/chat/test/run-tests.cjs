@@ -1,6 +1,7 @@
 /* Runner de los guardrails en Node, sin navegador.
    Carga widget-chat.js en un entorno simulado y ejecuta los mismos casos
-   que test-guardrails.html. Uso: node assets/chat/test/run-tests.js
+   que test-guardrails.html. Uso: node src/assets/chat/test/run-tests.cjs
+   (.cjs porque package.json es "type": "module" y este runner usa require).
    Sale con codigo 1 si algo falla, para poder encadenarlo. */
 
 const fs = require('fs');
