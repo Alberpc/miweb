@@ -260,8 +260,8 @@ document.querySelectorAll('a[data-mail][data-dom]').forEach((a) => {
 
     /* ── Alba en el hero (17-nov-2026) ─────────────────────────────
        Abre el widget con la pregunta ya enviada (ACW.preguntar, en
-       widget-chat.js). Si el widget no ha cargado, no se toca el envío:
-       el form tiene action="#contacto" y lleva al formulario. */
+       widget-chat.js). Si el widget no ha cargado (bloqueado o aún
+       descargando), se lleva al formulario de #contacto. */
     (() => {
         const bloque = document.getElementById('hero-alba');
         if (!bloque) return;
@@ -276,12 +276,17 @@ document.querySelectorAll('a[data-mail][data-dom]').forEach((a) => {
             }).observe(bloque);
         }
 
+        /* El input no lleva name: así, aunque el form se envíe sin JS, lo
+           escrito (puede ser un teléfono o un correo) no acaba en la URL. */
         form.addEventListener('submit', (e) => {
-            if (!window.ACW || typeof window.ACW.preguntar !== 'function') return;
             e.preventDefault();
+            if (!window.ACW || typeof window.ACW.preguntar !== 'function') {
+                location.hash = 'contacto';
+                return;
+            }
             if (!input.value.trim()) { input.focus(); return; }
-            window.ACW.preguntar(input.value, 'hero');
-            input.value = '';
+            // Solo se vacía si se ha enviado: si Alba aún responde, se conserva.
+            if (window.ACW.preguntar(input.value, 'hero')) input.value = '';
         });
 
         bloque.querySelectorAll('.hero-alba-sugerencias button').forEach((boton) => {

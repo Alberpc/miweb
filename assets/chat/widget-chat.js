@@ -287,6 +287,10 @@
        chat_open para comparar en Analytics por donde empieza la gente. */
     function abrir(origen) {
         if (!estado.montado) { return; }
+        if (!estado.abierto) {
+            // Para devolver el foco al cerrar si la burbuja esta oculta.
+            estado.focoPrevio = document.activeElement;
+        }
         estado.abierto = true;
         el.panel.classList.add('acw-panel--open');
         el.bubble.classList.add('acw-bubble--hidden');
@@ -325,7 +329,13 @@
         estado.abierto = false;
         el.panel.classList.remove('acw-panel--open');
         el.bubble.classList.remove('acw-bubble--hidden');
-        el.bubble.focus();
+        /* La home oculta la burbuja mientras se ve el bloque del hero, y una
+           burbuja oculta no recibe el foco: entonces vuelve a donde estaba. */
+        if (window.getComputedStyle(el.bubble).visibility !== 'hidden') {
+            el.bubble.focus();
+        } else if (estado.focoPrevio && estado.focoPrevio.focus) {
+            estado.focoPrevio.focus();
+        }
     }
 
     function addMessage(texto, autor) {
