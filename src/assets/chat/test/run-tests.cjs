@@ -103,5 +103,17 @@ for (const [nombre, tipo, entrada, comprobar] of casos) {
   if (ok) { pass++; } else { fail++; console.log(`FAIL - ${nombre} -> ${JSON.stringify(r)}`); }
 }
 
+// --- ACW.preguntar (hero, 17-nov-2026). Aqui el widget NO esta montado. ---
+const casosApi = [
+  ['expone preguntar', () => typeof ACW.preguntar === 'function'],
+  ['preguntar sin montar devuelve false', () => ACW.preguntar('hola', 'hero') === false],
+  ['preguntar vacio devuelve false', () => ACW.preguntar('   ', 'hero') === false]
+];
+for (const [nombre, comprobar] of casosApi) {
+  let ok;
+  try { ok = comprobar(); } catch (e) { ok = false; console.log(`EXCEPCION - ${nombre}: ${e.message}`); }
+  if (ok) { pass++; } else { fail++; console.log(`FAIL - ${nombre}`); }
+}
+
 console.log(`\n${pass} PASS / ${fail} FAIL`);
 process.exit(fail === 0 ? 0 : 1);
