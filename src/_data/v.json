@@ -2,7 +2,7 @@
   "indexCss": 115,
   "legalCss": 105,
   "indexJs": 22,
-  "homeCss": 104,
+  "homeCss": 105,
   "homeJs": 30,
   "chatCss": 11,
   "chatJs": 7,
@@ -13,5 +13,5 @@
   "blogFiltroJs": 1,
   "rielEntregasJs": 6,
   "baseJs": 3,
-  "paginasJs": 3
+  "paginasJs": 5
 }

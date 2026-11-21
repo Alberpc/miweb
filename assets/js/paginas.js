@@ -189,3 +189,47 @@
         }
     });
 })();
+
+/* Vídeos de casos (diseño web): se cargan y reproducen UNA vez cuando se
+   ven, se pausan al salir y al terminar vuelven a la portada con un botón
+   "Volver a ver". Con "reducir movimiento" no arrancan solos: el botón
+   aparece desde el principio. */
+(function () {
+    const videos = document.querySelectorAll('video[data-al-verse]');
+    if (!videos.length) return;
+    const quieto = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    videos.forEach((v) => {
+        const marco = v.parentElement;
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'pg-web-repetir';
+        btn.innerHTML = quieto ? '<span aria-hidden="true">▶</span> Ver el recorrido' : '<span aria-hidden="true">↻</span> Volver a ver';
+        btn.hidden = !quieto;
+        marco.appendChild(btn);
+        btn.addEventListener('click', () => {
+            btn.hidden = true;
+            v.dataset.visto = '1';
+            v.currentTime = 0;
+            v.play().catch(() => {});
+        });
+        v.addEventListener('ended', () => {
+            v.dataset.visto = '1';
+            v.currentTime = 0;
+            btn.innerHTML = '<span aria-hidden="true">↻</span> Volver a ver';
+            btn.hidden = false;
+        });
+    });
+
+    if (quieto || !('IntersectionObserver' in window)) return;
+    const obs = new IntersectionObserver((entradas) => {
+        entradas.forEach((e) => {
+            const v = e.target;
+            if (!e.isIntersecting) { v.pause(); return; }
+            // Arranca la primera vez; si se pausó a medias, sigue donde iba.
+            const aMedias = v.currentTime > 0 && !v.ended;
+            if (!v.dataset.visto || aMedias) v.play().catch(() => {});
+        });
+    }, { threshold: 0.35 });
+    videos.forEach((v) => obs.observe(v));
+})();
