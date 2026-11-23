@@ -117,6 +117,15 @@ jsPagina: |
         cuerpo.appendChild(tr);
       });
       lista.hidden = filas.length === 0;
+      var texto = 'Hola Alberto, he hecho la checklist de automatizar. Esta es mi lista:\n' +
+        filas.map(function (f, i) {
+          return '- ' + (f.nombre || 'Proceso ' + (i + 1)) + ': ' + (f.total === null ? '-' : f.total + '/8') + ', ' + f.titulo;
+        }).join('\n') + '\n¿Me ayudas a ver por cuál empiezo?';
+      document.getElementById('ck-enviar').href = 'https://wa.me/34685546948?text=' + encodeURIComponent(texto);
+      // Si ya hay lista, el WhatsApp del cierre tambien la lleva escrita
+      var wa = document.getElementById('ck-cta-wa');
+      if (!wa.dataset.base) wa.dataset.base = wa.href;
+      wa.href = filas.length ? document.getElementById('ck-enviar').href : wa.dataset.base;
     }
 
     form.addEventListener('change', pintar);
@@ -271,7 +280,8 @@ jsPagina: |
             </table>
         </div>
         <div class="ck-lista-acciones">
-            <button type="button" class="btn-main" data-imprimir>Descargar en PDF</button>
+            <a class="btn-main" id="ck-enviar" href="https://wa.me/34685546948" target="_blank" rel="noopener">Mándame tu lista por WhatsApp</a>
+            <button type="button" class="btn-ghost" data-imprimir>Descargar en PDF</button>
             <button type="button" class="btn-ghost" id="ck-borrar">Vaciar la lista</button>
         </div>
     </section>
@@ -280,9 +290,10 @@ jsPagina: |
         <p>Automatizar no va de meter IA en todas partes. Va de quitarte de las manos el trabajo que te come el día, y que siga funcionando cuando tú no estás.</p>
         <div class="ck-cta">
             <h2>¿Quieres que le eche un ojo a tu proceso?</h2>
-            <p>Si alguna tarea te ha dejado dudas, o te ha salido «Automatízalo» y no sabes por dónde empezar, cuéntamela y la miramos juntos. Sin compromiso.</p>
+            <p>Si alguna tarea te ha dejado dudas, o te ha salido «Automatízalo» y no sabes por dónde empezar, cuéntamela y la miramos juntos. Y si lo ves claro y lo montas tú, mejor todavía.</p>
             <div class="ck-cta-botones">
-                <a class="btn-main" href="https://wa.me/34685546948?text=Hola%20Alberto%2C%20he%20hecho%20la%20checklist%20de%20automatizar%20y%20me%20gustar%C3%ADa%20que%20me%20miraras%20un%20proceso%3A%20" target="_blank" rel="noopener">Escríbeme por WhatsApp</a>
+                <a class="btn-main" id="ck-cta-wa" href="https://wa.me/34685546948?text=Hola%20Alberto%2C%20he%20hecho%20la%20checklist%20de%20automatizar%20y%20me%20gustar%C3%ADa%20que%20me%20miraras%20un%20proceso%3A%20" target="_blank" rel="noopener">Escríbeme por WhatsApp</a>
+                <a class="btn-ghost" href="/#contacto">Reservar llamada de 20 min</a>
                 <a class="btn-ghost" href="https://ig.me/m/albercabrera.ia" target="_blank" rel="noopener">O por Instagram</a>
             </div>
         </div>

@@ -231,10 +231,12 @@
     .ck-ancho { padding: 0 var(--gutter-tablet); }
     .ck-paso, .ck-resultado { padding: var(--space-6); }
     .ck-resultado .btn-main { width: auto; }
-    .ck-lista-acciones { flex-direction: row; }
+    .ck-lista-acciones { flex-direction: row; flex-wrap: wrap; }
     .ck-cta { padding: var(--space-6); }
-    .ck-cta-botones { flex-direction: row; }
+    .ck-cta-botones { flex-direction: row; flex-wrap: wrap; }
     .ck-cta-botones a { width: auto; }
+    /* Tres botones en fila: si no caben, baja el boton entero, no se parte el texto */
+    .ck-lista-acciones > *, .ck-cta-botones a { white-space: nowrap; }
 }
 
 /* ---- PDF (imprimir) ----
