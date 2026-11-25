@@ -16,7 +16,7 @@ Tiene un bot en la web, WhatsApp o InstagramAvisar de que es una IA al empezar l
 
 Usa voz sintética para llamar o recordar citasDecirlo al inicio de la locución
 
-Publica imágenes o vídeos generados con IAEtiquetarlos de forma visible
+Publica imágenes o vídeos de IA que parecen reales y pueden engañarAvisar de que están generados con IA
 
 Usa avatares o vídeos que imitan a una personaEtiquetarlos como generados con IA
 
@@ -126,4 +126,4 @@ El reconocimiento de emociones de personas trabajadoras o de alumnos es una prá
 
 ### ¿Tengo que etiquetar los textos que escribo con ayuda de IA?
 
-Las correcciones de estilo estándar, como la ortografía o ajustes menores que no cambian sustancialmente lo que aporta la persona, no hay que marcarlas. Sí hay que marcar el contenido sintético publicado: imágenes, audio, vídeo y avatares generados con IA llevan etiqueta visible además del marcado técnico legible por máquina.
+Solo en un caso: si el texto se publica para informar al público sobre asuntos de interés público. Y ni siquiera entonces si una persona lo revisa y alguien asume la responsabilidad editorial de publicarlo. Los textos comerciales normales de tu web no entran. Con imagen, audio y vídeo, el aviso al público es obligatorio en las ultrasuplantaciones (deepfakes): contenido que parece real y puede engañar. El marcado técnico legible por máquina le corresponde al proveedor de la herramienta.

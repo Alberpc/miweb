@@ -46,7 +46,7 @@ Implementa estos consejos en tu día a día:
 
 - Organiza físicamente tu espacio para que cada material y producto esté accesible y su uso sea intuitivo.
 
-- Establece horarios y listas de tareas simples para que el enfoque y la priorización sean naturales. Un pizarrón o una libreta pueden ser suficientes.
+- Establece horarios y listas de tareas simples para que el enfoque y la priorización sean naturales. Una pizarra o una libreta pueden ser suficientes.
 
 - Fomenta la retroalimentación continua; pide a tu equipo que proponga ajustes o mejoras mensuales a los procesos.
 
@@ -80,4 +80,4 @@ No hace falta ninguna habilidad técnica especial. Basta con describir el proces
 
 ### ¿Necesito un software de gestión para sistematizar mi negocio?
 
-No, al menos no para empezar. Una hoja de cálculo para inventario y ventas, un formulario simple para recoger feedback y una libreta o pizarrón para las tareas diarias son suficientes en la mayoría de negocios locales. La tecnología ayuda a sostener el proceso una vez existe, pero no lo crea.
+No, al menos no para empezar. Una hoja de cálculo para inventario y ventas, un formulario simple para recoger opiniones y una libreta o pizarra para las tareas diarias son suficientes en la mayoría de negocios locales. La tecnología ayuda a sostener el proceso una vez existe, pero no lo crea.

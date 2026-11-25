@@ -62,4 +62,4 @@ El alumno nota menos fricción: la matrícula no depende de que alguien conteste
 
 ### ¿Qué pasa con las tareas que no se pueden automatizar, como dar la clase?
 
-Esas no se tocan, y no deben. La sistematización se aplica a la gestión administrativa —matrículas, asistencia, pagos, certificados, comunicación— para que el equipo docente dedique su tiempo a enseñar, no a rellenar hojas de cálculo o contestar el mismo email diez veces.
+Esas no se tocan, y no deben. La sistematización se aplica a la gestión administrativa (matrículas, asistencia, pagos, certificados, comunicación) para que el equipo docente dedique su tiempo a enseñar, no a rellenar hojas de cálculo o contestar el mismo email diez veces.

@@ -128,7 +128,7 @@ Puede, si tiene acceso a ellos. La defensa más fiable no es un filtro sino la a
 
 ### ¿Cuánto me puede costar si alguien usa mal mi chatbot?
 
-El riesgo económico real no es una multa sino la factura del modelo. Alguien puede usar tu chatbot como si fuera ChatGPT gratis y pagas tú cada conversación. Se controla con límites por visitante y por día, recortando los mensajes muy largos y poniendo un tope de gasto en la cuenta del proveedor, que funciona aunque falle el código.
+El gasto más fácil de sufrir es la factura del modelo. Alguien puede usar tu chatbot como si fuera ChatGPT gratis y pagas tú cada conversación. Se controla con límites por visitante y por día, recortando los mensajes muy largos y poniendo un tope de gasto en la cuenta del proveedor, que funciona aunque falle el código.
 
 ### ¿Puede el chatbot inventarse cosas?
 
